@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -25,12 +25,12 @@
 	
 	<!-- 헤더 -->
 	<div>
-		<C:import url="header.jsp"></C:import>
+		<c:import url="header.jsp"></c:import>
 	</div>
 	
 	<!-- 네이비게이션 영역-->
 	<div>
-		<C:import url="navigator.jsp"></C:import>
+		<c:import url="navigator.jsp"></c:import>
 	</div>
 	
 	
@@ -41,7 +41,7 @@
 	
 	<!-- 푸터영역 -->
 	<div>
-		<C:import url="footer.jsp"></C:import>
+		<c:import url="footer.jsp"></c:import>
 	</div>
 	
 </div>
