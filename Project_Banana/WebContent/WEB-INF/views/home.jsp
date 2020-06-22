@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,29 @@
 </div>
 
 <div>
-	<p>헤더, 네비게이션, 푸터 개별 jsp 만들어서 include 해서 사용</p>
+	<!-- <p>헤더, 네비게이션, 푸터 개별 jsp 만들어서 include 해서 사용</p> -->
+	
+	<!-- 헤더 -->
+	<div>
+		<C:import url="header.jsp"></C:import>
+	</div>
+	
+	<!-- 네이비게이션 영역-->
+	<div>
+		<C:import url="navigator.jsp"></C:import>
+	</div>
+	
+	
+	<!-- 바디영역 -->
+	
+	
+	
+	
+	<!-- 푸터영역 -->
+	<div>
+		<C:import url="footer.jsp"></C:import>
+	</div>
+	
 </div>
 
 </body>
