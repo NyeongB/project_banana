@@ -14,19 +14,13 @@
 	--hover-color1 :#2383ed;
 	
 }
-body
+#header_body 
 {
-	width:100%;
+
 	margin: 0;
 	
 }
-li a 
-{
-	color: #fff;
- 	text-decoration: none;
-  	outline: none;
-  	
- }
+
 #logo a
 {
 	text-decoration: none; 
@@ -35,14 +29,16 @@ li a
 	padding:0px 5px 3px 0px;
 	margin: 30px;
 }
-a
+#header a
 {
+	color :var(--text-color);
 	text-decoration: none; 
-	padding: 10px;
+	outline: none;
+
 
 }
 
-a:hover, a:active 
+#header a:hover, #header a:active 
 {
 	text-decoration: none; 
 	background-color:var(--hover-color);
@@ -51,28 +47,28 @@ a:hover, a:active
 }
 #header
 {
-	height: 20%;
+
 	background-color: var(--back-color);
 	display: flex;
+	width:100%;
 	align-items: center;
 	justify-content: space-between;
 	
 }
 
-ul
-{
-	list-style: none;
-	padding: 10px;
-	display: flex;
-	
-}
-li
+
+#nav_list > li
 {
 	padding-left:10px;
 	font-family: 'GmarketSansLight';
 	align-content: center;
 	margin: 10px;
 }
+/* #nav_list
+{
+	padding:5px;
+	
+} */
 
 #logo_text
 {
@@ -90,6 +86,9 @@ li
 	display: flex;
 	justify-content: space-between;
 	margin: 0px;
+	list-style: none;
+	padding: 10px;
+	display: flex;
 	
 }
 
@@ -98,13 +97,17 @@ li
 	display: flex;
 	justify-content: space-between;
 	margin: 0px;
+	list-style: none;
+	font-family: 'GmarketSansLight';
+	align-content: center;
+	margin: 10px;
 	
 }
-
-#nav_list
+#nav_icons li
 {
-	/* font-family: 'Noto Sans KR', sans-serif; */
+	padding-left:10px;
 }
+
 
 
 

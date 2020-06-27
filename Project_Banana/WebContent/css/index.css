@@ -1,0 +1,34 @@
+@charset "UTF-8";
+@font-face 
+{ 
+	font-family: 'GmarketSansLight';
+ 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  	font-weight: normal;
+   	font-style: normal; 
+}
+:root
+{
+	--back-color :#FFCC4F;
+	--back-color1 :#fefbc2;
+	--text-color :#fffdf7;
+	--hover-color :#52BF88;
+	--hover-color1 :#2383ed;
+	
+}
+#header
+{
+	position:fixed;
+}
+body
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+#content
+{
+	width:100%;
+	height: 800px;
+	background-color: var(--back-color1);
+	
+}

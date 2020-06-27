@@ -8,14 +8,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>banana</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/navStyle.css">
 <link rel="icon" href="images/favicon.ico" />
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 
 </head>
-<body>
+<body id="header_body">
 	<div id="header">
 		
 		<div id="logo"><a href=""><span id="logo_text">Banana</span></a></div>

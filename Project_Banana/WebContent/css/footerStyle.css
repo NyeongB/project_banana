@@ -1,0 +1,62 @@
+@charset "UTF-8";
+@font-face 
+{ 
+	font-family: 'GmarketSansLight';
+ 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  	font-weight: normal;
+   	font-style: normal; 
+}
+:root
+{
+	--back-color :#FFCC4F;
+	--text-color :#fffdf7;
+	--text-color2 :#332600;
+	--hover-color :#52BF88;
+	--hover-color1 :#2383ed;
+	
+}
+body
+{
+	width: 100%;
+	margin: 0;
+}
+#footer
+{
+	height: 60px;
+	background-color: var(--back-color);
+	display: flex;
+	/* text-align: center; */
+	justify-content: center; 
+	
+}
+#footer_list
+{
+
+	display: flex;
+	align-items: center;
+	margin: 0px;
+
+}
+#footer_list
+{
+	list-style: none;
+	font-family: 'GmarketSansLight';
+}
+#footer_list a
+{
+	text-decoration: none; 
+	padding: 10px 10px 10px 10px;
+	color: var(--text-color);
+
+}
+#footer_list li
+{
+	color: var(--text-color);	
+}
+/* a:hover, a:active 
+{
+	text-decoration: none; 
+	background-color:var(--hover-color);
+	border-radius: 10em;
+
+} */
