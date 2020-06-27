@@ -36,6 +36,7 @@
 	outline: none;
 
 
+
 }
 
 #header a:hover, #header a:active 
@@ -43,12 +44,14 @@
 	text-decoration: none; 
 	background-color:var(--hover-color);
 	border-radius: 10em;
+	
 
 }
 #header
 {
 
 	background-color: var(--back-color);
+	opacity:92%;
 	display: flex;
 	width:100%;
 	align-items: center;
@@ -63,6 +66,13 @@
 	font-family: 'GmarketSansLight';
 	align-content: center;
 	margin: 10px;
+	letter-spacing: 0.3em;
+}
+
+#nav_list a
+{
+	padding: 7px;
+	
 }
 /* #nav_list
 {
@@ -106,6 +116,12 @@
 #nav_icons li
 {
 	padding-left:10px;
+	letter-spacing: 0.3em;
+}
+
+#nav_icons a
+{
+	padding: 7px;
 }
 
 
