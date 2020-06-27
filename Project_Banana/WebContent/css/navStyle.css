@@ -1,9 +1,17 @@
 @charset "UTF-8";
+@font-face 
+{ 
+	font-family: 'GmarketSansLight';
+ 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  	font-weight: normal;
+   	font-style: normal; 
+}
 :root
 {
 	--back-color :#FFCC4F;
 	--text-color :#fffdf7;
 	--hover-color :#52BF88;
+	--hover-color1 :#2383ed;
 	
 }
 body
@@ -12,42 +20,76 @@ body
 	margin: 0;
 	
 }
+li a 
+{
+	color: #fff;
+ 	text-decoration: none;
+  	outline: none;
+  	
+ }
+#logo a
+{
+	text-decoration: none; 
+	background-color:var(--hover-color);
+	border-radius: 10em;
+	padding:0px 5px 3px 0px;
+	margin: 30px;
+}
+a
+{
+	text-decoration: none; 
+	padding: 10px;
+
+}
+
+a:hover, a:active 
+{
+	text-decoration: none; 
+	background-color:var(--hover-color);
+	border-radius: 10em;
+
+}
 #header
 {
 	height: 20%;
 	background-color: var(--back-color);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	
 }
-#logo 
-{
-	align-content: center;
-	padding : 5px;
-	
-}
+
 ul
 {
 	list-style: none;
-	padding: 0;
+	padding: 10px;
+	display: flex;
 	
 }
-span
+li
+{
+	padding-left:10px;
+	font-family: 'GmarketSansLight';
+	align-content: center;
+	margin: 10px;
+}
+
+#logo_text
 {
 	color: var(--text-color);
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 30pt;
+
 	
 	
 }
-#header
-{
-	display: flex;
-	justify-content: space-between;
-}
+
 
 #nav_list
 {
 	display: flex;
 	justify-content: space-between;
+	margin: 0px;
 	
 }
 
@@ -55,26 +97,16 @@ span
 {
 	display: flex;
 	justify-content: space-between;
+	margin: 0px;
 	
 }
-a 
-{
-	color: #fff;
- 	text-decoration: none;
-  	outline: none
- }
 
-a:hover, a:active 
+#nav_list
 {
-	text-decoration: none; 
-	color:#fff; 
-	background-color:var(--hover-color);
+	/* font-family: 'Noto Sans KR', sans-serif; */
 }
 
-li
-{
-	padding:5px;
-}
+
 
 
 
