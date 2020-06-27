@@ -1,0 +1,80 @@
+@charset "UTF-8";
+:root
+{
+	--back-color :#FFCC4F;
+	--text-color :#fffdf7;
+	--hover-color :#52BF88;
+	
+}
+body
+{
+	width:100%;
+	margin: 0;
+	
+}
+#header
+{
+	height: 20%;
+	background-color: var(--back-color);
+	
+}
+#logo 
+{
+	align-content: center;
+	padding : 5px;
+	
+}
+ul
+{
+	list-style: none;
+	padding: 0;
+	
+}
+span
+{
+	color: var(--text-color);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 30pt;
+	
+	
+}
+#header
+{
+	display: flex;
+	justify-content: space-between;
+}
+
+#nav_list
+{
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+#nav_icons
+{
+	display: flex;
+	justify-content: space-between;
+	
+}
+a 
+{
+	color: #fff;
+ 	text-decoration: none;
+  	outline: none
+ }
+
+a:hover, a:active 
+{
+	text-decoration: none; 
+	color:#fff; 
+	background-color:var(--hover-color);
+}
+
+li
+{
+	padding:5px;
+}
+
+
+
