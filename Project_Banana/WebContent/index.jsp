@@ -15,8 +15,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 		<div id="content">
-		123
-		
+
 		</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
