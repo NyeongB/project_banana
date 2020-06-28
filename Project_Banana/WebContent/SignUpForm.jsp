@@ -87,7 +87,6 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
 
 <div class="container-fluid">
 	<div class="row">
