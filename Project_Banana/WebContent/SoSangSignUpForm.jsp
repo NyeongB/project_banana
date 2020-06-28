@@ -104,7 +104,10 @@
 						
 						<br><br>
 						<button class="btn btn-primary" type="submit">
-							Submit
+							신청
+						</button>
+						<button class="btn btn-primary" type="reset">
+							취소
 						</button>
 						<br><br>
 					</form>
