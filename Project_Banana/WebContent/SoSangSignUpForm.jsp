@@ -46,7 +46,6 @@
 							</label>
 							
 							<input class="form-control" id="shopName" type="text" />
-							</div>
 							<button class="btn btn-primary" type="submit">중복확인</button>
 						</div>
 						<br><br>
