@@ -75,7 +75,7 @@
 				<div class="col-md-12">
 				
 		
-	<jsp:include page="footer.jsp"></jsp:include>
+				<jsp:include page="footer.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>
