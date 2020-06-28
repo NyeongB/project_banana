@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@font-face 
+{ 
+	font-family: 'GmarketSansLight';
+ 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  	font-weight: normal;
+   	font-style: normal; 
+}
+:root
+{
+	--back-color :#FFCC4F;
+	--text-color :#fffdf7;
+	--hover-color :#52BF88;
+	--hover-color1 :#2383ed;
+	
+}
+div *
+{
+	font-family: 'GmarketSansLight';
+	
+}
