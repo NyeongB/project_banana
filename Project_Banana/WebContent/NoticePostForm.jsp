@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css" href="css/signUpFormStyle.css">
+<link rel="stylesheet" type="text/css" href="css/noticePostFormStyle.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -80,7 +80,7 @@
 					</label>
 				</div> 
 				<button type="submit" class="btn btn-primary">
-					Submit
+					신청
 				</button>
 			</form>
 		</div>
