@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css" href="css/signUpFormStyle.css">
+<link rel="stylesheet" type="text/css" href="css/signupform.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -25,164 +24,122 @@
 </head>
 <body>
 <div class="container-fluid">
-	<div class="row">
+	<div class="header">
 		<div class="col-md-12">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-9">
-			<div class="row">
-				<div class="col-md-12">
-					<h3>
-						h3. Lorem ipsum dolor sit amet.
-					</h3>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-				</div>
-			</div>
-			<form role="form">
-				<div class="form-group">
-					 
-					<label for="exampleInputEmail1">
-						Email address
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputPassword1">
-						Password
-					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" />
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputFile">
-						File input
-					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" />
-					<p class="help-block">
-						Example block-level help text here.
-					</p>
-				</div>
-				<div class="checkbox">
-					 
-					<label>
-						<input type="checkbox" /> Check me out
-					</label>
-				</div> 
-				<button type="submit" class="btn btn-primary">
-					Submit
-				</button>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-		</div>
-	</div>
-</div>
-
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3 class="text-center">
+			<h2 class="text-center">
 				Banana
-			</h3>
-			<div class="header">
+			</h2>
+			<div class="head_2">
 				<div class="col-md-12">
-					<h2>
-						Banana
-					</h2>
+					<br>
 					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+						 회원가입을 통해 바나나 서비스를 이용하세요.
 					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	
+	<div class="body">
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-md-12">
+				   <!-- 아이디 입력 --> <!-- 버튼 -->
+				   <br>
+				   <input type="text" name="id" id="id" placeholder="아이디(*)"> 
+				   <button type="button" class="Btn" value="중복 확인"></button>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				   <!-- 비밀번호 -->
+				   <input type="text" name="pw" id="pw" placeholder="비밀번호(*)">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 비밀번호  확인-->
+				<input type="text" name="pwcon" id="pwcon" placeholder="비밀번호 확인(*)">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 휴대폰번호 입력 --> <!-- 인증하기 -->
+				<input type="text" name="pwcon" id="pwcon" placeholder="휴대폰 번호">
+				<button type="button" class="Btn" value="인증 하기"></button>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 인증번호 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 닉네임 입력 --><!-- 중복확인 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 우편번호 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 주소 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 상세주소 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 패스워드 찾기 질문 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 패스워드 찾기 답변 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 이메일 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 관심 카테고리 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 시군구 동 설정 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 은행명 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 예금주 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 계좌번호 -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+				<!-- 확인버튼, 취소버튼 -->
 				</div>
 			</div>
 		</div>
@@ -190,6 +147,5 @@
 		</div>
 	</div>
 </div>
-
 </body>
 </html>
