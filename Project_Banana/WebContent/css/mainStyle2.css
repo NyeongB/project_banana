@@ -14,8 +14,23 @@
 	--hover-color1 :#2383ed;
 	
 }
+.col-md-12
+{
+/* 	padding:0px; */
+}
+
 div *
 {
 	font-family: 'GmarketSansLight';
 	
+}
+#btn
+{
+	color: var(hover-color) !important;
+	
+}
+.hightlight
+{
+	color:var(--back-color);
+	font-weight: bold;
 }

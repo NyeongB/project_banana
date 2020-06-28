@@ -2,12 +2,39 @@
 
 /* signupform.css 회원가입 폼 */
 
+.body
+{
+	text-align: center;
+	
+}
+
+.head_2 p
+{
+	text-align: center;
+	font-size: 15pt;
+	font-weight: lighter ;
+}
+
 .header h2
 {
-	text-align: cneter;
-	font-size: 20%;
-	color: var(--#FFCC4F)
 	
+	font-size: 50px;
+	color: #FFCC4F;
+	margin-top: 90px;
+	font-weight: 900;
+	
+}
+
+.Btn
+{
+	width: 100px;
+	height: 40px;
+}
+
+input
+{
+	width: 260px;
+	height: 40px;
 }
 
 
