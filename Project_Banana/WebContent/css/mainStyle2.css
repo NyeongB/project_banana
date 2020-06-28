@@ -24,9 +24,10 @@ div *
 	font-family: 'GmarketSansLight';
 	
 }
-#btn
+.btn
 {
-	color: var(hover-color) !important;
+	background-color: var(--hover-color) !important;
+	border-color: var(--hover-color) !important;
 	
 }
 .hightlight
