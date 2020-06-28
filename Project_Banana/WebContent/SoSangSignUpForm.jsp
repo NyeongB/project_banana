@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -72,39 +72,41 @@
 							<select name="category">
 								<option var="1">식품</option>
 								<option var="2">유아용품</option>
+								<option var="3">전자기기</option>
 							</select>	
 						</div>
 						<br><br>
 						<div class="form-group">
 							 
-							<label for="bankcopy">
+							<label for="bankbookCopy">
 								통장사본
 							</label>
-							<input class="form-control-file" id="bankcopy" type="file" />
+							<input class="form-control-file" id="bankbookCopy" type="file" />
 						
 						</div>
 						<br><br>
 						<div class="form-group">
 							 
-							<label for="sellerNum">
+							<label for="businessNum">
 								사업자 번호
 							</label>
-							<input class="form-control" id="sellerNum" type="text" />
+							<input class="form-control" id="businessNum" type="text" />
 							<button class="btn btn-primary" type="button">인증</button>
 						</div>
 						<br><br>
 						<div class="form-group">
 							 
-							<label for="exampleInputFile">
+							<label for="businessNumFile">
 								사업자 등록증
 							</label>
-							<input class="form-control-file" id="exampleInputFile" type="file" />
+							<input class="form-control-file" id="businessNumFile" type="file" />
 						</div>
 						
 						<br><br>
 						<button class="btn btn-primary" type="submit">
 							Submit
 						</button>
+						<br><br>
 					</form>
 				</div>
 				<div class="col-md-3">
