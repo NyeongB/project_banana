@@ -24,49 +24,53 @@
 </script>
 </head>
 <body>
-<div class="container-fluid">
+<div class="notice-content">
 	<div class="row">
 		<div class="col-md-12">
+			<jsp:include page="header.jsp"></jsp:include>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-7">
 			<div class="row">
 				<div class="col-md-12">
 					<h3>
-						h3. Lorem ipsum dolor sit amet.
+						공지사항
 					</h3>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
+					<h4>
+						<span class="hightlight">공지사항 작성</span> > 공지사항 작성 완료
+					</h4>
 				</div>
 			</div>
 			<form role="form">
 				<div class="form-group">
 					 
 					<label for="exampleInputEmail1">
-						Email address
+						공지사항 제목
 					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
+					<input type="text" class="form-control" id="exampleInputEmail1" />
 				</div>
 				<div class="form-group">
 					 
 					<label for="exampleInputPassword1">
-						Password
+						공지사항 내용
 					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" />
+					<textarea class="form-control content" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					 
 					<label for="exampleInputFile">
-						File input
+						파일 첨부
 					</label>
 					<input type="file" class="form-control-file" id="exampleInputFile" />
 					<p class="help-block">
-						Example block-level help text here.
+						파일을 첨부 해주세요
 					</p>
 				</div>
 				<div class="checkbox">
@@ -80,14 +84,17 @@
 				</button>
 			</form>
 		</div>
+		<div class="col-md-2">
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+		<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
 </div>
-
 	
+
 	
 </body>
 </html>
