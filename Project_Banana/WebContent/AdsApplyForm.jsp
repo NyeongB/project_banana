@@ -18,16 +18,7 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
-	$(document).ready(function()
-	{
-		/* $("#birthday").datepicker(
-		{
-				dateFormat : "yy-mm-dd"
-				, changeYear : true
-				, changeMonth : true
-		}); */
-		
-	});
+	
 	
 </script>
 </head>
