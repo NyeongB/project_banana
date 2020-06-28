@@ -48,7 +48,7 @@
 				
 				<div><h1>광고 신청</h1></div><br>
 				
-					<form role="form" class="form-group">
+				<form role="form" class="form-group">
 
 				광고 기간 <input type="date" class="form-control" id="birthday" name="birthday" /> 
 				URL <input type="text" class="form-control" id="text" />

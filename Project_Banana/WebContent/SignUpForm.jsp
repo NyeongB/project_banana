@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/signupform.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -49,14 +49,14 @@
 				<div class="col-md-12">
 				   <!-- 아이디 입력 --> <!-- 버튼 -->
 				   <br>
-				   <input type="text" name="id" id="id" placeholder="아이디(*)"> 
+				   <input type="text" name="id" id="id" placeholder="아이디(*)" class="form-control"> 
 				   <button type="button" class="Btn" value="중복 확인"></button>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
 				   <!-- 비밀번호 -->
-				   <input type="text" name="pw" id="pw" placeholder="비밀번호(*)">
+				   <input type="password" name="pw" id="pw" placeholder="비밀번호(*)">
 				</div>
 			</div>
 			<div class="row">
