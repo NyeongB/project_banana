@@ -10,6 +10,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css"
+   href="<%=cp%>/css/bootstrap.min.css">
+<script type="text/javascript"
+   src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function()
+	{
+		$("#loginBtn").click(function()
+		{
+			alert( $("#id").val() + "/" + $("#password").val());
+		});
+	});
+	
+</script>
 </head>
 <body>
 
@@ -33,34 +49,20 @@
 						<div class="form-group">
 							 
 							<label for="exampleInputEmail1">
-								Email address
+								아이디
 							</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" />
+							<input type="text" class="form-control" id="id" name="id"/>
 						</div>
 						<div class="form-group">
 							 
 							<label for="exampleInputPassword1">
-								Password
+								비밀번호
 							</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" />
+							<input type="password" class="form-control" id="password" />
 						</div>
-						<div class="form-group">
-							 
-							<label for="exampleInputFile">
-								File input
-							</label>
-							<input type="file" class="form-control-file" id="exampleInputFile" />
-							<p class="help-block">
-								Example block-level help text here.
-							</p>
-						</div>
-						<div class="checkbox">
-							 
-							<label>
-								<input type="checkbox" /> Check me out
-							</label>
-						</div> 
-						<button type="submit" class="btn btn-primary">
+						
+						
+						<button type="submit" class="btn btn-primary" id="loginBtn">
 							Submit
 						</button>
 					</form>
