@@ -19,17 +19,7 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
-<<<<<<< HEAD
-	$(document).ready(function()
-	{
-		$("#loginBtn").click(function()
-		{
-			alert( $("#id").val() + "/" + $("#password").val());
-		});
-	});
-=======
 
->>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 	
 </script>
 </head>
@@ -202,9 +192,5 @@
 	</div>
 </div>
 
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 </body>
 </html>
