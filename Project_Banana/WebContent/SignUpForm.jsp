@@ -51,7 +51,7 @@
 				   <!-- 아이디 입력 --> <!-- 버튼 -->
 				   <br>
 				   <input type="text" name="id" id="id" placeholder="아이디(*)" class="form-control"> 
-				   <button type="button" class="Btn" value="중복 확인"></button>
+				   <button type="button" class="btn btn-primary" type="submit">중복 확인</button>
 				</div>
 			</div>
 			<div class="row">
