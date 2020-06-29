@@ -26,13 +26,20 @@
 div *
 {
 	font-family: 'GmarketSansLight';
+
+	
+}
+ul
+{
+	list-style: none;
 	
 }
 .btn
 {
 	background-color: var(--hover-color) !important;
 	border-color: var(--hover-color) !important;
-	color:var(--text-color) !important;
+	color:white;
+	/* var(--text-color) !important; */
 	
 }
 .highlight
@@ -44,4 +51,43 @@ div *
 	font-weight: bold;
 	
 	
+}
+/* a 태그 관련 */
+a
+{
+	text-decoration: none; 	
+	
+}
+a:hover
+{
+	text-decoration: none; 	
+	
+}
+/* 썸네일 사진 css */
+
+
+
+
+/* 푸터 고정 css */
+html 
+{
+	height: 100%;
+}
+body 
+{
+	margin: 0;
+	height: 100%;
+}
+
+.container-fluid
+{
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 19px; /* footer height */
+
+}
+.footer
+{
+	position: absolute;
+
 }

@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<td>1</td>
-					<td>사진</td>
+					<td><img src="images/oz.jpg" class="img-rounded" alt="오즈.jpg" width="100px" /></td>
 					<td>오레오같이사요~!</td>
 					<td>5/5</td>
 					<td>2020.07.01</td>
