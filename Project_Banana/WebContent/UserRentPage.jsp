@@ -40,7 +40,11 @@ String cp = request.getContextPath();
 			</div>
 		</div>
 		<div class="content">
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				
+				<jsp:include page="Menu.jsp"></jsp:include>
+				
+			</div>
 			<div class="col-md-8">
 				<div>
 					<h3>내가 신청한 렌트 현황</h3>
@@ -65,7 +69,7 @@ String cp = request.getContextPath();
 							<tr>
 								<td>1</td>
 								<td><img alt="Bootstrap Image Preview"
-									src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"
 									style="width: 70px; height: 70px;"></td>
 								<td>자전거 빌려드려요</td>
 								<td>자전거</td>
@@ -92,14 +96,14 @@ String cp = request.getContextPath();
 						
 						<tbody>
 							<tr>
-								<td>1</td>
+								<td>2</td>
 								<td><img alt="Bootstrap Image Preview"
 									src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
 									style="width: 70px; height: 70px;"></td>
-								<td>자전거 빌려드려요</td>
+								<td>전거 빌려드려요</td>
 								<td>자전거</td>
 								<td>렌트 서비스 종료</td>
-								<td>test152</td>
+								<td>cjfsud23</td>
 								<td>
 									<div class="btn-group" role="group">
 
