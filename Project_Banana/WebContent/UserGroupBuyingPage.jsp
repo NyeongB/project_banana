@@ -102,28 +102,27 @@ String cp = request.getContextPath();
 						
 						<tbody>
 							<tr>
-								<td>1</td>
+								<td>2</td>
 								<td><img alt="Bootstrap Image Preview"
-									src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+									src="data:image/jpeg;base64,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"
 									style="width: 70px; height: 70px;"></td>
-								<td>자전거 빌려드려요</td>
-								<td>자전거</td>
-								<td>렌트 서비스 종료</td>
-								<td>test152</td>
+								<td>생수 같이 사요~!!!</td>
+								<td>25,000 / 15,000</td>
+								<td>3 / 3</td>
+								<td>2020/06/17</td>
+								<td>수유역</td>
+								<td>모집완료</td>
 								<td>
 									<div class="btn-group" role="group">
 
-										<button class="" type="button">
-										<span class=""></span>
-										후기버튼
+										<button class="btn btn-secondary" type="button">Left
 										</button>
-										<button class="" type="button">
-											일자입력</button>
-										<button class="" type="button">
-										<span class="glyphicon glyphicon-print"></span>
-										</button>
-										<button class="glyphicon glyphicon-remove" type="button">
-											</button>
+										<button class="btn btn-secondary" type="button">
+											Center</button>
+										<button class="btn btn-secondary" type="button">
+											Right</button>
+										<button class="btn btn-secondary" type="button">
+											Justify</button>
 									</div>
 
 								</td>
