@@ -58,16 +58,7 @@ String cp = request.getContextPath();
 		<li><a href="#">◎ 공동 구매 출석부</a></li>
 		<li><a href="#">◎ 내가 쓴 댓글</a></li>
 			
-			<li><a href="#">정책 확인 및 변경</a>
-				<ul class="sub" style="display: none;">
-					<li><a href="#">신고</a></li>
-					<li><a href="#">마일리지</a></li>
-					<li><a href="#">활동 등급</a></li>
-					
-				</ul>
-			</li>
-			<li><a href="#">매출관리</a></li>
-			<li><a href="#">광고관리</a></li>
+		
 
 			
 		</ul>
