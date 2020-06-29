@@ -18,7 +18,11 @@
 {
 /* 	padding:0px; */
 }
+.col-xs-12
+{
+	padding:0px;
 
+}
 div *
 {
 	font-family: 'GmarketSansLight';
