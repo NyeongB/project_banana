@@ -11,3 +11,10 @@ body
 .col2 {width: 20%;}
 .col3 {width: 40%;}
 .col4 {width: 20%;} */
+
+.table td .table th
+{
+	text-align: center;
+	vertical-align: center;
+	
+}

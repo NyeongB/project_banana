@@ -9,13 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+
 <link rel="stylesheet" type="text/css" href="css/UserAttendanceListStyle.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
    src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <script type="text/javascript"></script>
 <style type="text/css">
 
@@ -48,23 +49,26 @@
 				</div>
 			</div> -->
 			
-			<table class="table table-hover">
+			<table class="table">
+				<tr><td><h3 class="highlight">오늘 분배 상품</h3></tr>
 				<tr>
 					<th>번호</th>
 					<th>사진</th>
 					<th>제목</th>
-					<th>가격</th>
 					<th>모집인원</th>
 					<th>분배날짜</th>
-					<th>분배날짜</th>
-					<th>분배날짜</th>
+					<th>분배장소</th>
+					<th>출석부</th>
 					
 				</tr>
 				<tr>
-					<td></td>
-										<td></td>
-															<td></td>
-																				<td></td>
+					<td>1</td>
+					<td>사진</td>
+					<td>오레오같이사요~!</td>
+					<td>5/5</td>
+					<td>2020.07.01</td>
+					<td>수유역</td>
+					<td><button class="btn">출석부</button></td>
 					
 				</tr>
 			
