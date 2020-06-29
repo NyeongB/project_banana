@@ -68,7 +68,7 @@ a:hover
 
 
 
-/* 푸터 고정 css */
+/* 푸터 고정 */
 html 
 {
 	height: 100%;
@@ -83,7 +83,7 @@ body
 {
 	min-height: 100%;
 	position: relative;
-
+	padding-bottom: 19px; /* footer height */
 
 }
 .footer

@@ -75,12 +75,12 @@
 			</table>
 
         </div>
-    </div>
-   
-    <div class="row footer">
-        <div class="col-xs-12">
-        	<jsp:include page="footer.jsp"></jsp:include>
-        </div>
+    </div>   
+
+</div>
+<div class="row">
+    <div class="col-xs-12">
+    	<jsp:include page="footer.jsp"></jsp:include>
     </div>
 </div>
 
