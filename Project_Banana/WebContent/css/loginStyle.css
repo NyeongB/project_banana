@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#logo_text_1
+{
+	color: var(--back-color);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 30pt;
+	text-align: center;
+	
+}
+#logo
+{
+	text-align: center;
+}
+/* .login_content
+{
+	display:flex;
+	justify-content: center;
+	align-items: center; 
+	
+} */
