@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminShopUserList.jsp</title>
+<title>AdminDropUserList.jsp</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
@@ -64,9 +64,7 @@ li {
 								<li><a href="#">관리자 계정 관리</a></li>
 								<li><a href="#">사용자 조회</a></li>
 							</ul></li>
-						<li><a href="#">게시물관리</a></li>
-						<li><a href="#">댓글관리</a></li>
-						<li><a href="#">공지사항</a></li>
+						
 						<li><a href="#">매출관리</a></li>
 						<li><a href="#">광고관리</a></li>
 
@@ -84,10 +82,10 @@ li {
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="nav nav-pills">
-							<li role="presentation" class="active" ><a href="#">일반회원</a></li>
+							<li role="presentation"><a href="#">일반회원</a></li>
 							<li role="presentation"><a href="#">소상공인회원</a></li>
 							<li role="presentation"><a href="#">정지회원</a></li>
-							<li role="presentation"><a href="#">탈퇴회원</a></li>
+							<li role="presentation" class="active"><a href="#">탈퇴회원</a></li>
 							<li role="presentation"><a href="#">휴면회원</a></li>
 						</ul>
 					</div>
@@ -113,7 +111,7 @@ li {
 							<th>계좌번호</th>
 							<th>경고</th>
 							<th>아웃</th>
-							<th>최근방문일</th>
+							<th>탈퇴 날짜</th>
 						</tr>
 						<tr>
 							<td>홍길동</td>
