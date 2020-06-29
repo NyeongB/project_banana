@@ -9,21 +9,12 @@ String cp = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap.min.css">
-	
-	
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
-	/* .container-fluid
-	{
-		padding: 0px ;
-	} */
-	
-</style>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -33,17 +24,21 @@ String cp = request.getContextPath();
 
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="header">
-			<div class="col-md-12">
-				<jsp:include page="header.jsp"></jsp:include>
-			</div>
+
+
+
+	<div class="header">
+		<div class="col-md-12">
+			<jsp:include page="header.jsp"></jsp:include>
 		</div>
+	</div>
+	<div class="container-fluid">
+
 		<div class="content">
 			<div class="col-md-2">
-				
+
 				<jsp:include page="Menu.jsp"></jsp:include>
-				
+
 			</div>
 			<div class="col-md-8">
 				<div>
@@ -78,22 +73,23 @@ String cp = request.getContextPath();
 								<td>
 									<div class="btn-group" role="group">
 
-										<button class="btn btn-secondary" type="button">Left
+										<button class="" type="button">
+											<span class=""></span> 후기버튼
 										</button>
-										<button class="btn btn-secondary" type="button">
-											Center</button>
-										<button class="btn btn-secondary" type="button">
-											Right</button>
-										<button class="btn btn-secondary" type="button">
-											Justify</button>
+										<button class="" type="button">일자입력</button>
+										<button class="" type="button">
+											<span class="glyphicon glyphicon-warning-sign"></span>
+										</button>
+										<button class="glyphicon glyphicon-remove" type="button">
+										</button>
 									</div>
 
 								</td>
 							</tr>
 
 						</tbody>
-						
-						
+
+
 						<tbody>
 							<tr>
 								<td>2</td>
@@ -107,24 +103,22 @@ String cp = request.getContextPath();
 								<td>
 									<div class="btn-group" role="group">
 
-										<button class="" type="button">
-										<span class=""></span>
-										후기버튼
+										<button class="btn" type="button">
+											<span class=""></span> 후기버튼
 										</button>
-										<button class="" type="button">
-											일자입력</button>
-										<button class="" type="button">
-										<span class="glyphicon glyphicon-print"></span>
+										<button class="btn" type="button">일자입력</button>
+										<button class="btn" type="button">
+											<span class="glyphicon glyphicon-warning-sign"></span>
 										</button>
-										<button class="glyphicon glyphicon-remove" type="button">
-											</button>
+										<button class="btn glyphicon glyphicon-remove" type="button">
+										</button>
 									</div>
 
 								</td>
 							</tr>
 
 						</tbody>
-						
+
 					</table>
 
 
@@ -134,10 +128,12 @@ String cp = request.getContextPath();
 			</div>
 			<div class="col-md-2"></div>
 		</div>
-		<div class="footer">
-			<div class="col-md-12">
-				<jsp:include page="footer.jsp"></jsp:include>
-			</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
 
