@@ -9,10 +9,11 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="icon" href="images/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	
 	
 <style type="text/css">
@@ -29,12 +30,6 @@ String cp = request.getContextPath();
 	}
 	
 </style>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	
-</script>
 
 </head>
 <!-- header -->
