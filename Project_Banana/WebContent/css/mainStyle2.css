@@ -87,8 +87,25 @@ body
 	padding-bottom: 19px; /* footer height */
 
 }
-.footer
+.Footer
 {
 	position: absolute;
 
+}
+h3
+{
+	font-weight: bold;
+	
+}
+.table th
+{
+	background-color: var(--back-color);
+	color: var(--text-color);
+	text-align: center;
+	
+}
+.table td
+{
+	text-align: center;
+	
 }
