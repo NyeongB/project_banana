@@ -38,7 +38,7 @@ String cp = request.getContextPath();
 	<div class="content">
 		<div class="col-md-2">
 
-			<jsp:include page="Menu.jsp"></jsp:include>
+			<jsp:include page="MenuUser.jsp"></jsp:include>
 
 		</div>
 		<div class="col-md-8">
