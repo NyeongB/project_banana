@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
+   <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript"
    src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
@@ -63,6 +64,9 @@
 				</div>
 			</div>
 			<br><br>
+		
+			
+			<br><br>
 			<div class="form-group">
 				
 				   <!-- 비밀번호 -->
@@ -74,6 +78,8 @@
 				   	<div class="col-md-3"></div>
 				   </div>
 			</div>
+			
+			
 			<br><br>
 			<div class="form-group">
 				<div class="col-md-12">
