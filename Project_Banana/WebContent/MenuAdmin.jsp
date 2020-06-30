@@ -41,22 +41,44 @@
 
 <div id="nav">
 		<ul class="menu">
-		<li><a href="#">◎ 개인 정보 수정</a></li>
-		<li><a href="#">◎ 나의 찜 목록</a></li>
 		
-		<li><a href="#">◎ 나의 공동구매</a>
+		<li><a href="#">사용자조회</a>
 				<ul class="sub" style="display: none;">
-					<li><a href="#">-내가 제안한 나눠사요</a></li>
-					<li><a href="#">- 내가 참여한 나눠사요</a></li>
-					<li><a href="#">- 함께사요</a></li>
-					<li><a href="#">- 내가 참여한 공동구매</a></li>
+					<li><a href="#">일반회원</a></li>
+					<li><a href="#">휴면회원</a></li>
+					<li><a href="#">탈퇴회원</a></li>
+					<li><a href="#">정지회원</a></li>
+					<li><a href="#">소상공인회원</a></li>
 				</ul>
-			</li>
+		</li>
 		
-		<li><a href="#">◎ 나의 렌트 현황</a></li>
-		<li><a href="#">◎ 일정표</a></li>
-		<li><a href="#">◎ 공동 구매 출석부</a></li>
-		<li><a href="#">◎ 내가 쓴 댓글</a></li>
+		<li><a href="#">공지사항 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="#">공지사항 메인</a></li>
+					<li><a href="#">공지사항 등록폼</a></li>
+				</ul>
+		</li>
+		
+		<li><a href="#">공지 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="#">광고 신청자 확정 목록</a></li>
+					<li><a href="#">광고 비용 설정</a></li>
+					<li><a href="#">광고 수익 관리</a></li>
+				</ul>
+		</li>
+		
+		<li><a href="#">포인트 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="#">포인트 입출금 리스트</a></li>
+				</ul>
+		</li>
+		
+		<li><a href="#">신고 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="#">접수된 신고</a></li>
+					<li><a href="#">처리 완료 신고</a></li>
+				</ul>
+		</li>
 			
 		
 

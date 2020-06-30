@@ -41,26 +41,21 @@
 
 <div id="nav">
 		<ul class="menu">
-		<li><a href="#">◎ 개인 정보 수정</a></li>
-		<li><a href="#">◎ 나의 찜 목록</a></li>
 		
-		<li><a href="#">◎ 나의 공동구매</a>
-				<ul class="sub" style="display: none;">
-					<li><a href="#">-내가 제안한 나눠사요</a></li>
-					<li><a href="#">- 내가 참여한 나눠사요</a></li>
-					<li><a href="#">- 함께사요</a></li>
-					<li><a href="#">- 내가 참여한 공동구매</a></li>
-				</ul>
-			</li>
-		
-		<li><a href="#">◎ 나의 렌트 현황</a></li>
-		<li><a href="#">◎ 일정표</a></li>
-		<li><a href="#">◎ 공동 구매 출석부</a></li>
-		<li><a href="#">◎ 내가 쓴 댓글</a></li>
-		
-		
-			
-		
+		<li><a href="#">마이페이지 메인</a></li>
+		<li><a href="#">찜</a></li>
+		<li><a href="#">렌트현황</a></li>
+		<li><a href="#">공동구매현황</a></li>
+		<li><a href="#">출석부</a></li>
+		<li><a href="#">신고내역</a></li>
+		<li><a href="#">일정표</a></li>
+		<li><a href="#">내가쓴댓글</a></li>
+		<li><a href="#">개인정보수정</a></li>
+		<li><a href="#">마이바나나</a></li>
+		<li><a href="#">친구목록</a></li>
+		<li><a href="#">가계부</a></li>
+		<li><a href="#">내가 제안한 함께사요</a></li>
+	
 
 			
 		</ul>
