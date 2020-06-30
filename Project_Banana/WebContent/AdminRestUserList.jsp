@@ -178,7 +178,7 @@ li
 
 
 
-	<div class="Footer">
+	<div class="row Footer">
 		<div class="col-md-12">
 			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
