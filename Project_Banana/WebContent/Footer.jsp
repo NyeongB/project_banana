@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+   request.setCharacterEncoding("UTF-8");
+   String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -15,12 +15,12 @@
 
 </head>
 <body id="footer_body">
-	<div id="footer">
-		<ul id="footer_list">
-			<li>ⓒBananaProject401 corp.</li>
-			<li><a href="">공지 사항</a></li>
-		</ul>
-	</div>
+   <div id="footer">
+      <ul id="footer_list">
+         <li>ⓒBananaProject401 corp.</li>
+         <li><a href="">공지 사항</a></li>
+      </ul>
+   </div>
 
 
 </body>

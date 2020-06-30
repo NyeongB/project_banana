@@ -38,9 +38,9 @@ String cp = request.getContextPath();
 
 </head>
 <!-- header -->
-<div class="header">
+<div class="Header">
 	<div class="col-md-12">
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="Header.jsp"></jsp:include>
 	</div>
 </div>
 <body>
@@ -136,7 +136,7 @@ String cp = request.getContextPath();
 	</div>
 <div class="row">
 	<div class="col-md-12">
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
 

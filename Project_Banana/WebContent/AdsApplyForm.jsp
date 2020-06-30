@@ -24,25 +24,20 @@
 </head>
 <body>
 
+<!-- header -->
+<div class="row Header">
+	<div class="col-md-12">				
+		<jsp:include page="Header.jsp"></jsp:include>				
+	</div>
+</div>			
+
+<!-- content  -->
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-			<!-- header -->
-				<div class="col-md-12">
-				
-				<jsp:include page="header.jsp"></jsp:include>
-				
-				</div>
-			</div>
-			
-			
-			
-			
+		<div class="col-md-12">			
 			<div class="row">
 				<div class="col-md-2">
-				</div>
-				
+				</div>			
 				
 				<div class="col-md-8">
 				
@@ -71,13 +66,10 @@
 				<div class="col-md-2">
 				</div>
 			</div>
-			
-			<div class="row">
 			<!-- footer -->
-				<div class="col-md-12">
-				
-		
-	<jsp:include page="footer.jsp"></jsp:include>
+			<div class="row">			
+				<div class="col-md-12">		
+					<jsp:include page="Footer.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>

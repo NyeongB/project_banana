@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -9,28 +9,32 @@ String cp = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>AdminDropUserList.jsp</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+
+	$(document).ready(function() 
+	{
 		$("#nav1 ul.sub").hide();
-		$("#nav1 ul.menu li").click(function() {
+		$("#nav1 ul.menu li").click(function() 
+		{
 			$("ul", this).slideToggle("fast");
 		});
 	})
 </script>
+
 <style type="text/css">
-li {
+li 
+{
 	font-weight: bold;
 	font-size: 18px;
 	list-style-type: none;
 }
 
-.table {
+.table 
+{
 	/*
 	 width: 100%; overflow: auto; 
 	*/
@@ -38,16 +42,17 @@ li {
 	font-weight: 300;
 }
 
-.nav2 {
+.nav2 
+{
 	float: rigth;
 }
 </style>
 </head>
 <body>
 
-	<div class="header">
+	<div class="row Header">
 		<div class="col-md-12">
-			<jsp:include page="header.jsp"></jsp:include>
+			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 	</div>
 	<div class="container-fluid">
@@ -173,9 +178,9 @@ li {
 
 
 
-	<div class="footer1">
+	<div class="Footer">
 		<div class="col-md-12">
-			<C:import url="footer.jsp"></C:import>
+			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
 	</div>
 

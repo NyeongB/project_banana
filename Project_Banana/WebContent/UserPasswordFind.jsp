@@ -26,9 +26,9 @@
 </style>
 </head>
 <body>
-	<div class="col-md-12">
-		<jsp:include page="header.jsp"></jsp:include>
-	</div>
+<div class="col-md-12">
+	<jsp:include page="Header.jsp"></jsp:include>
+</div>
 
 	<div class="container">
 
@@ -94,9 +94,10 @@
 	</div>
 	<!--end container div  -->
 
-	<div class="bottom">
-		<div class="col-md-12">
-			<jsp:include page="footer.jsp"></jsp:include>
+<div class="Footer">
+	<div class="col-md-12">
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
+</div>
 </body>
 </html>

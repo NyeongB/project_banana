@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -20,12 +20,14 @@
 </script>
 </head>
 <body>
-	<div class="container">
-		<div class="header">
-			<div class="col-md-12">
-				<jsp:include page="header.jsp"></jsp:include>
-			</div>
-		</div>
+<div class="row Header">
+	<div class="col-md-12">
+		<jsp:include page="Header.jsp"></jsp:include>
+	</div>
+</div>
+
+<div class="container-fluid">
+		
 		<%-- <div class="header">
 				<div class="col-md-12">
 					<jsp:include page="header.jsp"></jsp:include>
@@ -64,11 +66,11 @@
 
 						<label for="sellItem"> 취급품목(카테고리) </label> <br> <select
 							name="category">
-							<option var="1">식품</option>
-							<option var="2">생활용품</option>
-							<option var="3">스포츠</option>
-							<option var="3">유아동/반려동물</option>
-							<option var="3">디지털/가전도구</option>
+							<option value="1">식품</option>
+							<option value="2">생활용품</option>
+							<option value="3">스포츠</option>
+							<option value="3">유아동/반려동물</option>
+							<option value="3">디지털/가전도구</option>
 						</select>
 					</div>
 					<br>
@@ -105,16 +107,15 @@
 			</div>
 			<div class="col-md-3"></div>
 		</div>
-		<div class="footer">
+		
+
+	</div>
+
+<div class="row Footer">
 			<div class="col-md-12">
-				<jsp:include page="footer.jsp"></jsp:include>
+				<jsp:include page="Footer.jsp"></jsp:include>
 			</div>
 		</div>
-
-	</div>
-	</div>
-	</div>
-
 
 </body>
 </html>

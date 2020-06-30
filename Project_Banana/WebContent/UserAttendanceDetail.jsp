@@ -25,7 +25,7 @@
 <!-- header 영역 -->
 <div class="row">
 		<div class="col-md-12">
-			<jsp:include page="header.jsp"></jsp:include>
+			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 </div>
 <!-- content 영역 -->
@@ -84,9 +84,9 @@
 
 </div>
 <!-- footer 영역 -->
-<div class="row">
-	<div class="col-md-12 footer">
-		<jsp:include page="footer.jsp"></jsp:include>
+<div class="row Footer">
+	<div class="col-md-12">
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
 </body>

@@ -27,13 +27,13 @@
 </head>
 <body>
 
-
-<div class="container-fluid">
-    <div class="row header">
-        <div class="col-xs-12">
-        	<jsp:include page="header.jsp"></jsp:include>
-        </div>
+<div class="row Header">
+    <div class="col-xs-12">
+    	<jsp:include page="Header.jsp"></jsp:include>
     </div>
+</div>
+<div class="container-fluid">
+
     <div class="row">
         <div class="col-md-offset-3 col-md-6">	
     <!--     	<div id="row table">
@@ -78,9 +78,9 @@
     </div>   
 
 </div>
-<div class="row">
+<div class="row Footer">
     <div class="col-xs-12">
-    	<jsp:include page="footer.jsp"></jsp:include>
+    	<jsp:include page="Footer.jsp"></jsp:include>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -29,9 +29,9 @@ String cp = request.getContextPath();
 </head>
 <body>
 
-	<div class="header">
+	<div class="row Header">
 		<div class="col-md-12">
-			<jsp:include page="header.jsp"></jsp:include>
+			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 	</div>
 	<div class="container-fluid">
@@ -159,9 +159,9 @@ String cp = request.getContextPath();
 
 
 
-	<div class="footer1">
+	<div class="row Footer">
 		<div class="col-md-12">
-			<C:import url="footer.jsp"></C:import>
+			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
 	</div>
 
