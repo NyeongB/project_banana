@@ -59,11 +59,12 @@
 				</ul>
 		</li>
 		
-		<li><a href="#">공지 관리</a>
+		<li><a href="#">광고 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="#">광고 신청자 확정 목록</a></li>
 					<li><a href="#">광고 비용 설정</a></li>
 					<li><a href="#">광고 수익 관리</a></li>
+					<li><a href="#">예약 확정 목록</a></li>
 				</ul>
 		</li>
 		
