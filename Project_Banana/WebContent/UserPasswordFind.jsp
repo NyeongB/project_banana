@@ -29,23 +29,14 @@
 <div class="col-md-12">
 	<jsp:include page="Header.jsp"></jsp:include>
 </div>
-
+	
 	<div class="container">
-
+		
 		<div class="content">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
-				<div class="col-md-12">
-					<ul class="nav nav-pills">
-						<li class="nav-item"><a class="nav-link active" href="#"><h3>아이디 찾기</h3></a></li>
-						<li class="nav-item"><a class="nav-link" href="#"><h3 class="hightlight">비밀번호 찾기</h3></a></li>
-					</ul>
-				</div>
-				<!--div col-md-12 끝-->
-
-
 				<form role="form" class="form-inline" id="passwordForm">
-
+				<br><br>
 					<div class="form-group">
 						<label for="userId"> 아이디(*) </label> <input type="email"
 							class="form-control" id="userId" placeholder="아이디" />
@@ -79,17 +70,13 @@
 				
 				<button type="submit" class="btn btn-primary">다음</button>
 				<br><br>
-
+				<br><a href="">아이디 찾기</a>
 
 			</div>
 			<!--col-md-6 div 끝  -->
 			<div class="col-md-3"></div>
 		</div>
 		<!--end content  -->
-
-
-	
-	
 
 	</div>
 	<!--end container div  -->
