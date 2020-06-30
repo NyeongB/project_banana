@@ -55,7 +55,7 @@ String cp = request.getContextPath();
 			</div>
 			<div class="col-md-8">
 				<div>
-					<h3>내가 신청한 렌트 현황</h3>
+					<h3>내가 제안한 나눠사요</h3>
 				</div>
 
 				<div class="col-md-12">

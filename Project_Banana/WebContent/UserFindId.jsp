@@ -17,22 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
-.highlight
-{
-	background-color: var(--back-color);
-	color: var(--text-color);
-	border-radius: 10px;
-	padding:5px;
-	font-weight: bold;
-	
-	
-}
 
-.col-md-12
-{
-	background-color: #004080;
-	
-}
 #pwfont
 {
 	text-align: center;
@@ -46,13 +31,7 @@
 	<div class="header">
 		<jsp:include page="header.jsp"></jsp:include>
 	</div>
-	<div class="col-md-12 ">
-		<ul class="nav nav-pills">
-		<li class="nav-item"><a class="nav-link active" href="#"><h3 class="highlight">아이디 찾기</h3></a></li>
-		<li class="nav-item"><a class="nav-link" href="#"><h3>비밀번호 찾기</h3></a></li>
-		</ul>
-	</div>
-	
+
 	
 	<div class="container">
 	
@@ -125,16 +104,18 @@
 								<br>
 								<br>
 							</form>
+							<br><a href="">비밀번호 찾기</a>
 						</div>
 						<!-- email div 끝  -->
-					</div>
-					<!--col-md-6 div 끝  -->
-					<div class="col-md-3"></div>
-				</div>
-				<!--end content  -->
 
-			</div>
-			<!--end  class="col-md-12"   -->
+						
+				</div>
+				<!--col-md-6 div 끝  -->
+				<div class="col-md-3"></div>
+		</div>
+			<!--end content  -->
+
+		
 
 	</div>
 	<!--end container div  -->
