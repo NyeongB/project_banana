@@ -31,12 +31,47 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
+			<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
+		
+			<!-- 관리자 계정 관리 제목  -->
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
-					<h3>관리자 계정 생성</h3>
+					<h3>관리자 계정 관리</h3>
 				</div>
+			</div>
+			<!-- 관리자 계정 생성 -->	
+			<div class="row ">
+				<div class="col-md-12">
+						<form action="" class="form-inline">
+						<div class="input-group mb-3">
+							<label for="adminId">아이디</label>
+							<input type="text" class="form-control" id="adminId"/>
+							<div class="input-group-append">
+								<button type="button" class="btn">중복확인</button>
+							</div>
+						</div>
+						
+						<div class="input-group">
+							<label for="adminPw">비밀번호</label>
+							<div>
+								<input type="password" class="form-control" id="adminPw"/>
+							</div>
+						</div>
+	
+						<div class="input-group">
+							<label for="adminName">이름</label>
+							<div>
+								<input type="text" class="form-control" id="adminName"/>
+							</div>
+						</div>
+					</form>
+					
+
+				</div>
+
+				<!-- col-md-12 끝 -->
 			</div>
 			<div class="row">
 				<div class="col-md-12">
