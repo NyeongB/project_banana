@@ -42,31 +42,36 @@
 				</div>
 			</div>
 			<!-- 관리자 계정 생성 -->	
-			<div class="row ">
+			<div class="row">
 				<div class="col-md-12">
 						<form action="" class="form-inline">
-						<div class="input-group mb-3">
 							<label for="adminId">아이디</label>
-							<input type="text" class="form-control" id="adminId"/>
-							<div class="input-group-append">
-								<button type="button" class="btn">중복확인</button>
-							</div>
-						</div>
-						
-						<div class="input-group">
+								<div class="input-group">								
+									<input type="text" class="form-control" id="adminId"/>
+									<div class="input-group-btn">
+										<button type="button" class="btn">중복확인</button>
+									</div>
+								</div>
+							
 							<label for="adminPw">비밀번호</label>
-							<div>
-								<input type="password" class="form-control" id="adminPw"/>
+							<div class="input-group">
+								<div>
+									<input type="password" class="form-control" id="adminPw"/>
+								</div>
 							</div>
-						</div>
-	
-						<div class="input-group">
 							<label for="adminName">이름</label>
-							<div>
-								<input type="text" class="form-control" id="adminName"/>
+							<div class="input-group">
+								<div>
+									<input type="text" class="form-control" id="adminName"/>
+								</div>
 							</div>
-						</div>
-					</form>
+							<div class="input-group">
+								<div>
+									<input type="button" class="btn form-control" value="생성"/>
+								</div>
+							</div>
+						</form>
+					
 					
 
 				</div>
