@@ -12,7 +12,7 @@
 <style type="text/css">
 	#nav
 	{
-		padding: 25px;
+		padding: 5px;
 	}
 </style>
 <link rel="stylesheet" type="text/css"

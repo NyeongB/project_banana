@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-md-8">
 			<div>
-				<h3>신청 광고 조회</h3>
+				<h3>확정 광고 조회</h3>
 			</div>
 
 			<div class="col-md-12">
@@ -54,47 +54,8 @@
 							<th>광고 사진</th>
 							<th>광고 주소</th>
 							<th>광고내용</th>
-							<th>수락</th>
-							<th>거절</th>
 						</tr>
 					</thead>
-					
-
-
-					<tbody>
-						<tr>
-							<td>bike11</td>
-							<td>하단 광고</td>
-							<td>2020.06.25</td>
-							<td>2020.07.14</td>
-							<td><img alt="Bootstrap Image Preview"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzDMtEOltBIDuq-dRjaOstZ67y2lPrLX2e_w&usqp=CAU"
-								style="width: 70px; height: 70px;"></td>
-							<td><a href="">바로가기</a></td>
-							<td>자전거광고 신청합니다.</td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 수락
-									</button>
-									
-								</div>
-
-							</td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 거절
-									</button>
-									
-								</div>
-
-							</td>
-						</tr>
-
-					</tbody>
 					
 					<tbody>
 						<tr>
@@ -108,26 +69,6 @@
 								
 							<td><a href="">바로가기</a></td>
 							<td>사이트 홍보 광고 신청합니다. </td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 수락
-									</button>
-									
-								</div>
-
-							</td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 거절
-									</button>
-									
-								</div>
-
-							</td>
 							
 						</tr>
 
@@ -144,26 +85,6 @@
 								style="width: 70px; height: 70px;"></td>
 							<td><a href="">바로가기</a></td>
 							<td>인터넷+TV 가입 홍보입니다.</td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 수락
-									</button>
-									
-								</div>
-
-							</td>
-							<td>
-								<div class="btn-group" role="group">
-
-									<button class="" type="button">
-										<span class=""></span> 거절
-									</button>
-									
-								</div>
-
-							</td>
 							
 						</tr>
 
