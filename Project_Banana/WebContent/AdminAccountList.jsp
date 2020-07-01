@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="stylesheet" type="text/css" href="css/AdminAccountListStyle.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -34,15 +35,16 @@
 			<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
 		
-			<!-- 관리자 계정 관리 제목  -->
+		<!-- 관리자 계정 관리 제목  -->
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
 					<h3>관리자 계정 관리</h3>
+					<hr />
 				</div>
 			</div>
 			<!-- 관리자 계정 생성 -->	
-			<div class="row">
+			<div class="row adminList">
 				<div class="col-md-12">
 						<form action="" class="form-inline">
 							<label for="adminId">아이디</label>
@@ -71,7 +73,7 @@
 								</div>
 							</div>
 						</form>
-					
+					<hr />
 					
 
 				</div>

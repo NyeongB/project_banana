@@ -18,8 +18,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
@@ -42,7 +41,7 @@
 <div id="nav">
 		<ul class="menu">
 		
-		<li><a href="#">사용자조회</a>
+		<li ><a href="#">사용자조회</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="#">일반회원</a></li>
 					<li><a href="#">휴면회원</a></li>
