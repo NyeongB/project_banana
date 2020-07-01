@@ -27,10 +27,6 @@ String cp = request.getContextPath();
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #f9f0ca;
-	margin-right: auto;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #f9f0ca;
 	width: 100%;
 	height: 650px;
 	margin-bottom: 80px;
@@ -43,7 +39,7 @@ String cp = request.getContextPath();
 
 h1 {
 	font-weight: bold;
-	padding-top: 70px;
+	padding-top: 10px;
 }
 
 .radio label {
@@ -57,7 +53,9 @@ p {
 }
 
 .form-group {
+	
 	margin-left: 100px;
+	
 }
 
 #name
@@ -90,7 +88,38 @@ p {
 	padding-right: 80px;
 }
 
+img
+{
+	width: 60px;
+}
+
+#group1
+{
+	display: none;
+}
+
+#group2
+{
+	display: none;
+}
+
+
 </style>
+<script type="text/javascript">
+
+	$(document).ready(function() 
+	{
+		
+		$("#telCheck").click(function()
+		{
+			
+			$("#group1").css("display", "inline-block");	
+		});
+	});
+
+
+
+</script>
 
 
 
@@ -115,13 +144,15 @@ p {
 						<div class="center-block">
 							<div class="col-md-12">
 								<div class="page-header text-center">
+									<img alt="Bootstrap Image"
+									src="images/icons8-bing-50.png">
 									<h1>휴면 계정 해제</h1>
 								</div>
 
 
 								<div class="row ">
 									<div class="radio" id="r1">
-										<label> <input type="radio" name="telCheck"
+										<label> <input type="radio" name="restRadio"
 											id="telCheck" value="telO"> 회원 정보에 입력한 휴대번호로 인증
 										</label>
 										<p>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</p>
@@ -132,7 +163,7 @@ p {
 
 
 								<form class="form-inline" role="form">
-									<div class="row form-group">
+									<div class="row form-group" id="group1">
 										<div class="row">
 										<label for="name" id="name"> 이름 </label> 
 										<input class="form-control" id="name" type="text" /> 
@@ -165,7 +196,7 @@ p {
 								<div class="row ">
 									<div class="radio" id="r2">
 									
-										<label> <input type="radio" name="pwQuestion"
+										<label> <input type="radio" name="restRadio"
 											id="pwQuestion" value="pwQO"> 비밀번호 질문 답변
 										</label>
 										
@@ -175,7 +206,7 @@ p {
 								<br>
 								
 								<form class="form-inline" role="form">
-								<div class="row form-inline">
+								<div class="row form-inline" id="group2">
 										
 										<label for="" id="pwQ">비밀번호 질문</label> 
 										
@@ -196,12 +227,14 @@ p {
 
 
 							</div>
-						</div>
-					</div>
+						</div> <!-- end center-block -->
+					</div> <!-- col-md-8 end -->
+					
+					
 					<div class="col-md-2"></div>
 				</div>
 			</div>
-		</div>
+		</div> 
 
 
 
