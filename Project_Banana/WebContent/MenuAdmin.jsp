@@ -18,17 +18,26 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="stylesheet" type="text/css" href="css/MyMenuStyle.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function() 
 	{
-		$("#nav ul.sub").hide();
+		//$("#nav ul.sub").hide();
 		$("#nav ul.menu li").click(function() 
 		{
 			$("ul", this).slideToggle("fast");	
+			$("li a", this).toggleClass("clicked_menu");	
+
+			
 		});
+		
+	
+		
+		
+		
 	})
 	
 	
@@ -37,11 +46,14 @@
 
 </head>
 <body>
-
+<div class="adminPage_logo">
+	<h3>관리자페이지</h3>
+</div>
 <div id="nav">
+		
 		<ul class="menu">
 		
-		<li ><a href="#">사용자조회</a>
+		<li ><a href="#" id="userList">사용자조회</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="#">일반회원</a></li>
 					<li><a href="#">휴면회원</a></li>

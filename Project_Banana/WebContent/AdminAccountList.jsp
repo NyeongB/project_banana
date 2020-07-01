@@ -45,7 +45,7 @@
 			</div>
 			<!-- 관리자 계정 생성 -->	
 			<div class="row adminList">
-				<div class="col-md-12">
+				<div class="col-md-12 text-center">
 						<form action="" class="form-inline">
 							<label for="adminId">아이디</label>
 								<div class="input-group">								

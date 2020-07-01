@@ -1,0 +1,34 @@
+@charset "UTF-8";
+#nav a
+{
+	font-weight: 700;
+	color:var(--back-color2);
+	letter-spacing: 0.3em;
+	
+}
+.menu li
+{
+	padding:0.5em;
+	
+}
+a:active
+{
+	background-color: var(--back-color2);
+	
+}
+.clicked_menu
+{
+	background-color: var(--back-color);
+	
+}
+.adminPage_logo 
+{
+	padding-left:2em;
+	font-weight: 900;
+	
+}
+.MyUserPage_logo h3
+{
+	padding-left:2em;
+	font-weight: 900;	
+}
