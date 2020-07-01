@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserMyReceiveReportList.jsp</title>
+<title>UserMyGiveReportList.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -26,6 +26,26 @@
 {
 	color: blue;
 }
+
+#orderList
+{
+	margin-left: 25px;
+}
+
+#searchItem
+{
+	margin-left: 20px;
+}
+
+.navibar
+{
+	left: 50%; 
+        margin-left: 420px;
+}
+	
+</style>
+
+
 
 
 </head>
@@ -46,12 +66,37 @@
 			<div class="col-md-2">
 			<jsp:include page="MenuUser.jsp"></jsp:include>
 			
-			</div>
+			</div><!-- 왼쪽 MenuUser end  -->
+			
+		
 			<div class="col-md-8">
 				<div>
-					<h3>신고 접수</h3>
+					<h3>내가 접수한 신고</h3>
+					<hr>
 				</div>
-			
+				
+				<!--테이블 위 검색창,유형 div  -->
+				<div class="col-md-3">
+				
+				</div>
+				
+				<div class="col-md-5">
+				
+				
+				</div>
+				
+				<div class="col-md-4">
+				
+				<input type="text" name="search" id="searchItem">
+				<button type="button" name="searchBtn" ><span class="glyphicon glyphicon-search">  </span></button>
+				
+				<select name="orderList" id="orderList">
+					<option value="1">최신순</option>
+					<option value="2">신고유형</option>
+					<option value="3">처리상태</option>
+				</select>
+				</div><!-- 검색창,유형 div end -->
+				<br><br>
 			
 
 				<div class="col-md-12">
@@ -70,7 +115,7 @@
 								
 							</tr>
 						</thead>
-					<tbody>
+					    <tbody>
 						
 							<tr>
 								<td><a href="">사기 신고합니다.</a></td>
@@ -106,8 +151,37 @@
 				
 
 			</div> 
+			
+			<div class="text-center">
+					<div class="col-md-12">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+								<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
+								<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
+								<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
+								<li class="disabled"><a href="#" aria-label=""><span
+										aria-hidden="false">&laquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+			</div>
+			
 			<div class="col-md-2"></div>
+			
+			
+			
+		
+			
 		</div> <!-- content end -->
+		<br><br>
+		
+	
+		
 		
 </div> <!-- container-fluid end -->
 
