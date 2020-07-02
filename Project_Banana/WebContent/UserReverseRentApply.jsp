@@ -46,18 +46,17 @@
 				
 				<div>제목 <input type="text" class="form-control" id="text" /></div>
 				
-				<div>카테고리 <input type="text" class="form-control" id="text" /></div>
+				<div>1일 렌트비 <input type="text" class="form-control" id="text" /></div>
 				
-				<div>렌트 대여 희망 일시 <input type="text" class="form-control" id="text" /></div>
+				<div>보증금 <input type="text" class="form-control" id="text" /></div>
 				
-				<div>렌트 반납 희망 일시 <input type="text" class="form-control" id="text" /></div>
+				<label for="exampleInputFile">
+								사진 첨부
+							</label>
+							<input type="file" class="form-control-file" id="exampleInputFile" />
 				
-				<div>수령 장소<input type="text" class="form-control" id="text" /></div>
 				
-				<div>반납 장소<input type="text" class="form-control" id="text" /></div>
-				
-				
-				<div>설명 <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea></div>
+				<div>설명 <textarea name="" id="" cols="30" rows="10" class="form-control" style="resize: none;"></textarea></div>
 				
 										
 				<div>

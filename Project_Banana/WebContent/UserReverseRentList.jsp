@@ -29,53 +29,77 @@
 <!-- content  -->
 
 <div class="container-fluid">
-
-<div class="row">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-2">
 				
-				<jsp:include page="MenuUser.jsp"></jsp:include>
+				<jsp:include page="MenuUser.jsp"></jsp:include>  
 				
-				</div><!-- menu end -->
+				</div>
 				<div class="col-md-8">
+				<div>
+					<h3>역렌트 신청 현황</h3>
+					<hr>
+				</div>
 				
-				<div><h1>광고 신청</h1></div><br>
+				<div class="panel panel-primary"><!-- panel -->
 				
-				<form role="form" class="form-group">
-
-				광고 기간 <input type="date" class="form-control" id="birthday" name="birthday" /> 
-				URL <input type="text" class="form-control" id="text" />
-				광고 위치 <br><select name="" id="" class="form-control">
-					<option value="1">상단 : 50,000원</option>
-					<option value="2">우측 : 50,000원</option>
-					<option value="3">하단 : 50,000원</option>
-				</select><br>
-				글 내용
-				<textarea name="" id="" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
 				
-				<label for="exampleInputFile">
-								사진 첨부
-							</label>
-							<input type="file" class="form-control-file" id="exampleInputFile" />
-							
+				<div class="row">
+				<div class="col-md-2"><!-- 사진 -->
+				
+				<img alt="Bootstrap Image Preview"
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzDMtEOltBIDuq-dRjaOstZ67y2lPrLX2e_w&usqp=CAU"
+								style="width: 150px; height: 150px; text-align: center;">
+				
+				</div><!-- 사진끝 -->
+				<div class="col-md-8"><!-- 센터 -->
+				
+				<div class="panel-body">
+				  	  Panel content
+				  	</div>
+				  	
+				 
+				
+				</div><!-- 센터끝 -->
+				<div class="col-md-2"><!-- 버튼시작 -->
+				
+				<div class="btn-group" role="group">
 
+					<button class="" type="button">
+						<span class=""></span> 수락
+					</button>
+									
+				</div>
+				
+				<div class="btn-group" role="group">
 
-
-				<button type="submit" class="btn btn-primary" id="loginBtn">신청</button>
-				<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
-				</form>
+					<button class="" type="button">
+						<span class=""></span> 수락
+					</button>
+									
+				</div>
+				
+				</div><!-- 버튼끝 -->
 				</div>
 				
 				
-				</div><!-- col-md-8 end -->
+				
+				  	
+				  	
+				</div><!-- end panel -->
+				
+				</div>
 				<div class="col-md-2">
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
+
+<!-- container-fluid end -->
+
 
 
 <!-- content end -->

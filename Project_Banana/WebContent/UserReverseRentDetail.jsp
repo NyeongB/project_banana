@@ -46,7 +46,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 img-area">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSLcS9yXNUiaGfBrKKB4Ow9tauMto0QjRYkyA&usqp=CAU" alt=""  class="img-responsive img-rounded"/>
+					<img src="images/IlsanStation.JPG" alt=""  class="img-responsive img-rounded"/>
 				</div>
 				<div class="col-md-6 item_writer">
 					<div class="row">
