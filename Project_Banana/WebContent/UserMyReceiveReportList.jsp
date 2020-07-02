@@ -28,6 +28,8 @@
 }
 
 
+</style>
+
 </head>
 
 <body>
@@ -51,9 +53,27 @@
 				<div>
 					<h3>신고 접수</h3>
 				</div>
-			
-			
+				<br><br>
+				
+				<div class="col-md-3">
+				</div>
+				
+				<div class="col-md-6">
+				</div>
+				
+				<div class="col-md-3">
 
+				<input type="text" id="search">
+				<button type="button" ><span class="glyphicon glyphicon-search"></span></button>
+				<select name="order">
+					<option value="1">최신순</option>
+					<option value="2">신고유형</option>
+					<option value="3">처리상태</option>
+				</select>
+				</div>
+				<br><br>
+				
+				
 				<div class="col-md-12">
 
 
