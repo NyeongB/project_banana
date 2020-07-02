@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RentPostComplete.jsp</title>
+<title>PointChargeComplete.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -20,7 +20,7 @@
 .center-block
 {
 	display: block;
-	margin-top : 180px;
+	margin-top : 250px;
 	
 	
 }	
@@ -31,45 +31,33 @@ h1
 	font-size: 50px;
 }
 
-.CompleteBtn
+.pointBtn
 {
 	margin-top: 90px;
 }
 
 
-#mainback
+#chargemore
 {
 	margin-left: 40px;
 }
 
-#rentpage
+#mainback
 {
 	margin-right: 40px;
 }
 
-#mainback, #rentpage
+#mainback, #chargemore
 {
 	width: 150px;
 	height: 50px;
 	font-weight: bold;
     font-size: 20px;
+	
 }
 
-
-.rentNav
-{
-	margin-top : 30px;
-	margin-left: 100px;
-	font-size: 20px;
-}
-
-#rent1
-{
-	margin-right: 30px;
-}
 
 </style>
-
 
 
 </head>
@@ -81,7 +69,7 @@ h1
 <!-- Header  -->
 <div class="row Header">
    <div class="col-md-12">
-      <jsp:include page="Header.jsp"></jsp:include>   
+     <h1>Banana</h1>
    </div>
 </div>
 
@@ -91,27 +79,18 @@ h1
 
 <div class="content">
 			<div class="col-md-12">
-				
-				
-				<div class="row rentNav">
-					
-					<a href="" id="rent1">빌려드립니다</a> 
-					<a href="" id="rent2">빌려주세요</a>
-				
-				</div>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="center-block text-center" style="background-color: black">
 							<div class="col-md-12">
 								
-									<h1>렌트 게시물 작성이 완료되었습니다.</h1>
+									<h1>포인트 충전을 완료했습니다.</h1>
   								</div>
 									
 																	
-							<div class="col-md-12 CompleteBtn">
-								    <button class="btn btn-primary" type="button" id="rentpage">게시물로 가기</button>
-								    <button class="btn btn-primary" type="button" id="mainback">목록으로 가기</button>
+							<div class="col-md-12 pointBtn">
+								    <button class="btn btn-primary" type="button" id="chargemore">홈으로 돌아가기</button>
   								</div>
 								
 										
