@@ -32,7 +32,8 @@
 				<div>
 					<h3>게시물 신고 접수 페이지</h3>
 					<hr>
-				</div>
+				</div> 
+				
 			
 			
 				<table border="1">
