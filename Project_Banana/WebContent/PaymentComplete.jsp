@@ -20,31 +20,31 @@
 .center-block
 {
 	display: block;
-	margin-top : 180px;
+	margin-top : 150px;
 	
 	
 }	
 
-h1
+h2
 {
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 40px;
 }
 
 .PayBtn
 {
-	margin-top: 90px;
+	margin-top: 70px;
 }
 
 
 #rentpage
 {
-	margin-left: 40px;
+	margin-left: 20px;
 }
 
 #myrent
 {
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 #myrent, #rentpage
@@ -105,7 +105,7 @@ h1
 						<div class="center-block text-center">
 							<div class="col-md-12">
 								
-									<h1>결제가 완료되었습니다.</h1>
+									<h2>결제가 완료되었습니다.</h2>
   								</div>
 									
 																	

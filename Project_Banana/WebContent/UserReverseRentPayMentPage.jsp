@@ -29,52 +29,75 @@
 <!-- content  -->
 
 <div class="container-fluid">
-
-<div class="row">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-3">
 				
 				<jsp:include page="MenuUser.jsp"></jsp:include>
 				
-				</div><!-- menu end -->
-				<div class="col-md-8">
+				</div>
+				<div class="col-md-6">
 				
-				<div><h1>광고 신청</h1></div><br>
-				
-				<form role="form" class="form-group">
-
-				광고 기간 <input type="date" class="form-control" id="birthday" name="birthday" /> 
-				URL <input type="text" class="form-control" id="text" />
-				광고 위치 <br><select name="" id="" class="form-control">
-					<option value="1">상단 : 50,000원</option>
-					<option value="2">우측 : 50,000원</option>
-					<option value="3">하단 : 50,000원</option>
-				</select><br>
-				글 내용
-				<textarea name="" id="" cols="30" rows="10" class="form-control" style="resize: none;"></textarea>
-				
-				<label for="exampleInputFile">
-								사진 첨부
-							</label>
-							<input type="file" class="form-control-file" id="exampleInputFile" />
-							
-
-
-
-				<button type="submit" class="btn btn-primary" id="loginBtn">신청</button>
-				<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
-				</form>
+				<div>
+					<h3>역렌트 결제</h3>
+					<hr />
 				</div>
 				
 				
-				</div><!-- col-md-8 end -->
-				<div class="col-md-2">
+				<!-- 상세정보시작 -->
+				<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="img-thumbnail" />
+				</div>
+				<div class="col-md-8">
+					<h2 class="text-left">
+						자전거 빌려드려요~!!!
+					</h2>
+					<h5>렌트비 : 1,500원</h5>
+					<h5>보증금 : 10,000원</h5>
+					<h5>합계   : 20,500원</h5>
+					<h5>기간   : 2020.06.24 ~ 2020.06.30</h5>
+					<h3></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<hr />
+					<dl>
+						<dt>
+							결제 예정 금액
+						</dt>
+						<dd>
+							20,500원
+						</dd>
+						<dt>
+							나의 포인트
+						</dt>
+						<dd>
+							30,000원
+						</dd>
+					</dl>
+				</div>
+				
+				<div >
+				<button type="button" class="btn btnDefault">결제하기</button>
+				
+				<button type="button" class="btn btnDefault">취소하기</button>
+				</div>
+				
+			</div>
+		</div><!-- 상세정보 종료 -->
+				
+				
+				
+				</div><!-- 콜 엠디 6 끝 -->
+				<div class="col-md-3">
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 

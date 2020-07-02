@@ -10,6 +10,44 @@
 <meta charset="UTF-8">
 <title>UserMyGiveReportListDetail.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<style type="text/css">
+
+#attachFile
+{
+	border: 1px solid black;
+	
+}
+
+.formTop
+{
+	margin-top: 50px;
+
+	
+}
+
+.title
+{
+	background-color: var(--back-color);
+	border-bottom : 1px solid black ;
+	
+}
+
+.content
+{
+	/* margin : 1px; */
+	border: 1px solid black ;
+	
+	
+}
+
+input
+{
+	/* width: 178px; */
+	border: 1px solid gray ;
+}
+
+
+</style>
 </head>
 <body>
 
@@ -34,87 +72,118 @@
 					<hr>
 				</div> 
 				
-			
-			
-				<table border="1">
-					<thead>
-						<tr>
-							<th rowspan="2" >해당 게시물 제목</th>
-							<th rowspan="4"><input type="text" name="postname" id="postname" placeholder="고구마"></th>
-							<th rowspan="2">대상 아이디</th>
-							<td rowspan="2"><input type="text" name="reportId" id="reportId" placeholder="abc123" ></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th rowspan="2" >신고 제목</th>
-							<th rowspan="4"><input type="text" name="postTitle" id="postTitle" placeholder="고구마 함께 사요~"></th>
-							<th rowspan="2">신고 유형</th>
-							<td rowspan="2">
-								<select id="reportType" name="reportType">
-									<option value="1">노쇼</option>
-									<option value="2">허위게시물</option>
-									<option value="3">물품이상</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
 				
 				
-				</table>
+			
+				<div class="col-md-12 formTop">
+				
+					<div class="col-md-2">
+					</div>
+					
+						
+					<div class="col-md-2">
+						<input type="text"  value="해당 게시물 제목" class="title">
+					</div>
+					
+					<div class="col-md-2">
+						<input type="text" id="postTitle" name="postTitle" class="content">
+					</div>
+					
+					<div class="col-md-2">
+						<input type="text" value="신고대상자"  class="title">
+					</div>
+					<div class="col-md-2">
+						<input type="text" id="objReport" name="objReport" class="content">
+					</div>
+					
+					<div class="col-md-2">
+					</div>
+					
+				</div><!-- end col-md-12 -->
+				
+				<div class="col-md-12">
+				
+					<div class="col-md-2">
+					</div>
+				
+					<div class="col-md-2">
+						<input type="text"  value="신고 제목"  class="title">
+					</div>
+					
+					<div class="col-md-2">
+						<input type="text" id="reportTitle" name="reportTitle" class="content">
+					</div>
+					
+					<div class="col-md-2">
+						<input type="text" value="신고 유형"  class="title">
+					</div>
+					
+					<div class="col-md-2 content">
+						<select id="Rtype" name="Rtype" style="width: 232px; height: 27px;">
+						<option value="1">노쇼</option>
+						<option value="2">허위게시물</option>
+						<option value="3">물품이상</option>
+						</select>
+					</div>
+					
+					<div class="col-md-2">
+					</div>
+					
+				</div><!-- end col-md-12 -->
+				
+			    <div class="col-md-12">
+				
+					<div class="col-md-2">
+					</div>
+				
+					<div class="col-md-2">
+						<input type="text"  value="신고 내용" style="width: 100%; height: 150px; text-align: center;"  class="title">
+					</div>
+					
+					<div class="col-md-6" >
+						<input type="text" id="reportContent" name="reportContent" style="width: 111%; height: 150px;" class="content">
+					</div>
+				
+					
+					<div class="col-md-2">
+					</div>
+					
+				</div><!-- end col-md-12 -->
+				
+				<div class="col-md-12">
+				
+					<div class="col-md-2">
+					</div>
+				
+					<div class="col-md-2">
+						<input type="text"  value="첨부파일" style="width: 100%; height: 35px; text-align: center;"  class="title">
+					</div>
+					
+					<div class="col-md-6" >
+						<input type="file" id="attachFile" name="attachFile" style="width: 111%;" class="content" > 
+						<!-- <textarea rows="6" cols="52"> -->
+					</div> 
+				
+					
+					<div class="col-md-2">
+					</div>
+					
+				</div> <!-- end col-md-12 -->
+				 
 			
 			
-			</div>
+			
+			</div><!-- end col-md-8  -->
 			
 			<div class="col-md-2">
 			</div>
-		</div>
 		
-		</div>
+		</div><!--end content  -->				
 		
-	</div>
+	</div><!--end container-fluid  -->
+		
+		
+	
 
 	<!-- footer  -->
 	<div class="row">
