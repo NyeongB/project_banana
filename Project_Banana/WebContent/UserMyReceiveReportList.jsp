@@ -17,16 +17,31 @@
 <link rel="icon" href="glyphicon glyphicon-search" />
 <style type="text/css">
 
-#standby
-{
-	color: red;
-}
-
-#accept
+#blueAnswer
 {
 	color: blue;
 }
 
+#redAnswer
+{
+	color: red;
+}
+
+#greenAnswer
+{
+	color: green;
+}
+
+
+#orderList
+{
+	margin-left: 45px;
+}
+
+#searchItem
+{
+	margin-left: 80px;
+}
 
 </style>
 
@@ -42,93 +57,130 @@
 
 
 <div class="container-fluid">
-		<!-- content  -->
-		<div class="content">
-			
-			<div class="col-md-2">
+	<!-- content  -->
+	<div class="content">
+		<div class="col-md-2">
 			<jsp:include page="MenuUser.jsp"></jsp:include>
-			
-			</div>
-			<div class="col-md-8">
-				<div>
-					<h3>신고 접수</h3>
-				</div>
-				<br><br>
-				
-				<div class="col-md-3">
-				</div>
-				
-				<div class="col-md-6">
-				</div>
-				
-				<div class="col-md-3">
-
-				<input type="text" id="search">
-				<button type="button" ><span class="glyphicon glyphicon-search"></span></button>
-				<select name="order">
-					<option value="1">최신순</option>
-					<option value="2">신고유형</option>
-					<option value="3">처리상태</option>
-				</select>
-				</div>
-				<br><br>
-				
-				
-				<div class="col-md-12">
-
-
-					<table class="table">
-						<thead>
-							<tr>
-								<th>신고 제목</th>
-								<th>신고 대상자</th>
-								<th>신고 유형</th>
-								<th>게시물 제목</th>
-								<th>신고 내용</th>
-								<th>신고 시간</th>
-								<th>처리 상태</th>
-								
-							</tr>
-						</thead>
-					<tbody>
-						
-							<tr>
-								<td><a href="">사기 신고합니다.</a></td>
-								<td>cjfsud23</td>
-								<td>게시물</td>
-								<td><a href="">고구마 같이 사요~</a></td>
-								<td><a href="">고구마가 다 썩었어요</a></td>
-								<td>2020-06-08 15:00:03</td>
-								<td><p id="standby">접수</p></td>
-							</tr>
-
-						</tbody>
-						
-						
-						<tbody>
-					
-							<tr>
-								<td><a href="">댓글 신고합니다.</a></td>
-								<td>ehdehd95</td>
-								<td>댓글</td>
-								<td><a href="">물 나눠 사요~</a></td>
-								<td><a href="">욕설이 너무 많아요</a></td>
-								<td>2020-07-30 19:30:03</td>
-								<td><p id="accept">처리완료</p></td>
-							</tr>
-						
-						</tbody>
-						
-					</table>
-
-
-				</div>
-				
-
-			</div> 
-			<div class="col-md-2"></div>
-		</div> <!-- content end -->
+		</div><!-- 왼쪽 MenuUser end  -->		
 		
+		
+		<div class="col-md-8">
+			<div>
+				<h3>내가 받은 신고</h3>
+				<hr>
+			</div>
+				
+				
+		<!--테이블 위 검색창,유형 div  -->
+		<div class="col-md-3">
+		</div>
+		
+		<div class="col-md-5">
+		</div>
+				
+		<div class="col-md-4">
+				
+			<input type="text" name="search" id="searchItem">
+			<button type="button" name="searchBtn" ><span class="glyphicon glyphicon-search">  </span></button>
+			
+			<select name="orderList" id="orderList">
+				<option value="1">전체</option>
+				<option value="2">게시물</option>
+				<option value="3">댓글</option>
+			</select>
+		</div>
+		<!-- 검색창,유형 div end -->
+		<br><br>
+			
+
+		<div class="col-md-12">
+				
+			<table class="table">
+				<thead>
+					<tr>
+						<th>신고 당한 게시물</th>
+						<th>신고 당한 시간</th>
+						<th>신고 유형</th>
+						<th>신고 사유</th>
+						<th>이의제기</th>
+						<th>이의제기 가능일</th>
+						<th>이의제기 처리</th>
+								
+					</tr>
+				</thead>
+				 <tbody>	
+					<tr>
+						<td><a href="">물 나눠사요</a></td>
+						<td>2020-06-03 18:05:03</td>
+						<td>댓글</td>
+						<td>욕설/비방</td>
+						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
+						<td>2020-06-06 18:05:03</td>
+						<td><p id="blueAnswer">처리중</p></td>
+					</tr>
+					<tr>
+						<td><a href="">고데기 빌려드립니다</a></td>
+						<td>2020-04-21 09:00:03</td>
+						<td>게시물</td>
+						<td>대여자노쇼</td>
+						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
+						<td>2020-04-24 09:00:03</td>
+						<td><p id="redAnswer">환불</p></td>
+					</tr>
+					
+					<tr>
+						<td><a href="">고구마 함께 사요</a></td>
+						<td>2020-03-21 09:00:03</td>
+						<td>댓글</td>
+						<td>욕설/비방</td>
+						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
+						<td>2020-03-24 09:00:03</td>
+						<td><p id="redAnswer">경고</p></td>
+					</tr>
+					
+					<tr>
+						<td><a href="">빔 프로젝트 쓸 사람~</a></td>
+						<td>2020-02-18 13:00:03</td>
+						<td>게시물</td>
+						<td>상품하자</td>
+						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
+						<td>2020-02-21 13:00:00</td>
+						<td><p id="greenAnswer">부적절한 사유</p></td>
+					</tr>
+					
+				</tbody>
+						
+			</table>
+
+
+		</div> <!-- end col-md-12  -->
+	</div> 
+			
+	<div class="text-center">
+		<div class="col-md-12">
+			<nav>
+				<ul class="pagination">
+					<li class="disabled"><a href="#" aria-label="Previous"><span
+							aria-hidden="true">&laquo;</span></a></li>
+					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
+					<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
+					<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
+					<li class="disabled"><a href="#" aria-label=""><span
+							aria-hidden="false">&laquo;</span></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div> <!--text-center end -->
+
+			
+			
+		<div class="col-md-2"></div>
+			
+			
+	</div> <!-- content end -->
+	<br><br>
+
 </div> <!-- container-fluid end -->
 
 
@@ -139,5 +191,6 @@
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>
 </div>
+
 </body>
 </html>

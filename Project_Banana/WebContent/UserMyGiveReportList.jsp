@@ -29,19 +29,15 @@
 
 #orderList
 {
-	margin-left: 25px;
+	margin-left: 45px;
 }
 
 #searchItem
 {
-	margin-left: 20px;
+	margin-left: 80px;
 }
 
-.navibar
-{
-	left: 50%; 
-        margin-left: 420px;
-}
+
 	
 </style>
 
@@ -60,12 +56,11 @@
 
 
 <div class="container-fluid">
-		<!-- content  -->
+	<!-- content  -->
 		<div class="content">
 			
 			<div class="col-md-2">
 			<jsp:include page="MenuUser.jsp"></jsp:include>
-			
 			</div><!-- 왼쪽 MenuUser end  -->
 			
 		
@@ -77,12 +72,9 @@
 				
 				<!--테이블 위 검색창,유형 div  -->
 				<div class="col-md-3">
-				
 				</div>
 				
 				<div class="col-md-5">
-				
-				
 				</div>
 				
 				<div class="col-md-4">
@@ -91,17 +83,16 @@
 				<button type="button" name="searchBtn" ><span class="glyphicon glyphicon-search">  </span></button>
 				
 				<select name="orderList" id="orderList">
-					<option value="1">최신순</option>
-					<option value="2">신고유형</option>
-					<option value="3">처리상태</option>
+					<option value="1">전체</option>
+					<option value="2">게시물</option>
+					<option value="3">댓글</option>
 				</select>
+				
 				</div><!-- 검색창,유형 div end -->
 				<br><br>
 			
 
 				<div class="col-md-12">
-
-
 					<table class="table">
 						<thead>
 							<tr>
@@ -111,12 +102,10 @@
 								<th>게시물 제목</th>
 								<th>신고 내용</th>
 								<th>신고 시간</th>
-								<th>처리 상태</th>
-								
+								<th>처리 상태</th>		
 							</tr>
 						</thead>
 					    <tbody>
-						
 							<tr>
 								<td><a href="">사기 신고합니다.</a></td>
 								<td>cjfsud23</td>
@@ -126,12 +115,8 @@
 								<td>2020-06-08 15:00:03</td>
 								<td><p id="standby">접수</p></td>
 							</tr>
-
 						</tbody>
-						
-						
 						<tbody>
-					
 							<tr>
 								<td><a href="">댓글 신고합니다.</a></td>
 								<td>ehdehd95</td>
@@ -141,12 +126,8 @@
 								<td>2020-07-30 19:30:03</td>
 								<td><p id="accept">처리완료</p></td>
 							</tr>
-						
 						</tbody>
-						
 					</table>
-
-
 				</div>
 				
 
@@ -159,6 +140,10 @@
 								<li class="disabled"><a href="#" aria-label="Previous"><span
 										aria-hidden="true">&laquo;</span></a></li>
 								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+						
+						
+						
+						
 								<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
 								<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
 								<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
@@ -167,22 +152,16 @@
 							</ul>
 						</nav>
 					</div>
-				</div>
-
 			</div>
+
+	
 			
 			<div class="col-md-2"></div>
 			
 			
-			
-		
-			
-		</div> <!-- content end -->
-		<br><br>
-		
-	
-		
-		
+			</div> <!-- content end -->
+			<br><br>
+
 </div> <!-- container-fluid end -->
 
 
