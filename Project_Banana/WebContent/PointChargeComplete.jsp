@@ -20,31 +20,31 @@
 .center-block
 {
 	display: block;
-	margin-top : 250px;
+	margin-top : 200px;
 	
 	
 }	
 
-h1
+h2
 {
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 40px;
 }
 
 .pointBtn
 {
-	margin-top: 90px;
+	margin-top: 80px;
 }
 
 
 #chargemore
 {
-	margin-left: 40px;
+	margin-left: 20px;
 }
 
 #mainback
 {
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 #mainback, #chargemore
@@ -85,7 +85,7 @@ h1
 						<div class="center-block text-center">
 							<div class="col-md-12">
 								
-									<h1>포인트 충전을 완료했습니다.</h1>
+									<h2>포인트 충전을 완료했습니다.</h2>
   								</div>
 									
 																	

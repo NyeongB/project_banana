@@ -20,7 +20,7 @@
 .center-block
 {
 	display: block;
-	margin-top : 180px;
+	margin-top : 155px;
 	
 	
 }	
@@ -28,23 +28,23 @@
 h1
 {
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 40px;
 }
 
 .CompleteBtn
 {
-	margin-top: 90px;
+	margin-top: 70px;
 }
 
 
 #mainback
 {
-	margin-left: 40px;
+	margin-left: 20px;
 }
 
 #rentpage
 {
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 #mainback, #rentpage
