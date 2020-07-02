@@ -107,7 +107,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="panel-789870">
 								<p>
-									I'm in Section 1.
+									안녕하세요
 								</p>
 							</div>
 							<div class="tab-pane" id="tab2">
