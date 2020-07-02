@@ -102,7 +102,7 @@ h1
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="center-block text-center" style="background-color: black">
+						<div class="center-block text-center">
 							<div class="col-md-12">
 								
 									<h1>렌트 게시물 작성이 완료되었습니다.</h1>

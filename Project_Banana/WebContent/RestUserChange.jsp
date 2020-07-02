@@ -115,6 +115,12 @@ img
 			
 			$("#group1").css("display", "inline-block");	
 		});
+		
+		$("#pwQuestion").click(function()
+		{
+			$("#group2").css("display", "inline-block");	
+			
+		});
 	});
 
 
