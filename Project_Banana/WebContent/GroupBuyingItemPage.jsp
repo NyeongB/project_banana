@@ -45,11 +45,14 @@
 				<div class="col-md-6 img-area">
 					<img src="images/oz.jpg" alt=""  class="img-responsive img-rounded"/>
 				</div>
-				<div class="col-md-6 item_detail">
+				<div class="col-md-6 item_writer">
 					<div class="row">
 						<div class="col-md-12 text-right">
-							<span class="text-right">조회수 : 55</span>
-							<span class="text-right">| 2020.07.01</span>
+						    <ul>
+						    	<li>오레오 박사</li>
+						    	<li>조회수 : 55| 2020.07.01</li>			    
+						    </ul>
+						    <hr />
 						</div>
 					</div>
 					<div class="row">
@@ -60,18 +63,21 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 text-left">
-						 	<p>원가 : 20,000원 / 할인가 : 17,000원</p>
-						 	<p>1인 비용 : 8,500원</p>
-						 	<p>현재 달성인원 : 0/2명</p>
-						 	<p>분배날짜 : 6월 30일</p>
-						 	<p>분배시간 : 19시</p>
-						 	<p>분배장소 : 일산역</p>
+						<div class="col-md-12 text-left item_detail">
+							<ul>
+								<li>원가 : 20,000원 / 할인가 : 17,000원</li>
+								<li>1인 비용 : 8,500원</li>
+								<li>현재 달성인원 : 0/2명</li>
+								<li>분배날짜 : 6월 30일</li>
+								<li>분배시간 : 19시</li>
+								<li>분배장소 : 일산역</li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-						 	<button class="btn">참여하기</button>
+						 	<button class="btn item_btn">참여하기</button>
+						 	<button class="btn item_btn">찜하기</button>
 						</div>
 					</div>
 				</div>
