@@ -47,16 +47,16 @@
 </head>
 
 <body>
-<!-- Header  -->
-<div class="row Header">
-   <div class="col-md-12">
-      <jsp:include page="Header.jsp"></jsp:include>   
-   </div>
-</div>
+	<!-- Header  -->
+	<div class="row Header">
+	   <div class="col-md-12">
+	      <jsp:include page="Header.jsp"></jsp:include>   
+	   </div>
+	</div>
 
 
-<div class="container-fluid">
-	<!-- content  -->
+	<div class="container-fluid">
+		<!-- content  -->
 		<div class="content">
 			
 			<div class="col-md-2">
@@ -162,15 +162,15 @@
 			</div> <!-- content end -->
 			<br><br>
 
-</div> <!-- container-fluid end -->
+	</div> <!-- container-fluid end -->
 
 
 
-<!-- footer  -->
-<div class="row">
-   <div class="col-md-12">
-      <jsp:include page="Footer.jsp"></jsp:include>
-   </div>
-</div>
+	<!-- footer  -->
+	<div class="row">
+	   <div class="col-md-12">
+	      <jsp:include page="Footer.jsp"></jsp:include>
+	   </div>
+	</div>
 </body>
 </html>
