@@ -54,6 +54,12 @@ ul
 	
 	
 }
+.text_highlight
+{
+	font-weight: bold;
+	
+	
+}
 /* a 태그 관련 */
 a
 {
@@ -107,7 +113,7 @@ h3
 }
 .table td
 {
-	text-align: center;
+	/* text-align: center; */
 	
 }
 .item_btn
