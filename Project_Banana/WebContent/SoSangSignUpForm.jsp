@@ -111,12 +111,12 @@
 </div>
 
 
-<!-- footer  -->
-<div class="row">
-   <div class="col-md-12">
-      <jsp:include page="Footer.jsp"></jsp:include>
-   </div>
-</div>
+	<!-- footer  -->
+	<div class="row">
+	   <div class="col-md-12">
+	      <jsp:include page="Footer.jsp"></jsp:include>
+	   </div>
+	</div>
 
 </body>
 </html>

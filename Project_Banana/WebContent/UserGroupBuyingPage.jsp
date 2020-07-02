@@ -129,11 +129,12 @@ String cp = request.getContextPath();
 		</div>
 		
 	</div>
-<div class="row">
-	<div class="col-md-12">
-		<jsp:include page="Footer.jsp"></jsp:include>
+	
+<div class="row Footer">
+		<div class="col-md-12">
+			<jsp:include page="Footer.jsp"></jsp:include>
+		</div>
 	</div>
-</div>
 
 </body>
 </html>

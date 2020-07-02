@@ -25,6 +25,8 @@
 	font: white;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -37,7 +39,10 @@
 
 			<div class="content">
 				<div class="col-md-3"></div>
+				
+				
 				<div class="col-md-6">
+				
 					<div>
 						<form role="form" class="form-inline" id="phoneForm">
 						<br>
@@ -106,9 +111,7 @@
 						</form>
 						<br><a href="">비밀번호 찾기</a>
 					</div>
-					<!-- email div 끝  -->
-
-					
+					<!-- email div 끝  -->	
 			</div>
 			<!--col-md-6 div 끝  -->
 			<div class="col-md-3"></div>
@@ -118,12 +121,13 @@
 	
 
 </div>
-<!--end container div  -->
+<!--end container  -->
 
-<div class="Footer">
-	<div class="col-md-12">
-		<jsp:include page="Footer.jsp"></jsp:include>
-	</div>
-</div> 
+<!-- footer  -->
+<div class="row">
+   <div class="col-md-12">
+      <jsp:include page="Footer.jsp"></jsp:include>
+   </div>
+</div>
 </body>
 </html>
