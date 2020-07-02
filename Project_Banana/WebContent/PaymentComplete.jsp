@@ -31,7 +31,7 @@ h1
 	font-size: 50px;
 }
 
-.pointBtn
+.PayBtn
 {
 	margin-top: 90px;
 }
@@ -102,14 +102,14 @@ h1
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="center-block text-center" style="background-color: black">
+						<div class="center-block text-center">
 							<div class="col-md-12">
 								
 									<h1>결제가 완료되었습니다.</h1>
   								</div>
 									
 																	
-							<div class="col-md-12 pointBtn">
+							<div class="col-md-12 PayBtn">
 								    <button class="btn btn-primary" type="button" id="myrent">현황으로 가기</button>
 								    <button class="btn btn-primary" type="button" id="rentpage">게시물로 가기</button>
   								</div>
