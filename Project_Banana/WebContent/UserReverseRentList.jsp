@@ -22,8 +22,8 @@
 	{	
 		margin: 20px;
 		
-		height: 140px;
-		width: 100%;
+		height: 120px;
+		width: 95%;
 		border: 0.5px solid black;
 		padding: 10px;
 	}
@@ -65,7 +65,7 @@
 							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/3_%EB%B3%B8%EB%AA%85-_
 							%ED%8B%B0%ED%83%84_%EC%95%A0%EC%B9%AD-_%EB%AA%BD%EC%93%B0.jpg/220px-3_%EB%B3%B8%EB%AA%85-_%ED%8B%
 							B0%ED%83%84_%EC%95%A0%EC%B9%AD-_%EB%AA%BD%EC%93%B0.jpg" alt=""  class="img-responsive img-rounded"
-							style="width: 130px; height: auto;">
+							style="width: 120px; height: auto;">
 						
 						</div>
 						<div class="col-md-7">
@@ -93,7 +93,7 @@
 						<div class="col-md-3 img-area">
 							
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkpW2m4KeInLpPaPlg0VOcrJRl4yu8fbSdng&usqp=CAU" alt=""  class="img-responsive img-rounded"/
-							style="width: 130px; height: auto;">
+							style="width: 120px; height: auto;">
 						
 						</div>
 						<div class="col-md-7">
@@ -121,7 +121,7 @@
 						<div class="col-md-3 img-area">
 							
 							<img src="https://www.sisaweek.com/news/photo/201902/118581_103236_572.jpg" alt=""  class="img-responsive img-rounded"/
-							style="width: 130px; height: auto;">
+							style="width: 120px; height: auto;">
 						
 						</div>
 						<div class="col-md-7">
