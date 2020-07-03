@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserMyGiveReportListDetail.jsp</title>
+<title>UserReplyReportReceive.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -70,7 +70,7 @@
 	<div class="row">
     <div class="col-xs-2 col-md-2"></div>
     <div class="col-xs-8 col-md-8">
-    <h3 class="text_highlight">게시물 신고</h3><hr>
+    <h3 class="text_highlight">댓글 신고</h3><hr>
 
     <div class="table table-responsive tbl">
     
@@ -89,10 +89,9 @@
             <th class="col-md-1">신고유형</th>
             <td>
 	            <select class="form-control">
-	            	<option value="1">노쇼</option>
-	            	<option value="2">허위신고</option>
-	            	<option value="3">물건이상</option>
-	            	<option value="4">기타</option>
+	            	<option value="1">욕설/비방/음란물</option>
+	            	<option value="2">도배</option>
+	            	<option value="3">기타</option>
 	            </select>
             </td>
         </tr>                    
