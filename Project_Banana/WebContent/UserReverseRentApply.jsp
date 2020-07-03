@@ -50,6 +50,8 @@
 				
 				<div>보증금 <input type="text" class="form-control" id="text" /></div>
 				
+				<div>브랜드명 <input type="text" class="form-control" id="text" /></div>
+				
 				<label for="exampleInputFile">
 								사진 첨부
 							</label>

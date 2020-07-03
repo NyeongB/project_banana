@@ -48,6 +48,8 @@
 				
 				<div>카테고리 <input type="text" class="form-control" id="text" /></div>
 				
+				<div>물건명 <input type="text" class="form-control" id="text" /></div>
+				
 				<div>렌트 대여 희망 일시 <input type="text" class="form-control" id="text" /></div>
 				
 				<div>렌트 반납 희망 일시 <input type="text" class="form-control" id="text" /></div>
