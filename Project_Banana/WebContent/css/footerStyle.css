@@ -27,6 +27,7 @@ body
 	display: flex;
 	/* text-align: center; */
 	justify-content: center; 
+		position: absolute;
 	
 }
 #footer_list

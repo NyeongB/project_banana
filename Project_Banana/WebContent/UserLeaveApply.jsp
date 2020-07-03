@@ -1,16 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-   request.setCharacterEncoding("UTF-8");
-   String cp = request.getContextPath();
+	//필터 쓰기 전까지 사용하기
+	request.setCharacterEncoding("utf-8");
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SignUpComplete.jsp</title>
-<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<title>Banana</title>
 
+<!-- CSS 적용 부분  -->
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="stylesheet" type="text/css" href="css/AdminAccountListStyle.css">
+
+<!-- 부트스트랩 적용 부분  -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -18,7 +23,7 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
-*
+.ULA_content *
 {
 	text-align: center;
 }
@@ -28,7 +33,7 @@
 	display: block;
 	margin-top : 100px;
 	background-color: black;
-	height: 200px;
+	height: 400px;
 
 	display: block;
 	margin-top: 100px;
@@ -36,8 +41,8 @@
 	margin-right: auto;
 	padding-top : 20px;
 	background-color: #f4f4f4;
-	width: 50%;
-	height: 330px;
+	width: 80%;
+	height: 450px;
 	margin-bottom: 80px;	
 	border-radius: 30px;
 	
@@ -76,37 +81,41 @@ p
 
 
 </head>
-
-
-
-
 <body>
 <!-- Header  -->
-	<div class="row Header">
-		<div class="col-md-12">
-			<jsp:include page="Header.jsp"></jsp:include>
-		</div>
-	</div>
-	
+<div class="row Header">
 	<div class="col-md-12">
-		<h2 class="comfirm_logo">Banana</h2>
+		<jsp:include page="Header.jsp"></jsp:include>	
 	</div>
-<!-- content  -->
+</div>
 
 <div class="container-fluid">
 	<div class="content">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-2"></div>
+					<div class="col-md-2">
+						<jsp:include page="MenuUser.jsp"></jsp:include>
+					</div>
 					<div class="col-md-8">
-						<div class="center-block">
+						<div class="center-block  ULA_content">
+							<div class="col-md-12">
+								<h2 class="">회원탈퇴</h2>
+							</div>
+							<div class="col-md-12">
+								<h2 class="">Banana</h2>
+							</div>
 							<div class="col-md-12">
 								<div class="text-center">
-									<img alt="Bootstrap Image"
-									src="images/banana_icon.png" >
-									<p>"회원가입이 완료되었습니다."</p>
+									<img alt="Bootstrap Image" src="images/banana_icon.png" >
+										<p>"비밀번호를 입력해 주세요"</p>
+										<form action="" class="form-inline">
+											<label for="">비밀번호</label>
+											<input type="password" class="form-control"/>
+											<button class="btn btn-primary" type="button" id="pw_submit">확인</button>
+										</form>
+
 									
-								    <button class="btn btn-primary" type="button" id="backhome">홈으로 돌아가기</button>
+
   								
 								</div>
 
@@ -122,20 +131,12 @@ p
 </div> <!-- end container-fluid -->
 
 
-
-
-
-
-
-
-
-<!-- content end -->
-
 <!-- footer  -->
-<div class="row">
-   <div class="col-md-12">
-      <jsp:include page="Footer.jsp"></jsp:include>
-   </div>
+<div class="row Footer">
+	<div class="col-md-12">
+		<jsp:include page="Footer.jsp"></jsp:include>
+	</div>
 </div>
+
 </body>
 </html>

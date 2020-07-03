@@ -104,8 +104,8 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image"
 									src="images/banana_icon.png" >
-									<p>"회원가입이 완료되었습니다."</p>
-									
+									<h3>"회원탈퇴가 완료되었습니다."</h3>
+									<p></p>
 								    <button class="btn btn-primary" type="button" id="backhome">홈으로 돌아가기</button>
   								
 								</div>
@@ -115,7 +115,9 @@ p
 					</div>  <!-- col-md-8 end -->
 					
 					
-					<div class="col-md-2"></div>
+					<div class="col-
+					
+					md-2"></div>
 				</div>
 			</div>  <!-- end col-md-12 -->
 	</div> <!-- end content -->
