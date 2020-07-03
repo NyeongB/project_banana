@@ -82,10 +82,7 @@ p
 
 
 }
-.thick
-{
-	font-weight:800;
-}
+
 .leave_text
 {
 	display:flex;
