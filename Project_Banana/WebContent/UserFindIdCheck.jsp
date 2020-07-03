@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SignUpComplete.jsp</title>
+<title>UserFindIdCheck.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -65,9 +65,20 @@ p
 	margin-bottom: 50px;
 }
 
-#backhome
+#loginPage
+{
+	margin-right: 10px;
+}
+
+#mainList
+{
+	margin-left: 10px;
+}
+
+#loginPage, #mainList
 {
 	font-weight: bold;
+	width: 120px;
 }
 
 
@@ -104,10 +115,10 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image"
 									src="images/banana_icon.png" >
-									<p>"회원가입이 완료되었습니다."</p>
+									<p><span>전진영</span>님의 아이디 정보는 <span>jinyoung1704</span>입니다.</p>
 									
-								    <button class="btn btn-primary" type="button" id="backhome">홈으로 돌아가기</button>
-  								
+								    <button class="btn btn-primary" type="button" id="loginPage">로그인 하기</button>
+  									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
 								</div>
 
 							</div> 

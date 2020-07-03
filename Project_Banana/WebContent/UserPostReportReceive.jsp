@@ -9,189 +9,119 @@
 <head>
 <meta charset="UTF-8">
 <title>UserMyGiveReportListDetail.jsp</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
+<link rel="icon" href="images/favicon.ico" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
-
-#attachFile
+.nav_table
 {
-	border: 1px solid black;
-	
+	font-size: 11px;
+
 }
 
-.formTop
+.table-responsive
 {
-	margin-top: 50px;
-
-	
-}
-
-.title
-{
-	background-color: var(--back-color);
-	border-bottom : 1px solid black ;
-	
-}
-
-.content
-{
-	/* margin : 1px; */
-	border: 1px solid black ;
+	margin-top: 150px;
 	
 	
 }
 
-input
-{
-	/* width: 178px; */
-	border: 1px solid gray ;
+.ReportBtn
+{	margin-top: 100px;
+	text-align: center;
 }
+
 
 
 </style>
 </head>
 <body>
-
-	<!-- Header  -->
-	<div class="row Header">
-	   <div class="col-md-12">
-	      <jsp:include page="Header.jsp"></jsp:include>   
-	   </div>
+<!-- Header  -->
+<div class="row Header">
+	<div class="col-md-12">
+		<jsp:include page="Header.jsp"></jsp:include>	
 	</div>
+</div>
 
+<!-- content  -->
 
-	<div class="container-fluid">
-		<div class="content">
-			
-			<div class="col-md-2">
-				<jsp:include page="MenuUser.jsp"></jsp:include>
-			</div><!-- 왼쪽 MenuUser end  -->
-			
-			<div class="col-md-8">
-				<div>
-					<h3>게시물 신고 접수 페이지</h3>
-					<hr>
-				</div> 
-				
-				
-				
-			
-				<div class="col-md-12 formTop">
-				
-					<div class="col-md-2">
-					</div>
-					
-						
-					<div class="col-md-2">
-						<input type="text"  value="해당 게시물 제목" class="title">
-					</div>
-					
-					<div class="col-md-2">
-						<input type="text" id="postTitle" name="postTitle" class="content">
-					</div>
-					
-					<div class="col-md-2">
-						<input type="text" value="신고대상자"  class="title">
-					</div>
-					<div class="col-md-2">
-						<input type="text" id="objReport" name="objReport" class="content">
-					</div>
-					
-					<div class="col-md-2">
-					</div>
-					
-				</div><!-- end col-md-12 -->
-				
-				<div class="col-md-12">
-				
-					<div class="col-md-2">
-					</div>
-				
-					<div class="col-md-2">
-						<input type="text"  value="신고 제목"  class="title">
-					</div>
-					
-					<div class="col-md-2">
-						<input type="text" id="reportTitle" name="reportTitle" class="content">
-					</div>
-					
-					<div class="col-md-2">
-						<input type="text" value="신고 유형"  class="title">
-					</div>
-					
-					<div class="col-md-2 content">
-						<select id="Rtype" name="Rtype" style="width: 232px; height: 27px;">
-						<option value="1">노쇼</option>
-						<option value="2">허위게시물</option>
-						<option value="3">물품이상</option>
-						</select>
-					</div>
-					
-					<div class="col-md-2">
-					</div>
-					
-				</div><!-- end col-md-12 -->
-				
-			    <div class="col-md-12">
-				
-					<div class="col-md-2">
-					</div>
-				
-					<div class="col-md-2">
-						<input type="text"  value="신고 내용" style="width: 100%; height: 150px; text-align: center;"  class="title">
-					</div>
-					
-					<div class="col-md-6" >
-						<input type="text" id="reportContent" name="reportContent" style="width: 111%; height: 150px;" class="content">
-					</div>
-				
-					
-					<div class="col-md-2">
-					</div>
-					
-				</div><!-- end col-md-12 -->
-				
-				<div class="col-md-12">
-				
-					<div class="col-md-2">
-					</div>
-				
-					<div class="col-md-2">
-						<input type="text"  value="첨부파일" style="width: 100%; height: 35px; text-align: center;"  class="title">
-					</div>
-					
-					<div class="col-md-6" >
-						<input type="file" id="attachFile" name="attachFile" style="width: 111%;" class="content" > 
-						<!-- <textarea rows="6" cols="52"> -->
-					</div> 
-				
-					
-					<div class="col-md-2">
-					</div>
-					
-				</div> <!-- end col-md-12 -->
-				 
-			
-			
-			
-			</div><!-- end col-md-8  -->
-			
-			<div class="col-md-2">
-			</div>
-		
-		</div><!--end content  -->				
-		
-	</div><!--end container-fluid  -->
-		
-		
-	
-
-	<!-- footer  -->
+<div class="container-fluid">
 	<div class="row">
-	   <div class="col-md-12">
-	      <jsp:include page="Footer.jsp"></jsp:include>
-	   </div>
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-8 col-md-8">
+    <h3 class="text_highlight">게시물 신고</h3><hr>
+    <div class="table table-responsive">
+        <table class="table">
+        <tr>
+            <th class="col-md-1">글 제목</th>
+            <td colspan="3">고구마 맛있어요!같이 사요~</td>
+            <th class="col-md-1">신고대상자</th>
+            <td>cjfwusdqkqh123</td>
+        </tr>
+        
+        <tr>
+            
+            <th class="col-md-1">신고제목</th>
+            <td colspan="3">2020.06.01</td>
+            <th class="col-md-1">신고유형</th>
+            <td>
+	            <select class="form-control">
+	            	<option value="1">노쇼</option>
+	            	<option value="2">허위신고</option>
+	            	<option value="3">물건이상</option>
+	            </select>
+            </td>
+        </tr>                    
+        <tr>
+        	<th class="col-md-3">신고유형</th>
+        	
+            <td colspan="6"  class="notice_content">
+            	<p>물건 주러 나갔는데 안 나오면 어떡합니까!!날도 더운데 헛걸음 했어요!</p>     
+            	<br><br><br>            
+            </td>
+        </tr>
+         
+        <tr>
+            
+            <th class="col-md-1">첨부파일</th>
+            <td><input type="file"></td>
+        </tr> 
+        
+      
+       <!--   
+        <tr>
+            <td colspan="6" class="text-center">
+              <input type="button" class="btn" value="신고">
+              <input type="button" class="btn btn-light" value="취소">
+            </td>
+        </tr>   -->        
+         
+        </table>
+        
+        <div class="ReportBtn">
+        	<input type="button" class="btn" value="신고" >
+         	<input type="button" class="btn btn-light" value="취소">
+        </div>
+         
+      
+    </div>
+     
+    </div>
+</div>
+
+
+</div>
+
+
+<!-- content end -->
+
+<!-- footer  -->
+<div class="row">
+	<div class="col-md-12">
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
-
-
-</body>
+</div>
 </html>
