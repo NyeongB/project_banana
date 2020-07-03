@@ -43,6 +43,11 @@
 	margin-left: 80px;
 }
 
+.table
+{
+	margin-top: 20px;
+}
+
 </style>
 
 </head>
@@ -69,91 +74,85 @@
 				<h3>내가 받은 신고</h3>
 				<hr>
 			</div>
-				
-				
-		<!--테이블 위 검색창,유형 div  -->
-		<div class="col-md-3">
-		</div>
-		
-		<div class="col-md-5">
-		</div>
-				
-		<div class="col-md-4">
-				
-			<input type="text" name="search" id="searchItem">
-			<button type="button" name="searchBtn" ><span class="glyphicon glyphicon-search">  </span></button>
 			
-			<select name="orderList" id="orderList">
-				<option value="1">전체</option>
-				<option value="2">게시물</option>
-				<option value="3">댓글</option>
-			</select>
+		<div class="row">
+			<div class="col-md-12 text-right">
+			<!-- search bar  -->
+				<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
+				   <select name="" id="search">
+				   		<option value="">전체</option>
+				   		<option value="">게시물</option>
+				   		<option value="">댓글</option>
+				   </select>
+				  <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search" aria-label="Search">
+				  <button type="button" name="searchBtn"  class="btn"><span class="glyphicon glyphicon-search">  </span></button>
+				</div>
+			</div>
 		</div>
-		<!-- 검색창,유형 div end -->
-		<br><br>
 			
-
-		<div class="col-md-12">
-				
-			<table class="table">
-				<thead>
-					<tr>
-						<th>신고 당한 게시물</th>
-						<th>신고 당한 시간</th>
-						<th>신고 유형</th>
-						<th>신고 사유</th>
-						<th>이의제기</th>
-						<th>이의제기 가능일</th>
-						<th>이의제기 처리</th>
-								
-					</tr>
-				</thead>
-				 <tbody>	
-					<tr>
-						<td><a href="">물 나눠사요</a></td>
-						<td>2020-06-03 18:05:03</td>
-						<td>댓글</td>
-						<td>욕설/비방</td>
-						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
-						<td>2020-06-06 18:05:03</td>
-						<td><p id="blueAnswer">처리중</p></td>
-					</tr>
-					<tr>
-						<td><a href="">고데기 빌려드립니다</a></td>
-						<td>2020-04-21 09:00:03</td>
-						<td>게시물</td>
-						<td>대여자노쇼</td>
-						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
-						<td>2020-04-24 09:00:03</td>
-						<td><p id="redAnswer">환불</p></td>
-					</tr>
+		<div class="row">
+			<div class="col-md-12">
 					
-					<tr>
-						<td><a href="">고구마 함께 사요</a></td>
-						<td>2020-03-21 09:00:03</td>
-						<td>댓글</td>
-						<td>욕설/비방</td>
-						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
-						<td>2020-03-24 09:00:03</td>
-						<td><p id="redAnswer">경고</p></td>
-					</tr>
-					
-					<tr>
-						<td><a href="">빔 프로젝트 쓸 사람~</a></td>
-						<td>2020-02-18 13:00:03</td>
-						<td>게시물</td>
-						<td>상품하자</td>
-						<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
-						<td>2020-02-21 13:00:00</td>
-						<td><p id="greenAnswer">부적절한 사유</p></td>
-					</tr>
-					
-				</tbody>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>신고 당한 게시물</th>
+							<th>신고 당한 시간</th>
+							<th>신고 유형</th>
+							<th>신고 사유</th>
+							<th>이의제기</th>
+							<th>이의제기 가능일</th>
+							<th>이의제기 처리</th>
+									
+						</tr>
+					</thead>
+					 <tbody>	
+						<tr>
+							<td><a href="">물 나눠사요</a></td>
+							<td>2020-06-03 18:05:03</td>
+							<td>댓글</td>
+							<td>욕설/비방</td>
+							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
+							<td>2020-06-06 18:05:03</td>
+							<td><p id="blueAnswer">처리중</p></td>
+						</tr>
+						<tr>
+							<td><a href="">고데기 빌려드립니다</a></td>
+							<td>2020-04-21 09:00:03</td>
+							<td>게시물</td>
+							<td>대여자노쇼</td>
+							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
+							<td>2020-04-24 09:00:03</td>
+							<td><p id="redAnswer">환불</p></td>
+						</tr>
 						
-			</table>
-
-
-		</div> <!-- end col-md-12  -->
+						<tr>
+							<td><a href="">고구마 함께 사요</a></td>
+							<td>2020-03-21 09:00:03</td>
+							<td>댓글</td>
+							<td>욕설/비방</td>
+							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
+							<td>2020-03-24 09:00:03</td>
+							<td><p id="redAnswer">경고</p></td>
+						</tr>
+						
+						<tr>
+							<td><a href="">빔 프로젝트 쓸 사람~</a></td>
+							<td>2020-02-18 13:00:03</td>
+							<td>게시물</td>
+							<td>상품하자</td>
+							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
+							<td>2020-02-21 13:00:00</td>
+							<td><p id="greenAnswer">부적절한 사유</p></td>
+						</tr>
+						
+					</tbody>
+							
+				</table>
+	
+	
+			</div> <!-- end col-md-12  -->
+		</div><!-- end row  -->
 	</div> 
 			
 	<div class="text-center">
