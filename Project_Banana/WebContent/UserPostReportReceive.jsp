@@ -90,8 +90,8 @@
             <td>
 	            <select class="form-control">
 	            	<option value="1">노쇼</option>
-	            	<option value="2">허위신고</option>
-	            	<option value="3">물건이상</option>
+	            	<option value="2">허위게시물</option>
+	            	<option value="3">상품이상</option>
 	            	<option value="4">기타</option>
 	            </select>
             </td>
