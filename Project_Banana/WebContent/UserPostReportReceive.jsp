@@ -114,19 +114,19 @@
         
 		 
        	</table>
+       	
+       	
     </div><!-- end table table-responsive tbl"  -->
 
-   	
-   
-    
-   
-         
+
         <div class="ReportBtn">
         	<input type="button" class="btn" value="신고" >
          	<input type="button" class="btn btn-light" value="취소">
         </div>
      
     </div><!--end row  -->
+    
+    
 </div><!-- end container-fluid  -->
 
 
@@ -139,4 +139,5 @@
 		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
+</body>
 </html>
