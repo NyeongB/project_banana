@@ -29,6 +29,9 @@ String cp = request.getContextPath();
 		text-decoration: line-through;
 	}
 	
+	
+	
+	
 </style>
 
 </head>
@@ -84,7 +87,7 @@ String cp = request.getContextPath();
 								<td>
 									<div class="btn-group" role="group">
 
-										<button class="btn btn-secondary" type="button">참여 취소
+										<button class="btn btn-secondary" type="button">게시글 삭제
 										</button>
 									</div>
 
@@ -105,11 +108,19 @@ String cp = request.getContextPath();
 								<td>3 / 3</td>
 								<td>2020/06/17</td>
 								<td>수유역</td>
-								<td>모집완료</td>
+								<td>
+									모집완료<br>
+									<div class="btn-group" role="group">
+
+										<button class="btn btn-secondary" type="button">영수증 첨부
+										</button>
+									</div>
+									
+								</td>
 								<td>
 									<div class="btn-group" role="group">
 
-										<button class="btn btn-secondary" type="button">결석
+										<button class="btn btn-secondary" type="button">출석부
 										</button>
 									</div>
 
