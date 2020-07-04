@@ -121,7 +121,7 @@
    
          
         <div class="ReportBtn">
-        	<input type="button" class="btn" value="신고" >
+        	<input type="button" class="btn btn-primary" value="신고">
          	<input type="button" class="btn btn-light" value="취소">
         </div>
      

@@ -15,35 +15,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
+	td
+	{
+		text-align: center;
+	}
 
-#standby
-{
-	color: red;
-}
-
-#accept
-{
-	color: blue;
-}
-
-#orderList
-{
-	margin-left: 45px;
-}
-
-#searchItem
-{
-	margin-left: 80px;
-}
-
-.table
-{
-	margin-top: 20px;
-
-}
-
-
-	
 </style>
 
 </head>
@@ -61,13 +37,13 @@
 		<div class="content">
 			
 			<div class="col-md-2">
-			<jsp:include page="MenuAdmin.jsp"></jsp:include>
+			<jsp:include page="MenuUser.jsp"></jsp:include>
 			</div><!-- 왼쪽 MenuUser end  -->
 			
 		
 			<div class="col-md-8">
 				<div>
-					<h3>접수된 신고</h3>
+					<h3>내가 쓴 댓글</h3>
 					<hr>
 				</div>
 				<br>
@@ -81,9 +57,8 @@
 					
 						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
 						   <select name="" id="search" class="form-control">
-						   		<option value="">전체</option>
-						   		<option value="">게시물</option>
-						   		<option value="">댓글</option>
+						   		<option value="">최신순</option>
+						   		<option value="">과거순</option>
 						   </select>
 						</div>
 					</div>
@@ -94,88 +69,100 @@
 						<table class="table">
 							<thead class="reportTitle">
 								<tr>
-									<th>신고 제목</th>
-									<th>신고 대상자</th>
-									<th>접수 유형</th>
-									<th>신고 유형</th>
-									<th>신고 내용</th>
-									<th>신고 날짜</th>
-									<th>신고인</th>		
+									<th>게시물 제목</th>
+									<th>댓글 내용</th>
+									<th>작성 일자</th>
+									<th>좋아요</th>
+									<th>삭제</th>
 								</tr>
 							</thead>
 						    <tbody>
 								<tr>
-									<td><a href="">사기 신고합니다.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>노쇼</td>
-									<td>고구마가 다 썩었어요</td>
-									<td>2020-06-08 15:00:03</td>
-									<td>abc123</td>
-								</a>
+									
+									<td>청소기 쓰실분~~</td>
+									<td>할인되나요?</td>
+									<td>20.06.20</td>
+									<td>10</td>
+									<td>
+									<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 댓글 삭제
+									</button>
+									
+									</div>
+									</td>
 								</tr>
 								
 							</tbody>
+							
 							<tbody>
 								<tr>
-									<td><a href="">사기꾼 신고해요.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>상품이상</td>
-									<td>집가서 확인해보니...</td>
-									<td>2020-06-026 11:00:03</td>
-									<td>dongdong789</td>
+									
+									<td>텐트 대여합니다</td>
+									<td>텐트 브랜드가 어디예요?</td>
+									<td>20.06.24</td>
+									<td>44</td>
+									<td>
+									<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 댓글 삭제
+									</button>
+									
+									</div>
+									</td>
 								</tr>
+								
 							</tbody>
+							
 							<tbody>
 								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>ehdehd95</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>욕설이 너무 많아요</td>
-									<td>2020-07-30 19:30:03</td>
-									<td>dmksld45</td>
+									
+									<td>감자공동구매 하실분~?</td>
+									<td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</td>
+									<td>20.06.28</td>
+									<td>0</td>
+									<td>
+									<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 댓글 삭제
+									</button>
+									
+									</div>
+									</td>
 								</tr>
+								
 							</tbody>
+							
 							<tbody>
 								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>gyfla96</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>댓글이 좀 그래요...</td>
-									<td>2020-07-10 09:30:03</td>
-									<td>dkr45</td>
+									
+									<td>함께사요</td>
+									<td>뭐를요?</td>
+									<td>20.06.29</td>
+									<td>10</td>
+									<td>
+									<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 댓글 삭제
+									</button>
+									
+									</div>
+									</td>
 								</tr>
+								
 							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">게시물 신고합니다.</a></td>
-									<td>cjfsud93</td>
-									<td>게시물</td>
-									<td>허위게시물</td>
-									<td>게시물이 가짜예요!</td>
-									<td>2020-08-30 19:30:03</td>
-									<td>dslf03</td>
-								</tr>
-							</tbody>
+							
+							
+							
 						</table>
 						
 					</div><!--end col-md-12  -->
 					
-					<div class="col-md-12 text-right">
-					<!-- search bar  -->
-						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
-						   <select name="" id="search" class="form-control">
-						   		<option value="">작성자</option>
-						   		<option value="">제목</option>
-						   </select>
-						  <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search" aria-label="Search">
-						  <button type="button" name="searchBtn"  class="btn"><span class="glyphicon glyphicon-search">  </span></button>
-						</div>
-
-					</div>
+					
 					
 					
 			</div>	<!-- end row  -->
