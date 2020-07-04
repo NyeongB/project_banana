@@ -15,11 +15,35 @@ String cp = request.getContextPath();
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
+<style type="text/css">
+
+	.b1
+	{
+		margin: 10px;
+	}
+
+</style>
+
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
+	$(document).ready(function()
+	{
+		$('#openModalBtn').on('click', function(){
+			$('#modalBox').modal('show');
+			});
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+			$('#closeModalBtn').on('click', function(){
+			$('#modalBox').modal('hide');
+			});
+
+
+	});
+	
+			
+
 </script>
 
 </head>
@@ -72,16 +96,18 @@ String cp = request.getContextPath();
 							<td>렌트 서비스 종료</td>
 							<td>test152</td>
 							<td>
-								<div class="btn-group" role="group">
+								<div class="btn-group" role="group" style="margin-left: 30px;">
 
-									<button class="" type="button">
+									<button class="btn b1" type="button" >
 										<span class=""></span> 후기버튼
 									</button>
-									<button class="" type="button">일자입력</button>
-									<button class="" type="button">
-										<span class="glyphicon glyphicon-warning-sign"></span>
+									
+									<button class="btn b1" type="button" id="openModalBtn">일자입력</button>
+									<button class="btn b1" type="button">
+										<span class=" glyphicon glyphicon-warning-sign"></span>
 									</button>
-									<button class="glyphicon glyphicon-remove" type="button">
+									<button class="btn b1" type="button">
+										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</div>
 
@@ -102,16 +128,18 @@ String cp = request.getContextPath();
 							<td>렌트 서비스 종료</td>
 							<td>cjfsud23</td>
 							<td>
-								<div class="btn-group" role="group">
+								<div class="btn-group" role="group" style="margin-left: 30px;">
 
-									<button class="btn" type="button">
+									<button class="btn b1" type="button" >
 										<span class=""></span> 후기버튼
 									</button>
-									<button class="btn" type="button">일자입력</button>
-									<button class="btn" type="button">
-										<span class="glyphicon glyphicon-warning-sign"></span>
+									
+									<button class="btn b1" type="button">일자입력</button>
+									<button class="btn b1" type="button">
+										<span class=" glyphicon glyphicon-warning-sign"></span>
 									</button>
-									<button class="btn glyphicon glyphicon-remove" type="button">
+									<button class="btn b1" type="button">
+										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</div>
 
@@ -137,6 +165,45 @@ String cp = request.getContextPath();
 		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
+
+
+<!-- ----------------------------------모달영역--------------------------------------------------------- -->
+<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel">일자 재입력</h4>
+</div>
+<div class="modal-body">
+
+<dl>
+	<dt>
+		cjfsud23님의 기존 반납일자
+	</dt>
+	<dd>
+		2020.06.22
+	</dd>
+</dl>
+<hr />
+<dl>
+	<dt>
+		반납일자 재입력
+	</dt>
+	<dd>
+		<input type="date" class="form-control">
+	</dd>
+</dl>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-primary">재입력</button>
+<button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------- -->
 
 </body>
 </html>

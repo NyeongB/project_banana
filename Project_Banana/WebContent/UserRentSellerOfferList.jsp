@@ -32,7 +32,7 @@
 			$('#modalBox').modal('show');
 			});
 			// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn').on('click', function(){
+			$('#closeModalBtn1').on('click', function(){
 			$('#modalBox').modal('hide');
 			});
 
@@ -121,6 +121,78 @@
 
 					</tbody><!-- 테이블 한줄 끝   -->
 					
+					<tbody><!-- 테이블 한줄 시작 -->
+						<tr>
+							<td>1</td>
+							<td><img alt="Bootstrap Image Preview"
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ95YaD2KI0DqX-vYHTAnQCfHKm_wpKWuYNKg&usqp=CAU"
+								style="width: 70px; height: 70px;"></td>
+							<td>컵 빌려드려요~!</td>
+							<td>유리컵</td>
+							<td>렌트 제공 대기중</td>
+							
+							
+							<td>
+								<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 신청자 목록
+									</button>
+									
+								</div>
+
+							</td>
+							<td>
+								<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button">
+										<span class=""></span> 확정자 목록
+									</button>
+							
+									
+								</div>
+
+							</td>
+						</tr>
+
+					</tbody><!-- 테이블 한줄 끝   -->
+					
+					<tbody><!-- 테이블 한줄 시작 -->
+						<tr>
+							<td>1</td>
+							<td><img alt="Bootstrap Image Preview"
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ95YaD2KI0DqX-vYHTAnQCfHKm_wpKWuYNKg&usqp=CAU"
+								style="width: 70px; height: 70px;"></td>
+							<td>컵 빌려드려요~!</td>
+							<td>유리컵</td>
+							<td>렌트 제공 대기중</td>
+							
+							
+							<td>
+								<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button" id="openModalBtn">
+										<span class=""></span> 신청자 목록
+									</button>
+									
+								</div>
+
+							</td>
+							<td>
+								<div class="btn-group" role="group">
+
+									<button class="btn btnDefault" type="button">
+										<span class=""></span> 확정자 목록
+									</button>
+							
+									
+								</div>
+
+							</td>
+						</tr>
+
+					</tbody><!-- 테이블 한줄 끝   -->
+					
 					
 					
 
@@ -173,27 +245,125 @@
 			</nav>
 			</div><!-- 페이징 끝  -->
 
-
+<!-- -------------------모달 영역----------------------------------- -->
 <div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
-<div class="modal-header">
+
+<div class="modal-header"><!-- 모달헤더 -->
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">모달 타이틀</h4>
-</div>
-<div class="modal-body">
-내용
-</div>
-<div class="modal-footer">
+<h4 class="modal-title" id="myModalLabel" style="text-align: center">모달 타이틀</h4>
+</div><!-- 모달 헤더 끝 -->
+
+<div class="modal-body"><!-- 모달바디 -->
+
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>신청자 닉네임</th>
+					<th>신청기한</th>
+					<th>버튼</th>
+				</tr>
+			</thead>
+
+
+
+			<tbody> <!-- 테이블 한줄 시작 -->
+				<tr>
+					<td>1</td>
+					
+					<td>닉닉12</td>
+					<td>2020.06.20 ~ 2020.06.22</td>
+
+
+					<td>
+						<div class="btn-group" role="group">
+
+							<button class="btn btnDefault" type="button" id="openModalBtn">
+								<span class=""></span>수락
+							</button>
+							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
+								<span class=""></span>거절
+							</button>
+							
+						</div>
+
+					</td>
+				</tr>
+
+			</tbody> <!-- 테이블 한줄 끝   -->
+			
+			<tbody> <!-- 테이블 한줄 시작 -->
+				<tr>
+					<td>1</td>
+					
+					<td>닉닉12</td>
+					<td>2020.06.20 ~ 2020.06.22</td>
+
+
+					<td>
+						<div class="btn-group" role="group">
+
+							<button class="btn btnDefault" type="button" id="openModalBtn">
+								<span class=""></span>수락
+							</button>
+							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
+								<span class=""></span>거절
+							</button>
+							
+						</div>
+
+					</td>
+				</tr>
+
+			</tbody> <!-- 테이블 한줄 끝   -->
+			
+			<tbody> <!-- 테이블 한줄 시작 -->
+				<tr>
+					<td>1</td>
+					
+					<td>닉닉12</td>
+					<td>2020.06.20 ~ 2020.06.22</td>
+
+
+					<td>
+						<div class="btn-group" role="group">
+
+							<button class="btn btnDefault" type="button" id="openModalBtn">
+								<span class=""></span>수락
+							</button>
+							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
+								<span class=""></span>거절
+							</button>
+							
+						</div>
+
+					</td>
+				</tr>
+
+			</tbody> <!-- 테이블 한줄 끝   -->
+
+
+
+
+
+		</table>
+
+</div><!-- 모달바드끝 -->
+
+<div class="modal-footer"><!-- 모달 푸터 -->
 <button type="button" class="btn btn-primary">확인</button>
-<button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
-</div>
-</div>
-</div>
-</div>
+<button type="button" class="btn btn-default" id="closeModalBtn1">취소</button>
+</div><!-- 모달 푸터 끝 -->
 
 
-
+</div>
+</div>
+</div>
+<!-- -------------------------------------------------------- -->
 <!-- content end -->
 
 <!-- footer  -->
