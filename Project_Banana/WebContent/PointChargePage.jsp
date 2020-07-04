@@ -35,7 +35,7 @@ p
 
 .pointBtn
 {
-	margin-bottom: 10px; 
+	margin-bottom: 60px; 
 }
 
 #Cancel, #Payment
@@ -56,14 +56,14 @@ span
 
 .paym
 {
-	height: 50px;
-	
-	
+	height: 100px;
+	border-top: 1px solid gray;
+	line-height: 100px;
 }
 
-.muPay, .cardPay, .phonePay, .tossPay
+.muPay, .cardPay
 {
-	width: 130px;
+	width: 160px;
 	background-color: #e6e6e6;
 }
 
@@ -72,6 +72,46 @@ img
 	width: 25px;
 	
 }
+
+.center
+{
+	height: 200px;
+}
+
+#paym2
+{
+	border-bottom: 1px solid gray;
+}
+
+i
+{
+	margin-right: 10px;
+}
+
+
+.btn
+{
+	background-color: white;
+	font-weight: bold;
+	
+	
+}
+
+#i1
+{
+	margin-left: 15px;
+}
+
+label
+{
+	font-size: 17px;
+}
+
+input
+{
+	width: 30px;
+}
+
 
 </style>
 
@@ -121,11 +161,11 @@ img
 
 								<div class="row">
 									<div class="col-md-12 check"> 
-									    <label for=""><input type="radio" name="charge" />5,000원</label>
-									    <label for=""><input type="radio" name="charge"/>10,000원</label>
-									    <label for=""><input type="radio" name="charge"/>20,000원</label>
-									    <label for=""><input type="radio" name="charge"/>30,000원</label>
-									    <label for=""><input type="radio" name="charge"/>40,000원</label>
+									   <label for="m5000"><input type="radio" name="charge" id="m5000"/>5,000원</label>
+									   <label for="m10000"><input type="radio" name="charge" id="m10000"/>10,000원</label>
+									   <label for="m20000"><input type="radio" name="charge" id="m20000"/>20,000원</label>
+									   <label for="m30000"><input type="radio" name="charge" id="m30000"/>30,000원</label>
+									   <label for="m40000"><input type="radio" name="charge" id="m40000"/>40,000원</label>
 									</div>
 								</div><br>
 
@@ -156,29 +196,26 @@ img
 									<div class="col-md-12 point2">
 										<div class="col-md-3"></div>
 									
-										<div class="col-md-6" style="background-color: gray; height: 200px;">
+										<div class="col-md-6 center">
+											
+											<div class="col-md-12 paym" id="paym1">
+												<div class="col-md-4">					
+													<p>무통장 입금</p> 
+												</div>
+												<div class="col-md-8">
+													<button type="button" class="btn btn-default muPay"><i class="fa fa-money" aria-hidden="true" id="i1"></i>무통장 입금</button>
+												</div>
+											</div>
+											
+											<div class="col-md-12 paym" id="paym2">
+												<div class="col-md-4">			
+													<p>신용카드</p>
+												</div>
+												<div class="col-md-8">				
+													<button type="button" class="btn btn-default cardPay"><i class="fa fa-credit-card-alt" aria-hidden="true" id="i2"></i>신용카드</button>
+												</div>
+											</div>
 										
-											<div class="col-md-12 paym">
-																			
-												<p>무통장 입금 <button type="button" class="btn btn-default muPay"><i class="fa fa-money" aria-hidden="true"></i>무통장 입금</button></p>
-												
-												
-											</div>
-											
-											<div class="col-md-12 paym">
-												<p>신용카드<button type="button" class="btn btn-default cardPay"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>신용카드</button></p>
-											
-											</div>
-											
-											<div class="col-md-12 paym">
-												<p>휴대폰 결제<button type="button" class="btn btn-default phonePay"><i class="fa fa-mobile" aria-hidden="true"></i>휴대폰 결제</button></p>
-											
-											</div>
-											
-											<div class="col-md-12 paym">
-												<p>토스<button type="button" class="btn btn-default tossPay">토스</button></p>
-											
-											</div>
 										
 										
 										</div>

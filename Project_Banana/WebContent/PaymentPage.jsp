@@ -18,52 +18,54 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
-*
-{
-	text-align: center;
-}
 
 .center-block
 {
+	
 	display: block;
-	margin-top : 100px;
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top : 20px;
+	
+	/*padding-top : 40px;
+	padding-left : 40px;*/
+	
+	padding : 40px 40px 40px 40px;
+	
+	
 	background-color: #f4f4f4;
-	width: 50%;
-	height: 330px;
-	margin-bottom: 80px;	
+	width: 70%;
+	height: 260px;
+	margin-bottom: 50px;	
 	border-radius: 30px;
 	
 }	
 
-h2
-{
-	margin-top : 80px;
-	font-weight: bold;
-	font-size: 40px;
-	color: #FFCC4F;
-}
-
-
 img
 {
-	width: 50px;
-	margin-bottom: 40px;	
-	margin-top: 40px;
+	width: 200px;
+	height: 180px;
+	
+
 }
 
-p
+.txt, h4, h3
 {
-	font-size: 16px;
-	font-weight: bold;
-	margin-bottom: 50px;
+	font-weight: bold;	
 }
 
-#backhome
+#btn1
 {
+	margin-right: 10px;
 	font-weight: bold;
+	width: 80px;
+}
+
+#btn2
+{
+	margin-left: 10px;
+	font-weight: bold;
+	width: 80px;
 }
 
 
@@ -83,9 +85,7 @@ p
 		</div>
 	</div>
 	
-	<div class="col-md-12">
-		<h2 class="comfirm_logo">Banana</h2>
-	</div>
+	
 <!-- content  -->
 
 <div class="container-fluid">
@@ -94,19 +94,41 @@ p
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-12">
+								<h3>결제</h3>
+								<hr><br><br>
+							</div>
+						</div> <!-- end 결제 title div -->
+						
 						<div class="center-block">
 							<div class="col-md-12">
-								<div class="text-center">
-									<img alt="Bootstrap Image"
-									src="images/banana_icon.png" >
-									<p>"회원가입이 완료되었습니다."</p>
-									
-								    <button class="btn btn-primary" type="button" id="backhome">홈으로 돌아가기</button>
-  								
+								<div class="col-md-5">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/3_%EB%B3%B8%EB%AA%85-_
+							%ED%8B%B0%ED%83%84_%EC%95%A0%EC%B9%AD-_%EB%AA%BD%EC%93%B0.jpg/220px-3_%EB%B3%B8%EB%AA%85-_%ED%8B%
+							B0%ED%83%84_%EC%95%A0%EC%B9%AD-_%EB%AA%BD%EC%93%B0.jpg" alt="" >
 								</div>
 
+								<div class="col-md-7 txt">
+									<h4>자전거 빌려드려요!!</h4><br>
+									<p>렌트비 : 10,500원 &nbsp; &nbsp; &nbsp;  &nbsp;나의 잔고 : 30,000포인트</p>
+									<p>보증금 : 10,000원</p>
+									<p>합계 : 10,000원</p><br>
+									<p>기간 : 2020년 6월 24일 ~ 2020년 6월 30일</p>
+								</div>
+								
 							</div> 
 						</div> <!-- end center-block -->
+						
+						
+						<div class="col-md-12 text-center">
+							<h4>정말로 결제 하시겠습니까?</h4>
+							<button type="button" class="btn btn-default" id="btn1">수락</button>
+							<button type="button" class="btn btn-default" id="btn2">거절</button>
+						</div>
+						
+						
+						
 					</div>  <!-- col-md-8 end -->
 					
 					
