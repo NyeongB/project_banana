@@ -15,6 +15,7 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 
 .nav_table
@@ -113,8 +114,7 @@
 			        	<th class="col-md-1 content">신고내용</th>
 			        	
 			            <td colspan="6"  class="notice_content">
-			            	<textarea rows="15" cols="5" class="form-control" disabled="disabled"><pre>빌려주시는 분이랑 19시에 일산역에서 만나기로 했는데 나오지 않았습니다.<br>결제 이미 다했고요.그 분이 안 나온거니깐 빠른 처리</pre></textarea>
-			            	<!-- <input type="text" class="form-control content">  -->
+			            	<textarea rows="15" cols="5" id="txtbox" class="form-control txtbox" disabled="disabled">빌려주시는 분이랑 19시에 일산역에서 만나기로 했는데 나오지 않았습니다.신고 처리 부탁드려요</textarea>
 			            	
 			            </td>
 			        </tr>
@@ -144,8 +144,7 @@
 		            <td colspan="6"  class="notice_content">
 		            	<textarea rows="3" cols="5" class="form-control"></textarea>
 		            	<!-- <input type="text" class="form-control content">  -->
-		            	
-		            	
+		     
 		            </td>
 		        </tr>
 		   		</table>
