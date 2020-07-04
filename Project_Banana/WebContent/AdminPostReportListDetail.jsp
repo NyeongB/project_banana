@@ -149,6 +149,7 @@
 		            	<textarea rows="3" cols="5" class="form-control"></textarea>
 		            	<!-- <input type="text" class="form-control content">  -->
 		            	
+		            	
 		            </td>
 		        </tr>
 		   		</table>
