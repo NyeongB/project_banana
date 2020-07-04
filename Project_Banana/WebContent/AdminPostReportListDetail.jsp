@@ -113,11 +113,7 @@
 			        	<th class="col-md-1 content">신고내용</th>
 			        	
 			            <td colspan="6"  class="notice_content">
-			            	<textarea rows="15" cols="5" class="form-control" disabled="disabled">
-			            	 빌려주시는 분이랑 19시에 일산역에서 만나기로 했는데 나오지 않았습니다.
-			            	 결제 이미 다했고요.그 분이 안 나온거니깐 빠른 처리 해주세요.
-			            	
-			            	</textarea>
+			            	<textarea rows="15" cols="5" class="form-control" disabled="disabled"><pre>빌려주시는 분이랑 19시에 일산역에서 만나기로 했는데 나오지 않았습니다.<br>결제 이미 다했고요.그 분이 안 나온거니깐 빠른 처리</pre></textarea>
 			            	<!-- <input type="text" class="form-control content">  -->
 			            	
 			            </td>
