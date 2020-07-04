@@ -112,12 +112,7 @@
 			        	<th class="col-md-1 content">신고내용</th>
 			        	
 			            <td colspan="6"  class="notice_content">
-			            	<textarea rows="15" cols="5" class="form-control" disabled="disabled">
-			            	 댓글 도배가 너무 심해요!관리 부탁드려요
-			            	
-			            	</textarea>
-			            	<!-- <input type="text" class="form-control content">  -->
-			            	
+			            	<textarea rows="15" cols="5" class="form-control" id="txtbox" disabled="disabled">이 사람 댓글 도배 너무 심해요!!</textarea>
 			            </td>
 			        </tr>
 			       
