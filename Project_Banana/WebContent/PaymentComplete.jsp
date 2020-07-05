@@ -85,11 +85,11 @@ h2
    </div>
 </div>
 
-<!-- content  -->
+
 
 <div class="container-fluid">
 
-<div class="content">
+<div class="content"> <!-- content  -->
 			<div class="col-md-12">
 				
 				
