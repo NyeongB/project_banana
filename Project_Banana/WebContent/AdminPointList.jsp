@@ -70,7 +70,7 @@ nav
 		<!-- content  -->
 		<div class="content">
 			<div class="col-md-2">
-				<jsp:include page="MenuUser.jsp"></jsp:include>
+				<jsp:include page="MenuAdmin.jsp"></jsp:include>
 			</div>
 			<!-- 왼쪽 MenuUser end  -->
 
@@ -128,6 +128,7 @@ nav
 							<thead>
 								<tr>
 									<th>번호</th>
+									<th>사용자 닉네임</th>
 									<th>일자</th>
 									<th>유형</th>
 									<th>상세정보</th>
@@ -137,6 +138,7 @@ nav
 							<tbody>
 								<tr>
 									<td>1</td>
+									<td>test11***</td>
 									<td>2020-06-23 15:32:11</td>
 									<td>포인트 충전</td>
 									<td>카드 결제</td>
@@ -145,6 +147,7 @@ nav
 
 								<tr>
 									<td>2</td>
+									<td>test22***</td>
 									<td>2020-06-17 19:50:00</td>
 									<td>포인트 충전</td>
 									<td>카드 결제</td>
@@ -152,6 +155,7 @@ nav
 								</tr>
 								<tr>
 									<td>3</td>
+									<td>test33***</td>
 									<td>2020-06-15 20:44:09</td>
 									<td>포인트 출금</td>
 									<td>국민은행 포인트 출금</td>
@@ -159,6 +163,7 @@ nav
 								</tr>
 								<tr>
 									<td>4</td>
+									<td>test44***</td>
 									<td>2020-06-09 19:11:00</td>
 									<td>포인트 출금</td>
 									<td>국민은행 포인트 출금</td>
@@ -166,6 +171,7 @@ nav
 								</tr>
 								<tr>
 									<td>5</td>
+									<td>test55***</td>
 									<td>2020-06-05 15:32:32</td>
 									<td>포인트 충전</td>
 									<td>무통장 입금</td>
