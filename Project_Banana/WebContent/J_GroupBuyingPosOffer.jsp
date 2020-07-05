@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GroupBuyingPostOffer.jsp</title>
+<title>J_GroupBuyingPostOffer.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -76,6 +76,11 @@ p
 
 }
 
+.minunit
+{
+	margin-right: 15px;
+}
+
 </style>
 
 </head>
@@ -100,7 +105,7 @@ p
 				</div>
 				<div class="col-md-6">
 				
-				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
+				<div><h1>자율협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
 				
 				<form role="form" class="form-group">
@@ -251,11 +256,48 @@ p
 					</div>
 					
 					<div class="col-md-12">
-						<div class="col-md-12">목표인원(*)</div>
+						<div class="col-md-12">최소단위(*)</div>
 						
-						<div class="col-md-4">
+						<div class="col-md-4 minunit">
 							<input type="text" class="form-control" id="text" />
 						</div>
+						
+						
+						
+						<div class="col-md-1">
+							<select class="form-control">
+								<option value="">개</option>
+								<option value="">kg</option>
+								<option value="">g</option>
+								<option value="">L</option>
+								<option value="">ml</option>
+							</select>
+						</div>
+						
+						
+						
+						
+					</div>
+					
+					<div class="col-md-12">
+						<div class="col-md-12">목표량(*)</div>
+						
+						<div class="col-md-4 minunit">
+							<input type="text" class="form-control" id="text" />
+						</div>
+						
+						
+						
+						<div class="col-md-1">
+							<select class="form-control">
+								<option value="">개</option>
+								<option value="">kg</option>
+								<option value="">g</option>
+								<option value="">L</option>
+								<option value="">ml</option>
+							</select>
+						</div>
+						
 					</div>
 					
 					
@@ -269,7 +311,7 @@ p
 						
 					<div class="col-md-12 gonggustart">	
 						<div class="col-md-6">
-							수요조사 시작일
+							모집 시작일
 							<input type="date">
 							
 							<select name="startDate">
@@ -294,7 +336,7 @@ p
 					
 				
 						 <div>
-							수요조사 종료일
+							모집 종료일
 							
 							<input type="date">
 							
@@ -366,11 +408,14 @@ p
 								<option value="">21:00</option>
 								<option value="">22:00</option>
 							</select>
+							
+						
 						</div>
 						
 						<div class="col-md-12 notice">
 							<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
 						</div>
+						
 									
 						<div class="Btn">
 						<button type="submit" class="btn btn-primary" id="loginBtn">게시물 등록</button>
