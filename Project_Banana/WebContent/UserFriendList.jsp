@@ -19,29 +19,34 @@ String cp = request.getContextPath();
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	
-	$(document).ready(function()
-	{ 
-		 $("#allCheck").click(function()
-		{
+	$(document).ready(function() {
+		$("#allCheck").click(function() {
 			$("div > input:checkbox").prop("checked", this.checked);
-		}); 
+		});
 	});
-	
 </script>
 
 
 
 <style type="text/css">
-.form-inline
-{
+.form-inline {
 	margin-bottom: 20px;
-	
 }
 
-#allCheck, #selectDelete
-{
+#allCheck, #selectDelete {
 	margin-left: 10px;
+}
+
+.text-right
+{
+	position: relative; 
+	z-index: 1;
+}
+
+.side-block
+{
+	position: relative; left: 10px; top: -70px; z-index: 2;
+	background-color: #e6e6e6;
 }
 
 img
@@ -49,6 +54,14 @@ img
 	width: 70px;
 	height: 70px;
 }
+
+.banaicon
+{
+	width: 40px;
+	height: 40px;
+}
+
+
 
 </style>
 
@@ -77,7 +90,7 @@ img
 
 			<div class="col-md-8">
 				<div>
-					<h3>나의 찜 목록</h3>
+					<h3>친구 목록</h3>
 					<hr>
 				</div>
 				<br>
@@ -89,14 +102,13 @@ img
 						<button type="button" class="btn btn-default" id="selectDelete">선택삭제</button>
 					</div>
 					<div class="col-md-9 text-right">
-						<select name="" id="search" class="form-control">
-							<option value="">최신순</option>
-							<option value="">가격 낮은 순</option>
-							<option value="">가격 높은 순</option>
-							<option value="">공동 구매</option>
-							<option value="">렌트</option>
-						</select>
+						<h4>활동 등급 안내</h4>
 					</div>
+					
+					<div class="side-block">
+						
+					</div>
+					
 				</div>
 				<br>
 				<!-- search bar end  -->
@@ -108,46 +120,55 @@ img
 							<tr>
 								<th>&nbsp;</th>
 								<th>번호</th>
-								<th>썸네일</th>
-								<th>제목</th>
-								<th>가격</th>
-								<th>거래지역</th>
-								<th>거래자 닉네임</th>
-								<th>등록 날짜</th>
+								<th>프로필</th>
+								<th>닉네임</th>
+								<th>신용등급(당도)</th>
+								<th>활동등급</th>
+								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td >
+								<td>
 									<!-- Default checked -->
 									<div class="custom-control custom-checkbox">
-  										<input type="checkbox" class="custom-control-input" id="defaultChecked2">
+										<input type="checkbox" class="custom-control-input"
+											id="defaultChecked2">
 									</div>
 								</td>
 								<td>1</td>
 								<td><img alt="Bootstrap Image Preview"
 									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>자전거 빌려드립니다~~</td>
-								<td>2,000원</td>
-								<td>홍대입구역</td>
-								<td>제안자11</td>
-								<td>2020.06.30</td>
+								<td>닉닉1123</td>
+								<td><span>78</span>Brix</td>
+								<td>
+									<img alt="" src="images/banana_icon.png" class="banaicon">
+								</td>
+								<td>
+									 <span class="glyphicon glyphicon-warning-sign"></span>
+								</td>
+								
 							</tr>
 
 							<tr>
 								<td>
 									<div class="custom-control custom-checkbox">
-  										<input type="checkbox" class="custom-control-input" id="defaultChecked2">
+										<input type="checkbox" class="custom-control-input"
+											id="defaultChecked2">
 									</div>
 								</td>
 								<td>2</td>
 								<td><img alt="Bootstrap Image Preview"
 									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>자전거 상태 굿굿굿!</td>
-								<td>3,000원</td>
-								<td>신촌역</td>
-								<td>제공자222</td>
-								<td>2020.07.01</td>
+								<td>닉네임5128</td>
+								<td><span>55</span>Brix</td>
+								<td>
+									<img alt="" src="images/bananatree_icon.png" class="banaicon">
+								</td>
+								<td>
+								 <span class="glyphicon glyphicon-warning-sign"></span>
+								</td>
+								
 							</tr>
 						</tbody>
 					</table>
@@ -159,24 +180,24 @@ img
 			<!-- col-md-8 end -->
 		</div>
 		<!-- content end -->
-		
+
 		<!-- 페이징 바 -->
-					<div class="col-md-12 text-center">
-						<nav>
-							<ul class="pagination">
-								<li class="disabled"><a href="#" aria-label="Previous"><span
-										aria-hidden="true">&laquo;</span></a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#" aria-label="Next"><span
-										aria-hidden="true">&raquo;</span></a></li>
-							</ul>
-						</nav>
-					</div> <!-- end 페이징 바 -->
-		
+		<div class="col-md-12 text-center">
+			<nav>
+				<ul class="pagination">
+					<li class="disabled"><a href="#" aria-label="Previous"><span
+							aria-hidden="true">&laquo;</span></a></li>
+					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		<!-- end 페이징 바 -->
+
 	</div>
 	<!-- container-fluid end -->
 

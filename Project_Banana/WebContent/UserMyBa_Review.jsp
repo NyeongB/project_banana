@@ -73,9 +73,8 @@ i
 		</div> <!-- select박스 end  -->		
 		<br>
 		
+		<!-- table -->
 		<div class="col-md-12">
-
-
 				<table class="table">
 					<thead>
 						<tr>
@@ -117,8 +116,8 @@ i
 						</tr>
 					</tbody>
 				</table>
-			</div>
-
+			</div> <!-- table end -->
+			
 
 
 
