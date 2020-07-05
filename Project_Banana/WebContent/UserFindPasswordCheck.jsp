@@ -58,7 +58,7 @@ img
 	margin-top: 40px;
 }
 
-#next
+#postPassword
 {
 	margin-right: 10px;
 }
@@ -68,7 +68,7 @@ img
 	margin-left: 10px;
 }
 
-#next, #mainList
+#postPassword, #mainList
 {
 	font-weight: bold;
 	width: 120px;
@@ -132,7 +132,7 @@ img
 							<div class="col-md-12 form-inline space">
 								
 								<div class="col-md-6">
-									아이디(*)
+									새로 등록할 비밀번호(*)
 								</div>
 								
 								<div class="col-md-3">
@@ -141,6 +141,22 @@ img
 							
 							</div>
 							
+							<div class="col-md-12 form-inline space">
+								
+								<div class="col-md-6">
+									비밀번호 확인(*)
+								</div>
+								
+								<div class="col-md-3">
+									<input type="text" class="form-control">
+									
+								</div>
+								
+								<div class="col-md-3">
+									<span id="err">불일치</span>
+								</div>
+							
+							</div>
 							
 							<div class="col-md-12 form-group space">
 							
@@ -174,7 +190,7 @@ img
 							</div>
 							
 							<div class="col-md-12 spaceBtn">
-								<button class="btn btn-primary" type="button" id="next">비밀번호 찾기</button>
+								<button class="btn btn-primary" type="button" id="postPassword">비밀번호 설정</button>
   								<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>	
 							
 							</div>		
