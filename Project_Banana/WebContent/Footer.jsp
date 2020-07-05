@@ -12,7 +12,22 @@
 <link rel="stylesheet" type="text/css" href="css/footerStyle.css">
 <link rel="icon" href="images/favicon.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<style type="text/css">
+#footer
+{
 
+	width: 100%;
+	height: 60px;
+	background-color: var(--back-color);
+	display: flex;
+	/* text-align: center; */
+	justify-content: center; 
+		position: absolute;
+	
+}
+
+
+</style>
 </head>
 <body id="footer_body">
    <div id="footer">

@@ -13,10 +13,15 @@
 <link rel="icon" href="images/favicon.ico" />
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
-		<div id="content">
+	<div>
+		<jsp:include page="Header.jsp"></jsp:include>
+	</div>
+	<div id="content">
 
-		</div>
-	<jsp:include page="Footer.jsp"></jsp:include>
+	</div>
+	
+	<div>
+		<jsp:include page="Footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>
