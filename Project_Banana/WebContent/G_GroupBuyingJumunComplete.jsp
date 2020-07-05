@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -17,43 +18,57 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
+*
+{
+	text-align: center;
+}
+
 .center-block
 {
 	display: block;
-	margin-top : 200px;
-	
+	margin-top : 100px;
+	background-color: black;
+	height: 200px;
+
+	display: block;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top : 20px;
+	background-color: #f4f4f4;
+	width: 50%;
+	height: 330px;
+	margin-bottom: 80px;	
+	border-radius: 30px;
 	
 }	
 
 h2
 {
+	margin-top : 80px;
 	font-weight: bold;
 	font-size: 40px;
-}
-
-.groupBtn
-{
-	margin-top: 80px;
+	color: #FFCC4F;
 }
 
 
-#mainback
+img
 {
-	margin-left: 20px;
+	width: 50px;
+	margin-bottom: 40px;	
+	margin-top: 40px;
 }
 
-#groupList
+p
 {
-	margin-right: 20px;
-}
-
-#groupList, #mainback
-{
-	width: 220px;
-	height: 50px;
+	font-size: 16px;
 	font-weight: bold;
-    font-size: 20px;
-	
+	margin-bottom: 50px;
+}
+
+#backhome
+{
+	font-weight: bold;
 }
 
 
@@ -67,49 +82,44 @@ h2
 
 <body>
 <!-- Header  -->
-<div class="row Header">
-   <div class="col-md-12">
-      <jsp:include page="Header.jsp"></jsp:include>   
-   </div>
-</div>
-
+	<div class="row Header">
+		<div class="col-md-12">
+			<jsp:include page="Header.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	<div class="col-md-12">
+		<h2 class="comfirm_logo">Banana</h2>
+	</div>
 <!-- content  -->
 
 <div class="container-fluid">
-
-<div class="content">
+	<div class="content">
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="center-block text-center">
+						<div class="center-block">
 							<div class="col-md-12">
-								
-									<h2>공동구매 게시물 작성이 완료되었습니다.</h2>
-  								</div>
+								<div class="text-center">
+									<img alt="Bootstrap Image"
+									src="images/banana_icon.png" >
+									<p>"공동구매 신청이 완료 되었습니다."</p>
 									
-																	
-							<div class="col-md-12 groupBtn">
-								    <button class="btn btn-primary" type="button" id="groupList">공동구매 현황가기</button>
-								    <button class="btn btn-primary" type="button" id="mainback">목록으로 돌아가기</button>
-  								</div>
-								
-										
-  									
-		
-							</div> <!-- end center-block -->
-						</div>  <!-- col-md-8 end -->
-					</div> 
+								    <button class="btn btn-primary" type="button" id="backhome">메인으로</button>
+  									<button class="btn btn-primary" type="button" id="backMypage">마이페이지로</button>
+								</div>
+
+							</div> 
+						</div> <!-- end center-block -->
+					</div>  <!-- col-md-8 end -->
 					
 					
 					<div class="col-md-2"></div>
-				</div> <!-- end col-md-12 -->
-			</div> <!-- end content -->
+				</div>
+			</div>  <!-- end col-md-12 -->
+	</div> <!-- end content -->
 </div> <!-- end container-fluid -->
-
-
-
-
 
 
 

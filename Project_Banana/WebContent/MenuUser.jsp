@@ -10,14 +10,25 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
-	#nav
-	{
-		padding: 5px;
-	}
+#nav
+{
+	padding: 5px;
+}
+.menu li
+{
+	/* color:var(--hover-color); */
+	font-weight: bold;
+
+}
+.fa-user-circle
+{
+	color:var(--hover-color);
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/MyMenuStyle.css">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
@@ -44,9 +55,8 @@
 </div>
 
 <div id="nav">
-		<ul class="menu">
-		
-		<li><a href="#">마이페이지 메인</a></li>
+		<ul class="menu thick">
+		<li><a href="#">마이페이지 홈</a></li>
 		<li><a href="#">찜</a></li>
 		<li><a href="#">렌트현황</a></li>
 		<li><a href="#">공동구매현황</a></li>

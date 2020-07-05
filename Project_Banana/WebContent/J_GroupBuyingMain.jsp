@@ -73,6 +73,45 @@
 	font-size: 2em;
 	color:var(--hover-color);
 }
+
+.file-field.big .file-path-wrapper 
+{
+	height: 3.2rem; 
+}
+.file-field.big .file-path-wrapper .file-path
+{
+	height: 3rem;
+}
+
+.form-control
+{
+	margin-bottom: 10px;
+}
+
+p
+{
+	color: #5bb0ff;
+}
+
+
+.my-custom-scrollbar 
+{
+	position: relative;
+	height: 150px;
+	overflow: auto;
+}
+
+.table-wrapper-scroll-y
+ {
+	display: block;
+}
+
+.category
+{
+	 margin-top: 30px; 
+
+}
+
 </style>
 </head>
 <body>
@@ -100,6 +139,109 @@
 					</ul>
 				</div>
 			</div>
+
+				<div class="col-md-12 category" > 
+					
+					<div class="col-md-4">
+						
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+							  <table class="table table-bordered mb-0">
+						
+							    <tbody>
+							      <tr>
+							        <td>식품</td>
+							      </tr>
+							      <tr>
+							        <td>생활용품</td>
+							       
+							      </tr>
+							      <tr>
+							        <td>스포츠</td>						      
+							      </tr>
+							      <tr>
+							        <td>유아동/반려동물</td>
+							      </tr>
+							      <tr>
+							        <td>디지털/가전/가구</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							
+						</div>		
+					</div><!-- end col-md-4 -->
+					
+					
+					
+					<div class="col-md-4">
+					
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+							  <table class="table table-bordered mb-0">
+							   
+							    <tbody>
+							      <tr>
+							       
+							        <td>잡화</td>
+							        
+							      </tr>
+							      <tr>
+							        <td>유아동용품</td>
+							       
+							      </tr>
+							      <tr>
+							        <td>기저귀/이유식</td>						      
+							      </tr>
+							      <tr>
+							        <td>강아지 용품</td>
+							      </tr>
+							      <tr>
+							        <td>고양이 용품</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							
+							</div>		
+					</div><!-- end col-md-4 -->
+					
+					
+					
+					<div class="col-md-4">
+					
+						
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+							  <table class="table table-bordered mb-0">
+							   
+							    <tbody>
+							      <tr>
+							       
+							        <td>목줄</td>
+							        
+							      </tr>
+							      <tr>
+							        <td>사료</td>
+							       
+							      </tr>
+							      <tr>
+							        <td>간식</td>						      
+							      </tr>
+							      <tr>
+							        <td>의류</td>
+							      </tr>
+							      <tr>
+							        <td>장난감</td>
+							      </tr>
+	
+							    </tbody>
+							  </table>
+								
+						</div>
+				
+				</div><!--end col-md-4  -->
+				
+			</div>	<!--end col-md-12  -->
+		
 			<div class="row">
 				<div class="col-md-12">
 					
