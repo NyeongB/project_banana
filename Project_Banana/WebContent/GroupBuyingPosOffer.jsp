@@ -15,6 +15,7 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 
 .Btn
@@ -75,7 +76,6 @@ p
 			<div class="row">
 				<div class="col-md-2">
 				
-					<jsp:include page="MenuUser.jsp"></jsp:include>   
 				
 				</div>
 				<div class="col-md-8">
