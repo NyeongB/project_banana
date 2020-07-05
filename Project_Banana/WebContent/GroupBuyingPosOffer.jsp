@@ -30,9 +30,10 @@
     max-height: 200px;
 }
 
-.img-area
+.img-area,.gonggustart
 {
-	margin-bottom: 50px;
+	margin-top :20px;
+	margin-bottom: 30px;
 }
 
 .file-field.big .file-path-wrapper 
@@ -48,6 +49,12 @@
 {
 	margin-bottom: 10px;
 }
+
+p
+{
+	color: #5bb0ff;
+}
+
 </style>
 
 </head>
@@ -74,11 +81,11 @@
 				<div class="col-md-8">
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
-				<div><h3>상품등록>상품등록 완료</h3></div>
+				<div><h3>상품등록 > 상품등록 완료</h3></div>
 				
 				<form role="form" class="form-group">
 				
-					<div>제목 <input type="text" class="form-control" id="text" /></div>
+					<div>제목(*) <input type="text" class="form-control" id="text" /></div>
 					
 					<div>카테고리(*) <input type="text" class="form-control" id="text" /></div>
 					
@@ -88,17 +95,29 @@
 						사진(*)<br>
 						(앞,뒤,양,옆)
 						
+						<img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
+						
+						
 						<div class="file-field big">
 					    <a class="btn-floating btn-lg pink lighten-1 mt-0 float-left">
 					      <i class="fas fa-paperclip" aria-hidden="true"></i>
 					      <input type="file" multiple>
 					    </a>
 					    </div>
+					    
+					    <p>
+					    ＊상품 이미지는 640x640에 최적화 되어 있습니다.<br>
+					    -이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br>
+					    -이미지를 클릭 할 경우 원본 이미지를 확인할 수 있습니다.<br>
+					    -이미지를 클릭 후 이동하여 등록 순서를 변경할 수 있습니다.<br>
+					    -큰 이미지일 경우 이미지가 깨지는 경우가 발생할 수 있습니다.<br>
+					    최대 지원 사이즈인 640x640 으로 리사이즈 해서 올려주세요(개당 이미지 최대 10M)
+					    </p>
 
 					</div>
 					
 				
-					<div>글 내용 <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea></div>
+					<div>글 내용(*) <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea></div>
 					
 					<div class="col-md-12">
 						<div class="col-md-4">가격(*)<input type="text" class="form-control" id="text" /></div>
@@ -118,14 +137,12 @@
 						</div>	
 					</div>
 						
-					<div class="col-md-12">	
+					<div class="col-md-12 gonggustart">	
 						<div class="col-md-6">
-
-							상품반환 일시
+							수요조사 시작일
+							<input type="date">
 							
-							<span class="glyphicon glyphicon-calendar"></span>
-						
-							<select name="returnDate">
+							<select name="startDate">
 								<option value="">08:00</option>
 								<option value="">09:00</option>
 								<option value="">10:00</option>
@@ -144,13 +161,65 @@
 							</select>
 							
 						</div>
+					
+				
+						 <div>
+							수요조사 종료일
+							
+							<input type="date">
+							
+							<select name="endDate">
+								<option value="">08:00</option>
+								<option value="">09:00</option>
+								<option value="">10:00</option>
+								<option value="">11:00</option>
+								<option value="">12:00</option>
+								<option value="">13:00</option>
+								<option value="">14:00</option>
+								<option value="">15:00</option>
+								<option value="">16:00</option>
+								<option value="">17:00</option>
+								<option value="">18:00</option>
+								<option value="">19:00</option>
+								<option value="">20:00</option>
+								<option value="">21:00</option>
+								<option value="">22:00</option>
+							</select>
+						</div>
+					</div>
+						
+						
+					<div class="col-md-12">	
+						<div class="col-md-6">
+							분배일시    
+							<input type="date">
+							
+							<select name="startDate">
+								<option value="">08:00</option>
+								<option value="">09:00</option>
+								<option value="">10:00</option>
+								<option value="">11:00</option>
+								<option value="">12:00</option>
+								<option value="">13:00</option>
+								<option value="">14:00</option>
+								<option value="">15:00</option>
+								<option value="">16:00</option>
+								<option value="">17:00</option>
+								<option value="">18:00</option>
+								<option value="">19:00</option>
+								<option value="">20:00</option>
+								<option value="">21:00</option>
+								<option value="">22:00</option>
+							</select>
+							
+					</div>
 						
 						 <div>
-							분배 일시
+							상품반환 일시
 							
-							<span class="glyphicon glyphicon-calendar"></span>
+							<input type="date">
 							
-							<select name="separateDate">
+							<select name="endDate">
 								<option value="">08:00</option>
 								<option value="">09:00</option>
 								<option value="">10:00</option>
