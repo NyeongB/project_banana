@@ -85,10 +85,19 @@
 				</ul>
 		</li>
 		
-		<li><a href="#">신고 관리</a>
+		<li>
+			<a href="#">신고 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="#">접수된 신고</a></li>
 					<li><a href="#">처리 완료 신고</a></li>
+				</ul>
+		</li>
+		
+		<li>
+			<a href="#">소상공인 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="#">소상공인 신청자 리스트</a></li>
+					<li><a href="#">처리 완료된 소상공인 리스트</a></li>
 				</ul>
 		</li>
 			

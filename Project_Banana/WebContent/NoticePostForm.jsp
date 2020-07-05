@@ -35,6 +35,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3">
+			<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
 		<div class="col-md-7">
 			<div class="row">
