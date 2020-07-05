@@ -56,6 +56,25 @@ p
 	color: #5bb0ff;
 }
 
+
+.my-custom-scrollbar 
+{
+	position: relative;
+	height: 150px;
+	overflow: auto;
+}
+
+.table-wrapper-scroll-y
+ {
+	display: block;
+}
+
+.category
+{
+	margin: 30px;
+
+}
+
 </style>
 
 </head>
@@ -74,11 +93,11 @@ p
 <div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-3">
 				
 				
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-6">
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
@@ -87,8 +106,111 @@ p
 				
 					<div>제목(*) <input type="text" class="form-control" id="text" /></div>
 					
-					<div>카테고리(*) <input type="text" class="form-control" id="text" /></div>
+					<div>카테고리(*)</div>
+					<div class="col-md-12 category" > 
+						
+						<div class="col-md-4">
+							
+							<div class="table-wrapper-scroll-y my-custom-scrollbar">
+	
+								  <table class="table table-bordered mb-0">
+							
+								    <tbody>
+								      <tr>
+								        <td>식품</td>
+								      </tr>
+								      <tr>
+								        <td>생활용품</td>
+								       
+								      </tr>
+								      <tr>
+								        <td>스포츠</td>						      
+								      </tr>
+								      <tr>
+								        <td>유아동/반려동물</td>
+								      </tr>
+								      <tr>
+								        <td>디지털/가전/가구</td>
+								      </tr>
+								    </tbody>
+								  </table>
+								
+							</div>		
+						</div><!-- end col-md-4 -->
+						
+						
+						
+						<div class="col-md-4">
+						
+							<div class="table-wrapper-scroll-y my-custom-scrollbar">
+	
+								  <table class="table table-bordered mb-0">
+								   
+								    <tbody>
+								      <tr>
+								       
+								        <td>잡화</td>
+								        
+								      </tr>
+								      <tr>
+								        <td>유아동용품</td>
+								       
+								      </tr>
+								      <tr>
+								        <td>기저귀/이유식</td>						      
+								      </tr>
+								      <tr>
+								        <td>강아지 용품</td>
+								      </tr>
+								      <tr>
+								        <td>고양이 용품</td>
+								      </tr>
+								    </tbody>
+								  </table>
+								
+								</div>		
+						</div><!-- end col-md-4 -->
+						
+						
+						
+						<div class="col-md-4">
+						
+							
+							<div class="table-wrapper-scroll-y my-custom-scrollbar">
+	
+								  <table class="table table-bordered mb-0">
+								   
+								    <tbody>
+								      <tr>
+								       
+								        <td>목줄</td>
+								        
+								      </tr>
+								      <tr>
+								        <td>사료</td>
+								       
+								      </tr>
+								      <tr>
+								        <td>간식</td>						      
+								      </tr>
+								      <tr>
+								        <td>의류</td>
+								      </tr>
+								      <tr>
+								        <td>장난감</td>
+								      </tr>
+		
+								    </tbody>
+								  </table>
+									
+							</div>
 					
+					</div><!--end col-md-4  -->
+					
+				</div>	<!--end col-md-12  -->
+					
+					
+			
 					<div>브랜드명(*) <input type="text" class="form-control" id="text" /></div>
 					
 					<div>
@@ -250,7 +372,7 @@ p
 				
 				</div>
 				
-				<div class="col-md-2">
+				<div class="col-md-3">
 				</div>
 			</div>
 		</div>
