@@ -30,11 +30,21 @@
 	{
 		$('#openModalBtn').on('click', function(){
 			$('#modalBox').modal('show');
-			});
+		});
 			// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn1').on('click', function(){
-			$('#modalBox').modal('hide');
-			});
+		$('#closeModalBtn1').on('click', function(){
+				$('#modalBox').modal('hide');
+		});
+			
+		$("#openCompleteBtn").click(function()
+		{
+			//alert("!");
+			$('#modalBox2').modal('show');
+		});
+		
+		$('#closeModalBtn2').on('click', function(){
+			$('#modalBox2').modal('hide');
+	});
 
 
 	});
@@ -109,7 +119,7 @@
 							<td>
 								<div class="btn-group" role="group">
 
-									<button class="btn btnDefault" type="button">
+									<button class="btn btnDefault" type="button" id="openCompleteBtn">
 										<span class=""></span> 확정자 목록
 									</button>
 							
@@ -245,7 +255,7 @@
 			</nav>
 			</div><!-- 페이징 끝  -->
 
-<!-- -------------------모달 영역----------------------------------- -->
+<!-- -------------------신청자 모달 영역 시작 ----------------------------------- -->
 <div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
@@ -363,7 +373,69 @@
 </div>
 </div>
 </div>
-<!-- -------------------------------------------------------- -->
+<!-- 신청자 모달 영역 끝 -->
+<!-- ------------------------확정자 모달 시작-------------------------------- -->
+<div id="modalBox2" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+
+<div class="modal-header"><!-- 모달헤더 -->
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel" style="text-align: center">확정자 목록 현황</h4>
+</div><!-- 모달 헤더 끝 -->
+
+<div class="modal-body"><!-- 모달바디 -->
+
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>확정자 닉네임</th>
+					<th>신청기한</th>
+					<th>버튼</th>
+				</tr>
+			</thead>
+
+
+
+			<tbody> <!-- 테이블 한줄 시작 -->
+				<tr>
+					<td>1</td>
+					
+					<td>닉닉12</td>
+					<td>2020.06.20 ~ 2020.06.22</td>
+
+
+					<td>
+						<div class="btn-group" role="group">
+
+							<button class="btn btnDefault" type="button" id="openModalBtn">
+								<span class=""></span>일자 재입력
+							</button>
+							
+						</div>
+
+					</td>
+				</tr>
+
+			</tbody> <!-- 테이블 한줄 끝   -->
+
+		</table>
+
+</div><!-- 모달바드끝 -->
+
+<div class="modal-footer"><!-- 모달 푸터 -->
+<button type="button" class="btn btn-primary">확인</button>
+<button type="button" class="btn btn-default" id="closeModalBtn2">취소</button>
+</div><!-- 모달 푸터 끝 -->
+
+
+</div>
+</div>
+</div>
+<!-- 확정자모달 끝----------------------------------------------------------------- -->
 <!-- content end -->
 
 <!-- footer  -->
