@@ -23,30 +23,89 @@ String cp = request.getContextPath();
 		$("#allCheck").click(function() {
 			$("div > input:checkbox").prop("checked", this.checked);
 		});
+	
+		$(".rating").mouseover(function()
+		{
+			$(".side-block").css("display", "inline");
+			
+		});
+		
+		$(".rating").mouseout(function()
+		{
+			$(".side-block").css("display", "none");	
+		}); 
+		
+			
+		
+		
+	
+	
 	});
+	
+	
+	
+	
+	
 </script>
 
 
 
 <style type="text/css">
-.form-inline {
-	margin-bottom: 20px;
+.form-inline 
+{
+	margin-bottom: 10px;
 }
 
-#allCheck, #selectDelete {
+#allCheck, #selectDelete
+{
 	margin-left: 10px;
 }
 
-.text-right
+.text-right, .side-block, .tt
 {
-	position: relative; 
+	position: absolute; 
+}
+
+.text-rigth, .tt
+{
 	z-index: 1;
 }
 
 .side-block
 {
-	position: relative; left: 10px; top: -70px; z-index: 2;
 	background-color: #e6e6e6;
+	top : 30px;
+	width: 300px;
+	height: 250px;
+	z-index: 2;
+	opacity: 0.8;
+	border-radius: 15px;
+	display: none;
+	
+	padding: 20px;
+}
+
+.rating
+{
+	 margin-top: 20px; 
+	
+}
+
+.rating>p
+{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+h4
+{
+	font-weight: bold;
+}
+
+p
+{
+	font-size: 12px;
+	font-weight: bold;
 }
 
 img
@@ -59,6 +118,12 @@ img
 {
 	width: 40px;
 	height: 40px;
+}
+
+.warning
+{
+	height : 150px;
+	padding: auto;
 }
 
 
@@ -101,20 +166,32 @@ img
 						<input type="checkbox" class="form-control" id="allCheck">
 						<button type="button" class="btn btn-default" id="selectDelete">선택삭제</button>
 					</div>
-					<div class="col-md-9 text-right">
-						<h4>활동 등급 안내</h4>
-					</div>
 					
-					<div class="side-block">
+					<div class="col-md-8"></div>
+					<div class="col-md-1 text-right rating">
+						<p>활동 등급 안내</p>
 						
 					</div>
 					
+					<div class="side-block">
+						<h4>○ 활동 등급 안내</h4>
+						<p>▶ 초록 바나나 한 송이  : 회원가입 ~ 1000점</p>
+						<p>▶ 노란 바나나 한 송이  : 1001점 ~ 5000점</p>
+						<p>▶ 노란 바나나 두 송이  : 5001점 ~ 12000점 </p>
+						<p>▶ 노란 바나나 세 송이  : 12001점 ~ 22000점 </p>
+						<p>▶ 노란 바나나 네 송이  : 22001점 ~ 37000점</p>
+						<p>▶ 바나나 나무        : 37001점 ~ </p>
+					</div>
+					      
 				</div>
-				<br>
+				<br>       
+				
+				
+				
 				<!-- search bar end  -->
 
 				<!-- table -->
-				<div class="col-md-12">
+				<div class="col-md-12 tt">
 					<table class="table">
 						<thead>
 							<tr>
@@ -145,7 +222,9 @@ img
 									<img alt="" src="images/banana_icon.png" class="banaicon">
 								</td>
 								<td>
+								<div class="warning">
 									 <span class="glyphicon glyphicon-warning-sign"></span>
+								</div>
 								</td>
 								
 							</tr>
@@ -166,7 +245,9 @@ img
 									<img alt="" src="images/bananatree_icon.png" class="banaicon">
 								</td>
 								<td>
-								 <span class="glyphicon glyphicon-warning-sign"></span>
+								<div class="warning">
+										<span class="glyphicon glyphicon-warning-sign"></span>
+								 	</div>
 								</td>
 								
 							</tr>
@@ -211,3 +292,13 @@ img
 </body>
 </html>
 
+									
+									
+									
+									
+								 	
+								
+								
+								
+								
+									
