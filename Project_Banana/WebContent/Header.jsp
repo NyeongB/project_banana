@@ -19,7 +19,7 @@
       
       <div id="logo"><a href=""><span id="logo_text">Banana</span></a></div>
       <ul id="nav_list">
-         <li><a href="">공동구매</a></li>
+         <li><a href="">공동 구매</a></li>
          <li><a href="">렌트</a></li>
          <li><a href="">포인트충전</a></li>
          <li><a href="">공지사항</a></li>

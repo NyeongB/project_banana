@@ -124,6 +124,39 @@
 	padding: 7px;
 }
 
+@media screen and (max-width: 977px) 
+{ 
+	#header
+	{
+		flex-direction: column;
+		align-items: flex-start;
+	} 
+	#nav_list
+	{
+		flex-direction: column;	
+		align-items: center;
+		width: 100%;
+	}
+
+	#nav_list li 
+	{
+		width: 100%;
+		text-align: center;
+		padding-left:0px;
+	
+	}
+
+	#search_bar
+	{
+		width: 100%;
+	}
+	#nav_icons
+	{
+		justify-content: center;
+		padding: 0px;
+	}
+}
+
 
 
 

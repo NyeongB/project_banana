@@ -36,6 +36,7 @@
 .item_content .col-md-2
 {
 	margin: 5px;
+	transition: box-shadow .2s ease;
 
 }
 .floating 
