@@ -71,15 +71,31 @@ document.addEventListener('DOMContentLoaded', function() {
 				<jsp:include page="MenuUser.jsp"></jsp:include>
 				
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 ">
 					<div class="row">
 						<div class="col-md-12">
 							<h3>
 								일정표
 							</h3>
-							<p style="text-align: center;">
-							<div id="calendar" style="width: 50%; height: 50%;"></div>
-							</p >
+							
+							<div class="text-right
+							form-inline md-form form-sm form-2 pl-0 search_bar">
+						   <select name="" id="search" class="form-control">
+						   		<option value="">렌트 제공 일정표</option>
+						   		<option value="">렌트 참여 일정표</option>
+						   		<option value="">공통협력구매 제공 일정표</option>
+						   		<option value="">공통협력구매 참여 일정표</option>
+						   		<option value="">자율협력구매 제공 일정표</option>
+						   		<option value="">자율협력구매 참여 일정표</option>
+						   		
+						   </select>
+						   </div>
+							
+							<hr />
+							
+							
+							<div id="calendar" style="width: 100%; height: 100%;"></div>
+							
 						</div>
 					</div>
 					<div class="row">
@@ -91,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								
 							
 							
-							<div class="row">
+							<div class="row " >
 								
 								<div class="col-md-4">
 									<div>
