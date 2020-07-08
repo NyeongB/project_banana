@@ -23,8 +23,6 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 
 
-
-
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
@@ -44,9 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: 'title',
 	      right: ''
 	    },
+	    events: [
+
+	    	{
+
+	    	id: 1,
+
+	    	title: 'Test1',
+
+	    	start: '2019-08-22',
+
+	    	end: '2019-08-24'
+
+	    	},
+
+	    	{
+
+	    	id: 2,
+
+	    	title: 'Test2',
+
+	    	start: '2019-08-21',
+
+	    	end: '2019-08-23'
+
+	    	}
+
+	    	]
 	  });
 	  calendar.render();
 	});
+
+	
+
+	
 
 
 </script>

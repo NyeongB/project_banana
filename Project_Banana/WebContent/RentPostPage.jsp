@@ -20,8 +20,8 @@ String cp = request.getContextPath();
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 .rentNav {
-	margin-top: 30px;
-	margin-left: 100px;
+margin-top: 40px;
+	margin-left: 200px;
 	font-size: 20px;
 }
 
@@ -76,21 +76,17 @@ span {
 }
 
 
-.block
-{
-	width: 500px;
-	height: 150px;
-	background-color: #e6e6e6;
-	
-	
-}
 
 .Ad
 {
+
+	width: 500px;
+	height: 150px;
+	background-color: #e6e6e6;
 	margin-top : 50px;
 	margin-bottom: 50px;
-
 }
+
 
 .Btn {
 	margin-top: 20px;
@@ -140,11 +136,14 @@ p {
 
 		<div class="content">
 			<div class="col-md-12">
-				<div class="row rentNav">
+				
+					<div class="row">
+					<div class="col-md-12 rentNav">
 
-					<a href="" id="rent1">빌려드립니다</a> <a href="" id="rent2">빌려주세요</a>
+							<a href="" id="rent1">빌려드립니다</a> <a href="" id="rent2">빌려주세요</a>
 
-				</div>
+						</div>
+					</div>
 
 				<div class="row">
 					<div class="col-md-3"></div>
@@ -559,7 +558,7 @@ p {
 								<div class="col-md-3"></div>
 								<div class="col-md-6 block text-center" >광고배너</div>
 								<div class="col-md-3"></div>
-							</div>
+							</div> <!-- end 광고배너 -->
 
 						</form>
 					</div>

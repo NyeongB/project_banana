@@ -183,7 +183,7 @@ nav
 				</div>
 				
 
-				<div class="row">
+				<!-- 페이징 바 -->
 					<div class="col-md-12 text-center">
 						<nav>
 							<ul class="pagination">
@@ -198,8 +198,7 @@ nav
 										aria-hidden="true">&raquo;</span></a></li>
 							</ul>
 						</nav>
-					</div>
-				</div>
+					</div> <!-- end 페이징 바 -->
 
 			</div>
 			<!-- end col-md-8 -->
