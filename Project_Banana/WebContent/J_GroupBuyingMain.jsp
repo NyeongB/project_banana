@@ -112,6 +112,12 @@ p
 	 margin-top: 30px; 
 
 }
+.container-fluid .row
+{
+	margin-top:15px;
+	margin-left: 15px !important;
+
+}
 
 </style>
 </head>
@@ -257,7 +263,7 @@ p
 			
 			<div class="row">
 				<div class="col-md-12">
-					<div><span class="highlight">나의 공동구매 현황</span></div>
+					<div><span class="highlight">나의 함께사요 현황</span></div>
 	                  <div class="row item_content">
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">1</span></h4>

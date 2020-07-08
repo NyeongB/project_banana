@@ -112,7 +112,12 @@ p
 	 margin-bottom: 30px; 
 
 }
+.container-fluid .row
+{
+	margin-top:15px;
+	margin-left: 15px !important;
 
+}
 </style>
 </head>
 <body>

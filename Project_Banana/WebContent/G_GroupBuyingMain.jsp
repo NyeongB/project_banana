@@ -109,7 +109,7 @@ p
 .category
 {
 	 margin-top: 30px; 
-	 margin-bottom: 30px; 
+
 }
 .container-fluid .row
 {
@@ -117,6 +117,7 @@ p
 	margin-left: 15px !important;
 
 }
+
 </style>
 </head>
 <body>
@@ -136,6 +137,7 @@ p
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="cate_icons text-center">
+						<li><div><a href=""><i class="fas fa-utensils"></i></a></div><div>식품</div></li>
 						<li><div><a href=""><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
 						<li><div><a href=""><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
 						<li><div><a href=""><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
@@ -153,6 +155,9 @@ p
 							  <table class="table table-bordered mb-0">
 						
 							    <tbody>
+							      <tr>
+							        <td>식품</td>
+							      </tr>
 							      <tr>
 							        <td>생활용품</td>
 							       
@@ -257,14 +262,14 @@ p
 			
 			<div class="row">
 				<div class="col-md-12">
-					<div><span class="highlight">나의 빌려드려요 현황</span></div>
+					<div><span class="highlight">나의 나눠사요 현황</span></div>
 	                  <div class="row item_content">
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">1</span></h4>
 	                           <div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 빌려드립니다..</h5>
+	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
 	                                      <p><span class="price">9900원</span></p>                          
 	                                    </div>
 	                             </div>
@@ -372,7 +377,7 @@ p
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-				<div><span class="highlight">방금 올라온 빌려드려요.</span></div>
+				<div><span class="highlight">방금 올라온 나눠사요</span></div>
 	                  <div class="row item_content">
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">1</span></h4>
