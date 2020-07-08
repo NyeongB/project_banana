@@ -120,13 +120,19 @@ img
 	height: 40px;
 }
 
-.warning
+
+.warning, .photo , .nick, .banaicon, .custom-checkbox, .brix, .num
 {
-	height : 150px;
-	padding: auto;
+	
+	line-height: 100px;
+
 }
 
 
+table
+{
+	table-layout: fixed; word-break; break-all;
+}
 
 </style>
 
@@ -162,7 +168,7 @@ img
 
 				<!-- search bar  -->
 				<div class="col-md-12 form-inline">
-					<div class="col-xs-3 text-left">
+					<div class="col-md-3 text-left">
 						<input type="checkbox" class="form-control" id="allCheck">
 						<button type="button" class="btn btn-default" id="selectDelete">선택삭제</button>
 					</div>
@@ -213,18 +219,37 @@ img
 											id="defaultChecked2">
 									</div>
 								</td>
-								<td>1</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>닉닉1123</td>
-								<td><span>78</span>Brix</td>
 								<td>
-									<img alt="" src="images/banana_icon.png" class="banaicon">
+								<div class="num">
+							
+								1
+								</div>
 								</td>
 								<td>
-								<div class="warning">
-									 <span class="glyphicon glyphicon-warning-sign"></span>
+								<div class="photo">
+								<img alt="Bootstrap Image Preview"
+									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg">
 								</div>
+									</td>
+								<td>
+								<div class="nick">
+								닉닉1123
+								</div>
+								</td>
+								<td>
+								<div class="brix">
+								<span>78</span>Brix
+								</div>
+								</td>
+								<td>
+									<div class="banaicon">
+									<img alt="" src="images/banana_icon.png" class="banaicon">
+									</div>
+								</td>
+								<td>
+									<div class="warning">
+									 <span class="glyphicon glyphicon-warning-sign"></span>
+									</div>
 								</td>
 								
 							</tr>
@@ -236,13 +261,34 @@ img
 											id="defaultChecked2">
 									</div>
 								</td>
-								<td>2</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>닉네임5128</td>
-								<td><span>55</span>Brix</td>
 								<td>
-									<img alt="" src="images/bananatree_icon.png" class="banaicon">
+								<div class="num">
+									2
+								</div>
+								</td>
+								<td>
+								<div class="photo">	
+									<img alt="Bootstrap Image Preview"
+									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg">
+								</div>	
+								</td>
+								<td>
+								<div class="nick">
+								닉네임5128
+								</div>
+								</td>
+								
+								
+								<td>
+									<div class="brix">
+									<span>55</span>Brix
+									</div>
+								</td>
+									
+								<td>
+									<div class="banaicon">
+									<img alt="" src="images/bananatree_icon.png" class="banaicon" >
+									</div>
 								</td>
 								<td>
 								<div class="warning">

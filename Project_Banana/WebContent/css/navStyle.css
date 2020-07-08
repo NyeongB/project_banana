@@ -128,7 +128,8 @@
 	position: absolute;
 	right: 15px;
     top: 15px;
-    font-size: 25px
+    font-size: 25px;
+    display: none;
 }
 .nav_Btn i 
 {
@@ -165,6 +166,10 @@
 	{
 		justify-content: center;
 		padding: 0px;
+	}
+	.nav_Btn
+	{
+    	display: block;
 	}
 }
 

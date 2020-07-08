@@ -18,6 +18,24 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<style type="text/css">
+.glyphicon-bell
+{
+
+	color: var(--text-color);
+	
+}
+.btn
+{
+	background-color: var(--hover-color) !important;
+	border-color: var(--hover-color) !important;
+	color:white;
+
+	/* var(--text-color) !important; */
+	
+}
+
+</style>
 
 </head>
 <body id="header_body">
@@ -37,12 +55,12 @@
          
          <!-- 드롭다운 -->
          <div class="dropdown">
-  		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
+  			<button class="btn dropdown-toggle Btn" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
     
 		    <span class="glyphicon glyphicon-bell"></span>
-		  </button>
+		  	</button>
 		  <%-- <div class="alram" ><jsp:include page="NotificationList.jsp"></jsp:include>
-		  </div> --%>
+		  </div>--%>
 		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
     		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
    			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
