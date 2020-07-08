@@ -87,6 +87,10 @@ String cp = request.getContextPath();
 	font-size: 20px;
 }
 
+span
+{
+	color: #d00926;
+}
 </style>
 
 </head>
@@ -109,6 +113,7 @@ String cp = request.getContextPath();
 					<div class="col-md-12 rentNav">
 
 							<!-- 없다ㅏ에대한 검색 결과 0 개 -->
+							<span>없다아ㅏ</span> 의 검색 결과 <small>0 개</small>
 
 						</div>
 					</div>

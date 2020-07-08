@@ -94,15 +94,13 @@ h2
 			<div class="col-md-12">
 				
 				
+				
+					
+				<div class="col-md-2"></div>
+				
+				
 				<div class="row">
-					<div class="col-md-12 rentNav">
-
-							<a href="" id="rent1">빌려드립니다</a> <a href="" id="rent2">빌려주세요</a>
-
-						</div>
-					</div>
-				<div class="row">
-					<div class="col-md-2"></div>
+					
 					<div class="col-md-8">
 						<div class="center-block text-center">
 							<div class="col-md-12">

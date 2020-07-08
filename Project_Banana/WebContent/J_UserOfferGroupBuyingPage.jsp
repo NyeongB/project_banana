@@ -29,6 +29,12 @@ String cp = request.getContextPath();
 		text-decoration: line-through;
 	}
 	
+	.Aa
+	{
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+	
 </style>
 
 <script type="text/javascript">
@@ -195,12 +201,15 @@ $(document).ready(function()
 		
 		
 			<div class="row">
-				<div class="col-md-6 form-inline" >
-				할인 가격 : <input class="form-control text-right" 
+				
+				<div class="col-md-1"></div>
+				<div class="col-md-7 form-inline">
+				할인 가격 : <input class="form-control" 
 					type="text" readonly="readonly" placeholder="17,000원" style=" text-align: right;">
 				</div>
-				<div class="col-md-6">
-				</div>
+				
+				<div class="col-md-4"></div>
+				
 			</div>
 			
 			
