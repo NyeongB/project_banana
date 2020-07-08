@@ -70,6 +70,7 @@
 		<li><a href="#">가계부</a></li>
 		<li><a href="#">내가 제안한 함께사요</a></li>
 		<li><a href="#">출석체크</a></li>
+		<li><a href="#">포인트 출금</a></li>
 	
 
 			
