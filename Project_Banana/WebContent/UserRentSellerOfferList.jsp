@@ -262,7 +262,7 @@
 
 <div class="modal-header"><!-- 모달헤더 -->
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel" style="text-align: center">모달 타이틀</h4>
+<h4 class="modal-title" id="myModalLabel" style="text-align: center">신청자 목록 현황</h4>
 </div><!-- 모달 헤더 끝 -->
 
 <div class="modal-body"><!-- 모달바디 -->
