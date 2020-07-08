@@ -31,6 +31,32 @@ String cp = request.getContextPath();
 	
 </style>
 
+<script type="text/javascript">
+
+
+$(document).ready(function()
+{	
+	// 모달 
+	$('#openModalBtn').on('click', function(){
+		$('#modalBox').modal('show');
+	});
+		// 모달 안의 취소 버튼에 이벤트를 건다.
+	$('#closeModalBtn').on('click', function(){
+		$('#modalBox').modal('hide');
+	});
+		
+	$("#changePrice").click(function()
+	{
+		if(confirm("가격을 조정하시겠습니까?"))
+		{
+			$('#modalBox').modal('hide');
+		}
+	});
+
+
+});
+</script>
+
 </head>
 <!-- header -->
 <div class="Header">
@@ -105,7 +131,7 @@ String cp = request.getContextPath();
 									진행여부 확인 중<br>
 									<div class="btn-group" role="group">
 
-										<button class="btn btn-secondary" type="button">가격 조정
+										<button class="btn btn-secondary" type="button" id="openModalBtn">가격 조정
 										</button>
 									</div>
 								</td>
@@ -149,6 +175,67 @@ String cp = request.getContextPath();
 			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
 	</div>
+
+
+<!-- ----------------------------------모달영역--------------------------------------------------------- -->
+<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel">일자 재입력</h4>
+</div>
+<div class="modal-body"><!-- 모달바디 시작 -->
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+		
+		
+			<div class="row">
+				<div class="col-md-6 form-inline" >
+				할인 가격 : <input class="form-control text-right" 
+					type="text" readonly="readonly" placeholder="17,000원" style=" text-align: right;">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<div class="modal-footer"><!-- 모달바디 끝 -->
+<button type="button" class="btn btn-primary" id="changePrice">가격 변경</button>
+<button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ------------------------------------------------------------------------------------------------------- -->
+
 
 </body>
 </html>
