@@ -118,12 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="text-right
 							form-inline md-form form-sm form-2 pl-0 search_bar">
 						   <select name="" id="search" class="form-control">
+						  		<option value="">공통협력구매 참여 일정표</option>
+						  		<option value="">공통협력구매 제공 일정표</option>
+						  		<option value="">자율협력구매 제공 일정표</option>
 						   		<option value="">역렌트 제공 일정표</option>
 						   		<option value="">렌트 제공 일정표</option>
 						   		<option value="">렌트 참여 일정표</option>
-						   		<option value="">공통협력구매 제공 일정표</option>
-						   		<option value="">공통협력구매 참여 일정표</option>
-						   		<option value="">자율협력구매 제공 일정표</option>
+						   		
+						   		
+						   		
 						   		<option value="">자율협력구매 참여 일정표</option>
 						   		
 						   </select>
@@ -152,40 +155,29 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="row" id="apply"><!-- 렌트상세정보 -->
 						<div class="col-md-2 img-area">
 							
-							<img src="https://www.sisaweek.com/news/photo/201902/118581_103236_572.jpg" alt=""  class="img-responsive img-rounded"/
+							<img src="https://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/02/12/20190212000467_0.jpg"
 							style="width: 120px; height: auto;">
 						
 						</div>
 						<div class="col-md-5" style="padding-left: 20px;">
 						
 							
-								<p>카테고리 : 생활용품</p>
-								<p>제목 : ○○○ 빌려드립니다~!!</p>
-								<p>일 단위 비용 : 3,000원</p>
-								<p>렌트 수령일 : 2020.06.12</p>
-								<p>수령장소 & 수령시간 : 홍대입구역 13:00</p>
 								
+								<p>제목 : 고구마 꿀맛! 10kg 10명만 모아봅니다.</p>
+								<p>모집기간 : 20.07.01~20.07.10</p>
+								<p>가격 : 10,000원</p>
 						
 						</div>
 						<div class="col-md-5" >
 						
-							<p>렌트 제공자 닉네임 : 바나나</p>
-								<p>총 비용 : 20,000원</p>
-								<p>보증금 : 10,000원</p>
-								<p>물품 반납일 : 2020.06.12</p>
-								<p>반납장소 & 반납시간 : 홍대입구역 13:00</p>
-							
+								<p>분재장소 : 수유역</p>
+								<p>목표량 현황 <strong>8/10</strong> 명</p>
+								<p><input type="button" class="btn" value="출석부" id="openModalBtn"></p>
 						
 						</div>
 					</div><!-- 렌트 상세정보 종료  -->	
 					
-					<!-- 버튼 -->
-					<br />
-					<div class="ReportBtn text-right" style="padding-right: 20px;">
-		       		 <input type="button" class="btn" value="신청자 목록 현황" id="openModalBtn">
-		         	<input type="button" class="btn " value="확정자 목록 현황" id="openCompleteBtn">
-		   			 </div>
-					<!-- 버튼 끝 -->		
+						
 							
 					
 						</div>
