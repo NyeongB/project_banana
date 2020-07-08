@@ -143,9 +143,14 @@ h5>span
 							</div>
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
+							
+							
 							<h5>0<span>100</span></h5>
 							<p>단위 Brix</p>
+							
 							</div>
+							
+							
 							<div class="col-md-3"></div>
 						</div>
 						
