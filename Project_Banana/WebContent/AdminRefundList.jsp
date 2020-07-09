@@ -10,38 +10,25 @@
 <meta charset="UTF-8">
 <title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="icon" href="images/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
+<link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
-#standby
-{
-	color: red;
-}
 
-#accept
-{
-	color: blue;
-}
 
-#orderList
-{
-	margin-left: 45px;
-}
-
-#searchItem
-{
-	margin-left: 80px;
-}
-
-.table
-{
-	margin-top: 20px;
-
-}
+	.table
+	{
+		margin-top: 20px;
+	
+	}
+	
+	td
+	{
+		text-align: center;
+	}
 
 
 	
@@ -68,7 +55,7 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>접수된 신고</h3>
+					<h3>환불 내역</h3>
 					<hr>
 				</div>
 				<br>
@@ -83,8 +70,8 @@
 						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
 						   <select name="" id="search" class="form-control">
 						   		<option value="">전체</option>
-						   		<option value="">게시물</option>
-						   		<option value="">댓글</option>
+						   		<option value="">렌트/역렌트</option>
+						   		<option value="">공통/자율협력구매</option>
 						   </select>
 						</div>
 					</div>
@@ -95,72 +82,64 @@
 						<table class="table">
 							<thead class="reportTitle">
 								<tr>
-									<th>신고 제목</th>
-									<th>신고 대상자</th>
-									<th>접수 유형</th>
-									<th>신고 유형</th>
-									<th>신고 내용</th>
+									<th>상세정보</th>
+									<th>유형</th>
 									<th>신고 날짜</th>
-									<th>신고인</th>		
+									<th>금액</th>
+									<th>아이디</th>		
 								</tr>
 							</thead>
 						    <tbody>
 								<tr>
-									<td><a href="">사기 신고합니다.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>노쇼</td>
-									<td>고구마가 다 썩었어요</td>
+									<td>대여자 노쇼로 인한 환불</td>
+									<td>렌트</td>
 									<td>2020-06-08 15:00:03</td>
-									<td>abc123</td>
-								</a>
+									<td>20,000원</td>
+									<td>cjfsud23</td>
 								</tr>
 								
 							</tbody>
 							<tbody>
 								<tr>
-									<td><a href="">사기꾼 신고해요.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>상품이상</td>
-									<td>집가서 확인해보니...</td>
-									<td>2020-06-026 11:00:03</td>
-									<td>dongdong789</td>
+									<td>물건 하자로인한 환불</td>
+									<td>렌트</td>
+									<td>2020-06-09 15:00:03</td>
+									<td>30,000원</td>
+									<td>rlacjfsud11</td>
 								</tr>
+								
 							</tbody>
 							<tbody>
 								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>ehdehd95</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>욕설이 너무 많아요</td>
-									<td>2020-07-30 19:30:03</td>
-									<td>dmksld45</td>
+									<td>물건 이상으로 인한 환불</td>
+									<td>공통협력구매</td>
+									<td>2020-06-10 09:00:03</td>
+									<td>20,000원</td>
+									<td>qkrcjf99</td>
 								</tr>
+								
 							</tbody>
 							<tbody>
 								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>gyfla96</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>댓글이 좀 그래요...</td>
-									<td>2020-07-10 09:30:03</td>
-									<td>dkr45</td>
+									<td>물건 이상으로 인한 환불</td>
+									<td>공통협력구매</td>
+									<td>2020-06-12 19:00:03</td>
+									<td>24,000원</td>
+									<td>ffdaqe123</td>
 								</tr>
+								
 							</tbody>
 							<tbody>
 								<tr>
-									<td><a href="">게시물 신고합니다.</a></td>
-									<td>cjfsud93</td>
-									<td>게시물</td>
-									<td>허위게시물</td>
-									<td>게시물이 가짜예요!</td>
-									<td>2020-08-30 19:30:03</td>
-									<td>dslf03</td>
+									<td>목표량 미달로 인한 환불</td>
+									<td>렌트</td>
+									<td>2020-06-12 22:00:03</td>
+									<td>15,000원</td>
+									<td>kajfla114</td>
 								</tr>
+								
 							</tbody>
+							
 						</table>
 						
 					</div><!--end col-md-12  -->
