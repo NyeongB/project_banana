@@ -134,13 +134,16 @@ $(document).ready(function()
 					<h4>은행명 : 국민은행</h4>
 				</div>
 				<div class="list-group-item">
+					<h4>예금주 : 최철녕</h4>
+				</div>
+				<div class="list-group-item">
 					<h4>계좌번호 : 307002-04-229113</h4>
 				</div>
 				<div class="list-group-item">
 					<h4>출금 금액 : 30,000원</h4>
 				</div>
 				<div class="list-group-item">
-					<h4>출금 후 잔액 : 2,500원</h4>
+					<h4 style="color: red;">출금 후 잔액 : 2,500원</h4>
 				</div>
 			</div>
 
