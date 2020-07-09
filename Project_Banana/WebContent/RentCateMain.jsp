@@ -108,21 +108,6 @@ b
 	font-size: 16px;
 }
 
-/* .thblock
-{
-	display: block;
-	height: 280px;
-	background-color: #e6e6e6;
-	box-shadow:   5px 5px gray;
-} */
-
-
-.thumbnail
-{
-	display: block;
-	
-}
-
 
 </style>
 
@@ -474,7 +459,328 @@ b
 						
 					</div>
 				</div> <!-- end 실시간 게시글 1열  -->
+					
+					<hr>
+					
+					<!-- 실시간 게시글 2열 -->
+				<div class="row"> 
+					<div class="col-md-12">
 
+						
+							<div class="col-md-1"></div>
+
+							
+							<!-- 2열 1번 -->
+							
+							  <div class="col-sm-2 col-md-2 thblock">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+							
+							
+							<!-- 2열 2번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 3번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 4번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 5번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+
+							<div class="col-md-1"></div>
+
+						
+					</div>
+				</div> <!-- end 실시간 게시글 2열  -->	
+					
+					<hr>
+					
+					
+					<!-- 실시간 게시글 3열 -->
+				<div class="row"> 
+					<div class="col-md-12">
+
+						
+							<div class="col-md-1"></div>
+
+							
+							<!-- 3열 1번 -->
+							
+							  <div class="col-sm-2 col-md-2 thblock">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+							
+							
+							<!-- 3열 2번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 3번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 4번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 5번 -->
+							   <div class="col-sm-2 col-md-2">
+	                           		<div class="thumbnail">
+	                                 <img src="images/oz.jpg" >
+	                                   
+	                                    <div class="caption">
+	                                   		<div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>글쓴이</small>
+	                                        </div>
+	                                      
+	                                        
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
+	                                    </div>
+	                                </div>
+	                   		  </div>
+
+							<div class="col-md-1"></div>
+
+						
+					</div>
+				</div> <!-- end 실시간 게시글 3열  -->
+					
+				<hr>
+					
 
 				<div class="row">
 					<div class="col-md-12">
