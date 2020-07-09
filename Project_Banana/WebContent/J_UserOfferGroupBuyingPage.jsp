@@ -35,6 +35,7 @@ String cp = request.getContextPath();
 		margin-right: 30px;
 	}
 	
+	
 </style>
 
 <script type="text/javascript">
@@ -189,17 +190,18 @@ $(document).ready(function()
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">일자 재입력</h4>
+<h4 class="modal-title" id="myModalLabel">가격 조정</h4>
 </div>
 <div class="modal-body"><!-- 모달바디 시작 -->
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding: 5px;">
 	<div class="row">
 		<div class="col-md-12">
 		
-		
+			<span class="highlight">변경 전</span>
+			<br><br />
 			<div class="row">
 				
 				<div class="col-md-1"></div>
@@ -211,26 +213,45 @@ $(document).ready(function()
 				<div class="col-md-4"></div>
 				
 			</div>
+			<div class="row">
+				
+				<div class="col-md-1"></div>
+				<div class="col-md-7 form-inline">
+				최소 단위당 가격 : <input class="form-control" 
+					type="text" readonly="readonly" placeholder="2,500원" style=" text-align: right;">
+				</div>
+				
+				<div class="col-md-4"></div>
+				
+			</div>
+			<hr />
+			<span class="highlight">변경 후</span>
+			<br /><br />
+			<div class="row">
+				
+				<div class="col-md-1"></div>
+				<div class="col-md-7 form-inline">
+				변경 할 가격 : <input class="form-control" 
+					type="text"  placeholder="15,000원" style=" text-align: right;">
+				</div>
+				
+				<div class="col-md-4"></div>
+				
+			</div>
+			<div class="row">
+				
+				<div class="col-md-1"></div>
+				<div class="col-md-7 form-inline">
+				최소 단위 당 가격 : <input class="form-control" 
+					type="text" readonly="readonly" placeholder="2,000원" style=" text-align: right;">
+				</div>
+				
+				<div class="col-md-4"></div>
+				
+			</div>
 			
 			
-			<div class="row">
-				<div class="col-md-6">
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </div>
