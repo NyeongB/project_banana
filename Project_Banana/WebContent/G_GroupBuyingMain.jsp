@@ -40,8 +40,8 @@
 }
 .floating 
 { 
-	position: fixed; 
-	right: 50%; 
+	position: sticky;
+	right: 40%; 
 	top: 180px; 
 	margin-right: -720px; 
 	text-align:center; 

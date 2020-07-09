@@ -34,7 +34,25 @@
 	/* var(--text-color) !important; */
 	
 }
+.search_bar ul
+{
+	background: rgb(109,109,109);
+	 display:none; /* 평상시에는 서브메뉴가 안보이게 하기 */ 
+	 height:auto; 
+	 padding:0px; 
+	 margin:0px; 
+	 border:0px; 
+	 position:absolute; 
+	 width:200px; 
+	 z-index:200;
 
+}
+.search_bar:hover ul
+{
+
+	 display:block;
+
+}
 </style>
 
 </head>
@@ -53,23 +71,30 @@
          <!-- <input type="search" id="sear"/> -->
          <ul id="nav_icons">
          
-         <!-- 드롭다운 -->
-         <div class="dropdown">
-  			<button class="btn dropdown-toggle Btn" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
-    
-		    <span class="glyphicon glyphicon-bell"></span>
-		  	</button>
-		  <%-- <div class="alram" ><jsp:include page="NotificationList.jsp"></jsp:include>
-		  </div>--%>
-		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-  		  </ul>
-		</div>
-		<!-- 드롭다운 끝  -->
-                     
+         	 <!-- 드롭다운 -->
+	         <li>
+		         <div class="dropdown">
+		  			<button class="btn dropdown-toggle Btn" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
+		    
+				    <span class="glyphicon glyphicon-bell"></span>
+				  	</button>
+				  <%-- <div class="alram" ><jsp:include page="NotificationList.jsp"></jsp:include>
+				  </div>--%>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+		   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+		    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+		   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+		  		  </ul>
+				</div>
+			</li>
+			<!-- 드롭다운 끝  -->
+			<li class="search_bar"><a href="">search</a>
+				<ul>
+					<li><input type="search" /></li>
+				</ul>
+			</li>
+                    
             <li><a href="">로그인</a></li>
             <li><a href="">회원가입</a></li>
          </ul>
