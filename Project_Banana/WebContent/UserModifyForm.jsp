@@ -40,7 +40,7 @@ String cp = request.getContextPath();
 						<jsp:include page="MenuUser.jsp"></jsp:include>
 					</div>
 					<!-- end MenuUser.jsp -->
-					<div class="col-md-8">
+					<div class="col-md-8 " >
 						<!-- 개인정보수정시작 -->
 
 
@@ -57,7 +57,7 @@ String cp = request.getContextPath();
 						<!-- 버튼 -->
 						<p>아이디</p>
 						<input type="text" name="id" id="id" placeholder="아이디(*)"
-							class="form-control" readonly="readonly" value="cjfsud23">
+							class="form-control" readonly="readonly" value="cjfsud23" >
 						<br />
 
 
