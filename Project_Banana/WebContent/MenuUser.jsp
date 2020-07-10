@@ -30,6 +30,11 @@ i + a
 
 }
 
+#nav ul.sub
+{
+	font-size: small;  /*  다른페이지에서 적용이 안됩니당.. */
+}
+
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/css/bootstrap.min.css">
@@ -45,14 +50,18 @@ i + a
 	{
 		//$("#nav ul.sub").hide();
 		$("#nav ul.menu li").click(function() 
-		{
+		{ 
 			$("ul", this).slideToggle("fast");	
-			$("li a", this).toggleClass("clicked_menu");
+			$("li a", this).toggleClass("clicked_menu");  
+			
+		    
 		});
 	})
 	
 	
 </script>
+
+
 
 
 </head>
@@ -65,17 +74,38 @@ i + a
 		<ul class="menu thick">
 		<li><i class="fas fa-home"></i><a href="#">마이페이지 홈</a></li>
 		<li><i class="far fa-heart"></i><a href="#">찜</a></li>
-		<li><i class="fas fa-hand-holding-heart"></i><a href="#">렌트현황</a></li>
-		<li><i class="fas fa-clipboard-list"></i><a href="#">공동구매현황</a></li>
+		<li><i class="fas fa-hand-holding-heart"></i><a href="#">렌트현황</a>
+			<ul class="sub" style="display: none;">
+					<li><a href="#">내가 제공한 렌트</a></li>
+					<li><a href="#">내가 신청한 렌트</a></li>
+			</ul>
+		</li>
+		<li><i class="fas fa-clipboard-list"></i><a href="#">공동구매현황</a>
+			<ul class="sub" style="display: none;">
+					<li><a href="#">내가 제안한 함께사요</a></li>
+					<li><a href="#">내가 신청한 함께사요</a></li>
+					<li><a href="#">내가 제안한 나눠사요</a></li>
+					<li><a href="#">내가 신청한 나눠사요</a></li>
+			</ul>
+		</li>
+				
+		
 		<li><i class="far fa-address-book"></i><a href="#">출석부</a></li>
 		<li><i class="fas fa-bomb"></i><a href="#">신고내역</a></li>
 		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a></li>
 		<li><i class="far fa-comment-dots"></i><a href="#">내가쓴댓글</a></li>
 		<li><i class="far fa-address-card"></i><a href="#">개인정보수정</a></li>
-		<li><i class="far fa-user"></i><a href="#">마이바나나</a></li>
+		<li><i class="far fa-user"></i><a href="#">마이바나나</a>
+			<ul class="sub" style="display: none;">
+					<li><a href="#">개인 활동등급</a></li>
+					<li><a href="#">개인 신용등급</a></li>
+					<li><a href="#">거래 후기</a></li>
+					<li><a href="#">포인트</a></li>
+			</ul>
+		</li>
 		<li><i class="fas fa-users"></i><a href="#">친구목록</a></li>
 		<li><i class="fas fa-comments-dollar"></i><a href="#">가계부</a></li>
-		<li><a href="#">내가 제안한 함께사요</a></li>
+		
 		<li><i class="far fa-check-square"></i><a href="#">출석체크</a></li>
 		<li><a href="#">포인트 출금</a></li>
 	

@@ -30,14 +30,9 @@
 		{
 			$("ul", this).slideToggle("fast");	
 			$("li a", this).toggleClass("clicked_menu");	
-
 			
 		});
-		
 	
-		
-		
-		
 	})
 	
 	

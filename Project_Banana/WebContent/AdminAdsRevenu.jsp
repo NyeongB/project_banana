@@ -51,10 +51,24 @@
 				</button>
 				
 				
-				<select class="form-control">
+				<!-- <select class="form-control">
 					<option value="">모든유형</option>
 					<option value="">광고수익</option>
-				</select>
+				</select> -->
+				
+				<div class="col-md-12 text-right">
+					
+						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
+						   <select name="" id="search" class="form-control">
+						   		<option value="">전체</option>
+						   		<option value="">게시물</option>
+						   		<option value="">댓글</option>
+						   </select>
+						</div>
+					</div>
+				
+				
+				
 				<table class="table">
 					<thead>
 						<tr>
@@ -117,18 +131,21 @@
 
 				</table>
 
-
-			</div>
-
-
-		</div>
-		<div class="col-md-2"></div>
+                           
+		 <!-- end table -->
+		
+		
+		
+		
 	</div>
 
-</div>
+</div> <!-- end com-md-8 -->
+
+<div class="col-md-2"></div>
+</div> <!-- content end -->
+</div> <!-- end container-fluid -->
 
 
-<!-- content end -->
 
 <!-- footer  -->
 <div class="row">
