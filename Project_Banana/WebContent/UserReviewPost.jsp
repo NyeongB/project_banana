@@ -101,7 +101,6 @@
       
       <div class="modal-footer d-flex justify-content-center">
         <button class="btn btn-default">후기작성</button>
-        <button class="btn btn-default">취소</button>
       </div>
       
     </div>
