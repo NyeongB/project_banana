@@ -1267,7 +1267,246 @@ SELECT *
 FROM R_REPLY_LIKE;
 --==>>R_REPL1	R_REP1	USER9	20/07/11
 
+------------------------------------------------------------------------------------------------------------------------------------
+-- 2020-07-11 
+-- 렌트 게시물 등록 인서트
+INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
+                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER9', 'R_CATE57',  'LOC95', '등산복 빌릴사람있어요?', '제가 쓰던 등산복인데 요즘 잘 안입어서 렌트하실분 찾습니다. 가격은 싸게 드리고요. 언제든지 가져가세요 사용감은 조금있어서 아무렇게나 쓰셔도 상관없어요. 참고로 이걸로 북한산도 다녀왔습니다. 연락주세요~!'
+                                    , 55, TO_DATE('2020-07-11 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-10 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                    , '15:00', '일산역 1번출구', '17:00', '일산역 1번출구', 'K2', 1000, 5000);
+                                    
+INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
+                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER10', 'R_CATE64',  'LOC73', '제 자전거 좋은데 빌릴사람있어요?', '자전거 싸게 빌려가실분 찾아요 언제든지 연락주세요~!'
+                                    , 14, TO_DATE('2020-07-11 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-05 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                    , '14:00', '계양역 1번출구', '18:00', '계양역 1번출구', '삼천리', 900, 8000);
+                                    
+INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
+                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER6', 'R_CATE100',  'LOC26', '캣타워 쓰실분 연락주세요', '고양이 키우시는분들 빌려가세요 제 고양이는 캣타워를 싫어해서'
+                                    , 25, TO_DATE('2020-07-15 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-14:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                    , '12:00', '수유역 1번출구', '19:00', '수유역 1번출구', 'CATS', 2000, 10000);
+                                    
 
+-- 렌트 게시물 등록 조회                    
+SELECT * FROM R_POST;
+DELETE FROM R_POST;
+/*
+R_POST1	USER9	R_CATE57	LOC95	등산복 빌릴사람있어요?	제가 쓰던 등산복인데 요즘 잘 안입어서 렌트하실분 찾습니다. 가격은 싸게 드리고요. 언제든지 가져가세요 사용감은 조금있어서 아무렇게나 쓰셔도 상관없어요. 참고로 이걸로 북한산도 다녀왔습니다. 연락주세요~!	20/07/11	55	20/07/11	20/08/10	15:00	일산역 1번출구	17:00	일산역 1번출구	K2	1000	5000
+R_POST2	USER10	R_CATE64	LOC73	제 자전거 좋은데 빌릴사람있어요?	자전거 싸게 빌려가실분 찾아요 언제든지 연락주세요~!	20/07/11	14	20/07/11	20/08/05	14:00	계양역 1번출구	18:00	계양역 1번출구	삼천리	900	8000
+R_POST3	USER6	R_CATE100	LOC26	캣타워 쓰실분 연락주세요	고양이 키우시는분들 빌려가세요 제 고양이는 캣타워를 싫어해서	20/07/11	25	20/07/15	20/08/14	12:00	수유역 1번출구	19:00	수유역 1번출구	CATS	2000	10000
+*/
+COMMIT;
+
+-- 07.11 렌트 게시물 사진 등록 인서트
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST1' , '등산복.jpg');
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST1' , '등산복뒷부분.jpg');
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST2' , 'bike1.jpg');
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST2' , 'bike2.jpg');
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST2' , 'bike3.jpg');
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST3' , 'catTower1.jpg');           
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST3' , 'catTower2.jpg');        
+                      
+INSERT INTO R_PHOTO(R_PHOTO_CODE, R_POST_CODE, PHOTO)
+                      VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL, 'R_POST3' , 'catTower3.jpg');                      
+
+-- 렌트 게시물 사진 등록 조회
+SELECT * FROM R_PHOTO;
+
+/*
+R_PHOTO1	R_POST1	등산복.jpg
+R_PHOTO2	R_POST1	등산복뒷부분.jpg
+R_PHOTO3	R_POST2	bike1.jpg
+R_PHOTO4	R_POST2	bike2.jpg
+R_PHOTO5	R_POST2	bike3.jpg
+R_PHOTO6	R_POST3	catTower1.jpg
+R_PHOTO7	R_POST3	catTower2.jpg
+R_PHOTO8	R_POST3	catTower3.jpg
+*/
+
+-- 07.11 이용 신청 인서트
+SELECT * FROM R_APPLY;
+
+
+
+
+-- 1. 포인트 내역 등록
+SELECT * FROM POINT_LIST;
+--등산복
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER10', -(6000+5000));
+--등산복           
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER6', -(8000+5000));                        
+
+-- 자전거
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER9', -(900*11+5000));      
+
+-- 캣타워
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER7', -(2000*11+10000));    
+
+DROP SEQUENCE SEQ_POINT_LIST;
+CREATE SEQUENCE SEQ_POINT_LIST NOCACHE;
+DELETE FROM POINT_LIST;
+
+-- 2. 이용신청 인서트 
+SELECT * FROM R_APPLY;
+
+-- 등산복
+INSERT INTO R_APPLY(R_APPLY_CODE, R_POST_CODE, B_USER_CODE, START_DATE, END_DATE, POINT_LIST_CODE)
+                        VALUES('R_APPLY'||SEQ_R_APPLY.NEXTVAL, 'R_POST1', 'USER10'
+                        ,TO_DATE('2020-07-15', 'YYYY-MM-DD'), TO_DATE('2020-07-20', 'YYYY-MM-DD'), 'POLIS5');
+--등산복
+INSERT INTO R_APPLY(R_APPLY_CODE, R_POST_CODE, B_USER_CODE, START_DATE, END_DATE, POINT_LIST_CODE)
+                        VALUES('R_APPLY'||SEQ_R_APPLY.NEXTVAL, 'R_POST1', 'USER6'
+                        ,TO_DATE('2020-07-15', 'YYYY-MM-DD'), TO_DATE('2020-07-22', 'YYYY-MM-DD'), 'POLIS6');
+
+-- 자전거
+INSERT INTO R_APPLY(R_APPLY_CODE, R_POST_CODE, B_USER_CODE, START_DATE, END_DATE, POINT_LIST_CODE)
+                        VALUES('R_APPLY'||SEQ_R_APPLY.NEXTVAL, 'R_POST2', 'USER9'
+                        ,TO_DATE('2020-07-20', 'YYYY-MM-DD'), TO_DATE('2020-07-30', 'YYYY-MM-DD'), 'POLIS7');
+-- 캣타워
+INSERT INTO R_APPLY(R_APPLY_CODE, R_POST_CODE, B_USER_CODE, START_DATE, END_DATE, POINT_LIST_CODE)
+                        VALUES('R_APPLY'||SEQ_R_APPLY.NEXTVAL, 'R_POST3', 'USER7'
+                        ,TO_DATE('2020-07-20', 'YYYY-MM-DD'), TO_DATE('2020-07-30', 'YYYY-MM-DD'), 'POLIS8');
+
+                        
+-- 포인트 충전 시퀀스 생성
+CREATE SEQUENCE SEQ_POINT_CHARGE NOCACHE;
+DROP SEQUENCE SEQ_POINT_CHARGE;
+-- 포인트 내역등록 시퀀스 생성
+CREATE SEQUENCE SEQ_POINT_LIST NOCACHE;
+DROP SEQUENCE SEQ_POINT_LIST;
+
+--07.11 포인트 충전 시퀀스 
+
+-- 1. 내역등록
+SELECT * FROM POINT_LIST;
+DELETE FROM POINT_LIST;
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER6', 20000);
+                        
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER7', 30000);
+
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER8', 20000);
+
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER9', 40000);
+
+-- 2. 포인트 충전
+SELECT *
+FROM POINT_CHARGE;
+DELETE FROM POINT_CHARGE;
+INSERT INTO POINT_CHARGE(POINT_CHARGE_CODE, POINT_LIST_CODE, B_USER_CODE, CHARGE_POINT)
+                        VALUES('POCHA'||SEQ_POINT_CHARGE.NEXTVAL, 'POLIS1', 'USER6', 20000);
+                        
+INSERT INTO POINT_CHARGE(POINT_CHARGE_CODE, POINT_LIST_CODE, B_USER_CODE, CHARGE_POINT)
+                        VALUES('POCHA'||SEQ_POINT_CHARGE.NEXTVAL, 'POLIS2', 'USER7', 30000);
+                        
+INSERT INTO POINT_CHARGE(POINT_CHARGE_CODE, POINT_LIST_CODE, B_USER_CODE, CHARGE_POINT)
+                        VALUES('POCHA'||SEQ_POINT_CHARGE.NEXTVAL, 'POLIS3', 'USER8', 20000);
+                        
+INSERT INTO POINT_CHARGE(POINT_CHARGE_CODE, POINT_LIST_CODE, B_USER_CODE, CHARGE_POINT)
+                        VALUES('POCHA'||SEQ_POINT_CHARGE.NEXTVAL, 'POLIS4', 'USER9', 40000);
+                
+COMMIT;
+
+-- 거래 성사 등록 인서트 07.11
+
+-- 1. 포인트 리스트 
+SELECT * FROM POINT_LIST ORDER BY SDATE;
+
+-- 10번유저 등산복 R_POST1 거절당함
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER10', 6000 + 5000);
+-- 6번 유저 등산복 R_POST1  렌트 성사 → 대여자 user9에 8,000원 들어감 (                        
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER9', 8000,1);
+                        
+-- 9번 유저 자전거 R_POST2 렌트 성사 → 대여자 user9에게 9900원 들어감
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT,STATE )
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER10', 9900, 1);
+                        
+-- 7번 유저 캣타워 R_POST3 성사 → 대여자 user6에게 22,000원 들어감
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT,STATE)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER6', 22000,1);
+                        
+                        
+-- 2. 렌트 거래 성사 등록
+-- 굉장히 복잡함(실제 넣을때 굉장히 복잡함)
+
+
+SELECT * FROM R_SUCCESS;
+
+INSERT INTO R_SUCCESS(R_SUCCESS_CODE, R_APPLY_CODE,SDATE, POINT_LIST_CODE)
+                          VALUES('R_SUCCESS'||SEQ_R_SUCCESS.NEXTVAL, 'R_APPLY2', TO_DATE('2020-07-13 08:00:00', 'YYYY-MM-DD HH24:MI:SS'),'POLIS10');
+
+INSERT INTO R_SUCCESS(R_SUCCESS_CODE, R_APPLY_CODE,SDATE, POINT_LIST_CODE)
+                          VALUES('R_SUCCESS'||SEQ_R_SUCCESS.NEXTVAL, 'R_APPLY3', TO_DATE('2020-07-13 08:00:00', 'YYYY-MM-DD HH24:MI:SS'),'POLIS11');
+
+INSERT INTO R_SUCCESS(R_SUCCESS_CODE, R_APPLY_CODE,SDATE, POINT_LIST_CODE)
+                          VALUES('R_SUCCESS'||SEQ_R_SUCCESS.NEXTVAL, 'R_APPLY4', TO_DATE('2020-07-13 08:00:00', 'YYYY-MM-DD HH24:MI:SS'),'POLIS12');    
+                          
+                          
+-- 07.11 이용자 반납 테이블 인서트
+SELECT * FROM R_USER_RETURN;
+
+INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE, RETURN_STATE, POINT_LIST_CODE)
+VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, 'R_SUCCESS1', TO_DATE('2020-07-22 17:00:00', 'YYYY-MM-DD HH24:MI:SS') ,0,NULL);
+
+INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE, RETURN_STATE, POINT_LIST_CODE)
+VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, 'R_SUCCESS2', TO_DATE('2020-07-30 18:00:00', 'YYYY-MM-DD HH24:MI:SS') ,0,NULL);
+
+INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE, RETURN_STATE, POINT_LIST_CODE)
+VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, 'R_SUCCESS3', TO_DATE('2020-07-30 19:00:00', 'YYYY-MM-DD HH24:MI:SS') ,0,NULL);
+
+
+-- 이용자 반납 
+-- 1. 보증금 환불 
+SELECT * FROM POINT_LIST;
+
+-- 보증금이 환불되면서 유저 6한테 5000원 보증금 환불 
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+                        VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL, 'USER6',  5000);
+
+-- 2. 이용자반납 업데이트
+SELECT * FROM R_USER_RETURN;
+
+UPDATE R_USER_RETURN SET RETURN_STATE=1, POINT_LIST_CODE='POLIS13' WHERE R_USER_RETURN_CODE = 'R_UR3';
+
+-- 07.11 리뷰 등록 인서트
+SELECT * FROM CREDIT_SCORE;
+
+INSERT INTO CREDIT_SCORE(CREDIT_SCORE_CODE, CREDIT_SCORE, SDATE, B_USER_CODE)
+VALUES ( 'BRIX'||SEQ_BRIX.NEXTVAL, 5, TO_DATE('2020-07-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'USER7');
+-- 바나나점수 등록 
+SELECT * FROM BANANA_SCORE;
+
+INSERT INTO BANANA_SCORE(BANANA_SCORE_CODE, B_USER_CODE, BANANA_SCORE, SDATE)
+VALUES('BANA'||SEQ_BANANA.NEXTVAL, 'USER7', 30, TO_DATE('2020-07-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- 리뷰
+SELECT * FROM R_REVIEW;
+
+INSERT INTO R_REVIEW(R_REVIEW_CODE, R_USER_RETURN_CODE, WDATE, SCORE, CONTENT, CREDIT_SCORE_CODE, BANANA_SCORE_CODE)
+VALUES ('R_REV'||SEQ_R_REVIEW.NEXTVAL, 'R_UR3', TO_DATE('2020-07-31 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), 5, '캣타워 감사합니다','BRIX1', 'BANA3' );
+                                                                  
+COMMIT;        
 
 
 
