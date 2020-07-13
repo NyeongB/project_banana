@@ -438,6 +438,59 @@ END;
 
 
 
+-- ○ 회원가입 시 프로시저
+-- 1. 사용자 등록 INSERT
+-- 2. 회원가입 INSERT(사용자 등록 코드)
+-- 3. 관심 공동구매 카테고리 입력 INSERT(사용자 등록코드)
+-- 4. 관심렌트 카테고리 입력 INSERT(사용자 등록 코드)
+CREATE OR REPLACE PROCEDURE PRC_SIGNUP
+(
+V_LOC_CODE                 IN LOC.LOC_CODE%TYPE                            -- 지역 카테고리 코드
+, V_BANK_TYPE_CODE         IN BANK_TYPE.BANK_TYPE_CODE%TYPE                -- 은행명 코드
+, V_PW_QUESTION_TYPE_CODE  IN PW_QUESTION_TYPE.PW_QUESTION_TYPE_CODE%TYPE  -- 패스워드 찾기 질문 유형코드
+, V_ID                     IN JOIN.ID%TYPE                                 -- 아이디
+, V_NAME                   IN JOIN.NAME%TYPE                               -- 이름
+, V_SSN                    IN JOIN.SSN%TYPE                                -- 주민번호
+, V_TEL                    IN JOIN.TEL%TYPE                                -- 전화번호 
+, V_ADDR                   IN JOIN.ADDR%TYPE                               -- 주소
+, V_PW                     IN JOIN.PW%TYPE                                 -- 비밀번호
+, V_PW_ANSWER              IN JOIN.PW_ANSWER%TYPE                          -- 비밀번호 찾기 답변
+, V_EMAIL                  IN JOIN.EMAIL%TYPE                              -- 이메일
+, V_ACCOUNT_USER           IN JOIN.ACCOUNT_USER%TYPE                       -- 예금주
+, V_ACCOUNT                IN JOIN.ACCOUNT%TYPE                            -- 계좌번호
+, V_NICKNAME               IN JOIN.NICKNAME%TYPE                           -- 닉네임
+, V_PROFILE                IN JOIN.PROFILE%TYPE                            -- 프로필 사진
+, V_G_CATE_CODE            IN G_CATE_INPUT.G_CATE_INPUT_CODE%TYPE          -- 공동구매 관심카테고리
+, V_R_CATE_CODE           IN R_CATE_INPUT.R_CATE_INPUT_CODE%TYPE          -- 렌트 관심 카테고리        
+)
+IS
+V_B_USER_CODE   B_USER.B_USER_CODE%TYPE := 'USER' || SEQ_USER.NEXTVAL; -- 사용자등록 코드
+
+BEGIN
+-- 1. 사용자 등록 INSERT
+INSERT INTO B_USER(B_USER_CODE)
+VALUES (V_B_USER_CODE);
+
+-- 2. 회원가입 INSERT(사용자 등록 코드)
+INSERT INTO JOIN (JOIN_CODE, B_USER_CODE, LOC_CODE, BANK_TYPE_CODE, PW_QUESTION_TYPE_CODE, ID, NAME, SSN, TEL, ADDR, PW
+, PW_ANSWER, EMAIL, ACCOUNT_USER, ACCOUNT, NICKNAME, PROFILE)
+VALUES('JOIN' ||SEQ_JOIN.NEXTVAL, V_B_USER_CODE, V_LOC_CODE, V_BANK_TYPE_CODE, V_PW_QUESTION_TYPE_CODE
+, V_ID, V_NAME, V_SSN, V_TEL, V_ADDR, V_PW, V_PW_ANSWER, V_EMAIL, V_ACCOUNT_USER, V_ACCOUNT, V_NICKNAME, V_PROFILE);
+
+-- 3. 관심 공동구매 카테고리 입력 INSERT(사용자 등록코드)
+INSERT INTO G_CATE_INPUT(G_CATE_INPUT_CODE, G_CATE_CODE, B_USER_CODE)
+VALUES ('LIKE_G'||SEQ_LIKE_G.NEXTVAL, V_G_CATE_CODE, V_B_USER_CODE);
+
+-- 4. 관심렌트 카테고리 입력 INSERT(사용자 등록 코드)
+INSERT INTO R_CATE_INPUT(R_CATE_INPUT_CODE, R_CATE_CODE, B_USER_CODE)
+VALUES('LIKE_R'||SEQ_LIKE_R.NEXTVAL, V_R_CATE_CODE, V_B_USER_CODE);
+
+-- 5. 커밋
+-- COMMIT;
+END;
+
+
+
 
 
 
