@@ -36,6 +36,23 @@ public class MemberController
 		return view;
 	}
 	
+	@RequestMapping(value = "/leaveuser.action", method =RequestMethod.GET)
+	public String LeaveList(Model model)
+	{
+		String view = null; 
+		
+		ILeaveDAO dao = SqlSession.getMapper(ILeaveDAO.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminDropUserList.jsp";
+		
+		
+		return view;
+	}
+	
 	
 	
 }
