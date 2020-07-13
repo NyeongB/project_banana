@@ -203,104 +203,137 @@ END;
 -- 2) 역렌트 요청 게시물 신고 처리 INSERT
 
 -- 34. 역렌트 요청 게시물 신고 처리 
-CREATE OR REPLACE PROCEDURE PRC_RR_REQ_REP_PRC
+CREATE OR REPLACE PROCEDURE PRC_RR_REQ_REPORT_PRC
 (
- V_B_USER_CODE                  IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
-,V_RR_REQ_REPORT_CODE           IN  RR_REQ_REPORT.RR_REQ_REPORT_CODE%TYPE-- 역렌트 요청 게시물 신고 코드
-,V_ADMIN_CODE                   IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE   IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+ V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
+,V_RR_REQ_REPORT_CODE     IN  RR_REQ_REPORT.RR_REQ_REPORT_CODE%TYPE --역렌트 요청 게시물 신고 코드
+,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
 
-V_WARNING_CODE      WARNING.WARNING_CODE%TYPE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
-
-    -- 1) 경고내역 등록 INSERT
-     INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
-     VALUES (V_WARNING_CODE,V_B_USER_CODE);
-     
-     -- 2) 역렌트 요청 게시물 신고 처리 INSERT
-     INSERT INTO RR_REQ_REPORT_PROC(RR_REQ_REPORT_PROC_CODE, RR_REQ_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-     VALUES('RR_RPR'|| SEQ_RR_REQ_REP.NEXTVAL, V_RR_REQ_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
-
+        -- 유효한 신고일 경우
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        THEN
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE,V_B_USER_CODE);
+         
+            -- 2) 역렌트 요청 게시물 신고 처리 INSERT
+            INSERT INTO RR_REQ_REPORT_PROC(RR_REQ_REPORT_PROC_CODE, RR_REQ_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('RR_OPRP'||SEQ_RR_REQ_REP_PRC.NEXTVAL, V_RR_REQ_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 역렌트 요청 구매 게시물 신고 처리 INSERT
+         INSERT INTO RR_REQ_REPORT_PROC(RR_REQ_REPORT_PROC_CODE, RR_REQ_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('RR_OPRP'|| SEQ_RR_REQ_REP_PRC.NEXTVAL, V_RR_REQ_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
+        
+        END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
 END;
--- Procedure PRC_RR_REQ_REP_PRC이(가) 컴파일되었습니다.
---========================================================================================================================
-
+--Procedure PRC_RR_REQ_REPORT_PRC이(가) 컴파일되었습니다.
+-------------------------------
 -- ⑥ 역렌트 제공 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
 -- 2) 역렌트 제공 게시물 신고 처리 INSERT
 
 -- 35. 역렌트 제공 게시물 신고 처리 
-CREATE OR REPLACE PROCEDURE PRC_RR_OFF_REP_PRC
+CREATE OR REPLACE PROCEDURE PRC_RR_OFFER_REPORT_PRC
 (
- V_B_USER_CODE                  IN      B_USER.B_USER_CODE%TYPE    -- 유저코드
-,V_RR_OFFER_REPORT_CODE         IN      RR_OFFER_REPORT.RR_OFFER_REPORT_CODE%TYPE-- 역렌트 제공 게시물 신고 코드
-,V_ADMIN_CODE                   IN      ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE    IN      PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+ V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
+,V_RR_OFFER_REPORT_CODE     IN  RR_OFFER_REPORT.RR_OFFER_REPORT_CODE%TYPE --역렌트 제공 게시물 신고 코드
+,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
 
-V_WARNING_CODE      WARNING.WARNING_CODE%TYPE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
-
-    -- 1) 경고내역 등록 INSERT
-     INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
-     VALUES (V_WARNING_CODE,V_B_USER_CODE);
-     
-     -- 2) 역렌트 제공 게시물 신고 처리 INSERT
-     INSERT INTO RR_OFFER_REPORT_PROC(RR_OFFER_REPORT_PROC_CODE, RR_OFFER_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-     VALUES('RR_RPRP'|| SEQ_RR_OFF_REP_PRC.NEXTVAL, V_RR_OFFER_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
-
+        -- 유효한 신고일 경우
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        THEN
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE,V_B_USER_CODE);
+         
+            -- 2) 역렌트 제공 게시물 신고 처리 INSERT
+            INSERT INTO RR_OFFER_REPORT_PROC(RR_OFFER_REPORT_PROC_CODE, RR_OFFER_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('RR_RPRP'||SEQ_RR_OFF_REP_PRC.NEXTVAL, V_RR_OFFER_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 역렌트 제공 구매 게시물 신고 처리 INSERT
+         INSERT INTO RR_OFFER_REPORT_PROC(RR_OFFER_REPORT_PROC_CODE, RR_OFFER_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('RR_RPRP'|| SEQ_RR_OFF_REP_PRC.NEXTVAL, V_RR_OFFER_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
+        
+        END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
 END;
--- Procedure PRC_RR_OFF_REP_PRC이(가) 컴파일되었습니다.
---========================================================================================================================
-
-
-
-
---==================================================================================================
-
+--Procedure PRC_RR_OFFER_REPORT_PRC이(가) 컴파일되었습니다.
 -- ⑦ 역렌트 댓글 신고처리 시 프로시저
 -- 1. 경고 내역 등록코드 INSERT
 -- 2. 댓글 신고처리 INSERT
 
 -- 36. 역렌트 댓글 신고처리 
-CREATE OR REPLACE PROCEDURE PRC_RR_REPLY_REPORT_PROC
+CREATE OR REPLACE PROCEDURE PRC_RR_REPLY_REPORT_PRC
 (
-V_B_USER_CODE                    IN  B_USER.B_USER_CODE%TYPE    -- 유저코드
-, V_RR_REPLY_REPORT_CODE         IN  RR_REPLY_REPORT.RR_REPLY_REPORT_CODE%TYPE -- 역렌트 댓글 신고코드
-, V_ADMIN_CODE                   IN      ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
-
+ V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
+,V_RR_REPLY_REPORT_CODE     IN  RR_REPLY_REPORT.RR_REPLY_REPORT_CODE%TYPE --역렌트 댓글 신고 코드
+,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
-V_WARNING_CODE   WARNING.WARNING_CODE%TYPE := 'WAR'||SEQ_WAR.NEXTVAL;   -- 경고 내역 코드
 
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
--- 1. 경고 내역 등록 코드 INSERT
-INSERT INTO WARNING(WARNING_CODE, B_USER_CODE)
-VALUES(V_WARNING_CODE, V_B_USER_CODE );
+        -- 유효한 신고일 경우
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        THEN
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE,V_B_USER_CODE);
+         
+            -- 2) 역렌트 댓글  신고 처리 INSERT
+            INSERT INTO RR_REPLY_REPORT_PROC(RR_REPLY_REPORT_PROC_CODE, RR_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('RR_REPRP'||SEQ_RR_REPLY_REP_PRC.NEXTVAL, V_RR_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 역렌트 댓글 신고 처리 INSERT
+         INSERT INTO RR_REPLY_REPORT_PROC(RR_REPLY_REPORT_PROC_CODE, RR_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('RR_REPRP'||SEQ_RR_REPLY_REP_PRC.NEXTVAL, V_RR_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
+        
+        END IF;
 
-
--- 2. 댓글 신고처리 INSERT
-INSERT INTO RR_REPLY_REPORT_PROC(RR_REPLY_REPORT_PROC_CODE, RR_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-VALUES('RR_REPRP'||SEQ_RR_REPLY_REP_PRC.NEXTVAL,  V_RR_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+    -- 3) 커밋
+    -- COMMIT;
 
 END;
--- Procedure PRC_RR_REPLY_REPORT_PROC이(가) 컴파일되었습니다.
-
+--Procedure PRC_RR_REPLY_REPORT_PRC이(가) 컴파일되었습니다.
 
 
 
