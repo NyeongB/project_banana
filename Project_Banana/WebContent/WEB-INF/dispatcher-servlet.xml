@@ -4,15 +4,68 @@
    xmlns:p="http://www.springframework.org/schema/p"
    xmlns:context="http://www.springframework.org/schema/context"
    xsi:schemaLocation=" http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-     http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-   <context:component-scan
-      base-package="org.springframework.samples.petclinic.web" />
+                   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                   http://www.springframework.org/schema/context 
+                   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
    
    
-   <!-- HomeController -->
-   <bean name="/home.action" class="com.test.mvc.HomeController">
+   <!-- ※ dispatcher-servlet.xml 의 기본 샘플 코드  -->
+   <!--    이 코드는 기본 설정 내용을 복사하기 위해서 스프링 doc 를 참고하여 작성한다. -->
+   <!--    → 『C:\spring-framework\docs\spring-framework-reference\pdf』 경로로 이동 -->
+   <!--    → 『spring-framework-reference.pdf』파일 실행 -->
+   <!--    → 문서 본문 내용의 425 페이지(직접이동 450/805)로 이동 -->
+   <!--    → 페이지 하단의 XML 파일 샘플코드 복사&붙여넣기 -->
+   
+   <!-- ※ Annotation 표기법으로 Controller 객체를 등록한다.  -->
+   <!--    → Annotation 표기법으로 작성된 Controller 객체를 -->
+   <!--    스프링 컨테이너가 자동으로 스캔하여 찾아낼 수 있도록 처리 -->
+   
+   <!-- ① 기존 코드 -->
+   <!-- ※ Annotation 을 활용하여 Controller 객체를 등록한다. -->
+   <!--    → Annotation 을 활용하여 작성된 Controller 객체를 -->
+   <!--       스프링 컨테이너가 자동으로 스캔하여 확인하고 관리할 수 있도록 처리  -->
+   
+   <!--    → 『base-package』속성에 -->
+   <!--       Controller 객체가 포함된 패키지 경로를 지정한다. -->
+   <context:component-scan base-package="com.test.mvc"/>
+     
+   <!-- ③ mybatis 등록 과정 중(설정 중) -->
+   <!--    dataSource(JDBC)를 등록하는 과정에서 생겨나는 추가 코드 -->
+   <!-- ※ mybatis 에서 dataSource 를 사용할 수 있도록 환경 설정 추가 -->
+   <!--    즉, dataSOurce 객체를 등록하는 과정 -->
+   <!--    → 『SimpleDriverDataSource』 -->
+   <bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+   		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@13.231.82.47:1521:xe"></property>
+		<property name="username" value="BANANA"></property>
+		<property name="password" value="B401"></property>
    </bean>
+   
+   
+   
+   <!-- ② mybatis 등록 과정에서 생겨나는 추가 코드 -->
+   <!-- ※ mybatis 를 사용하기 위한 환경 설정 추가 1 -->
+   <!--    → SqlSessionFactortyBean -->
+   <!-- ④ dataSource 객체 등록 후 마저 등록해서 완성 -->
+   <!-- ※ mybatis 를 사용하기 위한 환경 설정 추가 2 -->
+   <!--    → dataSource 속성에 DI 설정 -->
+   <!--    → mapperLocations 속성에 DI 설정 -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+   		<property name="dataSource" ref="localDataSource"></property>
+   		<property name="mapperLocations" value="classpath:com/test/mybatis/mapper/*.xml"></property>
+   </bean>
+   
+   
+   <!-- ⑤ sqlSession 등록 과정에서 생겨나는 추가 코드 -->
+   <!-- ※ mybatis 를 사용하기 위한 환경 설정 추가 3 -->
+   <!--    → 『sqlSessionTemplate』 -->
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+   		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+   </bean>
+   
+   <!-- 『org.mybatis.spring.SqlSessionTemplate sqlSession
+   				 = new org.mybatis.spring.SqlSessionTemplate();』 -->
+   
+ 
    
 </beans>
