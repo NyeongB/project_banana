@@ -10,7 +10,8 @@ FROM DUAL;
 
 SELECT *
 FROM RR_OFFER;
-
+---------------역렌트 프로시저---------------------
+-- 30. 거래 성사 등록 프로시저 
 CREATE OR REPLACE PROCEDURE PRC_RR_DEAL_SUCCESS
 (
 
@@ -44,6 +45,7 @@ VALUES('RR_UR'||SEQ_RR_USER_RETURN.NEXTVAL, V_RR_DEAL_SUCCESS, EDATE);
 
 
 END;
+-- Procedure PRC_RR_DEAL_SUCCESS이(가) 컴파일되었습니다.
 
 SELECT *
 FROM RR_USER_RETURN;
@@ -52,6 +54,7 @@ SELECT * FROM USER_SEQUENCES;
 -- ② 역렌트 이용자 반납(정상적으로 반납되었을떄)
 --1일때"	1.포인트 내역등록 코드 / 2.출금상태여부 update/ 3.이용자반납상태 update
 
+-- 31. 역렌트 이용자 반납
 CREATE OR REPLACE PROCEDURE PRC_RR_USER_RETURN
 (
 V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
@@ -81,6 +84,7 @@ BEGIN
     --커밋
     --COMMIT;
 END;
+-- Procedure PRC_RR_USER_RETURN이(가) 컴파일되었습니다.
 
 --==============================================================================================================
 -- ③ 역렌트 거래 신고 처리 프로시저(유효한 신고일때)
@@ -89,6 +93,7 @@ END;
 -- 신고 대상자
 -- 1.포인트 내역 등록 insert 2.아웃 내역 등록 insert 3. 역렌트 거래 신고처리 insert
 
+-- 32.역렌트 거래 신고 처리 
 CREATE OR REPLACE PROCEDURE PRC_RR_DEAL_REPORT_PROC
 (
   V_B_USER_CODE                 IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
@@ -134,6 +139,7 @@ BEGIN
     -- COMMIT;
     
 END;
+--Procedure PRC_RR_DEAL_REPORT_PROC이(가) 컴파일되었습니다.
 --==============================================================================================================
 
 
@@ -153,6 +159,7 @@ COMMIT;
 
 -- EXECUTE PRC_RR_REVIEW('USER9',7,'넘조아욧 다음번에도 사용할게요 감삼돠',);
 
+-- 33. 역렌트 리뷰 등록
 CREATE OR REPLACE PROCEDURE PRC_RR_REVIEW
 ( V_B_USER_CODE   IN  CREDIT_SCORE.B_USER_CODE%TYPE  --사용자 코드
 ,  V_SCORE    IN  RR_REVIEW.SCORE%TYPE  --역렌트 대여자 평가 점수
@@ -187,12 +194,15 @@ BEGIN
     
 END;
 
+-- Procedure PRC_RR_REVIEW이(가) 컴파일되었습니다.
+
 --========================================================================================================================
 
 -- ⑤ 역렌트 요청 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
 -- 2) 역렌트 요청 게시물 신고 처리 INSERT
 
+-- 34. 역렌트 요청 게시물 신고 처리 
 CREATE OR REPLACE PROCEDURE PRC_RR_REQ_REP_PRC
 (
  V_B_USER_CODE                  IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
@@ -219,13 +229,14 @@ BEGIN
     -- COMMIT;
 
 END;
-
+-- Procedure PRC_RR_REQ_REP_PRC이(가) 컴파일되었습니다.
 --========================================================================================================================
 
 -- ⑥ 역렌트 제공 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
 -- 2) 역렌트 제공 게시물 신고 처리 INSERT
 
+-- 35. 역렌트 제공 게시물 신고 처리 
 CREATE OR REPLACE PROCEDURE PRC_RR_OFF_REP_PRC
 (
  V_B_USER_CODE                  IN      B_USER.B_USER_CODE%TYPE    -- 유저코드
@@ -252,7 +263,7 @@ BEGIN
     -- COMMIT;
 
 END;
-
+-- Procedure PRC_RR_OFF_REP_PRC이(가) 컴파일되었습니다.
 --========================================================================================================================
 
 
@@ -263,6 +274,8 @@ END;
 -- ⑦ 역렌트 댓글 신고처리 시 프로시저
 -- 1. 경고 내역 등록코드 INSERT
 -- 2. 댓글 신고처리 INSERT
+
+-- 36. 역렌트 댓글 신고처리 
 CREATE OR REPLACE PROCEDURE PRC_RR_REPLY_REPORT_PROC
 (
 V_B_USER_CODE                    IN  B_USER.B_USER_CODE%TYPE    -- 유저코드
@@ -286,7 +299,7 @@ INSERT INTO RR_REPLY_REPORT_PROC(RR_REPLY_REPORT_PROC_CODE, RR_REPLY_REPORT_CODE
 VALUES('RR_REPRP'||SEQ_RR_REPLY_REP_PRC.NEXTVAL,  V_RR_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
 
 END;
-
+-- Procedure PRC_RR_REPLY_REPORT_PROC이(가) 컴파일되었습니다.
 
 
 
