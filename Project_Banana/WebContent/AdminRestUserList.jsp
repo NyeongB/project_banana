@@ -83,40 +83,38 @@ String cp = request.getContextPath();
 							<th>주소</th>
 							<th>아이디</th>
 							<th>Email</th>
-							<th>신뢰도</th>
-							<th>활동등급</th>
-							<th>포인트</th>
-							<th>가입일</th>
 							<th>은행명</th>
 							<th>예금주</th>
 							<th>계좌번호</th>
 							<th>경고</th>
+							<th>포인트</th>
 							<th>아웃</th>
+							<th>신뢰도</th>
+							<th>활동등급</th>
+							<th>가입일</th>
 							<th>휴면 전환 날짜</th>
 						</tr>
+						<c:forEach var="restList" items="${list }">
 						<tr>
-							<td>홍길동</td>
-							<td>998852<br>-*******
-							</td>
-							<td>010-1111-1111</td>
-							<td>서울시<br>마포구 서교동
-							</td>
-							<td>hong5</td>
-							<td>hgd@test.com</td>
-							<td>55</td>
-							<td>1200</td>
-							<td>5000</td>
-							<td>2020- <br>06-30
-							</td>
-							<td>농협</td>
-							<td>홍길동</td>
-							<td>352-0732-<br>7111-53
-							</td>
-							<td>1</td>
-							<td>0</td>
-							<td>2020<br>-06-30
+							<td>${restList.name }</td>
+							<td>${restList.ssn }</td>
+							<td>${restList.tel }</td>
+							<td>${restList.addr }</td>
+							<td>${restList.id }</td>
+							<td>${restList.email }</td>
+							<td>${restList.bankTypeName }</td>
+							<td>${restList.accountName }</td>
+							<td>${restList.account }</td>
+							<td>${restList.warning }</td>
+							<td>${restList.point }</td>
+							<td>${restList.out }</td>
+							<td>${restList.creditScore }</td>
+							<td>${restList.bananaScore }</td>
+							<td>${restList.sdate }</td>
+							<td>${restList.changeDate }
 							</td>
 						</tr>
+						</c:forEach>
 					</table>
 
 
