@@ -4,6 +4,18 @@ public class StopDTO
 {
 	String name, ssn, tel, addr, email, credit_score, banana_score,
 	point, sdate, bank_name, account_user, account, warning, out, expulsion_date;
+	
+	String id;
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
 	public String getName()
 	{
