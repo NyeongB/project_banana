@@ -14,20 +14,10 @@ String cp = request.getContextPath();
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function() 
-	{
-		$("#nav1 ul.sub").hide();
-		$("#nav1 ul.menu li").click(function() 
-		{
-			$("ul", this).slideToggle("fast");
-		});
-	})
-</script>
 
 <style type="text/css">
-li 
+.nav-pills 
 {
 	font-weight: bold;
 	font-size: 18px;
@@ -61,22 +51,7 @@ li
 		<div class="content">
 			<div class="col-md-2">
 
-				<div id="nav1">
-					<ul class="menu">
-						<li><a href="#">조 회</a>
-							<ul class="sub" style="display: none;">
-								<li><a href="#">접수된 신고</a></li>
-								<li><a href="#">거래 조회</a></li>
-								<li><a href="#">관리자 계정 관리</a></li>
-								<li><a href="#">사용자 조회</a></li>
-							</ul></li>
-						
-						<li><a href="#">매출관리</a></li>
-						<li><a href="#">광고관리</a></li>
-
-
-					</ul>
-				</div>
+				<jsp:include page="MenuAdmin.jsp"></jsp:include>
 
 			</div>
 			<div class="col-md-8">
@@ -149,35 +124,41 @@ li
 				</div>
 
 				
+			<!-- 페이징 바 -->
+		<div class="col-md-12 text-center">
+			<nav>
+				<ul class="pagination">
+					<li class="disabled"><a href="#" aria-label="Previous"><span
+							aria-hidden="true">&laquo;</span></a></li>
+					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		<!-- end 페이징 바 -->
 
-				<div class="text-center">
-					<div class="col-md-12">
-						<nav>
-							<ul class="pagination">
-								<li class="disabled"><a href="#" aria-label="Previous"><span
-										aria-hidden="true">&laquo;</span></a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
-								<li class="disabled"><a href="#" aria-label=""><span
-										aria-hidden="false">&laquo;</span></a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
 
 			</div>
-
 
 
 
 			<div class="col-md-2"></div>
 		</div>
 
-	</div>
 
 
+		
+	</div> <!-- end container-fluid -->
+
+	
+	
+	
+	
+	
 
 	<div class="row Footer">
 		<div class="col-md-12">

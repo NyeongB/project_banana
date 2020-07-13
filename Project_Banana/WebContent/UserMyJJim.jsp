@@ -157,6 +157,9 @@ img
 
 			</div>
 			<!-- col-md-8 end -->
+			
+			<div class="col-md-2"></div>
+			
 		</div>
 		<!-- content end -->
 		
