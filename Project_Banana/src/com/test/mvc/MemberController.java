@@ -52,6 +52,18 @@ public class MemberController
 		
 		return view;
 	}
+	@RequestMapping(value = "/userlist.action", method = RequestMethod.GET)
+	public String userList(Model model) 
+	{
+		String view = null;
+		
+		IAdminUserListDAO dao = SqlSession.getMapper(IAdminUserListDAO.class);
+		
+		model.addAttribute("list", dao.list());
+		
+		view ="/AdminUserList.jsp";
+		return view;
+	}
 	
 	
 	
