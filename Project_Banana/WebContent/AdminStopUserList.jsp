@@ -130,7 +130,7 @@ li
 						<td>${list1.tel }</td>
 						<td>${list1.addr }
 						</td>
-						<td>아이디</td>
+						<td>${list1.id }</td>
 						<td>${list1.email }</td>
 						<td>${list1.credit_score }</td>
 						<td>${list1.banana_score }</td>
