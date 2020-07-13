@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminDropUserList.jsp</title>
+<title>Banana.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -103,7 +103,7 @@ String cp = request.getContextPath();
 							<th>아웃</th>
 							<th>탈퇴 날짜</th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>홍길동</td>
 							<td>998852<br>-*******
 							</td>
@@ -125,7 +125,28 @@ String cp = request.getContextPath();
 							<td>0</td>
 							<td>2020<br>-06-30
 							</td>
-						</tr>
+						</tr> -->
+						
+						<c:forEach var="lists" items="${list}" >
+							<tr>
+							<td>${lists.name}</td>
+							<td>${lists.ssn}</td>
+							<td>${lists.tel}</td>
+							<td>${lists.addr}</td>
+							<td>${lists.id}</td>
+							<td>${lists.email}</td>
+							<td>${lists.credit_score}</td>
+							<td>${lists.banana_score}</td>
+							<td>${lists.point}</td>
+							<td>${lists.joindate}</td>
+							<td>${lists.bank_name}</td>
+							<td>${lists.account_user}</td>
+							<td>${lists.account}</td>
+							<td>${lists.w_count}</td>
+							<td>${lists.o_count}</td>
+							<td>${lists.leavedate}</td>
+							</tr>
+						</c:forEach>
 					</table>
 
 
@@ -165,11 +186,12 @@ String cp = request.getContextPath();
 
 
 
-	<div class="row Footer">
-		<div class="col-md-12">
-			<jsp:include page="Footer.jsp"></jsp:include>
-		</div>
-	</div>
+<!-- footer  -->
+<div class="row">
+   <div class="col-md-12">
+      <jsp:include page="Footer.jsp"></jsp:include>
+   </div>
+</div>
 
 </body>
 </html>
