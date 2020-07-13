@@ -1719,3 +1719,28 @@ VALUES('WAR'||SEQ_WAR.NEXTVAL,'USER13');
 SELECT *
 FROM WARNING;
 --==>>WAR1   20/07/12   USER13
+
+-- 0714 역렌트 요청, 제공 게시물, 제공 사진 등록
+
+-- 역렌트 요청 게시물 등록
+--INSERT 역렌트 요청 게시물 등록 코드, 작성한 사용자 식별코드, 렌트 카테고리 식별 코드, 지역 카테고리 식별 코드
+--글제목, 글내용, (작성일시), 상품명, (조회수), 희망 대여 시작일시, 희망 대여 종료일시, 수령 장소, 반납 장소
+INSERT INTO RR_REQ(RR_REQ_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT
+                                      , ITEM_NAME, START_DATE, END_DATE, PICK_LOC, RETURN_LOC)
+                                      VALUES('RR_REQ'||SEQ_RR_REQ.NEXTVAL , 'USER15', 'R_CATE78', 'LOC51', '전동킥보드 빌려주실분 있나요?', '렌트 반납률 백 프로 깨끗이 쓰겠습니다.'
+                                                     ,'전동킥보드', TO_DATE('2020-07-15 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-10 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                                      ,'중심상가입구', '중심상가입구');
+
+-- 역렌트 제공 게시물 등록 
+-- INSERT 역렌트 제공 게시물 등록코드, 역렌트 요청 게시물 등록 코드, 신청한 사용자 식별코드, (작성일시), 비용, 보증금, 브랜드명
+INSERT INTO RR_OFFER(RR_OFFER_CODE, RR_REQ_CODE, B_USER_CODE, COST, DEPOSIT, BRAND)
+                      VALUES('RR_OFF'||SEQ_RR_OFF.NEXTVAL, 'RR_REQ1', 'USER16', 2000, 15000, '샤오미');
+
+-- 역렌트 제공 사진 등록                     
+INSERT INTO RR_PHOTO(RR_PHOTO_CODE, RR_OFFER_CODE, PHOTO)
+                        VALUES('RR_PHOTO'||SEQ_RR_PHOTO.NEXTVAL, 'RR_OFF1', '전동앞.jpg');
+INSERT INTO RR_PHOTO(RR_PHOTO_CODE, RR_OFFER_CODE, PHOTO)
+                        VALUES('RR_PHOTO'||SEQ_RR_PHOTO.NEXTVAL, 'RR_OFF1', '전동옆.jpg');
+INSERT INTO RR_PHOTO(RR_PHOTO_CODE, RR_OFFER_CODE, PHOTO)
+                        VALUES('RR_PHOTO'||SEQ_RR_PHOTO.NEXTVAL, 'RR_OFF1', '전동바퀴.jpg');                        
+
