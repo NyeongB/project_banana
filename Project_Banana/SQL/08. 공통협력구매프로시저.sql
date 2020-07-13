@@ -1,0 +1,287 @@
+--①.공통협력구매 거래 신청 프로시저
+CREATE OR REPLACE PROCEDURE PRC_G_APPLY
+(
+  V_B_USER_CODE         IN B_USER.B_USER_CODE%TYPE -- 유저코드
+, V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
+, V_G_POST_CODE         IN G_POST.G_POST_CODE%TYPE -- 공통협력구매 게시물 등록 코드
+
+)
+IS
+V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
+
+BEGIN
+-- 실행문
+-- 1. 포인트 내역 등록 INSERT
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT);
+
+-- 2. 공통협력구매 신청(포인트 내역 등록 식별 코드) INSERT
+INSERT INTO G_APPLY(G_APPLY_CODE, G_POST_CODE, B_USER_CODE, POINT_LIST_CODE)
+VALUES('G_APPLY'||SEQ_G_APPLY.NEXTVAL, V_G_POST_CODE, V_B_USER_CODE, V_POINT_LIST_CODE);
+
+-- 3. 커밋
+-- COMMIT;
+END;
+
+SELECT *
+FROM B_USER;
+------------------------------------------------------------------------------------------------
+--② 공통협력 구매 성사 시 
+
+
+-- ○ 공통협력 구매 성사 시 프로시저
+-- 1. 포인트내역 등록 INSERT(상태1)
+-- 2. 거래성사 등록 INSERT
+
+CREATE OR REPLACE PROCEDURE PRC_G_SUCCESS
+(
+ V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
+, V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
+, V_G_POST_CODE         IN G_POST.G_POST_CODE%TYPE  -- 공통협력 게시물 등록 코드
+)
+IS
+V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
+V_G_SUCCESS_CODE    G_SUCCESS.G_SUCCESS_CODE%TYPE := 'G_SUCCESS' || SEQ_G_SUCCESS.NEXTVAL;
+APPLYUSER_CODE      B_USER.B_USER_CODE%TYPE;
+
+
+
+BEGIN
+-- 1. 포인트내역 등록 INSERT(상태1)
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT, 1);
+
+-- 2. 거래성사 등록 INSERT
+INSERT INTO G_SUCCESS(G_SUCCESS_CODE, G_POST_CODE, POINT_LIST_CODE)
+VALUES(V_G_SUCCESS_CODE,  V_G_POST_CODE, V_POINT_LIST_CODE);
+
+
+END;
+------------------------------------------------------------------------------------------------
+--③.공통협력 거래 신고 처리
+-- 14. 공통협력구매 거래 신고 처리 프로시저(유효한 신고일때)
+-- 신고자 
+-- 1.포인트 내역 등록 insert 2. 공통협력구매 거래 신고처리 insert    
+-- 신고 대상자
+-- 1.포인트 내역 등록 insert 2.아웃 내역 등록 insert 3. 공통협력구매 거래 신고처리 insert
+
+CREATE OR REPLACE PROCEDURE PRC_G_DEAL_REPORT_PROC
+(
+  V_B_USER_CODE                     IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
+, V_B_USER_REP_CODE                 IN     B_USER.B_USER_CODE%TYPE   -- 신고당한사람유저코드
+, V_POINT                           IN     POINT_LIST.POINT%TYPE  -- 입력받을 포인트
+, V_G_DEAL_REPORT_CODE              IN     G_DEAL_REPORT.G_DEAL_REPORT_CODE%TYPE -- 공통협력구매 거래 신고 코드
+, V_ADMIN_CODE                      IN     ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+, V_DEAL_REPORT_PROC_TYPE_CODE      IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고자에 대한 거래 신고처리 유형 코드
+, V_DEAL_REPORT_PROC_TYPE_CODE2     IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고대상자에 대한 거래 신고처리 유형 코드
+, V_ANSWER                          IN      G_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변
+
+)
+IS
+ V_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자 포인트 내역 등록코드
+ V_REP_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자대상자 포인트 내역 등록코드
+ V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;
+
+BEGIN
+
+    
+    
+    -- 1) 아웃 내역 등록 INSERT(신고 대상자)
+    INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+    VALUES(V_OUT_CODE, V_B_USER_REP_CODE);
+    
+    -- 2) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+    INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER)
+    VALUES('G_DRP' || SEQ_G_D_REP_PRC.NEXTVAL,V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE, V_ANSWER);
+    
+    -- 3) 신고자대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+    INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER, OUT_CODE)
+    VALUES('G_DRP' || SEQ_G_D_REP_PRC.NEXTVAL,V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE2, V_ANSWER,V_OUT_CODE);
+    
+    -- 4) 커밋
+    -- COMMIT;
+    
+END;
+------------------------------------------------------------------------------------------------
+--④ 공통협력구매 상품반환 시
+
+
+----------------------------------------------공통협력구매 상품 반환 
+SELECT * FROM POINT_LIST;
+----------------------------
+-- 1. 포인트리스트 내역 INSERT
+-- 2. 공통협력 상품 반환 INSERT
+CREATE OR REPLACE PROCEDURE PRC_G_RETURN_ITEM
+( V_B_USER_CODE IN B_USER.B_USER_CODE%TYPE   --공구원 코드 
+, V_BB_USER_CODE IN B_USER.B_USER_CODE%TYPE   --공구장 코드
+, V_POINT IN POINT_LIST.POINT%TYPE           --참여자들에게 환불해줄 포인트
+, V_G_DEAL_REPORT_PROC_CODE IN G_DEAL_REPORT_PROC.G_DEAL_REPORT_PROC_CODE%TYPE  --거래신고 처리 코드
+, V_REFUND_DATE IN G_RETURN_ITEM.REFUND_DATE%TYPE   --환불 날짜 
+)
+IS
+  V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE;      --포인트 내역 코드
+BEGIN
+  
+  -- 변수 생성 및 포인트 리스트 시퀀스 생성 후 저장 
+   V_POINT_LIST_CODE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;
+
+  --  공구원 포인트 리스트 내역 INSERT
+  INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+  VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT);
+  
+  -- 공구장 포인트 리스트 내역 INSERT
+  INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+  VALUES(V_POINT_LIST_CODE, V_BB_USER_CODE, -V_POINT);
+  
+  
+ -- 공통협력 상품 반환 INSERT     
+ 
+INSERT INTO(
+   SELECT I.G_RETURN_ITEM_CODE, I.G_DEAL_REPORT_PROC_CODE,I.POINT_LIST_CODE,I.REFUND_DATE
+   FROM G_APPLY A LEFT JOIN G_POST P
+   ON A.G_POST_CODE = P.G_POST_CODE 
+               LEFT JOIN G_SUCCESS S
+               ON P.G_POST_CODE = S.G_POST_CODE
+               LEFT JOIN G_DEAL_REPORT D 
+               ON D.G_SUCCESS_CODE = S.G_SUCCESS_CODE
+               LEFT JOIN G_DEAL_REPORT_PROC R
+               ON R.G_DEAL_REPORT_CODE = D.G_DEAL_REPORT_CODE
+               RIGHT JOIN G_RETURN_ITEM I
+               ON R.G_DEAL_REPORT_PROC_CODE= I.G_DEAL_REPORT_PROC_CODE
+              WHERE A.B_USER_CODE = V_B_USER_CODE)
+VALUES('G_RETI'||SEQ_G_RETURN_ITEM.NEXTVAL, V_G_DEAL_REPORT_PROC_CODE, V_POINT_LIST_CODE, V_REFUND_DATE);
+             
+ 
+COMMIT;
+ 
+ 
+END;
+
+
+
+------------------------------------------------------------------------------------------------
+--⑤.리뷰 등록
+
+--5. 공통협력구매 리뷰 등록 프로시저
+-- 1. 신뢰도 점수 내역 insert
+-- 2. 바나나 점수 내역 insert
+-- 3. 공통협구매 리뷰 등록
+
+
+CREATE OR REPLACE PROCEDURE PRC_G_REVIEW(
+
+V_CREDIT_SCORE 		IN 	CREDIT_SCORE.CREDIT_SCORE%TYPE	--신뢰도점수
+,V_B_USER_CODE		IN        B_USER.B_USER_CODE%TYPE -- 유저코드
+,V_G_SUCCESS_CODE        IN      G_SUCCESS.G_SUCCESS_CODE%TYPE -- 공통협력구매 성사 코드
+,V_CONTENT			IN      G_REVIEW.CONTENT%TYPE -- 리뷰내용
+)
+IS
+	-- 변수 선언
+V_CREDIT_SCORE_CODE		CREDIT_SCORE.CREDIT_SCORE_CODE%TYPE := 'BRIX' || SEQ_BRIX.NEXTVAL;-- CS1
+V_BANANA_SCORE_CODE 	BANANA_SCORE.BANANA_SCORE_CODE%TYPE :='BANA' || SEQ_BANANA.NEXTVAL;--BS1
+
+BEGIN
+	-- 실행문
+	-- 1. 신뢰도 점수 내역 INSERT
+	INSERT INTO CREDIT_SCORE ( CREDIT_SCORE_CODE,CREDIT_SCORE,B_USER_CODE)
+    VALUES (V_CREDIT_SCORE_CODE,V_CREDIT_SCORE ,V_B_USER_CODE);
+
+      	 --2. 바나나점수 내역 INSERT
+	INSERT INTO BANANA_SCORE(BANANA_SCORE_CODE, B_USER_CODE, BANANA_SCORE)
+	VALUES (V_BANANA_SCORE_CODE, V_B_USER_CODE, 20);
+
+	--3. 공통협력구매 리뷰 등록 INSERT
+	INSERT INTO G_REVIEW(G_REVIEW_CODE,G_SUCCESS_CODE,SCORE,CONTENT,CREDIT_SCORE_CODE)
+	VALUES( 'G_REV' || SEQ_G_REVIEW.NEXTVAL,V_G_SUCCESS_CODE ,V_CREDIT_SCORE ,V_CONTENT,V_CREDIT_SCORE_CODE);
+
+
+	--4. 커밋
+	--COMMIT;
+END;
+
+------------------------------------------------------------------------------------------------	
+--⑥.공통협력구매 게시물 신고 처리
+
+-- 10. 공통협력구매 게시물 신고 처리
+-- 1) 경고내역등록 INSERT 
+-- 2) 공통협력구매 게시물 신고 처리 INSERT
+
+CREATE OR REPLACE PROCEDURE PRC_G_POST_REPORT_PRC
+(
+ V_B_USER_CODE                    IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
+,V_G_POST_REPORT_CODE             IN  G_POST_REPORT.G_POST_REPORT_CODE%TYPE -- 공통협력구매 게시물 신고 코드
+,V_ADMIN_CODE                     IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+)
+IS
+
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+
+BEGIN
+
+    IF(V_PNR_REPORT_PROC_TYPE_CODE = 0)
+    THEN
+    
+    -- 1) 경고내역 등록 INSERT
+     INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+     VALUES (V_WARNING_CODE,V_B_USER_CODE);
+     
+     -- 2) 공통협력구매 게시물 신고 처리 INSERT
+     INSERT INTO G_POST_REPORT_PROC(G_POST_REPORT_PROC_CODE, G_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+     VALUES('G_PRP'|| SEQ_G_POST_REP_PRC.NEXTVAL, V_G_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+    
+    ELSE
+    
+    -- 1) 공통협력구매 게시물 신고 처리 INSERT
+     INSERT INTO G_POST_REPORT_PROC(G_POST_REPORT_PROC_CODE, G_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+     VALUES('G_PRP'|| SEQ_G_POST_REP_PRC.NEXTVAL, V_G_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+    
+    
+    END IF;
+
+  
+
+
+    -- 3) 커밋
+    -- COMMIT;
+
+END;
+
+------------------------------------------------------------------------------------------------
+--20.공통협력구매 댓글 신고처리
+
+-- ○ 공통협력구매 댓글 신고처리	
+-- 1.경고 내역등록 insert
+-- 2.댓글 신고 처리 insert
+
+CREATE OR REPLACE PROCEDURE PRC_G_REP_REPORT_PRC
+(
+ V_B_USER_CODE                    IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
+,V_G_REPLY_REPORT_CODE            IN  G_REPLY_REPORT.G_REPLY_REPORT_CODE%TYPE -- 공통협력구매 댓글 신고 코드
+,V_ADMIN_CODE                     IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+)
+IS
+
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+
+BEGIN
+        
+    IF(V_PNR_REPORT_PROC_TYPE_CODE=0)
+	THEN
+	
+	-- 1) 경고내역 등록 INSERT
+     INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+     VALUES (V_WARNING_CODE,V_B_USER_CODE);
+     
+    --2. 댓글 신고처리 INSERT
+        INSERT INTO G_REPLY_REPORT_PROC(G_REPLY_REPORT_PROC_CODE, G_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+        VALUES('G_REPRP'||SEQ_G_REPLY_REP_PRC.NEXTVAL,  V_G_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+	
+	ELSE
+		--2. 댓글 신고처리 INSERT
+        INSERT INTO G_REPLY_REPORT_PROC(G_REPLY_REPORT_PROC_CODE, G_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+        VALUES('G_REPRP'||SEQ_G_REPLY_REP_PRC.NEXTVAL,  V_G_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE);
+	END IF;
+
+END;
