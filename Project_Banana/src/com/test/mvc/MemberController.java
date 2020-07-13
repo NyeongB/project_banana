@@ -54,6 +54,23 @@ public class MemberController
 	}
 	
 	
+	@RequestMapping(value = "/stoplist.action", method =RequestMethod.GET)
+	public String stopList(Model model)
+	{
+		String view = null; 
+		
+		IStopDAO dao = SqlSession.getMapper(IStopDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminStopUserList.jsp";
+		
+		
+		return view;
+	}
+	
 	
 	
 	
