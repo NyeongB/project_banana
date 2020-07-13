@@ -1,6 +1,186 @@
 -- ■■■■■ 자율협력구매 프로시저 ■■■■■■-
 
--- 자율협력구매 리뷰 등록 프로시저
+--===================================================================================================================================
+
+-- ① 자율협력 구매 신청 시 프로시저
+-- 1. 포인트 내역 등록 INSERT
+-- 2. 자율협력구매 신청 INSERT
+CREATE OR REPLACE PROCEDURE PRC_G_APPLY
+(
+ V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
+, V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
+, V_J_POST_CODE         IN J_POST.J_POST_CODE%TYPE -- 자율협력구매 게시물 등록 코드
+, V_AMOUNT              IN J_APPLY.AMOUNT%TYPE     -- 주문 수량
+)
+IS
+V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
+
+BEGIN
+-- 실행문
+-- 1. 포인트 내역 등록 INSERT
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT);
+
+-- 2. 자율협력구매 신청 INSERT
+INSERT INTO J_APPLY(J_APPLY_CODE, J_POST_CODE, B_USER_CODE, AMOUNT,POINT_LIST_CODE)
+VALUES('J_APPLY'||SEQ_J_APPLY.NEXTVAL, V_J_POST_CODE, V_B_USER_CODE, V_AMOUNT, V_POINT_LIST_CODE);
+
+-- 3. 커밋
+-- COMMIT;
+END;
+
+--===========================================================================================================
+-- ② 가격 하락 시 전체 환불 프로시저 
+-- 1. 포인트 내역 등록 
+CREATE OR REPLACE PROCEDURE PRC_J_COST_DROP_REFUND
+(
+    V_J_POST_CODE   IN J_POST.J_POST_CODE%TYPE      -- 게시물 코드
+
+)
+IS
+
+    -- 변수 선언
+    V_B_USER_CODE   B_USER.B_USER_CODE%TYPE;
+    V_POINT         POINT_LIST.POINT%TYPE;
+
+    -- 커서 선언
+    CURSOR CUR_REFUND_USER              -- 환불 받을 유저, 가격
+    IS
+    SELECT A.B_USER_CODE, P.POINT
+    FROM J_APPLY A LEFT JOIN POINT_LIST P
+    ON  A.POINT_LIST_CODE = P.POINT_LIST_CODE
+    WHERE A.J_POST_CODE = V_J_POST_CODE;
+
+BEGIN
+
+    -- 커서 오픈
+    OPEN CUR_REFUND_USER;
+    
+    -- 커서 오픈 후 데이터 처리
+    LOOP
+        
+        -- 한행 한행 받아다가 처리
+        FETCH CUR_REFUND_USER INTO V_B_USER_CODE, V_POINT;
+        
+        -- 포인트 환불 처리
+        INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+        VALUES('POLIS'|| SEQ_POINT_LIST.NEXTVAL,V_B_USER_CODE,- V_POINT);
+        
+        
+        -- 커서에서 더이상 데이터가 쏟아져 나오지 않음
+        EXIT WHEN CUR_REFUND_USER%NOTFOUND;    
+    
+    END LOOP;
+    
+    -- 커서 클로즈
+    CLOSE CUR_REFUND_USER;
+    
+END;
+
+
+--==============================================================================================================
+-- ③ 주문 수량 재입력
+--1.포인트 내역 등록 2.재입력 insert 
+CREATE OR REPLACE PROCEDURE PRC_J_REAPPLY
+(
+ V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
+,V_POINT                IN POINT_LIST.POINT%TYPE
+,V_J_COST_DROP_CODE     IN J_COST_DROP.J_COST_DROP_CODE%TYPE
+, V_RE_AMOUNT             IN J_REAPPLY.RE_AMOUNT%TYPE
+)
+IS
+
+    V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE :='POLIS'|| SEQ_POINT_LIST.NEXTVAL;
+
+BEGIN
+
+    -- 1. 포인트 내역 등록 - 구매 가격
+    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE,V_POINT );
+    
+    -- 2. 주문 재입력 INSERT
+    INSERT INTO J_REAPPLY(J_REAPPLY_CODE, J_COST_DROP_CODE, B_USER_CODE, POINT_LIST_CODE, RE_AMOUNT)
+    VALUES('J_REAP'||SEQ_J_REAPPLY.NEXTVAL,V_J_COST_DROP_CODE, V_B_USER_CODE, V_POINT_LIST_CODE,V_RE_AMOUNT );
+    
+    
+    -- 커밋
+    --COMMIT;
+
+END;
+
+--======================================================================================================
+-- ④ 자율협력구매 성사 시 프로시저
+-- 1. 포인트내역 등록 INSERT(제안자 + 상태1)
+-- 2. 거래성사 INSERT
+CREATE OR REPLACE PROCEDURE PRC_J_SUCCESS
+(
+  V_B_USER_CODE            IN B_USER.B_USER_CODE%TYPE
+, V_POINT                IN POINT_LIST.POINT%TYPE
+, V_J_POST_CODE         IN J_POST.J_POST_CODE%TYPE  -- 자율협력 게시물 등록 코드
+)
+IS
+V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
+
+BEGIN
+-- 1. 포인트내역 등록 INSERT(제안자 + 상태1)
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+VALUES (V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT, 1);
+
+-- 2. 거래성사 INSERT
+INSERT INTO J_SUCCESS(J_SUCCESS_CODE, J_POST_CODE, POINT_LIST_CODE)
+VALUES('J_SUCCESS '||SEQ_J_SUCCESS.NEXTVAL, V_J_POST_CODE, V_POINT_LIST_CODE);
+
+
+-- 3. 커밋
+-- COMMIT
+END;
+
+--===================================================================================================================================
+
+-- ⑤ 자율협력구매 거래 신고 처리 프로시저(유효한 신고일때)
+-- 신고자 
+-- 1.포인트 내역 등록 insert 2. 자율협력구매 거래 신고처리 insert    
+-- 신고 대상자
+-- 1.포인트 내역 등록 insert 2.아웃 내역 등록 insert 3. 자율협력구매 거래 신고처리 insert
+
+CREATE OR REPLACE PROCEDURE PRC_J_DEAL_REPORT_PROC
+(
+  V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
+, V_B_USER_REP_CODE             IN     B_USER.B_USER_CODE%TYPE   -- 신고당한사람유저코드
+, V_J_DEAL_REPORT_CODE      IN      J_DEAL_REPORT.J_DEAL_REPORT_CODE%TYPE -- 자율협력구매 거래 신고 코드
+, V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+, V_DEAL_REPORT_PROC_TYPE_CODE  IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고자에 대한 거래 신고처리 유형 코드
+, V_DEAL_REPORT_PROC_TYPE_CODE2  IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고대상자에 대한 거래 신고처리 유형 코드
+, V_ANSWER                      IN      J_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변
+
+)
+IS
+ V_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자 포인트 내역 등록코드
+ V_REP_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자대상자 포인트 내역 등록코드
+ V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;
+
+BEGIN
+    
+    -- 1) 아웃 내역 등록 INSERT(신고 대상자)
+    INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+    VALUES(V_OUT_CODE, V_B_USER_REP_CODE);
+    
+    -- 2) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+    INSERT INTO J_DEAL_REPORT_PROC(J_DEAL_REPORT_PROC_CODE, J_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER)
+    VALUES('J_DRP' || SEQ_J_D_REP_PRC.NEXTVAL,V_J_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE, V_ANSWER);
+    
+    -- 3) 신고자대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+    INSERT INTO J_DEAL_REPORT_PROC(J_DEAL_REPORT_PROC_CODE, J_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER, OUT_CODE)
+    VALUES('J_DRP' || SEQ_J_D_REP_PRC.NEXTVAL,V_J_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE2, V_ANSWER, V_OUT_CODE);
+    
+    -- 4) 커밋
+    -- COMMIT;
+    
+END;
+
+--====================================================================================================
+
+-- ⑥ 자율협력구매 리뷰 등록 프로시저
 -- 1. 신뢰도 점수 내역 insert
 -- 2. 바나나 점수 내역 insert
 -- 3. 공통협구매 리뷰 등록
@@ -38,145 +218,217 @@ BEGIN
 END;
 
 
--- 9. 자율협력구매 게시물 신고 처리
+--------------------------------------------------------------------------------------------------
+-- 자율 협력 구매 상품반환
+-- 1. 포인트리스트내역 INSERT 2. 공통협력 상품 반환 
+
+CREATE OR REPLACE PROCEDURE PRC_J_RETURN_ITEM
+( V_B_USER_CODE IN B_USER.B_USER_CODE%TYPE      -- 공구원 코드
+, V_BB_USER_CODE IN B_USER.B_USER_CODE%TYPE      -- 공구장 코드
+, V_POINT IN POINT_LIST.POINT%TYPE -- 공구원 돌려줘야하는 포인트 것
+, V_J_DEAL_REPORT_PROC_CODE IN J_DEAL_REPORT_PROC.J_DEAL_REPORT_PROC_CODE%TYPE
+, V_REFUND_DATE IN G_RETURN_ITEM.REFUND_DATE%TYPE
+)
+IS
+  V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE;
+  V_J_POST_CHECK   NUMBER;
+  V_J_POST_CODE     J_POST.J_POST_CODE%TYPE;
+  DROP_CHECK   J_POST.J_POST_CODE%TYPE;
+BEGIN
+  
+  -- 변수 생성 및 포인트 리스트 시퀀스 생성 후 저장 
+   V_POINT_LIST_CODE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;
+   
+   
+
+  -- 공구원에게 돌려주는 것포인트 리스트 내역 INSERT
+  INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+  VALUES(V_POINT_LIST_CODE, V_BB_USER_CODE, V_POINT);
+  
+  -- 공구장에게 회수하는 포인트 리스트 내역 INSERT
+  INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+  VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, V_BB_USER_CODE, - V_POINT);
+                        
+-- 자율협력공동구매 INSERT
+
+-- 1. 자율협력구매 게시물 등록코드를 V_J_POST_CODE 담음 
+    SELECT P.J_POST_CODE INTO V_J_POST_CODE 
+    FROM J_APPLY A LEFT JOIN J_POST P
+        ON A.J_POST_CODE = P.J_POST_CODE
+        LEFT  JOIN J_REAPPLY R
+        ON R.B_USER_CODE = P.B_USER_CODE
+        LEFT JOIN J_SUCCESS S
+        ON S.J_POST_CODE = P.J_POST_CODE
+        LEFT JOIN J_DEAL_REPORT D
+        ON D.J_SUCCESS_CODE = S.J_SUCCESS_CODE
+        LEFT JOIN J_DEAL_REPORT_PROC O
+        ON O.J_DEAL_REPORT_CODE = D.J_DEAL_REPORT_CODE
+        LEFT JOIN J_RETURN_ITEM I
+        ON I.J_DEAL_REPORT_PROC_CODE = O.J_DEAL_REPORT_PROC_CODE
+    WHERE A.B_USER_CODE=V_B_USER_CODE;
+    
+    --받아온 게시물 코드가 가격 하락 테이블에 존재하는지를 체크하여 DROP_CHECK 에 담음
+    SELECT J_COST_DROP_CODE INTO DROP_CHECK
+    FROM J_COST_DROP
+    WHERE J_POST_CODE = V_J_POST_CODE;
+    
+    IF(DROP_CHECK IS NULL)
+   THEN V_J_POST_CHECK :=0; -- 가격 하락이 없는 경우
+   ELSE 
+   V_J_POST_CHECK :=1;  --가격 하락이 있는 경우
+   END IF;
+   
+   
+   IF(V_J_POST_CHECK=0)
+  THEN
+      INSERT INTO 
+        ( SELECT  I.J_RETURN_ITEM_CODE, I.J_DEAL_REPORT_PROC_CODE,I.POINT_LIST_CODE,I.REFUND_DATE
+        FROM J_APPLY A LEFT JOIN J_POST P
+        ON A.J_POST_CODE = P.J_POST_CODE
+        LEFT  JOIN J_REAPPLY R
+        ON R.B_USER_CODE = P.B_USER_CODE
+        LEFT JOIN J_SUCCESS S
+        ON S.J_POST_CODE = P.J_POST_CODE
+        LEFT JOIN J_DEAL_REPORT D
+        ON D.J_SUCCESS_CODE = S.J_SUCCESS_CODE
+        LEFT JOIN J_DEAL_REPORT_PROC O
+        ON O.J_DEAL_REPORT_CODE = D.J_DEAL_REPORT_CODE
+        LEFT JOIN J_RETURN_ITEM I
+        ON I.J_DEAL_REPORT_PROC_CODE = O.J_DEAL_REPORT_PROC_CODE
+        WHERE A.B_USER_CODE=V_B_USER_CODE)
+    VALUES('J_RETI'||SEQ_J_RETURN_ITEM.NEXTVAL, V_J_DEAL_REPORT_PROC_CODE, V_POINT_LIST_CODE, V_REFUND_DATE);    
+    
+ELSE 
+  INSERT INTO 
+        ( SELECT  I.J_RETURN_ITEM_CODE, I.J_DEAL_REPORT_PROC_CODE,I.POINT_LIST_CODE,I.REFUND_DATE
+        FROM J_APPLY A LEFT JOIN J_POST P
+        ON A.J_POST_CODE = P.J_POST_CODE
+        LEFT  JOIN J_REAPPLY R
+        ON R.B_USER_CODE = P.B_USER_CODE
+        LEFT JOIN J_SUCCESS S
+        ON S.J_POST_CODE = P.J_POST_CODE
+        LEFT JOIN J_DEAL_REPORT D
+        ON D.J_SUCCESS_CODE = S.J_SUCCESS_CODE
+        LEFT JOIN J_DEAL_REPORT_PROC O
+        ON O.J_DEAL_REPORT_CODE = D.J_DEAL_REPORT_CODE
+        LEFT JOIN J_RETURN_ITEM I
+        ON I.J_DEAL_REPORT_PROC_CODE = O.J_DEAL_REPORT_PROC_CODE
+        WHERE R.B_USER_CODE=V_B_USER_CODE)
+    VALUES('J_RETI'||SEQ_J_RETURN_ITEM.NEXTVAL, V_J_DEAL_REPORT_PROC_CODE, V_POINT_LIST_CODE, V_REFUND_DATE);   
+END IF;
+
+--COMMIT;
+
+END;
+
+SELECT *
+FROM PNR_REPORT_PROC_TYPE;
+--============================================================================================================
+-- ⑧ 자율협력구매 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
 -- 2) 자율협력구매 게시물 신고 처리 INSERT
-
 CREATE OR REPLACE PROCEDURE PRC_J_POST_REPORT_PRC
 (
  V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
 ,V_J_POST_REPORT_CODE     IN  J_POST_REPORT.J_POST_REPORT_CODE%TYPE-- 자율협력구매 게시물 신고 코드
 ,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
 
-V_WARNING_CODE      WARNING.WARNING_CODE%TYPE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
-
-    -- 1) 경고내역 등록 INSERT
-     INSERT INTO WARNING (WARNIN_CODE, B_USER_CODE)
-     VALUES (V_WARNING_CODE,V_B_USER_CODE);
-     
-     -- 2) 자율협력구매 게시물 신고 처리 INSERT
-     INSERT INTO J_POST_REPORT_PROC(J_POST_REPORT_PROC_CODE, J_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-     VALUES('J_PRP'|| SEQ_J_POST_REP_PRC.NEXTVAL, V_J_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
-
+        -- 유효한 신고일 경우
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        THEN
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE,V_B_USER_CODE);
+         
+            -- 2) 자율협력구매 게시물 신고 처리 INSERT
+            INSERT INTO J_POST_REPORT_PROC(J_POST_REPORT_PROC_CODE, J_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('J_PRP'|| SEQ_J_POST_REP_PRC.NEXTVAL, V_J_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 자율협력구매 게시물 신고 처리 INSERT
+         INSERT INTO J_POST_REPORT_PROC(J_POST_REPORT_PROC_CODE, J_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('J_PRP'|| SEQ_J_POST_REP_PRC.NEXTVAL, V_J_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
+        
+        END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
 END;
---===================================================================================================================================
-
--- 13. 자율협력구매 거래 신고 처리 프로시저(유효한 신고일때)
--- 신고자 
--- 1.포인트 내역 등록 insert 2. 자율협력구매 거래 신고처리 insert    
--- 신고 대상자
--- 1.포인트 내역 등록 insert 2.아웃 내역 등록 insert 3. 자율협력구매 거래 신고처리 insert
-
-CREATE OR REPLACE PROCEDURE PRC_J_DEAL_REPORT_PROC
+--======================================================================================================
+-- ⑨ 자율협력 구매 댓글 신고 처리 시 프로시저
+-- 1. 경고 내역 등록 INSERT
+-- 2. 댓글 신고 처리 INSERT
+CREATE OR REPLACE PROCEDURE PRC_J_REPLY_REPORT_PROC
 (
-  V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
-, V_B_USER_REP_CODE             IN     B_USER.B_USER_CODE%TYPE   -- 신고당한사람유저코드
-, V_POINT                    IN     POINT_LIST.POINT%TYPE  -- 입력받을 포인트
-, V_J_DEAL_REPORT_CODE      IN      J_DEAL_REPORT.J_DEAL_REPORT_CODE%TYPE -- 자율협력구매 거래 신고 코드
-, V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE  IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고자에 대한 거래 신고처리 유형 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE2  IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고대상자에 대한 거래 신고처리 유형 코드
-, V_ANSWER                      IN      J_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변
+  V_B_USER_CODE                     IN  B_USER.B_USER_CODE%TYPE    -- 유저코드
+, V_J_REPLY_REPORT_CODE             IN  J_REPLY_REPORT.J_REPLY_REPORT_CODE%TYPE -- 댓글 신고 코드
+, V_ADMIN_CODE                      IN      ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+, V_PNR_REPORT_PROC_TYPE_CODE      IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
 
 )
 IS
- V_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자 포인트 내역 등록코드
- V_REP_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자대상자 포인트 내역 등록코드
- V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;
+V_WARNING_CODE   WARNING.WARNING_CODE%TYPE := 'WAR'||SEQ_WAR.NEXTVAL;   -- 경고 내역 코드
 
 BEGIN
+     -- 유효한 신고 일 경우
+     IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        THEN
+        -- 1. 경고 내역 등록 코드 INSERT
+        INSERT INTO WARNING(WARNING_CODE, B_USER_CODE)
+        VALUES(V_WARNING_CODE, V_B_USER_CODE );        
+        
+        -- 2. 댓글 신고처리 INSERT
+        INSERT INTO J_REPLY_REPORT_PROC(J_REPLY_REPORT_PROC_CODE, J_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+        VALUES('J_REPRP'||SEQ_J_REPLY_REP_PRC.NEXTVAL,  V_J_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+    ELSE
+        -- 1. 댓글 신고처리 INSERT
+        INSERT INTO J_REPLY_REPORT_PROC(J_REPLY_REPORT_PROC_CODE, J_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+        VALUES('J_REPRP'||SEQ_J_REPLY_REP_PRC.NEXTVAL,  V_J_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE);
+     
+     END IF;
 
-    -- 1) 포인트 내역 등록 INSERT  -- 신고자 돈 환불 (+)
-    -- SDATE,STATE는 기본값으로
-    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES(V_POINT_LIST_CODE,V_B_USER_CODE, V_POINT );
-    
-    -- 2) 포인트 내역 등록 INSERT  -- 신고대상자 돈 회수 (-)
-    -- SDATE,STATE는 기본값으로
-    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES(V_REP_POINT_LIST_CODE, V_B_USER_REP_CODE,-V_POINT );
-    
-    -- 3) 아웃 내역 등록 INSERT(신고 대상자)
-    INSERT INTO OUT(OUT_CODE,B_USER_CODE)
-    VALUES(V_OUT_CODE, V_B_USER_REP_CODE)
-    
-    -- 4) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO J_DEAL_REPORT_PROC(J_DEAL_REPORT_PROC_CODE, J_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
-    VALUES('J_DRP' || SEQ_J_D_REP_PRC.NEXTVAL,V_J_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE, V_ANSWER, V_POINT_LIST_CODE);
-    
-    -- 5) 신고자대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO _DEAL_REPORT_PROC(J_DEAL_REPORT_PROC_CODE, J_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE, OUT_CODE)
-    VALUES('J_DRP' || SEQ_J_D_REP_PRC.NEXTVAL,V_J_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE2, V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE)
-    
-    -- 6) 커밋
-    -- COMMIT;
-    
+
 END;
---===================================================================================================================================
 
--- ○ 자율협력 구매 신청 시 프로시저
--- 1. 포인트 내역 등록 INSERT
--- 2. 자율협력구매 신청 INSERT
-CREATE OR REPLACE PROCEDURE PRC_G_APPLY
+--=================================================================================================
+-- ⑪ 자율협력 구매 출 결석 버튼 클릭 시 프로시저
+-- 1. (신청,게시물등록,거래 성사 테이블,출/결석 조인 테이블)에 출/결석 insert(출결석 상태,일시 기본이 null)
+CREATE OR REPLACE PROCEDURE PRC_J_ATTENDANCE
 (
- V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
-, V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
-, V_J_POST_CODE         IN J_POST.J_POST_CODE%TYPE -- 자율협력구매 게시물 등록 코드
-, V_AMOUNT              IN J_APPLY.AMOUNT%TYPE     -- 주문 수량
+  V_B_USER_CODE         IN B_USER.B_USER_CODE%TYPE   -- 유저코드
+, V_J_SUCCESS_CODE    IN J_SUCCESS.J_SUCCESS_CODE%TYPE -- 거래 성사 코드
+, V_ATTENDANCE_STATE  IN J_ATTENDANCE.J_ATTENDANCE_CODE%TYPE -- 출/결석 상태
 )
 IS
-V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT.NEXTVAL;-- PL1
-
 BEGIN
--- 실행문
--- 1. 포인트 내역 등록 INSERT
-INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT);
+-- J_POST,J_ATTENDANCE, J_SUCESS, J_APPLY 조인하여 INSERT
+INSERT INTO(
+    SELECT A.J_ATTENDANCE_CODE, A.J_SUCCESS_CODE, A.ATTENDANCE_STATE
+    FROM J_ATTENDANCE A LEFT JOIN J_SUCCESS S 
+    ON A.J_SUCCESS_CODE = S.J_SUCCESS_CODE
+                        RIGHT JOIN J_POST P
+                        ON P.J_POST_CODE = S.J_POST_CODE
+                        LEFT JOIN J_APPLY L
+                        ON L.J_POST_CODE =P.J_POST_CODE
+                        WHERE L.B_USER_CODE = V_B_USER_CODE )
+VALUES('J_ATT'||SEQ_J_ATTEND.NEXTVAL, V_J_SUCCESS_CODE, V_ATTENDANCE_STATE);
 
--- 2. 자율협력구매 신청 INSERT
-INSERT INTO J_APPLY(J_APPLY_CODE, J_POST_CODE, B_USER_CODE, AMOUNT,POINT_LIST_CODE)
-VALUES('J_APPLY'||SEQ_J_APPLY.NEXTVAL, V_J_POST_CODE, V_B_USER_CODE, V_AMOUNT, V_POINT_LIST_CODE);
 
--- 3. 커밋
+-- 커밋
 -- COMMIT;
-END;
-
-
---==============================================================================================================
--- ○ 주문 수량 재입력
---1.포인트 내역 등록 2.재입력 insert 
-CREATE OR REPLACE PROCEDURE PRC_J_REAPPLY
-(
- V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
-,V_POINT                IN POINT_LIST.POINT%TYPE
-,V_J_COST_DROP_CODE     IN J_COST_DROP.J_COST_DROP_CODE%TYPE
-, V_RE_AMOUNT             IN J_REAPPLY.RE_AMOUNT%TYPE
-)
-IS
-
-    V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE :='POLIS'|| SEQ_POINT_LIST.NEXTVAL;
-
-BEGIN
-
-    -- 1. 포인트 내역 등록
-    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE,V_POINT );
-    
-    -- 2. 주문 재입력 INSERT
-    INSERT INTO J_REAPPLY(J_REAPPLY_CODE, J_COST_DROP_CODE, B_USER_CODE, POINT_LIST_CODE, RE_AMOUNT)
-    VALUES('J_REAP'||SEQ_J_REAPPLY.NEXTVAL,V_J_COST_DROP_CODE, V_B_USER_CODE, V_POINT_LIST_CODE,V_RE_AMOUNT );
-    
-    
-    -- 커밋
-    --COMMIT;
 
 END;
+
+
