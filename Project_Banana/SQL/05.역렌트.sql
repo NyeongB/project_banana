@@ -37,7 +37,7 @@ VALUES ('POLIS' || SEQ_POINT_LIST.NEXTVAL, V_USER_OFFER, V_COST, 1);
 
 -- 2. 역렌트 거래 성사 등록 INSERT
 INSERT INTO RR_DEAL_SUCCESS(RR_DEAL_SUCCESS_CODE, RR_OFFER_CODE, POINT_LIST_CODE )
-VALUES(V_RR_DEAL_SUCCESS, V_RR_OFFER_CODE, V_POINT_LIST_CODE );
+VALUES(V_RR_DEAL_SUCCESS, V_RR_OFFER_CODE, V_POINT_LIST_CODE );--포인트 리스트는 하나만 참고해서 요청자것만 참조가됨 제공자는 요청자 POLISxx + 1로 찾을순있음
 
 
 -- 3. 역렌트 이용자 반납 INSERT(포인트 내역 등록 식별 코드 NULL인 상태)
@@ -107,7 +107,20 @@ BEGIN
     --커밋
     --COMMIT;
 END;
--- Procedure PRC_RR_USER_RETURN이(가) 컴파일되었습니다.
+/*
+SELECT * FROM RR_USER_RETURN;
+-- 이용자 반납 
+SELECT * FROM POINT_LIST;
+
+EXEC PRC_RR_USER_RETURN('USER6', 30000, 'POLIS53','RR_UR1');
+프로시저 테스트
+
+-- 이용자 반납 
+
+Procedure PRC_RR_USER_RETURN이(가) 컴파일되었습니다.
+EXEC PRC_RR_USER_RETURN('USER6', 30000, 'POLIS53','RR_UR1');
+*/
+
 
 --==============================================================================================================
 -- ③ 역렌트 거래 신고 처리 프로시저(유효한 신고일때)
