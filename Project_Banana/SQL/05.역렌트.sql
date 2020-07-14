@@ -206,6 +206,8 @@ CREATE OR REPLACE PROCEDURE PRC_RR_REVIEW
     --SEQUENCE 를 담을 변수 선언
     V_CREDIT_SCORE_CODE     CREDIT_SCORE.CREDIT_SCORE_CODE%TYPE;    
     V_BANANA_SCORE_CODE     BANANA_SCORE.BANANA_SCORE_CODE%TYPE;
+    
+    V_B_USER_CODE2           CREDIT_SCORE.B_USER_CODE%TYPE; -- 신뢰도를 받을 대여자 코드 
 BEGIN
 
 
@@ -214,13 +216,27 @@ BEGIN
     --바나나점수 시퀀스 
     V_BANANA_SCORE_CODE := 'BANA' || SEQ_BANANA.NEXTVAL;
     
+    SELECT B_USER_CODE INTO V_B_USER_CODE2  -- 렌트 제공게시물을 올린 유저코드를 얻어냄 
+    FROM RR_OFFER
+    WHERE RR_OFFER_CODE = (SELECT RR_OFFER_CODE
+                            FROM RR_DEAL_SUCCESS
+                            WHERE RR_DEAL_SUCCESS_CODE 
+                            = 
+                            (
+                                SELECT RR_DEAL_SUCCESS_CODE
+                                FROM RR_USER_RETURN
+                                WHERE RR_USER_RETURN_CODE = V_RR_USER_RETURN_CODE
+                           
+                            )
+                            );
+    
     --1)신뢰도 점수 내역 INSERT
     INSERT INTO CREDIT_SCORE(CREDIT_SCORE_CODE,CREDIT_SCORE,B_USER_CODE)
-    VALUES(V_CREDIT_SCORE_CODE,V_SCORE,V_B_USER_CODE);
+    VALUES(V_CREDIT_SCORE_CODE,V_SCORE,V_B_USER_CODE2);
 
     --2)바나나 점수 내역 INSERT
     INSERT INTO BANANA_SCORE(BANANA_SCORE_CODE,B_USER_CODE,BANANA_SCORE)
-    VALUES(V_BANANA_SCORE_CODE,V_B_USER_CODE,5);
+    VALUES(V_BANANA_SCORE_CODE,V_B_USER_CODE,20);
     
     --3)역렌트  리뷰 등록
     INSERT INTO RR_REVIEW(RR_REVIEW_CODE,RR_USER_RETURN_CODE,SCORE,CONTENT,CREDIT_SCORE_CODE,BANANA_SCORE_CODE)
@@ -231,7 +247,11 @@ BEGIN
 END;
 
 -- Procedure PRC_RR_REVIEW이(가) 컴파일되었습니다.
-
+/*
+프로시저 테스트
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+EXEC PRC_RR_REVIEW('USER6', 5, '정말 잘 쓰고 갑니다.', 'RR_UR1');
+*/
 --========================================================================================================================
 
 -- ⑤ 역렌트 요청 게시물 신고 처리
