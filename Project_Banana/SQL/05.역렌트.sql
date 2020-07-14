@@ -365,18 +365,27 @@ PL/SQL 프로시저가 성공적으로 완료되었습니다.
 -- 36. 역렌트 댓글 신고처리 
 CREATE OR REPLACE PROCEDURE PRC_RR_REPLY_REPORT_PRC
 (
- V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
-,V_RR_REPLY_REPORT_CODE     IN  RR_REPLY_REPORT.RR_REPLY_REPORT_CODE%TYPE --역렌트 댓글 신고 코드
+ V_RR_REPLY_REPORT_CODE     IN  RR_REPLY_REPORT.RR_REPLY_REPORT_CODE%TYPE --역렌트 댓글 신고 코드
 ,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
 ,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
 
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
+V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
 
 BEGIN
+
+        SELECT B_USER_CODE INTO V_B_USER_CODE           -- 신고를 당한 사람 구하기 
+        FROM RR_REPLY
+        WHERE RR_REPLY_CODE = (SELECT RR_REPLY_CODE
+                        FROM RR_REPLY_REPORT
+                        WHERE RR_REPLY_REPORT_CODE
+                        = V_RR_REPLY_REPORT_CODE);
+
+
         -- 유효한 신고일 경우
-        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
         THEN
         
            V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
@@ -402,7 +411,12 @@ BEGIN
     -- COMMIT;
 
 END;
---Procedure PRC_RR_REPLY_REPORT_PRC이(가) 컴파일되었습니다.
+/*
+Procedure PRC_RR_REPLY_REPORT_PRC이(가) 컴파일되었습니다.
+EXEC PRC_RR_REPLY_REPORT_PRC('RR_REPR1','ADMIN2', 'PNRP1');
+
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+*/
 
 
 
