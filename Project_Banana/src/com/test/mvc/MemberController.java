@@ -83,6 +83,23 @@ public class MemberController
 		return view;
 	}
 	
+	@RequestMapping(value = "/adminnoticelist.action", method =RequestMethod.GET)
+	public String AdminNoticeList(Model model)
+	{
+		String view = null; 
+		
+		IAdminNoticeListDAO dao = SqlSession.getMapper(IAdminNoticeListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminNoticeList.jsp";
+		
+		
+		return view;
+	}
+	
 	
 	
 	
