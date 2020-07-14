@@ -102,29 +102,6 @@ public class MemberController
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/restuser.action", method =RequestMethod.GET)
 	public String RestList(Model model)
 	{
