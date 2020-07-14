@@ -138,3 +138,11 @@ INSERT INTO JOIN(JOIN_CODE,B_USER_CODE,LOC_CODE,BANK_TYPE_CODE,PW_QUESTION_TYPE_
 VALUES('JOIN'||SEQ_JOIN.NEXTVAL,'USER2','LOC1','BANK7','PWFIND1','han34','한길동','950723-1222222','010-9999-8888','서울특별시 마포구 서교동 447-5 풍성빌딩 9층','java006$','한길동','hang@test.com','한길동','110-444-444444','미스터한','han.jpg');
 >>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 
+--관리자 공지사항 목록 뷰 
+CREATE OR REPLACE VIEW VIEW_NOTICELIST
+AS
+SELECT SUBSTR(N.NOTICE_CODE,5) AS NUM,N.TITLE,A.ID,N.WDATE,N.VIEWS
+FROM NOTICE N JOIN ADMIN A
+ON N.ADMIN_CODE = A.ADMIN_CODE;
+
+
