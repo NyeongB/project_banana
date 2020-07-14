@@ -83,28 +83,22 @@ public class MemberController
 		return view;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/adminnoticelist.action", method =RequestMethod.GET)
+	public String AdminNoticeList(Model model)
+	{
+		String view = null; 
+		
+		IAdminNoticeListDAO dao = SqlSession.getMapper(IAdminNoticeListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminNoticeList.jsp";
+		
+		
+		return view;
+	}
 	
 	
 	
@@ -120,6 +114,24 @@ public class MemberController
 		model.addAttribute("list", dao.list());
 		
 		view = "/AdminRestUserList.jsp";
+		
+		
+		return view;
+	}
+	
+	
+	@RequestMapping(value ="/adminadapplylist.action", method =RequestMethod.GET)
+	public String AdminAdApplyList(Model model)
+	{
+		String view = null; 
+		
+		IAdminAdsApplyListDAO dao = SqlSession.getMapper(IAdminAdsApplyListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminAdsApplyList.jsp";
 		
 		
 		return view;
