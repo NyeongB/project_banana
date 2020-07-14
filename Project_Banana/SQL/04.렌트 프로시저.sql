@@ -6,9 +6,8 @@
 -- 2. 렌트 이용 신청 (포인트 내역 등록 식별 코드) INSERT
 CREATE OR REPLACE PROCEDURE PRC_R_APPLY
 (
- V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
+ V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 참여자 유저코드
 , V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
-, V_STATE               IN POINT_LIST.POINT%TYPE   -- 상태
 , V_R_POST_CODE         IN R_POST.R_POST_CODE%TYPE -- 렌트 게시물 등록 코드
 , V_START_DATE          IN R_APPLY.START_DATE%TYPE -- 렌트 시작일
 , V_END_DATE            IN R_APPLY.END_DATE%TYPE   -- 렌트 종료일
@@ -22,8 +21,8 @@ V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST
 BEGIN
 -- 실행문
 -- 1. 포인트 내역 등록 INSERT(참여자 돈)
-INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
-VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT, V_STATE);
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT);
 
 -- 2. 렌트 이용 신청 (포인트 내역 등록 식별 코드) INSERT
 INSERT INTO R_APPLY(R_APPLY_CODE, R_POST_CODE, B_USER_CODE, START_DATE, END_DATE, POINT_LIST_CODE)
@@ -34,45 +33,179 @@ VALUES('R_APPLY'||SEQ_R_APPLY.NEXTVAL, V_R_POST_CODE, V_B_USER_CODE, V_START_DAT
 -- COMMIT;
 END;
 
+--============
+-- 렌트 신청 확인
+--V_B_USER_CODE(유저 코드) , V_POINT(포인트) , V_R_POST_CODE(게시물 등록 코드), V_START_DATE(렌트 시작일), V_END_DATE(렌트 종료일)
+-- 영구 제명회원 잘못 넣어짐 ㅠㅠ
+EXEC PRC_R_APPLY('USER8', -9800, 'R_POST2', TO_DATE('2020-08-01', 'YYYY-MM-DD'), TO_DATE('2020-08-02', 'YYYY-MM-DD'));   
+--==>> O
+
+
+-- 재입력 (USET11이 자전거 렌트 신청)
+EXEC PRC_R_APPLY('USER11', -9800, 'R_POST2', TO_DATE('2020-08-01', 'YYYY-MM-DD'), TO_DATE('2020-08-02', 'YYYY-MM-DD'));  
+--==>> O
+
+
+-- 같은 유저(USER11)가 캣타워 렌트 신청 할 때
+EXEC PRC_R_APPLY('USER11', -12000, 'R_POST3', TO_DATE('2020-08-05 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-05 23:59:59', 'YYYY-MM-DD HH24:MI:SS'));
+--==>> O
+
+
+-- 다른 유저(USER12)가 캣타뤄 렌트할 때
+EXEC PRC_R_APPLY('USER12', -12000, 'R_POST3', TO_DATE('2020-08-05 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-05 23:59:59', 'YYYY-MM-DD HH24:MI:SS'));
+--==>> O
+-- USER12가 자전거 렌트 할 때
+EXEC PRC_R_APPLY('USER12', -9800, 'R_POST2', TO_DATE('2020-08-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-02 23:59:59', 'YYYY-MM-DD HH24:MI:SS'));
+
 
 --========================================================================================
--- ②
--- ○ 렌트 리뷰 등록 프로시저
--- 1. 신뢰도 점수 내역 INSERT
--- 2. 바나나 점수 내역 INSERT
--- 3. 렌트 리뷰 등록
+-- ⑤
+-- ○ 렌트 거래 성사 시 프로시저
+-- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
+-- 2. 거래성사등록 INSERT
+-- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
+-- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
 
-CREATE OR REPLACE PROCEDURE PRC_R_REVIEW
-(   
-  V_CREDIT_SCORE        IN CREDIT_SCORE.CREDIT_SCORE%TYPE -- 평가한 신뢰도 점수
-, V_B_USER_CODE         IN B_USER.B_USER_CODE%TYPE -- 유저코드
-, V_CONTENT             IN R_REVIEW.CONTENT%TYPE -- 리뷰내용
-, V_R_USER_RETURN_CODE  IN R_USER_RETURN.R_USER_RETURN_CODE%TYPE -- 이용자 반납 코드
+CREATE OR REPLACE PROCEDURE PRC_R_SUCCESS
+(
+ V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 제안자 유저코드
+, V_R_APPLY_CODE        IN R_APPLY.R_APPLY_CODE%TYPE --렌트 신청 코드
 )
 IS
--- 변수 선언
-V_CREDIT_SCORE_CODE      CREDIT_SCORE.CREDIT_SCORE_CODE%TYPE := 'BRIX' || SEQ_BRIX.NEXTVAL;-- CS1
-V_BANANA_SCORE_CODE    BANANA_SCORE.BANANA_SCORE_CODE%TYPE :='BANA' || SEQ_BANANA.NEXTVAL;--BS1
+V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
+V_R_SUCCESS_CODE    R_SUCCESS.R_SUCCESS_CODE%TYPE := 'R_SUCCESS' || SEQ_R_SUCCESS.NEXTVAL; 
+D_B_USER_CODE       B_USER.B_USER_CODE%TYPE;     -- 취소한 사람 명단
+SDATE               R_APPLY.START_DATE%TYPE;     -- 취소된 사람이 신청한 렌트 시작일
+EDATE               R_APPLY.END_DATE%TYPE;       -- 취소된 사람이 신청한 렌트 종료일
+SSDATE              R_APPLY.START_DATE%TYPE;     -- 성사된 사람이 신청한 렌트 시작일
+EEDATE              R_APPLY.END_DATE%TYPE;       -- 성사된 사람이 신청한 렌트 종료일   
+V_COST               R_POST.COST%TYPE;           -- 해당 렌트 게시물 일일렌트비용
+DDEPOSIT            R_POST.DEPOSIT%TYPE;         -- 해당 렌트 게시물 보증금
+V_R_POST_CODE       R_POST.R_POST_CODE%TYPE;     -- 신청한 게시물 코드
 
+
+-- 커서 선언
+-- 취소된 사람의 사용자 찾기(취소된 사람의 유저 코드, 렌트 시작일, 렌트 종료일)
+CURSOR CUR_DELETE_USER
+IS
+SELECT B_USER_CODE, START_DATE, END_DATE
+FROM R_APPLY
+WHERE START_DATE >= ( SELECT START_DATE
+                     FROM R_APPLY
+                     WHERE R_APPLY_CODE = V_R_APPLY_CODE)
+    AND END_DATE <= ( SELECT END_DATE
+                     FROM R_APPLY
+                     WHERE R_APPLY_CODE = V_R_APPLY_CODE)
+    AND R_APPLY_CODE != V_R_APPLY_CODE
+    AND R_POST_CODE = (SELECT R_POST_CODE
+                       FROM R_APPLY
+                       WHERE R_APPLY_CODE = V_R_APPLY_CODE
+                        );
+                        
 BEGIN
--- 실행문
--- 1. 신뢰도 점수 내역 INSERT
-INSERT INTO CREDIT_SCORE ( CREDIT_SCORE_CODE,CREDIT_SCORE,B_USER_CODE)
-VALUES (V_CREDIT_SCORE_CODE,V_CREDIT_SCORE ,V_B_USER_CODE);
+-- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
+SELECT R_POST_CODE INTO V_R_POST_CODE
+FROM R_APPLY
+WHERE R_APPLY_CODE =  V_R_APPLY_CODE;
 
--- 2. 바나나점수 내역 INSERT
-INSERT INTO BANANA_SCORE(BANANA_SCORE_CODE, B_USER_CODE, BANANA_SCORE)
-VALUES (V_BANANA_SCORE_CODE, V_B_USER_CODE, 20);
+SELECT COST INTO V_COST
+FROM R_POST
+WHERE R_POST_CODE = V_R_POST_CODE;
 
--- 3. 렌트 리뷰 등록 INSERT
-INSERT INTO R_REVIEW(R_REVIEW_CODE, R_USER_RETURN_CODE, SCORE, CONTENT, CREDIT_SCORE_CODE, BANANA_SCORE_CODE)
-VALUES('R_REV'||SEQ_R_REVIEW.NEXTVAL, V_R_USER_RETURN_CODE, V_CREDIT_SCORE, V_CONTENT, V_CREDIT_SCORE_CODE, V_BANANA_SCORE_CODE);
+SELECT START_DATE INTO SSDATE
+FROM R_APPLY
+WHERE R_APPLY_CODE = V_R_APPLY_CODE;
 
--- 4. 커밋 
+SELECT END_DATE INTO EEDATE
+FROM R_APPLY
+WHERE R_APPLY_CODE = V_R_APPLY_CODE;
+
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, ((EEDATE-SSDATE))*V_COST, 1);
+
+
+-- 2. 거래성사등록 INSERT
+INSERT INTO R_SUCCESS(R_SUCCESS_CODE, R_APPLY_CODE, POINT_LIST_CODE)
+VALUES(V_R_SUCCESS_CODE, V_R_APPLY_CODE, V_POINT_LIST_CODE);
+
+
+-- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
+SELECT DEPOSIT INTO DDEPOSIT    -- 취소한 사람이 신청했던 게시물의 보증금 찾기
+FROM R_POST
+WHERE R_POST_CODE = V_R_POST_CODE;
+
+-- 커서 오픈(취소된 사람 명단)
+OPEN CUR_DELETE_USER;
+
+LOOP
+FETCH CUR_DELETE_USER INTO D_B_USER_CODE, SDATE, EDATE;
+EXIT WHEN CUR_DELETE_USER%NOTFOUND;
+
+INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, D_B_USER_CODE, ((EDATE-SDATE))*V_COST+DDEPOSIT); 
+
+END LOOP;
+
+CLOSE CUR_DELETE_USER;
+
+
+-- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
+INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE, POINT_LIST_CODE)
+VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, V_R_SUCCESS_CODE, EEDATE, V_POINT_LIST_CODE);
+
+-- 5. 커밋
 -- COMMIT;
 END;
 
---========================================================================================================================
+
+--================================================================================================================
+-- 렌트 성사 확인
+-- 제안자 유저코드, 렌트 신청 코드
+EXEC PRC_R_SUCCESS('USER10', 'R_APPLY7');
+
+
+-- 거래 성사 테이블에 INSERT
+SELECT *
+FROM R_SUCCESS;
+--==>>
+/*
+R_SUCCESS12	R_APPLY7	20/07/14	POLIS78
+*/
+
+-- 제안자의 포인트내역에 성사된 렌트비만 입금
+SELECT *
+FROM POINT_LIST
+WHERE B_USER_CODE = 'USER10';
+--==>>
+/*
+POLIS78	USER10	1800	20/07/14	1
+*/
+
+-- 성사된 신청기한과 겹치는 신청자의 포인트 내역에 결제금(렌트비+보증금) 환불
+SELECT *
+FROM POINT_LIST
+WHERE B_USER_CODE = 'USER12';
+--==>>
+/*
+POLIS80	USER12	9800	20/07/14	0
+*/
+SELECT *
+FROM POINT_LIST
+WHERE B_USER_CODE = 'USER8';
+--==>>
+/*
+POLIS79	USER8	9800	20/07/14	0
+*/
+
+
+-- 이용자 반납테이블에 성사된 렌트 참여자의 반납예정일 INSERT
+SELECT *
+FROM R_USER_RETURN;
+--==>>
+/*
+R_UR8	R_SUCCESS12	20/08/02	0	POLIS78	
+*/
+--===========================================================
 -- ③
 -- 6. 렌트 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
