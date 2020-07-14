@@ -58,7 +58,22 @@
 					</thead>
 					
 					<tbody>
+					<c:forEach var="lists"  items="${list }">
 						<tr>
+							<td>${lists.name }</td>
+							<td>${lists.adv_loc }</td>
+							<td>${lists.start_date }</td>
+							<td>${lists.end_date }</td>
+							<td><img alt="Bootstrap Image Preview"
+								src="${lists.photo }"
+								style="width: 70px; height: 70px;"></td>
+								
+							<td><a href="${lists.link }">바로가기</a></td>
+							<td>${lists.content }</td>
+							
+						</tr>
+					</c:forEach>
+<!-- 					<tr>
 							<td>megastudy2020</td>
 							<td>상단 광고</td>
 							<td>2020.06.25</td>
@@ -70,7 +85,7 @@
 							<td><a href="">바로가기</a></td>
 							<td>사이트 홍보 광고 신청합니다. </td>
 							
-						</tr>
+						</tr> -->
 
 					</tbody>
 					

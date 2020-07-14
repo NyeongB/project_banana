@@ -15,7 +15,13 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+ img 
+{
+	width: 70px;
+	height: 70px;
+}
+</style>
 
 
 </head>
@@ -63,16 +69,15 @@
 
 
 					<tbody>
+					<c:forEach var = "AdApplyList" items="${list }">
 						<tr>
-							<td>bike11</td>
-							<td>하단 광고</td>
-							<td>2020.06.25</td>
-							<td>2020.07.14</td>
-							<td><img alt="Bootstrap Image Preview"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzDMtEOltBIDuq-dRjaOstZ67y2lPrLX2e_w&usqp=CAU"
-								style="width: 70px; height: 70px;"></td>
-							<td><a href="">바로가기</a></td>
-							<td>자전거광고 신청합니다.</td>
+							<td>${AdApplyList.id }</td>
+							<td>${AdApplyList.adloc }</td>
+							<td>${AdApplyList.adsdate }</td>
+							<td>${AdApplyList.adedate }</td>
+							<td><img alt="" src="${AdApplyList.photo }"></td>
+							<td><a href="${AdApplyList.adlink }">바로가기</a></td>
+							<td>${AdApplyList.content }</td>
 							<td>
 								<div class="btn-group" role="group">
 
@@ -94,9 +99,9 @@
 
 							</td>
 						</tr>
-
+					</c:forEach>
 					</tbody>
-					
+				<!-- 	
 					<tbody>
 						<tr>
 							<td>megastudy2020</td>
@@ -168,7 +173,7 @@
 							
 						</tr>
 
-					</tbody>
+					</tbody> -->
 
 				</table>
 
