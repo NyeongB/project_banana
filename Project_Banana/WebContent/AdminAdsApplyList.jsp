@@ -15,7 +15,13 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+ img 
+{
+	width: 70px;
+	height: 70px;
+}
+</style>
 
 
 </head>
@@ -65,11 +71,11 @@
 					<tbody>
 					<c:forEach var = "AdApplyList" items="${list }">
 						<tr>
-							<td>${AdApplyList.adapplyuser }</td>
+							<td>${AdApplyList.id }</td>
 							<td>${AdApplyList.adloc }</td>
 							<td>${AdApplyList.adsdate }</td>
 							<td>${AdApplyList.adedate }</td>
-							<td>${AdApplyList.photo }</td>
+							<td><img alt="" src="${AdApplyList.photo }"></td>
 							<td><a href="${AdApplyList.adlink }">바로가기</a></td>
 							<td>${AdApplyList.content }</td>
 							<td>
@@ -95,7 +101,7 @@
 						</tr>
 					</c:forEach>
 					</tbody>
-					
+				<!-- 	
 					<tbody>
 						<tr>
 							<td>megastudy2020</td>
@@ -167,7 +173,7 @@
 							
 						</tr>
 
-					</tbody>
+					</tbody> -->
 
 				</table>
 
