@@ -28,7 +28,7 @@ public class MemberController
 		
 		
 		//model.addAttribute("list", 명단);
-		model.addAttribute("list", dao.list());
+		model.addAttribute("list", dao.list());	
 		
 		view = "/AdminAccountList.jsp";
 		
@@ -101,30 +101,6 @@ public class MemberController
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/restuser.action", method =RequestMethod.GET)
 	public String RestList(Model model)
 	{
@@ -143,6 +119,22 @@ public class MemberController
 	}
 	
 	
+	@RequestMapping(value = "/reportlist.action", method =RequestMethod.GET)
+	public String reportList(Model model)
+	{
+		String view = null; 
+		
+		IAdminReportListDAO dao = SqlSession.getMapper(IAdminReportListDAO.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminReportList.jsp";
+		
+		
+		return view;
+	}
 	
 	
 	
