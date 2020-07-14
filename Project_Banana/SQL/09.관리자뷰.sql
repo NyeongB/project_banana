@@ -2,7 +2,8 @@
 -- 이름@, 주민번호@, 핸드폰@,주소@,아이디@, EMAIL@,신뢰도,활동등급,포인트,가입일@,은행명,예금주@,계좌번호@,경고,아웃,최근방문일@
 -- 테이블:사용자등록,회원가입,은행명유형,포인트내역등록,신뢰도점수내역등록,바나나점수내역등록,접속일관리,아웃내역등록,경고내역,
 
-
+CREATE OR REPLACE VIEW VIEW_ADM_USER_LIST
+AS
 SELECT 
         J.NAME AS NAME
       , J.SSN AS SSN
@@ -52,6 +53,9 @@ ON T.BANK_TYPE_CODE = J.BANK_TYPE_CODE;
 -- 관리자 휴먼 회원 조회
 -- 이름, 주민번호, 핸드폰,주소,아이디, EMAIL,신뢰도,활동등급,포인트,가입일,은행명,예금주,계좌번호,경고,아웃,최근방문일,휴면전환날짜
 -- 테이블:사용자등록,회원가입,은행명유형,포인트내역등록,신뢰도점수내역등록,바나나점수내역등록,접속일관리,아웃내역등록,경고내역, 휴면회원
+
+CREATE OR REPLACE VIEW VIEW_ADM_REST_LIST
+AS
 SELECT J.NAME , J.SSN, J.TEL, J.ADDR, J.ID, J.EMAIL, BT.BANK_NAME AS BANKTYPENAME, J.ACCOUNT_USER AS ACCOUNTNAME, J.ACCOUNT AS ACCOUNT
 , (SELECT COUNT(*) FROM WARNING WHERE B_USER_CODE = R.B_USER_CODE) AS WARNING
 , NVL((SELECT SUM(POINT) FROM POINT_LIST WHERE B_USER_CODE = R.B_USER_CODE), 0) AS POINT 
@@ -73,8 +77,8 @@ ON B.B_USER_CODE = R.B_USER_CODE
 =======
 -- ○ 영구제명 회원 조회 
 -- 아이디, 이름, 주번, 번호, 주소, 이메일, 신뢰도점수, 바나나점수, 포인트점수, 생성일, 은행명, 예금주, 계좌번호, 경고, 아웃, 제명일자
-	
-	String id;
+CREATE OR REPLACE VIEW VIEW_ADM_PERM_LIST
+AS
 SELECT J.ID,J.NAME, J.SSN, J.TEL, J.ADDR, J.EMAIL,NVL((SELECT AVG(CREDIT_SCORE) FROM CREDIT_SCORE WHERE P.B_USER_CODE = B_USER_CODE),0) AS CREDIT_SCORE
 , NVL((SELECT SUM(BANANA_SCORE) FROM BANANA_SCORE WHERE P.B_USER_CODE = B_USER_CODE), 0) AS BANANA_SCORE
 ,NVL((SELECT SUM(POINT) FROM POINT_LIST WHERE B_USER_CODE=P.B_USER_CODE),0) AS POINT,
@@ -93,7 +97,8 @@ ON U.B_USER_CODE = P.B_USER_CODE;
 --○탈퇴회원 조회
 --이름, 주민번호, 핸드폰,주소,아이디, EMAIL,신뢰도,활동등급,포인트,가입일,은행명,예금주,계좌번호,경고,아웃,최근방문일,탈퇴날짜
 --테이블:사용자등록,회원가입,은행명유형,포인트내역등록,신뢰도점수내역등록,바나나점수내역등록,접속일관리,아웃내역등록,경고내역, 탈퇴회원
-
+CREATE OR REPLACE VIEW VIEW_ADM_LEAVE_LIST
+AS
 SELECT J.NAME,J.SSN,J.TEL,J.ADDR,J.ID,J.EMAIL
 ,NVL((SELECT SUM(CREDIT_SCORE) FROM CREDIT_SCORE WHERE C.B_USER_CODE=J.B_USER_CODE),0) AS CREDIT_SCORE
 ,NVL((SELECT SUM(BANANA_SCORE) FROM BANANA_SCORE WHERE B_USER_CODE=J.B_USER_CODE),0) AS BANANA_SCORE
@@ -137,4 +142,30 @@ VALUES('JOIN'||SEQ_JOIN.NEXTVAL,'USER5','LOC1','BANK7','PWFIND1','lee93','이채
 INSERT INTO JOIN(JOIN_CODE,B_USER_CODE,LOC_CODE,BANK_TYPE_CODE,PW_QUESTION_TYPE_CODE,ID,NAME,SSN,TEL,ADDR,PW,PW_ANSWER,EMAIL,ACCOUNT_USER,ACCOUNT,NICKNAME,PROFILE)
 VALUES('JOIN'||SEQ_JOIN.NEXTVAL,'USER2','LOC1','BANK7','PWFIND1','han34','한길동','950723-1222222','010-9999-8888','서울특별시 마포구 서교동 447-5 풍성빌딩 9층','java006$','한길동','hang@test.com','한길동','110-444-444444','미스터한','han.jpg');
 >>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
+
+
+
+-- 광고 수락 확정 리스트 뷰 생성
+CREATE OR REPLACE VIEW VIEW_ADV_CON_LIST
+AS
+SELECT J.NAME AS NAME
+        , CASE
+          WHEN(AT.ADV_LOC ='Top')
+          THEN '상단광고'
+          WHEN(AT.ADV_LOC ='Right')
+          THEN '우측광고'
+          ELSE '하단광고'
+          END AS ADV_LOC
+        , AA.START_DATE AS START_DATE
+        , AA.END_DATE AS END_DATE
+        , AA.PHOTO AS PHOTO
+        , AA.L_LINK AS LINK
+        , AA.CONTENT AS CONTENT
+FROM ADV_APPLY_ACCEPT AC LEFT JOIN ADV_APPLY AA
+ON AC.ADV_APPLY_CODE = AA.ADV_APPLY_CODE
+                        LEFT JOIN JOIN J
+ON AA.B_USER_CODE = J.B_USER_CODE
+                        LEFT JOIN ADV_TYPE AT
+ON AT.ADV_TYPE_CODE = AA.ADV_TYPE_CODE;
+
 
