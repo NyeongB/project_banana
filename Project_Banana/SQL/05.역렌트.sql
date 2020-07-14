@@ -216,7 +216,7 @@ V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
         -- 유효한 신고일 경우
-        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
         THEN
         
            V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
@@ -235,14 +235,21 @@ BEGIN
          INSERT INTO RR_REQ_REPORT_PROC(RR_REQ_REPORT_PROC_CODE, RR_REQ_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
          VALUES('RR_OPRP'|| SEQ_RR_REQ_REP_PRC.NEXTVAL, V_RR_REQ_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
         
-        
         END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
 END;
---Procedure PRC_RR_REQ_REPORT_PRC이(가) 컴파일되었습니다.
+/*
+프로시저 테스트 
+Procedure PRC_RR_REQ_REPORT_PRC이(가) 컴파일되었습니다.
+
+EXEC PRC_RR_REQ_REPORT_PRC('USER15', 'RR_RPR1','ADMIN3','PNRP1');
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+
+*/
 -------------------------------
 -- ⑥ 역렌트 제공 게시물 신고 처리
 -- 1) 경고내역등록 INSERT 
@@ -262,7 +269,7 @@ V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 
 BEGIN
         -- 유효한 신고일 경우
-        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
         THEN
         
            V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
@@ -285,10 +292,16 @@ BEGIN
         END IF;
 
     -- 3) 커밋
-    -- COMMIT;
+    COMMIT;
 
 END;
---Procedure PRC_RR_OFFER_REPORT_PRC이(가) 컴파일되었습니다.
+/*
+프로시저 테스트 
+Procedure PRC_RR_OFFER_REPORT_PRC이(가) 컴파일되었습니다.
+
+EXEC PRC_RR_OFFER_REPORT_PRC('USER16', 'RR_OPR1', 'ADMIN3', 'PNRP1');
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+*/
 -- ⑦ 역렌트 댓글 신고처리 시 프로시저
 -- 1. 경고 내역 등록코드 INSERT
 -- 2. 댓글 신고처리 INSERT
