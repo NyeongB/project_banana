@@ -126,6 +126,24 @@ public class MemberController
 	}
 	
 	
+	@RequestMapping(value ="/adminadapplylist.action", method =RequestMethod.GET)
+	public String AdminAdApplyList(Model model)
+	{
+		String view = null; 
+		
+		IAdminAdsApplyListDAO dao = SqlSession.getMapper(IAdminAdsApplyListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminAdsApplyList.jsp";
+		
+		
+		return view;
+	}
+	
+	
 	
 	
 	

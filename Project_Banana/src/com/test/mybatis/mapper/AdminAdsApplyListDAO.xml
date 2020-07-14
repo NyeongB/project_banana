@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.test.mvc.IAdminAdsApplyListDAO">
+	
+	<select id="list" resultType="com.test.mvc.AdminAdsListDTO">
+	SELECT AP.B_USER_CODE AS ADAPPLYUSER , AT.ADV_LOC AS ADLOC, AP.START_DATE AS ADSDATE, AP.END_DATE AS ADEDATE, AP.PHOTO , AP.L_LINK ADLINK, AP.CONTENT
+	FROM ADV_APPLY AP LEFT JOIN ADV_TYPE AT
+	ON AP.ADV_TYPE_CODE = AT.ADV_TYPE_CODE
+
+	</select>
+	
+	
+	
+</mapper>
