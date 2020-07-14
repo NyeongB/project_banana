@@ -70,14 +70,20 @@
 							<th class="col-md-3">작성날짜</th>
 							<th class="col-md-1">조회수</th>
 						</tr>
+						
+						<c:forEach var="lists" items="${list }">
 						<tr>
-							<td class="important"><p>중요</p></td>
-							<td>서비스 약관 변경 공지</td>
-							<td>전진영</td>
-							<td>2020.06.30 16:20</td>
-							<td>100</td>
+							<td><p>${lists.num }</p></td>
+							<td>${lists.title }</td>
+							<td>${lists.id }</td>
+							<td>${lists.wdate }</td>
+							<td>${lists.views }</td>
 						</tr>
-						<tr>
+						
+						</c:forEach>
+						
+						
+						<!-- <tr>
 							<td class="important"><p>중요</p></td>
 							<td>바나나 서비스 특별 공지</td>
 							<td>전진영</td>
@@ -125,7 +131,7 @@
 							<td>최철녕</td>
 							<td>2020.06.12 11:32</td>
 							<td>22</td>
-						</tr>
+						</tr> -->
 					</table>
 				
 				</div>
