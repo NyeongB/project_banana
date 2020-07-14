@@ -7,7 +7,7 @@
 <mapper namespace="com.test.mvc.IAdminAdsApplyListDAO">
 	
 	<select id="list" resultType="com.test.mvc.AdminAdsListDTO">
-	SELECT ADAPPLYUSER
+	SELECT ID
       , ADLOC
       , ADSDATE
       , ADEDATE
