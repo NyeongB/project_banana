@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminShopUserList.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -118,29 +118,26 @@ li
 						<th>아웃</th>
 						<th>최근방문일</th>
 					</tr>
+				<C:forEach var="lists" items="${list }">
 					<tr>
-						<td>홍길동</td>
-						<td>998852<br>-*******
-						</td>
-						<td>010-1111-1111</td>
-						<td>서울시<br>마포구 서교동
-						</td>
-						<td>hong5</td>
-						<td>hgd@test.com</td>
-						<td>55</td>
-						<td>1200</td>
-						<td>5000</td>
-						<td>2020- <br>06-30
-						</td>
-						<td>농협</td>
-						<td>홍길동</td>
-						<td>352-0732-<br>7111-53
-						</td>
-						<td>1</td>
-						<td>0</td>
-						<td>2020<br>-06-30
-						</td>
+						<td>${lists.name }</td>
+						<td>${lists.ssn }</td>
+						<td>${lists.tel }</td>
+						<td>${lists.addr }</td>
+						<td>${lists.id }</td>
+						<td>${lists.email }</td>
+						<td>${lists.credit_score }</td>
+						<td>${lists.banana_score }</td>
+						<td>${lists.point}</td>
+						<td>${lists.signDate }</td>
+						<td>${lists.bank_name }</td>
+						<td>${lists.account_user }</td>
+						<td>${lists.account }</td>
+						<td>${lists.warning }</td>
+						<td>${lists.out }</td>
+						<td>${lists.conDate }</td>			
 					</tr>
+				</C:forEach>
 				</table>
 
 
@@ -177,13 +174,12 @@ li
 </div>
 
 
-<!-- Footer -->
-<div class="row Footer">
-	<div class="col-md-12">
-		<jsp:include page="Footer.jsp"></jsp:include>
-	</div>
+<!-- footer  -->
+<div class="row">
+   <div class="col-md-12">
+      <jsp:include page="Footer.jsp"></jsp:include>
+   </div>
 </div>
-
 </body>
 </html>
 

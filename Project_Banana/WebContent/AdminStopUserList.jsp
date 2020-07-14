@@ -121,29 +121,32 @@ li
 						<th>아웃</th>
 						<th>정지 날짜</th>
 					</tr>
+					
+					<c:forEach var="list1" items="${list }">
 					<tr>
-						<td>홍길동</td>
-						<td>998852<br>-*******
+						<td>${list1.name }</td>
+						<td>${list1.ssn }
 						</td>
-						<td>010-1111-1111</td>
-						<td>서울시<br>마포구 서교동
+						<td>${list1.tel }</td>
+						<td>${list1.addr }
 						</td>
-						<td>hong5</td>
-						<td>hgd@test.com</td>
-						<td>55</td>
-						<td>1200</td>
-						<td>5000</td>
-						<td>2020- <br>06-30
+						<td>${list1.id }</td>
+						<td>${list1.email }</td>
+						<td>${list1.credit_score }</td>
+						<td>${list1.banana_score }</td>
+						<td>${list1.point }</td>
+						<td>${list1.sdate }
 						</td>
-						<td>농협</td>
-						<td>홍길동</td>
-						<td>352-0732-<br>7111-53
+						<td>${list1.bank_name }</td>
+						<td>${list1.account_user }</td>
+						<td>${list1.account }
 						</td>
-						<td>1</td>
-						<td>0</td>
-						<td>2020<br>-06-30
+						<td>${list1.warning }</td>
+						<td>${list1.out }</td>
+						<td>${list1.expulsion_date }
 						</td>
 					</tr>
+					</c:forEach>
 				</table>
 
 

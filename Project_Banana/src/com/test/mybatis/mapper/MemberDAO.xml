@@ -9,7 +9,8 @@
 	<select id="list" resultType="com.test.mvc.AdminAccountDTO">
 	SELECT ADMIN_CODE, ID, PW, SDATE, NAME 
 	FROM ADMIN		
-	</select>
+	</select>	
 	
 	
 </mapper>  
+

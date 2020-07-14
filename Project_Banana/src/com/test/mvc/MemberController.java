@@ -52,6 +52,80 @@ public class MemberController
 		
 		return view;
 	}
+	@RequestMapping(value = "/userlist.action", method = RequestMethod.GET)
+	public String userList(Model model) 
+	{
+		String view = null;
+		
+		IAdminUserListDAO dao = SqlSession.getMapper(IAdminUserListDAO.class);
+		
+		model.addAttribute("list", dao.list());
+		
+		view ="/AdminUserList.jsp";
+		return view;
+	}
+	
+	
+	@RequestMapping(value = "/stoplist.action", method =RequestMethod.GET)
+	public String stopList(Model model)
+	{
+		String view = null; 
+		
+		IStopDAO dao = SqlSession.getMapper(IStopDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminStopUserList.jsp";
+		
+		
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/restuser.action", method =RequestMethod.GET)
+	public String RestList(Model model)
+	{
+		String view = null; 
+		
+		IRestDAO dao = SqlSession.getMapper(IRestDAO.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminRestUserList.jsp";
+		
+		
+		return view;
+	}
+	
+	
 	
 	
 	

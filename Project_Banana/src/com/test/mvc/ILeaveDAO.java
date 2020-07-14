@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface ILeaveDAO
 {
-	public ArrayList<AdminAccountDTO> list();
+	public ArrayList<LeaveDTO> list();
 
 }
