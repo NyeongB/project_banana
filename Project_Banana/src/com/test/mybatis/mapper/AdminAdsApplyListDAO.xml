@@ -7,10 +7,14 @@
 <mapper namespace="com.test.mvc.IAdminAdsApplyListDAO">
 	
 	<select id="list" resultType="com.test.mvc.AdminAdsListDTO">
-	SELECT AP.B_USER_CODE AS ADAPPLYUSER , AT.ADV_LOC AS ADLOC, AP.START_DATE AS ADSDATE, AP.END_DATE AS ADEDATE, AP.PHOTO , AP.L_LINK ADLINK, AP.CONTENT
-	FROM ADV_APPLY AP LEFT JOIN ADV_TYPE AT
-	ON AP.ADV_TYPE_CODE = AT.ADV_TYPE_CODE
-
+	SELECT ADAPPLYUSER
+      , ADLOC
+      , ADSDATE
+      , ADEDATE
+      , PHOTO
+      , ADLINK
+      , CONTENT 
+	FROM AD_APPLYLIST_VIEW
 	</select>
 	
 	

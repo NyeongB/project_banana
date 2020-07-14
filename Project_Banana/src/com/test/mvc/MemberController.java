@@ -94,8 +94,7 @@ public class MemberController
 		
 		model.addAttribute("list", dao.list());
 		
-		view = "/AdminNoticeList.jsp";
-		
+		view = "/AdminNoticeList.jsp";		
 		
 		return view;
 	}
