@@ -169,7 +169,7 @@ SELECT *
 FROM R_SUCCESS;
 --==>>
 /*
-R_SUCCESS12	R_APPLY7	20/07/14	POLIS78
+R_SUCCESS14	R_APPLY7	20/07/15	POLIS97
 */
 
 -- 제안자의 포인트내역에 성사된 렌트비만 입금
@@ -178,7 +178,7 @@ FROM POINT_LIST
 WHERE B_USER_CODE = 'USER10';
 --==>>
 /*
-POLIS78	USER10	1800	20/07/14	1
+POLIS97	USER10	1800	20/07/15	1
 */
 
 -- 성사된 신청기한과 겹치는 신청자의 포인트 내역에 결제금(렌트비+보증금) 환불
@@ -187,14 +187,14 @@ FROM POINT_LIST
 WHERE B_USER_CODE = 'USER12';
 --==>>
 /*
-POLIS80	USER12	9800	20/07/14	0
+POLIS99	USER12	9800	20/07/15	0
 */
 SELECT *
 FROM POINT_LIST
 WHERE B_USER_CODE = 'USER8';
 --==>>
 /*
-POLIS79	USER8	9800	20/07/14	0
+POLIS98	USER8	9800	20/07/15	0
 */
 
 
@@ -202,8 +202,9 @@ POLIS79	USER8	9800	20/07/14	0
 SELECT *
 FROM R_USER_RETURN;
 --==>>
-/*
-R_UR8	R_SUCCESS12	20/08/02	0	POLIS78	
+/*                                  
+R_UR10	R_SUCCESS14	20/08/02	0	POLIS97
+                                    ---------  -> 제안자의 포인트코드 나중에 반납상태가 반납일 때 포인트 출금가능으로 업데이트 해야 하기 때문
 */
 --===========================================================
 -- ③
@@ -213,47 +214,100 @@ R_UR8	R_SUCCESS12	20/08/02	0	POLIS78
 
 CREATE OR REPLACE PROCEDURE PRC_R_POST_REP_PRC
 (
-V_B_USER_CODE             IN     B_USER.B_USER_CODE%TYPE    -- 유저코드
-,V_R_POST_REPORT_CODE     IN  R_POST_REPORT.R_POST_REPORT_CODE%TYPE-- 렌트 게시물 신고 코드
+V_R_POST_REPORT_CODE     IN  R_POST_REPORT.R_POST_REPORT_CODE%TYPE-- 렌트 게시물 신고 코드
 ,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유혀 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 유형 코드 0 일때 유효한 신고
 )
 IS
 
+V_R_POST_CODE       R_POST.R_POST_CODE%TYPE;    
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
+V_B_USER_CODE       B_USER.B_USER_CODE%TYPE;    -- 신고자당한사람 유저코드
 
 BEGIN
 
-    -- 유효한 신고일 경우
-    IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+       -- 1. 신고당한 게시물 번호 얻어내기
+        SELECT R_POST_CODE INTO V_R_POST_CODE 
+        FROM R_POST_REPORT
+        WHERE R_POST_REPORT_CODE = V_R_POST_REPORT_CODE;
+        
+        -- 2. 신고당한 게시물에 사용자 식별 코드 얻어내기        
+        SELECT B_USER_CODE INTO V_B_USER_CODE
+        FROM R_POST
+        WHERE R_POST_CODE = V_R_POST_CODE;
+
+
+        -- 유효한 신고일 경우
+        IF(V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
         THEN
-
-         V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE, V_B_USER_CODE);
          
-         
-         
-    -- 1) 경고내역 등록 INSERT
-     INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
-     VALUES (V_WARNING_CODE,V_B_USER_CODE);
-     
-     -- 2) 렌트 게시물 신고 처리 INSERT
-     INSERT INTO R_POST_REPORT_PROCESS(R_POST_REPORT_PROCESS_CODE, R_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-     VALUES('R_PRP'|| SEQ_R_POST_REP_PRC.NEXTVAL, V_R_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
-    
-    
-    -- 유효하지 않은 신고일 경우
-    ELSE
-    
-    -- 1) 렌트 게시물 신고 처리 INSERT
-    INSERT INTO R_POST_REPORT_PROCESS(R_POST_REPORT_PROCESS_CODE, R_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
-    VALUES('R_PRP'|| SEQ_R_POST_REP_PRC.NEXTVAL, V_R_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
-
+            -- 2) 렌트 게시물 신고 처리 INSERT
+            INSERT INTO R_POST_REPORT_PROCESS(R_POST_REPORT_PROCESS_CODE, R_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('R_PRPP'|| SEQ_R_POST_REP_PRC.NEXTVAL, V_R_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+       
+        -- 유효하지 않은 신고일 경우
+        ELSE            
+          -- 1) 렌트 게시물 신고 처리 INSERT
+         INSERT INTO R_POST_REPORT_PROCESS(R_POST_REPORT_PROCESS_CODE, R_POST_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('R_PRPP'|| SEQ_R_POST_REP_PRC.NEXTVAL, V_R_POST_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
 
     END IF;
     -- 3) 커밋
     -- COMMIT;
 
 END;
+--==============================================================================================================
+-- 렌트 게시물 신고처리 프로시저 확인
+-- 신고할 렌트 게시물 더미 입력
+INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
+                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER13', 'R_CATE50',  'LOC95', '신고신고신고신고', '신고당함!!'
+                                    , 10, TO_DATE('2020-07-11 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-10 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                    , '15:00', '홍대홍홍1번출구', '17:00', '홍대홍홍1번출구', '브랜드', 1000, 5000);
+
+
+
+
+-- 신고TEST 게시물 신고하기
+INSERT INTO R_POST_REPORT(R_POST_REPORT_CODE,B_USER_CODE,R_POST_CODE,POST_REPORT_TYPE_CODE)
+VALUES('R_PR'||SEQ_R_POST_REP.NEXTVAL,'USER13','R_POST5','POSRT1');
+
+SELECT *
+FROM R_POST_REPORT;
+--==>>
+/*
+R_PR2	USER13	R_POST5	POSRT1	20/07/15
+*/
+
+--==>> Procedure PRC_R_POST_REP_PRC이(가) 컴파일되었습니다.
+
+--렌트 게시물 신고 코드, 관리자 등록 코드, 이용자 반납 코드
+EXEC PRC_R_POST_REP_PRC( 'R_PR2', 'ADMIN4', 'PNRP1');
+--==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+
+SELECT *
+FROM R_POST_REPORT_PROCESS;
+--==>>
+/*
+R_PRPP10	R_PR2	ADMIN4	20/07/15	PNRP1	WAR19
+*/
+
+
+SELECT *
+FROM WARNING;
+--==>>
+/*
+WAR19	20/07/15	USER13
+*/
+
+
 
 
 
@@ -311,109 +365,7 @@ BEGIN
     
 END;
 --================================================================================================================
--- ⑤
--- ○ 렌트 거래 성사 시 프로시저
--- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
--- 2. 거래성사등록 INSERT
--- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
--- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
 
-CREATE OR REPLACE PROCEDURE PRC_R_SUCCESS
-(
- V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
-, V_POINT               IN POINT_LIST.POINT%TYPE   -- 포인트
-, V_R_APPLY_CODE        IN R_APPLY.R_APPLY_CODE%TYPE --렌트 신청 코드
-)
-IS
-V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
-V_R_SUCCESS_CODE    R_SUCCESS.R_SUCCESS_CODE%TYPE := 'R_SUCCESS' || SEQ_R_SUCCESS.NEXTVAL; 
-D_B_USER_CODE       B_USER.B_USER_CODE%TYPE;
-SDATE               R_APPLY.START_DATE%TYPE;
-EDATE               R_APPLY.END_DATE%TYPE;
-D_R_POST_CODE       R_POST.R_POST_CODE%TYPE;
-DCOST               R_POST.COST%TYPE;
-DDEPOSIT            R_POST.DEPOSIT%TYPE;
-S_EDATE             R_APPLY.END_DATE%TYPE;
-
-BEGIN
--- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
-INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
-VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_POINT, 1);
-
--- 2. 거래성사등록 INSERT
-INSERT INTO R_SUCCESS(R_SUCCESS_CODE, R_APPLY_CODE, POINT_LIST_CODE)
-VALUES(V_R_SUCCESS_CODE, V_R_APPLY_CODE, V_POINT_LIST_CODE);
-
--- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
-SELECT B_USER_CODE INTO D_B_USER_CODE           -- 취소된 사람의 사용자 식별코드 찾기
-FROM R_APPLY
-WHERE START_DATE <= ( SELECT START_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                    )
-    AND END_DATE >= (SELECT END_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                        );
-
--- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
-SELECT  START_DATE INTO SDATE
-FROM R_APPLY
-WHERE START_DATE <= ( SELECT START_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                    )
-    AND END_DATE >= (SELECT END_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                        );
-
--- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
-SELECT END_DATE INTO EDATE
-FROM R_APPLY
-WHERE START_DATE <= ( SELECT START_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                    )
-    AND END_DATE >= (SELECT END_DATE
-                     FROM R_APPLY
-                     WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                        );
-                        
-
-SELECT R_POST_CODE INTO D_R_POST_CODE       -- 취소한 사람의 신청 게시물코드 찾기
-FROM R_APPLY
-WHERE D_B_USER_CODE = B_USER_CODE;
-
-                        
-SELECT COST INTO DCOST    -- 취소한 사람이 신청했던 게시물의 비용 찾기
-FROM R_POST
-WHERE R_POST_CODE = D_R_POST_CODE;
-
-SELECT DEPOSIT INTO DDEPOSIT    -- 취소한 사람이 신청했던 게시물의 비용 찾기
-FROM R_POST
-WHERE R_POST_CODE = D_R_POST_CODE;
-
-
-INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-VALUES(V_POINT_LIST_CODE, D_B_USER_CODE, ((EDATE-SDATE)+1)*DCOST+DDEPOSIT); 
-
-
--- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
-
-SELECT END_DATE   INTO S_EDATE
-FROM R_APPLY
-WHERE V_R_APPLY_CODE = R_APPLY_CODE;
-
-INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE)
-VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, V_R_SUCCESS_CODE, S_EDATE);
-
--- 5. 커밋
--- COMMIT;
-END;
-
-
---================================================================================================================
 -- ⑥
 -- 이용자 반납(정상적으로 반납되었을떄)
 --1일때"   1.포인트 내역등록 코드 / 2.출금상태여부 update/ 3.이용자반납상태 update
@@ -454,17 +406,27 @@ END;
 -- 2. 댓글 신고처리 INSERT
 CREATE OR REPLACE PROCEDURE PRC_R_REPLY_REPORT_PROC
 (
-V_B_USER_CODE             IN  B_USER.B_USER_CODE%TYPE    -- 유저코드
-, V_R_REPLY_REPORT_CODE  IN  R_REPLY_REPORT.R_REPLY_REPORT_CODE%TYPE -- 댓글 신고 코드
-, V_ADMIN_CODE            IN      ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드
+ V_R_REPLY_REPORT_CODE     IN  R_REPLY_REPORT.R_REPLY_REPORT_CODE%TYPE --렌트 댓글 신고 코드
+,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
 )
 IS
-V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;  -- 경고 내역 코드
+
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
+V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
 
 BEGIN
+
+        SELECT B_USER_CODE INTO V_B_USER_CODE           -- 신고를 당한 사람 구하기 
+        FROM R_REPLY
+        WHERE R_REPLY_CODE = (SELECT R_REPLY_CODE
+                        FROM R_REPLY_REPORT
+                        WHERE R_REPLY_REPORT_CODE
+                        = V_R_REPLY_REPORT_CODE);
+
+
         -- 유효한 신고일 경우
-        IF (V_PNR_REPORT_PROC_TYPE_CODE = 0)
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
         THEN
         
            V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
@@ -472,26 +434,52 @@ BEGIN
             -- 1) 경고내역 등록 INSERT
             INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
             VALUES (V_WARNING_CODE,V_B_USER_CODE);
-
-
-            -- 2) 댓글 신고처리 INSERT
+         
+            -- 2) 렌트 댓글  신고 처리 INSERT
             INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-            VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL,  V_R_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+            VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 렌트 댓글 신고 처리 INSERT
+         INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
         
-            -- 유효하지 않은 신고일 경우
-        ELSE
-
-            --1) 댓글 신고처리 INSERT
-             INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
-            VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL,  V_R_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE);
-
+        
         END IF;
-        
-        -- 3) 커밋
-        -- COMMIT;
+
+    -- 3) 커밋
+    -- COMMIT;
 
 END;
 
+--===========================
+-- 렌트 댓글 신고처리 프로시저 확인
+-- Procedure PRC_R_REPLY_REPORT_PROC이(가) 컴파일되었습니다.
+-- 신고할 렌트 댓글 입력
+INSERT INTO R_REPLY(R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY,L_LEVEL)
+VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, 'R_POST3', 'USER13', '신고', 0);
+
+-- 댓글 신고 INSERT
+INSERT INTO R_REPLY_REPORT(R_REPLY_REPORT_CODE,R_REPLY_CODE,REPLY_REPORT_TYPE_CODE,B_USER_CODE)
+VALUES('R_REPR'||SEQ_R_REPLY_REP.NEXTVAL,'R_REP5','REPRT5','USER6');
+--==>>
+/*
+R_REPR2	R_REP5	REPRT5	USER6	20/07/15
+*/
+
+-- 렌트 댓글 신고 코드, 관리자 코드, 게시물/댓글 신고처리 유형 코드 PNRP1 일때 유효한 신고
+EXEC PRC_R_REPLY_REPORT_PROC('R_REPR2', 'ADMIN4', 'PNRP1');
+--==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+SELECT *
+FROM R_REPLY_REPORT_PROC;
+--==>> R_REPRP2	R_REPR2	ADMIN4	20/07/15	PNRP1	WAR20
+SELECT *
+FROM WARNING;
+--==>> WAR20	20/07/15	USER13
+
+--=====================================================
 
 
 
