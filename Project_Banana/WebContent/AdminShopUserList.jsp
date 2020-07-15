@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminUserList.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -27,6 +27,12 @@ String cp = request.getContextPath();
 	})
 </script>
 <style type="text/css">
+
+tr
+{
+	font-size: 9px;
+}
+
 li 
 {
 	font-weight: bold;
@@ -41,12 +47,16 @@ li
 	*/
 	font-size: 13px;
 	font-weight: 300;
+	
 }
 
 .nav2 
 {
 	float: rigth;
 }
+
+
+
 </style>
 </head>
 <body>
@@ -60,26 +70,11 @@ li
 
 		<div class="content">
 			<div class="col-md-2">
-
-				<div id="nav1">
-					<ul class="menu">
-						<li><a href="#">조 회</a>
-							<ul class="sub" style="display: none;">
-								<li><a href="#">접수된 신고</a></li>
-								<li><a href="#">거래 조회</a></li>
-								<li><a href="#">관리자 계정 관리</a></li>
-								<li><a href="#">사용자 조회</a></li>
-							</ul></li>
-						
-						<li><a href="#">매출관리</a></li>
-						<li><a href="#">광고관리</a></li>
-
-
-					</ul>
-				</div>
+				<jsp:include page="MenuAdmin.jsp"></jsp:include>
+			</div>
 
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-10">
 				<div class="fluid">
 					<div class="col-md-12">
 						<h2>사용자 조회</h2>
@@ -87,13 +82,7 @@ li
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<ul class="nav nav-pills">
-							<li role="presentation"><a href="#">일반회원</a></li>
-							<li role="presentation" class="active"><a href="#">소상공인회원</a></li>
-							<li role="presentation"><a href="#">정지회원</a></li>
-							<li role="presentation"><a href="#">탈퇴회원</a></li>
-							<li role="presentation"><a href="#">휴면회원</a></li>
-						</ul>
+						
 					</div>
 				</div>
 
@@ -101,62 +90,57 @@ li
 				<div class="table">
 					<table class="table table-striped">
 						<tr>
-							<th>이름</th>
+							<th colspan="2">이름</th>
 							<th>주민번호</th>
-							<th>핸드폰<br>번호
-							</th>
-							<th>주소</th>
+							<th>핸드폰<br>번호</th>
+							<th colspan="2">주소</th>
 							<th>아이디</th>
 							<th>Email</th>
 							<th>신뢰도</th>
 							<th>활동등급</th>
 							<th>포인트</th>
 							<th>가입일</th>
-							<th>은행명</th>
-							<th>예금주</th>
+							<th colspan="2">은행명</th>
+							<th colspan="2">예금주</th>
 							<th>계좌번호</th>
 							<th>경고</th>
 							<th>아웃</th>
-							<th>최근방문일</th>
+							<th colspan="4">최근방문일</th>
+							<th colspan="2">사업장명</th>
+							<th>사업자 번호</th>
 						</tr>
-						<tr>
-							<td>홍길동</td>
-							<td>998852<br>-*******
-							</td>
-							<td>010-1111-1111</td>
-							<td>서울시<br>마포구 서교동
-							</td>
-							<td>hong5</td>
-							<td>hgd@test.com</td>
-							<td>55</td>
-							<td>1200</td>
-							<td>5000</td>
-							<td>2020- <br>06-30
-							</td>
-							<td>농협</td>
-							<td>홍길동</td>
-							<td>352-0732-<br>7111-53
-							</td>
-							<td>1</td>
-							<td>0</td>
-							<td>2020<br>-06-30
-							</td>
+						
+						<c:forEach var="shop" items="${list }">
+							<tr>
+							<td colspan="2">${shop.name }</td>
+							<td>${shop.ssn }</td>
+							<td>${shop.tel }</td>
+							<td colspan="2">${shop.addr }</td>
+							<td>${shop.id }</td>
+							<td>${shop.email }</td>
+							<td>${shop.c_score }</td>
+							<td>${shop.b_score }</td>
+							<td>${shop.point }</td>
+							<td>${shop.sdate }</td>
+							<td colspan="2">${shop.bank_name }</td>
+							<td colspan="2">${shop.account_user }</td>
+							<td>${shop.account }</td>
+							<td>${shop.w_count }</td>
+							<td>${shop.o_count }</td>
+							<td colspan="4">${shop.con_date }</td>
+							<td colspan="2">${shop.business_name }</td>
+							<td>${shop.business_num }</td>
 						</tr>
+						
+						</c:forEach>
+						
 					</table>
 
 
 
 				</div>
 
-				<div class="col-md-12">
-					<ol class="nav2 pull-right">
-						<li><a href="#">사업장명</a></li>
-						<li><a href="#">사업자 번호</a></li>
-						<li><a href="#">사업자 등록 사진</a></li>
-					</ol>
-
-
-				</div>
+				
 
 				<div class="text-center">
 					<div class="col-md-12">
