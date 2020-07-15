@@ -76,15 +76,23 @@ $(document).ready(function()
 
 	function readData()
 	{
-		$.ajax()
+		$.ajax(
 		{
 			type:"POST"
-			,url : ""
+			,url : "calimsi.jsp"
+			,data : params
+			,dataType: "json"
+			,success:function(args)
+			{
+				
+				
+			}
+			,beforeSend : showRequest
 			
 			
 			
 			
-		}
+		});
 		
 		
 	}
