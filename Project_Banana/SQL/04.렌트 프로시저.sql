@@ -418,20 +418,35 @@ END;
 -- 이용자 반납(정상적으로 반납되었을떄)
 --1일때"   1.포인트 내역등록 코드 / 2.출금상태여부 update/ 3.이용자반납상태 update
 
+
 CREATE OR REPLACE PROCEDURE PRC_R_USER_RETURN
 (
-V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 유저코드
-,V_POINT                IN POINT_LIST.POINT%TYPE -- 보증금......
-,V_POINT_LIST_CODE      IN POINT_LIST.POINT_LIST_CODE%TYPE -- 포인트 리스트 코드 (업데이트할)
-,V_R_USER_RETURN_CODE    IN R_USER_RETURN.R_USER_RETURN_CODE%TYPE
+V_R_USER_RETURN_CODE    IN R_USER_RETURN.R_USER_RETURN_CODE%TYPE
+
 )
 IS
+V_APPLY_USER         B_USER.B_USER_CODE%TYPE; -- 신청유저코드
+V_POINT                 POINT_LIST.POINT%TYPE; -- 보증금......
+V_POINT_LIST_CODE       POINT_LIST.POINT_LIST_CODE%TYPE;
 BEGIN
-
+      
+      --  신청 유저 코드 , 신청유저 보증금, 대여자 포인트 리스트 코드 
+      SELECT RA.B_USER_CODE, RP.DEPOSIT , RS.POINT_LIST_CODE INTO V_APPLY_USER, V_POINT, V_POINT_LIST_CODE
+     FROM R_USER_RETURN RE LEFT JOIN R_SUCCESS RS
+      ON RE.R_SUCCESS_CODE = RS.R_SUCCESS_CODE
+      LEFT JOIN R_APPLY RA
+    ON RS.R_APPLY_CODE = RA.R_APPLY_CODE
+    LEFT JOIN R_POST RP
+      ON RP.R_POST_CODE = RA.R_POST_CODE
+      WHERE RE.R_USER_RETURN_CODE = V_R_USER_RETURN_CODE;
+      
+      
+      
+      
 
     -- 포인트 내역 등록 코드(보증금 환불)
     INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL,V_B_USER_CODE,V_POINT);
+    VALUES('POLIS'||SEQ_POINT_LIST.NEXTVAL,V_APPLY_USER,V_POINT);
     
     -- 출금상태 여부 UPDATE(상태를 출금가능으로 )
     UPDATE POINT_LIST
@@ -447,6 +462,14 @@ BEGIN
     --커밋
     --COMMIT;
 END;
+/*
+Procedure PRC_R_USER_RETURN이(가) 컴파일되었습니다.
+
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+-- 반납 프로시저 실행 // 반납 코드 
+EXEC PRC_R_USER_RETURN('R_UR10');
+*/
 --==========================================================================================================================
 -- ⑦
 -- ○ 렌트 댓글 신고처리(경고 발생)
