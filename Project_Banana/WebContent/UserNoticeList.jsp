@@ -61,62 +61,15 @@
 							<th class="col-md-3">작성날짜</th>
 							<th class="col-md-1">조회수</th>
 						</tr>
-						<tr>
-							<td class="important"><p>중요</p></td>
-							<td>서비스 약관 변경 공지</td>
-							<td>전진영</td>
-							<td>2020.06.30 16:20</td>
-							<td>100</td>
+						<c:forEach var="lists" items="${list }">
+							<tr>
+							<td>${lists.num }</td>
+							<td>${lists.title }</td>
+							<td>${lists.id }</td>
+							<td>${lists.wdate }</td>
+							<td>${lists.views }</td>
 						</tr>
-						<tr>
-							<td class="important"><p>중요</p></td>
-							<td>바나나 서비스 특별 공지</td>
-							<td>전진영</td>
-							<td>2020.06.30 13:20</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td><p>6</p></td>
-							<td>특별회원 이벤트</td>
-							<td>전진영</td>
-							<td>2020.06.21 11:20</td>
-							<td>124</td>
-						</tr>
-						<tr>
-							<td><p>5</p></td>
-							<td>렌트 거래 정책 공지 드립니다.</td>
-							<td>전진영</td>
-							<td>2020.06.20 16:20</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td><p>4</p></td>
-							<td>소상 공인 정책 변경 공지</td>
-							<td>임효림</td>
-							<td>2020.06.19 12:22</td>
-							<td>9</td>
-						</tr>
-						<tr>
-							<td><p>3</p></td>
-							<td>자율협력 구매 관련 공지</td>
-							<td>임효림</td>
-							<td>2020.06.18 11:22</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td><p>2</p></td>
-							<td>출금 수수료 관련 공지</td>
-							<td>임효림</td>
-							<td>2020.06.16 12:42</td>
-							<td>88</td>
-						</tr>
-						<tr>
-							<td><p>1</p></td>
-							<td>바나나 포인트 충전 관련 공지</td>
-							<td>최철녕</td>
-							<td>2020.06.12 11:32</td>
-							<td>22</td>
-						</tr>
+						</c:forEach>
 					</table>
 				
 				</div>

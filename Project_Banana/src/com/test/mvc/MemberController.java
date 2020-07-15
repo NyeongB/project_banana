@@ -88,7 +88,7 @@ public class MemberController
 	{
 		String view = null; 
 		
-		IAdminNoticeListDAO dao = SqlSession.getMapper(IAdminNoticeListDAO.class);
+		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 		
 		
 		
@@ -153,5 +153,38 @@ public class MemberController
 		return view;
 	}
 	
+	@RequestMapping(value = "/usernoticelist.action", method =RequestMethod.GET)
+	public String UserNoticeList(Model model)
+	{
+		String view = null; 
+		
+		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/UserNoticeList.jsp";
+		
+		
+		return view;
+	}
+	
+	@RequestMapping(value = "/adminshopuserlist.action", method =RequestMethod.GET)
+	public String AdminShopUserList(Model model)
+	{
+		String view = null; 
+		
+		IAdminShopUserListDAO dao = SqlSession.getMapper(IAdminShopUserListDAO.class);
+		
+		
+		
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminShopUserList.jsp";
+		
+		
+		return view;
+	}
 	
 }

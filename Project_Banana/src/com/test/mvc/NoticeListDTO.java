@@ -1,6 +1,6 @@
 package com.test.mvc;
 
-public class AdminNoticeListDTO
+public class NoticeListDTO
 {
 	private String num,title,id,wdate;
 	private int views;

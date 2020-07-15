@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IAdminNoticeListDAO">
+<mapper namespace="com.test.mvc.INoticeListDAO">
 	
-	<select id="list" resultType="com.test.mvc.AdminNoticeListDTO">
+	<select id="list" resultType="com.test.mvc.NoticeListDTO">
 	SELECT *
 	FROM VIEW_NOTICELIST	
 	</select>	

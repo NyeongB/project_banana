@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.test.mvc.IAdminShopUserListDAO">
+	
+	<select id="list" resultType="com.test.mvc.AdminShopUserListDTO">			
+		SELECT  J.NAME,J.SSN,J.TEL,J.ADDR,J.ID,J.EMAIL
+		, NVL(CS.CREDIT_SCORE_CODE,0) AS C_SCORE
+		,NVL(BS.BANANA_SCORE_CODE,0) AS B_SCORE
+		,NVL(PL.POINT,0) AS POINT
+		,B.SDATE
+		,BT.BANK_NAME AS BANK_NAME
+		,J.ACCOUNT_USER
+		,J.ACCOUNT
+		,(
+		    SELECT COUNT(*)
+		    FROM WARNING
+		    WHERE B_USER_CODE = J.B_USER_CODE
+		) AS W_COUNT
+		,(
+		    SELECT COUNT(*) 
+		    FROM OUT
+		    WHERE B_USER_CODE = J.B_USER_CODE
+		) AS O_COUNT
+		,NVL((SELECT MAX(SDATE) FROM CONNECTION WHERE B_USER_CODE = J.B_USER_CODE),TO_DATE('1111-11-11')) AS CON_DATE
+		,A.BUSINESS_NAME
+		,A.BUSINESS_NUM
+		FROM JOIN J LEFT JOIN CREDIT_SCORE CS 
+		ON J.B_USER_CODE = CS.B_USER_CODE
+		          LEFT JOIN BANANA_SCORE BS
+		ON J.B_USER_CODE = BS.B_USER_CODE
+		          LEFT JOIN POINT_LIST PL
+		ON J.B_USER_CODE = PL.B_USER_CODE
+		        LEFT JOIN B_USER B
+		ON J.B_USER_CODE =B.B_USER_CODE 
+		        LEFT JOIN BANK_TYPE BT
+		 ON J.BANK_TYPE_CODE = BT.BANK_TYPE_CODE
+		         RIGHT JOIN SOSANG_APPLY A
+		ON  J.B_USER_CODE = A.B_USER_CODE 
+	</select>	
+	
+</mapper>  
