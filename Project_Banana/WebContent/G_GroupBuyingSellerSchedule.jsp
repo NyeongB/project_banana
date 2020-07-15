@@ -30,6 +30,10 @@
 		border: 0.5px solid black;
 		padding: 10px;
 	}
+	#calendar *
+	{
+		font-size: x-small;
+	}
 	
 </style>
 
@@ -38,7 +42,7 @@
 
 
 
-
+<script src='fullcalendar/core/locales/ko.js'></script>
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
@@ -68,19 +72,67 @@ $(document).ready(function()
 
 
 		});
+		
+
+	function readData()
+	{
+		$.ajax()
+		{
+			type:"POST"
+			,url : ""
+			
+			
+			
+			
+		}
+		
+		
+	}
+		
+		
 
 document.addEventListener('DOMContentLoaded', function() {
+	
 	  var calendarEl = document.getElementById('calendar');
 	  
-	  var calendar = new FullCalendar.Calendar(calendarEl, {
-	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+	  var calendar = new FullCalendar.Calendar(calendarEl, {	  
+
+	    eventDidMount: function(info) {
+	      var tooltip = new Tooltip(info.el, {
+	        title: info.event.extendedProps.description,
+	        placement: 'top',
+	        trigger: 'hover',
+	        container: 'body'
+	      });
+	    },
+		  
+	    plugins: [ 'list','interaction', 'dayGrid', 'timeGrid'],
 	    defaultView: 'dayGridMonth',
 	    defaultDate: new Date(),
+	    dateClick: function() {
+	        alert('a day has been clicked!');
+	      },
 	    header: {
 	      left: 'prev,next today',
 	      center: 'title',
 	      right: ''
 	    },
+	    locale: 'ko',
+	    events:[
+	    	
+	    	{
+	    		"title":"시작일",
+	    		"start":'2020-07-09T16:00:00'	    		
+	    		
+	    	},
+	    	 {
+	    	        groupId: '999',
+	    	        title: 'Repeating Event',
+	    	        description: 'description for Repeating Event',
+	    	        start: '2020-07-09T16:00:00'
+	    	      }
+	    	
+	    ]
 	  });
 	  calendar.render();
 	});
@@ -134,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<hr />
 							
 							
-							<div id="calendar" style="width: 80%; height: 80%;" class="text-center"></div>
+							<div id="calendar" style="width: 100%; height: 100%;" class="text-center"></div>
 							
 							
 						</div>

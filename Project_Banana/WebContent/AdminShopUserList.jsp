@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminUserList.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="icon" href="images/favicon.ico" />
@@ -61,23 +61,7 @@ li
 		<div class="content">
 			<div class="col-md-2">
 
-				<div id="nav1">
-					<ul class="menu">
-						<li><a href="#">조 회</a>
-							<ul class="sub" style="display: none;">
-								<li><a href="#">접수된 신고</a></li>
-								<li><a href="#">거래 조회</a></li>
-								<li><a href="#">관리자 계정 관리</a></li>
-								<li><a href="#">사용자 조회</a></li>
-							</ul></li>
-						
-						<li><a href="#">매출관리</a></li>
-						<li><a href="#">광고관리</a></li>
-
-
-					</ul>
-				</div>
-
+				
 			</div>
 			<div class="col-md-8">
 				<div class="fluid">
