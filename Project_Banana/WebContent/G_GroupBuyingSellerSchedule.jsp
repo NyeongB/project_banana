@@ -76,6 +76,7 @@ $(document).ready(function()
 
 	function readData()
 	{
+		var events;
 		$.ajax(
 		{
 			type:"POST"
@@ -84,7 +85,7 @@ $(document).ready(function()
 			,dataType: "json"
 			,success:function(args)
 			{
-				
+				events = args;
 				
 			}
 			,beforeSend : showRequest
@@ -94,13 +95,14 @@ $(document).ready(function()
 			
 		});
 		
-		
+		return events;
 	}
 		
 		
 
 document.addEventListener('DOMContentLoaded', function() {
 	
+	  var events = readData();
 	  var calendarEl = document.getElementById('calendar');
 	  
 	  var calendar = new FullCalendar.Calendar(calendarEl, {	  
@@ -126,21 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	      right: ''
 	    },
 	    locale: 'ko',
-	    events:[
-	    	
-	    	{
-	    		"title":"시작일",
-	    		"start":'2020-07-09T16:00:00'	    		
-	    		
-	    	},
-	    	 {
-	    	        groupId: '999',
-	    	        title: 'Repeating Event',
-	    	        description: 'description for Repeating Event',
-	    	        start: '2020-07-09T16:00:00'
-	    	      }
-	    	
-	    ]
+	    events: events
+	    
 	  });
 	  calendar.render();
 	});
