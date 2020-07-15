@@ -321,49 +321,162 @@ WAR19	20/07/15	USER13
 
 CREATE OR REPLACE PROCEDURE PRC_R_DEAL_REPORT_PROC
 (
-  V_B_USER_CODE                 IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
-, V_B_USER_REP_CODE             IN     B_USER.B_USER_CODE%TYPE   -- 신고당한사람유저코드
-, V_POINT                       IN     POINT_LIST.POINT%TYPE  -- 입력받을 포인트
-, V_R_DEAL_REPORT_CODE          IN      R_DEAL_REPORT.R_DEAL_REPORT_CODE%TYPE -- 렌트 거래 신고 코드
-, V_ADMIN_CODE                  IN      ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE  IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고자에 대한 거래 신고처리 유형 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE2 IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고대상자에 대한 거래 신고처리 유형 코드
-, V_ANSWER                       IN      R_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변
-
+V_R_DEAL_REPORT_CODE            IN      R_DEAL_REPORT.R_DEAL_REPORT_CODE%TYPE -- 렌트 거래 신고 코드
+, V_ADMIN_CODE                  IN      ADMIN.ADMIN_CODE%TYPE                 -- 관리자 등록 코드
+, V_ANSWER                      IN      R_DEAL_REPORT_PROC.ANSWER%TYPE        -- 신고답변
+, V_CHECK                       IN      NUMBER                            -- 신고처리여부  0일때 OK  
 )
 IS
- V_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자 포인트 내역 등록코드
+V_DEPOSIT   R_POST.DEPOSIT%TYPE;     -- 보증금
+V_COST      R_POST.COST%TYPE;        -- 비용
+V_R_DEAL_REPORT_TYPE_CODE       R_DEAL_REPORT.R_DEAL_REPORT_TYPE_CODE%TYPE; -- 렌트 거래 신고 유형 코드
+V_SDATE    R_APPLY.START_DATE%TYPE; -- 신청한 렌트 시작일
+V_EDATE    R_APPLY.END_DATE%TYPE;   -- 신청한 렌트 종료일
+V_APPLY_USER   B_USER.B_USER_CODE%TYPE; -- 렌트 신청한 사용자 코드
+V_POST_USER    B_USER.B_USER_CODE%TYPE; -- 렌트 대여자 코드
+V_POINT_LIST    POINT_LIST.POINT_LIST_CODE%TYPE; -- 대여자의  포인트 리스트 코드 
+
+V_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자 포인트 내역 등록코드
  V_REP_POINT_LIST_CODE     POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS'||SEQ_POINT_LIST.NEXTVAL;  -- 신고자대상자 포인트 내역 등록코드
  V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;
 
-BEGIN
 
-    -- 1) 포인트 내역 등록 INSERT  -- 신고자 돈 환불 (+)
-    -- SDATE,STATE는 기본값으로
-    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES(V_POINT_LIST_CODE,V_B_USER_CODE, V_POINT );
+BEGIN
+              -- 신고유형 
+              SELECT R_DEAL_REPORT_TYPE_CODE INTO V_R_DEAL_REPORT_TYPE_CODE
+              FROM R_DEAL_REPORT
+              WHERE R_DEAL_REPORT_CODE = V_R_DEAL_REPORT_CODE;
+              
+              -- 보증금, 렌트비, 시작일, 종료일, 신청유저, 대여자 
+              SELECT P.DEPOSIT, P.COST, RA.START_DATE, RA.END_DATE, RA.B_USER_CODE, P.B_USER_CODE , RS.POINT_LIST_CODE
+              INTO V_DEPOSIT, V_COST, V_SDATE, V_EDATE, V_APPLY_USER, V_POST_USER, V_POINT_LIST
+              FROM R_DEAL_REPORT DR LEFT JOIN R_SUCCESS RS
+              ON DR.R_SUCCESS_CODE = RS.R_SUCCESS_CODE
+              LEFT JOIN R_APPLY RA
+              ON RA.R_APPLY_CODE = RS.R_APPLY_CODE
+              LEFT JOIN R_POST P
+              ON RA.R_POST_CODE = P.R_POST_CODE
+              WHERE R_DEAL_REPORT_CODE = V_R_DEAL_REPORT_CODE;
+
+
+    IF(V_CHECK = 0)
+    THEN
     
-    -- 2) 포인트 내역 등록 INSERT  -- 신고대상자 돈 회수 (-)
-    -- SDATE,STATE는 기본값으로
-    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-    VALUES(V_REP_POINT_LIST_CODE, V_B_USER_REP_CODE,- V_POINT );
+        IF(V_R_DEAL_REPORT_TYPE_CODE = 'RDRT2')
+        THEN
+            -- 1, 9 (사용자 아웃) 보증금만 환불/ 신고무효처리(쓸수있는돈으로 바꿔줌) 
+          
+          -- 이용자에게 보증금만 환불 
+           INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+          VALUES(V_POINT_LIST_CODE,V_APPLY_USER, V_DEPOSIT );
+          
+          -- 대여자 포인트 상태 수정 
+          UPDATE POINT_LIST SET STATE = 0
+          WHERE POINT_LIST_CODE = V_POINT_LIST;
+          
+          -- 이용자에게 아웃처리 
+          INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+          VALUES(V_OUT_CODE, V_APPLY_USER);
+          
+          -- 이용자 처리
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE
+          ,REFUND_DATE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT1', V_ANSWER, V_POINT_LIST_CODE,V_OUT_CODE,SYSDATE);
+          
+          -- 대여자 처리 
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+           
+        ELSE
+            -- 3 렌트+보증금 환불 / 8 포인트 회수 ( 대여자 아웃)
+           
+            -- 이용자에게 보증금 + 렌트비 환불 
+           INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+          VALUES(V_POINT_LIST_CODE,V_APPLY_USER, V_DEPOSIT +  (V_EDATE - V_SDATE+1) * V_COST );
+          
+          -- 대여자 포인트 회수 
+          INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE )
+          VALUES(V_REP_POINT_LIST_CODE,V_POST_USER, -( (V_EDATE - V_SDATE+1) * V_COST),1);
+          
+          -- 대여자한테 아웃 처리 
+          INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+          VALUES(V_OUT_CODE, V_POST_USER);
+          
+          -- 이용자 처리
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,REFUND_DATE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT3', V_ANSWER, V_POINT_LIST_CODE,SYSDATE);
+          
+          -- 대여자 처리 
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
+           
+         
+        END IF;
+            
+        
+
+    ELSE 
+         IF(V_R_DEAL_REPORT_TYPE_CODE = 'RDRT2')
+        THEN
+             -- 3 렌트+보증금 환불 / 8 포인트 회수 ( 대여자 아웃)
+           
+            -- 이용자에게 보증금 + 렌트비 환불 
+           INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+          VALUES(V_POINT_LIST_CODE,V_APPLY_USER, V_DEPOSIT +  (V_EDATE - V_SDATE+1) * V_COST );
+          
+          -- 대여자 포인트 회수 
+          INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE )
+          VALUES(V_REP_POINT_LIST_CODE,V_POST_USER, -( (V_EDATE - V_SDATE+1) * V_COST),1);
+          
+          -- 대여자한테 아웃 처리 
+          INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+          VALUES(V_OUT_CODE, V_POST_USER);
+          
+          -- 이용자 처리
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,REFUND_DATE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT3', V_ANSWER, V_POINT_LIST_CODE,SYSDATE);
+          
+          -- 대여자 처리 
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
+           
+       
+        ELSE
+            -- 1, 9 (사용자 아웃) 보증금만 환불/ 신고무효처리(쓸수있는돈으로 바꿔줌) 
+          
+          -- 이용자에게 보증금만 환불 
+           INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
+          VALUES(V_POINT_LIST_CODE,V_APPLY_USER, V_DEPOSIT );
+          
+          -- 대여자 포인트 상태 수정 
+          UPDATE POINT_LIST SET STATE = 0
+          WHERE POINT_LIST_CODE = V_POINT_LIST;
+          
+          -- 이용자에게 아웃처리 
+          INSERT INTO OUT(OUT_CODE,B_USER_CODE)
+          VALUES(V_OUT_CODE, V_APPLY_USER);
+          
+          -- 이용자 처리
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE
+          ,REFUND_DATE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT1', V_ANSWER, V_POINT_LIST_CODE,V_OUT_CODE,SYSDATE);
+          
+          -- 대여자 처리 
+          INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
+          VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+         
+        END IF;
     
-    -- 3) 아웃 내역 등록 INSERT(신고 대상자)
-    INSERT INTO OUT(OUT_CODE,B_USER_CODE)
-    VALUES(V_OUT_CODE, V_B_USER_REP_CODE);
-    
-    -- 4) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
-    VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE, V_ANSWER, V_POINT_LIST_CODE);
-    
-    -- 5) 신고자대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE, OUT_CODE)
-    VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE2, V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
-    
-    -- 6) 커밋
-    -- COMMIT;
+    END IF;
+
     
 END;
+/*
+PL/SQL 프로시저가 성공적으로 완료되었습니다.
+EXEC PRC_R_DEAL_REPORT_PROC('R_DR3', 'ADMIN4', '신고처리해드릴게요', 0);
+Procedure PRC_R_DEAL_REPORT_PROC이(가) 컴파일되었습니다.
+*/
+
 --================================================================================================================
 
 -- ⑥
