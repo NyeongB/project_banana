@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.test.mvc.IAdminReportListDAO2">
+	
+	<select id="list" resultType="com.test.mvc.AdminReportListDTO">
+	SELECT CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO3' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
+            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
+            END AS ID1,CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO4' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
+            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
+            END AS ID2 
+            , '공통협력구매' AS TYPE, D.G_DEAL_REPORT_TYPE AS RTYPE
+            , R.CONTENT AS CONTENT, SDATE  
+            FROM G_DEAL_REPORT	 R JOIN G_SUCCESS S
+            ON R.G_SUCCESS_CODE = S.G_SUCCESS_CODE
+            JOIN G_POST P 
+            ON P.G_POST_CODE = S.G_POST_CODE
+            JOIN G_APPLY A
+            ON A.G_APPLY_CODE = R.G_APPLY_CODE    
+            JOIN G_DEAL_REPORT_TYPE D
+            ON D.G_DEAL_REPORT_TYPE_CODE = R.G_DEAL_REPORT_TYPE_CODE
+	</select>	
+	
+	
+</mapper>  
+

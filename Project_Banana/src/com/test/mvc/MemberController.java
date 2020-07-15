@@ -136,6 +136,23 @@ public class MemberController
 		return view;
 	}
 	
+	@RequestMapping(value = "/reportlist2.action", method =RequestMethod.GET)
+	public String reportList2(Model model)
+	{
+		String view = null; 
+		
+		IAdminReportListDAO2 dao = SqlSession.getMapper(IAdminReportListDAO2.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		model.addAttribute("list", dao.list());
+		
+		view = "/AdminReportList.jsp";
+		
+		
+		return view;
+	}
+	
 	@RequestMapping(value ="/adminadapplylist.action", method =RequestMethod.GET)
 	public String AdminAdApplyList(Model model)
 	{
