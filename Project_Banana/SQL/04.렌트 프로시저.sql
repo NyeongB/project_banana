@@ -96,18 +96,18 @@ CURSOR CUR_DELETE_USER
 IS
 SELECT B_USER_CODE, START_DATE, END_DATE
 FROM R_APPLY
-WHERE START_DATE >= ( SELECT START_DATE
+WHERE END_DATE >= ( SELECT START_DATE
                      FROM R_APPLY
                      WHERE R_APPLY_CODE = V_R_APPLY_CODE)
-    AND END_DATE <= ( SELECT END_DATE
+    AND START_DATE <= ( SELECT END_DATE
                      FROM R_APPLY
                      WHERE R_APPLY_CODE = V_R_APPLY_CODE)
-    AND R_APPLY_CODE != V_R_APPLY_CODE
-    AND R_POST_CODE = (SELECT R_POST_CODE
-                       FROM R_APPLY
-                       WHERE R_APPLY_CODE = V_R_APPLY_CODE
-                        );
+              AND R_APPLY_CODE != V_R_APPLY_CODE          
+                  AND R_POST_CODE = (SELECT R_POST_CODE
+                    FROM R_APPLY
+                   WHERE R_APPLY_CODE = V_R_APPLY_CODE); 
                         
+
 BEGIN
 -- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
 SELECT R_POST_CODE INTO V_R_POST_CODE
@@ -127,7 +127,7 @@ FROM R_APPLY
 WHERE R_APPLY_CODE = V_R_APPLY_CODE;
 
 INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
-VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, ((EEDATE-SSDATE))*V_COST, 1);
+VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, ((EEDATE-SSDATE+1))*V_COST, 1);
 
 
 -- 2. 거래성사등록 INSERT
@@ -148,7 +148,7 @@ FETCH CUR_DELETE_USER INTO D_B_USER_CODE, SDATE, EDATE;
 EXIT WHEN CUR_DELETE_USER%NOTFOUND;
 
 INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, D_B_USER_CODE, ((EDATE-SDATE))*V_COST+DDEPOSIT); 
+VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, D_B_USER_CODE, ((EDATE-SDATE+1))*V_COST+DDEPOSIT); 
 
 
 --3-2. 취소된 사람 알람가기 프로시저 추가
@@ -178,6 +178,7 @@ WHERE R_APPLY_CODE = V_R_APPLY_CODE;
 -- 6. 커밋
 -- COMMIT;
 END;
+
 
 
 --================================================================================================================
@@ -847,12 +848,13 @@ BEGIN
         ,V_F_FILE, V_CONTENT, V_DEAL_REPORTER_TYPE_CODE);
       
       
-      -- 2. 알람을 줄 이용자, 대여자 코드 가져오기 
-      SELECT A.B_USER_CODE, P.B_USER_CODE INTO V_APPLY_USER, V_POST_USER
+      -- 2. 알람을 줄 이용자, 대여자 코드 가져오기    
+      SELECT A.B_USER_CODE, P.B_USER_CODE  INTO V_APPLY_USER, V_POST_USER
       FROM R_SUCCESS S JOIN R_APPLY A
       ON S.R_APPLY_CODE = A.R_APPLY_CODE
       JOIN R_POST P 
-      ON P.R_POST_CODE = A.R_POST_CODE;
+      ON P.R_POST_CODE = A.R_POST_CODE
+      WHERE S.R_SUCCESS_CODE = V_R_SUCCESS_CODE;
      
     
     -- 알람 프로시저
@@ -863,7 +865,7 @@ BEGIN
     -- 3) 커밋
     -- COMMIT;
 
-END;  
+END; 
 
 
 
@@ -878,14 +880,15 @@ CREATE OR REPLACE PROCEDURE PRC_R_REPLY
 ,   V_REPLY         IN  R_REPLY.REPLY%TYPE       -- 댓글 내용
 ,   V_L_LEVEL       IN  R_REPLY.L_LEVEL%TYPE     -- 댓글 레벨
 ,   V_URL           IN  ALARM.URL%TYPE           -- 댓글 URL
+,   V_R_REPLY_REF_CODE IN R_REPLY.R_REPLY_REF_CODE%TYPE -- 대댓글 참조 코드 
 )
 IS
     V_POST_USER_CODE     B_USER.B_USER_CODE%TYPE; -- 게시물 글쓴이 
 BEGIN
 
     --  댓글 작성 INSERT 문 
-    INSERT INTO R_REPLY( R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY, L_LEVEL)
-    VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, V_R_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL);
+    INSERT INTO R_REPLY( R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY, L_LEVEL,R_REPLY_REF_CODE)
+    VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, V_R_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL, V_R_REPLY_REF_CODE);
     
     --======================================================================================
     -- < 댓글 달림 알림 >
@@ -898,3 +901,4 @@ BEGIN
     PRC_ALARM('AR_C15', V_URL , V_POST_USER_CODE);
 
 END;
+
