@@ -563,6 +563,7 @@ IS
 
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
+V_B_USER_CODE2        B_USER.B_USER_CODE%TYPE; -- 신고한 사람 (내부적으로 구함 ) 
 
 BEGIN
 
@@ -572,6 +573,10 @@ BEGIN
                         FROM R_REPLY_REPORT
                         WHERE R_REPLY_REPORT_CODE
                         = V_R_REPLY_REPORT_CODE);
+                        
+        SELECT B_USER_CODE INTO V_B_USER_CODE2      -- 신고한 사람 구하기 
+        FROM R_REPLY_REPORT
+        WHERE R_REPLY_REPORT_CODE = V_R_REPLY_REPORT_CODE;
 
 
         -- 유효한 신고일 경우
@@ -595,12 +600,15 @@ BEGIN
          VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
         
         
+        -- 알람 프로시저
+       PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
+        
         END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
-END;
+END;    
 
 --===========================
 -- 렌트 댓글 신고처리 프로시저 확인
