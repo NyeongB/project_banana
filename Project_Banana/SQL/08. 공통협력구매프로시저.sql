@@ -40,8 +40,7 @@ EXEC PRC_G_APPLY('USER16',5000,'G_POST3');
 -- 날짜 세션 변경
 ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
 
--- 확인
-EXEC PRC_G_SUCCESS('G_POST4','');
+EXEC PRC_G_SUCCESS('G_POST11','');
 
 CREATE OR REPLACE PROCEDURE PRC_G_SUCCESS
 (
@@ -72,13 +71,20 @@ V_AL_USER_CODE         B_USER.B_USER_CODE%TYPE; -- 알람 보내줄 모든 사�
 V_B_USER_CODE          B_USER.B_USER_CODE%TYPE; -- 공구장 유저코드
 
 V_DIS_COST             G_POST.DIS_COST%TYPE; --할인가격
+V_MEMBER_NUM           G_POST.MEMBER_NUM%TYPE;  -- 목표인원
+V_COST          G_POST.DIS_COST%TYPE;    -- 성사후 공구장에게 들어가는 돈
+
 
 BEGIN    
     
-    -- 공구장에게 돌려줄 돈 
-    SELECT DIS_COST INTO V_DIS_COST
+    -- 할인가격, 목표멤버
+    SELECT DIS_COST,MEMBER_NUM INTO V_DIS_COST, V_MEMBER_NUM
     FROM G_POST 
     WHERE G_POST_CODE = V_G_POST_CODE;
+    
+    V_COST := ( V_DIS_COST / V_MEMBER_NUM )*(V_MEMBER_NUM-1);
+    
+    
     
     -- 공구장 유저 코드 
     SELECT B_USER_CODE INTO V_B_USER_CODE
@@ -87,7 +93,7 @@ BEGIN
     
     -- 1. 포인트내역 등록 INSERT, 공구장에게 돈 입금(상태1)
     INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
-    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_DIS_COST, 1);
+    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_COST, 1);
     
     -- 2. 거래성사 등록 INSERT
     INSERT INTO G_SUCCESS(G_SUCCESS_CODE, G_POST_CODE, POINT_LIST_CODE)
