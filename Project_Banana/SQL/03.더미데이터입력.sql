@@ -828,6 +828,13 @@ VALUES('AR_C'||SEQ_ALARM.NEXTVAL,'AR_H3','중간점검 여부를 확인해주세
 INSERT INTO ALARM_CONTENT_TYPE(ALARM_CONTENT_TYPE_CODE,ALARM_HEAD_TYPE_CODE,ALARM_CONTENT_TYPE)
 VALUES('AR_C'||SEQ_ALARM.NEXTVAL,'AR_H3','수량을 재입력 해주세요.');
 
+-- 렌트부분 추가
+INSERT INTO ALARM_CONTENT_TYPE(ALARM_CONTENT_TYPE_CODE,ALARM_HEAD_TYPE_CODE,ALARM_CONTENT_TYPE)
+VALUES('AR_C'||SEQ_ALARM.NEXTVAL,'AR_H1','신청이 취소되었습니다.');
+
+INSERT INTO ALARM_CONTENT_TYPE(ALARM_CONTENT_TYPE_CODE,ALARM_HEAD_TYPE_CODE,ALARM_CONTENT_TYPE)
+VALUES('AR_C'||SEQ_ALARM.NEXTVAL,'AR_H1','회원님의 게시물에 댓글이 달렸습니다.');
+
 commit;
 --===========================================================================================================================
 --○ 게시물/댓글 신고 처리 유형
