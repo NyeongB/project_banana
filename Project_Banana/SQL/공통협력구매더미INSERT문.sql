@@ -70,3 +70,43 @@ INSERT INTO(
 VALUES('G_RETI'||SEQ_G_RETURN_ITEM.NEXTVAL, V_G_DEAL_REPORT_PROC_CODE, V_POINT_LIST_CODE, V_REFUND_DATE);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
