@@ -399,6 +399,10 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+          
+           -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_POST_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
            
         ELSE
             -- 3 렌트+보증금 환불 / 8 포인트 회수 ( 대여자 아웃)
@@ -422,6 +426,10 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
+           
+            -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
            
          
         END IF;
@@ -453,6 +461,10 @@ BEGIN
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
            
+           
+              -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
        
         ELSE
             -- 1, 9 (사용자 아웃) 보증금만 환불/ 신고무효처리(쓸수있는돈으로 바꿔줌) 
@@ -477,6 +489,11 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+         
+         
+            -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_POST_USER);  -- 환불처리 완료 
          
         END IF;
     
