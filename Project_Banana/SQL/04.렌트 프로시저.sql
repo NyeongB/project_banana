@@ -848,12 +848,13 @@ BEGIN
         ,V_F_FILE, V_CONTENT, V_DEAL_REPORTER_TYPE_CODE);
       
       
-      -- 2. 알람을 줄 이용자, 대여자 코드 가져오기 
-      SELECT A.B_USER_CODE, P.B_USER_CODE INTO V_APPLY_USER, V_POST_USER
+      -- 2. 알람을 줄 이용자, 대여자 코드 가져오기    
+      SELECT A.B_USER_CODE, P.B_USER_CODE  INTO V_APPLY_USER, V_POST_USER
       FROM R_SUCCESS S JOIN R_APPLY A
       ON S.R_APPLY_CODE = A.R_APPLY_CODE
       JOIN R_POST P 
-      ON P.R_POST_CODE = A.R_POST_CODE;
+      ON P.R_POST_CODE = A.R_POST_CODE
+      WHERE S.R_SUCCESS_CODE = V_R_SUCCESS_CODE;
      
     
     -- 알람 프로시저
@@ -864,7 +865,7 @@ BEGIN
     -- 3) 커밋
     -- COMMIT;
 
-END;  
+END; 
 
 
 
