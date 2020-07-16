@@ -609,6 +609,52 @@ END;
 
 --===============================================================================================================
 
+-- 알람 추가한 프로시저 (완전 새로운)
+-- ○ 공통협력구매 댓글 작성 프로시저
+CREATE OR REPLACE PROCEDURE PRC_G_REPLY
+(
+    V_G_POST_CODE   IN  G_POST.G_POST_CODE%TYPE  -- 게시물 코드
+,   V_B_USER_CODE   IN  B_USER.B_USER_CODE%TYPE  -- 댓글 글쓴이 코드
+,   V_REPLY         IN  G_REPLY.REPLY%TYPE       -- 댓글 내용
+,   V_L_LEVEL       IN  G_REPLY.L_LEVEL%TYPE     -- 댓글 레벨
+,   V_URL           IN  ALARM.URL%TYPE           -- 댓글 URL
+)
+IS
+    V_POST_USER_CODE     B_USER.B_USER_CODE%TYPE; -- 게시물 글쓴이 
+BEGIN
+
+    --  댓글 작성 INSERT 문 
+    INSERT INTO G_REPLY( G_REPLY_CODE, G_POST_CODE, B_USER_CODE, REPLY, L_LEVEL)
+    VALUES('G_REP'||SEQ_G_REPLY.NEXTVAL, V_G_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL);
+    
+    --======================================================================================
+    -- < 댓글 달림 알림 >
+    -- 1.게시글에서 글쓴이 알아내기 
+    SELECT B_USER_CODE INTO V_POST_USER_CODE
+    FROM G_POST    
+    WHERE G_POST_CODE = V_G_POST_CODE;    
+    
+    -- 2. 게시글 글쓴이에게 댓글 달림을 알림
+    PRC_ALARM('AR_C15', V_URL , V_POST_USER_CODE);
+
+END;
+
+-- ○ 댓글 작성 (프로시저)
+EXEC PRC_G_REPLY('G_POST3','USER16','누가 이렇게 자랑 게시물을 쓰나요! 얼탱이가 없네요.', 0, '' );
+
+-- 확인
+-- 1. 댓글 테이블
+SELECT *
+FROM G_REPLY;
+--==>G_POST3	G_REP3		USER16	20/07/16	누가 이렇게 자랑 게시물을 쓰나요! 얼탱이가 없네요.	0
+
+-- 2. 알림 테이블
+SELECT *
+FROM ALARM A JOIN ALARM_CONTENT_TYPE AC
+ON A.ALARM_CONTENT_TYPE_CODE = AC.ALARM_CONTENT_TYPE_CODE ;
+
+
+
 
 
 
