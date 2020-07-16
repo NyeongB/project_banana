@@ -1,4 +1,4 @@
--- ■ 렌트 확인
+-- 일자 재입력 알림 프로시저 생각하기
 
 -- ① 
 -- ○ 렌트 이용 신청 시 프로시저
@@ -60,9 +60,10 @@ EXEC PRC_R_APPLY('USER12', -9800, 'R_POST2', TO_DATE('2020-08-01 00:00:00', 'YYY
 
 --========================================================================================
 -- 신청이 취소되었습니다 알림 : 성사 프로시저에서 취소된 사람에게 알림
+-- 환불 처리 되었습니다 알림 : 성사 프로시저에서 취소된 사람에게 알림
 -- 성사되었습니다 알림 : 성사 프로시저에서 성사된 사람에게 알림
 
--- ⑤
+-- ②
 -- ○ 렌트 거래 성사 시 프로시저
 -- 1. 포인트 내역 등록 식별코드(제안자 돈+)출금가능상태1INSERT
 -- 2. 거래성사등록 INSERT
@@ -151,8 +152,12 @@ VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, D_B_USER_CODE, ((EDATE-SDATE))*V_COST+
 
 
 --3-2. 취소된 사람 알람가기 프로시저 추가
-    PRC_ALARM('AR_C31',V_URL1,D_B_USER_CODE);
-
+    PRC_ALARM('AR_C31',V_URL1,D_B_USER_CODE);   -- 렌트 취소 되었습니다.
+    PRC_ALARM('AR_C2',' ',D_B_USER_CODE);    -- 환불 처리 되었습니다.
+    
+    
+    
+    
 END LOOP;
 
 CLOSE CUR_DELETE_USER;
@@ -176,6 +181,11 @@ END;
 
 
 --================================================================================================================
+--==>> Procedure PRC_R_SUCCESS이(가) 컴파일되었습니다.
+
+
+-- 알림 프로시저 넣기 전 성사 프로시저 확인
+/*
 -- 렌트 성사 확인
 -- 제안자 유저코드, 렌트 신청 코드
 EXEC PRC_R_SUCCESS('USER10', 'R_APPLY7');
@@ -223,6 +233,7 @@ FROM R_USER_RETURN;
 R_UR10	R_SUCCESS14	20/08/02	0	POLIS97
                                     ---------  -> 제안자의 포인트코드 나중에 반납상태가 반납일 때 포인트 출금가능으로 업데이트 해야 하기 때문
 */
+**/
 --===========================================================
 -- ③
 -- 6. 렌트 게시물 신고 처리
@@ -343,6 +354,94 @@ WAR19	20/07/15	USER13
 
 --==============================================================================================================
 -- ④
+-- ○ 렌트 댓글 신고처리(경고 발생)
+-- 1. 경고 내역 등록 코드 INSERT
+-- 2. 댓글 신고처리 INSERT
+CREATE OR REPLACE PROCEDURE PRC_R_REPLY_REPORT_PROC
+(
+ V_R_REPLY_REPORT_CODE     IN  R_REPLY_REPORT.R_REPLY_REPORT_CODE%TYPE --렌트 댓글 신고 코드
+,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
+,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
+)
+IS
+
+V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
+V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
+V_B_USER_CODE2        B_USER.B_USER_CODE%TYPE; -- 신고한 사람 (내부적으로 구함 ) 
+
+BEGIN
+
+        SELECT B_USER_CODE INTO V_B_USER_CODE           -- 신고를 당한 사람 구하기 
+        FROM R_REPLY
+        WHERE R_REPLY_CODE = (SELECT R_REPLY_CODE
+                        FROM R_REPLY_REPORT
+                        WHERE R_REPLY_REPORT_CODE
+                        = V_R_REPLY_REPORT_CODE);
+                        
+        SELECT B_USER_CODE INTO V_B_USER_CODE2      -- 신고한 사람 구하기 
+        FROM R_REPLY_REPORT
+        WHERE R_REPLY_REPORT_CODE = V_R_REPLY_REPORT_CODE;
+
+
+        -- 유효한 신고일 경우
+        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
+        THEN
+        
+           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
+            
+            -- 1) 경고내역 등록 INSERT
+            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
+            VALUES (V_WARNING_CODE,V_B_USER_CODE);
+         
+            -- 2) 렌트 댓글  신고 처리 INSERT
+            INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
+            VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
+        -- 유효하지 않은 신고일 경우
+        ELSE         
+          
+          -- 1) 렌트 댓글 신고 처리 INSERT
+         INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
+         VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
+        
+        
+        -- 알람 프로시저
+       PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
+        
+        END IF;
+
+    -- 3) 커밋
+    -- COMMIT;
+
+END;    
+
+--====================================================================
+-- 렌트 댓글 신고처리 프로시저 확인
+-- Procedure PRC_R_REPLY_REPORT_PROC이(가) 컴파일되었습니다.
+-- 신고할 렌트 댓글 입력
+INSERT INTO R_REPLY(R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY,L_LEVEL)
+VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, 'R_POST3', 'USER13', '신고', 0);
+
+-- 댓글 신고 INSERT
+INSERT INTO R_REPLY_REPORT(R_REPLY_REPORT_CODE,R_REPLY_CODE,REPLY_REPORT_TYPE_CODE,B_USER_CODE)
+VALUES('R_REPR'||SEQ_R_REPLY_REP.NEXTVAL,'R_REP5','REPRT5','USER6');
+--==>>
+/*
+R_REPR2	R_REP5	REPRT5	USER6	20/07/15
+*/
+
+-- 렌트 댓글 신고 코드, 관리자 코드, 게시물/댓글 신고처리 유형 코드 PNRP1 일때 유효한 신고
+EXEC PRC_R_REPLY_REPORT_PROC('R_REPR2', 'ADMIN4', 'PNRP1');
+--==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+SELECT *
+FROM R_REPLY_REPORT_PROC;
+--==>> R_REPRP2	R_REPR2	ADMIN4	20/07/15	PNRP1	WAR20
+SELECT *
+FROM WARNING;
+--==>> WAR20	20/07/15	USER13
+
+--============================================================================================
+-- ⑤
 -- 11.렌트 거래 신고 처리 프로시저(유효한 신고일 때)
 -- 신고자 
 -- 1.포인트 내역 등록 insert 2. 거래 신고처리 insert    
@@ -525,7 +624,6 @@ Procedure PRC_R_DEAL_REPORT_PROC이(가) 컴파일되었습니다.
 */
 
 --================================================================================================================
-
 -- ⑥
 -- 이용자 반납(정상적으로 반납되었을떄)
 --1일때"   1.포인트 내역등록 코드 / 2.출금상태여부 update/ 3.이용자반납상태 update
@@ -588,95 +686,6 @@ EXEC PRC_R_USER_RETURN('R_UR10');
 */
 --==========================================================================================================================
 -- ⑦
--- ○ 렌트 댓글 신고처리(경고 발생)
--- 1. 경고 내역 등록 코드 INSERT
--- 2. 댓글 신고처리 INSERT
-CREATE OR REPLACE PROCEDURE PRC_R_REPLY_REPORT_PROC
-(
- V_R_REPLY_REPORT_CODE     IN  R_REPLY_REPORT.R_REPLY_REPORT_CODE%TYPE --렌트 댓글 신고 코드
-,V_ADMIN_CODE             IN          ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-,V_PNR_REPORT_PROC_TYPE_CODE     IN    PNR_REPORT_PROC_TYPE.PNR_REPORT_PROC_TYPE_CODE%TYPE--게시물/댓글 신고처리 유형 코드 0 일때 유효한 신고
-)
-IS
-
-V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
-V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
-V_B_USER_CODE2        B_USER.B_USER_CODE%TYPE; -- 신고한 사람 (내부적으로 구함 ) 
-
-BEGIN
-
-        SELECT B_USER_CODE INTO V_B_USER_CODE           -- 신고를 당한 사람 구하기 
-        FROM R_REPLY
-        WHERE R_REPLY_CODE = (SELECT R_REPLY_CODE
-                        FROM R_REPLY_REPORT
-                        WHERE R_REPLY_REPORT_CODE
-                        = V_R_REPLY_REPORT_CODE);
-                        
-        SELECT B_USER_CODE INTO V_B_USER_CODE2      -- 신고한 사람 구하기 
-        FROM R_REPLY_REPORT
-        WHERE R_REPLY_REPORT_CODE = V_R_REPLY_REPORT_CODE;
-
-
-        -- 유효한 신고일 경우
-        IF (V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
-        THEN
-        
-           V_WARNING_CODE := 'WAR' || SEQ_WAR.NEXTVAL;  -- WAR1
-            
-            -- 1) 경고내역 등록 INSERT
-            INSERT INTO WARNING (WARNING_CODE, B_USER_CODE)
-            VALUES (V_WARNING_CODE,V_B_USER_CODE);
-         
-            -- 2) 렌트 댓글  신고 처리 INSERT
-            INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE, WARNING_CODE)
-            VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
-        -- 유효하지 않은 신고일 경우
-        ELSE         
-          
-          -- 1) 렌트 댓글 신고 처리 INSERT
-         INSERT INTO R_REPLY_REPORT_PROC(R_REPLY_REPORT_PROC_CODE, R_REPLY_REPORT_CODE, ADMIN_CODE, PNR_REPORT_PROC_TYPE_CODE)
-         VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
-        
-        
-        -- 알람 프로시저
-       PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
-        
-        END IF;
-
-    -- 3) 커밋
-    -- COMMIT;
-
-END;    
-
---===========================
--- 렌트 댓글 신고처리 프로시저 확인
--- Procedure PRC_R_REPLY_REPORT_PROC이(가) 컴파일되었습니다.
--- 신고할 렌트 댓글 입력
-INSERT INTO R_REPLY(R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY,L_LEVEL)
-VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, 'R_POST3', 'USER13', '신고', 0);
-
--- 댓글 신고 INSERT
-INSERT INTO R_REPLY_REPORT(R_REPLY_REPORT_CODE,R_REPLY_CODE,REPLY_REPORT_TYPE_CODE,B_USER_CODE)
-VALUES('R_REPR'||SEQ_R_REPLY_REP.NEXTVAL,'R_REP5','REPRT5','USER6');
---==>>
-/*
-R_REPR2	R_REP5	REPRT5	USER6	20/07/15
-*/
-
--- 렌트 댓글 신고 코드, 관리자 코드, 게시물/댓글 신고처리 유형 코드 PNRP1 일때 유효한 신고
-EXEC PRC_R_REPLY_REPORT_PROC('R_REPR2', 'ADMIN4', 'PNRP1');
---==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
-
-SELECT *
-FROM R_REPLY_REPORT_PROC;
---==>> R_REPRP2	R_REPR2	ADMIN4	20/07/15	PNRP1	WAR20
-SELECT *
-FROM WARNING;
---==>> WAR20	20/07/15	USER13
-
---=====================================================
-
--- ②
 -- ○ 렌트 리뷰 등록 프로시저
 -- 1. 신뢰도 점수 내역 INSERT
 -- 2. 바나나 점수 내역 INSERT
@@ -741,8 +750,8 @@ FROM BANANA_SCORE;
 
 
 --=================================================================
-
--- 댓글 신고접수 시 알림
+-- ⑧
+-- 렌트 댓글 신고접수 시 알림
 -- 1. 신고접수 INSERT
 --AR_C6	AR_H9	신고 접수가 완료되었습니다.	AR_H9	신고
 --AR_C30	AR_H9	회원님의 댓글이 신고되었습니다.	AR_H9	신고
@@ -777,11 +786,9 @@ PRC_ALARM('AR_C30',V_URL2,V_B_USER_CODE2);
 END;
 
 
-
-
-
 --=================================================
--- 게시물 신고접수 시 알림
+-- ⑨
+-- 렌트 게시물 신고접수 시 알림
 --AR_C6	AR_H9	신고 접수가 완료되었습니다.	AR_H9	신고
 --AR_C29	AR_H9	회원님의 게시물이 신고되었습니다.	AR_H9	신고
 CREATE OR REPLACE PROCEDURE PRC_R_POST_REPORT
@@ -815,7 +822,8 @@ PRC_ALARM('AR_C29',V_URL2,V_B_USER_CODE2);
 
 END;
 
---======================================================
+--==========================================================================
+-- ⑩
 -- 게시물 거래 신고 접수 시 
 --AR_C8	AR_H9	회원님에 대한 신고가 접수되었습니다.이의제기 신청을 해주세요	AR_H9	신고
 CREATE OR REPLACE PROCEDURE PRC_R_DEAL_REPORT_PRC
@@ -861,8 +869,8 @@ END;
 
 
 --=============================================
-
--- ○ 렌트 댓글 작성 프로시저
+-- ⑪
+-- 렌트 댓글 작성 프로시저
 CREATE OR REPLACE PROCEDURE PRC_R_REPLY
 (
     V_R_POST_CODE   IN  R_POST.R_POST_CODE%TYPE  -- 게시물 코드
