@@ -223,6 +223,7 @@ IS
 V_R_POST_CODE       R_POST.R_POST_CODE%TYPE;    
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 V_B_USER_CODE       B_USER.B_USER_CODE%TYPE;    -- 신고자당한사람 유저코드
+V_B_USER_CODE2     B_USER.B_USER_CODE%TYPE;    -- 신고자 유저코드
 
 BEGIN
 
@@ -235,7 +236,14 @@ BEGIN
         SELECT B_USER_CODE INTO V_B_USER_CODE
         FROM R_POST
         WHERE R_POST_CODE = V_R_POST_CODE;
-
+        
+        -- 3. 신고한사람 번호 얻어내기
+        SELECT B_USER_CODE INTO V_B_USER_CODE2
+        FROM R_POST_REPORT
+        WHERE R_POST_REPORT_CODE = V_R_POST_REPORT_CODE;
+        
+        
+        
 
         -- 유효한 신고일 경우
         IF(V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
@@ -259,6 +267,11 @@ BEGIN
         
 
     END IF;
+    
+    -- 알람 프로시저
+    PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
+    
+    
     -- 3) 커밋
     -- COMMIT;
 
