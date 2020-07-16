@@ -240,6 +240,7 @@ IS
 V_R_POST_CODE       R_POST.R_POST_CODE%TYPE;    
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 V_B_USER_CODE       B_USER.B_USER_CODE%TYPE;    -- 신고자당한사람 유저코드
+V_B_USER_CODE2     B_USER.B_USER_CODE%TYPE;    -- 신고자 유저코드
 
 BEGIN
 
@@ -252,7 +253,14 @@ BEGIN
         SELECT B_USER_CODE INTO V_B_USER_CODE
         FROM R_POST
         WHERE R_POST_CODE = V_R_POST_CODE;
-
+        
+        -- 3. 신고한사람 번호 얻어내기
+        SELECT B_USER_CODE INTO V_B_USER_CODE2
+        FROM R_POST_REPORT
+        WHERE R_POST_REPORT_CODE = V_R_POST_REPORT_CODE;
+        
+        
+        
 
         -- 유효한 신고일 경우
         IF(V_PNR_REPORT_PROC_TYPE_CODE = 'PNRP1')
@@ -276,6 +284,11 @@ BEGIN
         
 
     END IF;
+    
+    -- 알람 프로시저
+    PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
+    
+    
     -- 3) 커밋
     -- COMMIT;
 
@@ -403,6 +416,10 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+          
+           -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_POST_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
            
         ELSE
             -- 3 렌트+보증금 환불 / 8 포인트 회수 ( 대여자 아웃)
@@ -426,6 +443,10 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
+           
+            -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
            
          
         END IF;
@@ -457,6 +478,10 @@ BEGIN
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE,OUT_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT8', V_ANSWER, V_REP_POINT_LIST_CODE,V_OUT_CODE);
            
+           
+              -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_APPLY_USER);  -- 환불처리 완료 
        
         ELSE
             -- 1, 9 (사용자 아웃) 보증금만 환불/ 신고무효처리(쓸수있는돈으로 바꿔줌) 
@@ -481,6 +506,11 @@ BEGIN
           -- 대여자 처리 
           INSERT INTO R_DEAL_REPORT_PROC(R_DEAL_REPORT_PROC_CODE, R_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER,POINT_LIST_CODE)
           VALUES('R_DRP' || SEQ_R_D_REP_P.NEXTVAL,V_R_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER, V_POINT_LIST);
+         
+         
+            -- 알람 프로시저
+          PRC_ALARM('AR_C7',' ', V_APPLY_USER);  -- 신고처리가 완료되었습니다.
+          PRC_ALARM('AR_C2',' ', V_POST_USER);  -- 환불처리 완료 
          
         END IF;
     
@@ -571,6 +601,7 @@ IS
 
 V_WARNING_CODE      WARNING.WARNING_CODE%TYPE;
 V_B_USER_CODE        B_USER.B_USER_CODE%TYPE; -- 신고를 당한 사람 (내부적으로 구함 ) 
+V_B_USER_CODE2        B_USER.B_USER_CODE%TYPE; -- 신고한 사람 (내부적으로 구함 ) 
 
 BEGIN
 
@@ -580,6 +611,10 @@ BEGIN
                         FROM R_REPLY_REPORT
                         WHERE R_REPLY_REPORT_CODE
                         = V_R_REPLY_REPORT_CODE);
+                        
+        SELECT B_USER_CODE INTO V_B_USER_CODE2      -- 신고한 사람 구하기 
+        FROM R_REPLY_REPORT
+        WHERE R_REPLY_REPORT_CODE = V_R_REPLY_REPORT_CODE;
 
 
         -- 유효한 신고일 경우
@@ -603,12 +638,15 @@ BEGIN
          VALUES('R_REPRP'||SEQ_R_REPLY_REP_PRC.NEXTVAL, V_R_REPLY_REPORT_CODE, V_ADMIN_CODE, V_PNR_REPORT_PROC_TYPE_CODE);
         
         
+        -- 알람 프로시저
+       PRC_ALARM('AR_C7',' ', V_B_USER_CODE2);  --신고처리가 완료되었습니다.
+        
         END IF;
 
     -- 3) 커밋
     -- COMMIT;
 
-END;
+END;    
 
 --===========================
 -- 렌트 댓글 신고처리 프로시저 확인

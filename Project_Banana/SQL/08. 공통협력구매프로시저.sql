@@ -32,31 +32,29 @@ EXEC PRC_G_APPLY('USER16',5000,'G_POST3');
 
 --===============================================================================================
 -- ○ 공통협력 구매 성사 시 프로시저
--- 1. 포인트내역 등록 INSERT(상태1)
+-- 1. 공구장에게 돈 입력 포인트내역 등록 INSERT(상태1)
 -- 2. 거래성사 등록 INSERT
-EXEC PRC_G_SUCCESS('G_POST4');
+-- 3. 출결석 INSERT
+-- 4. 공구원들에게 공동구매 성사 알림
 
-SELECT *
-FROM POINT_LIST;
+-- 날짜 세션 변경
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
 
-SELECT *
-FROM G_SUCCESS;
-
-SELECT *
-FROM G_ATTENDANCE;
+-- 확인
+EXEC PRC_G_SUCCESS('G_POST4','');
 
 CREATE OR REPLACE PROCEDURE PRC_G_SUCCESS
 (
  V_G_POST_CODE         IN G_POST.G_POST_CODE%TYPE  -- 공통협력 게시물 등록 코드
- , V_URL                 IN  ALARM.URL%TYPE
+, V_URL                 IN  ALARM.URL%TYPE
 )
 IS
 
     -- 커서 선언
-    -- 신청코드 목록 커서 선언
+    -- 신청 코드 목록 커서 선언(모든 신청자)
     CURSOR CUR_APPLY_USER             
     IS 
-    SELECT GA.G_APPLY_CODE, GA.B_USER_CODE
+    SELECT GA.G_APPLY_CODE, GA.B_USER_CODE  -- 신청 코드 , 신청자 코드
     FROM G_APPLY GA LEFT JOIN G_POST GP
     ON GA.G_POST_CODE = GP.G_POST_CODE
        LEFT JOIN G_SUCCESS GS
@@ -66,42 +64,35 @@ IS
     WHERE GP.G_POST_CODE = V_G_POST_CODE;
 
 
-V_POINT_LIST_CODE   POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;-- PL1
-V_G_SUCCESS_CODE    G_SUCCESS.G_SUCCESS_CODE%TYPE := 'G_SUCCESS' || SEQ_G_SUCCESS.NEXTVAL;
-V_APPLY_USER_CODE      B_USER.B_USER_CODE%TYPE;
+V_POINT_LIST_CODE      POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL; --  공구장에게 갈 포인트리스트 시퀀스
+V_G_SUCCESS_CODE       G_SUCCESS.G_SUCCESS_CODE%TYPE := 'G_SUCCESS' || SEQ_G_SUCCESS.NEXTVAL; -- 공동구매 성사 시퀀스
+
+V_APPLY_CODE           G_APPLY.G_APPLY_CODE%TYPE;   -- 모든 사용자에게 받을 신청코드
+V_AL_USER_CODE         B_USER.B_USER_CODE%TYPE; -- 알람 보내줄 모든 사용자에 유저코드
 V_B_USER_CODE          B_USER.B_USER_CODE%TYPE; -- 공구장 유저코드
+
 V_DIS_COST             G_POST.DIS_COST%TYPE; --할인가격
-V_MEMBER_NUM           G_POST.MEMBER_NUM%TYPE; --모집인원수
-V_REFUND_COST          G_POST.DIS_COST%TYPE; -- 환불해줄 가격
-V_AL_USER_CODE           B_USER.B_USER_CODE%TYPE;
 
-BEGIN
-
-SELECT DIS_COST INTO V_DIS_COST
-FROM G_POST 
-WHERE G_POST_CODE = V_G_POST_CODE;
-
-SELECT MEMBER_NUM INTO V_MEMBER_NUM
-FROM G_POST 
-WHERE G_POST_CODE = V_G_POST_CODE;
-
-
---V_REFUND_COST := (V_DIS_COST/V_MEMBER_NUM) * (V_MEMBER_NUM-1);
-
-
-
-SELECT B_USER_CODE INTO V_B_USER_CODE
-FROM G_POST
-WHERE G_POST_CODE = V_G_POST_CODE;
-
--- 1. 포인트내역 등록 INSERT(상태1)
-INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
-VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_DIS_COST, 1);
-
--- 2. 거래성사 등록 INSERT
-INSERT INTO G_SUCCESS(G_SUCCESS_CODE, G_POST_CODE, POINT_LIST_CODE)
-VALUES(V_G_SUCCESS_CODE,  V_G_POST_CODE, V_POINT_LIST_CODE);
-
+BEGIN    
+    
+    -- 공구장에게 돌려줄 돈 
+    SELECT DIS_COST INTO V_DIS_COST
+    FROM G_POST 
+    WHERE G_POST_CODE = V_G_POST_CODE;
+    
+    -- 공구장 유저 코드 
+    SELECT B_USER_CODE INTO V_B_USER_CODE
+    FROM G_POST
+    WHERE G_POST_CODE = V_G_POST_CODE;
+    
+    -- 1. 포인트내역 등록 INSERT, 공구장에게 돈 입금(상태1)
+    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_DIS_COST, 1);
+    
+    -- 2. 거래성사 등록 INSERT
+    INSERT INTO G_SUCCESS(G_SUCCESS_CODE, G_POST_CODE, POINT_LIST_CODE)
+    VALUES(V_G_SUCCESS_CODE, V_G_POST_CODE, V_POINT_LIST_CODE);
+    
 
     -- 4) 출/결석 INSERT
     -- 커서 오픈
@@ -109,50 +100,55 @@ VALUES(V_G_SUCCESS_CODE,  V_G_POST_CODE, V_POINT_LIST_CODE);
     
     LOOP
     
-        FETCH CUR_APPLY_USER INTO V_APPLY_USER_CODE, V_AL_USER_CODE;
+        FETCH CUR_APPLY_USER INTO V_APPLY_CODE, V_AL_USER_CODE; -- 신청코드, 신청자 코드
         
         EXIT WHEN CUR_APPLY_USER%NOTFOUND;    
         
-        INSERT INTO G_ATTENDANCE(G_ATTENDANCE_CODE, G_SUCCESS_CODE,G_APPLY_CODE)
-        VALUES('G_ATT'||SEQ_G_ATTEND.NEXTVAL,V_G_SUCCESS_CODE,V_APPLY_USER_CODE);
-    
-     PRC_ALARM('AR_C12',V_URL,V_AL_USER_CODE);
-
+        -- 출/결석 테이블 모든 신청자 INSERT
+        INSERT INTO G_ATTENDANCE(G_ATTENDANCE_CODE, G_SUCCESS_CODE, G_APPLY_CODE)
+        VALUES('G_ATT'||SEQ_G_ATTEND.NEXTVAL, V_G_SUCCESS_CODE, V_APPLY_CODE);
+        
+        -- 모든 사용자에게 공통협력구매 성사 알림 
+        PRC_ALARM('AR_C12', V_URL, V_AL_USER_CODE);
 
     END LOOP;
 
-
 END;
-
 --==============================================================================
 --③.공통협력 거래 신고 처리
+-- 신고가 처리되는 유형 ( 다 공구장이 잘못 했을 때)
+-- 1. 공구장 노쇼 'GDERT1'
+-- 2. 신청 상품과 다름, 제품하자,'GDERT3','GDERT4','GDERT5'
 -- 14. 공통협력구매 거래 신고 처리 프로시저(유효한 신고일때)
 -- 신고자 
 -- 1.포인트 내역 등록 insert 2. 공통협력구매 거래 신고처리 insert    
 -- 신고 대상자
 -- 1.포인트 내역 등록 insert 2.아웃 내역 등록 insert 3. 공통협력구매 거래 신고처리 insert
 
-EXEC PRC_G_DEAL_REPORT_PROC('USER10','USER9','G_DRP1','ADMIN1','DRPT6','DRPT7','환불이요');
+SELECT *
+FROM DEAL_REPORT_PROC_TYPE;
+
+EXEC PRC_G_DEAL_REPORT_PROC('G_DRP1','ADMIN1','환불입니다. 똑바로사세요');
 
 CREATE OR REPLACE PROCEDURE PRC_G_DEAL_REPORT_PROC
 (
-  V_B_USER_CODE                     IN     B_USER.B_USER_CODE%TYPE   -- 신고자유저코드
-, V_B_USER_REP_CODE                 IN     B_USER.B_USER_CODE%TYPE   -- 신고당한사람유저코드
-, V_G_DEAL_REPORT_CODE              IN     G_DEAL_REPORT.G_DEAL_REPORT_CODE%TYPE -- 공통협력구매 거래 신고 코드
+  V_G_DEAL_REPORT_CODE              IN     G_DEAL_REPORT.G_DEAL_REPORT_CODE%TYPE -- 공통협력구매 거래 신고 코드
 , V_ADMIN_CODE                      IN     ADMIN.ADMIN_CODE%TYPE-- 관리자 등록 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE      IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고자에 대한 거래 신고처리 유형 코드
-, V_DEAL_REPORT_PROC_TYPE_CODE2     IN     DEAL_REPORT_PROC_TYPE.DEAL_REPORT_PROC_TYPE_CODE%TYPE    -- 신고대상자에 대한 거래 신고처리 유형 코드
-, V_ANSWER                          IN      G_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변\
-, V_URL                 IN  ALARM.URL%TYPE
+, V_ANSWER                          IN      G_DEAL_REPORT_PROC.ANSWER%TYPE  -- 신고답변
+--, V_URL                             IN  ALARM.URL%TYPE                     -- 알람 URL
 )
 IS
 
- V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;
+ V_OUT_CODE            OUT.OUT_CODE%TYPE := 'OUT' ||SEQ_OUT.NEXTVAL;    -- 아웃 코드
  V_G_DEAL_REPORT_PROC_CODE      G_DEAL_REPORT_PROC.G_DEAL_REPORT_PROC_CODE%TYPE := 'G_DRP' || SEQ_G_D_REP_PRC.NEXTVAL;
  V_G_SUCCESS_CODE       G_SUCCESS.G_SUCCESS_CODE%TYPE;
- V_G_POST_CODE          G_POST.G_POST_CODE%TYPE;       
- V_APPLY_USER_CODE       B_USER.B_USER_CODE%TYPE;
- V_AL_USER_CODE           B_USER.B_USER_CODE%TYPE;
+ V_G_POST_CODE          G_POST.G_POST_CODE%TYPE;    -- 게시물 번호 코드   
+ V_APPLY_USER_CODE       B_USER.B_USER_CODE%TYPE;   -- 상품 반환에서 유저들 담을 변수(커서)
+ V_AL_USER_CODE           B_USER.B_USER_CODE%TYPE;  -- 알람 받을 유저들
+ V_G_APPLY_CODE          G_APPLY.G_APPLY_CODE%TYPE; -- 공통협력구매 신청코드 담을 변수
+ V_REPORTED_CODE        B_USER.B_USER_CODE%TYPE;     -- 신고 당한사람(알람)
+ V_REPORTER_CODE        B_USER.B_USER_CODE%TYPE;     -- 신고자(알람)
+ V_G_DEAL_REPORT_TYPE_CODE  G_DEAL_REPORT_TYPE.G_DEAL_REPORT_TYPE_CODE%TYPE;
  
     -- 신청코드 목록 커서 선언
     CURSOR CUR_APPLY_USER             -- 상품 반환 목록
@@ -183,44 +179,100 @@ BEGIN
     FROM G_SUCCESS
     WHERE G_SUCCESS_CODE = V_G_SUCCESS_CODE;
 
+        
+    -- 3. 공통협력구매 신청코드 알아내기
+    SELECT G_APPLY_CODE INTO V_G_APPLY_CODE
+    FROM G_DEAL_REPORT
+    WHERE G_DEAL_REPORT_CODE = V_G_DEAL_REPORT_CODE;
+    
+    -- 4. 거래 신고자 사람 알아내기 (공구원)
+    SELECT B_USER_CODE INTO V_REPORTER_CODE
+    FROM G_APPLY
+    WHERE G_APPLY_CODE = V_G_APPLY_CODE;
 
+
+    -- 5. 거래 신고당한 사람 알아내기 (공구장)    
+    SELECT B_USER_CODE INTO V_REPORTED_CODE
+    FROM G_POST
+    WHERE G_POST_CODE = V_G_POST_CODE;
     
-    -- 1) 아웃 내역 등록 INSERT(신고 대상자)
-    INSERT INTO OUT(OUT_CODE,B_USER_CODE)
-    VALUES(V_OUT_CODE, V_B_USER_REP_CODE);
+    -- 6.신고 유형 알아내기
+    SELECT G_DEAL_REPORT_TYPE_CODE INTO V_G_DEAL_REPORT_TYPE_CODE
+    FROM G_DEAL_REPORT
+    WHERE G_DEAL_REPORT_CODE = V_G_DEAL_REPORT_CODE ;
     
-    -- 2) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER)
-    VALUES(V_G_DEAL_REPORT_PROC_CODE, V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE, V_ANSWER);
-    
-    -- 3) 신고자대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
-    INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER, OUT_CODE)
-    VALUES('G_DRP' || SEQ_G_D_REP_PRC.NEXTVAL,V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, V_DEAL_REPORT_PROC_TYPE_CODE2, V_ANSWER,V_OUT_CODE);
-    
-    -- 4) 신고자 신고처리 시퀀스 로 상품반환 INSERT
-    -- 커서 오픈
-    OPEN CUR_APPLY_USER;
-    
-    LOOP
-    
-        FETCH CUR_APPLY_USER INTO V_APPLY_USER_CODE,V_AL_USER_CODE;
+    -- 공구장 노쇼, 상품이상, 상품파손 ,사진과 다름 의 경우
+    IF(V_G_DEAL_REPORT_TYPE_CODE='GDERT1' OR V_G_DEAL_REPORT_TYPE_CODE ='GDERT3' OR  V_G_DEAL_REPORT_TYPE_CODE='GDERT4' OR V_G_DEAL_REPORT_TYPE_CODE='GDERT5')
+    THEN
         
-        EXIT WHEN CUR_APPLY_USER%NOTFOUND;    
+        -- 1) 아웃 내역 등록 INSERT(신고 대상자)
+        INSERT INTO OUT(OUT_CODE, B_USER_CODE)
+        VALUES(V_OUT_CODE, V_REPORTED_CODE);
         
-        INSERT INTO G_RETURN_ITEM(G_RETURN_ITEM_CODE,G_DEAL_REPORT_PROC_CODE,G_APPLY_CODE)
-        VALUES('G_RETI'||SEQ_G_RETURN_ITEM.NEXTVAL,V_G_DEAL_REPORT_PROC_CODE,V_APPLY_USER_CODE);
+        -- 2) 신고자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+        INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER)
+        VALUES(V_G_DEAL_REPORT_PROC_CODE, V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT6', V_ANSWER);
+        
+        -- 신고자 알람
+         PRC_ALARM('AR_C7', '', V_REPORTER_CODE);
+        
+        -- 3) 신고대상자 신고 처리 INSERT  -- 환불시간 처리 시간 디폴트
+        INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER, OUT_CODE)
+        VALUES('G_DRP' || SEQ_G_D_REP_PRC.NEXTVAL, V_G_DEAL_REPORT_CODE, V_ADMIN_CODE,'DRPT7', V_ANSWER, V_OUT_CODE);
+        
+        PRC_ALARM('AR_C7', '', V_REPORTED_CODE);
+        
+        -- 4) 신고자 신고처리 시퀀스 로 상품반환 INSERT
+        -- 커서 오픈
+        OPEN CUR_APPLY_USER;
+        
+        LOOP
+        
+            FETCH CUR_APPLY_USER INTO V_APPLY_USER_CODE,V_AL_USER_CODE;
+            
+            EXIT WHEN CUR_APPLY_USER%NOTFOUND;    
+            
+            INSERT INTO G_RETURN_ITEM(G_RETURN_ITEM_CODE,G_DEAL_REPORT_PROC_CODE,G_APPLY_CODE)
+            VALUES('G_RETI'||SEQ_G_RETURN_ITEM.NEXTVAL,V_G_DEAL_REPORT_PROC_CODE,V_APPLY_USER_CODE);
+        
+            PRC_ALARM('AR_C28', '', V_AL_USER_CODE);
+        
+        END LOOP;
+        
+    -- 신고 무효일 경우
+    ELSIF(V_G_DEAL_REPORT_TYPE_CODE='GDERT9')
+    THEN 
+        -- 1) 신고자 신고 처리 INSERT  -- 신고 무효 넣어줌
+        INSERT INTO G_DEAL_REPORT_PROC(G_DEAL_REPORT_PROC_CODE, G_DEAL_REPORT_CODE, ADMIN_CODE, DEAL_REPORT_PROC_TYPE_CODE, ANSWER)
+        VALUES(V_G_DEAL_REPORT_PROC_CODE, V_G_DEAL_REPORT_CODE,V_ADMIN_CODE, 'DRPT9', V_ANSWER);
+        
+        PRC_ALARM('AR_C7', '', V_REPORTER_CODE);
+        
+    END IF;
     
-         PRC_ALARM('AR_C28',V_URL,V_AL_USER_CODE);
-    
-    END LOOP;
-    
-    
+
     -- 4) 커밋
     -- COMMIT;
     
 END;
 
+
+SELECT *
+FROM ALARM;
+
+SELECT *
+FROM ALARM_CONTENT_TYPE;
+
+DESC ALARM_CONTENT_TYPE;
+--
+--INSERT INTO ALARM_CONTENT_TYPE(ALARM_CONTENT_TYPE_CODE, ALARM_HEAD_TYPE_CODE, ALARM_CONTENT_TYPE)
+--VALUES('AR_C'||SEQ_ALARM.NEXTVAL, 'AR_H9','회원님의 거래')
+
 --==========================================================================================================
+    SELECT *
+    FROM ALARM_CONTENT_TYPE C LEFT JOIN ALARM_HEAD_TYPE H
+    ON C.ALARM_HEAD_TYPE_CODE = H.ALARM_HEAD_TYPE_CODE;
+
 ---④ 공통협력구매 상품반환 시
 
 
@@ -392,6 +444,12 @@ BEGIN
     -- COMMIT;
 
 END;
+
+
+SELECT H.ALARM_HEAD_TYPE, C.ALARM_CONTENT_TYPE_CODE, H.ALARM_HEAD_TYPE_CODE, C.ALARM_CONTENT_TYPE
+FROM ALARM_CONTENT_TYPE C LEFT JOIN ALARM_HEAD_TYPE H
+ON C.ALARM_HEAD_TYPE_CODE = H.ALARM_HEAD_TYPE_CODE
+ORDER BY 1;
 --============================================================================================
 --20.공통협력구매 댓글 신고처리
 
@@ -500,14 +558,15 @@ BEGIN
         UPDATE G_ATTENDANCE
         SET SDATE = SYSDATE,ATTENDANCE_STATE = 0
         WHERE G_APPLY_CODE = V_G_APPLY_CODE;
-    ELSE    -- 결석시
+    ELSE    
+    	-- 결석시
         UPDATE G_ATTENDANCE
         SET SDATE = SYSDATE,ATTENDANCE_STATE = 1
         WHERE G_APPLY_CODE = V_G_APPLY_CODE;
         
-        --공구장
+        --공구장 에게 알림
         PRC_ALARM('AR_C14','',V_BB_USER_CODE);
-        --공구원
+        --공구원 에게 알림
         PRC_ALARM('AR_C13','',V_B_USER_CODE);
         
     END IF;    
@@ -517,6 +576,89 @@ BEGIN
 -- COMMIT;
 
 END;
+
+
+-- 알림 프로시저
+CREATE OR REPLACE PROCEDURE PRC_ALARM
+(
+ V_ALARM_CONTENT_TYPE_CODE      IN  ALARM_CONTENT_TYPE.ALARM_CONTENT_TYPE_CODE%TYPE
+,V_URL                          IN  ALARM.URL%TYPE
+,V_USER_CODE                    IN  B_USER.B_USER_CODE%TYPE 
+)
+IS
+BEGIN
+
+
+-- 알람 INSERT INTO
+INSERT INTO ALARM(ALARM_CODE,ALARM_CONTENT_TYPE_CODE,B_USER_CODE,URL)
+VALUES('AR'||SEQ_ALARM_B.NEXTVAL,V_ALARM_CONTENT_TYPE_CODE,V_USER_CODE,V_URL);
+
+
+END;
+
+
+--===============================================================================================================
+
+-- 알람 추가한 프로시저 (완전 새로운)
+-- ○ 공통협력구매 댓글 작성 프로시저
+CREATE OR REPLACE PROCEDURE PRC_G_REPLY
+(
+    V_G_POST_CODE   IN  G_POST.G_POST_CODE%TYPE  -- 게시물 코드
+,   V_B_USER_CODE   IN  B_USER.B_USER_CODE%TYPE  -- 댓글 글쓴이 코드
+,   V_REPLY         IN  G_REPLY.REPLY%TYPE       -- 댓글 내용
+,   V_L_LEVEL       IN  G_REPLY.L_LEVEL%TYPE     -- 댓글 레벨
+,   V_URL           IN  ALARM.URL%TYPE           -- 댓글 URL
+)
+IS
+    V_POST_USER_CODE     B_USER.B_USER_CODE%TYPE; -- 게시물 글쓴이 
+BEGIN
+
+    --  댓글 작성 INSERT 문 
+    INSERT INTO G_REPLY( G_REPLY_CODE, G_POST_CODE, B_USER_CODE, REPLY, L_LEVEL)
+    VALUES('G_REP'||SEQ_G_REPLY.NEXTVAL, V_G_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL);
+    
+    --======================================================================================
+    -- < 댓글 달림 알림 >
+    -- 1.게시글에서 글쓴이 알아내기 
+    SELECT B_USER_CODE INTO V_POST_USER_CODE
+    FROM G_POST    
+    WHERE G_POST_CODE = V_G_POST_CODE;    
+    
+    -- 2. 게시글 글쓴이에게 댓글 달림을 알림
+    PRC_ALARM('AR_C15', V_URL , V_POST_USER_CODE);
+
+END;
+
+-- ○ 댓글 작성 (프로시저)
+EXEC PRC_G_REPLY('G_POST3','USER16','누가 이렇게 자랑 게시물을 쓰나요! 얼탱이가 없네요.', 0, '' );
+
+-- 확인
+-- 1. 댓글 테이블
+SELECT *
+FROM G_REPLY;
+--==>G_POST3	G_REP3		USER16	20/07/16	누가 이렇게 자랑 게시물을 쓰나요! 얼탱이가 없네요.	0
+
+-- 2. 알림 테이블
+SELECT *
+FROM ALARM A JOIN ALARM_CONTENT_TYPE AC
+ON A.ALARM_CONTENT_TYPE_CODE = AC.ALARM_CONTENT_TYPE_CODE ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
