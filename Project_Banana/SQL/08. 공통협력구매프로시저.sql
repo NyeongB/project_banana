@@ -568,14 +568,15 @@ BEGIN
         UPDATE G_ATTENDANCE
         SET SDATE = SYSDATE,ATTENDANCE_STATE = 0
         WHERE G_APPLY_CODE = V_G_APPLY_CODE;
-    ELSE    -- 결석시
+    ELSE    
+    	-- 결석시
         UPDATE G_ATTENDANCE
         SET SDATE = SYSDATE,ATTENDANCE_STATE = 1
         WHERE G_APPLY_CODE = V_G_APPLY_CODE;
         
-        --공구장
+        --공구장 에게 알림
         PRC_ALARM('AR_C14','',V_BB_USER_CODE);
-        --공구원
+        --공구원 에게 알림
         PRC_ALARM('AR_C13','',V_B_USER_CODE);
         
     END IF;    
