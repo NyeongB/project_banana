@@ -76,7 +76,9 @@ $(document).ready(function()
 
 	function readData()
 	{
-		var events;
+		var event ="";
+		const params = "";
+		
 		$.ajax(
 		{
 			type:"POST"
@@ -85,17 +87,19 @@ $(document).ready(function()
 			,dataType: "json"
 			,success:function(args)
 			{
-				events = args;
-				
+				event = args.jsonTxt;
+				/* events +='{ "title": ';
+				events += '"'+ args.title +'"';
+				events +=', "start": ';
+				events +='"'+ args.start +'"';			
+				events +=" }";
+				alert(events); */
 			}
-			,beforeSend : showRequest
-			
-			
-			
+		
 			
 		});
 		
-		return events;
+		return event;
 	}
 		
 		
@@ -128,7 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	      right: ''
 	    },
 	    locale: 'ko',
-	    events: events
+	    events: [
+	        {
+	          id: '1',
+	          resourceId: 'a',
+	          title: 'Meeting',
+	          start: '2020-07-14'
+	        }
+	      ]
 	    
 	  });
 	  calendar.render();
