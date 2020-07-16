@@ -71,42 +71,15 @@ $(document).ready(function()
 		});
 
 
-		});
-		
+		});		
 
-	function readData()
-	{
-		var event ="";
-		const params = "";
-		
-		$.ajax(
-		{
-			type:"POST"
-			,url : "calimsi.jsp"
-			,data : params
-			,dataType: "json"
-			,success:function(args)
-			{
-				event = args.jsonTxt;
-				/* events +='{ "title": ';
-				events += '"'+ args.title +'"';
-				events +=', "start": ';
-				events +='"'+ args.start +'"';			
-				events +=" }";
-				alert(events); */
-			}
-		
-			
-		});
-		
-		return event;
-	}
+
 		
 		
 
 document.addEventListener('DOMContentLoaded', function() {
 	
-	  var events = readData();
+	  //var events = readData();
 	  var calendarEl = document.getElementById('calendar');
 	  
 	  var calendar = new FullCalendar.Calendar(calendarEl, {	  
@@ -120,11 +93,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	      });
 	    },
 		  
-	    plugins: [ 'list','interaction', 'dayGrid', 'timeGrid'],
+	    plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
 	    defaultView: 'dayGridMonth',
 	    defaultDate: new Date(),
 	    dateClick: function() {
-	        alert('a day has been clicked!');
+	        
 	      },
 	    header: {
 	      left: 'prev,next today',
@@ -132,14 +105,27 @@ document.addEventListener('DOMContentLoaded', function() {
 	      right: ''
 	    },
 	    locale: 'ko',
-	    events: [
-	        {
-	          id: '1',
-	          resourceId: 'a',
-	          title: 'Meeting',
-	          start: '2020-07-14'
-	        }
-	      ]
+	    eventSources: [{
+	       
+	    	events: function(info, callback, failureCallback)// 이건 무슨 의미지?
+	    	{
+	    		$.ajax(
+	    				{
+	    					type:"POST"
+	    					,url : "calimsi.jsp"
+	    					,dataType: "json"
+	    					,success:function(args)
+	    					{
+	    						callback(args);
+	    						//alert(args);
+	    						
+	    					}
+	    				
+	    				});		    		
+	    		
+	    	}    	
+	    	
+	    }]
 	    
 	  });
 	  calendar.render();
