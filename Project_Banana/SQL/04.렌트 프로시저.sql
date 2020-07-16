@@ -879,14 +879,15 @@ CREATE OR REPLACE PROCEDURE PRC_R_REPLY
 ,   V_REPLY         IN  R_REPLY.REPLY%TYPE       -- 댓글 내용
 ,   V_L_LEVEL       IN  R_REPLY.L_LEVEL%TYPE     -- 댓글 레벨
 ,   V_URL           IN  ALARM.URL%TYPE           -- 댓글 URL
+,   V_R_REPLY_REF_CODE IN R_REPLY.R_REPLY_REF_CODE%TYPE -- 대댓글 참조 코드 
 )
 IS
     V_POST_USER_CODE     B_USER.B_USER_CODE%TYPE; -- 게시물 글쓴이 
 BEGIN
 
     --  댓글 작성 INSERT 문 
-    INSERT INTO R_REPLY( R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY, L_LEVEL)
-    VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, V_R_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL);
+    INSERT INTO R_REPLY( R_REPLY_CODE, R_POST_CODE, B_USER_CODE, REPLY, L_LEVEL,R_REPLY_REF_CODE)
+    VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, V_R_POST_CODE, V_B_USER_CODE, V_REPLY, V_L_LEVEL, V_R_REPLY_REF_CODE);
     
     --======================================================================================
     -- < 댓글 달림 알림 >
@@ -899,3 +900,4 @@ BEGIN
     PRC_ALARM('AR_C15', V_URL , V_POST_USER_CODE);
 
 END;
+
