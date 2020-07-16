@@ -646,9 +646,37 @@ ON A.ALARM_CONTENT_TYPE_CODE = AC.ALARM_CONTENT_TYPE_CODE ;
 
 
 
+-- ○ 공통협력구매 거래 신고 프로시저
+CREATE OR REPLACE PROCEDURE PRC_G_DEAL_REPORT
+(
+  V_G_SUCCESS_CODE          IN      G_SUCCESS.G_SUCCESS_CODE%TYPE                       -- 거래 성사 코드 
+, V_G_DEAL_REPORT_TYPE_CODE   IN    G_DEAL_REPORT_TYPE.G_DEAL_REPORT_TYPE_CODE%TYPE     -- 거래 신고 유형 코드
+, V_DEAL_REPORTER_TYPE_CODE     IN  DEAL_REPORTER_TYPE.DEAL_REPORTER_TYPE_CODE%TYPE     -- 거래 신고자 유형 코드
+, V_F_FILE                  IN      G_DEAL_REPORT.F_FILE%TYPE                           -- 첨부파일
+, V_CONTENT                 IN      G_DEAL_REPORT.CONTENT%TYPE                          -- 거래 신고 내용
+, V_G_APPLY_CODE            IN      G_APPLY.G_APPLY_CODE%TYPE                           -- 신청 코드
+)
+IS
+V_B_USER_CODE   B_USER.B_USER_CODE%TYPE;    -- 거래 신고자의 유저 코드 
+BEGIN
 
+    -- ○ 신청코드를 통해 신청자의 유저 코드 구하기
+    SELECT B_USER_CODE INTO V_B_USER_CODE
+    FROM G_APPLY
+    WHERE G_APPLY_CODE = V_G_APPLY_CODE;    
+      
+    -- ○ 공통협력 구매 거래 신고하기
+    INSERT INTO G_DEAL_REPORT(G_DEAL_REPORT_CODE, G_SUCCESS_CODE, G_DEAL_REPORT_TYPE_CODE, F_FILE, CONTENT, DEAL_REPORTER_TYPE_CODE, G_APPLY_CODE)
+    VALUES('G_DRP'||SEQ_G_D_REP.NEXTVAL, V_G_SUCCESS_CODE, V_G_DEAL_REPORT_TYPE_CODE, V_F_FILE, V_CONTENT, V_DEAL_REPORTER_TYPE_CODE, V_G_APPLY_CODE);
+    
+    -- ○ 거래 신고 접수 완료 알림 
+    PRC_ALARM('AR_C6', '' , V_B_USER_CODE);
 
+END;
 
+-- 테스트
+EXEC PRC_G_DEAL_REPORT('G_SUCCESS4','GDERT3','DREPO4','PHFO.JPG','물건이랑 달라요,,,,,,속상해요..','G_APPLY2');
+--==
 
 
 
