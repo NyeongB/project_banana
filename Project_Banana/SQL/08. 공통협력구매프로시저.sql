@@ -437,7 +437,7 @@ BEGIN
     -- 공구원
      PRC_ALARM('AR_C7',V_URL,V_AL_USER_CODE);
     -- 공구장
-     PRC_ALARM('AR_C29',V_URL,V_B_USER_CODE);
+     PRC_ALARM('AR_C7',V_URL,V_B_USER_CODE);
 
 
     -- 3) 커밋
@@ -500,7 +500,7 @@ BEGIN
         VALUES('G_REPRP'||SEQ_G_REPLY_REP_PRC.NEXTVAL,  V_G_REPLY_REPORT_CODE, V_ADMIN_CODE,V_PNR_REPORT_PROC_TYPE_CODE, V_WARNING_CODE);
         
         -- 신고 당한사람        
-        PRC_ALARM('AR_C30','',V_B_USER_CODE);
+        PRC_ALARM('AR_C7','',V_B_USER_CODE);
         -- 신고한사람
         PRC_ALARM('AR_C7','',V_B_REP_USER_CODE);
     
@@ -677,6 +677,121 @@ END;
 -- 테스트
 EXEC PRC_G_DEAL_REPORT('G_SUCCESS4','GDERT3','DREPO4','PHFO.JPG','물건이랑 달라요,,,,,,속상해요..','G_APPLY2');
 --==
+--===============================================================================================================
+--○ 댓글 신고 접수 프로시저 
+--1.댓글 신고 INSERT
+--2.신고 접수 완료되었다는 알림(신고자)
+--3.신고 받았다는 알림(신고 대상자)
+CREATE OR REPLACE PROCEDURE PRC_REPLY_REPORT
+(
+    V_G_REPLY_CODE      IN G_REPLY.G_REPLY_CODE%TYPE --공통 협력 구매 댓글 식별 코드
+,   V_REPLEY_REPORT_TYPE_CODE IN REPLY_REPORT_TYPE.REPLY_REPORT_TYPE_CODE%TYPE -- 댓글 신고 유형 코드
+,   V_B_USER_CODE       IN B_USER.B_USER_CODE%TYPE --신고한 사용자 식별 코드
+    
+)
+IS 
+ V_WB_USER_CODE    B_USER.B_USER_CODE%TYPE; --신고대상자(댓글 작성자 )   
+BEGIN
+
+    --공통 협력 구매 댓글 신고 코드를 통해 댓글 작성자 알아내기
+    SELECT B_USER_CODE INTO V_WB_USER_CODE
+    FROM G_REPLY
+    WHERE G_REPLY_CODE = V_G_REPLY_CODE;
+    
+    
+    -- 댓글 신고 INSERT 
+    INSERT INTO G_REPLY_REPORT(G_REPLY_REPORT_CODE,G_REPLY_CODE,REPLY_REPORT_TYPE_CODE,B_USER_CODE)
+    VALUES('G_REPR'||SEQ_G_REPLY_REP.NEXTVAL, V_G_REPLY_CODE, V_REPLEY_REPORT_TYPE_CODE, V_B_USER_CODE);
+    
+    --신고한 사용자에게 신고가 접수되었다는 알림
+     PRC_ALARM('AR_C6','',V_B_USER_CODE);
+     
+     --신고대상자에게 신고 받았다는 알림
+     PRC_ALARM('AR_C30','',V_WB_USER_CODE);
+    
+    --커밋
+    --COMMIT;
+
+END;
+
+--테스트 확인
+EXEC PRC_REPLY_REPORT('G_REP2','REPRT5', 'USER17');
+
+--------------------------------------------------------------------
+--○게시물 신고 접수 프로시저
+--1.게시물 신고 INSERT
+--2.게시물 신고 접수 알림(신고자)
+--3.게시물 신고 받음 알림(신고 대상자)
+CREATE OR REPLACE PROCEDURE PRC_POST_REPORT
+(
+    V_POST_REPORT_TYPE_CODE  IN POST_REPORT_TYPE.POST_REPORT_TYPE_CODE%TYPE -- 게시물 신고 유형 코드
+,   V_B_USER_CODE           IN B_USER.B_USER_CODE%TYPE -- 신고한 사용자 식별 코드
+,   V_G_POST_CODE           IN G_POST.G_POST_CODE%TYPE -- 공통협력구매 게시물 등록 코드
+
+)
+IS
+ V_WB_USER_CODE  B_USER.B_USER_CODE%TYPE; -- 신고당한 사용자 식별 코드(게시물 작성자)
+
+BEGIN
+
+    --게시물 작성자 알아내기
+    SELECT B_USER_CODE INTO V_WB_USER_CODE
+    FROM G_POST
+    WHERE G_POST_CODE = V_G_POST_CODE;
+
+
+    --게시물 신고 INSERT 
+    INSERT INTO G_POST_REPORT(G_POST_REPORT_CODE,POST_REPORT_TYPE_CODE,B_USER_CODE,G_POST_CODE)
+    VALUES('G_PR'||SEQ_G_POST_REP.NEXTVAL, V_POST_REPORT_TYPE_CODE, V_B_USER_CODE, V_G_POST_CODE);
+    
+    --신고한 사용자에게 신고가 접수되었다는 알림
+     PRC_ALARM('AR_C6','',V_B_USER_CODE);
+     
+     --신고대상자에게 신고 받았다는 알림
+     PRC_ALARM('AR_C29','',V_WB_USER_CODE);
+     
+     --커밋
+     --COMMIT;
+    
+END;
+
+--테스트 확인
+EXEC PRC_POST_REPORT('POSRT3','USER17','G_POST4');
+
+
+-----------------------------------------------------------------------
+SELECT *
+FROM FOLLOW_LIST;
+--컬럼명 바꾸기
+ALTER TABLE FOLLOW_LIST RENAME COLUMN FLLOW_LIST_CODE TO FOLLOW_LIST_CODE;
+ALTER TABLE FOLLOW_LIST RENAME COLUMN B_USER TO B_USER_CODE;
+ALTER TABLE FOLLOW_LIST RENAME COLUMN FLLOW TO FOLLOW;
+
+--○ 팔로워 프로시저 
+--1.팔로잉 목록에 INSERT
+--2.팔로워한테 팔로잉 소식 알림
+CREATE OR REPLACE PROCEDURE PRC_FOLLOW
+(
+    V_B_USER_CODE IN B_USER.B_USER_CODE%TYPE  --주체아이디
+,   V_FOLLOWER    IN  B_USER.B_USER_CODE%TYPE  --팔로워아이디(주체아이디가 다른 사람을 팔로우)
+)
+IS
+BEGIN 
+    
+    --팔로우리스트에 INSERT
+    INSERT INTO FOLLOW_LIST(FOLLOW_LIST_CODE,B_USER_CODE,FOLLOW)
+    VALUES('FOLL'||SEQ_FOLL.NEXTVAL,V_B_USER_CODE,V_FOLLOWER);
+
+    --팔로워에게 알림 
+    PRC_ALARM('AR_C9','',V_FOLLOWER);
+
+    --커밋
+    --COMMIT;
+
+END;
+
+--테스트 확인
+EXEC PRC_FOLLOW('USER17','USER8');
 
 
 
