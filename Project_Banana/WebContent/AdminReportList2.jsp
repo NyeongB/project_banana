@@ -68,7 +68,7 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>접수된 신고</h3>
+					<h3>게시물 / 댓글 신고</h3>
 					<hr>
 				</div>
 				<br>
@@ -95,7 +95,6 @@
 						<table class="table">
 							<thead class="reportTitle">
 								<tr>
-									<th>신고 제목</th>
 									<th>신고 대상자</th>
 									<th>접수 유형</th>
 									<th>신고 유형</th>
@@ -104,63 +103,23 @@
 									<th>신고인</th>		
 								</tr>
 							</thead>
+							<c:forEach var="lists" items="${list }">
 						    <tbody>
+						    	
 								<tr>
-									<td><a href="">사기 신고합니다.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>노쇼</td>
-									<td>고구마가 다 썩었어요</td>
-									<td>2020-06-08 15:00:03</td>
-									<td>abc123</td>
-								</a>
+									
+									<td>${lists.id1 }</td>
+									<td>${lists.type }</td>
+									<td>${lists.rType }</td>
+									<td>${lists.content }</td>
+									<td>${lists.sDate }</td>
+									<td>${lists.id2 }</td>
+									
 								</tr>
 								
 							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">사기꾼 신고해요.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td>상품이상</td>
-									<td>집가서 확인해보니...</td>
-									<td>2020-06-026 11:00:03</td>
-									<td>dongdong789</td>
-								</tr>
-							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>ehdehd95</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>욕설이 너무 많아요</td>
-									<td>2020-07-30 19:30:03</td>
-									<td>dmksld45</td>
-								</tr>
-							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>gyfla96</td>
-									<td>댓글</td>
-									<td>욕설/비방/음란</td>
-									<td>댓글이 좀 그래요...</td>
-									<td>2020-07-10 09:30:03</td>
-									<td>dkr45</td>
-								</tr>
-							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">게시물 신고합니다.</a></td>
-									<td>cjfsud93</td>
-									<td>게시물</td>
-									<td>허위게시물</td>
-									<td>게시물이 가짜예요!</td>
-									<td>2020-08-30 19:30:03</td>
-									<td>dslf03</td>
-								</tr>
-							</tbody>
+							</c:forEach>
+							
 						</table>
 						
 					</div><!--end col-md-12  -->
