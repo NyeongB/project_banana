@@ -20,10 +20,7 @@
 	
 	$(document).ready(function()
 	{
-		$("#loginBtn").click(function()
-		{
-			alert( $("#id").val() + "/" + $("#password").val());
-		});
+		
 	});
 	
 </script>
@@ -42,21 +39,23 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6">
-			<form role="form">
+			<form role="form" action="<%=cp %>/login.action" method="get">
 				<div id="logo"><span id="logo_text_1">banana</span></div>
 				<div class="form-group">
 					 
 					<label for="exampleInputEmail1">
 						아이디
 					</label>
-					<input type="text" class="form-control" id="id" name="id"/>
+					<input type="text" class="form-control" id="id" name="id" required="required"
+					placeholder="아이디를 입력하시오.">
 				</div>
 				<div class="form-group">
 					 
 					<label for="exampleInputPassword1">
 						비밀번호
 					</label>
-					<input type="password" class="form-control" id="password" />
+					<input type="password" class="form-control" id="pw"  name="pw" required="required"
+					placeholder="비밀번호를 입력하시오.">
 				</div>		
 				
 				<button type="submit" class="btn btn-primary" id="loginBtn">

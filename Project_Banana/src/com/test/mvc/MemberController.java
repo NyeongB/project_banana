@@ -244,4 +244,83 @@ public class MemberController
 		return view;
 	}
 	
+	@RequestMapping(value = "/login.action", method =RequestMethod.GET)
+	public String loginCheck(Model model, HttpServletRequest request)
+	{
+		
+		String view = null; 
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		
+		System.out.println("id : " + id + " pw : " + pw);
+		int state = login(id,pw);
+		
+		
+		
+		
+		//model.addAttribute("list", dao.list());
+		//model.addAttribute("check",check);
+		
+		view = "/Login.jsp";
+		return view;
+	}
+	
+	
+	public int login(String id, String pw)
+	{
+		int result = 0 ;
+		LoginDTO dto = new LoginDTO();
+		dto.setId(id);
+		dto.setPw(pw);
+		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
+		String login1 =null;
+		String login2=null;
+		String login3=null;
+		String login4=null;
+		/*
+		 *  String login2 = dao.rest(id,pw); String
+		 * login3 = dao.permanent(id,pw); String login4 = dao.leave(id,pw);
+		 */
+		
+		// -- 디폴트(회원가입안됨) --0
+		// 정상회원 --1
+		login1 = dao.general(dto);
+		// 탈퇴회원 --2
+		login2 = dao.leave(dto);
+		// 영구정지 회원 --3
+		login3 = dao.permanent(dto);
+		// 휴면회원 --4
+		login4 = dao.rest(dto);
+		
+		
+		if(login1 !=null && login2==null && login3==null && login4==null)
+		{
+			System.out.println("정상로그인");
+			result = 1 ;
+		}
+		else if (login1 ==null && login2!=null && login3==null && login4==null)
+		{
+			System.out.println("탈퇴 회원");
+			result = 2 ;
+		}
+		else if (login1 ==null && login2==null && login3!=null && login4==null)
+		{
+			System.out.println("영구정지 회원");
+			result = 3 ;
+		}
+		else if (login1 ==null && login2==null && login3==null && login4!=null)
+		{
+			System.out.println("휴면 회원");
+			result = 4 ;
+		}
+		else
+		{
+			System.out.println("로그인 불가");
+		}
+		
+		
+		
+		return result;
+	}
+	
 }

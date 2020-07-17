@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.test.mvc.ILoginDAO">
+	
+	<select id="rest" resultType="java.lang.String">			
+		SELECT R.B_USER_CODE
+		FROM JOIN J LEFT JOIN REST R
+		ON J.B_USER_CODE = R.B_USER_CODE
+		WHERE J.ID = #{id} AND J.PW = #{pw}
+	</select>	
+	
+	<select id="leave" resultType="java.lang.String">			
+		SELECT L.B_USER_CODE
+		FROM JOIN J LEFT JOIN LEAVE L
+		ON J.B_USER_CODE = L.B_USER_CODE
+		WHERE J.ID = #{id} AND J.PW = #{pw}
+	</select>	
+	
+	<select id="permanent" resultType="java.lang.String">			
+		SELECT PE.B_USER_CODE
+		FROM JOIN J LEFT JOIN PERMANENT_EXPULSION PE
+		ON J.B_USER_CODE = PE.B_USER_CODE
+		WHERE ID = #{id} AND PW = #{pw}	
+	</select>	
+	
+	<select id="general" resultType="java.lang.String">			
+		SELECT NAME
+		FROM JOIN
+		WHERE ID = #{id} AND PW = #{pw}
+	</select>	
+	
+</mapper>  
