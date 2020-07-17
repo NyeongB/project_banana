@@ -807,3 +807,84 @@ FROM G_DEAL_REPORT;
 
 -- 거래 신고 완료
 
+
+
+--=====================================================================================================================================================
+--20.07.17  더미 새로 넣음
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+--===================================================================================================
+-- 게시물 ..더미..넣기
+
+--○ 공통협력 구매 거래 등록 INSERT -- 홍삼 거래완료 리뷰 쓸거, 7월 6일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER35','G_CATE142','LOC97','홍삼 같이 사서 나눠가져요~','지치고 힘들 때 홍삼 먹으면 힘나요!같이 구매해요~',33,'정관장',TO_DATE('2020-07-07 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-14 13:00:00','YYYY-MM-DD HH24:MI:SS'),25000,20000,5,'LOC97',TO_DATE('2020-07-16 08:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-18 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-15 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+    
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST20','홍삼사진.jpg');
+
+select *
+from g_post;
+
+
+--==============================
+--○ 공통협력 구매 거래 등록 INSERT -- 산삼 아직 거래중 7월 12일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER35','G_CATE142','LOC97','산삼 같이 사서 나눠가져요~','지치고 힘들 때 홍삼말고 산삼 먹으면 힘나요!같이 구매해요~',33,'정관장',TO_DATE('2020-07-13 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-20 13:00:00','YYYY-MM-DD HH24:MI:SS'),25000,20000,5,'LOC97',TO_DATE('2020-07-22 08:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-23 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-21 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+           
+
+            
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST21','산삼사진.jpg');    
+   
+   
+   
+--==
+--○ 거래 신고 당할 공통협력 구매 거래 등록 추가 INSERT -- 볼펜 거래신고 (제공자 노쇼) 7월 7일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER37','G_CATE46','LOC31','볼펜 같이 사서 나눠가져요~','볼펜 한 묶음 사서 같이 나눠 가질 사람~',4,'모나미',TO_DATE('2020-07-08 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-14 13:00:00','YYYY-MM-DD HH24:MI:SS'),20000,12000,4,'LOC31',TO_DATE('2020-07-17 10:30:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-18 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-15 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+            
+            
+--○ 추가된 거래 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST22','볼펜사진.jpg');
+
+--==============================
+--○ 공통협력 구매 거래 등록 INSERT -- 게시물 신고  7월 7일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER36','G_CATE40','LOC31','휴지 필요하신 분~','휴지 필요하신가요?전 휴지 많아요:)',23,'크리넥스',TO_DATE('2020-07-10 08:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-20 12:50:00','YYYY-MM-DD HH24:MI:SS'),20000,15000,3,'LOC31',TO_DATE('2020-07-23 13:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-24 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-21 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+            
+
+            
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST23','휴지자랑.jpg');
+
+
+--=
+SELECT * 
+FROM JOIN;
+
+SELECT *
+FROM G_POST;
+
+SELECT *
+FROM G_PHOTO;
+            
+
+
+SELECT SYSDATE
+FROM DUAL;
+
+commit;
+
