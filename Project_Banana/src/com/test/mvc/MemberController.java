@@ -253,15 +253,39 @@ public class MemberController
 		String pw = request.getParameter("pw");
 		
 		System.out.println("id : " + id + " pw : " + pw);
+		
+		// state 0→비정상로그인 1→정상로그인 2→탈퇴회원 3→영구회원 4→휴면회원
 		int state = login(id,pw);
 		
-		
+		if(state==0)
+		{
+			// 다시 로그인
+			view = "/Login.jsp";
+		}
+		else if(state == 1)
+		{
+			// 정상로그인
+			view = "/UserMyJJim.jsp";
+		}
+		else if(state == 2)
+		{
+			
+		}
+		else if(state == 3)
+		{
+			
+		}
+		else if(state == 4)
+		{	
+			// 휴면
+			view = "/RestUserChange.jsp";
+		}
 		
 		
 		//model.addAttribute("list", dao.list());
 		//model.addAttribute("check",check);
 		
-		view = "/Login.jsp";
+		
 		return view;
 	}
 	
