@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.test.mvc.IGPostDAO">
+	
+	<select id="cateList" resultType="com.test.mvc.CateDTO">
+	SELECT G_CATE_BCODE,CATE_NAME
+	FROM G_CATE
+	WHERE G_CATE_BCODE = #{G_CATE_BCODE} AND G_CATE_MCODE IS NULL
+	</select>
+	
+	<select id="cateMList" resultType="com.test.mvc.CateDTO">
+	SELECT G_CATE_CODE,CATE_NAME
+	FROM G_CATE
+	WHERE G_CATE_BCODE = #{G_CATE_BCODE} AND G_CATE_MCODE = #{G_CATE_MCODE} 	
+	</select>
+	
+</mapper>
