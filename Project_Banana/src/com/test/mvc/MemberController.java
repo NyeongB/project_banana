@@ -5,6 +5,10 @@
 
 package com.test.mvc;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -201,6 +205,42 @@ public class MemberController
 		view = "/AdminShopUserList.jsp";
 		
 		
+		return view;
+	}
+	
+	// 중복체크 ajax
+	@RequestMapping(value = "/ajaxadmincheck.action", method =RequestMethod.GET)
+	public String adminCheck(Model model, HttpServletRequest request)
+	{
+		
+		String view = null; 
+		
+		IAdminAccountDAO dao = SqlSession.getMapper(IAdminAccountDAO.class);
+		
+		ArrayList<AdminAccountDTO> result = dao.list();
+		
+		int check = 0;
+		
+		// ajax 요청으로부터 받은 값 받아오기 
+		String admin = request.getParameter("adminId");
+		System.out.println(admin);
+		
+		
+		for(int i=0; i<result.size(); i++) 
+		{
+			//System.out.println();
+			if( admin.equals( result.get(i).getId() )==true )
+			{	
+				// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
+				check = 1;
+				System.out.println("중복됨");
+			}
+		}
+		
+		//model.addAttribute("list", dao.list());
+		model.addAttribute("check",check);
+		
+		view = "/ajax.jsp";
 		return view;
 	}
 	
