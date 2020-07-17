@@ -17,6 +17,72 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+	
+	$(document).ready(function()
+	{
+		// 누락정보 유효성 검사
+		$("#createBtn").click(function()
+		{
+			/* var id = $("#adminId").val();
+			var pw = $("#adminPw").val();
+			 */
+			
+			if( $("#adminId").val()=="")
+			{
+				alert("관리자 아이디를 입력해야합니다.");
+				return;
+			}
+			
+			if( $("#adminPw").val()=="")
+			{
+				alert("비밀번호를 입력해야합니다.");
+				return;
+			}
+			
+			if( $("#adminName").val()=="")
+			{
+				alert("관리자 이름을 입력해야합니다.");
+				return;
+			}
+			
+			
+			//alert(id);
+			//alert("아이디를 입력해주세요!");
+		});
+		
+		// 아이디 중복검사 
+		$("#checkBtn").click(function()
+		{
+			alert("중복검사");
+			ajaxRequest();
+		});
+		
+	});
+
+	function ajaxRequest()
+	{
+		
+	
+		$.get("ajaxadmincheck.action", {adminId : $("#adminId").val()}, function(data)
+		{
+		alert("ajax");
+		alert(data);
+		// 1이면 중복발생
+		if(Number(data) >0)
+		{
+			return;
+		}
+		
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+		}
+
+</script>
+
 
 </head>
 <body>
@@ -51,7 +117,7 @@
 								<div class="input-group">								
 									<input type="text" class="form-control" id="adminId"/>
 									<div class="input-group-btn">
-										<button type="button" class="btn">중복확인</button>
+										<button type="button" class="btn" id="checkBtn">중복확인</button>
 									</div>
 								</div>
 							
@@ -69,7 +135,7 @@
 							</div>
 							<div class="input-group">
 								<div>
-									<input type="button" class="btn form-control" value="생성"/>
+									<input type="button" class="btn form-control" value="생성" id="createBtn">
 								</div>
 							</div>
 						</form>
