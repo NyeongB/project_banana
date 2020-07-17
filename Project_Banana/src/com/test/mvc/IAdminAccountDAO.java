@@ -6,5 +6,7 @@ public interface IAdminAccountDAO
 {
 	public ArrayList<AdminAccountDTO> list();
 	
+	public int add(AdminAccountDTO dto);
+	
 	
 }

@@ -19,6 +19,8 @@
 
 <script type="text/javascript">
 	
+	var state = 0;
+	
 	$(document).ready(function()
 	{
 		// 누락정보 유효성 검사
@@ -46,6 +48,10 @@
 				return;
 			}
 			
+			if( state == 1)
+			{
+				$("#adminAdd").submit();
+			}
 			
 			//alert(id);
 			//alert("아이디를 입력해주세요!");
@@ -54,7 +60,7 @@
 		// 아이디 중복검사 
 		$("#checkBtn").click(function()
 		{
-			alert("중복검사");
+			//alert("중복검사");
 			ajaxRequest();
 		});
 		
@@ -66,14 +72,23 @@
 	
 		$.get("ajaxadmincheck.action", {adminId : $("#adminId").val()}, function(data)
 		{
-		alert("ajax");
-		alert(data);
-		// 1이면 중복발생
+		
 		if(Number(data) >0)
 		{
+			alert("아이디 중복 발생!!");
+			//alert("state : " + state);
+			state=0;
 			return;
 		}
-		
+		else
+		{
+			// 아이디가 중복되지않음
+			// 상태를 1로 바꿈 
+			alert("사용가능한 아이디입니다.");
+			state = 1;
+			//alert("state : " + state);
+			
+		}
 		
 		
 		//$("#positionForm").submit();
@@ -112,10 +127,10 @@
 			<!-- 관리자 계정 생성 -->	
 			<div class="row adminList">
 				<div class="col-md-12 text-center">
-						<form action="" class="form-inline">
+						<form action="adminAdd.action" class="form-inline" id="adminAdd">
 							<label for="adminId">아이디</label>
 								<div class="input-group">								
-									<input type="text" class="form-control" id="adminId"/>
+									<input type="text" class="form-control" id="adminId" name="adminId"/>
 									<div class="input-group-btn">
 										<button type="button" class="btn" id="checkBtn">중복확인</button>
 									</div>
@@ -124,13 +139,13 @@
 							<label for="adminPw">비밀번호</label>
 							<div class="input-group">
 								<div>
-									<input type="password" class="form-control" id="adminPw"/>
+									<input type="password" class="form-control" id="adminPw" name="adminPw"/>
 								</div>
 							</div>
 							<label for="adminName">이름</label>
 							<div class="input-group">
 								<div>
-									<input type="text" class="form-control" id="adminName"/>
+									<input type="text" class="form-control" id="adminName" name="adminName"/>
 								</div>
 							</div>
 							<div class="input-group">

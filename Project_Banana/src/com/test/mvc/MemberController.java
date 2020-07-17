@@ -223,7 +223,7 @@ public class MemberController
 		
 		// ajax 요청으로부터 받은 값 받아오기 
 		String admin = request.getParameter("adminId");
-		System.out.println(admin);
+		//System.out.println(admin);
 		
 		
 		for(int i=0; i<result.size(); i++) 
@@ -233,7 +233,7 @@ public class MemberController
 			{	
 				// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
 				check = 1;
-				System.out.println("중복됨");
+				//System.out.println("중복됨");
 			}
 		}
 		
@@ -243,6 +243,32 @@ public class MemberController
 		view = "/ajax.jsp";
 		return view;
 	}
+	
+	
+	// 중복체크 ajax
+		@RequestMapping(value = "/adminAdd.action", method =RequestMethod.GET)
+		public String adminAdd(Model model, HttpServletRequest request)
+		{
+			
+			String view = null; 
+			
+			IAdminAccountDAO dao = SqlSession.getMapper(IAdminAccountDAO.class);
+			
+			
+			String adminId = request.getParameter("adminId");
+			String adminPw = request.getParameter("adminPw");
+			String adminName = request.getParameter("adminName");
+			System.out.println(adminId+" "+adminPw+" "+adminName);
+			AdminAccountDTO dto = new AdminAccountDTO();
+			dto.setId(adminId);
+			dto.setPw(adminPw);
+			dto.setName(adminName);
+			
+			dao.add(dto);
+			
+			view = "/adminaccount.action";
+			return view;
+		}
 	
 	@RequestMapping(value = "/login.action", method =RequestMethod.GET)
 	public String loginCheck(Model model, HttpServletRequest request)

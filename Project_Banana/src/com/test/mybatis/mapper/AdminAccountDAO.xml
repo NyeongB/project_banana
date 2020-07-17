@@ -11,6 +11,10 @@
 	FROM ADMIN		
 	</select>	
 	
+	<insert id="add">
+	INSERT INTO ADMIN(ADMIN_CODE,ID,PW,NAME)
+	VALUES('ADMIN'||SEQ_ADMIN.NEXTVAL,#{id},#{pw},#{name})
+	</insert>
 	
 </mapper>  
 
