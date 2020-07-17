@@ -888,3 +888,224 @@ FROM DUAL;
 
 commit;
 
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+--===================================================================================================
+-- 게시물 ..더미..넣기
+
+--○ 공통협력 구매 거래 등록 INSERT -- 홍삼 거래완료 리뷰 쓸거, 7월 6일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER35','G_CATE142','LOC97','홍삼 같이 사서 나눠가져요~','지치고 힘들 때 홍삼 먹으면 힘나요!같이 구매해요~',33,'정관장',TO_DATE('2020-07-07 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-14 13:00:00','YYYY-MM-DD HH24:MI:SS'),25000,20000,5,'LOC97',TO_DATE('2020-07-16 08:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-18 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-15 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+    
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST20','홍삼사진.jpg');
+
+select *
+from g_post;
+
+
+--==============================
+--○ 공통협력 구매 거래 등록 INSERT -- 산삼 아직 거래중 7월 12일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER35','G_CATE142','LOC97','산삼 같이 사서 나눠가져요~','지치고 힘들 때 홍삼말고 산삼 먹으면 힘나요!같이 구매해요~',33,'정관장',TO_DATE('2020-07-13 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-20 13:00:00','YYYY-MM-DD HH24:MI:SS'),25000,20000,5,'LOC97',TO_DATE('2020-07-22 08:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-23 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-21 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+           
+
+            
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST21','산삼사진.jpg');    
+   
+   
+   
+--==
+--○ 거래 신고 당할 공통협력 구매 거래 등록 추가 INSERT -- 볼펜 거래신고 (제공자 노쇼) 7월 7일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER37','G_CATE46','LOC31','볼펜 같이 사서 나눠가져요~','볼펜 한 묶음 사서 같이 나눠 가질 사람~',4,'모나미',TO_DATE('2020-07-08 13:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-14 13:00:00','YYYY-MM-DD HH24:MI:SS'),20000,12000,4,'LOC31',TO_DATE('2020-07-17 10:30:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-18 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-15 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+            
+            
+--○ 추가된 거래 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST22','볼펜사진.jpg');
+
+--==============================
+--○ 공통협력 구매 거래 등록 INSERT -- 게시물 신고  7월 7일
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES('G_POST'||SEQ_G_POST.NEXTVAL,'USER36','G_CATE40','LOC31','휴지 필요하신 분~','휴지 필요하신가요?전 휴지 많아요:)',23,'크리넥스',TO_DATE('2020-07-10 08:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-20 12:50:00','YYYY-MM-DD HH24:MI:SS'),20000,15000,3,'LOC31',TO_DATE('2020-07-23 13:00:00','YYYY-MM-DD HH24:MI:SS'),TO_DATE('2020-07-24 18:00:00','YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE('2020-07-21 13:00:00','YYYY-MM-DD HH24:MI:SS'));
+            
+
+            
+--○ 공통협력 구매 사진 등록
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,'G_POST23','휴지자랑.jpg');
+
+
+--==============================
+--○ 게시물 신고
+EXEC PRC_POST_REPORT('POSRT3','USER41','G_POST23');
+
+--게시물 신고 
+SELECT *
+FROM G_POST_REPORT;
+--==>>G_PR5	POSRT3	USER41	2020-07-09 00:01:48	G_POST23
+
+SELECT *
+FROM ALARM;
+--==>>
+/*
+AR120	AR_C6	USER41	2020-07-09 00:01:48		
+AR121	AR_C29	USER36	2020-07-09 00:01:48		
+*/
+
+SELECT *
+FROM G_POST;
+
+--===============================
+--○ 게시물 신고 처리
+EXEC PRC_G_POST_REPORT_PRC('G_PR5','ADMIN3','PNRP1');
+
+SELECT *
+FROM G_POST_REPORT_PROC;
+--==>>G_PRP11	ADMIN3	G_PR5	2020-07-09 09:15:04	PNRP1	WAR35
+
+--===============================
+--○ 댓글 작성
+--7/8
+--댓글 신고 당할 댓글 0708작성
+EXEC PRC_G_REPLY('G_POST22','USER38','볼펜 제가 파는데 엄청 좋아요!한번 써보실래요?저희 가게 이름은 바나나문구입니다.놀러오세요',NULL,0, '' );
+--댓글 신고 허위신고 판단될 댓글 0709작성 
+EXEC PRC_G_REPLY('G_POST22','USER39','모나미 좋죠!저 살래요!',NULL ,0, '' );
+--정상 댓글
+--G_REP5에 대한 대댓글  0709작성
+EXEC PRC_G_REPLY('G_POST22','USER40','여기서 이렇게 홍보하지 마세요', 'G_REP8' ,1, '' );
+
+--댓글  확인
+SELECT *
+FROM G_REPLY;
+--==>>
+/*
+G_POST22	G_REP8		USER38	2020-07-08 18:24:35	볼펜 제가 파는데 엄청 좋아요!한번 써보실래요?저희 가게 이름은 바나나문구입니다.놀러오세요	0
+G_POST22	G_REP9		USER39	2020-07-09 10:24:57	모나미 좋죠!저 살래요!	0
+G_POST22	G_REP10	G_REP8	USER40	2020-07-09 10:25:24	여기서 이렇게 홍보하지 마세요	1
+*/
+
+--====================================================================
+--○ 댓글 신고 접수(7월 9일 오후 1시에 신고)
+EXEC PRC_REPLY_REPORT('G_REP8','REPRT1', 'USER42'); -- 신고 접수될 댓글
+EXEC PRC_REPLY_REPORT('G_REP9','REPRT5', 'USER42'); -- 허위신고로 판정될 신고
+
+--댓글 신고 접수 조회
+SELECT *
+FROM G_REPLY_REPORT;
+--==>>
+/*
+G_REPR5	G_REP8	REPRT1	USER42	2020-07-09 13:04:21
+G_REPR6	G_REP9	REPRT5	USER42	2020-07-09 13:04:26
+*/
+
+SELECT *
+FROM ALARM
+ORDER BY 1;
+--==>>
+/*
+AR157	AR_C6	USER42	2020-07-09 13:04:21		
+AR158	AR_C30	USER38	2020-07-09 13:04:21		
+AR159	AR_C6	USER42	2020-07-09 13:04:26		
+AR160	AR_C30	USER39	2020-07-09 13:04:26			
+*/
+
+--======================================================================================
+--○ 댓글 신고 처리 프로시저 호출(7월 9일 2시에 신고 처리)
+EXEC PRC_G_REP_REPORT_PRC('G_REPR5','ADMIN3','PNRP1'); --신고 수락
+EXEC PRC_G_REP_REPORT_PRC('G_REPR6','ADMIN3','PNRP2'); --신고 거절
+
+SELECT *
+FROM G_REPLY_REPORT_PROC;
+--==>>
+/*
+G_REPRP5	G_REPR5	ADMIN3	2020-07-09 14:07:01	PNRP1	WAR36
+G_REPRP6	G_REPR6	ADMIN3	2020-07-09 14:07:04	PNRP2	
+*/
+
+SELECT *
+FROM ALARM
+ORDER BY 1;
+--==>>
+/*
+AR161	AR_C7	USER38	2020-07-09 14:07:01		
+AR162	AR_C7	USER42	2020-07-09 14:07:01		
+AR163	AR_C7	USER42	2020-07-09 14:07:04		
+
+*/
+
+--=========================================================================
+--○ 공통협력구매 게시물 찜
+INSERT INTO G_POST_JJIM(G_POST_JJIM_CODE,SDATE,G_POST_CODE,B_USER_CODE)
+VALUES('G_PJ'||SEQ_G_POST_JJIM.NEXTVAL,TO_DATE('2020-07-13 09:00:00','YYYY-MM-DD HH24:MI:SS'),'G_POST21','USER41');
+
+SELECT *
+FROM G_POST_JJIM;
+--==>>G_PJ2	2020-07-13 09:00:00	G_POST21	USER41
+
+--==========================================================================
+--○ 공통협력구매 댓글 좋아요
+INSERT INTO G_REPLY_LIKE(G_REPLY_LIKE_CODE,G_REPLY_CODE,B_USER_CODE,SDATE)
+VALUES('G_REPL'||SEQ_G_REPLY_LIKE.NEXTVAL,'G_REP10','USER35',TO_DATE('2020-07-09 16:00:00','YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO G_REPLY_LIKE(G_REPLY_LIKE_CODE,G_REPLY_CODE,B_USER_CODE,SDATE)
+VALUES('G_REPL'||SEQ_G_REPLY_LIKE.NEXTVAL,'G_REP10','USER42',TO_DATE('2020-07-09 17:30:00','YYYY-MM-DD HH24:MI:SS'));
+
+--확인
+SELECT *
+FROM G_REPLY_LIKE;
+--==>>
+/*
+G_REPL3	G_REP10	USER35	2020-07-09 16:00:00
+G_REPL4	G_REP10	USER42	2020-07-09 17:30:00
+*/
+
+--==========================================================================
+--○ 거래 신고 
+
+EXEC PRC_G_DEAL_REPORT('G_SUCCESS8','GDERT1','DREPO4','NOSHOW.JPG','공구장이 안나왔어요...날도 더운데 헛걸음입니다...!','G_APPLY30');
+
+
+SELECT *
+FROM G_DEAL_REPORT;
+
+--==========================================================================
+--○ 거래 신고 이의 제기
+INSERT INTO G_REPORT_OBJ(G_REPORT_OBJ_CODE,G_DEAL_REPORT_CODE,CONTENT,F_FILE)
+VALUES('G_ROBJ'||SEQ_G_D_REP_OBJ.NEXTVAL,'G_DRP7','저 나갔는데 억울해요!','뻥이지.jpg');
+
+SELECT *
+FROM G_REPORT_OBJ;
+--==>>G_ROBJ1	G_DRP7	2020-07-17 14:06:35	저 나갔는데 억울해요!	뻥이지.jpg
+
+--==========================================================================
+--○ 거래 신고 처리
+
+
+EXEC PRC_G_DEAL_REPORT_PROC('G_DRP7','ADMIN1','환불입니다.똑바로사세요');
+
+SELECT *
+FROM G_DEAL_REPORT_PROC;
+--==>>
+/*
+G_DRP9	G_DRP7	ADMIN1	DRPT6	2020-07-17 15:07:38	환불입니다.똑바로사세요	
+G_DRP10	G_DRP7	ADMIN1	DRPT7	2020-07-17 15:07:38	환불입니다.똑바로사세요	OUT14
+*/
+
+
+
+
+
