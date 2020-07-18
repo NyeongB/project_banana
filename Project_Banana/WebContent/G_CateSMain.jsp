@@ -161,15 +161,14 @@ p
 						 	<ul class="catelist">
 								<c:forEach var="catelists" items="${cateList }">
 									<li>
-									<a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}">${catelists.cate_name }</a>
-							
+									<a href="g_catesmain.action?bid=${g_cate_bcode }&mid=${g_cate_code}">${catelists.cate_name }</a>
 									</li>								
 								</c:forEach>
 							</ul>							
 							</div>		
 					</div>
 					
-				<%-- 	<div class="col-md-12">
+					<div class="col-md-12">
 						<!--소분류  -->
 						<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						 	<ul class="catelist">
@@ -181,7 +180,7 @@ p
 							</ul>							
 							</div>		
 					</div>
-				 --%>
+				
 				
 				
 				</div>	<!--end col-md-12  -->
