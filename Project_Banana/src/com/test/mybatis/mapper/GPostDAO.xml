@@ -6,16 +6,16 @@
   
 <mapper namespace="com.test.mvc.IGPostDAO">
 	
-	<select id="cateList" resultType="com.test.mvc.CateDTO">
-	SELECT G_CATE_BCODE,CATE_NAME
+	<select id="cateList" resultType="com.test.mvc.GCateDTO">
+	SELECT G_CATE_BCODE, CATE_NAME,G_CATE_CODE
 	FROM G_CATE
-	WHERE G_CATE_BCODE = #{G_CATE_BCODE} AND G_CATE_MCODE IS NULL
+	WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE IS NULL
 	</select>
 	
-	<select id="cateMList" resultType="com.test.mvc.CateDTO">
+	<select id="cateMList" resultType="com.test.mvc.GCateDTO">
 	SELECT G_CATE_CODE,CATE_NAME
 	FROM G_CATE
-	WHERE G_CATE_BCODE = #{G_CATE_BCODE} AND G_CATE_MCODE = #{G_CATE_MCODE} 	
+	WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE = #{g_cate_code} 	
 	</select>
 	
 </mapper>

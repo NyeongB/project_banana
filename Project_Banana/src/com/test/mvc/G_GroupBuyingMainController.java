@@ -25,9 +25,9 @@ public class G_GroupBuyingMainController
 			
 			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 			
-			
-			
-			model.addAttribute("cateList", dao.cateList(bid));
+			GCateDTO dto = new GCateDTO();
+			dto.setG_cate_bcode(bid);
+			model.addAttribute("cateList", dao.cateList(dto));
 		
 			
 			view = "/G_CateMain.jsp";
@@ -36,25 +36,30 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 		
-	/*
-	 * // 소분류 불러오는 메소드
-	 * 
-	 * @RequestMapping(value = "/g_catemain.action", method = RequestMethod.GET)
-	 * public String cateList(Model model, String bid, String mid) { String view =
-	 * null;
-	 * 
-	 * IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-	 * 
-	 * 
-	 * 
-	 * model.addAttribute("cateMList", dao.cateMList(bid, mid));
-	 * 
-	 * 
-	 * view = "/G_CateMain.jsp";
-	 * 
-	 * 
-	 * return view; }
-	 */
+	
+	  // 소분류 불러오는 메소드
+	  
+	
+	  @RequestMapping(value = "/g_catesmain.action", method = RequestMethod.GET)
+	  public String cateList(Model model, String bid, String mid) 
+	  { 
+		  String view = null;
+	  
+	  IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+	  
+	  GCateDTO dto = new GCateDTO();
+	  dto.setG_cate_bcode(bid);
+	  dto.setG_cate_code(mid);
+	  
+	  model.addAttribute("cateMList", dao.cateMList(dto));
+	  
+	  
+	  view = "/G_CateSMain.jsp";
+	  
+	  
+	  return view; }
+	 
+	 
 	
 	
 	
