@@ -114,7 +114,7 @@
 					
 					<button type="submit" class="btn btn-primary" id="rightBtn">
 					재설정
-				</button>
+					</button>
 				</div>
 				</form>
 				
