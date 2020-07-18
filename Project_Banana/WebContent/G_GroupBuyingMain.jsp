@@ -120,6 +120,19 @@ p
 }
 
 </style>
+<script type="text/javascript">
+	
+	$().ready(function()
+	{
+		$("#postItem").click(function()
+		{
+			//alert("확인");
+			$(location).attr("href","groupbuyingpostoffer.action");
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 <!-- Header  -->
@@ -156,7 +169,7 @@ p
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-right">
-					<button class="btn">상품등록</button>
+					<button class="btn" id="postItem" name="postItem">상품등록</button>
 				</div>
 			</div>
 			

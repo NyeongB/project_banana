@@ -373,4 +373,17 @@ public class MemberController
 		return result;
 	}
 	
+	//상품 페이지 등록
+	@RequestMapping(value = "/groupbuyingpostoffer.action", method =RequestMethod.GET)
+	public String GroupBuyingPostOffer()
+	{
+		String view = null; 
+		
+		
+		view = "/GroupBuyingPostOffer.jsp";
+		
+		
+		return view;
+	}
+	
 }
