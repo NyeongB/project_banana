@@ -30,19 +30,19 @@
 			var pw = $("#adminPw").val();
 			 */
 			
-			if( $("#adminId").val()=="")
+			if( $("#adminId").val().trim()=="")
 			{
 				alert("관리자 아이디를 입력해야합니다.");
 				return;
 			}
 			
-			if( $("#adminPw").val()=="")
+			if( $("#adminPw").val().trim()=="")
 			{
 				alert("비밀번호를 입력해야합니다.");
 				return;
 			}
 			
-			if( $("#adminName").val()=="")
+			if( $("#adminName").val().trim()=="")
 			{
 				alert("관리자 이름을 입력해야합니다.");
 				return;
@@ -60,6 +60,11 @@
 		// 아이디 중복검사 
 		$("#checkBtn").click(function()
 		{
+			if( $("#adminId").val().trim()=="")
+			{
+				alert("관리자 아이디를 입력해야합니다.");
+				return;
+			}
 			//alert("중복검사");
 			ajaxRequest();
 		});
