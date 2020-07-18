@@ -348,17 +348,17 @@ public class MemberController
 			System.out.println("정상로그인");
 			result = 1 ;
 		}
-		else if (login1 ==null && login2!=null && login3==null && login4==null)
+		else if (login1 !=null && login2!=null && login3==null && login4==null)
 		{
 			System.out.println("탈퇴 회원");
 			result = 2 ;
 		}
-		else if (login1 ==null && login2==null && login3!=null && login4==null)
+		else if (login1 !=null && login2==null && login3!=null && login4==null)
 		{
 			System.out.println("영구정지 회원");
 			result = 3 ;
 		}
-		else if (login1 ==null && login2==null && login3==null && login4!=null)
+		else if (login1 !=null && login2==null && login3==null && login4!=null)
 		{
 			System.out.println("휴면 회원");
 			result = 4 ;
