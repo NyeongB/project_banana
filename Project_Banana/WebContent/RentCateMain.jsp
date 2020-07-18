@@ -54,10 +54,6 @@ String cp = request.getContextPath();
 	font-weight: bold;
 }
 
-#rent1 
-{
-	margin-right: 30px;
-}
 
 #location 
 {
@@ -132,14 +128,10 @@ b
 		<div class="row">
 			<div class="col-md-12 rentNav">
 
-				<div class="col-md-7">
-					<a href="" id="rent1">빌려드립니다</a> <a href="" id="rent2">빌려주세요</a>
-				</div>
-
-				<div class="col-md-5">
+				
 					<img src="images/icons_b50.png" id="location"> <small>서울시
 						마포구 서교동</small>
-				</div>
+				
 			</div>
 		</div>
 		<!-- end rentNav -->

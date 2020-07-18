@@ -119,6 +119,46 @@ p
 
 }
 
+.rentNav 
+{
+	margin-top: 40px;
+	margin-left: 200px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#location 
+{
+	width: 23px;
+	height: 20px;
+}
+
+.thumbnail
+{
+	margin: 10px;
+}
+
+.Ad 
+{
+	width: 500px;
+	height: 150px;
+	background-color: #e6e6e6;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+b
+{
+	font-size: 16px;
+}
+
+.rent, .myrent, .recommend
+{
+	margin-bottom: 70px;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -131,6 +171,17 @@ p
 
 <!-- content  -->
 <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 rentNav">
+
+				
+					<img src="images/icons_b50.png" id="location"> <small>서울시
+						마포구 서교동</small>
+				
+			</div>
+
+		</div>
+
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -258,180 +309,441 @@ p
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row myrent">
 				<div class="col-md-12">
 					<div><span class="highlight">나의 렌트 현황</span></div>
-	                  <div class="row item_content">
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">1</span></h4>
-	                           <div class="thumbnail">
+					
+					
+					
+					
+					
+	                  <!-- 내 렌트 현황 게시글 1열 -->
+				<div class="row"> 
+					<div class="col-md-12">
+
+						
+							<div class="col-md-1"></div>
+
+							
+							<!-- 1열 1번 -->
+							
+							  <div class="col-sm-2 col-md-2 thblock">
+							  <h4 class="thick"><span class="line">1</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 빌려드립니다..</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">2</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+							
+							
+							<!-- 1열 2번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">2</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">3</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 1열 3번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">3</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">4</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 1열 4번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">4</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                      <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">5</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 1열 5번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">5</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>                                    
-	               </div>	
+	                                </div>
+	                   		  </div>
+
+							<div class="col-md-1"></div>
+
+						
+					</div>
+				</div> <!-- end 내 렌트 현황 게시글 1열  -->
 				</div>
 			</div>
-			<div class="row">
+			
+			
+			
+			<div class="row recommend">
 				<div class="col-md-12">
 					<div><span class="highlight">카테고리 추천 게시물</span></div>
-	                  <div class="row item_content">
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">1</span></h4>
-	                           <div class="thumbnail">
+					
+					
+					      <!-- 카테고리 추천 게시글 2열 -->
+				<div class="row"> 
+					<div class="col-md-12">
+
+						
+							<div class="col-md-1"></div>
+
+							
+							<!-- 2열 1번 -->
+							
+							  <div class="col-sm-2 col-md-2 thblock">
+							  <h4 class="thick"><span class="line">1</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">2</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+							
+							
+							<!-- 2열 2번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">2</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">3</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 3번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">3</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">4</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 4번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">4</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                      <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">5</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 2열 5번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">5</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>                                    
-	               </div>	
-				
+	                                </div>
+	                   		  </div>
+
+							<div class="col-md-1"></div>
+
+						
+					</div>
+				</div> <!-- end 카테고리 추천 게시글 2열  -->
 				</div>
 			</div>
-			<div class="row">
+			
+			
+			<div class="row rent">
 				<div class="col-md-12">
 				<div><span class="highlight">방금 올라온 빌려드립니다.</span></div>
-	                  <div class="row item_content">
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">1</span></h4>
-	                           <div class="thumbnail">
+				
+				
+	                      <!-- 빌려드립니다 실시간 게시글 3열 -->
+				<div class="row"> 
+					<div class="col-md-12">
+
+						
+							<div class="col-md-1"></div>
+
+							
+							<!-- 3열 1번 -->
+							
+							  <div class="col-sm-2 col-md-2 thblock">
+							  <h4 class="thick"><span class="line">1</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">2</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+							
+							
+							<!-- 3열 2번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">2</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
+	                                   
 	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">3</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 3번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">3</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">4</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 4번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">4</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                      <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">5</span></h4>
-	                           <div class="thumbnail">
+	                                </div>
+	                   		  </div>
+	                   		  
+	                   		  
+	                   		  
+							<!-- 3열 5번 -->
+							   <div class="col-sm-2 col-md-2">
+							   <h4 class="thick"><span class="line">5</span></h4>
+	                           		<div class="thumbnail">
 	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
+	                                   
+	                                     <div class="caption">
+	                                  			<div class="col-md-12 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                  
+	                                        	<div class="col-md-12 text-right wr">
+	                                        		<small>글쓴이</small>
+	                                       	 </div>
+	  
+	                                      <b>오레오 빌려드립니다..</b>
+	                                      <p>홍대입구역/홍대입구역</p>
+	                                      <span class="price">9900</span>원(1일)                    
 	                                    </div>
-	                             </div>
-	                     </div>                                    
-	               </div>	
+	                                </div>
+	                   		  </div>
+
+							<div class="col-md-1"></div>
+
+						
+					</div>
+				</div> <!-- end 빌려드립니다 실시간 게시글 3열  -->	
 				
 				</div>
 			</div>
-		</div>
+			
+			
+						
+			<div class="col-md-12 Ad">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 block text-center">광고배너</div>
+		<div class="col-md-3"></div>
+	</div>
+	<!-- end 광고배너 -->
+			
+			
+		</div> <!-- end col-md-8 -->
 		<div class="col-md-2">
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>

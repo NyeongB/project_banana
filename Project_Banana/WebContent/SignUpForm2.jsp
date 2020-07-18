@@ -44,6 +44,10 @@ input
 	width: 82px;
 }
 
+.bo
+{
+	margin-bottom: 30px;
+}
 
 </style>
 
@@ -364,6 +368,7 @@ input
 				</div>
 			</div>
 			
+			<div class="col-md-12 bo"></div>
 			
 			</form>
 		</div>
