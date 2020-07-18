@@ -1,8 +1,5 @@
 package com.test.mvc;
 
-import java.util.Collection;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +54,24 @@ public class G_GroupBuyingMainController
 	  view = "/G_CateSMain.jsp";
 	  
 	  
-	  return view; }
+	  return view; 
+	  }
+	  
+	  @RequestMapping(value = "/g_main.action", method = RequestMethod.GET)
+	  public String gMain(Model model) 
+	  { 
+		  String view = null;
+	  
+		  IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+		  
+		  model.addAttribute("gNewList", dao.gNewList());
+		  model.addAttribute("gCateList", dao.gCateList());
+
+		  view = "/G_GroupBuyingMain.jsp";
+		  
+		  
+		  return view; 
+	  }
 	 
 	 
 	
