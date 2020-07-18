@@ -161,26 +161,28 @@ p
 						 	<ul class="catelist">
 								<c:forEach var="catelists" items="${cateList }">
 									<li>
-									<a href="g_catemain.action?id=" + ${catelists.g_cate_bcode }>${catelists.cate_name }</a>
+									<a>${catelists.cate_name }</a>
+									<%-- <a href="g_catemain.action?mid=${catelists.g_cate_code }" value="${catelists.g_cate_bcode}">${catelists.cate_name }</a> --%>
+									<%-- <a href="g_catemain.action?bid=${catelists.g_cate_bcode}&mid=${catelists.g_cate_ }  ">${catelists.cate_name }</a> --%>
 									</li>								
 								</c:forEach>
 							</ul>							
 							</div>		
 					</div>
 					
-					<div class="col-md-12">
+				<%-- 	<div class="col-md-12">
 						<!--소분류  -->
 						<div class="table-wrapper-scroll-y my-custom-scrollbar">
 						 	<ul class="catelist">
-								<c:forEach var="catelists" items="${cateList }">
+								<c:forEach var="cateMlists" items="${cateMList }">
 									<li>
-									<a href="g_catemain.action?mid=" >${catelists.cate_name }</a>
+									<a>${cateMlists.cate_name }</a>
 									</li>								
 								</c:forEach>
 							</ul>							
 							</div>		
 					</div>
-				
+				 --%>
 				
 				
 				</div>	<!--end col-md-12  -->
