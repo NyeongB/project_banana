@@ -3,8 +3,8 @@ package com.test.mvc;
 public class GPostDTO
 {
 	
-	private String g_post_code, b_user_code, g_cate_code, loc_code, 
-		   title, content, wDate,views, brand,start_date, end_date;
+	private String g_post_code, b_user_code, g_cate_code,loc_name, 
+		   title, content, wDate,views, brand,start_date, end_date,photo;
 	private int cost, dis_cost, member_num;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	
@@ -33,13 +33,13 @@ public class GPostDTO
 	{
 		this.g_cate_code = g_cate_code;
 	}
-	public String getLoc_code()
+	public String getLoc_name()
 	{
-		return loc_code;
+		return loc_name;
 	}
-	public void setLoc_code(String loc_code)
+	public void setLoc_name(String loc_name)
 	{
-		this.loc_code = loc_code;
+		this.loc_name = loc_name;
 	}
 	public String getTitle()
 	{
@@ -97,6 +97,14 @@ public class GPostDTO
 	{
 		this.end_date = end_date;
 	}
+	public String getPhoto()
+	{
+		return photo;
+	}
+	public void setPhoto(String photo)
+	{
+		this.photo = photo;
+	}
 	public int getCost()
 	{
 		return cost;
@@ -153,6 +161,8 @@ public class GPostDTO
 	{
 		this.receipt_date = receipt_date;
 	}
+	
+	
 	
 	
 	

@@ -18,4 +18,27 @@
 	WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE = #{g_cate_code} 	
 	</select>
 	
+	<select id="gNewList" resultType="com.test.mvc.GPostDTO">
+		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
+		FROM G_POST G  LEFT JOIN LOC L
+		ON G.LOC_CODE = L.LOC_CODE
+		        LEFT JOIN G_PHOTO P
+		ON G.G_POST_CODE = P.G_POST_CODE
+		ORDER BY WDATE DESC
+	</select>
+	
+	<select id="gCateList" resultType="com.test.mvc.GPostDTO">
+		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
+		FROM G_POST G  LEFT JOIN LOC L
+		ON G.LOC_CODE = L.LOC_CODE
+		        LEFT JOIN G_PHOTO P
+		ON G.G_POST_CODE = P.G_POST_CODE
+		        JOIN G_CATE T
+		ON G.G_CATE_CODE = T.G_CATE_CODE
+		WHERE G_CATE_BCODE = 'G_CATE5'
+		ORDER BY WDATE DESC
+	</select>
+	
+	
+	
 </mapper>
