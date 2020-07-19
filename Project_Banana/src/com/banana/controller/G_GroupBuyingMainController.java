@@ -55,6 +55,7 @@ public class G_GroupBuyingMainController
 		  
 		  model.addAttribute("cateMList", dao.cateMList(dto));
 		  model.addAttribute("cateList", dao.cateList(dto));
+		  model.addAttribute("gCatemMainList", dao.gCatemMainList(dto));
 		  
 		  view = "/G_CateSMain.jsp";
 	  

@@ -18,4 +18,7 @@ public interface IGPostDAO
 	
 	//대분류 카테고리 선택 시 메인페이지
 	public ArrayList<GPostDTO> gCateMainList(GCateDTO dto);
+	
+	//중분류 카테고리 선택 시 메인페이지
+	public ArrayList<GPostDTO> gCatemMainList(GCateDTO dto);
 }

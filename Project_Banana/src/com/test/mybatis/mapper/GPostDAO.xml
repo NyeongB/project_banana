@@ -45,15 +45,16 @@
 	
 	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->
 	<select id="gCateMainList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
-		FROM G_POST G  LEFT JOIN LOC L
-		ON G.LOC_CODE = L.LOC_CODE
-		        LEFT JOIN G_PHOTO P
-		ON G.G_POST_CODE = P.G_POST_CODE
-		        JOIN G_CATE T
-		ON G.G_CATE_CODE = T.G_CATE_CODE
-		WHERE G_CATE_BCODE = #{g_cate_bcode}
-		ORDER BY WDATE DESC
+		SELECT *
+		FROM  VIEW_CATEMAINLIST
+		WHERE G_CATE_BCODE=  #{g_cate_bcode}
+	</select>
+	
+	<!--중분류 카테고리 눌렀을 때 실시간 게시물  -->
+	<select id="gCatemMainList" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT *
+		FROM  VIEW_CATEMAINLIST
+		WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE = #{g_cate_code} 	
 	</select>
 	
 	

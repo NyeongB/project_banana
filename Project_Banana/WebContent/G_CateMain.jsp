@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
@@ -213,42 +214,38 @@ p
 			<!-- 실시간 게시글 1열 -->
 				<div class="row"> 
 					<div class="col-md-12">
-
-						
-							
-
-							
-							<!-- 1열 1번 -->
-							<c:forEach var="glists" items="${gCateMainList }" begin="1" end="5">
-							
-								<div class="col-md-1"></div>
-								<div class="col-sm-2 col-md-2 thblock">
-		                           		<div class="thumbnail">
-		                                 <img src="images/oz.jpg" >
-		                                   
-		                                    <div class="caption">
-		                                   		<div class="col-md-12">
-		                                   			<div class="col-md-6">
-		                                    			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-		                                   			</div>
-		                                  			<div class="col-md-6 text-right">
-		                                    			<small>5분전</small>
-		                                    		</div>
-		                                        </div>
-		                                        
-		                                        <div class="col-md-12 text-right wr">
-		                                        	<small>글쓴이</small>
-		                                        </div>
-		                                      
-		                                        
-		                                      <b>${glists.title }</b>
-		                                      <p>${glists.loc_name }</p>
-		                                      <span class="price">${glists.cost }</span>원(1일)                    
-		                                    </div>
-		                                </div>
-		                   		  </div>
-							</c:forEach>
-							
+	
+					<!-- 1열 1번 -->
+					<c:forEach var="glists" items="${gCateMainList }" begin="1" end="5">
+					
+						<div class="col-md-1"></div>
+						<div class="col-sm-2 col-md-2 thblock">
+                           		<div class="thumbnail">
+                                 <img src="images/oz.jpg" >
+                                   
+                                    <div class="caption">
+                                   		<div class="col-md-12">
+                                   			<div class="col-md-6">
+                                    			<!-- <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> -->
+                                   			</div>
+                                  			<div class="col-md-6 text-right">
+                                    			<small>5분전</small>
+                                    		</div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 text-right wr">
+                                        	<small>${glists.nickname }</small>
+                                        </div>
+                                      
+                                        
+                                      <b>${glists.title }</b>
+                                      <p>${glists.loc_name }</p>
+                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber>            
+                                    </div>
+                                </div>
+                   		  </div>
+					</c:forEach><!-- 카테고리 해당 게시물 하나 부르기  -->
+					
 					
 					
 				<hr>

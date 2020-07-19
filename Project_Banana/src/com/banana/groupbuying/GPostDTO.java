@@ -3,7 +3,7 @@ package com.banana.groupbuying;
 public class GPostDTO
 {
 	
-	private String g_post_code, b_user_code, g_cate_code,loc_name, 
+	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,
 		   title, content, wDate,views, brand,start_date, end_date,photo;
 	private int cost, dis_cost, member_num;
 	private String bun_loc, bun_date, return_date, receipt_date;
@@ -160,6 +160,14 @@ public class GPostDTO
 	public void setReceipt_date(String receipt_date)
 	{
 		this.receipt_date = receipt_date;
+	}
+	public String getNickname()
+	{
+		return nickname;
+	}
+	public void setNickname(String nickname)
+	{
+		this.nickname = nickname;
 	}
 	
 	
