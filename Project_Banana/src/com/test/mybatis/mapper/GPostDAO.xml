@@ -4,21 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IGPostDAO">
+<mapper namespace="com.banana.groupbuying.IGPostDAO">
 	
-	<select id="cateList" resultType="com.test.mvc.GCateDTO">
+	<select id="cateList" resultType="com.banana.groupbuying.GCateDTO">
 	SELECT G_CATE_BCODE, CATE_NAME,G_CATE_CODE
 	FROM G_CATE
 	WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE IS NULL
 	</select>
 	
-	<select id="cateMList" resultType="com.test.mvc.GCateDTO">
+	<select id="cateMList" resultType="com.banana.groupbuying.GCateDTO">
 	SELECT G_CATE_CODE,CATE_NAME
 	FROM G_CATE
 	WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE = #{g_cate_code} 	
 	</select>
 	
-	<select id="gNewList" resultType="com.test.mvc.GPostDTO">
+	<select id="gNewList" resultType="com.banana.groupbuying.GPostDTO">
 		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
 		FROM G_POST G  LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE
@@ -27,7 +27,7 @@
 		ORDER BY WDATE DESC
 	</select>
 	
-	<select id="gCateList" resultType="com.test.mvc.GPostDTO">
+	<select id="gCateList" resultType="com.banana.groupbuying.GPostDTO">
 		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
 		FROM G_POST G  LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE

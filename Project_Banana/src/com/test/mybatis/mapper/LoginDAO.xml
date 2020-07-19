@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.ILoginDAO">
+<mapper namespace="com.banana.user.ILoginDAO">
 	
 	<select id="rest" resultType="java.lang.String">			
 		SELECT R.B_USER_CODE

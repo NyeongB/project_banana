@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.banana.IG_GroupBuyingScheduleDAO">
+<mapper namespace="com.banana.my.IG_GroupBuyingScheduleDAO">
 	
 	<!-- 스케줄러 스케줄 불러오기  -->
-	<select id="list" resultType="com.test.mvc.GPostDTO">
+	<select id="list" resultType="com.banana.groupbuying.GPostDTO">
 	SELECT TITLE, START_DATE, END_DATE, BUN_LOC
 	FROM G_APPLY A LEFT JOIN G_POST P
 	ON A.G_POST_CODE = P.G_POST_CODE
