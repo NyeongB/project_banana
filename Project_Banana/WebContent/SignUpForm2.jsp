@@ -92,7 +92,8 @@ function ajaxRequest(str)
 	$.get("ajaxloc.action", {loc : str}, function(data)
 	{
 	
-	alert(data);
+	//alert(data);
+	$("#sel").html(data);
 	
 	
 	//$("#positionForm").submit();
@@ -360,16 +361,13 @@ function ajaxRequest(str)
 						<option value="${list.loc_code }">${list.loc_name }</option>
 					</c:forEach>
 				</select>
-				
+				<div class="form-inline">
 				<span>시/군/구 : </span> 
 				
-
-				<select class="form-control">
-					<option value="">선택</option>
-					<c:forEach var="list" items="${locList2 }">
-						<option value="${list.loc_code }">${list.loc_name }</option>
-					</c:forEach>
-				</select>
+				<div id="sel">
+						
+					</div>
+				</div>
 				
 				</div>
 				
