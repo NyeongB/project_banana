@@ -121,11 +121,71 @@ p
 .catelist
 {
 	display: flex;
-	justify-content: center;
+	/* margin: 7px; */
+	padding: 3px;
+	
+	
 
 }
 
+.catemlist
+{
+	display: flex;
+	/* margin-top: 3px; */
+	margin-right: 7px;
+	padding: 2px;
+	
+}
+
+.catelist li
+{
+	
+	margin-right: 30px;
+	margin-top:10px; 
+	text-align: center;
+	font-family: 맑은고딕;	
+	font-size: 14px;
+
+}
+
+.catemlist li
+{
+	margin-right: 30px;
+	margin-top:0px; 
+	text-align: center;
+	font-size: 13px;
+}
+
 </style>
+<script type="text/javascript">
+	
+	$().ready(function()
+	{
+		$("#postItem").click(function()
+		{
+			//alert("확인");
+			$(location).attr("href","groupbuyingpostoffer.action");
+		});
+		
+		
+		
+
+	});
+	
+
+	 function liColor(obj)
+	{
+		alert(obj.attr('id')); 
+		alert(obj);
+		//alert($(this).val()).;
+		document.getElementById("#${catelists.g_cate_code }").style.color = "red";
+		
+		
+	}
+	 
+	
+
+</script>
 </head>
 <body>
 <!-- Header  -->
@@ -161,7 +221,8 @@ p
 						 	<ul class="catelist">
 								<c:forEach var="catelists" items="${cateList }">
 									<li>
-									<a href="g_catesmain.action?bid=${g_cate_bcode }&mid=${g_cate_code}">${catelists.cate_name }</a>
+									<%-- <a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}" id="${catelists.g_cate_code }" onclick="liColor(obj)">${catelists.cate_name }</a> --%>
+									<a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}" id="${catelists.g_cate_bcode }" onclick="liColor(this).attr('id')">${catelists.cate_name }</a>
 									</li>								
 								</c:forEach>
 							</ul>							
@@ -171,7 +232,7 @@ p
 					<div class="col-md-12">
 						<!--소분류  -->
 						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-						 	<ul class="catelist">
+						 	<ul class="catemlist">
 								<c:forEach var="cateMlists" items="${cateMList }">
 									<li>
 									<a>${cateMlists.cate_name }</a>
@@ -193,7 +254,7 @@ p
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-right">
-					<button class="btn">상품등록</button>
+					<button class="btn" id="postItem" name="postItem">상품등록</button>
 				</div>
 			</div>
 			
