@@ -74,6 +74,32 @@ function changeEmail()
 	}	
 }
 
+function changeLoc()
+{
+	var f = document.memberForm;
+	var str = f.selectLoc.value;
+	//alert(str);
+	ajaxRequest(str);
+	
+	
+	
+}
+
+function ajaxRequest(str)
+{
+	//alert(str);
+
+	$.get("ajaxloc.action", {loc : str}, function(data)
+	{
+	
+	alert(data);
+	
+	
+	//$("#positionForm").submit();
+	
+});
+	}
+
 </script>
 
 </head>
@@ -206,11 +232,10 @@ function changeEmail()
 
 				
 				<select class="form-control">
-					<option value="">나의 보물 1호는?</option>
-					<option value="">내가 태어난 곳은?</option>
-					<option value="">졸업한 초등학교는?</option>
-					<option value="">기억에 남는 여행지는?</option>
-					<option value="">나의 별명은?</option>
+					<option value="">선택</option>
+					<c:forEach var="list" items="${pwList }">
+						<option value="${list.pw_question_type_code }">${list.pw_question }</option>
+					</c:forEach>
 				</select>
 				
 				</div>
@@ -329,26 +354,21 @@ function changeEmail()
 				
 				<span>시/도 : </span> 
 
-				<select class="form-control">
+				<select name="selectLoc" class="selectField form-control" onchange="changeLoc()">
 					<option value="">선택</option>
-					<option value="">내가 태어난 곳은?</option>
-					<option value="">졸업한 초등학교는?</option>
-					<option value="">기억에 남는 여행지는?</option>
-					<option value="">나의 별명은?</option>
+					<c:forEach var="list" items="${locList }">
+						<option value="${list.loc_code }">${list.loc_name }</option>
+					</c:forEach>
 				</select>
 				
 				<span>시/군/구 : </span> 
 				
 
-
-
-				
 				<select class="form-control">
-					<option value="">나의 보물 1호는?</option>
-					<option value="">내가 태어난 곳은?</option>
-					<option value="">졸업한 초등학교는?</option>
-					<option value="">기억에 남는 여행지는?</option>
-					<option value="">나의 별명은?</option>
+					<option value="">선택</option>
+					<c:forEach var="list" items="${locList2 }">
+						<option value="${list.loc_code }">${list.loc_name }</option>
+					</c:forEach>
 				</select>
 				
 				</div>
@@ -366,16 +386,12 @@ function changeEmail()
 				
 				<span>은행 : </span> 
 				
-
-
-
-				
 				<select class="form-control">
-					<option value="">나의 보물 1호는?</option>
-					<option value="">내가 태어난 곳은?</option>
-					<option value="">졸업한 초등학교는?</option>
-					<option value="">기억에 남는 여행지는?</option>
-					<option value="">나의 별명은?</option>
+				<option>선택</option>
+				<c:forEach var="list" items="${bankList }">
+					
+					<option value="${list.bank_type_code }">${list.bank_name }</option>
+				</c:forEach>
 				</select>
 				</div>
 				</div>

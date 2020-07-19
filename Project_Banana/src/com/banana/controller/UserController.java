@@ -30,6 +30,7 @@ import com.banana.user.ILeaveDAO;
 import com.banana.user.ILoginDAO;
 import com.banana.user.IRestDAO;
 import com.banana.user.IStopDAO;
+import com.banana.user.LocDTO;
 import com.banana.user.LoginDTO;
 
 @Controller
@@ -50,16 +51,45 @@ public class UserController
 		
 		
 		// 비밀번호찾기 질문
+		model.addAttribute("pwList", dao.pwList());
+		
 		// 공동구매 관심 카테고리
 		model.addAttribute("groupList", dao.groupList());
+		
 		// 렌트거래 관심 카테고리
 		model.addAttribute("rentList",dao.rentList());
+		
 		// 시/도
+		model.addAttribute("locList", dao.locList());
 		// 시/군/구
+		
 		// 은행
+		model.addAttribute("bankList", dao.bankList());
 		
 		
 		view = "/SignUpForm2.jsp";
+		
+		
+		return view;
+	}
+	
+	
+	@RequestMapping(value = "/ajaxloc.action", method =RequestMethod.GET)
+	public String ajaxloc(Model model,HttpServletRequest request)
+	{
+		String view = null; 
+		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		//model.addAttribute("list", dao.list());
+		
+		ArrayList<LocDTO> list = dao.locAjaxList(request.getParameter("loc"));
+		
+		model.addAttribute("locList2", list);
+		
+		view = "/Ajax2.jsp";
 		
 		
 		return view;

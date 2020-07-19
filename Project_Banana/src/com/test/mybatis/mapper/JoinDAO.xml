@@ -27,5 +27,25 @@
 	FROM G_CATE_VIEW
 	</select> 
 	
+	<select id="bankList" resultType="com.banana.user.BankDTO">
+	SELECT * FROM
+	BANK_TYPE
+	</select> 
+	
+	<select id="pwList" resultType="com.banana.user.PasswordDTO">
+	SELECT * FROM PW_QUESTION_TYPE
+	</select> 
+	
+	<select id="locList" resultType="com.banana.user.LocDTO">
+	SELECT LOC_CODE, LOC_NAME FROM VIEW_LOC
+	</select> 
+	
+	<select id="locAjaxList" resultType="com.banana.user.LocDTO">
+	SELECT * FROM LOC
+	WHERE LOC_BCODE = #{loc}
+	</select> 
+	
+	
+	
 </mapper>  
 

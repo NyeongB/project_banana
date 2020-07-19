@@ -19,4 +19,16 @@ public interface IJoinDAO
 	
 	// 공동구매 카테고리 리스트 
 	public ArrayList<GCateDTO> groupList();
+	
+	// 은행 리스트
+	public ArrayList<BankDTO> bankList();
+	
+	// 비밀번호 질문 유형 리스트
+	public ArrayList<PasswordDTO> pwList();
+	
+	// 지역 대분류 리스트
+	public ArrayList<LocDTO> locList();
+	
+	// 지역 중분류 리스트
+	public ArrayList<LocDTO> locAjaxList(String loc);
 }
