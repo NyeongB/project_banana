@@ -27,7 +27,7 @@
    
    <!--    → 『base-package』속성에 -->
    <!--       Controller 객체가 포함된 패키지 경로를 지정한다. -->
-   <context:component-scan base-package="com.test.mvc"/>
+   <context:component-scan base-package="com.banana.controller"/>
      
    <!-- ③ mybatis 등록 과정 중(설정 중) -->
    <!--    dataSource(JDBC)를 등록하는 과정에서 생겨나는 추가 코드 -->
