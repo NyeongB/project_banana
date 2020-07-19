@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IAdminAdsCostDAO">
+<mapper namespace="com.banana.admin.IAdminAdsCostDAO">
 	
-	<select id="list" resultType="com.test.mvc.AdminAdsCostDTO">
+	<select id="list" resultType="com.banana.admin.AdminAdsCostDTO">
 	
 		SELECT ADV_LOC, ADV_COST 
 		FROM ADV_TYPE	
