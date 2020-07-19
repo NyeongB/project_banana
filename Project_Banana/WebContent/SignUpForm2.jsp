@@ -60,6 +60,12 @@ input
 	var stateNick = 0;
 	$(document).ready(function()
 	{
+		// 인증번호 전송
+		$("#telBtn").click(function()
+		{
+			ajaxRequest3();
+		});
+		
 		// 아이디 중복검사 
 		$("#idBtn").click(function()
 		{
@@ -194,6 +200,19 @@ input
 	});
 		}
 	
+	
+	// 휴대폰 인증 
+	function ajaxRequest3()
+	{
+		
+		alert("인증번호가 발송되었습니다.");
+		$.get("telcheck.action", {tel : $("#tel").val()}, function(data)
+		{
+		
+		
+		});
+	}
+	
 </script>
 
 </head>
@@ -258,7 +277,7 @@ input
 				<div class="col-md-12 form-inline">
 				
 				<input type="text" name="tel" id="tel" placeholder="휴대폰 번호" class="form-control">
-				<button type="button" class="btn btn-primary" type="submit">인증 하기</button>
+				<button type="button" class="btn btn-primary" type="submit" id="telBtn">인증 하기</button>
 				</div>
 			</div>
 			

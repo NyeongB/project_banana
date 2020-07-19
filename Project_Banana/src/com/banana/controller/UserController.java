@@ -16,23 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.banana.admin.AdminAccountDTO;
-import com.banana.admin.IAdminAccountDAO;
-import com.banana.admin.IAdminAdsApplyListDAO;
-import com.banana.admin.IAdminReportListDAO;
-import com.banana.admin.IAdminReportListDAO2;
-import com.banana.admin.IAdminShopUserListDAO;
-import com.banana.admin.IAdminUserListDAO;
-import com.banana.admin.INoticeListDAO;
-import com.banana.rent.IRPostDAO;
 import com.banana.user.IJoinDAO;
-import com.banana.user.ILeaveDAO;
-import com.banana.user.ILoginDAO;
-import com.banana.user.IRestDAO;
-import com.banana.user.IStopDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LocDTO;
-import com.banana.user.LoginDTO;
+import com.banana.util.Send;
 
 @Controller
 public class UserController
@@ -221,6 +208,26 @@ public class UserController
 			model.addAttribute("check",check);
 			
 			view = "/ajax.jsp";
+			return view;
+		}
+		
+		
+		
+		@RequestMapping(value = "/telcheck.action", method =RequestMethod.GET)
+		public String telcheck(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			String tel = request.getParameter("tel");
+			System.out.println(tel);
+			
+			
+			
+			Send.send(tel.trim());
+			System.out.println("??");
+			
+			
+			
+			
 			return view;
 		}
 	
