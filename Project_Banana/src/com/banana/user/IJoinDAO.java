@@ -31,4 +31,10 @@ public interface IJoinDAO
 	
 	// 지역 중분류 리스트
 	public ArrayList<LocDTO> locAjaxList(String loc);
+	
+	// 아이디 중복체크
+	public ArrayList<JoinDTO> userList();
+	
+	// 닉네임 중복체크
+	public ArrayList<JoinDTO> nickList();
 }

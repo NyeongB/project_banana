@@ -259,7 +259,7 @@ public class MemberController
 	}
 	
 	
-	// 중복체크 ajax
+	// 관리자 추가 메소드
 		@RequestMapping(value = "/adminAdd.action", method =RequestMethod.GET)
 		public String adminAdd(Model model, HttpServletRequest request)
 		{

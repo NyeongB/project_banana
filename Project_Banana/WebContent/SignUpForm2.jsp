@@ -54,53 +54,146 @@ input
 
 <script type="text/javascript">
 
-function changeEmail()
-{
-	var f = document.memberForm;
-	var str = f.selectEmail.value;
-	//alert(str);
-	
-	if(str!="direct")
+	// 아이디중복변수
+	var stateId = 0;
+	// 닉네임 중복 변수
+	var stateNick = 0;
+	$(document).ready(function()
 	{
-		f.email2.value = str;
-		f.email2.readOnly = true;
-		f.email1.focus();
+		// 아이디 중복검사 
+		$("#idBtn").click(function()
+		{
+			if( $("#id").val().trim()=="")
+			{
+				alert("아이디를 입력해야합니다.");
+				return;
+			}
+			//alert("중복검사");
+			ajaxRequest1();
+		});
+		
+		// 아이디 중복검사 
+		$("#nickBtn").click(function()
+		{
+			if( $("#nickname").val().trim()=="")
+			{
+				alert("닉네임을 입력해야합니다.");
+				return;
+			}
+			//alert("중복검사");
+			ajaxRequest2();
+		});
+	});
+	
+	// 이메일 변경 메소드
+	function changeEmail()
+	{
+		var f = document.memberForm;
+		var str = f.selectEmail.value;
+		//alert(str);
+		
+		if(str!="direct")
+		{
+			f.email2.value = str;
+			f.email2.readOnly = true;
+			f.email1.focus();
+		}
+		else
+		{
+			f.email2.value = "";
+			f.email2.readOnly = false;
+			f.email1.focus();
+		}	
 	}
-	else
+	
+	// 시/도 변경시 시/군/구 불러오는 메소드 
+	function changeLoc()
 	{
-		f.email2.value = "";
-		f.email2.readOnly = false;
-		f.email1.focus();
-	}	
-}
-
-function changeLoc()
-{
-	var f = document.memberForm;
-	var str = f.selectLoc.value;
-	//alert(str);
-	ajaxRequest(str);
-	
-	
-	
-}
-
-function ajaxRequest(str)
-{
-	//alert(str);
-
-	$.get("ajaxloc.action", {loc : str}, function(data)
-	{
-	
-	//alert(data);
-	$("#sel").html(data);
-	
-	
-	//$("#positionForm").submit();
-	
-});
+		var f = document.memberForm;
+		var str = f.selectLoc.value;
+		//alert(str);
+		ajaxRequest(str);
+		
 	}
-
+	
+	// 시/군/구 ajax
+	function ajaxRequest(str)
+	{
+		//alert(str);
+	
+		$.get("ajaxloc.action", {loc : str}, function(data)
+		{
+		
+		//alert(data);
+		$("#sel").html(data);
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+	}
+	
+	// 아이디 중복검사 ajax
+	function ajaxRequest1()
+	{
+		
+	
+		$.get("idcheck.action", {id : $("#id").val()}, function(data)
+		{
+		
+		if(Number(data) >0)
+		{
+			alert("아이디 중복 발생!!");
+			//alert("state : " + state);
+			stateId=0;
+			return;
+		}
+		else
+		{
+			// 아이디가 중복되지않음
+			// 상태를 1로 바꿈 
+			alert("사용가능한 아이디입니다.");
+			stateId = 1;
+			//alert("state : " + state);
+			
+		}
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+		}
+	// 닉네임 중복검사 ajax
+	function ajaxRequest2()
+	{
+		
+	
+		$.get("nickcheck.action", {nickname : $("#nickname").val()}, function(data)
+		{
+		
+		if(Number(data) >0)
+		{
+			alert("닉네임 중복 발생!!");
+			//alert("state : " + state);
+			stateNick=0;
+			return;
+		}
+		else
+		{
+			// 아이디가 중복되지않음
+			// 상태를 1로 바꿈 
+			alert("사용가능한 닉네임입니다.");
+			stateNick = 1;
+			//alert("state : " + state);
+			
+		}
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+		}
+	
 </script>
 
 </head>
@@ -136,7 +229,7 @@ function ajaxRequest(str)
 				<div class="col-md-12 form-inline">
 				
 				   <input type="text" name="id" id="id" placeholder="아이디(*)" class="form-control"> 
-				   <button type="button" class="btn btn-primary" type="submit">중복 확인</button>
+				   <button type="button" class="btn btn-primary" id="idBtn">중복 확인</button>
 				
 				</div>
 			</div>
@@ -184,7 +277,7 @@ function ajaxRequest(str)
 			<div class="row">
 				<div class="col-md-12 form-inline">
 				<input type="text" name="nickname" id="nickname" placeholder="닉네임(*)" class="form-control">
-				<button type="button" class="btn btn-primary" type="submit">중복 확인</button>
+				<button type="button" class="btn btn-primary" id="nickBtn">중복 확인</button>
 				</div>
 			</div>
 			
