@@ -12,16 +12,14 @@
 	SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE
 	FROM VIEW_USER_REPLY_LIST
 	WHERE B_USER_CODE =#{user_code}
-	ORDER BY 2 DESC
+	ORDER BY 
+	<choose>
+		<when test="order == 'WDATE_DESC'">WDATE DESC</when>
+		<when test="order == 'WDATE_ASC'">WDATE ASC</when>
+	</choose>
 	</select>	
 	
-	<!-- 과거순  -->
-	<select id="gReplyList" resultType="com.banana.my.UserReplyDTO">
-	SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE
-	FROM VIEW_USER_REPLY_LIST
-	WHERE B_USER_CODE =#{user_code}
-	ORDER BY 2 
-	</select>	
+	
 
 	
 </mapper>  
