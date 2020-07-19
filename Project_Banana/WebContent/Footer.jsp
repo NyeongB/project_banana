@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
-<link rel="stylesheet" type="text/css" href="css/footerStyle.css">
-<link rel="icon" href="images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/footerStyle.css">
+<link rel="icon" href="<%=cp %>/images/favicon.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <style type="text/css">
 #footer

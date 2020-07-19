@@ -9,15 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
-<link rel="stylesheet" type="text/css" href="css/navStyle.css">
-<link rel="icon" href="images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/navStyle.css">
+<link rel="icon" href="<%=cp %>/images/favicon.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=cp %>/js/bootstrap.min.js"></script>
 <style type="text/css">
 .glyphicon-bell
 {

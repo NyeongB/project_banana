@@ -16,11 +16,11 @@
 	}
 </style>
 <link rel="stylesheet" type="text/css"
-	href="<%=cp%>/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css" href="css/MyMenuStyle.css">
+	href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/mainStyle2.css">
+<link rel="stylesheet" type="text/css" href="../css/MyMenuStyle.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function() 
