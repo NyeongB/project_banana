@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IStopDAO">
+<mapper namespace="com.banana.user.IStopDAO">
 	
-	<select id="list" resultType="com.test.mvc.StopDTO">
+	<select id="list" resultType="com.banana.user.StopDTO">
 	SELECT J.ID,J.NAME, J.SSN, J.TEL, J.ADDR, J.EMAIL,NVL((SELECT AVG(CREDIT_SCORE) FROM CREDIT_SCORE WHERE P.B_USER_CODE = B_USER_CODE),0) AS CREDIT_SCORE
 	, NVL((SELECT SUM(BANANA_SCORE) FROM BANANA_SCORE WHERE P.B_USER_CODE = B_USER_CODE), 0) AS BANANA_SCORE
 	,NVL((SELECT SUM(POINT) FROM POINT_LIST WHERE B_USER_CODE=P.B_USER_CODE),0) AS POINT,

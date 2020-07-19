@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IRPostDAO">
+<mapper namespace="com.banana.rent.IRPostDAO">
 
-	<select id="rnewList" resultType="com.test.mvc.RPostDTO">
+	<select id="rnewList" resultType="com.banana.rent.RPostDTO">
 	SELECT DISTINCT RP.WDATE, RP.TITLE, J.NICKNAME, OFFER_LOC AS OFFERLOC, COLLECT_LOC AS COLLECTLOC, COST , FIRST_VALUE(PT.PHOTO)OVER (PARTITION BY PT.R_POST_CODE ORDER BY PT.R_PHOTO_CODE) AS PHOTO       
 	FROM R_POST RP LEFT JOIN JOIN J
 	ON RP.B_USER_CODE = J.B_USER_CODE
