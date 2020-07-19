@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IUserReplyDAO">
+	
+	
+	<!-- 최신순  -->
+	<select id="rReplyList" resultType="com.banana.my.UserReplyDTO">
+	SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE
+	FROM VIEW_USER_REPLY_LIST
+	WHERE B_USER_CODE =#{user_code}
+	ORDER BY 2 DESC
+	</select>	
+	
+	<!-- 과거순  -->
+	<select id="gReplyList" resultType="com.banana.my.UserReplyDTO">
+	SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE
+	FROM VIEW_USER_REPLY_LIST
+	WHERE B_USER_CODE =#{user_code}
+	ORDER BY 2 
+	</select>	
+
+	
+</mapper>  
+
