@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IAdminReportListDAO2">
+<mapper namespace="com.banana.admin.IAdminReportListDAO2">
 	
-	<select id="list" resultType="com.test.mvc.AdminReportListDTO">
+	<select id="list" resultType="com.banana.admin.AdminReportListDTO">
 	SELECT ID1,ID2, TYPE, RTYPE, CONTENT, SDATE 
             FROM REPORTLIST_VIEW
 	</select>	

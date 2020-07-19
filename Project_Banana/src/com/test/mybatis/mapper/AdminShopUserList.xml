@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IAdminShopUserListDAO">
+<mapper namespace="com.banana.admin.IAdminShopUserListDAO">
 	
-	<select id="list" resultType="com.test.mvc.AdminShopUserListDTO">			
+	<select id="list" resultType="com.banana.admin.AdminShopUserListDTO">			
 		SELECT  J.NAME,J.SSN,J.TEL,J.ADDR,J.ID,J.EMAIL
 		, NVL(CS.CREDIT_SCORE_CODE,0) AS C_SCORE
 		,NVL(BS.BANANA_SCORE_CODE,0) AS B_SCORE
