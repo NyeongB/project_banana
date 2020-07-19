@@ -6,7 +6,7 @@
   
 <mapper namespace="com.test.mvc.IRestDAO">
 	
-	<select id="list" resultType="com.test.mvc.RestDTO">
+	<select id="list" resultType="com.banana.user.RestDTO">
 		SELECT J.NAME , J.SSN, J.TEL, J.ADDR, J.ID, J.EMAIL, BT.BANK_NAME AS BANKTYPENAME, J.ACCOUNT_USER AS ACCOUNTNAME, J.ACCOUNT AS ACCOUNT
 	, (SELECT COUNT(*) FROM WARNING WHERE B_USER_CODE = R.B_USER_CODE) AS WARNING
 	, NVL((SELECT SUM(POINT) FROM POINT_LIST WHERE B_USER_CODE = R.B_USER_CODE), 0) AS POINT 
