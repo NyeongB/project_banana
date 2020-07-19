@@ -393,7 +393,7 @@ public class MemberController
 		String view = null; 
 		
 		
-		view = "/WEB-INF/groupbuying/GroupBuyingPostOffer.jsp";
+		view = "/GroupBuyingPostOffer.jsp";
 		
 		
 		return view;
