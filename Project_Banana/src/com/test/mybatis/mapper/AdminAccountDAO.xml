@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-<mapper namespace="com.test.mvc.IAdminAccountDAO">
+<mapper namespace="com.banana.admin.IAdminAccountDAO">
 	
-	<select id="list" resultType="com.test.mvc.AdminAccountDTO">
+	<select id="list" resultType="com.banana.admin.AdminAccountDTO">
 	SELECT ADMIN_CODE, ID, PW, SDATE, NAME 
 	FROM ADMIN		
 	</select>	
