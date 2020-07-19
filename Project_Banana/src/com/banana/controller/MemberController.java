@@ -306,6 +306,7 @@ public class MemberController
 		{
 			// 정상로그인
 			view = "/UserMyJJim.jsp";
+			
 		}
 		else if(state == 2)
 		{

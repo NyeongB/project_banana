@@ -4,6 +4,13 @@
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
 %>
+<%
+    String id = request.getParameter("id");
+    String pw = request.getParameter("pw");
+
+	
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +26,7 @@ String cp = request.getContextPath();
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
-.rentNav {
-margin-top: 40px;
-	margin-left: 200px;
-	font-size: 20px;
-}
 
-#rent1 {
-	margin-right: 30px;
-}
 
 * {
 	font-weight: bold;
@@ -75,18 +74,24 @@ span {
 	width: 195px;
 }
 
-
-
-.Ad
+.Atitle, .selectCate, .brand, .txt, .cost, .deposit, .offer, .collect,  bstart, bend
 {
-
-	width: 500px;
-	height: 150px;
-	background-color: #e6e6e6;
-	margin-top : 50px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
+.txt
+{
+	margin-top: 20px;
+}
+
+
+
+.postBtn
+{
+	margin-top : 60px;
+	margin-bottom: 80px;
+
+}
 
 .Btn {
 	margin-top: 20px;
@@ -119,7 +124,17 @@ span {
 p {
 	color: #5bb0ff;
 }
+
+.mainH
+{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
 </style>
+
+
+
 
 </head>
 <body>
@@ -137,13 +152,7 @@ p {
 		<div class="content">
 			<div class="col-md-12">
 				
-					<div class="row">
-					<div class="col-md-12 rentNav">
-
-							<a href="" id="rent1">빌려드립니다</a> <a href="" id="rent2">빌려주세요</a>
-
-						</div>
-					</div>
+					
 
 				<div class="row">
 					<div class="col-md-3"></div>
@@ -151,16 +160,16 @@ p {
 
 					<div class="col-md-6">
 
-						<div class="col-md-12 text-center">
+						<div class="col-md-12 text-center mainH">
 							<h2>빌려드립니다. 게시물 등록</h2>
 							<hr>
 						</div>
 						
 
+							
+						<form role="form" class="form-group" id="rpost" action="r_postinsert.action">
 
-						<form role="form" class="form-group">
-
-							<div class="col-md-12">
+							<div class="col-md-12 Atitle">
 								<div class="col-md-2">
 									<div class="title">
 										제목<span>*</span>
@@ -189,7 +198,7 @@ p {
 								<div class="col-md-10">
 									<div class="col-md-4">
 
-										<div class="table-wrapper-scroll-y my-custom-scrollbar">
+										<div class="table-wrapper-scroll-y my-custom-scrollbar" >
 
 											<table class="table table-bordered mb-0">
 
@@ -296,7 +305,7 @@ p {
 							<!--end col-md-12  -->
 							<!-- end 카테고리 -->
 
-							<div class="col-md-12">
+							<div class="col-md-12 brand">
 								<div class="col-md-2">
 									<div>
 										브랜드명<span>*</span>
@@ -310,7 +319,7 @@ p {
 							<!-- end 브랜드명 -->
 
 
-							<div class="col-md-12">
+							<div class="col-md-12 photo">
 
 								<div class="col-md-2">
 									<div >
@@ -340,7 +349,7 @@ p {
 							<!-- end 사진첨부 -->
 
 
-							<div class="col-md-12">
+							<div class="col-md-12 txt">
 								<div class="col-md-2">
 
 									<div>글 내용</div>
@@ -352,7 +361,7 @@ p {
 							</div>
 							<!-- end 글 내용 -->
 
-							<div class="col-md-12 form-inline">
+							<div class="col-md-12 form-inline cost">
 								<div class="col-md-2">
 									<div>
 										비용<span>*</span><small>(일 단위)</small>
@@ -367,7 +376,7 @@ p {
 							</div>
 							<!-- end 비용 -->
 
-							<div class="col-md-12 form-inline">
+							<div class="col-md-12 form-inline deposit">
 								<div class="col-md-2">
 									<div>
 										보증금<span>*</span>
@@ -383,7 +392,7 @@ p {
 							<!-- end 보증금 -->
 
 
-							<div class="col-md-12 form-inline">
+							<div class="col-md-12 form-inline offer">
 								
 								<div class="col-md-2">
 									<div>
@@ -428,7 +437,7 @@ p {
 						
 						
 						
-						<div class="col-md-12 form-inline">
+						<div class="col-md-12 form-inline collect">
 								
 								<div class="col-md-2">
 									<div>
@@ -473,7 +482,7 @@ p {
 
 
 						
-						<div class="col-md-12 form-inline">
+						<div class="col-md-12 form-inline bstart">
 								
 								<div class="col-md-2">
 									<div>
@@ -512,7 +521,7 @@ p {
 						
 						
 						
-							<div class="col-md-12 form-inline">
+							<div class="col-md-12 form-inline bend">
 								
 								<div class="col-md-2">
 									<div>
@@ -549,16 +558,14 @@ p {
 							</div>
 							<!-- end 대여 종료 일시 -->
 						
-							<div class="col-md-12 text-right">
+							<div class="col-md-12 text-right postBtn">
 								<button type="button" class="btn btn-default">취소하기</button>
 								<button type="button" class="btn btn-default">게시물 등록</button>
+								<input type="hidden" value="<%=id %>">
+								<input type="hidden" value="<%=pw %>">
 							</div>
 							
-							<div class="col-md-12 Ad">
-								<div class="col-md-3"></div>
-								<div class="col-md-6 block text-center" >광고배너</div>
-								<div class="col-md-3"></div>
-							</div> <!-- end 광고배너 -->
+					
 
 						</form>
 					</div>
@@ -586,7 +593,7 @@ p {
 </body>
 </html>
 
-
+								
 
 
 

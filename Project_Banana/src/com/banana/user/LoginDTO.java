@@ -23,6 +23,9 @@ public class LoginDTO
 	{
 		this.pw = pw;
 	}
+
+	
+	
 	
 	
 	

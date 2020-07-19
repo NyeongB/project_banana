@@ -20,7 +20,7 @@
 	
 	$(document).ready(function()
 	{
-		
+		 $("#login").submit();
 	});
 	
 </script>
@@ -39,7 +39,7 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6">
-			<form role="form" action="<%=cp %>/login.action" method="get">
+			<form role="form" action="<%=cp %>/login.action" method="get" id="login">
 				<div id="logo"><span id="logo_text_1">banana</span></div>
 				<div class="form-group">
 					 

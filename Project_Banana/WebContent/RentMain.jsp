@@ -19,6 +19,20 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() 
+	{
+		$("#rentPost").click(function() 
+		{
+			$(location).attr("href", "rentpostpage.action");	
+		});
+	});
+
+
+
+</script>
+
 
 
 <style type="text/css">
@@ -308,7 +322,7 @@ b
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-right">
-					<button class="btn">상품등록</button>
+					<button class="btn" id="rentPost" name="rentPost" >상품등록</button>
 				</div>
 			</div>
 			
