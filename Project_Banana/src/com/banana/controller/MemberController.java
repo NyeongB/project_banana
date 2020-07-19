@@ -387,4 +387,16 @@ public class MemberController
 		return result;
 	}
 	
+	@RequestMapping(value = "/groupbuyingpostoffer.action", method =RequestMethod.GET)
+	public String GroupBuyingPostOffer()
+	{
+		String view = null; 
+		
+		
+		view = "/WEB-INF/groupbuying/GroupBuyingPostOffer.jsp";
+		
+		
+		return view;
+	}
+	
 }
