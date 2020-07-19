@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/AdminAccountListStyle.css">
@@ -120,15 +120,23 @@ p
 	margin-left: 15px !important;
 
 }
+
 .catelist
 {
 	display: flex;
+	 
 	
+
 }
+
 .catelist li
 {
-	
-	margin: 10px;
+	display: flex;
+	margin-right: 20px;
+	/* margin-top:10px;  */
+	text-align: center;
+	font-family: 맑은고딕;	
+	font-size: 15px;
 
 }
 </style>
@@ -170,18 +178,20 @@ p
 						<li><div><a href="g_catemain.action?bid=G_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
 					</ul>
 				</div>
+				
 			</div>
-
+				<hr>
 				<div class="col-md-12 category" > 				
 					
 					<div class="col-md-12">
 						<!--중분류  -->
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+						<div>
 						 	<ul class="catelist">
-								<c:forEach var="catelists" items="${cateList }">
+						 		
+								<c:forEach var="catelists" items="${cateList }" >
+
 									<li>
 									<a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}">${catelists.cate_name }</a>
-							
 									</li>								
 								</c:forEach>
 							</ul>							
@@ -218,10 +228,11 @@ p
 					<!-- 1열 1번 -->
 					<c:forEach var="glists" items="${gCateMainList }" begin="1" end="5">
 					
-						<div class="col-md-1"></div>
+						<!-- <div class="col-md-1"></div> -->
 						<div class="col-sm-2 col-md-2 thblock">
                            		<div class="thumbnail">
-                                 <img src="images/oz.jpg" >
+                                 <!-- <img src="images/oz.jpg" > -->
+                                ${glists.photo }
                                    
                                     <div class="caption">
                                    		<div class="col-md-12">
