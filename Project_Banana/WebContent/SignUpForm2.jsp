@@ -72,7 +72,7 @@ input
 			ajaxRequest1();
 		});
 		
-		// 아이디 중복검사 
+		// 닉네임 중복검사 
 		$("#nickBtn").click(function()
 		{
 			if( $("#nickname").val().trim()=="")
