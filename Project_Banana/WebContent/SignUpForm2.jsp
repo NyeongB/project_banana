@@ -52,6 +52,30 @@ input
 </style>
 
 
+<script type="text/javascript">
+
+function changeEmail()
+{
+	var f = document.memberForm;
+	var str = f.selectEmail.value;
+	//alert(str);
+	
+	if(str!="direct")
+	{
+		f.email2.value = str;
+		f.email2.readOnly = true;
+		f.email1.focus();
+	}
+	else
+	{
+		f.email2.value = "";
+		f.email2.readOnly = false;
+		f.email1.focus();
+	}	
+}
+
+</script>
+
 </head>
 <body>
 <!-- Header  -->
@@ -80,7 +104,7 @@ input
 				</div>
 			</div>
 			
-			<form action="">
+			<form action="join.action" name="memberForm" method="get">
 			<div class="row">
 				<div class="col-md-12 form-inline">
 				
@@ -171,18 +195,26 @@ input
 			<!-- 패스워드 찾기 질문 -->
 			<div class="row">
 			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
-				<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-   패스워드 찾기 질문
-    		<span class="caret"></span>
-  			</button>
-  				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">질문 1</a></li>
-    				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">질문 2</a></li>
-    				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">질문 3</a></li>
-				  </ul>
+				<div class="col-md-5 text-center ">
+				
+				<div class="form-inline">
+				
+				<span>비밀번호찾기 질문: </span> 
+				
+
+
+
+				
+				<select class="form-control">
+					<option value="">나의 보물 1호는?</option>
+					<option value="">내가 태어난 곳은?</option>
+					<option value="">졸업한 초등학교는?</option>
+					<option value="">기억에 남는 여행지는?</option>
+					<option value="">나의 별명은?</option>
+				</select>
+				
 				</div>
+				
 				
 				</div>
 				<div class="col-md-4"></div>
@@ -201,81 +233,87 @@ input
 			
 			<!-- 이메일!!!! -->
 			<div class="row">
-				<div class="col-md-12 form-inline">
-				
-				<div class="col-md-6">
-				<input class="form-control" id="email" type="text" placeholder="이메일(*)"/>
+				<div class="col-md-12">
+				<div class="col-md-3 ">
 				</div>
-				<div class="col-md-6">
-				<div class="dropdown">
-            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">@gmail.com <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">질문 목록</a></li>
-                <li class="divider"></li>
-                <li><a href="#">리스트 1</a></li>
-                <li><a href="#">리스트 2</a></li>
-            </ul>
-        	</div>
-        	</div>
+				<div class="col-md-5 form-inline">
+						<select name="selectEmail" class="selectField form-control" onchange="changeEmail()">
+							<option value="">선택</option>
+							<option value="gmail.com"
+							${dto.email2=="gmail.com" ? "selected='selected'" : "" 
+							}>gmail.com</option>
+							<option value="hanmail.net"
+							${dto.email2=="hanmail.net" ? "selected='selected'" : "" 
+							}>hanmail.net</option>
+							<option value="naver.com"
+							${dto.email2=="naver.com" ? "selected='selected'" : "" 
+							}>naver.com</option>
+							<option value="direct">직접입력</option> 
+						</select>
+						<input type="text" name="email1"
+							 class="form-control" value="${dto.email1 }"> @
+						<input type="text" name="email2" 
+							 class="form-control" value="${dto.email2 }"
+							readonly = "readonly">
+				</div>
+				
+				<div class="col-md-4">
+				
+				</div>
+				
         	
 				</div>
 			</div>
 			
 			
 			<!-- 관심 카테고리 -->
-			<div class="row">
-				<div class="col-md-12">
-				<p class="text-center">
-				관심 카테고리
-				</p>
-				</div>
-			</div>
+			
 			
 			
 			
 			<div class="row">
 				<div class="col-md-12">
+				<div class="col-md-3"></div>
+				<div class="col-md-5">
 				
-				<div class="col-md-6">
-				<div class="checkbox">
-	  			<label>
-	    				<input type="checkbox" value="">
-	    				식품
-	  			</label>
-				</div>
+				<div class="form-inline">
 				
-				<div class="checkbox">
-	  			<label>
-	    				<input type="checkbox" value="">
-	    				생활용품
-	  			</label>
-				</div>
+				<span>공동구매 관심 카테고리: </span> 
 				
-				<div class="checkbox">
-	  			<label>
-	    				<input type="checkbox" value="">
-	    				스포츠
-	  			</label>
-				</div>
-				
+
+				<select class="form-control">
+					<option value="">선택</option>
+					<c:forEach var="list" items="${groupList }">
+						<option value="${list.g_cate_code }">${list.cate_name }</option>
+					</c:forEach>
+				</select>
 				
 				</div>
 				
-				<div class="col-md-6">
-				<div class="checkbox">
-	  			<label>
-	    				<input type="checkbox" value="">
-	    				유아동/반려동물
-	  			</label>
+				<br>
+				
+				<div class="form-inline">
+				
+				<span>렌트거래 관심 카테고리: </span> 
+				
+
+
+
+				
+				<select class="form-control">
+					<option value="">선택</option>
+					<c:forEach var="list" items="${rentList }">
+						<option value="${list.r_cate_code }">${list.cate_name }</option>
+					</c:forEach>
+					
+				</select>
+				
 				</div>
 				
-				<div class="checkbox">
-	  			<label>
-	    				<input type="checkbox" value="">
-	    				디지털/가전/가구
-	  			</label>
+				
 				</div>
-				</div>
+				<div class="col-md-4"></div>
+				
 				
 				
 				</div>
@@ -286,44 +324,34 @@ input
 			<!-- 시군구 동 설정 -->
 			<div class="row">
 				<div class="col-md-12">
-				<div class="col-md-4">
-				<div class="dropdown">
-            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">시/도<span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">시/도</a></li>
-                <li class="divider"></li>
-                <li><a href="#">특별시</a></li>
-                <li><a href="#">광역시</a></li>
-            </ul>
-            
-           		 </div>
-        		</div>
-        		
-        		 <div class="col-md-4">
-        <div class="dropdown">
-            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">시/군/구 <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">시/군/구</a></li>
-                <li class="divider"></li>
-                <li><a href="#">서구</a></li>
-                <li><a href="#">남구</a></li>
-            </ul>
-        </div>
-        </div>
-        		
-        		
-        		  <div class="col-md-4">
-        <div class="dropdown">
-            <button type="button" class="btn btn-default dropdown toggle" data-toggle="dropdown">동 <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">동</a></li>
-                <li class="divider"></li>
-                <li><a href="#">서교동</a></li>
-                <li><a href="#">동교동</a></li>
-            </ul>
-        </div>
-         </div>
-        		
+				
+					<div class="form-inline">
+				
+				<span>시/도 : </span> 
+
+				<select class="form-control">
+					<option value="">선택</option>
+					<option value="">내가 태어난 곳은?</option>
+					<option value="">졸업한 초등학교는?</option>
+					<option value="">기억에 남는 여행지는?</option>
+					<option value="">나의 별명은?</option>
+				</select>
+				
+				<span>시/군/구 : </span> 
+				
+
+
+
+				
+				<select class="form-control">
+					<option value="">나의 보물 1호는?</option>
+					<option value="">내가 태어난 곳은?</option>
+					<option value="">졸업한 초등학교는?</option>
+					<option value="">기억에 남는 여행지는?</option>
+					<option value="">나의 별명은?</option>
+				</select>
+				
+				</div>
 				
 				</div>
 			</div>
@@ -334,7 +362,22 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="bank" type="text" placeholder="은행명"/>
+				<div class="form-inline">
+				
+				<span>은행 : </span> 
+				
+
+
+
+				
+				<select class="form-control">
+					<option value="">나의 보물 1호는?</option>
+					<option value="">내가 태어난 곳은?</option>
+					<option value="">졸업한 초등학교는?</option>
+					<option value="">기억에 남는 여행지는?</option>
+					<option value="">나의 별명은?</option>
+				</select>
+				</div>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -363,8 +406,8 @@ input
 			<!-- 확인버튼, 취소버튼 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-				<button type="button" class="btn btn-primary" type="submit">확인</button>
-				<button type="button" class="btn btn-primary" type="reset">취소</button>
+				<button class="btn btn-primary" type="submit">확인</button>
+				<button  class="btn btn-primary" type="reset">취소</button>
 				</div>
 			</div>
 			

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.user.IJoinDAO">
+	
+	
+	
+	
+	<insert id="add">
+	<!-- 지역번호, 은행번호, 비밀번호찾기질문, 아이디, 이름, 주번, 전번
+	, 주소, 비번, 비번찾기, 이메일, 예금주, 계좌, 닉네임, 프사, 관심공구카테, 관심렌트카테-->
+	EXEC PRC_SIGNUP('LOC31','BANK7','PWFIND5','lim96','임효림','960730-2222222'
+	,'010-3226-2488','서울특별시 마포구 서교동 447-5 풍성빌딩 4층','java006$'
+	,'이묘이묘','lim@test.com','임효림','110-111-111111','이묘이묘','dawn.jpg','G_CATE3','R_CATE1')
+	</insert>
+	
+	<select id="rentList" resultType="com.banana.rent.RCateDTO">
+	SELECT R_CATE_CODE, CATE_NAME 
+	FROM R_CATE_VIEW
+	</select> 
+	
+	<select id="groupList" resultType="com.banana.groupbuying.GCateDTO">
+	SELECT G_CATE_CODE, CATE_NAME
+	FROM G_CATE_VIEW
+	</select> 
+	
+</mapper>  
+
