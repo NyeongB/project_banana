@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
 
+
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/core/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/daygrid/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/timegrid/main.css">
@@ -37,16 +38,12 @@
 	
 </style>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
-
-
-
 <script src='fullcalendar/core/locales/ko.js'></script>
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/interaction/main.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
 <script type="text/javascript">
 
@@ -82,17 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	  //var events = readData();
 	  var calendarEl = document.getElementById('calendar');
 	  
-	  var calendar = new FullCalendar.Calendar(calendarEl, {	  
-
-	    eventDidMount: function(info) {
-	      var tooltip = new Tooltip(info.el, {
-	        title: info.event.extendedProps.description,
-	        placement: 'top',
-	        trigger: 'hover',
-	        container: 'body'
-	      });
-	    },
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
 		  
+	    themeSystem: 'bootstrap',
 	    plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
 	    defaultView: 'dayGridMonth',
 	    defaultDate: new Date(),
@@ -104,31 +93,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: 'title',
 	      right: ''
 	    },
-	    locale: 'ko',
-	    
+	   /*  locale: 'ko',  */  
 	   
 	    eventSources: [{
 	       
 	    	events: function(info, callback, failureCallback)// 이건 무슨 의미지?
 	    	{
 	    		$.ajax(
-	    				{
-	    					type:"POST"
-	    					,url : "/Project_Banana/ggroupbuyingschedule.action"
-	    					,data : {userId :'USER38'}
-	    					,dataType: "json"
-	    					,success:function(args)
-	    					{
-	    						callback(args);
-	    						//alert(args);
-	    						
-	    					},
-	    					  error:function(request,status,error){
-	    					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    					       }
-
-	    					
-	    				});		    		
+   				{
+   					type:"POST"
+   					,url : "/Project_Banana/ggroupbuyingschedule.action"
+   					,data : {userId :'USER39'}
+   					,dataType: "json"
+   					,success:function(args)
+   					{
+   						callback(args);
+   						//alert(args);
+   						
+   					},
+   					 error:function(request,status,error)
+   					{
+			        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   					}   					
+   				});		   		
 	    		
 	    	}    	
 	    	
@@ -141,6 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
+
+
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
+
 
 </head>
 <body>

@@ -1,6 +1,6 @@
 package com.banana.controller;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class G_GroupBuyingScheduleController
 		
 		model.addAttribute("list",dao.list(userId));
 		
-		view = "calimsi.jsp";
+		view = "/calimsi.jsp";
 		
 		
 		return view;
