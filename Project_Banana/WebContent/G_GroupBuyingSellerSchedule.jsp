@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	      right: ''
 	    },
 	    locale: 'ko',
+	    
+	   
 	    eventSources: [{
 	       
 	    	events: function(info, callback, failureCallback)// 이건 무슨 의미지?
@@ -112,20 +114,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	    		$.ajax(
 	    				{
 	    					type:"POST"
-	    					,url : "calimsi.jsp"
+	    					,url : "/Project_Banana/ggroupbuyingschedule.action"
+	    					,data : {userId :'USER38'}
 	    					,dataType: "json"
 	    					,success:function(args)
 	    					{
 	    						callback(args);
 	    						//alert(args);
 	    						
-	    					}
-	    				
+	    					},
+	    					  error:function(request,status,error){
+	    					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    					       }
+
+	    					
 	    				});		    		
 	    		
 	    	}    	
 	    	
 	    }]
+	   
 	    
 	  });
 	  calendar.render();
