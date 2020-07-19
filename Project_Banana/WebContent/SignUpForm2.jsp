@@ -224,7 +224,7 @@ input
 				</div>
 			</div>
 			
-			<form action="join.action" name="memberForm" method="get">
+			<form action="joinInsert.action" name="memberForm" method="get">
 			<div class="row">
 				<div class="col-md-12 form-inline">
 				
@@ -285,8 +285,8 @@ input
 			<!-- 우편번호 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-				<input class="form-control" id="shopLocation1" type="text" /> - 
-				<input class="form-control" id="shopLocation2" type="text" />
+				<input class="form-control" id="shopLocation1" name ="shopLocation1"type="text" /> - 
+				<input class="form-control" id="shopLocation2" name="shopLocation2"type="text" />
 				<button class="btn btn-primary" type="submit">우편번호</button>
 				</div>
 			</div>
@@ -296,7 +296,7 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="shopLocation" type="text" placeholder="주소"/>
+				<input class="form-control" id="shopLocation3" name="shopLocation3"type="text" placeholder="주소"/>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -306,7 +306,7 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="shopLocation" type="text" placeholder="상세주소"/>
+				<input class="form-control" id="shopLocation4" name="shopLocation4"type="text" placeholder="상세주소"/>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -325,7 +325,7 @@ input
 
 
 				
-				<select class="form-control">
+				<select class="form-control" name="pwQuestion">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${pwList }">
 						<option value="${list.pw_question_type_code }">${list.pw_question }</option>
@@ -344,7 +344,7 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="pwreply" type="text" placeholder="패스워드 찾기 답변"/>
+				<input class="form-control" id="pwReply" name="pwReply" type="text" placeholder="패스워드 찾기 답변"/>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -400,7 +400,7 @@ input
 				<span>공동구매 관심 카테고리: </span> 
 				
 
-				<select class="form-control">
+				<select class="form-control" name="gCate">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${groupList }">
 						<option value="${list.g_cate_code }">${list.cate_name }</option>
@@ -419,7 +419,7 @@ input
 
 
 				
-				<select class="form-control">
+				<select class="form-control" name="rCate">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${rentList }">
 						<option value="${list.r_cate_code }">${list.cate_name }</option>
@@ -477,7 +477,7 @@ input
 				
 				<span>은행 : </span> 
 				
-				<select class="form-control">
+				<select class="form-control" name="bank1">
 				<option>선택</option>
 				<c:forEach var="list" items="${bankList }">
 					
@@ -494,7 +494,7 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="bank2" type="text" placeholder="예금주"/>
+				<input class="form-control" id="bank2" name="bank2" type="text" placeholder="예금주"/>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -504,7 +504,7 @@ input
 			<div class="row">
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="banknum" type="text" placeholder="계좌번호"/>
+				<input class="form-control" id="banknum" name="banknum" type="text" placeholder="계좌번호"/>
 				</div>
 			<div class="col-md-4"></div>
 			</div>

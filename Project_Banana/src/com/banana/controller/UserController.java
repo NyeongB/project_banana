@@ -75,6 +75,62 @@ public class UserController
 	}
 	
 	
+	@RequestMapping(value = "/joinInsert.action", method =RequestMethod.GET)
+	public String joinInsert(Model model, HttpServletRequest request)
+	{
+		String view = null; 
+		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String tel = request.getParameter("tel");
+		String nickname = request.getParameter("nickname");
+		
+		// 우편주소 - 우편주소2, 주소, 상세주소
+		String shopLoc1 = request.getParameter("shopLocation1");
+		String shopLoc2 = request.getParameter("shopLocation2");
+		String shopLoc3 = request.getParameter("shopLocation3");
+		String shopLoc4 = request.getParameter("shopLocation4");
+		
+		// 비번찾기유형, 비번찾기 답변
+		String pwQuestion = request.getParameter("pwQuestion");
+		String pwReply = request.getParameter("pwReply");
+		
+		// 이메일앞, 이메일 뒤
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		
+		// 공동구매카테고리코드, 렌트 카테고리 코드
+		String gCate = request.getParameter("gCate");
+		String rCate = request.getParameter("rCate");
+		
+		// 시/군/구 코드
+		String loc = request.getParameter("selectLoc2");
+		
+		// 은행명, 예금주, 통장번호
+		String bankName = request.getParameter("bank1");
+		String bankUser = request.getParameter("bank2");
+		String bankNum = request.getParameter("banknum");
+		
+		System.out.printf("아이디 : %s 비밀번호: %s 전화번호 : %s닉네임 : %s\n",id,pw,tel,nickname);
+		System.out.printf("%s - %s / %s / %s \n",shopLoc1,shopLoc2,shopLoc3,shopLoc4);
+		System.out.printf("비밀번호 찾기 유형 : %s/ 답변 : %s\n",pwQuestion,pwReply);
+		System.out.printf("%s@%s\n",email1,email2);
+		System.out.printf("공동 : %s, 렌트 : %s\n",gCate, rCate);
+		System.out.printf("거래지역 : %s\n",loc);
+		System.out.printf("은행명 : %s 예금주 : %s 계좌번호 : %s",bankName, bankUser, bankNum);
+		
+		
+		view = "/SignUpComplete.jsp";
+		
+		
+		return view;
+	}
+	
+	
+	
 	@RequestMapping(value = "/ajaxloc.action", method =RequestMethod.GET)
 	public String ajaxloc(Model model,HttpServletRequest request)
 	{
