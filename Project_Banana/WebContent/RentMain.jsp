@@ -91,6 +91,7 @@
 p
 {
 	color: #5bb0ff;
+	font-size: 10pt;
 }
 
 
@@ -125,6 +126,7 @@ p
 	margin-left: 200px;
 	font-size: 20px;
 	font-weight: bold;
+	
 }
 
 #location 
@@ -136,6 +138,7 @@ p
 .thumbnail
 {
 	margin: 10px;
+	height: 270px;
 }
 
 .Ad 
@@ -607,11 +610,11 @@ b
 
 							
 							<!-- 3열 1번 -->
-							
+							<c:forEach var="rnewList" items="${rnewList }" varStatus="status" begin="1" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
-							  <h4 class="thick"><span class="line">1</span></h4>
+							  <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
+	                                 ${rnewList.photo }
 	                                   
 	                                    <div class="caption">
 	                                  			<div class="col-md-12 text-right">
@@ -619,117 +622,22 @@ b
 	                                    		</div>
 	                  
 	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
+	                                        		<small>${rnewList.nickname }</small>
 	                                       	 </div>
 	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
+	                                      <b>${rnewList.title }</b>
+	                                      <p>${rnewList.offerloc }/${rnewList.collectloc }</p>
+	                                      <span class="price">${rnewList.cost }</span>원(1일)                    
 	                                    </div>
 	                                </div>
 	                   		  </div>
+							</c:forEach>
 							
-							
-							<!-- 3열 2번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">2</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                    <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 3열 3번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">3</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                     <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 3열 4번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">4</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                      <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 3열 5번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">5</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                     <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-
 							<div class="col-md-1"></div>
-
-						
+							
+							
+						</div>
 					</div>
-				</div> <!-- end 빌려드립니다 실시간 게시글 3열  -->	
-				
 				</div>
 			</div>
 			
