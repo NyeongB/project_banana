@@ -109,8 +109,11 @@ i
 								style="width: 70px; height: 70px;"></td>
 							<td>자전거 굿굿굿</td>
 							<td>이번에도 잘 탔습니다!!</td>
-							<td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
-							<i class="fa fa-star-half-o" aria-hidden="true"></i></td>
+							<td>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star-half-o" aria-hidden="true"></i>
+							</td>
 							<td>test222***</td>
 							<td>2020.07.01</td>
 						</tr>
