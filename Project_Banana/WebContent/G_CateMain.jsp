@@ -252,7 +252,7 @@ p
                                         	<small>${glists.nickname }</small>
                                         </div>
 	                                      <p>${glists.loc_name }</p>
-	                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber>                         
+	                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>                         
 	                                    </div>
 	                                    
 	                                    

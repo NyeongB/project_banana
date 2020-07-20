@@ -158,30 +158,27 @@ p
 
 a
 {
-	text-decoration: none;
+	color:black;
+	font-family: bold;
+	text-decoration: none !important;
+	font: NanumGothic;
 }
 
-a:link 
+ a:link 
 { 
 	color: black; 
-	text-decoration: none;
+	
 }
-
-a:visited
+ 
+/* a:visited
 { 	color: black;
-	text-decoration: none;
 }
-
-a:hover 
-{ 	
-	color: black;
-    text-decoration: none;
-}
+ */
 
 a:active
-{ 	color: red;
-	text-decoration: none;
-}
+{ 	color: black;
+	
+} 
 
 
 
@@ -190,6 +187,8 @@ a:active
 	
 	$().ready(function()
 	{
+		
+
 		$("#postItem").click(function()
 		{
 			//alert("확인");
@@ -198,18 +197,37 @@ a:active
 		
 		
 		
+		
 
 	});
 	
 
-	 function liColor(obj)
+	function liColor(obj)
 	{
-		alert(obj.attr('id')); 
+		alert(obj.getAttribute("id"));
+		var id = obj.getAttribute("id")
+		document.getElementById(id).style.color="red";
+		
+		alert(document.getElementById(id));
+		//id.style.color ="red";
+		//obj.getAttribute("id").style.color = 'red';
+		//obj.getAttribute("id").css("color","red");
+		
+		
+		
+	/* 	alert("확인");
+		console.log($(this));
+		alert($(this).attr('id'));
+		$(".linkColor").css("color","red"); */
+		/* alert(obj.attr('id')); 
 		alert(obj);
 		//alert($(this).val()).;
-		document.getElementById("#${catelists.g_cate_code }").style.color = "red";
+		document.getElementById("#${catelists.g_cate_code }").style.color = "red"; 
 		
+		$(#obj.getAttribute("id")).css("color","red");
 		
+		$(".linkColor").css("color","red");
+		obj.getAttribute("id").css("color","red");*/
 	}
 	 
 	
@@ -249,10 +267,10 @@ a:active
 						<div >
 						<hr>
 						 	<ul class="catelist">
-								<c:forEach var="catelists" items="${cateList }">
-									<li>
-									<%-- <a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}" id="${catelists.g_cate_code }" onclick="liColor(obj)">${catelists.cate_name }</a> --%>
-									<a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}" id="${catelists.g_cate_bcode }" onclick="liColor(this).attr('id')">${catelists.cate_name }</a>
+								<c:forEach var="catelists" items="${cateList }" >
+									<li id="${catelists.g_cate_code }"  class="linkColor"  onclick="liColor(this)">
+										<%-- <a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}" id="linkColor" onclick="liColor(this).attr('id')">${catelists.cate_name }</a> --%>
+										<a href="g_catesmain.action?bid=${catelists.g_cate_bcode }&mid=${catelists.g_cate_code}">${catelists.cate_name }</a>
 									</li>								
 								</c:forEach>
 							</ul>							
@@ -265,7 +283,7 @@ a:active
 						 	<ul class="catemlist">
 								<c:forEach var="cateMlists" items="${cateMList }">
 									<li>
-									<a>${cateMlists.cate_name }</a>
+									<a >${cateMlists.cate_name }</a>
 									</li>								
 								</c:forEach>
 							</ul>							
@@ -388,6 +406,9 @@ a:active
 			</div><!--end row -->
 		</div><!--end col-md-8   -->
 	</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 

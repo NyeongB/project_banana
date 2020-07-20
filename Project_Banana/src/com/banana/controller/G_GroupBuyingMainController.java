@@ -1,5 +1,8 @@
 package com.banana.controller;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.groupbuying.GCateDTO;
+import com.banana.groupbuying.GPostDTO;
 import com.banana.groupbuying.IGPostDAO;
 
 @Controller
@@ -80,9 +84,30 @@ public class G_GroupBuyingMainController
 		  return view; 
 	  }
 	  
+	  //상품 상세 페이지
+	  @RequestMapping(value = "/groupbuyingitempage.action", method =RequestMethod.GET)
+		public String GroupBuyingItemPage(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+		
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			
+			String code = request.getParameter("postcode"); 
+			//System.out.println(code);
+			GPostDTO dto = new GPostDTO();
+			dto.setG_post_code(code);
+			
+			model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
+			model.addAttribute("count", dao.gApplyCount(dto));
+			
+			view = "/GroupBuyingItemPage.jsp";
+			
+			
+			return view;
+		}
+		
+	 
 	  
-	 
-	 
 	
 	
 	
