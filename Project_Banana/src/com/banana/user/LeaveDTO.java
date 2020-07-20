@@ -6,7 +6,24 @@ public class LeaveDTO
 
 	private String name,ssn,tel,addr,id,email,joindate,bank_name,account_user,account,condate,leavedate;
 	private int credit_score,banana_score,point,o_count,w_count;
+	private String b_user_code, leave_type_code;
 	
+	public String getB_user_code()
+	{
+		return b_user_code;
+	}
+	public void setB_user_code(String b_user_code)
+	{
+		this.b_user_code = b_user_code;
+	}
+	public String getLeave_type_code()
+	{
+		return leave_type_code;
+	}
+	public void setLeave_type_code(String leave_type_code)
+	{
+		this.leave_type_code = leave_type_code;
+	}
 	//getter /setter;
 	public String getName()
 	{

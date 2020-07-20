@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.user.IJoinDAO;
+import com.banana.user.ILeaveDAO;
 import com.banana.user.JoinDTO;
+import com.banana.user.LeaveDTO;
 import com.banana.user.LocDTO;
 import com.banana.util.Send;
 import com.banana.util.SessionInfo;
@@ -435,8 +437,30 @@ public class UserController
 		@RequestMapping(value = "/leave.action", method =RequestMethod.GET)
 		public String leave(Model model,HttpServletRequest request)
 		{
+			String id = request.getParameter("id");
+			String type = request.getParameter("type");
 			
-			return "/UserLeaveApplyAction.jsp";
+			ILeaveDAO dao = SqlSession.getMapper(ILeaveDAO.class);
+			String bUser = dao.getUser(id);
+			LeaveDTO dto = new LeaveDTO();
+			
+			/*
+			 * System.out.println(bUser); System.out.println(type);
+			 */
+			
+			dto.setB_user_code(bUser);
+			dto.setLeave_type_code(type);
+			
+			dao.leave(dto);
+			
+			// 세션도 끊음
+	          HttpSession session = request.getSession();
+	          
+	          session.removeAttribute("user");
+	          session.invalidate();
+			
+			
+			return "/UserLeaveApplyAccept.jsp";
 		}
 		
 }

@@ -37,5 +37,16 @@
 		ON J.B_USER_CODE = W.B_USER_CODE
 	</select>
 	
+	<insert id="leave">
+	INSERT INTO LEAVE(LEAVE_CODE, B_USER_CODE, LEAVE_TYPE_CODE)
+	 VALUES('LEA_U2'||SEQ_LEAVE_U.NEXTVAL, #{b_user_code},#{leave_type_code})
+	</insert>
+	
+	<select id="getUser" resultType="java.lang.String">
+	SELECT B_USER_CODE
+	FROM JOIN
+	WHERE ID=#{id}
+	</select>
+	
 	
 </mapper>  

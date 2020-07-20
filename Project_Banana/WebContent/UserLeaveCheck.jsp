@@ -1,9 +1,17 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
 	String cp = request.getContextPath();
+%>
+<%
+	session = request.getSession();
+
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	String id = info.getId();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -115,15 +123,16 @@ p
 	{	
 		$("#leaveBtn").click(function()
 		{
-			
+			var radio;
+			var check;
 			if($('input:radio[name=reason]').is(':checked'))
 			{
 				//alert("라디오 체크");
 
 				//var test = $('input:radio[name=reason]').val();
-				var test =  $(":input:radio[name=reason]:checked").val();
+				radio =  $(":input:radio[name=reason]:checked").val();
 				
-				alert(test);
+				//alert(radio);
 				state1 = 1;
 			}
 			else
@@ -136,7 +145,9 @@ p
 			
 			if($('input:checkbox[name=checkBox]').is(':checked'))
 			{
-				alert("셀렉트박스 체크")
+				//alert("셀렉트박스 체크")
+				//check =  $(":input:checkbox[name=checkBox]:checked").val();
+				//alert(check)
 				state2 = 1;
 			}
 			else
@@ -148,9 +159,10 @@ p
 			
 			if(state1 == 1 && state2 ==1)
 			{
-				if(confirm("정말 삭제하시겠습니까?"))
+				if(confirm("정말 탈퇴하시겠습니까?"))
 				{
-					alert("삭제");
+					//alert("삭제");
+					location.href="<%=cp%>/leave.action?id=<%=id%>&type="+radio;
 				}
 			}
 			
