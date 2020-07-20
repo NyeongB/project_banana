@@ -99,7 +99,7 @@ i + a
 			<ul class="sub" style="display: none;">
 					<li><a href="activityRating.action">개인 활동등급</a></li>
 					<li><a href="#">개인 신용등급</a></li>
-					<li><a href="#">거래 후기</a></li>
+					<li><a href="myreview.action">거래 후기</a></li>
 					<li><a href="#">포인트</a></li>
 			</ul>
 		</li>
