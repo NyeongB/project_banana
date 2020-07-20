@@ -37,4 +37,7 @@ public interface IJoinDAO
 	
 	// 닉네임 중복체크
 	public ArrayList<JoinDTO> nickList();
+	
+	// 회원가입 INSERT
+	public void add(JoinDTO dto);
 }

@@ -7,12 +7,12 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class Send
 {
-	public static void send(String tel)
+	public static String send(String tel)
 	{
 		String api_key = "NCSK3SWNJNK7KFNX";
 		String api_secret = "ASIQZOSSE7DOROFR4TZ1SOPX1ILC7UFR";
 		Message coolsms = new Message(api_key, api_secret);
-
+		
 		// 난수 발생
 		RandomCheck rc = new RandomCheck();
 		String str = rc.couponnum();
@@ -32,5 +32,8 @@ public class Send
 			System.out.println(e.getMessage());
 			System.out.println(e.getCode());
 		}
+		
+		
+		return str;
 	}
 }

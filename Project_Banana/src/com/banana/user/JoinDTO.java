@@ -10,9 +10,6 @@ public class JoinDTO
 	private String loc_code, bank_type_code, pw_question_type_code, id, name;
 	private String ssn, tel, addr, pw, pw_answer, email, account_user, account, nickname, profile;
 	private String g_cate_code, r_cate_code;
-	
-	// getter / setter 
-	
 	public String getLoc_code()
 	{
 		return loc_code;
@@ -149,6 +146,9 @@ public class JoinDTO
 	{
 		this.r_cate_code = r_cate_code;
 	}
+	
+	
+	
 	
 	
 	
