@@ -121,6 +121,33 @@ p
 
 }
 
+ a
+{
+	color:black;
+	font-family: bold;
+	text-decoration: none !important;
+	font: NanumGothic;
+}
+
+
+
+ a:link 
+{ 
+	color: #084B8A; 
+	
+}
+ 
+ a:visited
+{ 	color: #084B8A;
+}
+ 
+
+a:active
+{ 	color: #084B8A;
+	
+}  
+
+
 .catelist
 {
 	display: flex;
