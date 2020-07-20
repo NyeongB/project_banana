@@ -323,13 +323,13 @@ function liColor(obj)
 					<div class="col-md-12">
 
 						
-							<div class="col-md-1"></div>
+							
 
 							
 							<!-- 1열 1번 -->
 							
 							<c:forEach var="rlists" items="${rCatemMainList }" >
-							<c:if test="${ status.count%5 eq 0 }" ><br/></c:if>
+							<c:if test="${ status.count%5 eq 0 }" ></c:if>
 							
 							  <div class="col-sm-2 col-md-2 thblock">
 	                           		<div class="thumbnail">
@@ -348,7 +348,7 @@ function liColor(obj)
 	  
 	                                      <b>${rlists.title }</b>
 	                                      <p>${rlists.offerloc }/${rlists.collectloc }</p>
-	                                      <span class="price"><fmt:formatNumber value="${rslists.cost }" ></fmt:formatNumber></span>원(1일)                    
+	                                      <span class="price">${rlists.cost }</span>원(1일)                    
 	                                    </div>
 	                                </div>
 	                   		  </div>
@@ -357,7 +357,6 @@ function liColor(obj)
 							
 					
 
-							<div class="col-md-1"></div>
 
 						
 					</div>

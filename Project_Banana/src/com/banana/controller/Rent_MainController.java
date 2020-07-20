@@ -13,6 +13,7 @@ import com.banana.admin.AdminAccountDTO;
 import com.banana.admin.IAdminAccountDAO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.RCateDTO;
+import com.banana.rent.RPostDTO;
 import com.banana.user.ILoginDAO;
 import com.banana.user.LoginDTO;
 
@@ -73,11 +74,14 @@ public class Rent_MainController
 		  }
 			
 			
+		  
+		  
+		  
 			
 			
 			
 			
-		//  관심 카테고리별 추천 게시글/빌려드립니다. 실시간 게시글
+		//  렌트 페이지로 이동 - >관심 카테고리별 추천 게시글/빌려드립니다. 실시간 게시글
 		@RequestMapping(value = "/r_main.action", method = RequestMethod.GET)
 		 public String rentMain(Model model) 
 		 {
@@ -98,6 +102,10 @@ public class Rent_MainController
 		
 		
 		
+		
+		
+		
+	
 		// 렌트 상품 등록 클릭 시 페이지 이동
 		@RequestMapping(value = "/rentpostpage.action", method = RequestMethod.GET)
 		 public String rentpostpage(Model model) 
@@ -141,8 +149,11 @@ public class Rent_MainController
 			
 		 }
 		
+	
 		
 		
+		
+		/*
 		// 렌트 게시물 insert 
 		@RequestMapping(value = "/r_postinsert.action", method = RequestMethod.GET)
 		 public String rentpostinsert(Model model, HttpServletRequest request) 
@@ -152,12 +163,7 @@ public class Rent_MainController
 			
 			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 			ILoginDAO lda = SqlSession.getMapper(ILoginDAO.class);
-			/*
-			 INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
-                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER45', 'R_CATE78',  'LOC31', '전동 킥보드 빌릴 사람 있나요?', '전동 킥보드 빌릴 사람 구합니다~~'
-                                    , 55, TO_DATE('2020-07-21 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-19 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
-                                    , '20:00', '홍대입구 1번출구', '20:00', '홍대입구 1번출구', '샤오미', 1000, 10000); 
-			*/
+			
 			
 			
 			String id = request.getParameter("id");
@@ -177,24 +183,27 @@ public class Rent_MainController
 			return view;
 			
 		 }
+		*/
+		
 		
 		
 		// 렌트 게시물 클릭 시 상세 페이지로 이동
 			@RequestMapping(value = "/rpostdetailpage.action", method = RequestMethod.GET)
-			 public String rpostDetailpage(Model model) 
+			 public String rpostDetailpage(Model model, HttpServletRequest request) 
 			 {
 				
 				String view = null;
 				
 				
 				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+				RPostDTO dto = new RPostDTO();
+				String rpost_code = request.getParameter("r_post_code");
 				
+				dto.setR_post_code(rpost_code);
 				
-				model.addAttribute("rCateList", dao.rCateList());
+				model.addAttribute("rpostDetail", dao.rpostDetail(dto));
+				model.addAttribute("dealLoc", dao.dealLoc(dto));
 				
-				
-				
-					
 				view = "/UserRentDetail.jsp";
 				
 				return view;
