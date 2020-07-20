@@ -9,4 +9,6 @@ public interface ILoginDAO
 	public String permanent(LoginDTO dto);
 	
 	public String rest(LoginDTO dto);
+	
+	public String getNick(String id);
 }

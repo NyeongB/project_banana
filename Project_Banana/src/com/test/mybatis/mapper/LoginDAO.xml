@@ -33,4 +33,8 @@
 		WHERE ID = #{id} AND PW = #{pw}
 	</select>	
 	
+	<select id="getNick" resultType="java.lang.String">			
+		SELECT NICKNAME FROM JOIN WHERE ID=#{id}
+	</select>	
+	
 </mapper>  

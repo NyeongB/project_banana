@@ -8,6 +8,7 @@ package com.banana.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import com.banana.user.ILoginDAO;
 import com.banana.user.IRestDAO;
 import com.banana.user.IStopDAO;
 import com.banana.user.LoginDTO;
+import com.banana.util.SessionInfo;
 
 @Controller
 public class MemberController
@@ -289,6 +291,13 @@ public class MemberController
 	public String loginCheck(Model model, HttpServletRequest request)
 	{
 		
+		// session 생성
+		
+		// 로그인할떄만 매개변수 true 초기화때문
+		HttpSession session = request.getSession(true);
+		
+		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
+		
 		String view = null; 
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -298,6 +307,9 @@ public class MemberController
 		// state 0→비정상로그인 1→정상로그인 2→탈퇴회원 3→영구회원 4→휴면회원
 		int state = login(id,pw);
 		
+		String nick = dao.getNick(id);
+		System.out.println(nick);
+		
 		if(state==0)
 		{
 			// 다시 로그인
@@ -306,7 +318,21 @@ public class MemberController
 		else if(state == 1)
 		{
 			// 정상로그인
-			view = "/UserMyJJim.jsp";
+			
+			
+			SessionInfo info = new SessionInfo();
+			
+			// 아이디랑 닉네임 인포에 넣음
+			info.setId(id);
+			info.setNickname(nick);
+			
+			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
+			session.setAttribute("user", info);
+			
+			
+			
+			
+			view = "/LoginComplete.jsp";
 			
 		}
 		else if(state == 2)
