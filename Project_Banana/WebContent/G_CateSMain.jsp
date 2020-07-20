@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/AdminAccountListStyle.css">
@@ -155,6 +155,35 @@ p
 	text-align: center;
 	font-size: 13px;
 }
+
+a
+{
+	text-decoration: none;
+}
+
+a:link 
+{ 
+	color: black; 
+	text-decoration: none;
+}
+
+a:visited
+{ 	color: black;
+	text-decoration: none;
+}
+
+a:hover 
+{ 	
+	color: black;
+    text-decoration: none;
+}
+
+a:active
+{ 	color: red;
+	text-decoration: none;
+}
+
+
 
 </style>
 <script type="text/javascript">

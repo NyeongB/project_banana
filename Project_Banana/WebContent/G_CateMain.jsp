@@ -242,7 +242,6 @@ p
 	                                      <h5 class="thick">${glists.title }</h5>
 	                                      <div class="col-md-12">
                                    			<div class="col-md-6">
-                                    			<!-- <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> -->
                                    			</div>
                                   			<div class="col-md-6 text-right">
                                     			<small>5분전</small>
