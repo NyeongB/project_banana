@@ -101,14 +101,46 @@ public class UserController
 		String bankUser = request.getParameter("bank2");
 		String bankNum = request.getParameter("banknum");
 		
-		System.out.printf("아이디 : %s 비밀번호: %s 전화번호 : %s닉네임 : %s\n",id,pw,tel,nickname);
-		System.out.printf("%s - %s / %s / %s \n",shopLoc1,shopLoc2,shopLoc3,shopLoc4);
-		System.out.printf("비밀번호 찾기 유형 : %s/ 답변 : %s\n",pwQuestion,pwReply);
-		System.out.printf("%s@%s\n",email1,email2);
-		System.out.printf("공동 : %s, 렌트 : %s\n",gCate, rCate);
-		System.out.printf("거래지역 : %s\n",loc);
-		System.out.printf("은행명 : %s 예금주 : %s 계좌번호 : %s",bankName, bankUser, bankNum);
+		// 주민번호
+		String ssn;
+		String ssn1 = request.getParameter("ssn1");
+		String ssn2 = request.getParameter("ssn2");
+		ssn = ssn1 + "-" + ssn2;
+		// 이름 
+		String name = request.getParameter("name");
 		
+		/*
+		 * System.out.printf("아이디 : %s 비밀번호: %s 전화번호 : %s닉네임 : %s\n",id,pw,tel,nickname)
+		 * ;
+		 * System.out.printf("%s - %s / %s / %s \n",shopLoc1,shopLoc2,shopLoc3,shopLoc4)
+		 * ; System.out.printf("비밀번호 찾기 유형 : %s/ 답변 : %s\n",pwQuestion,pwReply);
+		 * System.out.printf("%s@%s\n",email1,email2);
+		 * System.out.printf("공동 : %s, 렌트 : %s\n",gCate, rCate);
+		 * System.out.printf("거래지역 : %s\n",loc);
+		 * System.out.printf("은행명 : %s 예금주 : %s 계좌번호 : %s",bankName, bankUser, bankNum);
+		 */
+		
+		JoinDTO dto = new JoinDTO();
+		
+		dto.setId(id);
+		dto.setPw(pw);
+		dto.setTel(tel);
+		dto.setName(name);
+		dto.setSsn(ssn);
+		dto.setProfile("123.jpg");
+		dto.setNickname(nickname);
+		dto.setAddr(shopLoc1+"-"+shopLoc2+" "+shopLoc3+" "+shopLoc4);
+		dto.setPw_question_type_code(pwQuestion);
+		dto.setPw_answer(pwReply);
+		dto.setEmail(email1+"@"+email2);
+		dto.setG_cate_code(gCate);
+		dto.setR_cate_code(rCate);
+		dto.setLoc_code(loc);
+		dto.setBank_type_code(bankName);
+		dto.setAccount_user(bankUser);
+		dto.setAccount(bankNum);
+		
+		dao.add(dto);
 		
 		view = "/SignUpComplete.jsp";
 		
@@ -222,11 +254,13 @@ public class UserController
 			
 			
 			
-			Send.send(tel.trim());
-			System.out.println("??");
+			String check = Send.send(tel.trim());
+			//System.out.println("??");
 			
 			
+			model.addAttribute("check",check);
 			
+			view = "/ajax.jsp";
 			
 			return view;
 		}

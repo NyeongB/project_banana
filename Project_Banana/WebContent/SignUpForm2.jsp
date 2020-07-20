@@ -58,8 +58,64 @@ input
 	var stateId = 0;
 	// 닉네임 중복 변수
 	var stateNick = 0;
+	
+	// 문자인증번호 
+	var phoneCheck;
+	
+	// 문자인증완료했는지 보는 변수 
+	var statePhone = 0;
+	
 	$(document).ready(function()
 	{
+		
+		// 서브밋 유효성 검사
+		 $("#submitBtn").click(function()
+		{
+			if(stateId>0 && stateNick>0)
+			{
+				
+				if(statePhone >0)
+				{
+					if($("#pw").val() == $("#pwcon").val())
+					{
+						$("#memberForm").submit();
+					}
+					else
+					{
+						alert("비밀번호를 확인해주세요.");	
+					}
+					
+				}
+				else
+				{
+					alert("핸드폰인증을 해야합니다.");
+					return;
+				}
+			}
+			else
+			{
+				alert("중복검사를 하지않았습니다.");
+				return;
+			}
+			
+		}); 
+		
+		// 문자 인증 확인
+		$("#numBtn").click(function()
+		{
+			if($("#num").val()==phoneCheck)
+			{
+				alert("인증번호 확인!");
+				statePhone =1;
+			}
+			else
+			{
+				alert("인증번호가 같지않습니다.");
+				statePhone = 0;
+			}
+		});
+		
+		
 		// 인증번호 전송
 		$("#telBtn").click(function()
 		{
@@ -90,6 +146,9 @@ input
 			ajaxRequest2();
 		});
 	});
+	
+	
+	// 함수부분 
 	
 	// 이메일 변경 메소드
 	function changeEmail()
@@ -208,9 +267,11 @@ input
 		alert("인증번호가 발송되었습니다.");
 		$.get("telcheck.action", {tel : $("#tel").val()}, function(data)
 		{
-		
-		
+			//alert(data);
+			phoneCheck = data.trim();
+			
 		});
+		
 	}
 	
 </script>
@@ -243,7 +304,7 @@ input
 				</div>
 			</div>
 			
-			<form action="joinInsert.action" name="memberForm" method="get">
+			<form action="joinInsert.action" name="memberForm" method="get" id="memberForm">
 			<div class="row">
 				<div class="col-md-12 form-inline">
 				
@@ -272,6 +333,23 @@ input
 				<div class="col-md-4"></div>
 			</div>
 			
+			<!-- 이름-->
+			<div class="row">
+			<div class="col-md-3"></div>
+				<div class="col-md-5 text-center Cn">
+				<input type="text" name="name" id="name" placeholder="이름" class="form-control">
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			
+			<!-- 주민등록번호 -->
+			<div class="row">
+				<div class="col-md-12 form-inline">
+				<input class="form-control" id="ssn1" name ="ssn1"type="text"  placeholder="주민번호 앞자리" > - 
+				<input class="form-control" id="ssn2" name="ssn2"type="text"  placeholder="주민번호 뒷자리" >
+				</div>
+			</div>
+			
 			<!-- 휴대폰번호 입력 --> <!-- 인증하기 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
@@ -287,6 +365,7 @@ input
 			<div class="col-md-3"></div>
 				<div class="col-md-5 text-center Cn">
 				<input type="text" name="num" id="num" placeholder="인증번호" class="form-control">
+				<button type="button" class="btn btn-primary" id="numBtn">인증확인</button>
 				</div>
 			<div class="col-md-4"></div>
 			</div>
@@ -476,9 +555,8 @@ input
 				<div class="form-inline">
 				<span>시/군/구 : </span> 
 				
-				<div id="sel">
-						
-					</div>
+				<!-- 시/군/구 들어올부분  -->
+				<div id="sel"></div>
 				</div>
 				
 				</div>
@@ -532,7 +610,7 @@ input
 			<!-- 확인버튼, 취소버튼 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-				<button class="btn btn-primary" type="submit">확인</button>
+				<button class="btn btn-primary" type="button" id="submitBtn">확인</button>
 				<button  class="btn btn-primary" type="reset">취소</button>
 				</div>
 			</div>
