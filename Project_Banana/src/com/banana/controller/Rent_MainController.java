@@ -179,6 +179,30 @@ public class Rent_MainController
 		 }
 		
 		
+		// 렌트 게시물 클릭 시 상세 페이지로 이동
+			@RequestMapping(value = "/rpostdetailpage.action", method = RequestMethod.GET)
+			 public String rpostDetailpage(Model model) 
+			 {
+				
+				String view = null;
+				
+				
+				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+				
+				
+				model.addAttribute("rCateList", dao.rCateList());
+				
+				
+				
+					
+				view = "/UserRentDetail.jsp";
+				
+				return view;
+				
+			 }
+			
+			
+		
 		
 		
 		

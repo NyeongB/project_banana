@@ -16,6 +16,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
+
+
+
 .breadcrumb-item+.breadcrumb-item::before 
 { 
 	content: ">"; 
@@ -28,10 +31,7 @@
 	margin-bottom: 20px;
 }
 
-.warning
-{
-	margin-right: 3px;
-}
+
 
 .imgbox
 {
@@ -253,15 +253,18 @@ $().ready(function()
 						<div class="col-md-6 mid">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-6">
-										대여자 닉네임
+									
+									<div class="col-md-6 w1">
+										작성자 : 
 									</div>
 									
-									<div class="col-md-6 text-right warning">
-										<button class="btn b1" type="button">
+									<div class="col-md-6 text-right warning w2">
+										<button class="btn btn-sm" type="button" >
 										<span class=" glyphicon glyphicon-warning-sign"></span>
 									</button>신고하기
 									</div>
+									
+									
 								</div>
 							</div>
 							

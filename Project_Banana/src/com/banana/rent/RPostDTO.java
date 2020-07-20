@@ -5,7 +5,7 @@ public class RPostDTO
 	
 	// 주요 속성 구성
 	private String wdate, title, nickname, offerloc, collectloc, photo;
-	private String r_cate_code, b_user_code;
+	private String r_cate_code, b_user_code, r_post_code;
 	private int cost;
 	
 	
@@ -15,11 +15,33 @@ public class RPostDTO
 	
 	
 	
+	
+	public String getB_user_code() 
+	{
+		return b_user_code;
+	}
+
+	public void setB_user_code(String b_user_code) 
+	{
+		this.b_user_code = b_user_code;
+	}
+
+	public String getR_post_code() 
+	{
+		return r_post_code;
+	}
+
+	public void setR_post_code(String r_post_code) 
+	{
+		this.r_post_code = r_post_code;
+	}
+
 	public String getR_cate_code() 
 	{
 		return r_cate_code;
 	}
 
+	
 	public void setR_cate_code(String r_cate_code) 
 	{
 		this.r_cate_code = r_cate_code;

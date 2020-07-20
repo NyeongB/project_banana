@@ -27,8 +27,19 @@
 		{
 			$(location).attr("href", "rentpostpage.action");	
 		});
+	
+	
 	});
 
+	
+	
+	function postDetail() 
+	{
+		var a = obj.getAttribute("id");
+		$(location)attr.("href", "rpostdetailpage.action?r_post_code=" + a);
+		
+	}
+	
 
 
 </script>
@@ -378,7 +389,7 @@ b
 							<c:forEach var="rCateList" items="${rCateList }" varStatus="status" begin="1" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
 							  <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           		<div class="thumbnail">
+	                           		<div class="thumbnail" id="${rCateList.r_post_code }" onclick="postDetail(this)">
 	                                ${rCateList.photo }
 	                                   
 	                                    <div class="caption">
@@ -425,7 +436,7 @@ b
 							<c:forEach var="rnewList" items="${rnewList }" varStatus="status" begin="1" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
 							  <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           		<div class="thumbnail">
+	                           		<div class="thumbnail" id="${rnewList.r_post_code }" onclick="postDetail(this)">
 	                                 ${rnewList.photo }
 	                                   
 	                                    <div class="caption">
