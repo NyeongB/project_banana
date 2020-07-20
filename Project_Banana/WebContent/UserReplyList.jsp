@@ -36,18 +36,15 @@ td
 		
 		 $.ajax({
 			
-			url:'/Project_Banana/userreplylist.action',
+			url:'/Project_Banana/usergreplylist.action',
 			type:'get',
 			data:{order:params},
 			dataType:'json',
 			success: function(data)
 			{
-				var str ="";
-				alert(data);
-				alert(data.title[1]);
+
+				document.getElementById("tbody").innerHTML = data;
 				
-				
-				document.getElementById("tbody").innerHTML = "";
 				
 			},error:function(request,status,error)
 			{

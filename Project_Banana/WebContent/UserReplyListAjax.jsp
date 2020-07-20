@@ -9,7 +9,7 @@
 	String cp = request.getContextPath();
 %>
 <%
-	ArrayList<UserReplyDTO> list = (ArrayList<UserReplyDTO>)request.getAttribute("rReplyList");
+/* 	ArrayList<UserReplyDTO> list = (ArrayList<UserReplyDTO>)request.getAttribute("rReplyList");
 	
 	// 데이터 담을 배열 선언
 	JSONArray jarr = new JSONArray();
@@ -25,7 +25,27 @@
 	
 	}
 	
-	out.print(jarr.toString());	
-
+	out.print(jarr.toString());	 */
 
 %>
+<div id="rReplyLists">
+	<c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
+		<tr>
+			<td>${status.count }</td>									
+			<td>${rReplyLists.title }</td>
+			<td>${rReplyLists.reply }</td>
+			<td>${rReplyLists.wDate }</td>
+			<td>${rReplyLists.reply_like }</td>
+			<td>
+			<div class="btn-group" role="group">
+	
+			<button class="btn btnDefault" type="button" id="openModalBtn">
+				<span class=""></span> 댓글 삭제
+			</button>
+			
+			</div>
+			</td>
+		</tr>
+	</c:forEach>	
+
+</div>

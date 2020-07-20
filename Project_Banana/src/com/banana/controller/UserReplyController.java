@@ -19,12 +19,44 @@ public class UserReplyController
 	private SqlSession SqlSession;
 	
 	@RequestMapping(value = "/userreplylist.action", method = RequestMethod.GET)
-	public String rReplyList(Model model, String order)
+	public String rReplyList(Model model)
 	{
-		String view = null; 
+	
 		
+		String view = null;
 		String user_code = "USER49";
 		UserReplyDTO dto = new UserReplyDTO();
+		
+			
+		dto.setOrder("WDATE_ASC");		
+		
+		dto.setUser_code(user_code);
+		
+		
+		IUserReplyDAO dao = SqlSession.getMapper(IUserReplyDAO.class);
+		
+		//System.out.println(user_code);
+		model.addAttribute("rReplyList", dao.rReplyList(dto));
+	
+		
+		view = "/UserReplyListAjax.jsp";
+		
+		
+		return view;
+	}
+	
+	@RequestMapping(value = "/usergreplylist.action", method = RequestMethod.GET)
+	public String rReplyList(Model model, String order)
+	{
+		
+		String view = null; 
+		
+		// 세션으로 받아올 부분
+		String user_code = "USER49";
+		
+		System.out.println(order);
+		UserReplyDTO dto = new UserReplyDTO();
+		
 		if(Integer.parseInt(order) == 1) 
 		{
 			dto.setOrder("WDATE_DESC");			
