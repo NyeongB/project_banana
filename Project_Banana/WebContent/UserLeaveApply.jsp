@@ -108,10 +108,10 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image" src="images/banana_icon.png" >
 										<p>"비밀번호를 입력해 주세요"</p>
-										<form action="" class="form-inline">
+										<form action="leavecheck.action" class="form-inline">
 											<label for="">비밀번호</label>
-											<input type="password" class="form-control"/>
-											<button class="btn btn-primary" type="button" id="pw_submit">확인</button>
+											<input type="password" class="form-control" name="pw" required="required">
+											<button class="btn btn-primary" type="submit" id="pw_submit">확인</button>
 										</form>
 
 									

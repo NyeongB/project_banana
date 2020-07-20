@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="	<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>

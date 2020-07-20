@@ -8,6 +8,7 @@ package com.banana.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.banana.user.IJoinDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LocDTO;
 import com.banana.util.Send;
+import com.banana.util.SessionInfo;
 
 @Controller
 public class UserController
@@ -396,5 +398,45 @@ public class UserController
 		}
 		
 		
-	
+		// 탈퇴 메인 
+		@RequestMapping(value = "/leaveapply.action", method =RequestMethod.GET)
+		public String leaveApply(Model model,HttpServletRequest request)
+		{
+			
+			return "/UserLeaveApply.jsp";
+		}
+		
+		// 탈퇴 의사 페이지
+		@RequestMapping(value = "/leavecheck.action", method =RequestMethod.GET)
+		public String leaveCheck(Model model,HttpServletRequest request)
+		{
+			// 비밀번호 맞는지 확인
+			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+			HttpSession session = request.getSession();
+	         
+	         SessionInfo info = (SessionInfo)session.getAttribute("user");
+	         // 아이디가져오기
+	         String id = info.getId();
+				/* System.out.println(id); */
+	         
+			String pwSession = dao.findPw2(id);
+			String pw = request.getParameter("pw");
+			/*
+			 * System.out.println("세션 pw : " + pwSession); System.out.println(pw);
+			 */
+			
+	        if(pw.equals(pwSession))
+	        	return "/UserLeaveCheck.jsp";
+	        else
+	        	return "/UserLeaveApply.jsp";
+		}
+		
+		// 탈퇴 처리 페이지
+		@RequestMapping(value = "/leave.action", method =RequestMethod.GET)
+		public String leave(Model model,HttpServletRequest request)
+		{
+			
+			return "/UserLeaveApplyAction.jsp";
+		}
+		
 }

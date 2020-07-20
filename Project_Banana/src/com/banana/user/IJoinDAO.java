@@ -44,8 +44,11 @@ public interface IJoinDAO
 	// 아이디찾기
 	public JoinDTO findId(JoinDTO dto);
 	
-	// 비밀번호 찾기
+	// 아이디, 패스워드질문, 패스워드유형 넣은 비밀번호 찾기
 	public String findPw(JoinDTO dto);
+	
+	// 마이바티스 오버로딩 지원안해서 만든, 아이디넣으면 비번나오는 메소드
+	public String findPw2(String id);
 	
 	//비밀번호 재설정
 	public void setPw(JoinDTO dto);

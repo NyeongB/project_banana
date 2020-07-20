@@ -108,6 +108,63 @@ p
 </style>
 
 
+<script type="text/javascript">
+	var state1 = 0;
+	var state2 = 0;
+	$(document).ready(function()
+	{	
+		$("#leaveBtn").click(function()
+		{
+			
+			if($('input:radio[name=reason]').is(':checked'))
+			{
+				//alert("라디오 체크");
+
+				//var test = $('input:radio[name=reason]').val();
+				var test =  $(":input:radio[name=reason]:checked").val();
+				
+				alert(test);
+				state1 = 1;
+			}
+			else
+			{
+				alert("라디오 버튼을 눌러주세요");
+				state1 = 0;
+				return;
+			}
+			
+			
+			if($('input:checkbox[name=checkBox]').is(':checked'))
+			{
+				alert("셀렉트박스 체크")
+				state2 = 1;
+			}
+			else
+			{
+				alert("셀렉트박스버튼을 눌러주세요.");
+				state2 = 0;
+				return;
+			}
+			
+			if(state1 == 1 && state2 ==1)
+			{
+				if(confirm("정말 삭제하시겠습니까?"))
+				{
+					alert("삭제");
+				}
+			}
+			
+		});
+		
+
+
+
+
+	});
+
+</script>
+
+
 </head>
 <body>
 <!-- Header  -->
@@ -143,24 +200,26 @@ p
 										&nbsp;&nbsp;<span class="warning">삭제를 원하시는 게시글이 있다면 반드시 탈퇴 전 삭제</span> 하시기 바랍니다.<br />
 										&nbsp;&nbsp;탈퇴 후에는 회원 정보가 삭제되어 본인 여부를 확인 할 수 있는 방법이 없어, 게시글을 임의로 삭제 해 드릴 수 없습니다.<br /> 		
 								</div>
+								form
 								<div class="text-center">
 									<p class="thick">탈퇴사유</p>
 									<form action="" class="form-inline">
 										<ul class="leave_reasons">
-											<li><label for="reason1" class="radio-inline"><input type="radio" class="warning thick form-control" id="reason1" name="reason"/>타 사이트의 유사 서비스 이용</label></li>
-											<li><label for="reason2" class="radio-inline"><input type="radio" class="warning thick form-control" id="reason2" name="reason"/>속도가 느림</label></li>
-											<li><label for="reason3" class="radio-inline"><input type="radio" class="warning thick form-control" id="reason3" name="reason"/>자주 이용하지 않음</label></li>
-											<li><label for="reason4" class="radio-inline"><input type="radio" class="warning thick form-control" id="reason4" name="reason"/>찾고자 하는 정보가 없음</label></li>
-											<li><label for="reason5" class="radio-inline"><input type="radio" class="warning thick form-control" id="reason5" name="reason"/>개인정보/사생활침해 사례 경험</label></li>										
+											<li><label for="reason1" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE1" name="reason"/>타 사이트의 유사 서비스 이용</label></li>
+											<li><label for="reason2" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE2" name="reason"/>개인정보/사생활침해 사례 경험</label></li>
+											<li><label for="reason3" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE3" name="reason"/>속도가 느림</label></li>
+											<li><label for="reason4" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE4" name="reason"/>개인정보 변경으로인한 재가입</label></li>
+											<li><label for="reason5" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE5" name="reason"/>자주 이용하지 않음</label></li>										
+											<li><label for="reason6" class="radio-inline"><input type="radio" class="warning thick form-control" value="LEAVE6" name="reason"/>찾고자 하는 정보가 없음</label></li>
 										</ul>
 									</form>
 								
 								</div>
 								<br />
-									<input type="checkbox" class="warning thick"/><label for="">안내사항을 모두 동의하였으며,이에 동의합니다. </label> 
+									<input type="checkbox" class="warning thick" name="checkBox"><label for="">안내사항을 모두 동의하였으며,이에 동의합니다. </label> 
 							</div>
 							<div class="text-center">
-								<button class="btn">회원탈퇴</button> 
+								<button class="btn" id="leaveBtn">회원탈퇴</button> 
 							</div>
 
 						</div> <!-- end center-block -->
