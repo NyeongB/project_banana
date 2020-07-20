@@ -20,9 +20,11 @@ String cp = request.getContextPath();
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-* {
+.body
+{
 	font-size: 16px;
-}
+	font-weight: 600;
+} 
 
 .Brix1 {
 	font-size: 30px;
@@ -34,11 +36,7 @@ strong {
 	font-size: 20px;
 }
 
-.credit {
-	margin-top: 20px;
-	margin-left: 70px;
-	margin-bottom: 60px;
-}
+
 
 ins {
 	font-size: 20px;
@@ -62,10 +60,9 @@ ins {
 
 .progress
 {
-	margin-top : 20px;
-	margin-left : auto;
-	margin-right : auto;
-	width: 40%;
+	height: 40px !important;
+
+	width: 100%;
 }
 
 .col-md-6>p
@@ -138,8 +135,14 @@ h5>span
 	height: 100px;
 
 }
+
+element.style
+{
+	width:100% !important;
+
+}
 .progress.yellow .progress-value
-{ background: #eea921; }
+{ background: var(--hover-color); }
 
 @keyframes animate-positive{
     0%{ width: 0; }
@@ -161,7 +164,7 @@ h5>span
 
 
 </head>
-<body>
+<body class="body">
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
@@ -185,8 +188,8 @@ h5>span
 				</div>
 
 				<div class="row">
-					<div class="col-md-12 credit">									
-						<h2 class="thick">바나나님</h2> 
+					<div class="col-md-12 credit text-center">									
+						<h2 class="thick">바나나의 </h2><p>신뢰등급</p>
 					</div>
 				</div>
 
@@ -216,9 +219,10 @@ h5>span
 							            <div class="progress yellow">
 							                <h3 class="progress-title">Brix</h3>
 							                <div class="progress-bar">
-							                    <div class="progress-value" style="width: ${brixMul }%;">${brix }</div>
+							                    <div class="progress-value" style="width: ${brixMul }%;">${brixMul}%</div>
 							                </div>
 							            </div>
+							            <p class="thick"> &#11088; 첫거래 시 0brix</p>
 							        </div>
 							    </div>
 							</div>
@@ -238,13 +242,10 @@ h5>span
 					<div class="center-block">
 						<div class="col-md-12">
 
-							<h4>○ 신용 등급 안내</h4>
+							<h4 class="thick">&#127820; Brix 안내</h4>
 							<br>
-							<p>▶ 회원 가입 시 : 0점</p>
-							<br>
-							<p>- 신용등급은 거래에 대한 신뢰도를 나타내는 것으로 거래 후 리뷰 작성을 통한 평점을 통해 계산된다.
-							<p>- 리뷰의 별 반개는 10점이며, 거래 후 거래 상대방이 평가해준 별 점수와 기존의 나의 당도를 더한 뒤
-								평균을 내어 갱신된다.</p>
+							<p>- Brix는 거래에 대한 신뢰도를 나타내는 것으로 거래 후 리뷰 작성을 통한 평점을 통해 계산된다.
+							<p>- 거래 후 거래 상대방이 평가해준 별 점수와 기존의 나의 당도를 더한 뒤 평균을 내어 갱신된다.</p>
 
 
 						</div>

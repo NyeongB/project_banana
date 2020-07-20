@@ -40,7 +40,9 @@
 			<td>
 			<div class="btn-group" role="group">
 	
-			<button class="btn btnDefault" type="button" id="openModalBtn" name="${rReplyLists.reply_code }" onclick="clickBtn(this)">
+			<button class="btn btnDefault" type="button" id="openModalBtn" name="${rReplyLists.reply_code }" 
+			<c:if test="${rReplyLists.reply eq '삭제된 댓글입니다.'}">disabled = "disabled"</c:if>
+			onclick="clickBtn(this)">
 				<span class="">댓글 삭제</span> 
 			</button>
 			

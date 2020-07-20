@@ -21,10 +21,11 @@ String cp = request.getContextPath();
 
 <style type="text/css">
 
-*
+.body
 {
 	font-size: 16px;
-}
+	font-weight: 600;
+} 
 
 .score1
 {
@@ -36,7 +37,7 @@ String cp = request.getContextPath();
 {
 	color: var(--hover-color);
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 800;
 }
 
 #green
@@ -126,7 +127,7 @@ ins
 
 
 </head>
-<body>
+<body class="body">
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
@@ -151,27 +152,41 @@ ins
 				
 				<div class="row">
 					<div class="col-md-12 activity">			
-						<h2 class="thick">${nickName } 님</h2> <p>활동등급 &nbsp;&nbsp;: ${grade }</p>
+						<h2 class="thick">${nickName } 님</h2> 
+						<p>활동등급 &nbsp;&nbsp;: ${grade }
+							<%-- <c:choose>							
+								<c:when test="${grade <= 1000}"> <img alt="" src="images/bananagreen_icon.png" id="green"> </c:when>
+								<c:when test="${grade >= 1001 || grade <= 5000}"><img alt="" src="images/banana_icon.png" id="bana1"> </c:when>
+								<c:when test="${grade >= 5001 || grade <= 12000}"> <img alt="" src="images/banana_icon2.png" id="bana2">  </c:when>
+								<c:when test="${grade >= 12001 || grade <= 22000 }"> <img alt="" src="images/banana_icon3.png" id="bana3"> </c:when>
+								<c:when test="${grade >= 22001 || grade <= 37000 }"> <img alt="" src="images/banana_icon4.png" id="bana4"> </c:when>
+								<c:when test="${grade >= 37001 }"> <img alt="" src="images/bananatree_icon.png" id="banatree"> </c:when>
+							</c:choose> --%>
+
+
+						
+						</p>
 					</div>
 				</div>
 			
 				<div class="row">
 					<div class="col-md-12 text-center">	
+						<h2 class="thick">활동점수</h2>
 						<p><span class="score1">${sum }</span>점</p>
 						<p>다음 등급인 <span class="score2">${nextGrade }</span>까지 <span class="score2">${leftPoint }</span>점 남았습니다.</p>
 					</div>
 				</div><br>
 				
-				<div class="center-block text-center">
+				<div class="center-block ">
 							<div class="col-md-12 ">
 
-									<h4>○ 활동 등급 안내</h4><br>
-									<p>▶ 초록 바나나 한 송이 : 회원 가입 ~ 1,000점   		<img alt="" src="images/bananagreen_icon.png" id="green"></p>
-									<p>▶ 노란 바나나 한 송이 : 1,001점 ~ 5000점    		<img alt="" src="images/banana_icon.png" id="bana1"></p>
-									<p>▶ 노란 바나나 두 송이 : 5,001점 ~ 12,000점   	<img alt="" src="images/banana_icon2.png" id="bana2"></p>
-									<p>▶ 노란 바나나 세 송이 : 12,001점 ~ 22,000점	<img alt="" src="images/banana_icon3.png" id="bana3"></p>
-									<p>▶ 노란 바나나 네 송이 : 22,001점 ~ 37,000점	<img alt="" src="images/banana_icon4.png" id="bana4"></p>
-									<p>▶ 바나나 나무 : 37,001점 ~					<img alt="" src="images/bananatree_icon.png" id="banatree"></p>
+									<p>&#128170; 활동 등급 안내</p><br>
+									<p>1. 초록 바나나 한 송이 : 회원 가입 ~ 1,000점  <img alt="" src="images/bananagreen_icon.png" id="green"></p>
+									<p>2. 노란 바나나 한 송이 : 1,001점 ~ 5000점    <img alt="" src="images/banana_icon.png" id="bana1"></p>
+									<p>3. 노란 바나나 두 송이 : 5,001점 ~ 12,000점   <img alt="" src="images/banana_icon2.png" id="bana2"></p>
+									<p>4. 노란 바나나 세 송이 : 12,001점 ~ 22,000점	<img alt="" src="images/banana_icon3.png" id="bana3"></p>
+									<p>5. 노란 바나나 네 송이 : 22,001점 ~ 37,000점	<img alt="" src="images/banana_icon4.png" id="bana4"></p>
+									<p>6. 바나나 나무 : 37,001점 ~					<img alt="" src="images/bananatree_icon.png" id="banatree"></p>
 							
 								
 							</div> 

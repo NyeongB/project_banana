@@ -38,7 +38,7 @@ public class MyCreditController
 		
 		// 신뢰도 %로 나타낸것
 		brixMul = dao.brix(b_user_code);
-		brixMul *= 25;
+		brixMul *= 20;
 		
 		model.addAttribute("brixMul", brixMul);
 		
