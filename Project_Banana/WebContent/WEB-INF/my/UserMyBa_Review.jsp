@@ -28,6 +28,11 @@ i
 {
 	margin-right: 30px;
 }
+.count
+{
+	color: var(--hover-color);
+	font-weight: bolder;
+}
 
 </style>
 
@@ -37,7 +42,7 @@ i
 <!-- Header  -->
 <div class="row Header">
    <div class="col-md-12">
-      <jsp:include page="Header.jsp"></jsp:include>   
+      <jsp:include page="../../Header.jsp"></jsp:include>   
    </div>
 </div>
 
@@ -48,7 +53,7 @@ i
 	<!-- content  -->
 	<div class="content">
 		<div class="col-md-2">
-			<jsp:include page="MenuUser.jsp"></jsp:include>
+			<jsp:include page="../../MenuUser.jsp"></jsp:include>
 		</div><!-- 왼쪽 MenuUser end  -->		
 		
 		
@@ -60,7 +65,8 @@ i
 			
 			<div class="row">
 			<div class="col-md-12 text-right">
-			<!-- search bar  -->
+				<h4 class="thick">후기 <span class="count">${count }</span> 개 </h4>
+			<!-- search bar 
 				<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
 				   <select name="" id="search">
 				   		<option value="">전체</option>
@@ -68,55 +74,36 @@ i
 				   		<option value="">함께사요.</option>
 				   		<option value="">빌려드립니다.</option>
 				   </select>
-				</div>
+				</div> -->
 			</div>
 		</div> <!-- select박스 end  -->		
 		<br>
 		
 		<!-- table -->
 		<div class="col-md-12">
-				<table class="table">
+				<table class="table" style="text-align: center">
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>후기사진</th>
-							<th>제목</th>
 							<th>내용</th>
 							<th>평점</th>
-							<th>작성자 닉네임</th>
+							<th>작성자</th>
 							<th>등록 날짜</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td><img alt="Bootstrap Image Preview"
-								src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"
-								style="width: 70px; height: 70px;"></td>
-							<td>자전거 잘 빌렸습니다~~</td>
-							<td>자전거가 튼튼하고 좋네요!!</td>
-							<td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
-							<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
-							<i class="fa fa-star-o" aria-hidden="true"></i></td>
-							<td>test1***</td>
-							<td>2020.06.30</td>
-						</tr>
+						<c:forEach var="reviewLists" items="${reviewList }" varStatus="status">
+							<tr>
+								<td>${status.count }</td>
+								<td>${reviewLists.content }</td>
+								<td>${reviewLists.score }
+								<!-- <i class="fa fa-star" aria-hidden="true"></i> --></td>
+								<td>${reviewLists.w_nickname }</td>
+								<td>${reviewLists.wDate }</td>
+							</tr>
+						</c:forEach>
 						
-						<tr>
-							<td>2</td>
-							<td><img alt="Bootstrap Image Preview"
-								src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"
-								style="width: 70px; height: 70px;"></td>
-							<td>자전거 굿굿굿</td>
-							<td>이번에도 잘 탔습니다!!</td>
-							<td>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</td>
-							<td>test222***</td>
-							<td>2020.07.01</td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div> <!-- table end -->
@@ -154,7 +141,7 @@ i
 <!-- footer  -->
 <div class="row">
    <div class="col-md-12">
-      <jsp:include page="Footer.jsp"></jsp:include>
+      <jsp:include page="../../Footer.jsp"></jsp:include>
    </div>
 </div>
 </body>
