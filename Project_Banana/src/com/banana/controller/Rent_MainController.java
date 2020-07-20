@@ -145,13 +145,29 @@ public class Rent_MainController
 		
 		// 렌트 게시물 insert 
 		@RequestMapping(value = "/r_postinsert.action", method = RequestMethod.GET)
-		 public String rentpostinsert(Model model) 
+		 public String rentpostinsert(Model model, HttpServletRequest request) 
 		 {
 			// insert !!!
 			String view = null;
 			
 			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+			ILoginDAO lda = SqlSession.getMapper(ILoginDAO.class);
+			/*
+			 INSERT INTO R_POST (R_POST_CODE, B_USER_CODE, R_CATE_CODE, LOC_CODE, TITLE, CONTENT, VIEWS , BOOKING_START_DATE, BOOKING_END_DATE, OFFER_TIME, OFFER_LOC, COLLECT_TIME, COLLECT_LOC, BRAND, COST, DEPOSIT)
+                                    VALUES('R_POST'||SEQ_R_POST.NEXTVAL, 'USER45', 'R_CATE78',  'LOC31', '전동 킥보드 빌릴 사람 있나요?', '전동 킥보드 빌릴 사람 구합니다~~'
+                                    , 55, TO_DATE('2020-07-21 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-08-19 20:00:00', 'YYYY-MM-DD HH24:MI:SS')
+                                    , '20:00', '홍대입구 1번출구', '20:00', '홍대입구 1번출구', '샤오미', 1000, 10000); 
+			*/
 			
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			LoginDTO dto = new LoginDTO();
+			dto.setId(id);
+			dto.setPw(pw);
+			
+			
+			String b_user_code = lda.general(dto);
 			
 			
 			

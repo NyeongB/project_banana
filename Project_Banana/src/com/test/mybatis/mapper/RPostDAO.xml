@@ -69,7 +69,7 @@
 
 	<!-- 상품등록 INSERT -->
 	<!-- <select id="rpostinsert" resultType="com.banana.rent.RPostDTO">
-	상품 등록 프로시저 필요 
+	
 	</select> -->
 
 

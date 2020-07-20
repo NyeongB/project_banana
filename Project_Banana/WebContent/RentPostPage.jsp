@@ -183,7 +183,7 @@ clear:both;
 								</div>
 								<div class="col-md-10">
 									<div class="Tinput">
-										<input type="text" class="form-control" id="text"
+										<input type="text" class="form-control" id="text" name="title"
 											placeholder="내용을 입력해주세요." />
 									</div>
 								</div>

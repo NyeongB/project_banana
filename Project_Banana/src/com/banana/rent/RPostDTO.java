@@ -4,8 +4,9 @@ public class RPostDTO
 {
 	
 	// 주요 속성 구성
-	private String wdate, title, nickname, offerloc, collectloc, cost, photo;
-	private String r_cate_code;
+	private String wdate, title, nickname, offerloc, collectloc, photo;
+	private String r_cate_code, b_user_code;
+	private int cost;
 	
 	
 
@@ -79,12 +80,12 @@ public class RPostDTO
 		this.collectloc = collectloc;
 	}
 
-	public String getCost() 
+	public int getCost() 
 	{
 		return cost;
 	}
 
-	public void setCost(String cost) 
+	public void setCost(int cost) 
 	{
 		this.cost = cost;
 	}

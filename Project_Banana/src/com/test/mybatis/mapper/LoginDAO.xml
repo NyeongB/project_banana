@@ -28,7 +28,7 @@
 	</select>	
 	
 	<select id="general" resultType="java.lang.String">			
-		SELECT NAME
+		SELECT B_USER_CODE
 		FROM JOIN
 		WHERE ID = #{id} AND PW = #{pw}
 	</select>	
