@@ -4,9 +4,9 @@ public class RPostDTO
 {
 	
 	// 주요 속성 구성
-	private String wdate, title, nickname, offerloc, collectloc, photo;
-	private String r_cate_code, b_user_code, r_post_code;
-	private int cost;
+	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
+	private String r_cate_code, b_user_code, r_post_code, locname1, locname2;
+	private int cost, deposit;
 	
 	
 
@@ -16,6 +16,83 @@ public class RPostDTO
 	
 	
 	
+
+	
+
+	
+
+	public String getLocname1() 
+	{
+		return locname1;
+	}
+
+	public void setLocname1(String locname1) 
+	{
+		this.locname1 = locname1;
+	}
+
+	public String getLocname2() 
+	{
+		return locname2;
+	}
+
+	public void setLocname2(String locname2) 
+	{
+		this.locname2 = locname2;
+	}
+	
+	public String getOffer_time()
+	{
+		return offer_time;
+	}
+
+	public void setOffer_time(String offer_time) 
+	{
+		this.offer_time = offer_time;
+	}
+
+	public String getCollect_time() 
+	{
+		return collect_time;
+	}
+
+	public void setCollect_time(String collect_time) 
+	{
+		this.collect_time = collect_time;
+	}
+
+	
+	public String getViews() 
+	{
+		return views;
+	}
+	
+	public void setViews(String views) 
+	{
+		this.views = views;
+	}
+
+	public String getBrand()
+	{
+		return brand;
+	}
+
+	public void setBrand(String brand) 
+	{
+		this.brand = brand;
+	}
+
+	public int getDeposit() 
+	{
+		return deposit;
+	}
+
+	public void setDeposit(int deposit) 
+	{
+		this.deposit = deposit;
+	}
+	
+
 	public String getB_user_code() 
 	{
 		return b_user_code;

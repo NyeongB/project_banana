@@ -24,8 +24,13 @@ public interface IRPostDAO
 	//중분류 카테고리 선택 시 메인페이지
 	public ArrayList<RPostDTO> rCatemMainList(RCateDTO dto);
 	
+	// 상세 페이지 클릭 시
+	public ArrayList<RPostDTO> rpostDetail(RPostDTO dto);
 	
+	
+	// 거래지역 불러오기
+	public ArrayList<RPostDTO> dealLoc(RPostDTO dto); 
 	
 	// 상품등록 insert
-	public int rpostinsert(RPostDTO dto);
+	//public int rpostinsert(RPostDTO dto);
 }

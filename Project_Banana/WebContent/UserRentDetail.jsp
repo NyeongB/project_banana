@@ -197,9 +197,8 @@ $().ready(function()
 			<div class="row">
 				<div class="col-md-12">
 					 <ol class="breadcrumb">
-           				<li class="breadcrumb-item"><a>Home</a></li>
-            			<li class="breadcrumb-item"><a>렌트</a></li>
-            			<li class="breadcrumb-item"><a>빌려드립니다.</a></li>
+           				<li class="breadcrumb-item"><a href="">Home</a></li>
+            			<li class="breadcrumb-item"><a href="r_main.action">렌트</a></li>
             			<li class="breadcrumb-item"><a>유아동/반려동물</a></li>
             			<li class="breadcrumb-item"><a>강아지 용품</a></li>
             			<li class="breadcrumb-item"><a>의류</a></li>
@@ -208,10 +207,11 @@ $().ready(function()
 				</div>
 			</div>
 			
+			<c:forEach var="rpostDetail" items="${rpostDetail }"> 
 			<!-- 조회수/날짜 -->
 			<div class="row">
 				<div class="col-md-12 text-right">
-					조회수 : 55  |  2020.06.25
+					조회수 : ${rpostDetail.views }  |  ${rpostDetail.wdate }
 				</div>
 			</div>
 			
@@ -228,7 +228,7 @@ $().ready(function()
 				
 				
 				<!--  -->					  
-				  
+				  <!--사진 불러오기  -->
 				
 				
 				<!--  -->
@@ -255,7 +255,7 @@ $().ready(function()
 								<div class="col-md-12">
 									
 									<div class="col-md-6 w1">
-										작성자 : 
+										작성자 : ${rpostDetail.nickname }
 									</div>
 									
 									<div class="col-md-6 text-right warning w2">
@@ -270,8 +270,8 @@ $().ready(function()
 							
 							<div class="row">
 								<div class="col-md-12">
-								 <h2>게시글 제목</h2>
-								 <p>1000원 (일)</p>
+								 <h2>${rpostDetail.title }</h2>
+								 <p>${rpostDetail.cost } 원 (일)</p>
 								 
 								</div>
 							</div>
@@ -279,14 +279,19 @@ $().ready(function()
 							<div class="row">
 								<div class="col-md-12">
 								 <ul>
-								 	<li>브랜드명</li>
-								 	<li>거래지역 : 서울시 마포구 서교동</li>
-								 	<li>수령장소 ＆ 수령시간 : oo편의점 앞  / 13시</li>
-								 	<li>반납장소 ＆ 반납시간 : oo편의점 앞  / 13시</li>
+								 	<li>브랜드명 : ${rpostDetail.brand }</li>
+								 	<c:forEach var="dealLoc" items="${dealLoc }">
+								 	<li>거래지역 : ${dealLoc.locname1 } ${dealLoc.locname2 }</li>
+								 	</c:forEach>
+								 	<li>수령장소 ＆ 수령시간 : ${rpostDetail.offerloc }  / ${rpostDetail.offer_time }</li>
+								 	<li>반납장소 ＆ 반납시간 : ${rpostDetail.collectloc } / ${rpostDetail.collect_time }</li>
 								 </ul>
 								
 								</div>
 							</div>
+							
+							
+							
 							
 							<div class="row">
 								<div class="col-md-12 option">
@@ -333,7 +338,8 @@ $().ready(function()
 				</div>
 			</div>  <!-- end  -->
 			
-			
+			</c:forEach>
+							
 			
 			
 			

@@ -72,6 +72,23 @@
 	
 	</select>
 
+
+	<!-- 거래지역 불러오기 -->
+	<select id="dealLoc" resultType="com.banana.rent.RPostDTO">
+	SELECT LOC_NAME AS LOCNAME1, (SELECT L.LOC_NAME
+	FROM R_POST R LEFT JOIN LOC L
+	ON R.LOC_CODE = L.LOC_CODE
+	WHERE R_POST_CODE = #{r_post_code}) AS LOCNAME2
+	FROM LOC
+	WHERE LOC_CODE    = (SELECT LOC_BCODE
+    	                 FROM LOC
+                         WHERE LOC_CODE = (SELECT LOC_CODE
+                                           FROM R_POST
+                                           WHERE R_POST_CODE = #{r_post_code}))
+	
+	
+	</select>
+	
 	<!-- 상품등록 INSERT -->
 	<!-- <select id="rpostinsert" resultType="com.banana.rent.RPostDTO">
 	

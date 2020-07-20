@@ -156,7 +156,7 @@ p
 	font-size: 13px;
 }
 
-/* a
+ a
 {
 	color:black;
 	font-family: bold;
@@ -164,21 +164,23 @@ p
 	font: NanumGothic;
 }
 
+
+
  a:link 
 { 
-	color: black; 
+	color: #084B8A; 
 	
 }
  
  a:visited
-{ 	color: black;
+{ 	color: #084B8A;
 }
  
 
 a:active
-{ 	color: black;
+{ 	color: #084B8A;
 	
-}  */
+}  
 
 .thumbnail
 {

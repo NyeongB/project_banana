@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IMyReviewDAO">
+	
+	<select id="reviewList" resultType="com.banana.my.MyReviewDTO">	
+	SELECT WDATE, CONTENT, SCORE, R_NICKNAME, W_NICKNAME, B_USER_CODE
+	FROM VIEW_REVIEW
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>	
+	
+	<select id="reviewCount" resultType="int">	
+	SELECT COUNT(*)
+	FROM VIEW_REVIEW
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>	
+
+	
+	
+</mapper>  
+

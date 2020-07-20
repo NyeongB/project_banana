@@ -33,10 +33,10 @@
 
 	
 	
-	function postDetail() 
+	function postDetail(obj) 
 	{
 		var a = obj.getAttribute("id");
-		$(location)attr.("href", "rpostdetailpage.action?r_post_code=" + a);
+		$(location).attr("href", "rpostdetailpage.action?r_post_code=" + a);
 		
 	}
 	

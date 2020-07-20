@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IMyCreditDAO">
+	
+	<select id="brix" resultType="int">
+	SELECT AVG(CREDIT_SCORE) AS CREDIT_SCORE
+	FROM CREDIT_SCORE
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>	
+	
+	
+	
+</mapper>  
+

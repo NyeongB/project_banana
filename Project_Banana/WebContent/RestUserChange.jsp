@@ -48,26 +48,30 @@ h1 {
 	font-weight: bold;
 }
 
-p {
-	margin-left: 120px;
-}
 
-.form-group {
-	
-	margin-left: 100px;
-	
-}
+
+
 
 #name
 {
-	padding-right: 80px;
+	padding-right: 20px;
+	
+	margin-left: 115px;
+	
+}
+
+#nameinput
+{
+	margin-left: 61px;
 }
 
 #tel
 {
 	padding-right: 55px;
+	margin-left: 115px;
 
 }
+
 
 
 #Answer, #pwQ
@@ -90,7 +94,14 @@ p {
 
 img
 {
-	width: 60px;
+	width: 50px;
+	margin-bottom: 20px;	
+	margin-top: 40px;
+}
+
+p
+{
+	margin-left: 120px;
 }
 
 #group1
@@ -151,7 +162,7 @@ img
 							<div class="col-md-12">
 								<div class="page-header text-center">
 									<img alt="Bootstrap Image"
-									src="images/icons8-bing-50.png">
+									src="images/banana_icon.png" >
 									<h1>휴면 계정 해제</h1>
 								</div>
 
@@ -161,7 +172,7 @@ img
 										<label> <input type="radio" name="restRadio"
 											id="telCheck" value="telO"> 회원 정보에 입력한 휴대번호로 인증
 										</label>
-										<p>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</p>
+										<p style="margin-left: 120px;">회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</p>
 									</div>
 								</div>
 								<br>
@@ -172,7 +183,7 @@ img
 									<div class="row form-group" id="group1">
 										<div class="row">
 										<label for="name" id="name"> 이름 </label> 
-										<input class="form-control" id="name" type="text" /> 
+										<input class="form-control" id="nameinput" type="text" style="width: 389px;"/> 
 									</div>
 										<br> 
 										
@@ -180,12 +191,12 @@ img
 										
 										<label for="" id="tel"> 전화번호 </label> 
 										
-										<select name="telList" class="form-control">
+										<select name="telList" class="form-control tel1">
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="02">02</option>
 										</select>
-											<input class="form-control" id="tel" type="text" />	
+											<input class="form-control" id="telinput" type="text" />	
 											<button class="btn btn-primary" type="submit">인증번호 받기</button>
 										
   									</div>
@@ -216,7 +227,7 @@ img
 										
 										<label for="" id="pwQ">비밀번호 질문</label> 
 										
-										<select name="pwQlist" id="pwQlist" class="form-control">
+										<select name="pwQlist" id="pwQlist" class="form-control" style="width: 287px;">
 											<option value="1">보물 1호는?</option>
 											<option value="2">가장 좋아하는 색은?</option>
 											
@@ -224,7 +235,7 @@ img
 										<br>
 										<label for="" id="Answer">답변</label> 
 										
-											<input class="form-control" id="tel" type="text" />	
+											<input class="form-control" id="an" type="text" />	
 											<button class="btn btn-primary" type="submit">제출 하기</button>
 										
   									

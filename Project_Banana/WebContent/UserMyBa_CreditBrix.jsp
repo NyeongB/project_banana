@@ -83,6 +83,79 @@ h5>span
 {
 	margin-left: 390px;
 }
+.demo{ background: #dad9d4; }
+.progress{
+    height: 40px;
+    background: #fff;
+    border-radius: 100px;
+    box-shadow: none;
+    margin-top: 40px;
+    position: relative;
+}
+.progress .progress-title{
+    width: 20%;
+    height: 100%;
+    background: #fff;
+    border-radius: 100px 0 0 100px;
+    float: left;
+    margin: 0;
+    font-size: 15px;
+    color: #000;
+    line-height: 40px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+}
+.progress .progress-title:after{
+    content: "";
+    border-left: 10px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    z-index: 1;
+}
+.progress .progress-bar{
+    width: 80%;
+    background: #fff;
+    box-shadow: none;
+    position: relative;
+}
+.progress .progress-value{
+    height: 100%;
+    border-radius: 0 100px 100px 0;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #fff;
+    animation: animate-positive 2s;
+}
+.pro-bar
+{
+	width: 100px;
+	height: 100px;
+
+}
+.progress.yellow .progress-value
+{ background: #eea921; }
+
+@keyframes animate-positive{
+    0%{ width: 0; }
+}
+@media only screen and (max-width: 480px){
+    .progress .progress-title{
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+}
+#bana1
+{
+	width: 40px;
+	height: 40px;
+
+}
 
 </style>
 
@@ -107,23 +180,21 @@ h5>span
 
 			<div class="col-md-8">
 				<div>
-					<h3>개인 신용 등급(당도)</h3>
+					<h3>개인 신뢰 등급(당도)</h3>
 					<hr>
 				</div>
 
 				<div class="row">
-					<div class="col-md-12 credit">
-						<p>
-							<ins>바나나</ins>
-							님의 신용등급
-						</p>
+					<div class="col-md-12 credit">									
+						<h2 class="thick">바나나님</h2> 
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-12 text-center">
+						<img alt="" src="images/banana_icon.png" id="bana1">
 						<p>
-							<span class="Brix1">88</span><strong>Brix</strong> / 100
+							<span class="Brix1">${brix }</span><strong>Brix</strong> / 5
 						</p>
 
 					</div>
@@ -133,20 +204,25 @@ h5>span
 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="progress">
-								<div class="progress-bar progress-bar-success"
-									role="progressbar" aria-valuenow="88" aria-valuemin="0"
-									aria-valuemax="100" style="width: 88%">
-									
-								</div>
-								
+							
+							<div class="col-md-3">
+							
 							</div>
-							<div class="col-md-3"></div>
 							<div class="col-md-6">
+							<div class="container pro-bar">
+							    <div class="row">
+							        <div class="col-md-6">
+							          			 
+							            <div class="progress yellow">
+							                <h3 class="progress-title">Brix</h3>
+							                <div class="progress-bar">
+							                    <div class="progress-value" style="width: ${brixMul }%;">${brix }</div>
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							</div>
 							
-							
-							<h5>0<span>100</span></h5>
-							<p>단위 Brix</p>
 							
 							</div>
 							
