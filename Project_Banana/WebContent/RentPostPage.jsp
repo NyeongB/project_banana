@@ -52,10 +52,7 @@ span {
 	width: 40px;
 }
 
-.Tinput {
-	height: 40px;
-	width: 650px;
-}
+
 
 .selectCate {
 	color: #d00926;
@@ -129,6 +126,15 @@ p {
 {
 	margin-top: 50px;
 	margin-bottom: 50px;
+}
+
+
+
+.of2
+{
+
+clear:both;
+
 }
 
 </style>
@@ -394,18 +400,18 @@ p {
 
 							<div class="col-md-12 form-inline offer">
 								
-								<div class="col-md-2">
+								<div class="col-md-2 ">
 									<div>
 										제공장소<span>*</span>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 of1">
 									<input type="text" class="form-control" id="text"
 										placeholder="클릭 시 지도가 나와야 함.." />
 								</div>
 								
 								
-								<div class="col-md-2">
+								<div class="col-md-2 of2">
 									<div>
 										제공시간<span>*</span>
 									</div>
@@ -450,7 +456,7 @@ p {
 								</div>
 								
 								
-								<div class="col-md-2">
+								<div class="col-md-2 of2">
 									<div>
 										회수시간<span>*</span>
 									</div>

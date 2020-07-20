@@ -44,8 +44,13 @@
 
 img
 {
-	width: 400px;
-	height: 450px;
+	/* width: 400px;
+	height: 450px;  */
+
+	width: 110%;
+	height : 450px;
+	
+
 }
 
 
@@ -132,6 +137,20 @@ textarea
 	
 }
 
+.photo
+{
+	padding-right: 20px;
+	
+}
+
+.mid
+{
+	margin-right: 10px;
+	padding: 20px;
+	
+	
+}
+
 </style>
 
 <script type="text/javascript">
@@ -200,7 +219,7 @@ $().ready(function()
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-5 photo">
 						 
 							<div class="row">
 								<div class="col-md-12 imgbox">
@@ -229,9 +248,9 @@ $().ready(function()
 							
 						</div>
 						
+						<div class="col-md-1"></div>
 						
-						
-						<div class="col-md-6">
+						<div class="col-md-6 mid">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-md-6">
@@ -304,6 +323,8 @@ $().ready(function()
 							
 						</div> <!-- end col-md-6 -->
 	
+	
+						<div class="col-md-1"></div>
 
 					</div>
 				</div>
