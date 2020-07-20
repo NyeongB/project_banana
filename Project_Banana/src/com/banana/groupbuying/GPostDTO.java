@@ -5,7 +5,7 @@ public class GPostDTO
 	
 	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,
 		   title, content, wDate,views, brand,start_date, end_date,photo;
-	private int cost, dis_cost, member_num;
+	private int cost, dis_cost, member_num,count;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	
 	//getter/setter 설정
@@ -168,6 +168,14 @@ public class GPostDTO
 	public void setNickname(String nickname)
 	{
 		this.nickname = nickname;
+	}
+	public int getCount()
+	{
+		return count;
+	}
+	public void setCount(int count)
+	{
+		this.count = count;
 	}
 	
 	

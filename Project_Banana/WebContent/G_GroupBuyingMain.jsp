@@ -119,18 +119,65 @@ p
 
 }
 
+.thumbnail
+{
+	 border-radius:3px;
+ 	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
+ 	 height: 210px;
+ 	 margin-right: 3px;
+} 
+
+.caption
+{
+	height: 150px;
+}
+
 </style>
 <script type="text/javascript">
 	
 	$().ready(function()
 	{
+		
+		
 		$("#postItem").click(function()
 		{
 			//alert("확인");
 			$(location).attr("href","groupbuyingpostoffer.action");
 		});
 		
+		
+		 $(".thumbnail").mouseover(function()
+		{
+			
+			
+			$(".thumbnail").css("background","#E6E6E6");
+		}); 
+		
+		$(".thumbnail").mouseout(function()
+		{
+			$(".thumbnail").css("background","none");
+		}); 
+		
+		
+		
+		
 	});
+	
+	
+	
+	
+	function goList(obj)
+	{
+		//alert("확인");	
+		//alert(obj.getAttribute("id"));
+		var a = obj.getAttribute("id");
+		//alert(a);
+		
+	
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
+		
+		
+	}
 
 </script>
 </head>
@@ -235,9 +282,9 @@ p
 					<div><span class="highlight">카테고리 추천 게시물</span></div>
 						<div class="row item_content">
 	                  	<c:forEach var="catelist" items="${gCateList }" varStatus="status" begin="1" end="5">
-	                     <div class="col-sm-2 col-md-2">
+	                     <div class="col-sm-2 col-md-2 box">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail">
+	                           <div class="thumbnail" id="${catelist.g_post_code }" onclick="goList(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
 	                           			${catelist.photo }
@@ -256,11 +303,11 @@ p
 				<div class="col-md-12">
 				<div><span class="highlight">방금 올라온 나눠사요</span></div>
 					
-	                  <div class="row item_content">
+	                  <div class="row item_content" >
 	                  	<c:forEach var="newlist" items="${gNewList }" varStatus="status" begin="1" end="5">
-	                     <div class="col-sm-2 col-md-2">
+	                     <div class="col-sm-2 col-md-2 box" id="boxnum">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail">
+	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
 	                           			${newlist.photo }
@@ -288,6 +335,8 @@ p
 
 		</div>
 	</div>
+</div>
+</div>
 </div>
 
 

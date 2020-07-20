@@ -22,7 +22,7 @@
 	
 	<!--공동구매 메인페이지에서 새로올라운 게시물  -->
 	<select id="gNewList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
+		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO,G.G_POST_CODE
 		FROM G_POST G  LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE
 		        LEFT JOIN G_PHOTO P
@@ -32,7 +32,7 @@
 	
 	<!--관심카테고리 기반 추천 게시물  -->
 	<select id="gCateList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO
+		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO,G.G_POST_CODE
 		FROM G_POST G  LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE
 		        LEFT JOIN G_PHOTO P
@@ -57,6 +57,20 @@
 		WHERE G_CATE_BCODE = #{g_cate_bcode} AND G_CATE_MCODE = #{g_cate_code} 	
 	</select>
 	
+	
+	<!--상품 상세 게시물 불러오기  -->
+	<select id="gPostDetailList" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT *
+		FROM VIEW_GPOST
+		WHERE G_POST_CODE = #{g_post_code}	
+	</select>
+	
+	<!--신청 인원 불러오기  -->
+	<select id="gApplyCount" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT COUNT(*) AS COUNT
+		FROM G_APPLY
+		WHERE G_POST_CODE =#{g_post_code}
+	</select>
 	
 	
 	
