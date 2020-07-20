@@ -2,10 +2,20 @@ package com.banana.my;
 
 public class UserReplyDTO
 {
-	private String title, wDate, reply;
+	private String title, wDate, reply, reply_code;
 	private int reply_like;
 	private String order;	// 최신순 과거순을 위한 변수
 	private String user_code;	// 유저 코드 
+	
+	
+	public String getReply_code()
+	{
+		return reply_code;
+	}
+	public void setReply_code(String reply_code)
+	{
+		this.reply_code = reply_code;
+	}
 	
 	// getter/ setter 구성
 	public String getTitle()

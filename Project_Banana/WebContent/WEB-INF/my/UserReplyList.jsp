@@ -1,8 +1,15 @@
+<%@page import="com.banana.my.UserReplyDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+%>
+<%
+
+	ArrayList<UserReplyDTO> list= (ArrayList<UserReplyDTO>)request.getAttribute("rReplyList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +33,7 @@ td
 
 }	
 
+
 </style>
 <script type="text/javascript">
 
@@ -39,11 +47,10 @@ td
 			url:'/Project_Banana/usergreplylist.action',
 			type:'get',
 			data:{order:params},
-			dataType:'json',
 			success: function(data)
 			{
 
-				document.getElementById("tbody").innerHTML = data;
+				$("#tbody").html(data);
 				
 				
 			},error:function(request,status,error)
@@ -54,6 +61,19 @@ td
 		}); 
 		
 	}
+	
+	function clickBtn(obj)
+	{
+		// 확인
+		/* console.log(obj); */
+		/* console.log(obj.getAttribute("name")); */
+		var str = obj.getAttribute("id");
+		
+		location.href="userreplydelete.action?reply_code=" + str;
+		
+		
+		
+	}
 </script>
 
 </head>
@@ -62,7 +82,7 @@ td
 <!-- Header  -->
 <div class="row Header">
 	<div class="col-md-12">
-		<jsp:include page="Header.jsp"></jsp:include>	
+		<jsp:include page="../../Header.jsp"></jsp:include>	
 	</div>
 </div>
 
@@ -71,7 +91,7 @@ td
 		<div class="content">
 			
 			<div class="col-md-2">
-			<jsp:include page="MenuUser.jsp"></jsp:include>
+			<jsp:include page="../../MenuUser.jsp"></jsp:include>
 			</div><!-- 왼쪽 MenuUser end  -->
 			
 		
@@ -99,7 +119,7 @@ td
 				<div class="row">
 					<div class="col-md-12">
 						<table class="table">
-							<thead class="reportTitle">
+							
 								<tr>
 									<th>번호</th>
 									<th>게시물 제목</th>
@@ -107,30 +127,30 @@ td
 									<th>작성 일자</th>
 									<th>좋아요</th>
 									<th>삭제</th>
-								</tr>
-								
-							</thead>
-						    <tbody id="tbody">
-						    <c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
-								<tr>
-									<td>${status.count }</td>									
-									<td>${rReplyLists.title }</td>
-									<td>${rReplyLists.reply }</td>
-									<td>${rReplyLists.wDate }</td>
-									<td>${rReplyLists.reply_like }</td>
-									<td>
-									<div class="btn-group" role="group">
+								</tr>			
+    								<tbody id="tbody">
+									    <c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
+											<tr>
+												<td>${status.count }</td>									
+												<td>${rReplyLists.title }</td>
+												<td>${rReplyLists.reply }</td>
+												<td>${rReplyLists.wDate }</td>
+												<td>${rReplyLists.reply_like }</td>
+												<td>
+	
+												<div class="btn-group" role="group">
+												<button class="btn btnDefault" type="button" id="${rReplyLists.reply_code }"
+													<c:if test="${rReplyLists.reply eq '삭제된 댓글입니다.'}">disabled = "disabled"</c:if>
+																name="${rReplyLists.reply_code }"  onclick="clickBtn(this)">
+													<span class=""></span> 댓글 삭제
+												</button>
+												
+												</div>
+												</td>
+											</tr>
+										</c:forEach>	
+									</tbody>	
 
-									<button class="btn btnDefault" type="button" id="openModalBtn">
-										<span class=""></span> 댓글 삭제
-									</button>
-									
-									</div>
-									</td>
-								</tr>
-							</c:forEach>	
-							</tbody>			
-							
 							
 						</table>
 						
@@ -179,7 +199,7 @@ td
 <!-- footer  -->
 <div class="row">
 	<div class="col-md-12">
-		<jsp:include page="Footer.jsp"></jsp:include>
+		<jsp:include page="../../Footer.jsp"></jsp:include>
 	</div>
 </div>
 

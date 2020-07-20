@@ -18,33 +18,31 @@ public class UserReplyController
 	@Autowired
 	private SqlSession SqlSession;
 	
+	// 초기에 불러오는 유저 댓글 리스트
 	@RequestMapping(value = "/userreplylist.action", method = RequestMethod.GET)
 	public String rReplyList(Model model)
 	{
-	
-		
+			
 		String view = null;
+		// 세션으로 받아올부분
 		String user_code = "USER49";
 		UserReplyDTO dto = new UserReplyDTO();
 		
-			
-		dto.setOrder("WDATE_ASC");		
+		// 최신순
+		dto.setOrder("WDATE_DESC");		
 		
-		dto.setUser_code(user_code);
-		
+		dto.setUser_code(user_code);		
 		
 		IUserReplyDAO dao = SqlSession.getMapper(IUserReplyDAO.class);
 		
-		//System.out.println(user_code);
-		model.addAttribute("rReplyList", dao.rReplyList(dto));
-	
+		model.addAttribute("rReplyList", dao.rReplyList(dto));	
 		
-		view = "/UserReplyListAjax.jsp";
+		view = "/WebContent/WEB-INF/my/UserReplyList.jsp";
 		
 		
 		return view;
 	}
-	
+	// Ajax 처리 시 불러오는 유저 리스트
 	@RequestMapping(value = "/usergreplylist.action", method = RequestMethod.GET)
 	public String rReplyList(Model model, String order)
 	{
@@ -55,32 +53,51 @@ public class UserReplyController
 		String user_code = "USER49";
 		
 		System.out.println(order);
-		UserReplyDTO dto = new UserReplyDTO();
+		UserReplyDTO dto = new UserReplyDTO();	
 		
 		if(Integer.parseInt(order) == 1) 
-		{
-			dto.setOrder("WDATE_DESC");			
+		{			
+			dto.setOrder("WDATE_DESC");	
 		}
 		else 
 		{
 			dto.setOrder("WDATE_ASC");
 		}
 		
-		dto.setUser_code(user_code);
-		
+		dto.setUser_code(user_code);		
 		
 		IUserReplyDAO dao = SqlSession.getMapper(IUserReplyDAO.class);
+
+		model.addAttribute("rReplyList", dao.rReplyList(dto));	
 		
-		//System.out.println(user_code);
-		model.addAttribute("rReplyList", dao.rReplyList(dto));
-	
-		
-		view = "/UserReplyListAjax.jsp";
+		view = "/WebContent/WEB-INF/my/UserReplyListAjax.jsp";
 		
 		
 		return view;
 	}
 	
+	@RequestMapping(value= "/userreplydelete.action", method = RequestMethod.GET)
+	public String replyDelete(Model model, String reply_code) 
+	{
+		String view = null; 
+		
+		IUserReplyDAO dao = SqlSession.getMapper(IUserReplyDAO.class);
+
+		if(reply_code.substring(0, 1).equals("R")) 
+		{
+			dao.rReplyDelete(reply_code);
+			
+		}else 
+		{
+			dao.gReplyDelete(reply_code);
+			
+		}
+		
+		view = "/WebContent/my/userreplylist.action";
+		
+		return view;
+		
+	}
 
 	
 	

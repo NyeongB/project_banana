@@ -28,8 +28,9 @@
 	out.print(jarr.toString());	 */
 
 %>
-<div id="rReplyLists">
+
 	<c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
+	
 		<tr>
 			<td>${status.count }</td>									
 			<td>${rReplyLists.title }</td>
@@ -39,13 +40,11 @@
 			<td>
 			<div class="btn-group" role="group">
 	
-			<button class="btn btnDefault" type="button" id="openModalBtn">
-				<span class=""></span> 댓글 삭제
+			<button class="btn btnDefault" type="button" id="openModalBtn" name="${rReplyLists.reply_code }" onclick="clickBtn(this)">
+				<span class="">댓글 삭제</span> 
 			</button>
 			
 			</div>
 			</td>
 		</tr>
-	</c:forEach>	
-
-</div>
+	</c:forEach>
