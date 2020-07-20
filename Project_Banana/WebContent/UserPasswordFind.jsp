@@ -128,7 +128,7 @@ img
 									src="images/banana_icon.png" >
 								</div>
 							</div>
-									
+							<form action="findpwcheck.action" >		
 							<div class="col-md-12 form-inline space">
 								
 								<div class="col-md-6">
@@ -136,7 +136,7 @@ img
 								</div>
 								
 								<div class="col-md-3">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="id">
 								</div>
 							
 							</div>
@@ -149,12 +149,11 @@ img
 									비밀번호 찾기 질문(*)
 								</div>	
 								<div class="col-md-4">	
-									<select id="passwordQnA" name="passwordQnA" class="form-control">
-										<option value="1">나의 보물 1호는?</option>
-										<option value="2">내가 태어난 곳은?</option>
-										<option value="3">졸업한 초등학교는?</option>
-										<option value="4">기억에 남는 여행지는?</option>
-										<option value="5">나의 별명은?</option>
+									<select id="passwordQnA"  class="form-control" name="question">
+										<option value="">선택</option>
+										<c:forEach var="list" items="${pwList}">
+										<option value="${list.pw_question_type_code  }">${list.pw_question }</option>
+										</c:forEach>
 									</select>
 								</div>
 							 
@@ -168,17 +167,17 @@ img
 								</div>
 								
 								<div class="col-md-3">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="answer">
 								</div>
 							
 							</div>
 							
 							<div class="col-md-12 spaceBtn">
-								<button class="btn btn-primary" type="button" id="next">비밀번호 찾기</button>
+								<button class="btn btn-primary" type="submit" id="submit">비밀번호 찾기</button>
   								<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>	
 							
 							</div>		
-								    
+							</form>	    
 
 							
 						</div> <!-- end center-block -->

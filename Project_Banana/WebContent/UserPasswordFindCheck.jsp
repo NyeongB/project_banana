@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Banana</title>
+<title>UserFindPasswordCheck.jsp</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -35,8 +35,8 @@
 	margin-right: auto;
 	padding-top : 20px;
 	background-color: #f4f4f4;
-	width: 50%;
-	height: 330px;
+	width: 60%;
+	height: 500px;
 	margin-bottom: 80px;	
 	border-radius: 30px;
 	
@@ -54,18 +54,11 @@ h2
 img
 {
 	width: 50px;
-	margin-bottom: 40px;	
+	margin-bottom: 60px;	
 	margin-top: 40px;
 }
 
-p
-{
-	font-size: 16px;
-	font-weight: bold;
-	margin-bottom: 50px;
-}
-
-#loginPage
+#postPassword
 {
 	margin-right: 10px;
 }
@@ -75,12 +68,31 @@ p
 	margin-left: 10px;
 }
 
-#loginPage, #mainList
+#postPassword, #mainList
 {
 	font-weight: bold;
 	width: 120px;
 }
 
+.space
+{
+	margin-bottom: 10px;
+	
+}
+
+.spaceBtn
+{
+	margin-top: 80px;
+}
+
+#err
+{
+	margin-left: 20px;
+	color: red;
+	text-align: right;
+	display:none;
+	
+}
 
 </style>
 
@@ -89,16 +101,33 @@ p
 
 	$(document).ready(function()
 	{
-		$("#loginPageBtn").click(function()
+		$("#pw2").keyup(function()
 		{
-			location.href="<%=cp%>/loginmain.action";
-		});
-	
+			if($("#pw").val() != $("#pw2").val())
+			{
+				$("#err").show();	
+			}
+			else
+			{
+				$("#err").hide();	
+			}
+		})
 		
-		$("#pwFindBtn").click(function()
+		
+		$("#postPassword").click(function()
 		{
-			location.href="<%=cp%>/userfindpw.action";
+			if($("#pw").val() != $("#pw2").val())
+			{
+				alert("비밀번호가 일치하지않습니다.");
+				return;
+			}
+			else
+			{
+				$("#pwset").submit();
+			}
 		});
+		
+		
 	});
 
 </script>
@@ -133,13 +162,51 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image"
 									src="images/banana_icon.png" >
-									<p><span>${join.name }</span>님의 아이디 정보는 <span>${join.id }</span>입니다.</p>
-									
-								    <button class="btn btn-primary" type="button" id="loginPageBtn">로그인 하기</button>
-  									<button class="btn btn-primary" type="button" id="pwFindBtn">비밀번호 찾기로 가기</button>
 								</div>
+							</div>
+							
+							<form action="pwset.action" id="pwset">
+									
+							<div class="col-md-12 form-inline space">
+								
+								<div class="col-md-6">
+									새로 등록할 비밀번호(*)
+								</div>
+								
+								<div class="col-md-3">
+									<input type="text" class="form-control" id="pw" name="pw" required="required">
+								</div>
+							
+							</div>
+							
+							<div class="col-md-12 form-inline space">
+								
+								<div class="col-md-6">
+									비밀번호 확인(*)
+								</div>
+								
+								<div class="col-md-3">
+									<input type="text" class="form-control" id="pw2" required="required">
+									
+								</div>
+								
+								<div class="col-md-3">
+									<span id="err">불일치</span>
+								</div>
+							
+							</div>
+							
+							<input type="text" style="display: none;" name="id" value="${id }">
+							
+							<div class="col-md-12 spaceBtn">
+								<button class="btn btn-primary" type="button" id="postPassword">비밀번호 설정</button>
+  								<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>	
+							
+							</div>		
+							
+							</form>	    
 
-							</div> 
+							
 						</div> <!-- end center-block -->
 					</div>  <!-- col-md-8 end -->
 					

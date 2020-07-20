@@ -60,5 +60,15 @@
 	SELECT NICKNAME FROM JOIN
 	</select> 
 	
+	<select id="findPw" resultType="java.lang.String">
+	SELECT PW
+	FROM JOIN
+	WHERE ID = #{id} and PW_ANSWER = #{pw_answer} and PW_QUESTION_TYPE_CODE = #{pw_question_type_code}
+	</select> 
+	
+	<update id="setPw">
+	UPDATE JOIN SET PW=#{pw} WHERE ID=#{id}
+	</update>
+	
 </mapper>  
 

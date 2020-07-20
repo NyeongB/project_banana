@@ -43,4 +43,10 @@ public interface IJoinDAO
 	
 	// 아이디찾기
 	public JoinDTO findId(JoinDTO dto);
+	
+	// 비밀번호 찾기
+	public String findPw(JoinDTO dto);
+	
+	//비밀번호 재설정
+	public void setPw(JoinDTO dto);
 }

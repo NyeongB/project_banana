@@ -315,12 +315,86 @@ public class UserController
 			return view;
 		}
 		
-		@RequestMapping(value = "/userfind.action", method =RequestMethod.GET)
-		public String userFind()
+		// 아이디찾기 메인 
+		@RequestMapping(value = "/userfindid.action", method =RequestMethod.GET)
+		public String userFindId()
 		{
 			
 			
 			return "/UserFindId.jsp";
 		}
+		
+		// 비밀번호찾기 메인
+		@RequestMapping(value = "/userfindpw.action", method =RequestMethod.GET)
+		public String userFindPw(Model model)
+		{
+			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+			
+			model.addAttribute("pwList", dao.pwList());
+			
+			return "/UserPasswordFind.jsp";
+		}
+		
+		
+		@RequestMapping(value = "/findpwcheck.action", method =RequestMethod.GET)
+		public String findPwCheck(Model model,HttpServletRequest request)
+		{
+			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+			
+			model.addAttribute("pwList", dao.pwList());
+			
+			String id = request.getParameter("id");
+			String question = request.getParameter("question");
+			String answer = request.getParameter("answer");
+			
+			
+			  System.out.println(id); System.out.println(question);
+			  System.out.println(answer);
+			 
+			JoinDTO dto = new JoinDTO();
+			dto.setId(id);
+			dto.setPw_question_type_code(question);
+			dto.setPw_answer(answer);
+			String pw = dao.findPw(dto);
+			//System.out.println(pw);
+			
+			if(pw==null)
+			{
+				// 정보를 찾을수없어서 다시 입력받게함
+				return "/UserPasswordFind.jsp";
+			}
+			
+			model.addAttribute("id", id);
+			
+			return "/UserPasswordFindCheck.jsp";
+		}
+		
+		
+
+		@RequestMapping(value = "/pwset.action", method =RequestMethod.GET)
+		public String pwset(Model model,HttpServletRequest request)
+		{
+			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+			
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			JoinDTO dto = new JoinDTO();
+			
+			dto.setId(id);
+			dto.setPw(pw);
+			
+			  System.out.println(id); 
+			  
+			  dao.setPw(dto);
+			 
+			
+			
+			
+			return "/UserPasswordComplete.jsp";
+		}
+		
+		
 	
 }
