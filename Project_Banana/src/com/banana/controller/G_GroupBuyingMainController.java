@@ -123,7 +123,7 @@ public class G_GroupBuyingMainController
 		
 			
 			
-			view = "/G_GroupBuyingJumunComfirm.jsp";
+			view = "/G_GroupBuyingJumunConfirm.jsp";
 			
 			
 			return view;
