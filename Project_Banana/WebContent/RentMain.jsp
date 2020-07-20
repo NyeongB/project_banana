@@ -36,6 +36,12 @@
 
 
 <style type="text/css">
+.wr
+{
+	margin-bottom: 10px;
+}
+
+
 .price
 {
 	color:var(--hover-color);
@@ -88,14 +94,7 @@
 	color:var(--hover-color);
 }
 
-.file-field.big .file-path-wrapper 
-{
-	height: 3.2rem; 
-}
-.file-field.big .file-path-wrapper .file-path
-{
-	height: 3rem;
-}
+
 
 .form-control
 {
@@ -109,24 +108,8 @@ p
 }
 
 
-.my-custom-scrollbar 
-{
-	position: relative;
-	height: 150px;
-	overflow: auto;
-}
 
-.table-wrapper-scroll-y
- {
-	display: block;
-}
 
-.category
-{
-	 margin-top: 30px; 
-	 margin-bottom: 30px; 
-
-}
 .container-fluid .row
 {
 	margin-top:15px;
@@ -174,6 +157,11 @@ b
 	margin-bottom: 70px;
 }
 
+.fas
+{
+	font-size: 2em;
+	color:var(--hover-color);
+}
 
 
 </style>
@@ -206,113 +194,15 @@ b
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="cate_icons text-center">
-						<li><div><a href=""><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
-						<li><div><a href=""><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
-						<li><div><a href=""><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
-						<li><div><a href=""><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
+						<li><div><a href="r_catemain.action?bid=R_CATE1"><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
+						<li><div><a href="r_catemain.action?bid=R_CATE2"><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
+						<li><div><a href="r_catemain.action?bid=R_CATE3"><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
+						<li><div><a href="r_catemain.action?bid=R_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
 					</ul>
 				</div>
 			</div>
 
-				<div class="col-md-12 category" > 
-					
-					<div class="col-md-4">
-						
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-							  <table class="table table-bordered mb-0">
-						
-							    <tbody>
-							      <tr>
-							        <td>생활용품</td>
-							       
-							      </tr>
-							      <tr>
-							        <td>스포츠</td>						      
-							      </tr>
-							      <tr>
-							        <td>유아동/반려동물</td>
-							      </tr>
-							      <tr>
-							        <td>디지털/가전/가구</td>
-							      </tr>
-							      
-							    </tbody>
-							  </table>
-							
-						</div>		
-					</div><!-- end col-md-4 -->
-					
-					
-					
-					<div class="col-md-4">
-					
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-							  <table class="table table-bordered mb-0">
-							   
-							    <tbody>
-							      <tr>
-							       
-							        <td>잡화</td>
-							        
-							      </tr>
-							      <tr>
-							        <td>유아동용품</td>
-							       
-							      </tr>
-							      <tr>
-							        <td>기저귀/이유식</td>						      
-							      </tr>
-							      <tr>
-							        <td>강아지 용품</td>
-							      </tr>
-							      <tr>
-							        <td>고양이 용품</td>
-							      </tr>
-							    </tbody>
-							  </table>
-							
-							</div>		
-					</div><!-- end col-md-4 -->
-					
-					
-					
-					<div class="col-md-4">
-					
-						
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-							  <table class="table table-bordered mb-0">
-							   
-							    <tbody>
-							      <tr>
-							       
-							        <td>목줄</td>
-							        
-							      </tr>
-							      <tr>
-							        <td>사료</td>
-							       
-							      </tr>
-							      <tr>
-							        <td>간식</td>						      
-							      </tr>
-							      <tr>
-							        <td>의류</td>
-							      </tr>
-							      <tr>
-							        <td>장난감</td>
-							      </tr>
-	
-							    </tbody>
-							  </table>
-								
-						</div>
-				
-				</div><!--end col-md-4  -->
-				
-			</div>	<!--end col-md-12  -->
+			
 		
 			<div class="row">
 				<div class="col-md-12">
@@ -485,10 +375,11 @@ b
 							
 							<!-- 2열 1번 -->
 							
+							<c:forEach var="rCateList" items="${rCateList }" varStatus="status" begin="1" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
-							  <h4 class="thick"><span class="line">1</span></h4>
+							  <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
+	                                ${rCateList.photo }
 	                                   
 	                                    <div class="caption">
 	                                  			<div class="col-md-12 text-right">
@@ -496,111 +387,18 @@ b
 	                                    		</div>
 	                  
 	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
+	                                        		<small>${rCateList.nickname }</small>
 	                                       	 </div>
 	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
+	                                      <b>${rCateList.title }</b>
+	                                      <p>${rCateList.offerloc }/${rCateList.collectloc }</p>
+	                                      <span class="price"><fmt:formatNumber value="${rCateList.cost }" ></fmt:formatNumber></span>원(1일)                    
 	                                    </div>
 	                                </div>
 	                   		  </div>
+							</c:forEach>
 							
-							
-							<!-- 2열 2번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">2</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                    <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 2열 3번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">3</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                     <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 2열 4번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">4</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                      <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-	                   		  
-	                   		  
-	                   		  
-							<!-- 2열 5번 -->
-							   <div class="col-sm-2 col-md-2">
-							   <h4 class="thick"><span class="line">5</span></h4>
-	                           		<div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                   
-	                                     <div class="caption">
-	                                  			<div class="col-md-12 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
-	                  
-	                                        	<div class="col-md-12 text-right wr">
-	                                        		<small>글쓴이</small>
-	                                       	 </div>
-	  
-	                                      <b>오레오 빌려드립니다..</b>
-	                                      <p>홍대입구역/홍대입구역</p>
-	                                      <span class="price">9900</span>원(1일)                    
-	                                    </div>
-	                                </div>
-	                   		  </div>
-
+						
 							<div class="col-md-1"></div>
 
 						
@@ -641,13 +439,21 @@ b
 	  
 	                                      <b>${rnewList.title }</b>
 	                                      <p>${rnewList.offerloc }/${rnewList.collectloc }</p>
-	                                      <span class="price">${rnewList.cost }</span>원(1일)                    
+	                                      
+	                                      <!-- 가격!! -->  
+	                                      <span class="price">
+	                                      	${rnewList.cost }
+	                                      </span>원(1일)                    
+	                                    
+	                                    
 	                                    </div>
 	                                </div>
 	                   		  </div>
 							</c:forEach>
 							
-							<div class="col-md-1"></div>
+							<div class="col-md-1">
+							
+							</div>
 							
 							
 						</div>

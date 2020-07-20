@@ -1,5 +1,7 @@
 package com.banana.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.banana.admin.AdminAccountDTO;
+import com.banana.admin.IAdminAccountDAO;
 import com.banana.rent.IRPostDAO;
+import com.banana.rent.RCateDTO;
 import com.banana.user.ILoginDAO;
 import com.banana.user.LoginDTO;
 
@@ -21,10 +26,58 @@ public class Rent_MainController
 			@Autowired
 			private SqlSession SqlSession;
 
+			// 중분류 불러오는 메소드
+			@RequestMapping(value = "/r_catemain.action", method = RequestMethod.GET)
+			public String cateList(Model model, String bid)
+			{
+				String view = null; 
+				
+				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+				
+				RCateDTO dto = new RCateDTO();
+				dto.setR_cate_bcode(bid);
+				
+				model.addAttribute("cateList", dao.cateList(dto));
+				model.addAttribute("rCateMainList", dao.rCateMainList(dto));
+				
+			
+				
+				view = "/R_CateMain.jsp";
+				
+				
+				return view;
+			}
+			
+		
+		  // 소분류 불러오는 메소드(R_CateMain에서 R_CateSMain으로 넘어감)
+		 
+		  @RequestMapping(value = "/r_catesmain.action", method = RequestMethod.GET)
+		  public String cateList(Model model, String bid, String mid) 
+		  { 
+			  String view = null;
+		  
+			  IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+			  
+			  RCateDTO dto = new RCateDTO();
+			  dto.setR_cate_bcode(bid);
+			  dto.setR_cate_code(mid);
+			  
+			  model.addAttribute("cateMList", dao.cateMList(dto));
+			  model.addAttribute("cateList", dao.cateList(dto));
+			  model.addAttribute("rCatemMainList", dao.rCatemMainList(dto));
+			  
+			  view = "/R_CateSMain.jsp";
+		  
+		  
+		  return view; 
+		  }
 			
 			
 			
-		// 빌려드립니다. 실시간 게시글
+			
+			
+			
+		//  관심 카테고리별 추천 게시글/빌려드립니다. 실시간 게시글
 		@RequestMapping(value = "/r_main.action", method = RequestMethod.GET)
 		 public String rentMain(Model model) 
 		 {
@@ -34,9 +87,7 @@ public class Rent_MainController
 			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 			
 			model.addAttribute("rnewList", dao.rnewList());
-			
-			
-			
+			model.addAttribute("rCateList", dao.rCateList());
 			
 			view = "/RentMain.jsp";
 			
@@ -100,8 +151,6 @@ public class Rent_MainController
 			String view = null;
 			
 			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
-			
-			model.addAttribute("rnewList", dao.rnewList());
 			
 			
 			

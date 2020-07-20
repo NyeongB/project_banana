@@ -6,6 +6,57 @@
   
 <mapper namespace="com.banana.rent.IRPostDAO">
 
+	<!--대분류 카테고리 선택  -->
+	<select id="cateList" resultType="com.banana.rent.RCateDTO">
+		SELECT R_CATE_BCODE, CATE_NAME, R_CATE_CODE
+		FROM R_CATE
+		WHERE R_CATE_BCODE = #{r_cate_bcode} AND R_CATE_MCODE IS NULL 
+	</select>
+	
+	<!--소분류 카테고리 선택 -->
+	<select id="cateMList" resultType="com.banana.rent.RCateDTO">
+		SELECT R_CATE_CODE, CATE_NAME
+		FROM R_CATE
+		WHERE R_CATE_BCODE = #{r_cate_bcode}  AND R_CATE_MCODE = #{r_cate_code}
+	</select>
+	
+	
+	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->
+	<select id="rCateMainList" resultType="com.banana.rent.RPostDTO">
+		SELECT *
+		FROM VIEW_RCATEMAINLIST
+		WHERE  R_CATE_BCODE=  #{r_cate_bcode}
+	</select>
+	
+	
+	
+	<!--중분류 카테고리 눌렀을 때 실시간 게시물  -->
+	<select id="rCatemMainList" resultType="com.banana.rent.RPostDTO">
+		SELECT *
+		FROM VIEW_RCATEMAINLIST
+		WHERE R_CATE_BCODE = #{r_cate_bcode} AND R_CATE_MCODE = #{r_cate_code} 
+	</select>
+	
+	
+
+	<!--관심카테고리 기반 추천 게시물  -->
+	<select id="rCateList" resultType="com.banana.rent.RPostDTO">
+		SELECT DISTINCT RP.TITLE , J.NICKNAME, FIRST_VALUE(PT.PHOTO) OVER (PARTITION BY PT.R_POST_CODE ORDER BY PT.R_PHOTO_CODE)AS PHOTO, RP.OFFER_LOC AS OFFERLOC, RP.COLLECT_LOC AS COLLECTLOC, RP.COST
+		FROM R_POST RP LEFT JOIN JOIN J
+		ON RP.B_USER_CODE = J.B_USER_CODE
+		LEFT JOIN R_PHOTO PT
+		ON RP.R_POST_CODE = PT.R_POST_CODE
+		LEFT JOIN R_CATE C 
+		ON RP.R_CATE_CODE = C.R_CATE_CODE
+		WHERE C.R_CATE_BCODE = (SELECT R_CATE_CODE 
+                        FROM R_CATE_INPUT
+                        WHERE B_USER_CODE = 'USER36')
+	</select>
+	
+	
+	
+	
+	<!-- 빌려드립니다. 실시간 게시물 -->
 	<select id="rnewList" resultType="com.banana.rent.RPostDTO">
 	SELECT DISTINCT RP.WDATE, RP.TITLE, J.NICKNAME, OFFER_LOC AS OFFERLOC, COLLECT_LOC AS COLLECTLOC, COST , FIRST_VALUE(PT.PHOTO)OVER (PARTITION BY PT.R_POST_CODE ORDER BY PT.R_PHOTO_CODE) AS PHOTO       
 	FROM R_POST RP LEFT JOIN JOIN J
@@ -16,6 +67,10 @@
 	</select>
 
 
+	<!-- 상품등록 INSERT -->
+	<!-- <select id="rpostinsert" resultType="com.banana.rent.RPostDTO">
+	상품 등록 프로시저 필요 
+	</select> -->
 
 
 

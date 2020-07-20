@@ -2,7 +2,34 @@ package com.banana.rent;
 
 public class RCateDTO
 {
-	private String r_cate_code, r_cate_bcode, r_cate_mcode, cate_name;
+	private String mid, bid;
+	private String r_cate_code, r_cate_bcode, cate_name;
+
+	
+	
+	
+	
+	
+	
+	public String getMid() 
+	{
+		return mid;
+	}
+
+	public void setMid(String mid) 
+	{
+		this.mid = mid;
+	}
+
+	public String getBid() 
+	{
+		return bid;
+	}
+
+	public void setBid(String bid) 
+	{
+		this.bid = bid;
+	}
 
 	public String getR_cate_code()
 	{
@@ -24,15 +51,6 @@ public class RCateDTO
 		this.r_cate_bcode = r_cate_bcode;
 	}
 
-	public String getR_cate_mcode()
-	{
-		return r_cate_mcode;
-	}
-
-	public void setR_cate_mcode(String r_cate_mcode)
-	{
-		this.r_cate_mcode = r_cate_mcode;
-	}
 
 	public String getCate_name()
 	{

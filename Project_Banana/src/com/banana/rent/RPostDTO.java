@@ -5,15 +5,32 @@ public class RPostDTO
 	
 	// 주요 속성 구성
 	private String wdate, title, nickname, offerloc, collectloc, cost, photo;
+	private String r_cate_code;
+	
+	
 
 	
 	// getter / setter 구성
+	
+	
+	
+	public String getR_cate_code() 
+	{
+		return r_cate_code;
+	}
+
+	public void setR_cate_code(String r_cate_code) 
+	{
+		this.r_cate_code = r_cate_code;
+	}
 	
 	
 	public String getWdate() 
 	{
 		return wdate;
 	}
+
+	
 
 	public void setWdate(String wdate) 
 	{
