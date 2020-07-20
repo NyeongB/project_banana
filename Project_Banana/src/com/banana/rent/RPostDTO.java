@@ -5,7 +5,9 @@ public class RPostDTO
 	
 	// 주요 속성 구성
 	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
-	private String r_cate_code, b_user_code, r_post_code, locname1, locname2;
+	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
+	
+
 	private int cost, deposit;
 	
 	
@@ -17,7 +19,15 @@ public class RPostDTO
 	
 	
 
-	
+	public String getContent() 
+	{
+		return content;
+	}
+
+	public void setContent(String content) 
+	{
+		this.content = content;
+	}
 
 	
 

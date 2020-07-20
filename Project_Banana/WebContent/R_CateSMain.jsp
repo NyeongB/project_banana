@@ -127,11 +127,38 @@ td, tbl2
 
 .thumbnail
 {
-	margin: 10px;
-	height: 270px;
-	
+	 border-radius:3px;
+ 	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
+ 	 height: 210px;
+ 	 margin-right: 3px;
+} 
+
+
+ a
+{
+	color:black;
+	font-family: bold;
+	text-decoration: none !important;
+	font: NanumGothic;
 }
 
+
+
+ a:link 
+{ 
+	color: #084B8A; 
+	
+}
+ 
+ a:visited
+{ 	color: #084B8A;
+}
+ 
+
+a:active
+{ 	color: #084B8A;
+	
+}  
 
 
 .wr
@@ -210,6 +237,21 @@ function liColor(obj)
 	document.getElementById("#${catelists.r_cate_code }").style.color = "red";
 	
 	
+}
+
+
+function mouseon(obj)
+{
+	
+	var id = obj.getAttribute("id")
+	document.getElementById(id).style.background = "#E6E6E6";
+}
+
+function mouseout(obj)
+{
+	var id = obj.getAttribute("id")
+	
+	document.getElementById(id).style.background = "none";
 }
 
 </script>
@@ -332,7 +374,7 @@ function liColor(obj)
 							<c:if test="${ status.count%5 eq 0 }" ></c:if>
 							
 							  <div class="col-sm-2 col-md-2 thblock">
-	                           		<div class="thumbnail">
+	                           		<div class="thumbnail" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                              <!--    <img src="images/oz.jpg" > -->
 	                                    ${rlists.photo }
 	                                   

@@ -358,9 +358,9 @@ $().ready(function()
 			
 			<div class="row">
 				<div class="col-md-12 detail">
-				
-					상세정보.....
-				
+				<c:forEach var="rpostDetail" items="${rpostDetail }">
+					${rpostDetail.content }
+				</c:forEach>
 				</div>
 			</div>
 			

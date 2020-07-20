@@ -138,7 +138,19 @@ clear:both;
 }
 
 </style>
+<script type="text/javascript">
+	
+	$().ready(function() 
+	{
+			$("#postadd").click(function() 
+			{
+				$("#rpost").submit();
+				
+			})
+	});
+	
 
+</script>
 
 
 
@@ -452,7 +464,7 @@ clear:both;
 								</div>
 								<div class="col-md-4">
 									<input type="text" class="form-control" id="text"
-										placeholder="클릭 시 지도가 나와야 함.." />
+										placeholder="클릭 시 지도가 나와야 함.."/>
 								</div>
 								
 								
@@ -566,7 +578,7 @@ clear:both;
 						
 							<div class="col-md-12 text-right postBtn">
 								<button type="button" class="btn btn-default">취소하기</button>
-								<button type="button" class="btn btn-default">게시물 등록</button>
+								<button type="button" class="btn btn-default" id="postadd">게시물 등록</button>
 								<input type="hidden" value="<%=id %>">
 								<input type="hidden" value="<%=pw %>">
 							</div>
