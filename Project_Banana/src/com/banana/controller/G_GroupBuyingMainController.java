@@ -106,6 +106,28 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 		
+	  //주문상세 확인 페이지
+	  @RequestMapping(value = "/groupbuyingjumunconfirm.action", method =RequestMethod.GET)
+		public String GroupBuyingJumunConfirm(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			
+			String code = request.getParameter("postcode"); 
+			//System.out.println(code);
+			GPostDTO dto = new GPostDTO();
+			dto.setG_post_code(code);
+			
+			model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
+		
+			
+			
+			view = "/G_GroupBuyingJumunComfirm.jsp";
+			
+			
+			return view;
+		}
 	 
 	  
 	

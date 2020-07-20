@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -61,11 +62,12 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12 thick">
-							<h3 class="thick">
+							<h3 class="thick" >
 								주문확인
 							</h3>
 						</div>
 					</div>
+					<c:forEach var="lists" items="${gPostConfirmList }">
 					<div class="row">
 						<div class="col-md-12 jumun_confirm">
 							<div class="col-md-4">
@@ -74,12 +76,13 @@
 							<div class="col-md-8">
 
 								<ul class="jumun_list">
-									<li><h3 class="thick">오레오오즈 마니아들 3분 모셔봅니다.</h3></li>
-									<li>분배날짜 : 6월 30일</li>
-									<li>분배시간 : 19시</li>
-									<li>분배장소 : 일산역</li>
-									<li>신청수량 : 500g</li>
-									<li>공구금액 : 2500원</li>
+								
+									<li><h3 class="thick">${lists.title }</h3></li>
+									<li>분배일시 : ${lists.bun_date }</li>
+									<li>분배장소 : ${lists.loc_name }</li>
+									<li>신청수량 : 1개</li>
+									<li>공구금액 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
+								
 								</ul>
 							</div>
 						</div>
@@ -91,7 +94,7 @@
 					<div class="line"></div>
 					<h3 class="thick">결제 예정 금액</h3>
 						<ul>
-							<li>주문 합계 : 2500원</li>
+							<li>주문 합계 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
 							<li>보유 포인트 : 1000원</li>
 							<li>부족한 포인트 : 1500원</li>
 							<li>※ 포인트 잔액이 부족하여 결제 할 수 없습니다.</li>
@@ -99,6 +102,7 @@
 				
 				</div>
 			</div>
+			</c:forEach>
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<button class="btn">포인트충전</button>

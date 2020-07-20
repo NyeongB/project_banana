@@ -169,10 +169,19 @@ $().ready(function()
 	  wrap: true
 	
 	});
+	
+	
 
 	
 	
 });
+
+function orderItem(obj)
+{
+	var a = obj.getAttribute("id");
+	
+	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
+}
 
 </script>
 
@@ -293,7 +302,7 @@ $().ready(function()
 									<li>원가 : ${lists.cost }원 / 할인가 : ${lists.dis_cost }원</li>
 									<li>1인 비용 :<fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
 									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
-									<li>분배날짜 : ${lists.bun_date }</li>
+									<li>분배일시 : ${lists.bun_date }</li>
 									<li>분배장소 :${lists.loc_name }</li>
 								
 									
@@ -306,7 +315,7 @@ $().ready(function()
 							<div class="row">
 								<div class="col-md-12 text-center Btn">
 								<button type="button" class="btn btn-default" id="btn1">찜 하기</button>
-								<button type="button" class="btn btn-default" id="btn2">주문 하기</button>
+								<button type="button" class="btn btn-default" id="${lists.g_post_code }" onclick="orderItem(this)">주문 하기</button>
 								
 								</div>
 							</div>
