@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.banana.groupbuying.GCateDTO;
-import com.banana.groupbuying.IGPostDAO;
+
 import com.banana.my.IUserReplyDAO;
+import com.banana.my.UserReplyDTO;
 
 @Controller
 public class UserReplyController
@@ -19,23 +19,37 @@ public class UserReplyController
 	private SqlSession SqlSession;
 	
 	@RequestMapping(value = "/userreplylist.action", method = RequestMethod.GET)
-	public String cateList(Model model)
+	public String rReplyList(Model model, String order)
 	{
 		String view = null; 
 		
 		String user_code = "USER49";
+		UserReplyDTO dto = new UserReplyDTO();
+		if(Integer.parseInt(order) == 1) 
+		{
+			dto.setOrder("WDATE_DESC");			
+		}
+		else 
+		{
+			dto.setOrder("WDATE_ASC");
+		}
+		
+		dto.setUser_code(user_code);
+		
 		
 		IUserReplyDAO dao = SqlSession.getMapper(IUserReplyDAO.class);
 		
-		System.out.println(user_code);
-		model.addAttribute("rReplyList", dao.rReplyList(user_code));
+		//System.out.println(user_code);
+		model.addAttribute("rReplyList", dao.rReplyList(dto));
 	
 		
-		view = "/UserReplyList.jsp";
+		view = "/UserReplyListAjax.jsp";
 		
 		
 		return view;
 	}
+	
+
 	
 	
 }

@@ -29,33 +29,34 @@ td
 </style>
 <script type="text/javascript">
 
-$(function() {
-   
-	$.ajax({
+	function changeList(obj){
 		
-		url:'',
-		type:'get',
-		data:{},
-		dataType:'json',
-		success: function(data)
-		{
+		//alert(obj.value);
+		var params = obj.value;
+		
+		 $.ajax({
 			
-			
-		}
+			url:'/Project_Banana/userreplylist.action',
+			type:'get',
+			data:{order:params},
+			dataType:'json',
+			success: function(data)
+			{
+				var str ="";
+				alert(data);
+				alert(data.title[1]);
+				
+				
+				document.getElementById("tbody").innerHTML = "";
+				
+			},error:function(request,status,error)
+			{
+        		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}   					
+				
+		}); 
 		
-		
-		
-		
-		
-	});
-	
-	
-	
-	
-	
-	
-})
-
+	}
 </script>
 
 </head>
@@ -90,7 +91,7 @@ $(function() {
 					<div class="col-md-12 text-right">
 					
 						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
-						   <select name="" id="order" class="form-control" onchange="changeList()">
+						   <select name="" id="order" class="form-control" onchange="changeList(this)">
 						   		<option value="1">최신순</option>
 						   		<option value="2">과거순</option>
 						   </select>
@@ -112,7 +113,7 @@ $(function() {
 								</tr>
 								
 							</thead>
-						    <tbody>
+						    <tbody id="tbody">
 						    <c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
 								<tr>
 									<td>${status.count }</td>									
