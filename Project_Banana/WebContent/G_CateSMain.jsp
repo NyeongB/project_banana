@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/AdminAccountListStyle.css">
@@ -121,9 +121,9 @@ p
 .catelist
 {
 	display: flex;
-	/* margin: 7px; */
-	padding: 3px;
-	
+	/* margin: 7px; 
+	padding: 3px; */
+	margin:0px;
 	
 
 }
@@ -133,28 +133,57 @@ p
 	display: flex;
 	/* margin-top: 3px; */
 	margin-right: 7px;
-	padding: 2px;
+	/* padding: 2px; */
 	
 }
 
 .catelist li
 {
 	
-	margin-right: 30px;
-	margin-top:10px; 
+	margin-right: 20px;
+	/* margin-top:10px;  */
 	text-align: center;
-	font-family: 맑은고딕;	
-	font-size: 14px;
+	font-family: 돋움;	
+	font-size: 15px;
 
 }
 
 .catemlist li
 {
 	margin-right: 30px;
-	margin-top:0px; 
+	margin-top:30px; 
 	text-align: center;
 	font-size: 13px;
 }
+
+a
+{
+	text-decoration: none;
+}
+
+a:link 
+{ 
+	color: black; 
+	text-decoration: none;
+}
+
+a:visited
+{ 	color: black;
+	text-decoration: none;
+}
+
+a:hover 
+{ 	
+	color: black;
+    text-decoration: none;
+}
+
+a:active
+{ 	color: red;
+	text-decoration: none;
+}
+
+
 
 </style>
 <script type="text/javascript">
@@ -217,7 +246,8 @@ p
 					
 					<div class="col-md-12">
 						<!--중분류  -->
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+						<div >
+						<hr>
 						 	<ul class="catelist">
 								<c:forEach var="catelists" items="${cateList }">
 									<li>
@@ -228,10 +258,10 @@ p
 							</ul>							
 							</div>		
 					</div>
-					
+					<hr>
 					<div class="col-md-12">
 						<!--소분류  -->
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+						<div>
 						 	<ul class="catemlist">
 								<c:forEach var="cateMlists" items="${cateMList }">
 									<li>
@@ -252,15 +282,18 @@ p
 				
 				</div>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-12 text-right">
 					<button class="btn" id="postItem" name="postItem">상품등록</button>
 				</div>
-			</div>
+			</div> -->
 			
 			<div class="row">
 				<div class="col-md-12 h3">
-					<h3 style="font-weight: bold;">실시간 게시글</h3>
+					
+					<div class="col-md-12 text-right">
+					<button class="btn" id="postItem" name="postItem">상품등록</button>
+					</div><h3 style="font-weight: bold;">실시간 게시글</h3>
 					<hr>
 				</div>
 			</div>
@@ -270,23 +303,29 @@ p
 			<!-- 실시간 게시글 1열 -->
 				<div class="row"> 
 					<div class="col-md-12">
-
-						
-							<div class="col-md-1"></div>
-
-							
-							<!-- 1열 1번 -->
-					<c:forEach var="gslists" items="${gCatemMainList }" begin="1" end="5">
-					
 						<div class="col-md-1"></div>
-						<div class="col-sm-2 col-md-2 thblock">
-                           		<div class="thumbnail">
-                                 <img src="images/oz.jpg" >
-                                   
-                                    <div class="caption">
-                                   		<div class="col-md-12">
+	
+			
+					
+					<!-- 실시간 게시글 1열 -->
+				<div class="row"> 
+					<div class="col-md-12">
+						<div class="row item_content">
+	                  	<c:forEach var="gslists" items="${gCatemMainList }" varStatus="status"  >
+	                  	<c:if test="${ status.count%5 eq 0 }" ><br/></c:if>
+
+	                     <div class="col-sm-2 col-md-2">
+	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
+	                           <div class="thumbnail">
+	                           		
+	                           			<!-- <img src="images/oz.jpg" > -->
+	                           			${gslists.photo }
+	                           			<div class="caption">
+	                      
+	                                      <h5 class="thick">${gslists.title }</h5>
+	                                      <div class="col-md-12">
                                    			<div class="col-md-6">
-                                    			<!-- <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> -->
+                                    	
                                    			</div>
                                   			<div class="col-md-6 text-right">
                                     			<small>5분전</small>
@@ -296,18 +335,20 @@ p
                                         <div class="col-md-12 text-right wr">
                                         	<small>${gslists.nickname }</small>
                                         </div>
-                                      
-                                        
-                                      <b>${gslists.title }</b>
+	                                      <p>${glists.loc_name }</p>
+	                                 
+	                                    
                                       <p>${gslists.loc_name }</p>
-                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber>            
+                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>            
                                     </div>
-                                </div>
-                   		  </div>
-					</c:forEach><!-- 카테고리 해당 게시물 하나 부르기  -->
+	                                    
+	                           		    
+	                           </div>
+	                     </div>
+	                     </c:forEach>  
 							
 							
-					
+				</div>	
 					
 				<hr>
 					
@@ -339,15 +380,17 @@ p
 								<div><button class="btn">▲</button><button class="btn">▼</button></div>
 							</div>
 				
-						</div>
+						</div><!--end col-md-2  -->
 							
 			
 			
-				</div>
-			</div>
-		</div>
+					</div>
+			</div><!--end row -->
+		</div><!--end col-md-8   -->
 	</div>
 </div>
+</div>
+
 
 
 
