@@ -7,7 +7,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class Send
 {
-	public static void send(String num)
+	public static void send(String tel)
 	{
 		String api_key = "NCSK3SWNJNK7KFNX";
 		String api_secret = "ASIQZOSSE7DOROFR4TZ1SOPX1ILC7UFR";
@@ -17,7 +17,7 @@ public class Send
 		RandomCheck rc = new RandomCheck();
 		String str = rc.couponnum();
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", "01099659257"); // 수신번호
+		params.put("to", tel); // 수신번호
 		params.put("from", "01099659257"); // 발신번호
 		params.put("type", "SMS"); // Message type ( SMS, LMS, MMS, ATA )
 		params.put("text", "[BANANA401]인증번호는\n" + str + "입니다."); // 문자내용
