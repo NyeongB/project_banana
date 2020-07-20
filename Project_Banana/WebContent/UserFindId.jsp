@@ -28,6 +28,71 @@
 
 
 </style>
+
+<script type="text/javascript">
+	
+	var phoneCheck;
+	
+	var statePhone = 0;
+	
+	$(document).ready(function()
+	{
+		
+		$("#findBtn").click(function()
+		{
+			
+			if($("#name").val().trim()=="" || $("#phoneNumber").val().trim()=="")
+			{
+				alert("값을 입력해야합니다.");
+				return;
+			}
+			
+			ajaxRequest();
+			
+		});
+		
+		
+		$("#checkBtn").click(function()
+		{
+			//$("#phoneForm").submit();
+			if($("#confirmNum").val()==0)
+			{
+				alert("인증번호를 입력하세요");
+				return;
+			}
+			
+			if($("#confirmNum").val()==phoneCheck)
+			{
+				alert("인증번호 확인!");
+				$("#phoneForm").submit();
+			}
+			else
+			{
+				alert("인증번호가 같지않습니다.");
+				statePhone = 0;
+				return;
+			}
+		});
+		
+	});
+	
+	// 휴대폰 인증 
+	function ajaxRequest()
+	{
+		
+		alert("인증번호가 발송되었습니다.");
+		$.get("telcheck.action", {tel : $("#localNum").val()+$("#phoneNumber").val()}, function(data)
+		{
+			//alert(data);
+			phoneCheck = data.trim();
+			
+		});
+		
+	}
+	
+
+</script>
+
 </head>
 <body>
 <div class="header">
@@ -44,27 +109,28 @@
 				<div class="col-md-6">
 				
 					<div>
-						<form role="form" class="form-inline" id="phoneForm">
+						<form role="form" class="form-inline" id="phoneForm" action="idcheckfind.action" method="get">
 						<br>
-							<input type="radio" name="phoneSearch" id="phoneSearch"><b>
+							<!-- <input type="radio" name="phoneSearch" id="phoneSearch"><b>
 								휴대전화로 찾기</b> <br>
-							<br>
+							<br> -->
+							<h3>아이디 찾기</h3>
 
 							<div class="form-group">
 								<label for="name"> 이름 </label> <input type="text"
-									class="form-control" id="name" placeholder="이름" />
+									class="form-control" id="name" placeholder="이름" name="name">
 							</div>
 							<br>
 							<br>
 
 							<div class="form-group">
-								<label for="phoneNumber"> 핸드폰 번호 </label> <select id="localNum"
-									name="localNum">
-									<option value="1">010</option>
-									<option value="2">011</option>
-								</select> <input type="password" class="form-control" id="phoneNumber"
+								<label for="phoneNumber"> 핸드폰 번호 </label> 
+								<select id="localNum" name="num1" class="form-control">
+									<option value="010">010</option>
+									<option value="011">011</option>
+								</select> <input type="text" class="form-control" id="phoneNumber" name="num2"
 									placeholder="전화번호" />
-								<button type="button" class="btn btn-primary">인증번호 받기</button>
+								<button type="button" class="btn btn-primary" id="findBtn">인증번호 받기</button>
 							</div>
 							<br>
 							<br>
@@ -72,46 +138,14 @@
 							<div class="form-group">
 								<input type="text" class="form-control" id="confirmNum"
 									placeholder="인증번호" />
+								<button type="button" class="btn btn-primary" id="checkBtn">인증번호 확인</button>
 							</div>
 
-							<br>
-							<br> <a href="">인증번호 다시 받기</a> <br>
-							<br>
+							
 						</form>
 					</div>
-					<!-- 휴대폰 form div 끝  -->
-					<hr>
-					<div>
-						<form role="form" class="form-inline" id="emailForm">
-							<input type="radio" name="emailSearch" id="emailSearch"><b>
-								이메일로 찾기</b> <br> <br>
-							<div class="form-group">
-								<label for="name"> 이름 </label> <input type="text"
-									class="form-control" id="name" placeholder="이름" />
-							</div>
-							<br> <br>
-							<div class="form-group">
-
-								<label for="emailAddress"> 이메일 주소 </label> <input type="email"
-									class="form-control" id="emailAddress" placeholder="이메일 주소" />
-
-								<button type="button" class="btn btn-primary">인증번호 받기</button>
-							</div>
-							<br> <br>
-							<div class="form-group">
-								<input type="text" class="form-control" id="confirmNum"
-									placeholder="인증번호" />
-							</div>
-							<br> <br> <a href="">인증번호 다시 받기</a> <br> <br>
-							<hr>
-
-							<button type="submit" class="btn btn-primary">다음</button>
-							<br>
-							<br>
-						</form>
-						<br><a href="">비밀번호 찾기</a>
-					</div>
-					<!-- email div 끝  -->	
+					<br />
+					
 			</div>
 			<!--col-md-6 div 끝  -->
 			<div class="col-md-3"></div>

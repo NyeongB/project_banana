@@ -72,7 +72,8 @@ public class UserController
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		String tel = request.getParameter("tel");
+		String tel1 = request.getParameter("tel");
+		String tel  = tel1.substring(0,3)+"-"+tel1.substring(3,7)+"-"+tel1.substring(7,11);
 		String nickname = request.getParameter("nickname");
 		
 		// 우편주소 - 우편주소2, 주소, 상세주소
@@ -250,7 +251,7 @@ public class UserController
 		{
 			String view = null; 
 			String tel = request.getParameter("tel");
-			System.out.println(tel);
+			//System.out.println(tel);
 			
 			
 			
@@ -263,6 +264,63 @@ public class UserController
 			view = "/ajax.jsp";
 			
 			return view;
+		}
+		
+		@RequestMapping(value = "/idcheckfind.action", method =RequestMethod.GET)
+		public String idcheck(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			String tel1 = (request.getParameter("num1") + request.getParameter("num2")).trim();
+			//System.out.println(tel);
+			String tel  = tel1.substring(0,3)+"-"+tel1.substring(3,7)+"-"+tel1.substring(7,11);
+			String name = request.getParameter("name");
+			/*
+			 * System.out.println(name); System.out.println(tel);
+			 */
+			
+			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+			JoinDTO dto = new JoinDTO();
+			dto.setTel(tel);
+			dto.setName(name);
+			JoinDTO join = new JoinDTO();
+			
+			try
+			{
+				join = dao.findId(dto);
+				if(name.equals( join.getName()))
+				{	
+					//System.out.println("회원정보있다~!");
+					model.addAttribute("join", join);
+					view = "/UserFindIdCheck.jsp";
+				}
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+				System.out.println("회원정보없다.");
+				view = "/UserFindId.jsp";
+			}
+			
+			join =	dao.findId(dto);
+			
+			//회원정보가 없을시 
+			
+			
+			// 회원정보가 있을시 
+			
+			
+			
+			
+			
+			
+			return view;
+		}
+		
+		@RequestMapping(value = "/userfind.action", method =RequestMethod.GET)
+		public String userFind()
+		{
+			
+			
+			return "/UserFindId.jsp";
 		}
 	
 }

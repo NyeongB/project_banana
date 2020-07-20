@@ -18,6 +18,11 @@
 
 	</select>
 	
+	<select id="findId" resultType="com.banana.user.JoinDTO"> 
+	SELECT ID, NAME
+	FROM JOIN
+	WHERE TEL=#{tel} AND NAME=#{name}
+	</select> 
 	
 	<select id="rentList" resultType="com.banana.rent.RCateDTO"> 
 	SELECT R_CATE_CODE, CATE_NAME 

@@ -20,7 +20,11 @@
 	
 	$(document).ready(function()
 	{
-		 $("#login").submit();
+		$("#loginBtn").click(function()
+		{
+			$("#login").submit();	
+		});
+		 
 	});
 	
 </script>

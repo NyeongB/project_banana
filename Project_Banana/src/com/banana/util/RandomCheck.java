@@ -22,7 +22,7 @@ public class RandomCheck
 		int i = 0;
 		
 			StringBuffer buf = new StringBuffer(16);
-			// i는 8자리의 랜덤값을 의미
+			// i는 6자리의 랜덤값을 의미
 			for (i = 6; i > 0; i--)
 			{
 				buf.append(possibleCharacters[rnd.nextInt(possibleCharacterCount)]);

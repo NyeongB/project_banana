@@ -40,4 +40,7 @@ public interface IJoinDAO
 	
 	// 회원가입 INSERT
 	public void add(JoinDTO dto);
+	
+	// 아이디찾기
+	public JoinDTO findId(JoinDTO dto);
 }

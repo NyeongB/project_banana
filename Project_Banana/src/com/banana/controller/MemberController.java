@@ -205,6 +205,7 @@ public class MemberController
 		return view;
 	}
 	
+	// 소상공인 조회
 	@RequestMapping(value = "/adminshopuserlist.action", method =RequestMethod.GET)
 	public String AdminShopUserList(Model model)
 	{
@@ -325,6 +326,19 @@ public class MemberController
 		
 		//model.addAttribute("list", dao.list());
 		//model.addAttribute("check",check);
+		
+		
+		return view;
+	}
+	
+	@RequestMapping(value = "/loginmain.action", method =RequestMethod.GET)
+	public String loginMain(Model model, HttpServletRequest request)
+	{
+		
+		String view = null; 
+		
+		view = "/Login.jsp";
+		
 		
 		
 		return view;

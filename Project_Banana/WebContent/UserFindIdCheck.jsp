@@ -115,7 +115,7 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image"
 									src="images/banana_icon.png" >
-									<p><span>전진영</span>님의 아이디 정보는 <span>jinyoung1704</span>입니다.</p>
+									<p><span>${join.name }</span>님의 아이디 정보는 <span>${join.id }</span>입니다.</p>
 									
 								    <button class="btn btn-primary" type="button" id="loginPage">로그인 하기</button>
   									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
