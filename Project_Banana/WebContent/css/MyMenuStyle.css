@@ -16,11 +16,7 @@ a:active
 	background-color: var(--back-color2);
 	
 }
-.clicked_menu
-{
-	background-color: var(--back-color);
-	
-}
+
 .adminPage_logo 
 {
 	padding-left:2em;

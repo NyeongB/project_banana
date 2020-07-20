@@ -37,7 +37,7 @@ public class UserReplyController
 		
 		model.addAttribute("rReplyList", dao.rReplyList(dto));	
 		
-		view = "/WebContent/WEB-INF/my/UserReplyList.jsp";
+		view = "/WEB-INF/my/UserReplyList.jsp";
 		
 		
 		return view;
@@ -70,7 +70,7 @@ public class UserReplyController
 
 		model.addAttribute("rReplyList", dao.rReplyList(dto));	
 		
-		view = "/WebContent/WEB-INF/my/UserReplyListAjax.jsp";
+		view = "/WEB-INF/my/UserReplyListAjax.jsp";
 		
 		
 		return view;
@@ -93,7 +93,7 @@ public class UserReplyController
 			
 		}
 		
-		view = "/WebContent/my/userreplylist.action";
+		view = "/userreplylist.action";
 		
 		return view;
 		

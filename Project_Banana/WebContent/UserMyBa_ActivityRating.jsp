@@ -163,7 +163,7 @@ ins
 				</div><br>
 				
 				<div class="center-block">
-							<div class="col-md-12">
+							<div class="col-md-12 text-center">
 
 									<h4>○ 활동 등급 안내</h4><br>
 									<p>▶ 초록 바나나 한 송이 : 회원 가입 ~ 1,000점   		<img alt="" src="images/bananagreen_icon.png" id="green"></p>

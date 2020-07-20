@@ -93,7 +93,7 @@ i + a
 		<li><i class="far fa-address-book"></i><a href="#">출석부</a></li>
 		<li><i class="fas fa-bomb"></i><a href="#">신고내역</a></li>
 		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a></li>
-		<li><i class="far fa-comment-dots"></i><a href="#">내가쓴댓글</a></li>
+		<li><i class="far fa-comment-dots"></i><a href="userreplylist.action">내가쓴댓글</a></li>
 		<li><i class="far fa-address-card"></i><a href="#">개인정보수정</a></li>
 		<li><i class="far fa-user"></i><a href="#">마이바나나</a>
 			<ul class="sub" style="display: none;">
