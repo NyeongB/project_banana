@@ -66,8 +66,8 @@
 	</select>
 	
 	<!--신청 인원 불러오기  -->
-	<select id="gApplyCount" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT COUNT(*) AS COUNT
+	<select id="gApplyCount" resultType="int">
+		SELECT COUNT(*)+1 AS COUNT
 		FROM G_APPLY
 		WHERE G_POST_CODE =#{g_post_code}
 	</select>

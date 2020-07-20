@@ -139,6 +139,19 @@ p
 	font-size: 15px;
 
 }
+
+.thumbnail
+{
+	 border-radius:3px;
+ 	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
+ 	 height: 210px;
+ 	 margin-right: 3px;
+} 
+
+.caption
+{
+	height: 150px;
+}
 </style>
 <script type="text/javascript">
 	
@@ -151,6 +164,34 @@ p
 		});
 		
 	});
+	
+	
+	function goList(obj)
+	{
+		//alert("확인");	
+		//alert(obj.getAttribute("id"));
+		var a = obj.getAttribute("id");
+		//alert(a);
+		
+	
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
+		
+		
+	}
+	
+	function mouseon(obj)
+	{
+		
+		var id = obj.getAttribute("id")
+		document.getElementById(id).style.background = "#E6E6E6";
+	}
+	
+	function mouseout(obj)
+	{
+		var id = obj.getAttribute("id")
+		
+		document.getElementById(id).style.background = "none";
+	}
 
 </script>
 </head>
@@ -229,13 +270,14 @@ p
 					<div class="col-md-12">
 						<div class="row item_content">
 	                  	<c:forEach var="glists" items="${gCateMainList }" varStatus="status"  >
-	                  	<c:if test="${ status.count%5 eq 0 }" >&nbsp;<br/s></c:if>
+	                  	<c:if test="${ status.count%6 eq 0 }" ></c:if>
 
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail">
+	                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
+	                           	
 	                           			${glists.photo }
 	                           			<div class="caption">
 	                      

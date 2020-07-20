@@ -156,7 +156,7 @@ p
 	font-size: 13px;
 }
 
-a
+/* a
 {
 	color:black;
 	font-family: bold;
@@ -170,16 +170,28 @@ a
 	
 }
  
-/* a:visited
+ a:visited
 { 	color: black;
 }
- */
+ 
 
 a:active
 { 	color: black;
 	
+}  */
+
+.thumbnail
+{
+	 border-radius:3px;
+ 	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
+ 	 height: 210px;
+ 	 margin-right: 3px;
 } 
 
+.caption
+{
+	height: 150px;
+}
 
 
 </style>
@@ -204,30 +216,40 @@ a:active
 
 	function liColor(obj)
 	{
-		alert(obj.getAttribute("id"));
+		//alert(obj.getAttribute("id"));
 		var id = obj.getAttribute("id")
 		document.getElementById(id).style.color="red";
 		
-		alert(document.getElementById(id));
-		//id.style.color ="red";
-		//obj.getAttribute("id").style.color = 'red';
-		//obj.getAttribute("id").css("color","red");
+		//alert(document.getElementById(id));
+		
+	}
+	
+	function goList(obj)
+	{
+		//alert("확인");	
+		//alert(obj.getAttribute("id"));
+		var a = obj.getAttribute("id");
+		//alert(a);
+		
+	
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
 		
 		
+	}
+	
+	function mouseon(obj)
+	{
 		
-	/* 	alert("확인");
-		console.log($(this));
-		alert($(this).attr('id'));
-		$(".linkColor").css("color","red"); */
-		/* alert(obj.attr('id')); 
-		alert(obj);
-		//alert($(this).val()).;
-		document.getElementById("#${catelists.g_cate_code }").style.color = "red"; 
+		var id = obj.getAttribute("id");
 		
-		$(#obj.getAttribute("id")).css("color","red");
+		document.getElementById(id).style.background = "#E6E6E6";
+	}
+	
+	function mouseout(obj)
+	{
+		var id = obj.getAttribute("id");
 		
-		$(".linkColor").css("color","red");
-		obj.getAttribute("id").css("color","red");*/
+		document.getElementById(id).style.background = "none";
 	}
 	 
 	
@@ -330,11 +352,11 @@ a:active
 					<div class="col-md-12">
 						<div class="row item_content">
 	                  	<c:forEach var="gslists" items="${gCatemMainList }" varStatus="status"  >
-	                  	<c:if test="${ status.count%5 eq 0 }" ><br/></c:if>
+	                  	<c:if test="${ status.count%6 eq 0 }" ><br/></c:if>
 
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail">
+	                           <div class="thumbnail" id="${gslists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
 	                           			${gslists.photo }

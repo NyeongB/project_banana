@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
@@ -26,7 +27,7 @@
 {
 	color:var(--hover-color);
 	font-weight: 800;
-
+	
 }
 .line
 {
@@ -146,7 +147,7 @@ p
 		});
 		
 		
-		 $(".thumbnail").mouseover(function()
+		/*  $(".thumbnail").mouseover(function()
 		{
 			
 			
@@ -156,7 +157,7 @@ p
 		$(".thumbnail").mouseout(function()
 		{
 			$(".thumbnail").css("background","none");
-		}); 
+		});  */
 		
 		
 		
@@ -178,6 +179,20 @@ p
 		
 		
 	}
+	
+	function mouseon(obj)
+	{
+		var id = obj.getAttribute("id")
+		document.getElementById(id).style.background = "#E6E6E6";
+	}
+	
+	function mouseout(obj)
+	{
+		var id = obj.getAttribute("id")
+		
+		document.getElementById(id).style.background = "none";
+	}
+
 
 </script>
 </head>
@@ -226,7 +241,7 @@ p
 	                  <div class="row item_content">
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">1</span></h4>
-	                           <div class="thumbnail">
+	                           <div class="thumbnail" >
 	                                 <img src="images/oz.jpg" >
 	                                    <div class="caption">
 	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
@@ -284,14 +299,14 @@ p
 	                  	<c:forEach var="catelist" items="${gCateList }" varStatus="status" begin="1" end="5">
 	                     <div class="col-sm-2 col-md-2 box">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail" id="${catelist.g_post_code }" onclick="goList(this)">
+	                           <div class="thumbnail" id="${catelist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
 	                           			${catelist.photo }
 	                           			<div class="caption">
 	                                      <h5 class="thick">${catelist.title }</h5>
 	                                      <p>${catelist.loc_name }</p>
-	                                      <p><span class="price">${catelist.dis_cost }원</span></p>                          
+	                                      <p><span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span></p>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -307,16 +322,16 @@ p
 	                  	<c:forEach var="newlist" items="${gNewList }" varStatus="status" begin="1" end="5">
 	                     <div class="col-sm-2 col-md-2 box" id="boxnum">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)">
+	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
 	                           			<!-- <img src="images/oz.jpg" > -->
 	                           			${newlist.photo }
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
 	                                      <p>${newlist.loc_name }</p>
-	                                      <p><span class="price">${newlist.dis_cost }원</span></p>                          
+	                                      <p><span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span></p>                          
 	                                    </div>
-	                           		    
+	                           		   
 	                           </div>
 	                     </div>
 	                     </c:forEach>  
