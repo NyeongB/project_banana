@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IActivityRatingDAO">
+	
+	<select id="list" resultType="com.banana.my.ActivityRatingDTO">
+	SELECT BS.BANANA_SCORE_CODE AS BANANA_SCORE_CODE, J.B_USER_CODE AS B_USER_CODE, BS.BANANA_SCORE AS BANANA_SCORE, J.NICKNAME AS NICKNAME
+	FROM BANANA_SCORE BS LEFT JOIN JOIN J
+	ON BS.B_USER_CODE = J.B_USER_CODE
+	WHERE BS.B_USER_CODE =#{b_user_code}
+	</select>	
+	
+	
+	
+</mapper>  
+

@@ -97,7 +97,7 @@ i + a
 		<li><i class="far fa-address-card"></i><a href="#">개인정보수정</a></li>
 		<li><i class="far fa-user"></i><a href="#">마이바나나</a>
 			<ul class="sub" style="display: none;">
-					<li><a href="#">개인 활동등급</a></li>
+					<li><a href="activityRating.action">개인 활동등급</a></li>
 					<li><a href="#">개인 신용등급</a></li>
 					<li><a href="#">거래 후기</a></li>
 					<li><a href="#">포인트</a></li>

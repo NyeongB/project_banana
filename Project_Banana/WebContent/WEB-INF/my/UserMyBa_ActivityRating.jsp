@@ -34,7 +34,7 @@ String cp = request.getContextPath();
 
 .score2
 {
-	color: var(--hover-color1);
+	color: var(--hover-color);
 	font-size: 18px;
 	font-weight: bold;
 }
@@ -130,7 +130,7 @@ ins
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
-			<jsp:include page="Header.jsp"></jsp:include>
+			<jsp:include page="../../Header.jsp"></jsp:include>
 		</div>
 	</div>
 
@@ -139,7 +139,7 @@ ins
 	<div class="container-fluid">
 		<div class="content">
 			<div class="col-md-2">
-				<jsp:include page="MenuUser.jsp"></jsp:include>
+				<jsp:include page="../../MenuUser.jsp"></jsp:include>
 			</div>
 			<!-- 왼쪽 MenuUser end  -->
 
@@ -151,19 +151,19 @@ ins
 				
 				<div class="row">
 					<div class="col-md-12 activity">			
-						<p><ins>바나나</ins>님의 활동등급 &nbsp;&nbsp;  /  <img alt="" src="images/banana_icon4.png" id="userrating"></p>
+						<h2 class="thick">${nickName } 님</h2> <p>활동등급 &nbsp;&nbsp;: ${grade }</p>
 					</div>
 				</div>
 			
 				<div class="row">
 					<div class="col-md-12 text-center">	
-						<p><span class="score1">35,000</span>점</p>
-						<p>다음 등급인<span class="score2">바나나 나무</span>까지 <span class="score2">2,001</span>점 남았습니다.</p>
+						<p><span class="score1">${sum }</span>점</p>
+						<p>다음 등급인 <span class="score2">${nextGrade }</span>까지 <span class="score2">${leftPoint }</span>점 남았습니다.</p>
 					</div>
 				</div><br>
 				
-				<div class="center-block">
-							<div class="col-md-12 text-center">
+				<div class="center-block text-center">
+							<div class="col-md-12 ">
 
 									<h4>○ 활동 등급 안내</h4><br>
 									<p>▶ 초록 바나나 한 송이 : 회원 가입 ~ 1,000점   		<img alt="" src="images/bananagreen_icon.png" id="green"></p>
@@ -189,7 +189,7 @@ ins
 	<!-- footer  -->
 	<div class="row">
 		<div class="col-md-12">
-			<jsp:include page="Footer.jsp"></jsp:include>
+			<jsp:include page="../../Footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>
