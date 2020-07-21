@@ -189,7 +189,7 @@ element.style
 
 				<div class="row">
 					<div class="col-md-12 credit text-center">									
-						<h2 class="thick">바나나의 </h2><p>신뢰등급</p>
+						<h2 class="thick">${nickName }의 </h2><p>신뢰등급</p>
 					</div>
 				</div>
 

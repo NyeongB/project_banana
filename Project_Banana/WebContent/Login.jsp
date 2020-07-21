@@ -28,6 +28,32 @@
 	});
 	
 </script>
+<style type="text/css">
+.login
+{
+	margin-top: 100px;
+
+
+}
+.loginBox
+{
+	height: 55px !important;
+	border-radius: 50px !important;
+
+}
+#logo_text_1
+{
+	font-size:50px!important;
+
+}
+#loginBtn
+{
+	width: 50%;
+	height: 55px;
+	border-radius: 50px !important;
+
+}
+</style>
 </head>
 <body>
 <!-- header -->
@@ -40,17 +66,17 @@
 <div class="container-fluid login_content">
 	
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-5">
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-2 login">
 			<form role="form" action="<%=cp %>/login.action" method="get" id="login">
-				<div id="logo"><span id="logo_text_1">banana</span></div>
+				<div id="logo"><h1 id="logo_text_1">banana</h1></div>
 				<div class="form-group">
 					 
 					<label for="exampleInputEmail1">
 						아이디
 					</label>
-					<input type="text" class="form-control" id="id" name="id" required="required"
+					<input type="text" class="form-control loginBox" id="id" name="id" required="required"
 					placeholder="아이디를 입력하시오.">
 				</div>
 				<div class="form-group">
@@ -58,25 +84,26 @@
 					<label for="exampleInputPassword1">
 						비밀번호
 					</label>
-					<input type="password" class="form-control" id="pw"  name="pw" required="required"
+					<input type="password" class="form-control loginBox" id="pw"  name="pw" required="required"
 					placeholder="비밀번호를 입력하시오.">
 				</div>		
-				
-				<button type="submit" class="btn btn-primary" id="loginBtn">
-					로그인
-				</button>
+				<div class="col-md-12 text-center">
+					<button type="submit" class="btn btn-primary" id="loginBtn">
+						로그인
+					</button>
+				</div>
 			</form>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-5">
 		</div>
 	</div>			
 	
 </div>
-<!-- footer -->
-<div class="row Footer">			
-	<div class="col-md-12">		
-		<jsp:include page="Footer.jsp"></jsp:include>
-	</div>
+<!-- footer  -->
+<div class="row">
+   <div class="col-md-12">
+      <jsp:include page="Footer.jsp"></jsp:include>
+   </div>
 </div>
 
 

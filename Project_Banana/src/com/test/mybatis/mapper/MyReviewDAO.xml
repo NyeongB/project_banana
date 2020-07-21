@@ -13,7 +13,7 @@
 	</select>	
 	
 	<select id="reviewCount" resultType="int">	
-	SELECT COUNT(*)
+	SELECT NVL(COUNT(*), 0)
 	FROM VIEW_REVIEW
 	WHERE B_USER_CODE = #{b_user_code}
 	</select>	

@@ -297,6 +297,7 @@ public class MemberController
 		HttpSession session = request.getSession(true);
 		
 		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
+		ILeaveDAO dao2 = SqlSession.getMapper(ILeaveDAO.class);
 		
 		String view = null; 
 		String id = request.getParameter("id");
@@ -308,6 +309,7 @@ public class MemberController
 		int state = login(id,pw);
 		
 		String nick = dao.getNick(id);
+		String b_user_code = dao2.getUser(id);
 		System.out.println(nick);
 		
 		if(state==0)
@@ -325,6 +327,7 @@ public class MemberController
 			// 아이디랑 닉네임 인포에 넣음
 			info.setId(id);
 			info.setNickname(nick);
+			info.setB_user_code(b_user_code);
 			
 			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
 			session.setAttribute("user", info);
