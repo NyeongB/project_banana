@@ -329,14 +329,13 @@ public class MemberController
 			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
 			session.setAttribute("user", info);
 			
-			
-			
-			
 			view = "/LoginComplete.jsp";
 			
 		}
 		else if(state == 2)
 		{
+			//  탈퇴 회원
+			view = "/LeaveUser.jsp";
 			
 		}
 		else if(state == 3)
