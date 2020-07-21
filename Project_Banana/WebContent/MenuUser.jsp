@@ -97,14 +97,14 @@ i + a
 		<li><i class="far fa-address-card"></i><a href="#">개인정보수정</a></li>
 		<li><i class="far fa-user"></i><a href="#">마이바나나</a>
 			<ul class="sub" style="display: none;">
-					<li><a href="activityRating.action">개인 활동등급</a></li>
-					<li><a href="mycredit.action">개인 신용등급</a></li>
-					<li><a href="myreview.action">거래 후기</a></li>
-					<li><a href="#">포인트</a></li>
+					<li><a href="activityRating.action">나의 바나나점수</a></li>
+					<li><a href="mycredit.action">나의 당도</a></li>
+					<li><a href="myreview.action">내가 받은 리뷰 </a></li>
+					<li><a href="mypoint.action">포인트</a></li>
 			</ul>
 		</li>
-		<li><i class="fas fa-users"></i><a href="#">친구목록</a></li>
-		<li><i class="fas fa-comments-dollar"></i><a href="#">가계부</a></li>
+		<li><i class="fas fa-users"></i><a href="userfriendlist.action">친구목록</a></li>
+		<!-- <li><i class="fas fa-comments-dollar"></i><a href="#">가계부</a></li> -->
 		
 		<li><i class="far fa-check-square"></i><a href="#">출석체크</a></li>
 		<li><a href="#">포인트 출금</a></li>

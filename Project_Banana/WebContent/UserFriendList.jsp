@@ -73,7 +73,8 @@ String cp = request.getContextPath();
 
 .side-block
 {
-	background-color: #e6e6e6;
+	background-color: var(--hover-color);
+	color : white;
 	top : 30px;
 	width: 300px;
 	height: 250px;
@@ -81,6 +82,7 @@ String cp = request.getContextPath();
 	opacity: 0.8;
 	border-radius: 15px;
 	display: none;
+	font-weight:500;
 	
 	padding: 20px;
 }
@@ -198,19 +200,19 @@ table
 
 				<!-- table -->
 				<div class="col-md-12 tt">
-					<table class="table">
+					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>&nbsp;</th>
+								<th>선택</th>
 								<th>번호</th>
 								<th>프로필</th>
 								<th>닉네임</th>
 								<th>신용등급(당도)</th>
 								<th>활동등급</th>
-								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="followLists" items="${followList }" varStatus ="status">
 							<tr>
 								<td>
 									<!-- Default checked -->
@@ -220,83 +222,30 @@ table
 									</div>
 								</td>
 								<td>
-								<div class="num">
-							
-								1
-								</div>
+									<div class="num">${status.count }</div>
 								</td>
 								<td>
-								<div class="photo">
-								<img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg">
-								</div>
-									</td>
-								<td>
-								<div class="nick">
-								닉닉1123
-								</div>
-								</td>
-								<td>
-								<div class="brix">
-								<span>78</span>Brix
-								</div>
-								</td>
-								<td>
-									<div class="banaicon">
-									<img alt="" src="images/banana_icon.png" class="banaicon">
+									<div class="photo">
+									<img alt="preview " class="img-circle"
+										<%-- src="${followLists.profile }" --%> src="images/banana_icon.png">
 									</div>
 								</td>
 								<td>
-									<div class="warning">
-									 <span class="glyphicon glyphicon-warning-sign"></span>
-									</div>
+									<div class="nick">${followLists.nickName }</div>
 								</td>
-								
-							</tr>
-
-							<tr>
-								<td>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input"
-											id="defaultChecked2">
-									</div>
-								</td>
-								<td>
-								<div class="num">
-									2
-								</div>
-								</td>
-								<td>
-								<div class="photo">	
-									<img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg">
-								</div>	
-								</td>
-								<td>
-								<div class="nick">
-								닉네임5128
-								</div>
-								</td>
-								
-								
 								<td>
 									<div class="brix">
-									<span>55</span>Brix
+										${followLists.credit_score } Brix
 									</div>
 								</td>
-									
 								<td>
 									<div class="banaicon">
-									<img alt="" src="images/bananatree_icon.png" class="banaicon" >
+										${followLists.banana_score }
 									</div>
-								</td>
-								<td>
-								<div class="warning">
-										<span class="glyphicon glyphicon-warning-sign"></span>
-								 	</div>
-								</td>
-								
+								</td>								
 							</tr>
+					</c:forEach>
+							
 						</tbody>
 					</table>
 				</div>
