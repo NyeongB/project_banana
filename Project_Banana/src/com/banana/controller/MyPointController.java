@@ -34,9 +34,10 @@ public class MyPointController
 			
 			if(info == null)
 				return "/loginmain.action";
-			String id = info.getId();
+			String b_user_code = info.getB_user_code();
 			
-			model.addAttribute("pointList", dao.pointList(id));		
+			model.addAttribute("pointList", dao.pointList(b_user_code));	
+			model.addAttribute("sumPoint", dao.sumPoint(b_user_code));
 			
 			view = "/UserMyBa_Point.jsp";
 			

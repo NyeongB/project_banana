@@ -69,7 +69,6 @@ EXEC PRC_R_APPLY('USER12', -9800, 'R_POST2', TO_DATE('2020-08-01 00:00:00', 'YYY
 -- 2. 거래성사등록 INSERT
 -- 3. 취소된 사람들 포인트 내역(사용자+)환불 처리
 -- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
-
 CREATE OR REPLACE PROCEDURE PRC_R_SUCCESS
 (
  V_B_USER_CODE          IN B_USER.B_USER_CODE%TYPE -- 제안자 유저코드
@@ -164,8 +163,8 @@ CLOSE CUR_DELETE_USER;
 
 
 -- 4. 이용자 반납 테이블 INSERT(포인트 내역 NULL)
-INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE, POINT_LIST_CODE)
-VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, V_R_SUCCESS_CODE, EEDATE, V_POINT_LIST_CODE);
+INSERT INTO R_USER_RETURN(R_USER_RETURN_CODE, R_SUCCESS_CODE, RETURN_DATE)
+VALUES('R_UR'||SEQ_R_USER_RETURN.NEXTVAL, V_R_SUCCESS_CODE, EEDATE);
 
 
 -- 5. 성사된 이용자에게 성사가 완료되었습니다 알림가기 프로시저 추가
@@ -178,8 +177,6 @@ WHERE R_APPLY_CODE = V_R_APPLY_CODE;
 -- 6. 커밋
 -- COMMIT;
 END;
-
-
 
 --================================================================================================================
 --==>> Procedure PRC_R_SUCCESS이(가) 컴파일되었습니다.

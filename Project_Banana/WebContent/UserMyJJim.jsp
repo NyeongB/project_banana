@@ -77,8 +77,11 @@ img
 
 			<div class="col-md-8">
 				<div>
-					<h3>나의 찜 목록</h3>
+					<h3>나의 찜한 상품</h3><p class="thick"> &#128155; 임효임효님이 좋아하시는 상품입니다.</p>
 					<hr>
+				</div>
+				<div class="text-right">
+				<p class="thick"> 마이페이지 > <span>나의 찜한 상품</span></p>	
 				</div>
 				<br>
 
@@ -88,7 +91,7 @@ img
 						<input type="checkbox" class="form-control" id="allCheck">
 						<button type="button" class="btn btn-default" id="selectDelete">선택삭제</button>
 					</div>
-					<div class="col-md-9 text-right">
+					<div class="col-md-9 text-right">			
 						<select name="" id="search" class="form-control">
 							<option value="">최신순</option>
 							<option value="">가격 낮은 순</option>
@@ -96,6 +99,7 @@ img
 							<option value="">공동 구매</option>
 							<option value="">렌트</option>
 						</select>
+						
 					</div>
 				</div>
 				<br>

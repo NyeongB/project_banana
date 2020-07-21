@@ -35,9 +35,7 @@ String cp = request.getContextPath();
 	font-weight: bold;
 }
 
-tr, td, th {
-	border: 1px solid gray;
-}
+
 
 span {
 	color: var(- -hover-color1);
@@ -79,7 +77,16 @@ nav
 				<div>
 					<h3>포인트 관리</h3>
 					<div class="col-md-12 text-right">
-						나의 잔여 포인트 <span>30,000</span>점 <input type="button"
+							<div class="text-right">
+					
+						
+						   <div class="form-inline"><h4>총 수입 : <input type="text" 
+						   class="form-control" readonly="readonly" value="30,000원"></h4></div>
+						   <div class="form-inline"><h4>총 지출 : <input type="text" 
+						   class="form-control" readonly="readonly" value="20,000원"></h4></div>
+						
+					</div>
+						나의 잔여 포인트 <span>${sumPoint }</span>점 <input type="button"
 							class="btn btn-info" value="충전하기"> <input type="button"
 							class="btn btn-info" value="출금하기">
 						<hr>
@@ -91,20 +98,17 @@ nav
 				<br>
 
 				<div class="row">
-					<div class="col-md-12 form-inline">
-						<div class="col-xs-3">
-							기간 <input type="date" class="form-control">
-						</div>
-						<div class="col-md-9 text-right">
+					<div class="col-md-12 form-inline text-right">
+						
+						
 							<!-- search bar  -->
 							<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
-								<select name="" id="search">
+								<select name="" id="search" class="form-control">
 									<option value="">최신순</option>
-									<option value="">충전 내역</option>
-									<option value="">출금 내역</option>
+									<option value="">과거순</option>
 								</select>
 							</div>
-						</div>
+						
 					</div>
 				</div>
 				<!-- select박스 end  -->
@@ -140,43 +144,16 @@ nav
 									<th>금액</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="text-center">
+							<c:forEach var="pointLists"  items="${pointList }" varStatus="status">
 								<tr>
-									<td>1</td>
-									<td>2020-06-23 15:32:11</td>
-									<td>포인트 충전</td>
-									<td>카드 결제</td>
-									<td>5,000원</td>
+									<td>${status.count }</td>
+									<td>${pointLists.sdate }</td>
+									<td>${pointLists.type }</td>
+									<td>${pointLists.detail }</td>
+									<td>${pointLists.point }</td>
 								</tr>
-
-								<tr>
-									<td>2</td>
-									<td>2020-06-17 19:50:00</td>
-									<td>포인트 충전</td>
-									<td>카드 결제</td>
-									<td>50,000원</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>2020-06-15 20:44:09</td>
-									<td>포인트 출금</td>
-									<td>국민은행 포인트 출금</td>
-									<td>20,000원</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>2020-06-09 19:11:00</td>
-									<td>포인트 출금</td>
-									<td>국민은행 포인트 출금</td>
-									<td>500,000원</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>2020-06-05 15:32:32</td>
-									<td>포인트 충전</td>
-									<td>무통장 입금</td>
-									<td>50,000원</td>
-								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>
