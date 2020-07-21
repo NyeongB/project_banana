@@ -76,7 +76,7 @@
 	<select id="gMyList" resultType="com.banana.groupbuying.GPostDTO">
 		SELECT *
 		FROM VIEW_MYGROUPBUYING
-		WHERE B_USER_CODE = 'USER40'
+		WHERE B_USER_CODE = #{b_user_code}
 	</select>
 	
 	

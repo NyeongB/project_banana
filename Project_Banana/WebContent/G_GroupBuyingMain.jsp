@@ -150,12 +150,12 @@ p
 	$().ready(function()
 	{
 		
-		
+		/* 
 		$("#postItem").click(function()
 		{
 			//alert("확인");
 			$(location).attr("href","groupbuyingpostoffer.action");
-		});
+		}); */
 		
 		
 		/*  $(".thumbnail").mouseover(function()
@@ -284,7 +284,12 @@ p
 	                           		    
 	                           </div>
 	                     </div>
-	                     </c:forEach>  
+	                     </c:forEach> 
+	                     <c:if test="${check eq '1' }">
+							<tr>
+								<td>${noApply }</td>
+							</tr>
+						</c:if> 
 	                     </div>
 	                     <!-- <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">2</span></h4>

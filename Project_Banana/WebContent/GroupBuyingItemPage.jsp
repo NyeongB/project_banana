@@ -179,6 +179,9 @@ $().ready(function()
 function orderItem(obj)
 {
 	var a = obj.getAttribute("id");
+
+	alert(${count});
+	alert(${member});
 	
 	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 }
@@ -302,6 +305,7 @@ function orderItem(obj)
 									<li>원가 : ${lists.cost }원 / 할인가 : ${lists.dis_cost }원</li>
 									<li>1인 비용 :<fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
 									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
+									
 									<li>분배일시 : ${lists.bun_date }</li>
 									<li>분배장소 :${lists.loc_name }</li>
 								

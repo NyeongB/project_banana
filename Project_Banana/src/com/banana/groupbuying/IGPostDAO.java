@@ -32,5 +32,5 @@ public interface IGPostDAO
 	//public ArrayList<GCateDTO> postCateList(String cate);
 	
 	//나의 공동구매 리스트
-	public ArrayList<GPostDTO> gMyList();
+	public ArrayList<GPostDTO> gMyList(GPostDTO dto);
 }
