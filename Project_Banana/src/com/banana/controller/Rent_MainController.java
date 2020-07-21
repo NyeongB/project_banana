@@ -1,6 +1,7 @@
 package com.banana.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ import com.banana.admin.IAdminAccountDAO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.RCateDTO;
 import com.banana.rent.RPostDTO;
+import com.banana.user.ILocDAO;
 import com.banana.user.ILoginDAO;
+import com.banana.user.LocDTO;
 import com.banana.user.LoginDTO;
+import com.banana.util.SessionInfo;
 
 
 @Controller
@@ -258,26 +262,27 @@ public class Rent_MainController
 			
 			
 			// 유저에 따라 다른 주소 설정 값 받아오기
-			
 			@RequestMapping(value = "/locationajax.action", method = RequestMethod.GET)
-			 public String location(Model model, HttpServletRequest request) 
+			 public String locationajax(Model model, HttpServletRequest request) 
 			 {
 				
 				String view = null;
 				
 				try
 				{
+					
+					HttpSession session = request.getSession();
+					
+					SessionInfo info = (SessionInfo)session.getAttribute("user");
+					String userCode = info.getB_user_code();
+					
+					ILocDAO dao = SqlSession.getMapper(ILocDAO.class);
+					LocDTO dto = new LocDTO();
+					dto.setB_user_code(userCode);
+			
+					model.addAttribute("userlocation", dao.userlocation(dto));
 				
-				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
-				RPostDTO dto = new RPostDTO();
-				String rpost_code = request.getParameter("r_post_code");
-				
-				dto.setR_post_code(rpost_code);
-				
-				model.addAttribute("rpostDetail", dao.rpostDetail(dto));
-				model.addAttribute("dealLoc", dao.dealLoc(dto));
-				
-				view = "/UserRentDetail.jsp";
+					view = "/AjaxLoc.jsp";
 				}catch(Exception e)
 				{
 					System.out.println(e.toString());

@@ -83,7 +83,7 @@ span {
 
 
 
-.postBtn
+.pBtn
 {
 	margin-top : 60px;
 	margin-bottom: 80px;
@@ -142,14 +142,146 @@ clear:both;
 	
 	$().ready(function() 
 	{
-			$("#postadd").click(function() 
+		 // 예약가능시간 반복문
+		   var html1 = [];
+		   var value = "";
+
+		   
+		   
+		   for(var i = 0; i<24; i++)
 			{
+				if(i<10)
+					value="0" + i + ":00";
+				else
+					value = i + ":00";
+				
+				html1[i] =  "<option value="+value+">" +value+ "</option>";
+			   
+			}
+		   $("#BookingStartDate").append(html1.join(""));
+		   $("#BookingEndDate").append(html1.join(""));
+		
+		
+		   
+			
+			//가격에 해당하는 부분은 숫자만 가능하도록
+			$("input:text[numberOnly]").on("keyup", function() 
+			{
+				 $(this).val($(this).val().replace(/[^0-9]/g,""));
+			});
+			
+			//폼 전송 전 유효성 검사
+			$("#postBtn").click(function()
+			{
+				//제목 빈칸인지 체크
+				if($("#title").val().trim()=="")
+				{
+					alert("제목을 입력해주세요");
+					$("#title").focus();
+					return;
+				}
+				//브랜드 빈칸인지 체크
+				if($("#brand").val().trim()=="")
+				{
+					alert("브랜드를 입력해주세요");
+					$("#brand").focus();
+					return;
+				}
+				//글 내용 빈칸인지 체크
+				if($("#content").val().trim()=="")
+				{
+					alert("글 내용을 적어주세요");
+					$("#content").focus();
+					return;
+				} 
+				//가격 빈칸인지 체크
+				if($("#cost").val().trim()=="")
+				{
+					alert("가격을 적어주세요");
+					$("#cost").focus();
+					
+					return;
+				} 
+			
+				//보증금 빈칸인지 체크
+				if($("#deposit").val().trim()=="")
+				{
+					alert("보증금을 적어주세요");
+					$("#deposit").focus();
+					return;
+				}
+				//제공장소 빈칸인지 체크
+				if($("#offerloc").val().trim()=="")
+				{
+					alert("상품을 제공할 장소를 적어주세요");
+					$("#offerloc").focus();
+					return;
+				}
+				
+				// 제공 시간 빈칸인지 체크
+				if($("#OfferDate").val()=="")
+				{
+					alert("제공 시간을 선택해 주세요");
+					$("#OfferDate").focus();
+					return;
+				}
+				
+				// 회수장소 빈칸인지 체크
+				if($("#collectloc").val().trim()=="")
+				{
+					alert("상품을 회수할 장소를 적어주세요");
+					$("#collectloc").focus();
+					return;
+				}
+				
+				// 회수 시간 빈칸인지 체크
+				if($("#EndDate").val()=="")
+				{
+					alert("회수 시간을 선택해 주세요");
+					$("#EndDate").focus();
+					return;
+					
+				}
+				
+				// 대여가능 시작시간 빈칸인지 체크
+				if($("#BookingStartDate").val()=="")
+				{
+					alert("대여가능 시작 시간을 선택해 주세요");
+					$("#BookingStartDate").focus();
+					return;
+					
+				}
+				
+				
+				// 대여가능 종료시간 빈칸인지 체크
+				if($("#BookingEndDate").val()=="")
+				{
+					alert("대여가능 종료 시간을 선택해 주세요");
+					$("#BookingEndDate").focus();
+					return;
+					
+				}
+				
+				// 대여 가능 시작, 종료 일시 유효성 체크 데이터 피커 후에 추가하기!!!!
+				
+				
+				
+				
+				
 				$("#rpost").submit();
 				
-			})
+			});
+			
+			
+			
 	});
 	
 
+	
+	
+	
+	
+	
 </script>
 
 
@@ -195,7 +327,7 @@ clear:both;
 								</div>
 								<div class="col-md-10">
 									<div class="Tinput">
-										<input type="text" class="form-control" id="text" name="title"
+										<input type="text" class="form-control" id="title" name="title"
 											placeholder="내용을 입력해주세요." />
 									</div>
 								</div>
@@ -330,7 +462,7 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="text"
+									<input type="text" class="form-control" id="brand"
 										placeholder="내용을 입력해주세요." />
 								</div>
 							</div>
@@ -373,7 +505,7 @@ clear:both;
 									<div>글 내용</div>
 								</div>
 								<div class="col-md-10">
-									<textarea name="" id="" cols="30" rows="10"
+									<textarea name="" id="content" cols="30" rows="10"
 										class="form-control" placeholder="내용을 입력해주세요."></textarea>
 								</div>
 							</div>
@@ -386,8 +518,8 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control won" id="text"
-										placeholder="숫자만 입력해주세요." />원
+									<input type="text" class="form-control won" id="cost"
+										placeholder="숫자만 입력해주세요." numberonly = "true"/>원
 								</div>
 								<div class="col-md-2"></div>
 
@@ -401,8 +533,8 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control won" id="text"
-										placeholder="숫자만 입력해주세요." />원
+									<input type="text" class="form-control won" id="deposit"
+										placeholder="숫자만 입력해주세요." numberonly = "true"/>원
 								</div>
 								<div class="col-md-2"></div>
 
@@ -418,7 +550,7 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-4 of1">
-									<input type="text" class="form-control" id="text"
+									<input type="text" class="form-control" id="offerloc"
 										placeholder="클릭 시 지도가 나와야 함.." />
 								</div>
 								
@@ -431,21 +563,21 @@ clear:both;
 								<div class="col-md-4">
 									<div>
 										<select name="OfferDate" id="OfferDate" class="form-control">
-											<option value="">08:00</option>
-											<option value="">09:00</option>
-											<option value="">10:00</option>
-											<option value="">11:00</option>
-											<option value="">12:00</option>
-											<option value="">13:00</option>
-											<option value="">14:00</option>
-											<option value="">15:00</option>
-											<option value="">16:00</option>
-											<option value="">17:00</option>
-											<option value="">18:00</option>
-											<option value="">19:00</option>
-											<option value="">20:00</option>
-											<option value="">21:00</option>
-											<option value="">22:00</option>
+											<option value="">시간 선택</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00">10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option> 
+										
 										</select>
 									</div>
 								</div>
@@ -463,7 +595,7 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" id="text"
+									<input type="text" class="form-control" id="collectloc"
 										placeholder="클릭 시 지도가 나와야 함.."/>
 								</div>
 								
@@ -476,21 +608,21 @@ clear:both;
 								<div class="col-md-4">
 									<div>
 										<select name="EndDate" id="EndDate" class="form-control">
-											<option value="">08:00</option>
-											<option value="">09:00</option>
-											<option value="">10:00</option>
-											<option value="">11:00</option>
-											<option value="">12:00</option>
-											<option value="">13:00</option>
-											<option value="">14:00</option>
-											<option value="">15:00</option>
-											<option value="">16:00</option>
-											<option value="">17:00</option>
-											<option value="">18:00</option>
-											<option value="">19:00</option>
-											<option value="">20:00</option>
-											<option value="">21:00</option>
-											<option value="">22:00</option>
+											<option value="">시간 선택</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00">10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option> 
+									
 										</select>
 									</div>
 								</div>
@@ -508,28 +640,17 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="date" />
+									<input type="date" class="form-control" id="booking1" />
 								</div>
 								
 								
 								<div class="col-md-5">
 									<div>
 										<select name="BookingStartDate" id="BookingStartDate" class="form-control">
-											<option value="">08:00</option>
-											<option value="">09:00</option>
-											<option value="">10:00</option>
-											<option value="">11:00</option>
-											<option value="">12:00</option>
-											<option value="">13:00</option>
-											<option value="">14:00</option>
-											<option value="">15:00</option>
-											<option value="">16:00</option>
-											<option value="">17:00</option>
-											<option value="">18:00</option>
-											<option value="">19:00</option>
-											<option value="">20:00</option>
-											<option value="">21:00</option>
-											<option value="">22:00</option>
+											<option value="" >시간선택</option>
+											
+											
+											
 										</select>
 									</div>
 								</div>
@@ -547,28 +668,14 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="date" />
+									<input type="date" class="form-control" id="booking2" />
 								</div>
 								
 								
 								<div class="col-md-5">
 									<div>
 										<select name="BookingEndDate" id="BookingEndDate" class="form-control">
-											<option value="">08:00</option>
-											<option value="">09:00</option>
-											<option value="">10:00</option>
-											<option value="">11:00</option>
-											<option value="">12:00</option>
-											<option value="">13:00</option>
-											<option value="">14:00</option>
-											<option value="">15:00</option>
-											<option value="">16:00</option>
-											<option value="">17:00</option>
-											<option value="">18:00</option>
-											<option value="">19:00</option>
-											<option value="">20:00</option>
-											<option value="">21:00</option>
-											<option value="">22:00</option>
+											<option value="" >시간선택</option>
 										</select>
 									</div>
 								</div>
@@ -576,9 +683,9 @@ clear:both;
 							</div>
 							<!-- end 대여 종료 일시 -->
 						
-							<div class="col-md-12 text-right postBtn">
-								<button type="button" class="btn btn-default">취소하기</button>
-								<button type="button" class="btn btn-default" id="postadd">게시물 등록</button>
+							<div class="col-md-12 text-right pBtn">
+								<button type="reset" class="btn btn-default" id="loginBtn">취소하기</button>
+								<button type="button" class="btn btn-default" id="postBtn">게시물 등록</button>
 								<input type="hidden" value="<%=id %>">
 								<input type="hidden" value="<%=pw %>">
 							</div>

@@ -1,8 +1,21 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
+%>
+<%
+	session = request.getSession();
+
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	
+	if(info== null)
+	System.out.println(info);
+	
+
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +43,11 @@ String cp = request.getContextPath();
 	color:var(--hover-color);
 }
 
+.item_content .col-md-2
+{
+	margin: 5px;
 
+}
 
 .category 
 {
@@ -172,6 +189,13 @@ b
 
 }
 
+.container-fluid .row
+{
+	margin-top:15px;
+	margin-left: 15px !important;
+
+}
+
 p
 {
 	color: #5bb0ff;
@@ -198,10 +222,6 @@ p
 
 $(document).ready(function() 
 		{
-			$("#rentPost").click(function() 
-			{
-				$(location).attr("href", "rentpostpage.action");	
-			});
 			
 			$( ".top" ).click( function() {
 				$( "html, body" ).animate( { scrollTop : 0 }, 400 );
@@ -216,6 +236,27 @@ $(document).ready(function()
 			});
 			
 		});
+
+function rentPost() 
+{
+	
+   var id1 = "<%=info %>";
+   
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+		location.href = "loginmain.action";
+		
+	}
+	else 
+	{
+		location.href = "rentpostpage.action";
+		
+	}
+	
+}
+
 
 
 function postDetail(obj) 
@@ -319,9 +360,9 @@ function mouseout(obj)
 
 
 				<div class="row">	
-					<div class="col-md-12 ">
+					<div class="col-md-12 h3">
 					<div class="col-md-12 text-right">
-						<button class="btn"  id="rentPost" name="rentPost">상품등록</button>
+						<button class="btn"  id="rentPost" name="rentPost" onclick="rentPost()">상품등록</button>
 						</div>	<h3 style="font-weight: bold;">실시간 게시글</h3>
 						<hr>
 					</div>	
@@ -333,7 +374,7 @@ function mouseout(obj)
 				<!-- 실시간 게시글  -->
 				<div class="row"> 
 					<div class="col-md-12">
-
+							<div class="row item_content">
 						
 							
 
@@ -341,10 +382,11 @@ function mouseout(obj)
 							<!-- 1열 1번 -->
 						
 							<c:forEach var="rlists" items="${rCateMainList }" varStatus="status">
-							<c:if test="${ status.count%5 eq 0 }" ></c:if>
+							<c:if test="${ status.count%6 eq 0 }" ></c:if>
 							
 							  <div class="col-sm-2 col-md-2 thblock">
-	                           		<div class="thumbnail" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+							   <h4 class="thick"><span class="line">${status.count }</span></h4>
+	                           		<div class="thumbnail" id="${rlists.r_post_code }" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                              <!--    <img src="images/oz.jpg" > -->
 	                                    ${rlists.photo }
 	                                   
@@ -374,7 +416,7 @@ function mouseout(obj)
 						
 					</div>
 				</div> <!-- end 실시간 게시글  -->
-					
+			</div>		
 				<hr>
 					
 

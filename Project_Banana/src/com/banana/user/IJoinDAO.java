@@ -52,4 +52,6 @@ public interface IJoinDAO
 	
 	//비밀번호 재설정
 	public void setPw(JoinDTO dto);
+	
+
 }

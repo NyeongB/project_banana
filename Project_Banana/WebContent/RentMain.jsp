@@ -15,6 +15,8 @@
 	System.out.println(info);
 	
 
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -103,10 +105,10 @@
 		}
 	}
 	
-	window.onload = function() 
+	 window.onload = function() 
 	{
-		var id1 = "<%=info %>";
-		var id2 = "<%=info.getId() %>";
+		var id1 = "<%=info%>";
+		
 		
 		if(id1 == "null" || id1 ==" " )
 		{
@@ -114,15 +116,15 @@
 		}
 		else
 		{
-			$.get("locationajax.action", {id : id2}, function(data) 
+			$.get("locationajax.action", function(data) 
 			{
 				$("#loc").html(data);
-			})
+			}) 
 		}
-		
+		 
 		
 	}
-
+ 
 
 </script>
 
@@ -301,10 +303,17 @@ b
 <!-- content  -->
 <div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12 rentNav">
+			<div class="col-md-12 rentNav form-inline">
 
 				<!-- 주소설정한 값 뜨기 -->
-					<img src="images/icons_b50.png" id="location"><small onclick="loc()" id="loc"></small>
+				<div class="col-md-1">
+					<img src="images/icons_b50.png" id="location">
+				</div>
+				
+				<div class="col-md-11">
+					<small onclick="loc()" id="loc"></small>
+				</div>
+				
 				
 			</div>
 
@@ -333,6 +342,9 @@ b
 				
 				</div>
 			</div>
+			
+			
+			
 			<div class="row">
 				<div class="col-md-12 text-right">
 					<button class="btn" id="rentPost" name="rentPost"  onclick="rentPost()">상품등록</button>

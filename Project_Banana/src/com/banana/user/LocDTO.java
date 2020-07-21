@@ -2,7 +2,45 @@ package com.banana.user;
 
 public class LocDTO
 {
-	private String loc_code, loc_bcode, loc_name;
+	private String loc_code, loc_bcode, loc_name, locname1, locname2, b_user_code;
+
+	
+	
+	
+	
+	
+	
+	
+	public String getB_user_code() 
+	{
+		return b_user_code;
+	}
+
+	public void setB_user_code(String b_user_code)
+	{
+		this.b_user_code = b_user_code;
+	}
+
+	public String getLocname1() 
+	
+	{
+		return locname1;
+	}
+
+	public void setLocname1(String locname1) 
+	{
+		this.locname1 = locname1;
+	}
+
+	public String getLocname2()
+	{
+		return locname2;
+	}
+
+	public void setLocname2(String locname2) 
+	{
+		this.locname2 = locname2;
+	}
 
 	public String getLoc_code()
 	{
