@@ -128,8 +128,8 @@ p
 									<p>로그인 완료</p>
 									
 									<h5>세션 정보</h5>
-									<h5>세션 닉네임 : <%=id %></h5>
-									<h5>세션 아이디 : <%=nick %></h5>
+									<h5>세션 닉네임 : <%=nick %></h5>
+									<h5>세션 아이디 : <%=id %></h5>
 								    
   									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
 								</div>

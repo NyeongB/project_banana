@@ -198,7 +198,7 @@ $().ready(function()
 				<div class="col-md-12">
 					 <ol class="breadcrumb">
            				<li class="breadcrumb-item"><a href="">Home</a></li>
-            			<li class="breadcrumb-item"><a href="r_main.action">렌트</a></li>
+            			<li class="breadcrumb-item"><a href="<%=cp %>/r_main.action">렌트</a></li>
             			<li class="breadcrumb-item"><a>유아동/반려동물</a></li>
             			<li class="breadcrumb-item"><a>강아지 용품</a></li>
             			<li class="breadcrumb-item"><a>의류</a></li>
