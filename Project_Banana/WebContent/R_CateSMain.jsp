@@ -226,7 +226,12 @@ $(document).ready(function()
 			});
 		});
 
-
+function postDetail(obj) 
+{
+	var a = obj.getAttribute("id");
+	$(location).attr("href", "rpostdetailpage.action?r_post_code=" + a);
+	
+}
 
 
 function liColor(obj)
@@ -370,11 +375,11 @@ function mouseout(obj)
 							
 							<!-- 1열 1번 -->
 							
-							<c:forEach var="rlists" items="${rCatemMainList }" >
+							<c:forEach var="rlists" items="${rCatemMainList }" varStatus="status">
 							<c:if test="${ status.count%5 eq 0 }" ></c:if>
 							
 							  <div class="col-sm-2 col-md-2 thblock">
-	                           		<div class="thumbnail" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+	                           		<div class="thumbnail" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                              <!--    <img src="images/oz.jpg" > -->
 	                                    ${rlists.photo }
 	                                   

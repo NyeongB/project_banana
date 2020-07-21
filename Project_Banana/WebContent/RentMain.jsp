@@ -479,7 +479,7 @@ b
 	                                        		<small>${rnewList.nickname }</small>
 	                                       	 </div>
 	  
-	                                      <b>${rnewList.title }</b>
+	                                      <h5 class="thick">${rnewList.title }</h5>
 	                                      <p>${rnewList.offerloc }/${rnewList.collectloc }</p>
 	                                      
 	                                      <!-- 가격!! -->  
