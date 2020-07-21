@@ -1,8 +1,18 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+%>
+<%
+	session = request.getSession();
+
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+
+	if(info== null)
+	System.out.println(info);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +25,15 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+ <%-- 
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/jquery-ui.css">
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script> --%> 
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 <style type="text/css">
 
 
@@ -154,9 +173,10 @@ textarea
 </style>
 
 <script type="text/javascript">
+
 $().ready(function() 
 {
-	$('.carousel').carousel();
+	/* $('.carousel').carousel();
 	
 	$('.carousel').carousel
 	({
@@ -167,11 +187,97 @@ $().ready(function()
 	
 	  wrap: true
 	
+	}); // 이게 뭐지....? */
+			
+			
+
+	$( ".top" ).click( function() {
+		$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+		return false;
+	} );
+	
+	
+	$(".bottom").click(function() 
+	{
+		$("html, body").animate({scrollTop: $(document).height() }, "slow");
+		return false;
 	});
+	
+	
+	$("#qa").click(function() 
+	{
+		$("html, body").animate({scrollTop : $(document).height() }, "slow");	
+		
+	});
+	
+	$(function() 
+	{
+		var dBtn = $(".nav ul > li");
+		dBtn.find("a").click(function()
+		{
+			dBtn.removeClass("active");
+			$(this).parent().addClass("active");
+			
+			
+		});
+	});
+	
+	
+/* 
+		$("#date1").datepicker(
+				{
+					dateFormat : "yy-mm-dd"
+					, changeYear : true
+					, changeMonth : true
+				
+				});
+	데이트피커...	 */
 
 	
 	
+	
+		
+		
+
+	
 });
+
+
+
+
+function jjim() 
+{
+	
+   var id1 = "<%=info %>";
+   
+   
+   
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+		location.href = "loginmain.action";
+		
+	}
+	else 
+	{
+		alert("찜 목록에 추가하시겠습니까?")
+		location.href = "rjjiminsert.action";
+		
+	}
+	
+	
+	
+}
+
+
+
+
+	
+  
+
+
+
 
 </script>
 
@@ -250,6 +356,7 @@ $().ready(function()
 						
 						<div class="col-md-1"></div>
 						
+						<form action=""  id="reservationform">
 						<div class="col-md-6 mid">
 							<div class="row">
 								<div class="col-md-12">
@@ -301,7 +408,7 @@ $().ready(function()
 										<div class="Ss">
 										<div class="col-md-5">
 										<b>수령일</b><br>
-										<input type="date" placeholder="수령일을 입력하세요." class="form-control">
+										<input type="text" placeholder="수령일을 입력하세요." class="form-control" id="date1">
 										</div>
 										
 										<div class="col-md-2">
@@ -310,7 +417,7 @@ $().ready(function()
 										
 										<div class="col-md-5">
 										<b>반납일</b><br>
-										<input type="date" placeholder="반납일을 입력하세요." class="form-control">
+										<input type="text" placeholder="반납일을 입력하세요." class="form-control" id="date2">
 										</div>
 										
 										<div class="col-md-12 text-right">
@@ -323,14 +430,14 @@ $().ready(function()
 							
 							<div class="row">
 								<div class="col-md-12 text-center Btn">
-								<button type="button" class="btn btn-default" id="btn1">찜 하기</button>
+								<button type="button" class="btn btn-default" id="btn1" onclick="jjim()" >찜 하기</button>
 								<button type="button" class="btn btn-default" id="btn2">예약 하기</button>
 								
 								</div>
 							</div>
 							
 						</div> <!-- end col-md-6 -->
-	
+						</form>
 	
 						<div class="col-md-1"></div>
 
@@ -348,8 +455,8 @@ $().ready(function()
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-tabs">
-  						<li role="presentation" class="active"><a href="#">상세정보</a></li>
-  						<li role="presentation"><a href="#">Q ＆ A</a></li>
+  						<li role="presentation" ><a href="#" >상세정보</a></li>
+  						<li role="presentation"><a href="#" id="qa" class="active">Q ＆ A</a></li>
 
 					</ul>
 				</div>
@@ -357,7 +464,7 @@ $().ready(function()
 			
 			
 			<div class="row">
-				<div class="col-md-12 detail">
+				<div class="col-md-12 detail" id="detail">
 				<c:forEach var="rpostDetail" items="${rpostDetail }">
 					${rpostDetail.content }
 				</c:forEach>
@@ -368,7 +475,7 @@ $().ready(function()
 			
 			<div class="row">
 				<div class="col-md-12 detail">
-				<h3>Q ＆ A</h3>
+				<h3 id="QA">Q ＆ A</h3>
 				
 				<div>
 					<textarea rows="" cols="" placeholder="상품문의 입력"></textarea>
@@ -390,7 +497,7 @@ $().ready(function()
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-				<div><button class="btn">▲</button><button class="btn">▼</button></div>
+				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
 		
 		</div>
@@ -403,7 +510,7 @@ $().ready(function()
 <!-- content end -->
 
 <!-- footer  -->
-<div class="row">
+<div class="row" id="bottom">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>

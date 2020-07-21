@@ -1,9 +1,20 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
 	String cp = request.getContextPath();
+%>
+<%
+	session = request.getSession();
+
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	
+	if(info== null)
+	System.out.println(info);
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -23,11 +34,19 @@
 
 	$(document).ready(function() 
 	{
-		$("#rentPost").click(function() 
-		{
-			$(location).attr("href", "rentpostpage.action");	
-		});
 	
+		
+		$( ".top" ).click( function() {
+			$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+			return false;
+		} );
+		
+		
+		$(".bottom").click(function() 
+		{
+			$("html, body").animate({scrollTop: $(document).height() }, "slow");
+			return false;
+		});
 	
 	});
 
@@ -38,8 +57,71 @@
 		var a = obj.getAttribute("id");
 		$(location).attr("href", "rpostdetailpage.action?r_post_code=" + a);
 		
+		
+		
 	}
 	
+	
+	
+	function rentPost() 
+	{
+		
+	   var id1 = "<%=info %>";
+	   
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+			location.href = "loginmain.action";
+			
+		}
+		else 
+		{
+			location.href = "rentpostpage.action";
+			
+		}
+		
+	}
+	
+	
+	
+	function loc() 
+	{
+		var id1 = "<%=info %>";
+	   
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+			location.href = "loginmain.action";
+			
+		}
+		else 
+		{
+			location.href = "redirect:RentMain.jsp";
+			
+		}
+	}
+	
+	window.onload = function() 
+	{
+		var id1 = "<%=info %>";
+		var id2 = "<%=info.getId() %>";
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			$("#loc").html("위치 설정하기");
+		}
+		else
+		{
+			$.get("locationajax.action", {id : id2}, function(data) 
+			{
+				$("#loc").html(data);
+			})
+		}
+		
+		
+	}
 
 
 </script>
@@ -221,9 +303,8 @@ b
 		<div class="row">
 			<div class="col-md-12 rentNav">
 
-				
-					<img src="images/icons_b50.png" id="location"> <small>서울시
-						마포구 서교동</small>
+				<!-- 주소설정한 값 뜨기 -->
+					<img src="images/icons_b50.png" id="location"><small onclick="loc()" id="loc"></small>
 				
 			</div>
 
@@ -254,7 +335,7 @@ b
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-right">
-					<button class="btn" id="rentPost" name="rentPost" >상품등록</button>
+					<button class="btn" id="rentPost" name="rentPost"  onclick="rentPost()">상품등록</button>
 				</div>
 			</div>
 			
@@ -368,6 +449,7 @@ b
 	                                </div>
 	                   		  </div>
 	                   		  
+	                   		  		
 	                   		  
 	                   		  
 							<!-- 1열 5번 -->
@@ -467,7 +549,7 @@ b
 							<c:forEach var="rnewList" items="${rnewList }" varStatus="status" begin="1" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
 							  <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           		<div class="thumbnail" id="${rnewList.r_post_code }" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+	                           		<div class="thumbnail" id="${rnewList.r_post_code }" onclick="postDetail(this)">
 	                                 ${rnewList.photo }
 	                                   
 	                                    <div class="caption">
@@ -518,9 +600,9 @@ b
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-				<div><button class="btn">▲</button><button class="btn">▼</button></div>
+				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
-
+		
 		</div>
 	</div>
 </div>
@@ -530,7 +612,7 @@ b
 <!-- content end -->
 
 <!-- footer  -->
-<div class="row footer">
+<div class="row footer" id="bottom">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>

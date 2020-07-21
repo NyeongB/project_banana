@@ -224,6 +224,18 @@ $(document).ready(function()
 			{
 				$(location).attr("href", "rentpostpage.action");	
 			});
+			
+			$( ".top" ).click( function() {
+				$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+				return false;
+			} );
+			
+			
+			$(".bottom").click(function() 
+			{
+				$("html, body").animate({scrollTop: $(document).height() }, "slow");
+				return false;
+			});
 		});
 
 function postDetail(obj) 
@@ -453,13 +465,13 @@ function mouseout(obj)
 			</div> <!-- end col-md-8 -->
 
 			<div class="col-md-2">
-				<div class="floating">
-								<div><span  class="thick">최근게시물</span></div>
-								<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-								<div><button class="btn">▲</button><button class="btn">▼</button></div>
-				</div>
-			
+			<div class="floating">
+				<div><span  class="thick">최근게시물</span></div>
+				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
+		
+		</div>
 
 
 
@@ -476,7 +488,7 @@ function mouseout(obj)
 	<!-- content end -->
 
 	<!-- footer  -->
-	<div class="row">
+	<div class="row" id="bottom">
 		<div class="col-md-12">
 			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>

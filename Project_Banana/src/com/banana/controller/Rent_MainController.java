@@ -33,6 +33,10 @@ public class Rent_MainController
 			{
 				String view = null; 
 				
+				try
+				{
+				
+				
 				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 				
 				RCateDTO dto = new RCateDTO();
@@ -41,12 +45,17 @@ public class Rent_MainController
 				model.addAttribute("cateList", dao.cateList(dto));
 				model.addAttribute("rCateMainList", dao.rCateMainList(dto));
 				
-			
-				
 				view = "/R_CateMain.jsp";
 				
+					
 				
-				return view;
+				
+				}
+				catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				return view;	
 			}
 			
 		
@@ -55,8 +64,11 @@ public class Rent_MainController
 		  @RequestMapping(value = "/r_catesmain.action", method = RequestMethod.GET)
 		  public String cateList(Model model, String bid, String mid) 
 		  { 
+			  
 			  String view = null;
 		  
+			  try
+			  {
 			  IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 			  
 			  RCateDTO dto = new RCateDTO();
@@ -68,7 +80,10 @@ public class Rent_MainController
 			  model.addAttribute("rCatemMainList", dao.rCatemMainList(dto));
 			  
 			  view = "/R_CateSMain.jsp";
-		  
+			  }catch(Exception e)
+			  {
+				System.out.println(e.toString());
+			  }
 		  
 		  return view; 
 		  }
@@ -88,13 +103,18 @@ public class Rent_MainController
 			
 			String view = null;
 			
+			try
+			{
 			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 			
 			model.addAttribute("rnewList", dao.rnewList());
 			model.addAttribute("rCateList", dao.rCateList());
 			
 			view = "/RentMain.jsp";
-			
+			}catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
 			
 			return view;
 			
@@ -111,10 +131,13 @@ public class Rent_MainController
 		 public String rentpostpage(Model model) 
 		 {
 			
+			
+			
 			String view = null;
 			
-			
-			LoginDTO dto = new LoginDTO();
+			try
+			{
+			/*LoginDTO dto = new LoginDTO();
 			String id = "qwer11";
 			String pw = "java006$";
 		
@@ -123,12 +146,13 @@ public class Rent_MainController
 			
 			ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
 			String login = dao.general(dto);
-			
+			*/
 
 			
 			// System.out.println(login);
 			
 			// 로그인 시
+			/*
 			if(login != null)
 			{
 				
@@ -142,8 +166,13 @@ public class Rent_MainController
 				
 				view = "/RentMain.jsp";
 
-			}
-				
+			}*/
+			
+			view = "RentPostPage.jsp";
+			}catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}	
 
 			return view;
 			
@@ -194,6 +223,8 @@ public class Rent_MainController
 				
 				String view = null;
 				
+				try
+				{
 				
 				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 				RPostDTO dto = new RPostDTO();
@@ -205,14 +236,57 @@ public class Rent_MainController
 				model.addAttribute("dealLoc", dao.dealLoc(dto));
 				
 				view = "/UserRentDetail.jsp";
-				
+				}catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
 				return view;
 				
 			 }
 			
 			
+			// 찜하기 클릭 시
+				/*
+				 * @RequestMapping(value = "/rjjiminsert.action", method = RequestMethod.GET)
+				 * public String jjiminsert(Model model, HttpServletRequest request) {
+				 * 
+				 * 
+				 * 
+				 * }
+				 */
 		
-		
+			
+			
+			// 유저에 따라 다른 주소 설정 값 받아오기
+			
+			@RequestMapping(value = "/locationajax.action", method = RequestMethod.GET)
+			 public String location(Model model, HttpServletRequest request) 
+			 {
+				
+				String view = null;
+				
+				try
+				{
+				
+				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+				RPostDTO dto = new RPostDTO();
+				String rpost_code = request.getParameter("r_post_code");
+				
+				dto.setR_post_code(rpost_code);
+				
+				model.addAttribute("rpostDetail", dao.rpostDetail(dto));
+				model.addAttribute("dealLoc", dao.dealLoc(dto));
+				
+				view = "/UserRentDetail.jsp";
+				}catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				return view;
+				
+			 }
+			
+			
 		
 		
 		
