@@ -163,11 +163,12 @@ public class G_GroupBuyingMainController
 			
 			GCateDTO dto = new GCateDTO();
 			dto.setG_cate_code(request.getParameter("mCate"));
+			dto.setG_cate_bcode(request.getParameter("cate"));
 			
-			model.addAttribute("postCateList", dao.cateMList(dto));
+			model.addAttribute("postMCateList", dao.cateMList(dto));
 			/* model.addAttribute("cateList", dao.cateList(dto)); */
 			
-			view = "/CateAjax.jsp";
+			view = "/CateAjax2.jsp";
 			
 			
 			return view;

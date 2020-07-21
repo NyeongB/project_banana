@@ -79,24 +79,35 @@ p
 </style>
 <script type="text/javascript">
 
+	var catecode;
+	var mcatecode;
+	
+
 	//대분류 카테고리 눌렀을 때 
 	function cate(obj)
 	{
 		//alert("확인");
-		
-		var a = obj.getAttribute("id");
+		/* cdocument.getEonsole.log(document.getElementById("tblColor2").childNodes);
+		lementById("tblColor2").childNodes.style.backgroundColor = "#000000"; */
+
+		catecode = obj.getAttribute("id");
 		
 		//alert(a);
-		requestCate(a);
+		requestCate(catecode);
 	
+		
+		document.getElementById(catecode).style.background = "#F2F2F2";
+		
 	}
 	
-	function requestCate(a)
+	function requestCate(catecode)
 	{
-		$.get("ajaxcate.action", {cate : a}, function(data)
+		$.get("ajaxcate.action", {cate : catecode}, function(data)
 		{
 		
 			//alert(data);
+			/* alert($(".tb1 td").length);
+			console.log($(".tb1 td")); */
 			$("#cate").html(data);
 		});
 		
@@ -105,26 +116,64 @@ p
 	//중분류 카테고리 눌렀을 때
 	function mCate(obj)
 	{
-		alert("확인");
+		//alert("확인");
 		
-		var a = obj.getAttribute("id");
+		mcatecode = obj.getAttribute("id");
 		
-		alert(a);
-		requestMCate(a);
+		//alert(mcatecode);
+		requestMCate(mcatecode);
+		document.getElementById(mcatecode).style.background = "#F2F2F2";
 	
 	}
 	
-	function requestMCate(a)
+	function requestMCate(mcatecode)
 	{
-		$.get("ajaxmcate.action", {mCate : a}, function(data)
+		$.get("ajaxmcate.action", {mCate : mcatecode, cate : catecode}, function(data)
 		{
 		
 			//alert(data);
+			
 			$("#mCate").html(data);
+			alert($(".tb2 td").length);
+			if($(".tb2 td").length<4)
+				addRow();
+			//alert($(".tb2 td").length)
+			
+			
 		});
 		
 	}
-
+	
+	$().ready(function()
+	{
+		$("#postBtn").click(function()
+		{
+			if($("#title").val().trim()=="")
+			{
+				alert("제목을 입력해주세요");
+				return;
+			}
+			if($("#brand").val().trim()=="")
+			{
+				alert("브랜드를 입력해주세요");
+				return;
+			}
+			if($("#content").val().trim()=="")
+			{
+				alert("글 내용을 적어주세요");
+				return;
+			}
+			
+				
+			
+		});
+	});
+	
+	function addRow()
+	{
+		
+			document.getElementById("mCate").insertRow(-1);
+	}
 </script>
 </head>
 <body>
@@ -153,7 +202,7 @@ p
 				
 				<form role="form" class="form-group">
 				
-					<div>제목(*) <input type="text" class="form-control" id="text" /></div>
+					<div>제목(*) <input type="text" class="form-control" id="title" name="title"/></div>
 					
 					<div>카테고리(*)</div>
 					<div class="col-md-12 category" > 
@@ -162,9 +211,8 @@ p
 							
 							<div class="table-wrapper-scroll-y my-custom-scrollbar">
 	
-								  <table class="table table-bordered mb-0">
-							
-								    <tbody>
+								  <table class="table table-bordered mb-0 tb1" id="tblColor">							
+								    <tbody id="tblColor2">
 								    
 								      <tr>
 								        <td onclick="cate(this)" id="G_CATE5">식품</td>
@@ -194,7 +242,7 @@ p
 						
 							<div class="table-wrapper-scroll-y my-custom-scrollbar">
 									<!-- <div id="cate"></div> -->
-								     <table id="cate" class="table table-bordered mb-0"></table>  
+								     <table id="cate" class="table table-bordered mb-0 tb1"></table>  
 							</div>
 									
 						</div><!-- end col-md-4 -->
@@ -206,30 +254,8 @@ p
 							
 							<div class="table-wrapper-scroll-y my-custom-scrollbar">
 	
-								  <table id="mCate" class="table table-bordered mb-0">
-								   
-								    <!-- <tbody>
-								      <tr>
-								       
-								        <td>목줄</td>
-								        
-								      </tr>
-								      <tr>
-								        <td>사료</td>
-								       
-								      </tr>
-								      <tr>
-								        <td>간식</td>						      
-								      </tr>
-								      <tr>
-								        <td>의류</td>
-								      </tr>
-								      <tr>
-								        <td>장난감</td>
-								      </tr>
-		
-								    </tbody>
-								  </table> -->
+								  <table id="mCate" class="table table-bordered mb-0 tb2">
+							
 								  </table>
 									
 							</div>
@@ -240,7 +266,7 @@ p
 					
 					
 			
-					<div>브랜드명(*) <input type="text" class="form-control" id="text" /></div>
+					<div>브랜드명(*) <input type="text" class="form-control" id="brand" /></div>
 					
 					<div>
 						사진(*)<br>
@@ -268,7 +294,7 @@ p
 					</div>
 					
 				
-					<div>글 내용(*) <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea></div>
+					<div>글 내용(*) <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea></div>
 					
 					<div class="col-md-12">
 						<div class="col-md-4">가격(*)<input type="text" class="form-control" id="text" /></div>
@@ -401,7 +427,7 @@ p
 						</div>
 									
 						<div class="Btn">
-						<button type="submit" class="btn btn-primary" id="loginBtn">게시물 등록</button>
+						<button type="submit" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
 						</div>
 					</div><!--end col-md-12  -->
