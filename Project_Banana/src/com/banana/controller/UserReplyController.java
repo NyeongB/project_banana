@@ -1,5 +1,8 @@
 package com.banana.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.my.IUserReplyDAO;
 import com.banana.my.UserReplyDTO;
+import com.banana.util.SessionInfo;
 
 @Controller
 public class UserReplyController
@@ -20,12 +24,20 @@ public class UserReplyController
 	
 	// 초기에 불러오는 유저 댓글 리스트
 	@RequestMapping(value = "/userreplylist.action", method = RequestMethod.GET)
-	public String rReplyList(Model model)
+	public String rReplyList(Model model, HttpServletRequest request)
 	{
 			
 		String view = null;
+		
 		// 세션으로 받아올부분
-		String user_code = "USER49";
+		HttpSession session = request.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("user");
+		String user_code = info.getId();
+		
+		// 세션이 없을 경우 로그인 페이지로 
+		if(info == null)
+			return "/loginmain.action";
+		
 		UserReplyDTO dto = new UserReplyDTO();
 		
 		// 최신순
@@ -44,15 +56,21 @@ public class UserReplyController
 	}
 	// Ajax 처리 시 불러오는 유저 리스트
 	@RequestMapping(value = "/usergreplylist.action", method = RequestMethod.GET)
-	public String rReplyList(Model model, String order)
+	public String rReplyList(Model model, String order, HttpServletRequest request)
 	{
 		
 		String view = null; 
 		
-		// 세션으로 받아올 부분
-		String user_code = "USER49";
+		// 세션에 있는 유저코드 받아오기
+		HttpSession session = request.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("user");
+		String user_code = info.getId();
 		
-		System.out.println(order);
+		// 세션이 없을 경우 로그인 페이지로 
+		if(info == null)
+			return "/loginmain.action";
+		
+
 		UserReplyDTO dto = new UserReplyDTO();	
 		
 		if(Integer.parseInt(order) == 1) 

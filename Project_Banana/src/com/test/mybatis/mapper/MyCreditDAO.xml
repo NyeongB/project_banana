@@ -7,7 +7,7 @@
 <mapper namespace="com.banana.my.IMyCreditDAO">
 	
 	<select id="brix" resultType="int">
-	SELECT AVG(CREDIT_SCORE) AS CREDIT_SCORE
+	SELECT NVL(AVG(CREDIT_SCORE),0) AS CREDIT_SCORE
 	FROM CREDIT_SCORE
 	WHERE B_USER_CODE = #{b_user_code}
 	</select>	

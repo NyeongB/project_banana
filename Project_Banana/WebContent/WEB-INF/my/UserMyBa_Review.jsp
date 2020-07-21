@@ -92,18 +92,23 @@ i
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="reviewLists" items="${reviewList }" varStatus="status">
+						<c:if test="${check eq '0' }">
+							<c:forEach var="reviewLists" items="${reviewList }" varStatus="status">
+								<tr>
+									<td>${status.count }</td>
+									<td>${reviewLists.content }</td>
+									<td>${reviewLists.score }
+									<!-- <i class="fa fa-star" aria-hidden="true"></i> --></td>
+									<td>${reviewLists.w_nickname }</td>
+									<td>${reviewLists.wDate } ${check }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${check eq '1' }">
 							<tr>
-								<td>${status.count }</td>
-								<td>${reviewLists.content }</td>
-								<td>${reviewLists.score }
-								<!-- <i class="fa fa-star" aria-hidden="true"></i> --></td>
-								<td>${reviewLists.w_nickname }</td>
-								<td>${reviewLists.wDate }</td>
+								<td>${msg }</td>
 							</tr>
-						</c:forEach>
-						
-						
+						</c:if>
 					</tbody>
 				</table>
 			</div> <!-- table end -->
