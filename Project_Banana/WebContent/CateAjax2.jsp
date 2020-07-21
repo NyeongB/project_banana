@@ -4,7 +4,7 @@
 <table id="tblCount">
 <c:forEach var="list" items="${postMCateList }">
 	<tr>
-		<td name= "${list.g_cate_code }" id="${list.g_cate_code }">${list.cate_name }</td>
+		<td name= "${list.g_cate_code }" id="${list.g_cate_code }" onclick="cateFinal(this)">${list.cate_name }</td>
 	</tr>
 </c:forEach>
 </table> 

@@ -134,37 +134,87 @@ p
 			//alert(data);
 			
 			$("#mCate").html(data);
-			alert($(".tb2 td").length);
+			/* alert($(".tb2 td").length);
 			if($(".tb2 td").length<4)
 				addRow();
-			//alert($(".tb2 td").length)
+			alert($(".tb2 td").length) */
 			
 			
 		});
 		
 	}
 	
+	//소분류 카테고리 클릭
+	function cateFinal(obj)
+	{
+		scatecode = obj.getAttribute("id");
+		alert(scatcode);
+	}
+	
 	$().ready(function()
 	{
+		//가격에 해당하는 부분은 숫자만 가능하도록
+		$("input:text[numberOnly]").on("keyup", function() 
+		{
+			 $(this).val($(this).val().replace(/[^0-9]/g,""));
+		});
+		
+		//폼 전송 전 유효성 검사
 		$("#postBtn").click(function()
 		{
+			//제목 빈칸인지 체크
 			if($("#title").val().trim()=="")
 			{
 				alert("제목을 입력해주세요");
+				$("#title").focus();
 				return;
 			}
+			//브랜드 빈칸인지 체크
 			if($("#brand").val().trim()=="")
 			{
 				alert("브랜드를 입력해주세요");
+				$("#brand").focus();
 				return;
 			}
+			//글 내용 빈칸인지 체크
 			if($("#content").val().trim()=="")
 			{
 				alert("글 내용을 적어주세요");
+				$("#content").focus();
+				return;
+			} 
+			//가격 빈칸인지 체크
+			if($("#cost").val().trim()=="")
+			{
+				alert("가격을 적어주세요");
+				$("#cost").focus();
+				
+				return;
+			} 
+		
+			//할인가격 체크
+			if($("#dis_cost").val().trim()=="")
+			{
+				alert("판매 가격을 적어주세요");
+				$("#dis_cost").focus();
+				return;
+			}
+			//목표 인원 빈칸인지 체크
+			if($("#goal").val().trim()=="")
+			{
+				alert("목표인원을 설정해주세요");
+				$("#goal").focus();
+				return;
+			}
+			//목표 인원이 올바른지 체크
+			if(Number($("#goal").val())<1)
+			{
+				alert("목표인원은 한명 이상이어야 합니다.");
+				$("#goal").focus();
 				return;
 			}
 			
-				
+			$("#postItem").submit();
 			
 		});
 	});
@@ -174,6 +224,9 @@ p
 		
 			document.getElementById("mCate").insertRow(-1);
 	}
+	
+	
+
 </script>
 </head>
 <body>
@@ -200,7 +253,7 @@ p
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
 				
-				<form role="form" class="form-group">
+				<form role="form" class="form-group" name="postItem" id="postItem">
 				
 					<div>제목(*) <input type="text" class="form-control" id="title" name="title"/></div>
 					
@@ -297,18 +350,21 @@ p
 					<div>글 내용(*) <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea></div>
 					
 					<div class="col-md-12">
-						<div class="col-md-4">가격(*)<input type="text" class="form-control" id="text" /></div>
+						
+						<div class="col-md-4">가격(*)<p>숫자만 입력 가능</p>
+						<input type="text" class="form-control" id="cost" numberonly = "true" /></div>
 					</div>
 					
 					<div class="col-md-12">	
-						<div class="col-md-4">할인가(*)<input type="text" class="form-control" id="text" /></div>
+						<div class="col-md-4">할인가(*)<p>숫자만 입력 가능</p>
+						<input type="text" class="form-control" id="dis_cost" numberonly = "true"/></div>
 					</div>
 					
 					<div class="col-md-12">
-						<div class="col-md-12">목표인원(*)</div>
+						<div class="col-md-12">목표인원(*)<p>숫자만 입력 가능</p></div>
 						
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="text" />
+							<input type="text" class="form-control" id="goal" numberonly = "true" />
 						</div>
 					</div>
 					
@@ -427,7 +483,7 @@ p
 						</div>
 									
 						<div class="Btn">
-						<button type="submit" class="btn btn-primary" id="postBtn" >게시물 등록</button>
+						<button type="button" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
 						</div>
 					</div><!--end col-md-12  -->

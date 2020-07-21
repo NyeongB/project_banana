@@ -296,116 +296,76 @@ a:active
 				<div class="row"> 
 					<div class="col-md-12">
 						<div class="row item_content">
-	                  	<c:forEach var="glists" items="${gCateMainList }" varStatus="status"  >
-	                  	<c:if test="${ status.count%6 eq 0 }" ></c:if>
+	                  		<c:forEach var="glists" items="${gCateMainList }" varStatus="status"  >
+	                  		<c:if test="${ status.count%6 eq 0 }" ></c:if>
 
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           	
-	                           			${glists.photo }
-	                           			<div class="caption">
-	                      
-	                                      <h5 class="thick">${glists.title }</h5>
-	                                      <div class="col-md-12">
-                                   			<div class="col-md-6">
-                                   			</div>
-                                  			<div class="col-md-6 text-right">
-                                    			<small>5분전</small>
-                                    		</div>
-                                        </div>
-                                        
-                                        <div class="col-md-12 text-right wr">
-                                        	<small>${glists.nickname }</small>
-                                        </div>
-	                                      <p>${glists.loc_name }</p>
-	                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>                         
-	                                    </div>
-	                                    
-	                                    
-	                                    
-	                           		    
-	                           </div>
-	                     </div>
-	                     </c:forEach>  
-					
-	
-					<%-- <!-- 1열 1번 -->
-					<c:forEach var="glists" items="${gCateMainList }" begin="1" end="5">
-					
-						<!-- <div class="col-md-1"></div> -->
-						<div class="col-sm-2 col-md-2 thblock">
-                           		<div class="thumbnail">
-                                 <!-- <img src="images/oz.jpg" > -->
-                                ${glists.photo }
-                                   
-                                    <div class="caption">
-                                   		<div class="col-md-12">
-                                   			<div class="col-md-6">
-                                    			<!-- <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> -->
-                                   			</div>
-                                  			<div class="col-md-6 text-right">
-                                    			<small>5분전</small>
-                                    		</div>
-                                        </div>
-                                        
-                                        <div class="col-md-12 text-right wr">
-                                        	<small>${glists.nickname }</small>
-                                        </div>
-                                      
-                                        
-                                      <b>${glists.title }</b>
-                                      <p>${glists.loc_name }</p>
-                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber>            
-                                    </div>
-                                </div>
-                   		  </div>
-					</c:forEach><!-- 카테고리 해당 게시물 하나 부르기  -->
-					 --%>
-					
-					
-				<hr>
+		                     <div class="col-sm-2 col-md-2">
+		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
+		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+		                           		
+		                           			<!-- <img src="images/oz.jpg" > -->
+		                           	
+		                           			${glists.photo }
+		                           			<div class="caption">
+		                      
+		                                      <h5 class="thick">${glists.title }</h5>
+		                                      <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>
+	                                  			<div class="col-md-6 text-right">
+	                                    			<small>5분전</small>
+	                                    		</div>
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>${glists.nickname }</small>
+	                                        </div>
+		                                      <p>${glists.loc_name }</p>
+		                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>                         
+		                                    </div>		    
+	                     		 </div>
+	                   		</div>
+	                     	</c:forEach> 
+						 <hr>
 					
 
-				<div class="row">
-					<div class="col-md-12">
-
-						<!-- 페이징 바 -->
-						<div class="col-md-12 text-center">
-							<nav>
-								<ul class="pagination">
-									<li class="disabled"><a href="#" aria-label="Previous"><span
-											aria-hidden="true">&laquo;</span></a></li>
-									<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#" aria-label="Next"><span
-											aria-hidden="true">&raquo;</span></a></li>
-								</ul>
-							</nav>
-						</div>
-						<!-- end 페이징 바 -->
-						<div class="col-md-2">
-							<div class="floating">
-								<div><span  class="thick">최근게시물</span></div>
-								<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-								<div><button class="btn">▲</button><button class="btn">▼</button></div>
-							</div>
-				
-						</div>
+							<div class="row">
+								<div class="col-md-12">
+			
+									<!-- 페이징 바 -->
+									<div class="col-md-12 text-center">
+										<nav>
+											<ul class="pagination">
+												<li class="disabled"><a href="#" aria-label="Previous"><span
+														aria-hidden="true">&laquo;</span></a></li>
+												<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">5</a></li>
+												<li><a href="#" aria-label="Next"><span
+														aria-hidden="true">&raquo;</span></a></li>
+											</ul>
+										</nav>
+									</div>
+									<!-- end 페이징 바 -->
+									<div class="col-md-2">
+										<div class="floating">
+											<div><span  class="thick">최근게시물</span></div>
+											<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+											<div><button class="btn">▲</button><button class="btn">▼</button></div>
+										</div>
 							
-			
-			
+									</div>
+
+							</div><!--end col-md-12  -->
+						</div><!--end row  -->
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 
 
 <!-- content end -->
