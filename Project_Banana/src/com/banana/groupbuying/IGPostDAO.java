@@ -29,5 +29,8 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> gApplyCount(GPostDTO dto);
 	
 	//상품 등록 시 카테고리
-	public ArrayList<GCateDTO> postCateList(String cate);
+	//public ArrayList<GCateDTO> postCateList(String cate);
+	
+	//나의 공동구매 리스트
+	public ArrayList<GPostDTO> gMyList();
 }

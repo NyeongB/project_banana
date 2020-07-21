@@ -81,6 +81,7 @@ public class G_GroupBuyingMainController
 		  
 		  model.addAttribute("gNewList", dao.gNewList());
 		  model.addAttribute("gCateList", dao.gCateList());
+		  model.addAttribute("myList", dao.gMyList());
 
 		  view = "/G_GroupBuyingMain.jsp";
 		  
