@@ -42,6 +42,19 @@
 
 
 </style>
+<script type="text/javascript">
+	
+	function cancle(obj)
+	{
+		//alert("확인");
+		var a = obj.getAttribute("id");
+		
+		//alert(a);
+		
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
+	}
+
+</script>
 </head>
 <body>
 <!-- Header  -->
@@ -102,14 +115,15 @@
 				
 				</div>
 			</div>
-			</c:forEach>
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<button class="btn">포인트충전</button>
 					<button class="btn">결제하기</button>
-					<button class="btn">결제취소</button>
+					<button class="btn" id="${lists.g_post_code }" onclick="cancle(this)">결제취소</button>
 				</div>
 			</div>
+			</c:forEach>
+			
 		</div>
 		<div class="col-md-3">
 		</div>
