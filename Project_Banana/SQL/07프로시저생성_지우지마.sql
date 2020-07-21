@@ -572,3 +572,45 @@ BEGIN
 END;
 --==>>Procedure PRC_SUNGJUK_INSERT이(가) 컴파일되었습니다.
 
+
+---
+-- 광고신청 프로시저 
+
+-- 광고신청 프로시저 테스트 
+-- 
+
+
+CREATE OR REPLACE PROCEDURE PRC_ADV_APPLY
+(
+  V_ADV_TYPE_CODE IN ADV_TYPE.ADV_TYPE_CODE%TYPE    -- 광고유형코드(위,옆,아래)
+, V_B_USER_CODE    IN B_USER.B_USER_CODE%TYPE                 -- 유저코드 
+, V_START_DATE     IN ADV_APPLY.START_DATE%TYPE               -- 시작일
+, V_END_DATE       IN ADV_APPLY.END_DATE%TYPE                 -- 종료일
+, V_CONTENT        IN ADV_APPLY.CONTENT%TYPE                  -- 내용
+, V_L_LINK         IN ADV_APPLY.L_LINK%TYPE                   -- 링크
+, V_PHOTO          IN ADV_APPLY.PHOTO%TYPE                         -- 사진
+)
+IS
+
+    V_ADV_COST   ADV_TYPE.ADV_COST%TYPE; -- 1일 광고료를 담을 변수 선언 
+     
+BEGIN
+    
+    -- 광고료 담기 
+    SELECT ADV_COST INTO V_ADV_COST
+    FROM ADV_TYPE
+    WHERE ADV_TYPE_CODE = V_ADV_TYPE_CODE;
+    
+    
+    -- 광고신청 INSERT
+    INSERT INTO ADV_APPLY(ADV_APPLY_CODE, ADV_TYPE_CODE, B_USER_CODE, START_DATE, END_DATE, CONTENT, L_LINK, PHOTO, COST)
+    VALUES('ADV_AP'||SEQ_ADV_APP.NEXTVAL,V_ADV_TYPE_CODE,V_B_USER_CODE,V_START_DATE,V_END_DATE,V_CONTENT,V_L_LINK,V_PHOTO, V_ADV_COST*(V_END_DATE-V_START_DATE+1));
+    
+    --COMMIT;
+    
+
+END;
+-- 테스트 
+EXEC PRC_ADV_APPLY('ADV_T1','USER49', TO_DATE('2020-07-23', 'YYYY-MM-DD'),TO_DATE('2020-07-31', 'YYYY-MM-DD'),'학원 광고 신청합니다.','http://www.naver.com','https://i.ytimg.com/vi/AkOwp7HKwzg/maxresdefault.jpg');
+
+
