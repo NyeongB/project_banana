@@ -4717,3 +4717,6 @@ ALTER TABLE POINT_WITHDRAW
 		REFERENCES B_USER ( -- 사용자 등록
 			B_USER_CODE -- 사용자 식별 코드
 		);
+-- 포인트 충전테이블 컬럼 추가 
+-- 0-- 무통장 1-- 카드 충전
+ALTER TABLE POINT_CHARGE ADD (CHARGE_TYPE NUMBER(1) DEFAULT 0);		
