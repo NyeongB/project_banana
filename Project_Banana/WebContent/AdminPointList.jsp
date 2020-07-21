@@ -10,13 +10,10 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
@@ -35,9 +32,7 @@ String cp = request.getContextPath();
 	font-weight: bold;
 }
 
-tr, td, th {
-	border: 1px solid gray;
-}
+
 
 span {
 	color: var(- -hover-color1);

@@ -4670,3 +4670,53 @@ REFERENCES J_REAPPLY(J_REAPPLY_CODE);
 
 DESC J_RETURN_ITEM;
 COMMIT;
+
+-- 포인트 출금 테이블 추가 
+
+-- 포인트 출금
+CREATE TABLE POINT_WITHDRAW (
+	POINT_WITHDRAW_CODE VARCHAR2(20) NOT NULL, -- 포인트 충전 코드
+	POINT_LIST_CODE     VARCHAR2(20) NOT NULL, -- 포인트 내역 등록 식별 코드
+	B_USER_CODE         VARCHAR2(20) NOT NULL, -- 사용자 식별 코드
+	WITHDRAW_POINT      NUMBER(12)   NOT NULL, -- 출금 포인트
+	SDATE               DATE       DEFAULT SYSDATE  NOT NULL  -- 포인트 출금 일시
+);
+
+-- 포인트 출금 기본키
+CREATE UNIQUE INDEX PK_POINT_WITHDRAW
+	ON POINT_WITHDRAW ( -- 포인트 출금
+		POINT_WITHDRAW_CODE ASC -- 포인트 충전 코드
+	);
+
+-- 포인트 출금
+ALTER TABLE POINT_WITHDRAW
+	ADD
+		CONSTRAINT PK_POINT_WITHDRAW -- 포인트 출금 기본키
+		PRIMARY KEY (
+			POINT_WITHDRAW_CODE -- 포인트 충전 코드
+		);
+
+-- 포인트 출금
+ALTER TABLE POINT_WITHDRAW
+	ADD
+		CONSTRAINT FK_POINT_LISTPOINT_WITHDRAW -- 포인트 내역 등록 -> 포인트 출금
+		FOREIGN KEY (
+			POINT_LIST_CODE -- 포인트 내역 등록 식별 코드
+		)
+		REFERENCES POINT_LIST ( -- 포인트 내역 등록
+			POINT_LIST_CODE -- 포인트 내역 등록 식별 코드
+		);
+
+-- 포인트 출금
+ALTER TABLE POINT_WITHDRAW
+	ADD
+		CONSTRAINT FK_B_USER_TO_POINT_WITHDRAW -- 사용자 등록 -> 포인트 출금
+		FOREIGN KEY (
+			B_USER_CODE -- 사용자 식별 코드
+		)
+		REFERENCES B_USER ( -- 사용자 등록
+			B_USER_CODE -- 사용자 식별 코드
+		);
+-- 포인트 충전테이블 컬럼 추가 
+-- 0-- 무통장 1-- 카드 충전
+ALTER TABLE POINT_CHARGE ADD (CHARGE_TYPE NUMBER(1) DEFAULT 0);		

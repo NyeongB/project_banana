@@ -5,15 +5,7 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<%
-	session = request.getSession();
-	
-	SessionInfo info = (SessionInfo)session.getAttribute("user");
-	// 아이디가져오기
-	String id = info.getId();
-	// 닉네임 가져오기
-	String nick = info.getNickname();
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,12 +117,8 @@ p
 								<div class="text-center">
 									<img alt="Bootstrap Image"
 									src="images/banana_icon.png" >
-									<p>로그인 완료</p>
 									
-									<h5>세션 정보</h5>
-									<h5>세션 닉네임 : <%=nick %></h5>
-									<h5>세션 아이디 : <%=id %></h5>
-								    
+									<h5>탈퇴한 사용자입니다.</h5>
   									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
 								</div>
 
