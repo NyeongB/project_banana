@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -119,7 +120,7 @@ nav
 					<div class="col-md-12">
 
 
-						<table class="table">
+						<table class="table" style="text-align: center;">
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -130,49 +131,19 @@ nav
 									<th>금액</th>
 								</tr>
 							</thead>
+							<c:forEach var="dto" items="${list }" varStatus="status" begin="1">
 							<tbody>
 								<tr>
-									<td>1</td>
-									<td>test11***</td>
-									<td>2020-06-23 15:32:11</td>
-									<td>포인트 충전</td>
-									<td>카드 결제</td>
-									<td>5,000원</td>
-								</tr>
-
-								<tr>
-									<td>2</td>
-									<td>test22***</td>
-									<td>2020-06-17 19:50:00</td>
-									<td>포인트 충전</td>
-									<td>카드 결제</td>
-									<td>50,000원</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>test33***</td>
-									<td>2020-06-15 20:44:09</td>
-									<td>포인트 출금</td>
-									<td>국민은행 포인트 출금</td>
-									<td>20,000원</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>test44***</td>
-									<td>2020-06-09 19:11:00</td>
-									<td>포인트 출금</td>
-									<td>국민은행 포인트 출금</td>
-									<td>500,000원</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>test55***</td>
-									<td>2020-06-05 15:32:32</td>
-									<td>포인트 충전</td>
-									<td>무통장 입금</td>
-									<td>50,000원</td>
+									<td>${status.count }</td>
+									<td>${dto.id }</td>
+									<td>${dto.sdate }</td>
+									<td>${dto.type }</td>
+									<td>${dto.detail }</td>
+									<td><fmt:formatNumber value="${dto.point }" ></fmt:formatNumber>원</td>
 								</tr>
 							</tbody>
+							</c:forEach>
+							
 						</table>
 					</div>
 				</div>

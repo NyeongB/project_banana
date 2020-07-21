@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.admin.IAdminPointDAO">
+	
+	<select id="list" resultType="com.banana.admin.AdminPointDTO">
+		SELECT * FROM VIEW_POINT_MANAGE
+		ORDER BY SDATE
+		<!-- CREATE OR REPLACE VIEW VIEW_POINT_MANAGE
+		AS
+		SELECT B.B_USER_CODE AS NICKNAME, C.SDATE AS "SDATE", '포인트 충전' AS TYPE
+		, CASE WHEN C.CHARGE_TYPE = 0 THEN '무통장 입금'
+		       WHEN C.CHARGE_TYPE = 1 THEN '카드결제'
+		            ELSE '휴대폰 결제'
+		            END AS DETAIL
+		, C.CHARGE_POINT AS POINT
+		FROM B_USER B JOIN  POINT_CHARGE C
+		ON B.B_USER_CODE = C.B_USER_CODE
+		JOIN JOIN J
+		ON J.B_USER_CODE = B.B_USER_CODE
+		UNION
+		SELECT B.B_USER_CODE AS NICKNAME, W.SDATE AS "SDATE", '포인트 출금' AS TYPE
+		, '포인트 출금' AS DETAIL, W.WITHDRAW_POINT AS POINT
+		FROM B_USER B JOIN POINT_WITHDRAW W
+		ON B.B_USER_CODE = W.B_USER_CODE
+		JOIN JOIN J
+		ON J.B_USER_CODE = B.B_USER_CODE; -->
+	</select>
+	
+	
+	
+</mapper>  
