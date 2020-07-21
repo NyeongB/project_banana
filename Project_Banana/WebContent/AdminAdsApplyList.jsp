@@ -23,6 +23,26 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function goList(obj)
+{
+	//alert("확인");	
+	//alert(obj.getAttribute("id"));
+	var a = obj.getAttribute("id");
+	//alert(a);
+	
+	if(confirm("정말 거절하시겠습니까?"))
+	{
+		$(location).attr("href","rejectads.action?id=" + a);
+	}
+
+	//
+	
+	
+}
+
+</script>
 
 </head>
 <body>
@@ -81,8 +101,7 @@
 							<td>
 								<div class="btn-group" role="group">
 
-									<button class="" type="button">
-										<span class=""></span> 수락
+									<button class="btn btn-primary" type="button" onclick="location.href='adminadsaccept.action?id=${AdApplyList.id }'">수락
 									</button>
 									
 								</div>
@@ -91,8 +110,8 @@
 							<td>
 								<div class="btn-group" role="group">
 
-									<button class="" type="button">
-										<span class=""></span> 거절
+									<button class="btn btn-primary" type="button" id="${AdApplyList.id }" onclick="goList(this)">
+										거절
 									</button>
 									
 								</div>

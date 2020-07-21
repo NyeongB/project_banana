@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.admin.AdminAdsCostDTO;
+import com.banana.admin.IAdminAdsApplyListDAO;
 import com.banana.admin.IAdminAdsCostDAO;
 import com.banana.admin.IAdminAdsListDAO;
 
@@ -116,5 +117,8 @@ public class AdsController
 			view = "/AdminAdsRevenu.jsp";
 			return view;
 		}
+		
+		
+		
 	
 }

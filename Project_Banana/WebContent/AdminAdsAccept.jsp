@@ -75,16 +75,16 @@ img
 					<div class="row">
 						<div class="col-md-12 jumun_confirm">
 							<div class="col-md-4">
-								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzDMtEOltBIDuq-dRjaOstZ67y2lPrLX2e_w&usqp=CAU"  class="jumun_img img-rounded">
+								<img src="${dto.photo }"  class="jumun_img img-rounded">
 							</div>
 							<div class="col-md-8">
 
 								<ul class="jumun_list" style="font-size: large; margin-bottom: 30px;">
-									<li>신청자 : cjfsud23</li>
-									<li>2020.06.25 ~ 2020.07.10</li>
-									<li>종류 : 상단광고</li>
-									<li>내용 : 사이트 홍보</li>
-									<li>주소 : <a href="http://naver.com">주소로 바로가기</a></li>
+									<li>신청자 : ${dto.id}</li>
+									<li>기간 : ${dto.adsdate } ~ ${dto.adedate }</li>
+									<li>종류 : ${dto.adloc }</li>
+									<li>내용 : ${dto.content }</li>
+									<li>주소 : <a href="${dto.adlink }">주소로 바로가기</a></li>
 								</ul>
 							</div>
 						</div>

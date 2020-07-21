@@ -87,6 +87,17 @@ p
 </style>
 
 
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#join").click(function()
+		{
+			location.href='<%=cp%>/join.action';
+		});
+	})
+</script>
+
 </head>
 
 
@@ -119,7 +130,7 @@ p
 									src="images/banana_icon.png" >
 									
 									<h5>탈퇴한 사용자입니다.</h5>
-  									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
+  									<button class="btn btn-primary" type="button" id="join">회원가입</button>
 								</div>
 
 							</div> 

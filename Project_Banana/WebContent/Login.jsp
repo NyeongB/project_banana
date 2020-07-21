@@ -24,6 +24,11 @@
 		{
 			$("#login").submit();	
 		});
+		
+		$("#idBtn").click(function()
+		{
+			location.href='<%=cp%>/userfindid.action';
+		});
 		 
 	});
 	
@@ -46,9 +51,9 @@
 	font-size:50px!important;
 
 }
-#loginBtn
+.loginBtn
 {
-	width: 50%;
+	width: 80%;
 	height: 55px;
 	border-radius: 50px !important;
 
@@ -87,10 +92,19 @@
 					<input type="password" class="form-control loginBox" id="pw"  name="pw" required="required"
 					placeholder="비밀번호를 입력하시오.">
 				</div>		
-				<div class="col-md-12 text-center">
-					<button type="submit" class="btn btn-primary" id="loginBtn">
+				<div class="col-md-12 text-center form-inline">
+					<div class="col-md-6">
+					
+					<button type="submit" class="btn btn-primary loginBtn" id="loginBtn">
 						로그인
 					</button>
+					</div>
+					
+					<div class="col-md-6">
+					<button type="button" class="btn btn-primary loginBtn" id="idBtn">
+						아이디 찾기
+					</button>
+					</div>
 				</div>
 			</form>
 		</div>

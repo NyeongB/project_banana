@@ -173,22 +173,7 @@ public class MemberController
 		return view;
 	}
 	
-	@RequestMapping(value ="/adminadapplylist.action", method =RequestMethod.GET)
-	public String AdminAdApplyList(Model model)
-	{
-		String view = null; 
-		
-		IAdminAdsApplyListDAO dao = SqlSession.getMapper(IAdminAdsApplyListDAO.class);
-		
-		
-		
-		model.addAttribute("list", dao.list());
-		
-		view = "/AdminAdsApplyList.jsp";
-		
-		
-		return view;
-	}
+	
 	
 	@RequestMapping(value = "/usernoticelist.action", method =RequestMethod.GET)
 	public String UserNoticeList(Model model)
@@ -384,10 +369,7 @@ public class MemberController
 		String login2=null;
 		String login3=null;
 		String login4=null;
-		/*
-		 *  String login2 = dao.rest(id,pw); String
-		 * login3 = dao.permanent(id,pw); String login4 = dao.leave(id,pw);
-		 */
+		
 		
 		// -- 디폴트(회원가입안됨) --0
 		// 정상회원 --1
@@ -398,6 +380,11 @@ public class MemberController
 		login3 = dao.permanent(dto);
 		// 휴면회원 --4
 		login4 = dao.rest(dto);
+		
+		/*
+		 * System.out.println(login1); System.out.println(login2);
+		 * System.out.println(login3); System.out.println(login4);
+		 */
 		
 		
 		if(login1 !=null && login2==null && login3==null && login4==null)
