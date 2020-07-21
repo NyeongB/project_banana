@@ -34,7 +34,7 @@ function goList(obj)
 	
 	if(confirm("정말 거절하시겠습니까?"))
 	{
-		$(location).attr("href","rejectads.action?id=" + a);
+		$(location).attr("href","rejectads.action?adv_apply_code=" + a);
 	}
 
 	//
@@ -110,7 +110,7 @@ function goList(obj)
 							<td>
 								<div class="btn-group" role="group">
 
-									<button class="btn btn-primary" type="button" id="${AdApplyList.id }" onclick="goList(this)">
+									<button class="btn btn-primary" type="button" id="${AdApplyList.adv_apply_code }" onclick="goList(this)">
 										거절
 									</button>
 									

@@ -15,6 +15,7 @@ import com.banana.admin.AdminAdsConfirmListDTO;
 import com.banana.admin.AdminAdsListDTO;
 import com.banana.admin.IAdminAdsApplyListDAO;
 import com.banana.admin.IAdminAdsListDAO;
+import com.banana.user.IUserDAO;
 
 @Controller
 public class AdminAdsListController
@@ -89,19 +90,23 @@ public class AdminAdsListController
 		}
 		
 		
-		// 광고신청 조회 
+		// 광고삭제
 		@RequestMapping(value ="/rejectads.action", method =RequestMethod.GET)
-		public String reject(Model model,HttpServletRequest request)
+		public String reject(HttpServletRequest request)
 		{
 			String view = null; 
 			
 			IAdminAdsApplyListDAO dao = SqlSession.getMapper(IAdminAdsApplyListDAO.class);
-			System.out.println(request.getParameter("id"));
+			
+			// 유저코드 가져오기 
+			String adv_apply_code = request.getParameter("adv_apply_code");
+			
+			//System.out.println(adv_apply_code);
+			
+			dao.delete(adv_apply_code);
 			
 			
-			model.addAttribute("list", dao.list());
-			
-			view = "/AdminAdsApplyList.jsp";
+			view = "/adminadapplylist.action";
 			
 			
 			return view;

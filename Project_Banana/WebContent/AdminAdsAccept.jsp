@@ -95,7 +95,7 @@ img
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<button class="btn btn-lg">광고 수락</button>
-					<button class="btn btn-lg">취소</button>
+					<button class="btn btn-lg" onclick="history.back()">취소</button>
 				</div>
 			</div>
 		</div>

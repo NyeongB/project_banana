@@ -7,7 +7,7 @@
 <mapper namespace="com.banana.admin.IAdminAdsApplyListDAO">
 	
 	<select id="list" resultType="com.banana.admin.AdminAdsListDTO">
-	SELECT ID
+	SELECT ADV_APPLY_CODE, ID
       , ADLOC
       , ADSDATE
       , ADEDATE
@@ -17,6 +17,11 @@
 	FROM AD_APPLYLIST_VIEW
 	</select>
 	
+	<delete id="delete">
+	DELETE 
+	FROM ADV_APPLY 
+	WHERE ADV_APPLY_CODE=#{adv_apply_code}
+	</delete>
 	
 	
 </mapper>
