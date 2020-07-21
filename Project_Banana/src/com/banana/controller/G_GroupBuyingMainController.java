@@ -1,5 +1,7 @@
 package com.banana.controller;
 
+import java.util.ArrayList;
+
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.banana.groupbuying.GCateDTO;
 import com.banana.groupbuying.GPostDTO;
 import com.banana.groupbuying.IGPostDAO;
+import com.banana.user.IJoinDAO;
+import com.banana.user.LocDTO;
 
 @Controller
 public class G_GroupBuyingMainController
@@ -129,9 +133,45 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 	 
-	  
+	  //게시물 작성 시 대분류 카테고리 클릭 시 
+	  @RequestMapping(value = "/ajaxcate.action", method =RequestMethod.GET)
+		public String ajaxCate(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			
+			GCateDTO dto = new GCateDTO();
+			dto.setG_cate_bcode(request.getParameter("cate"));
+			
+			model.addAttribute("postCateList", dao.cateList(dto));
+		
+			
+			view = "/CateAjax.jsp";
+			
+			
+			return view;
+		}
 	
-	
+	  //게시물 작성 시 중분류 카테고리 클릭 시 
+	  @RequestMapping(value = "/ajaxmcate.action", method =RequestMethod.GET)
+		public String ajaxMCate(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			
+			GCateDTO dto = new GCateDTO();
+			dto.setG_cate_code(request.getParameter("mCate"));
+			
+			model.addAttribute("postCateList", dao.cateMList(dto));
+			/* model.addAttribute("cateList", dao.cateList(dto)); */
+			
+			view = "/CateAjax.jsp";
+			
+			
+			return view;
+		}
 	
 
 }

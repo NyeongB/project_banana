@@ -77,7 +77,55 @@ p
 }
 
 </style>
+<script type="text/javascript">
 
+	//대분류 카테고리 눌렀을 때 
+	function cate(obj)
+	{
+		//alert("확인");
+		
+		var a = obj.getAttribute("id");
+		
+		//alert(a);
+		requestCate(a);
+	
+	}
+	
+	function requestCate(a)
+	{
+		$.get("ajaxcate.action", {cate : a}, function(data)
+		{
+		
+			//alert(data);
+			$("#cate").html(data);
+		});
+		
+	}
+	
+	//중분류 카테고리 눌렀을 때
+	function mCate(obj)
+	{
+		alert("확인");
+		
+		var a = obj.getAttribute("id");
+		
+		alert(a);
+		requestMCate(a);
+	
+	}
+	
+	function requestMCate(a)
+	{
+		$.get("ajaxmcate.action", {mCate : a}, function(data)
+		{
+		
+			//alert(data);
+			$("#mCate").html(data);
+		});
+		
+	}
+
+</script>
 </head>
 <body>
 <!-- Header  -->
@@ -117,22 +165,23 @@ p
 								  <table class="table table-bordered mb-0">
 							
 								    <tbody>
+								    
 								      <tr>
-								        <td>식품</td>
+								        <td onclick="cate(this)" id="G_CATE5">식품</td>
 								      </tr>
 								      <tr>
-								        <td>생활용품</td>
-								       
+								        <td onclick="cate(this)" id="G_CATE1">생활용품</td>
 								      </tr>
 								      <tr>
-								        <td>스포츠</td>						      
+								        <td onclick="cate(this)" id="G_CATE2">스포츠</td>						      
 								      </tr>
 								      <tr>
-								        <td>유아동/반려동물</td>
+								        <td onclick="cate(this)" id="G_CATE3">유아동/반려동물</td>
 								      </tr>
 								      <tr>
-								        <td>디지털/가전/가구</td>
+								        <td onclick="cate(this)" id="G_CATE4">디지털/가전/가구</td>
 								      </tr>
+								  
 								    </tbody>
 								  </table>
 								
@@ -144,32 +193,10 @@ p
 						<div class="col-md-4">
 						
 							<div class="table-wrapper-scroll-y my-custom-scrollbar">
-	
-								  <table class="table table-bordered mb-0">
-								   
-								    <tbody>
-								      <tr>
-								       
-								        <td>잡화</td>
-								        
-								      </tr>
-								      <tr>
-								        <td>유아동용품</td>
-								       
-								      </tr>
-								      <tr>
-								        <td>기저귀/이유식</td>						      
-								      </tr>
-								      <tr>
-								        <td>강아지 용품</td>
-								      </tr>
-								      <tr>
-								        <td>고양이 용품</td>
-								      </tr>
-								    </tbody>
-								  </table>
-								
-								</div>		
+									<!-- <div id="cate"></div> -->
+								     <table id="cate" class="table table-bordered mb-0"></table>  
+							</div>
+									
 						</div><!-- end col-md-4 -->
 						
 						
@@ -179,9 +206,9 @@ p
 							
 							<div class="table-wrapper-scroll-y my-custom-scrollbar">
 	
-								  <table class="table table-bordered mb-0">
+								  <table id="mCate" class="table table-bordered mb-0">
 								   
-								    <tbody>
+								    <!-- <tbody>
 								      <tr>
 								       
 								        <td>목줄</td>
@@ -202,6 +229,7 @@ p
 								      </tr>
 		
 								    </tbody>
+								  </table> -->
 								  </table>
 									
 							</div>
@@ -403,3 +431,38 @@ p
 </div>
 </body>
 </html>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+								      
+								      
+								   
+								    
+								    
+								     

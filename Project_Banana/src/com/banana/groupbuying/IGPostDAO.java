@@ -28,4 +28,6 @@ public interface IGPostDAO
 	//신청인원 파악
 	public ArrayList<GPostDTO> gApplyCount(GPostDTO dto);
 	
+	//상품 등록 시 카테고리
+	public ArrayList<GCateDTO> postCateList(String cate);
 }
