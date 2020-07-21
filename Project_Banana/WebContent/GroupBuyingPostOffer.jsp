@@ -9,6 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>GroupBuyingPostOffer.jsp</title>
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -82,6 +86,8 @@ p
 	var catecode;
 	var mcatecode;
 	
+	
+	
 
 	//대분류 카테고리 눌렀을 때 
 	function cate(obj)
@@ -153,6 +159,16 @@ p
 	
 	$().ready(function()
 	{
+		
+		//jquery-ui 캘린더(datepicker)를 불러오는 함수 처리
+		$("#date1").datepicker(
+		{
+			dateFormat : "yy-mm-dd"
+			, changeYear : true
+			, changeMonth : true
+			
+		});
+		
 		//가격에 해당하는 부분은 숫자만 가능하도록
 		$("input:text[numberOnly]").on("keyup", function() 
 		{
@@ -226,10 +242,15 @@ p
 	}
 	
 	
+	
+
+	
 
 </script>
 </head>
 <body>
+	
+
 <!-- Header  -->
 <div class="row Header">
    <div class="col-md-12">
@@ -380,7 +401,7 @@ p
 					<div class="col-md-12 gonggustart">	
 						<div class="col-md-6">
 							수요조사 시작일
-							<input type="date">
+							<input type="text" id="date1" class="datePicker">
 							
 							<select name="startDate">
 								<option value="">08:00</option>
