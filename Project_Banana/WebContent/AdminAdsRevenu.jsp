@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
@@ -80,19 +81,19 @@
 						</tr>
 					</thead>
 					
-										
+					<c:forEach var="dto" items="${list }">			
 					<tbody>
 						<tr>
-							<td>2020.06.25 17:55</td>
-							<td>광고 수익</td>
-							<td>카드결제(광고)</td>
-							<td>500,000원</td>
-							<td>kdtoaj93</td>
+							<td>${dto.sdate }</td>
+							<td>${dto.type }</td>
+							<td>${dto.detail }</td>
+							<td><fmt:formatNumber value="${dto.cost }" ></fmt:formatNumber>원</td>
+							<td>${dto.id }</td>
 							
 						</tr>
 
 					</tbody>
-					
+					</c:forEach>		
 					<tbody>
 						<tr>
 							<td>2020.06.27 10:05</td>

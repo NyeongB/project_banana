@@ -6,8 +6,10 @@
   
 <mapper namespace="com.banana.admin.IAdminAdsListDAO">
 	
+	
+	<!-- 확정목록조회 -->
 	<select id="list" resultType="com.banana.admin.AdminAdsConfirmListDTO">
-	SELECT NAME
+	SELECT ID
        ,ADV_LOC
        ,START_DATE
        ,END_DATE
@@ -15,6 +17,21 @@
        ,LINK
        ,CONTENT
 	FROM VIEW_ADV_CON_LIST	
+	</select>	
+	
+	<!-- 광고 수익조회 -->
+	<select id="revenuList" resultType="com.banana.admin.AdminRevenuDTO">
+	SELECT * FROM
+	VIEW_ADV_REVENU
+	<!-- 
+	 SELECT AD.APPLY_DATE AS SDATE ,'광고 수익' AS TYPE, '카드결제(광고)' AS DETAIL,  AD.COST AS COST, J.ID AS ID
+    FROM ADV_APPLY AD JOIN B_USER B
+    ON AD.B_USER_CODE = B.B_USER_CODE
+    JOIN JOIN J
+    ON J.B_USER_CODE = AD.B_USER_CODE
+    JOIN adv_apply_accept ADA
+    ON ada.adv_apply_code = ad.adv_apply_code
+	 -->
 	</select>	
 	
 	

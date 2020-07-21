@@ -57,9 +57,8 @@ img
 <!-- content  -->
 
 <div class="container-fluid">
-	<div class="row">
 		<div class="col-md-3">
-		<jsp:include page="MenuUser.jsp"></jsp:include>
+		<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
 		<div class="col-md-6">
 			<div class="row">
@@ -102,7 +101,6 @@ img
 		</div>
 		<div class="col-md-3">
 		</div>
-	</div>
 </div>
 
 

@@ -44,7 +44,7 @@
 			<div class="col-md-12">
 
 
-				<table class="table">
+				<table class="table" style="text-align: center;">
 					<thead>
 						<tr>
 							<th>신청자</th>
@@ -60,7 +60,7 @@
 					<tbody>
 					<c:forEach var="lists"  items="${list }">
 						<tr>
-							<td>${lists.name }</td>
+							<td>${lists.id }</td>
 							<td>${lists.adv_loc }</td>
 							<td>${lists.start_date }</td>
 							<td>${lists.end_date }</td>
@@ -77,7 +77,7 @@
 
 					</tbody>
 					
-					<tbody>
+					<!-- <tbody>
 						<tr>
 							<td>cjfsud23</td>
 							<td>우측 광고</td>
@@ -92,7 +92,7 @@
 						</tr>
 
 					</tbody>
-
+ -->
 				</table>
 
 

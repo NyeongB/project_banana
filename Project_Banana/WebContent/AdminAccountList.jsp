@@ -116,7 +116,6 @@
 <!-- content  -->
 
 <div class="container-fluid">
-	<div class="row">
 		<div class="col-md-2">
 			<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
@@ -192,7 +191,6 @@
 		</div>
 		<div class="col-md-2">
 		</div>
-	</div>
 </div>
 
 <!-- content end -->

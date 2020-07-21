@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.admin.AdminAdsCostDTO;
 import com.banana.admin.IAdminAdsCostDAO;
+import com.banana.admin.IAdminAdsListDAO;
 
 @Controller
 public class AdsController
@@ -108,6 +109,9 @@ public class AdsController
 			
 			String view = null; 
 			
+			IAdminAdsListDAO dao = SqlSession.getMapper(IAdminAdsListDAO.class);
+			
+			model.addAttribute("list", dao.revenuList());
 			
 			view = "/AdminAdsRevenu.jsp";
 			return view;

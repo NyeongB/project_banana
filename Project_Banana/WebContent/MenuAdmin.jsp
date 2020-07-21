@@ -58,7 +58,7 @@
 					<li><a href="<%=cp%>/restuser.action">휴면회원</a></li>
 					<li><a href="<%=cp%>/leaveuser.action">탈퇴회원</a></li>
 					<li><a href="<%=cp%>/stoplist.action">정지회원</a></li>
-					<li><a href="<%=cp%>/adminshopuserlist.action">소상공인회원</a></li>
+					<%-- <li><a href="<%=cp%>/adminshopuserlist.action">소상공인회원</a></li> --%>
 				</ul>
 		</li>
 		
@@ -72,12 +72,11 @@
 		<li><a href="#">광고 관리</a>
 				<ul class="sub" style="display: none;">
 					
-					<li><a href="<%=cp%>/adminadapplylist.action">광고 신청자 목록</a></li>
-					<li><a href="#">광고 신청자 확정 목록</a></li>
-					<li><a href="#">광고 비용 설정</a></li>
-					<li><a href="#">광고 수익 관리</a></li>
-					<li><a href="#">예약 확정 목록</a></li>
-					<li><a href="<%=cp%>/adminadscost.action">광고비 재설정</a></li>
+					<li><a href="<%=cp%>/adminadapplylist.action">광고 신청 목록</a></li>
+					<li><a href="<%=cp%>/adminadsconfirmlist.action">광고 확정 목록</a></li>
+					<li><a href="<%=cp%>/adminadscost.action">광고 비용 설정</a></li>
+					<li><a href="<%=cp%>/adminadsrevenu.action">광고 수익 관리</a></li>
+					
 				</ul>
 		</li>
 		
@@ -95,14 +94,14 @@
 				</ul>
 		</li>
 		
-		<li>
+		<!-- <li>
 			<a href="#">소상공인 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="#">소상공인 신청자 리스트</a></li>
 					<li><a href="#">처리 완료된 소상공인 리스트</a></li>
 				</ul>
 		</li>
-			
+			 -->
 		
 
 			

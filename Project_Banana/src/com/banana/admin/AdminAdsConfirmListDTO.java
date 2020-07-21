@@ -2,7 +2,17 @@ package com.banana.admin;
 
 public class AdminAdsConfirmListDTO
 {
-	private String name, adv_loc, start_date, end_date, photo, link, content, cost;
+	private String name, adv_loc, start_date, end_date, photo, link, content, cost, id, sdate;
+
+	public String getSdate()
+	{
+		return sdate;
+	}
+
+	public void setSdate(String sdate)
+	{
+		this.sdate = sdate;
+	}
 
 	public String getName()
 	{
@@ -12,6 +22,16 @@ public class AdminAdsConfirmListDTO
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 
 	public String getAdv_loc()
