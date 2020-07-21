@@ -100,5 +100,17 @@ public class AdsController
 			return view;
 		}
 	
+		
+		// 광고수익 페이지 조회 
+		@RequestMapping(value = "/adminadsrevenu.action", method =RequestMethod.GET)
+		public String adminrevenu(Model model)
+		{
+			
+			String view = null; 
+			
+			
+			view = "/AdminAdsRevenu.jsp";
+			return view;
+		}
 	
 }

@@ -2,9 +2,8 @@ package com.banana.admin;
 
 public class AdminAdsConfirmListDTO
 {
-	private String name, adv_loc, start_date, end_date, photo, link, content;
+	private String name, adv_loc, start_date, end_date, photo, link, content, cost;
 
-	// getter / setter 구성
 	public String getName()
 	{
 		return name;
@@ -74,6 +73,18 @@ public class AdminAdsConfirmListDTO
 	{
 		this.content = content;
 	}
+
+	public String getCost()
+	{
+		return cost;
+	}
+
+	public void setCost(String cost)
+	{
+		this.cost = cost;
+	}
+
+	// getter / setter 구성
 	
 	
 }

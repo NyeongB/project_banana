@@ -73,19 +73,7 @@
 							
 						</tr>
 					</c:forEach>
-<!-- 					<tr>
-							<td>megastudy2020</td>
-							<td>상단 광고</td>
-							<td>2020.06.25</td>
-							<td>2020.07.14</td>
-							<td><img alt="Bootstrap Image Preview"
-								src="https://img.seoul.co.kr/img/upload/2019/09/16/SSI_20190916095057.jpg"
-								style="width: 70px; height: 70px;"></td>
-								
-							<td><a href="">바로가기</a></td>
-							<td>사이트 홍보 광고 신청합니다. </td>
-							
-						</tr> -->
+
 
 					</tbody>
 					

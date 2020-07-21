@@ -20,10 +20,11 @@ public class AdminAdsListController
 		@RequestMapping(value = "/adminadsconfirmlist.action", method =RequestMethod.GET)
 		public String memberList(Model model)
 		{
+			System.out.println("오는지 테스트");
 			String view = null; 
 			
 			IAdminAdsListDAO dao = SqlSession.getMapper(IAdminAdsListDAO.class);
-			
+System.out.println(dao.list());
 			model.addAttribute("list", dao.list());
 			
 			view = "/AdminAdsConfirmList.jsp";

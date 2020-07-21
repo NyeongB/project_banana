@@ -71,9 +71,9 @@
 							<th class="col-md-1">조회수</th>
 						</tr>
 						
-						<c:forEach var="lists" items="${list }">
+						<c:forEach var="lists" items="${list }" varStatus="status" begin="0">
 						<tr>
-							<td><p>${lists.num }</p></td>
+							<td><p>${status.count }</p></td>
 							<td>${lists.title }</td>
 							<td>${lists.id }</td>
 							<td>${lists.wdate }</td>

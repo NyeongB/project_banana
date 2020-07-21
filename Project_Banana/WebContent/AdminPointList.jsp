@@ -131,7 +131,7 @@ nav
 									<th>금액</th>
 								</tr>
 							</thead>
-							<c:forEach var="dto" items="${list }" varStatus="status" begin="1">
+							<c:forEach var="dto" items="${list }" varStatus="status" begin="0">
 							<tbody>
 								<tr>
 									<td>${status.count }</td>
