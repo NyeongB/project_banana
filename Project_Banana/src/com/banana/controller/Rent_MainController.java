@@ -1,6 +1,9 @@
 package com.banana.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.banana.admin.AdminAccountDTO;
 import com.banana.admin.IAdminAccountDAO;
 import com.banana.rent.IRPostDAO;
+import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RCateDTO;
 import com.banana.rent.RPostDTO;
 import com.banana.user.ILocDAO;
@@ -277,15 +281,50 @@ public class Rent_MainController
 			
 			
 			// 찜하기 클릭 시
-				/*
-				 * @RequestMapping(value = "/rjjiminsert.action", method = RequestMethod.GET)
-				 * public String jjiminsert(Model model, HttpServletRequest request) {
-				 * 
-				 * 
-				 * 
-				 * }
-				 */
+				
+			 @RequestMapping(value = "/rjjiminsert.action", method = RequestMethod.GET)
+			 public String jjiminsert(HttpServletRequest request, HttpServletResponse response) 
+			 {
+				 String view = null;
+				 
+				 try 
+				 {
+				
+					 
+					 HttpSession session = request.getSession();
+					 
+					 String rpostCode = (String)session.getAttribute("rpostCode");
+					 SessionInfo info = (SessionInfo)session.getAttribute("user");
+					 String UserCode = info.getB_user_code();
+					
+					 //System.out.println(rpostCode);
+					 //System.out.println(UserCode);
+					 
+					 RPostDTO dto = new RPostDTO();
+					 dto.setR_post_code(rpostCode);
+					 dto.setB_user_code(UserCode);
+					 
+					 IRentJJimDAO dao = SqlSession.getMapper(IRentJJimDAO.class);
+					
+					 dao.rentJJim(dto);
+				 
+					
+					 
+					 view = "/AjaxJJimComplete.jsp";
+					 
+				 }catch(Exception e)
+				 {
+				  	 System.out.println(e.toString());
+				 }
+				 
+				 
+				 
+				 return view;
+			 
+			 }
 		
+			 
+			 
 			
 			
 			// 유저에 따라 다른 주소 설정 값 받아오기

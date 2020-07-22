@@ -12,7 +12,11 @@
 
 	if(info== null)
 	System.out.println(info);
+	
+	String rpostCode = request.getParameter("r_post_code");
 
+
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -262,7 +266,13 @@ function jjim()
 	else 
 	{
 		alert("찜 목록에 추가하시겠습니까?")
-		location.href = "rjjiminsert.action";
+		<% session.setAttribute("rpostCode",  rpostCode); %>
+		
+		$.get("rjjiminsert.action", function(data) 
+		{
+			alert(data);
+		});
+		
 		
 	}
 	

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.rent.IRentJJimDAO">
+
+	<insert id="rentJJim" >
+		INSERT INTO R_POST_JJIM(R_POST_JJIM_CODE,R_POST_CODE,B_USER_CODE)
+		VALUES('R_PJ'||SEQ_R_POST_JJIM.NEXTVAL, #{r_post_code}, #{b_user_code})
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
