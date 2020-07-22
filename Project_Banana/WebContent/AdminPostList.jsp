@@ -51,7 +51,7 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>게시물/댓글 관리</h3>
+					<h3>게시물 관리</h3>
 					<hr>
 				</div>
 				<br>
@@ -65,8 +65,8 @@
 					
 						<div class="form-inline md-form form-sm form-2 pl-0 search_bar">
 						   <select name="" id="search" class="form-control">
-						   		<option value="">게시물</option>
-						   		<option value="">댓글</option>
+						   		<option value="">최신순</option>
+						   		<option value="">과거순</option>
 						   </select>
 						</div>
 					</div>
@@ -80,80 +80,28 @@
 									<th>번호</th>
 									<th>제목</th>
 									<th>내용</th>
-									<th>작성자 닉네임</th>
+									<th>아이디</th>
+									<th>닉네임</th>
 									<th>유형</th>
 									<th>작성일</th>
-									<th>삭제 버튼</th>
+									
 								
 								</tr>
 							</thead>
-						    <tbody>
-								<tr>
-									<td>1</td>
-									<td>자전거 잘 빌려드립니다!!</td>
-									<td>자전거 상태 좋아요!!</td>
-									<td>test111</td>
-									<td>빌려드립니다.</td>
-									<td>2020-06-08 15:00:03</td>
-									<td><button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button></td>
-								
-								</tr>
-								
-							</tbody>
+						    <c:forEach var="dto" items="${postList }" varStatus="status" begin="0">
 							<tbody>
 								<tr>
-									<td>2</td>
-									<td>오레오2+1행사중!!</td>
-									<td>나눠사실 분 구합니당~~근</td>
-									<td>test22</td>
-									<td>나눠사요.</td>
-									<td>2020-06-026 11:00:03</td>
-									<td><button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button></td>
+									<td>${stats.count }</td>
+									<td>${dto.title }</td>
+									<td>${dto.content }</td>
+									<td>${dto.id }</td>
+									<td>${dto.nickname }</td>
+									<td>${dto.type }</td>
+									<td>${dto.wdate }</td>
 								</tr>
 							</tbody>
-							<tbody>
-								<tr>
-									<td>3</td>
-									<td>배터리배터리이ㅣ</td>
-									<td>배터리 빌려주세용~</td>
-									<td>test333</td>
-									<td>빌려주세요.</td>
-									<td>2020-07-30 19:30:03</td>
-									<td><button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button></td>
-								</tr>
-							</tbody>
-							<tbody>
-								<tr>
-									<td>4</td>
-									<td>깨팔아욧~</td>
-									<td>함께해요 여러분</td>
-									<td>test4444</td>
-									<td>함께사요.</td>
-									<td>2020-07-10 09:30:03</td>
-									<td><button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button></td>
-								</tr>
-							</tbody>
-							<tbody>
-								<tr>
-									<td>5</td>
-									<td>컵 빌려드립니다!</td>
-									<td>컵 깨끗해요@.@</td>
-									<td>test5</td>
-									<td>빌려드립니다.</td>
-									<td>2020-08-30 19:30:03</td>
-									<td><button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button></td>
-								</tr>
-							</tbody>
+							</c:forEach>
+							
 						</table>
 						
 					</div><!--end col-md-12  -->
