@@ -167,13 +167,38 @@ p
 	
 	$(document).ready(function()
 	{
-		$("#startDate").datetimepicker();
 		
-		$("#sdate").datetimepicker("option", "onClose", function(selectedDate)
+	    
+	        $('#startDate').datetimepicker();
+	        $('#endDate').datetimepicker({
+	            useCurrent: false //Important! See issue #1075
+	        });
+	        $("#startDate").on("dp.change", function (e) {
+	            $('#endDate').data("DateTimePicker").minDate(e.date);
+	        });
+	        $("#endDate").on("dp.change", function (e) {
+	            $('#startDate').data("DateTimePicker").maxDate(e.date);
+	        });
+	   
+		
+		
+	/* 	$("#startDate").datetimepicker();
+		//$('#endDate').datetimepicker();
+		
+		$("#startDate").datepicker({
+            onClose: function( selectedDate ) {    
+                $("#endDate").datepicker( "option", "minDate", selectedDate );
+                
+            }                
+        }); */
+		
+		
+		/* $("#startDate").datetimepicker("option", "onClose", function(selectedDate)
 		{
+		
 			$("#endDate").datetimepicker("option", "minDate" , selectedDate);
-		});
-	
+		}); */
+		
 		
 		/* $('#startDate').datetimepicker();
        
