@@ -463,4 +463,23 @@ public class UserController
 			return "/UserLeaveApplyAccept.jsp";
 		}
 		
+		
+		
+		// 휴면회원 메인 페이지 
+		// 탈퇴 처리 페이지
+		@RequestMapping(value = "/restuserchange.action", method =RequestMethod.GET)
+		public String restUser(Model model,HttpServletRequest request)
+		{
+			
+			System.out.println("휴면오는지확인");
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			System.out.println("id " + id );
+			System.out.println("pw " + pw);
+			
+			return "/RestUserChange.jsp";
+		}
+		
 }

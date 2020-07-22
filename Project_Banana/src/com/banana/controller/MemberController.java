@@ -303,7 +303,11 @@ public class MemberController
 		else if(state == 4)
 		{	
 			// 휴면
-			view = "/RestUserChange.jsp";
+			//view = "/RestUserChange.jsp";
+			
+			
+			
+			return "/restuserchange.action";
 		}
 		else if (state == 5)
 		{	

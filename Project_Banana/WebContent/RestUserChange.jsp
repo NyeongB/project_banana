@@ -227,11 +227,7 @@ p
 										
 										<label for="" id="pwQ">비밀번호 질문</label> 
 										
-										<select name="pwQlist" id="pwQlist" class="form-control" style="width: 287px;">
-											<option value="1">보물 1호는?</option>
-											<option value="2">가장 좋아하는 색은?</option>
-											
-										</select>
+										<input type="text" class="form-control">
 										<br>
 										<label for="" id="Answer">답변</label> 
 										
