@@ -64,7 +64,7 @@
          <li><a href="<%=cp%>/g_main.action">공동구매</a></li>
          <li><a href="<%=cp%>/r_main.action">렌트</a></li>
          <li><a href="">포인트충전</a></li>
-         <li><a href="">공지사항</a></li>
+         <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>
       </ul>
       
       <div id="search_bar">         

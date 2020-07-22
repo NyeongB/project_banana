@@ -72,7 +72,7 @@
 		<li><a href="#">공지사항 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="<%=cp%>/adminnoticelist.action">공지사항 목록</a></li>
-					<li><a href="#">공지사항 등록</a></li>
+<!-- 					<li><a href="#">공지사항 등록</a></li> -->
 				</ul>
 		</li>
 		

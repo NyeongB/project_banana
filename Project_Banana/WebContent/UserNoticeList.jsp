@@ -64,7 +64,7 @@
 						<c:forEach var="lists" items="${list }">
 							<tr>
 							<td>${lists.num }</td>
-							<td>${lists.title }</td>
+							<td><a href="<%=cp%>/usernoticedetail.action?notice_code=${lists.notice_code}">${lists.title }</a></td>
 							<td>${lists.id }</td>
 							<td>${lists.wdate }</td>
 							<td>${lists.views }</td>

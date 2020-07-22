@@ -9,8 +9,22 @@
 	<select id="list" resultType="com.banana.admin.NoticeListDTO">
 	SELECT *
 	FROM VIEW_NOTICELIST	
+	
+	<!-- 공지사항 코드, 작성자 이름, 콘텐츠 추가 
+	  CREATE OR REPLACE FORCE VIEW "BANANA"."VIEW_NOTICELIST" ("NUM", "TITLE", "ID", "WDATE", "VIEWS","NOTICE_CODE","NAME","CONTENT") AS 
+  SELECT SUBSTR(N.NOTICE_CODE,5) AS NUM,N.TITLE,A.ID,N.WDATE,N.VIEWS, N.NOTICE_CODE AS NOTICE_CODE , a.name as NAME , content 
+FROM NOTICE N JOIN ADMIN A
+ON N.ADMIN_CODE = A.ADMIN_CODE;
+	 -->
 	</select>	
 	
+	
+	<select id="insert">
+
+    INSERT INTO NOTICE(NOTICE_CODE,ADMIN_CODE,TITLE,CONTENT,F_FILE)
+    VALUES('NOTI' || SEQ_NOTI.NEXTVAL,#{admin},#{title},#{content},#{file})
+
+   </select>
 	
 </mapper>  
 

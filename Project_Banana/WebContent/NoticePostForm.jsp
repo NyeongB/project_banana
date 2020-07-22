@@ -17,9 +17,35 @@
 <script type="text/javascript"
    src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
+
 <script type="text/javascript">
 	
-
+	$(document).ready(function()
+	{
+		
+		$("#insertBtn").click(function()
+		{
+			if($("#title").val().trim()=="")
+			{
+				alert("제목을 입력하십시오.");
+				return;
+			}
+			
+			if($("#content").val().trim()=="")
+			{
+				alert("내용을 입력하십시오.");
+				return;
+			}
+			
+			$("#noticeInsert").submit();
+			
+		});
+		
+		
+		
+	});
+	
 	
 </script>
 </head>
@@ -45,45 +71,51 @@
 					</h3>
 				</div>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-12">
 					<h4>
 						<span class="hightlight">공지사항 작성</span> > 공지사항 작성 완료
 					</h4>
 				</div>
-			</div>
-			<form role="form">
+			</div> -->
+			<form action="noticeinsert.action" id="noticeInsert">
+			
+				<input type="text" style="display: none;" name="admin" value="${admin }">
+			
 				<div class="form-group">
 					 
 					<label for="exampleInputEmail1">
 						공지사항 제목
 					</label>
-					<input type="text" class="form-control" id="exampleInputEmail1" />
+					<input type="text" class="form-control" id="title" name="title">
 				</div>
 				<div class="form-group">
 					 
 					<label for="exampleInputPassword1">
 						공지사항 내용
 					</label>
-					<textarea class="form-control content" rows="3"></textarea>
+					<textarea class="form-control content" rows="3" name="content" id="content"></textarea>
 				</div>
 				<div class="form-group">
 					 
 					<label for="exampleInputFile">
 						파일 첨부
 					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" />
+					<input type="file" class="form-control-file" id="exampleInputFile" name="file">
 					<p class="help-block">
 						파일을 첨부 해주세요
 					</p>
 				</div>
-				<div class="checkbox">
+				<!-- <div class="checkbox">
 					 
 					<label>
 						<input type="checkbox" /> Check me out
 					</label>
-				</div> 
-				<button type="submit" class="btn btn-primary">
+				</div>  -->
+				
+				
+				
+				<button type="button" class="btn btn-primary" id="insertBtn">
 					신청
 				</button>
 			</form>

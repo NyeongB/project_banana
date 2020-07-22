@@ -42,25 +42,20 @@
         <table class="table">
         <tr>
             <th class="col-md-1">글 제목</th>
-            <td colspan="5">포인트 제도 정책 변경 공지</td>
+            <td colspan="5">${notice.title }</td>
         </tr>
         
         <tr>
             <th class="col-md-1">작성자</th>
-            <td>임효림</td>
+            <td>${notice.name }</td>
             <th class="col-md-1">작성일</th>
-            <td>2020.06.01</td>
+            <td>${notice.wdate }</td>
             <th class="col-md-1">조회수</th>
-            <td>30</td>
+            <td>${notice.views }</td>
         </tr>                    
         <tr>
             <td colspan="6" class="notice_content">
-            	<p>안녕하세요 바나나 401 관리자 입니다.</p>  
-            	<p>2020 년 06월 2일 부로 포인트 수수료 제도에 대해 변경 사항이 있어 안내 드립니다.</p>  
-            	<p>기존의 포인트 5% 에서 10%로 변경 되었습니다.</p>  
-            	<p>자세한 사항은 첨부된 pdf를 통해 확인하시기 바랍니다.</p>  
-            	<p>이상 바나나 401 이였습니다.</p>  
-            	<p>감사합니다.</p>                
+            	<p>${notice.content }</p>              
             </td>
         </tr>
          
@@ -68,7 +63,7 @@
          
         <tr>
             <td colspan="6" class="text-right">
-              <input type="button" class="btn" value="목록보기">
+              <input type="button" class="btn" value="목록보기" onclick="location.href='<%=cp%>/adminnoticelist.action'">
             </td>
         </tr>          
          
