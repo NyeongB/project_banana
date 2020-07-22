@@ -8,20 +8,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GroupBuyingPostOffer.jsp</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<title>Banana</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
+<script type="text/javascript" src="js/jquery.datetimepicker.full.min.js"></script>
 
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
 
 
 <style type="text/css">
@@ -157,39 +157,59 @@ p
 	}
 	
 	//소분류 카테고리 클릭
+	
 	function cateFinal(obj)
 	{
 		scatecode = obj.getAttribute("id");
 		alert(scatcode);
 	}
 	
+	
 	$(document).ready(function()
 	{
 		
+		/* $("#startDate").datetimepicker(function()
+		{
+			dateFormat: "yy-mm-dd",           
+            changeMonth: true,   
+            mindate:-1,
+            onClose: function(selectedDate)
+			{
+				$("#endDate").datetimepicker("option","minDate",selectedDate)
+			}
+		}); */
 		
+		/* $("#startDate").on("dp.change", function (e) {
+            $('#endDate').data("DateTimePicker").minDate(e.date);
+        }); */
 		
-		
-		    $("#startDate").datepicker( {
-		        onClose : function( selectedDate ) {  // 날짜를 설정 후 달력이 닫힐 때 실행
-		                      if( selectedDate != "" ) {
-		                          // yyy의 minDate를 xxx의 날짜로 설정
-		                          $("#endDate").datepicker("option", "startDate", selectedDate);
-		                      }
-		                  }
-		    } );
+     
+          $("#startDate").datetimepicker({
+        	 
+      
+        	 dateFormat: "yy-mm-dd",           
+             changeMonth: true,   
+             mindate:-1,
+             onClose: function( selectedDate ){    
+                 
+                 $("#endDate").datetimepicker( "option", "minDate", selectedDate );
+             }                
+        	 
+         }); 
+         $("#endDate").datetimepicker({
+        	 
+        	 dateFormat: "yy-mm-dd",
+             changeMonth: true,
+             onClose: function( selectedDate ) {
+                 // 종료일(toDate) datepicker가 닫힐때
+                 // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+                 $("#startDate").datepicker( "option", "maxDate", selectedDate );
+             }                
 
-		    $("#endDate").datepicker( {
-		        onClose : function( selectedDate ) {  // 날짜를 설정 후 달력이 닫힐 때 실행
-		                      if( selectedDate != "" ) {
-		                          // xxx의 maxDate를 yyy의 날짜로 설정
-		                          $("#startDate").datepicker("option", "maxDate", selectedDate);
-		                      }
-		                  }
-		    } );
-	
-
-
-
+         });
+         $("#bunDate").datetimepicker();
+         $("#returnDate").datetimepicker();
+  
 		
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
@@ -422,111 +442,42 @@ p
 					</div>
 						
 					<div class="col-md-12 gonggustart">	
-						<div class="col-md-6">
+						<div class="col-md-4">
 							수요조사 시작일
-							<input type="text" id="startDate" class="datePicker">
-							
-							<select name="startDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
-							
+							<input type="text" id="startDate" class="form-control">
+			
 						</div>
+						
+						<div class="col-md-2"></div>
 					
 				
-						 <div>
+						 <div class="col-md-4">
 							수요조사 종료일
-							
-							<input type="text" id="endDate" class="datePicker">
-							
-							<select name="endDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
+							<input type="text" id="endDate" class="form-control">	
 						</div>
 					</div>
 						
 						
 					<div class="col-md-12">	
-						<div class="col-md-6">
+						<div class="col-md-4">
 							분배일시    
-							<input type="date">
+							<input type="text" id="bunDate" class="form-control">
 							
-							<select name="startDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
-							
-					</div>
+						</div>
 						
-						 <div>
-							상품반환 일시
-							
-							<input type="date">
-							
-							<select name="endDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
+						<div class="col-md-2"></div>
+						
+						 <div class="col-md-4">
+							상품반환 일시	
+							<input type="text" id="returnDate" class="form-control">
+
 						</div>
 						
 						<div class="col-md-12 notice">
 							<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
 						</div>
 									
-						<div class="Btn">
+						<div class="col-md-12 Btn">
 						<button type="button" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
 						</div>
