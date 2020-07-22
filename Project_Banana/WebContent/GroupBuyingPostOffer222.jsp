@@ -167,36 +167,40 @@ p
 	
 	$(document).ready(function()
 	{
+		$("#startDate").datetimepicker();
 		
-		/* $("#startDate").datetimepicker(function()
+		$("#sdate").datetimepicker("option", "onClose", function(selectedDate)
 		{
-			dateFormat: "yy-mm-dd",           
-            changeMonth: true,   
-            mindate:-1,
-            onClose: function(selectedDate)
-			{
-				$("#endDate").datetimepicker("option","minDate",selectedDate)
-			}
-		}); */
+			$("#endDate").datetimepicker("option", "minDate" , selectedDate);
+		});
+	
 		
-		/* $("#startDate").on("dp.change", function (e) {
+		/* $('#startDate').datetimepicker();
+       
+		
+		$("#startDate").on("dp.change", function (e) {
             $('#endDate').data("DateTimePicker").minDate(e.date);
-        }); */
+        });
+        $("#endDate").on("dp.change", function (e) {
+            $('#startDate').data("DateTimePicker").maxDate(e.date);
+        });
 		
+		/* */
      
-          $("#startDate").datetimepicker({
+       /*    $("#startDate").datetimepicker({
         	 
-      
         	 dateFormat: "yy-mm-dd",           
              changeMonth: true,   
-             mindate:-1,
-             onClose: function( selectedDate ){    
+             mindate:0,
+             onClose: function(selectedDate){    
                  
                  $("#endDate").datetimepicker( "option", "minDate", selectedDate );
              }                
         	 
          }); 
-         $("#endDate").datetimepicker({
+		
+		$("#endDate").datetimepicker(); */
+        /*  $("#endDate").datetimepicker({
         	 
         	 dateFormat: "yy-mm-dd",
              changeMonth: true,
@@ -206,10 +210,10 @@ p
                  $("#startDate").datepicker( "option", "maxDate", selectedDate );
              }                
 
-         });
+         }); */
          $("#bunDate").datetimepicker();
          $("#returnDate").datetimepicker();
-  
+   
 		
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
@@ -445,9 +449,10 @@ p
 						<div class="col-md-4">
 							수요조사 시작일
 							<input type="text" id="startDate" class="form-control">
-			
+							
 						</div>
-						
+			
+			
 						<div class="col-md-2"></div>
 					
 				
