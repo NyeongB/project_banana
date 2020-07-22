@@ -6,14 +6,18 @@
   
 <mapper namespace="com.banana.my.IUserAttendGroupBuyingDAO">
 	
-	<!-- 나의 공동구매 현황  -->
+	<!-- 나의 신청공동구매 현황  -->
 	<select id="myGList" resultType="com.banana.groupbuying.GPostDTO">
 		SELECT TITLE, COST, DIS_COST, LOC_NAME, PHOTO, G_POST_CODE, G_APPLY_CODE, B_USER_CODE, BUN_DATE, END_DATE, PROGRESS, MEMBER_NUM, COUNT
-		FROM MY_GONGGU
+		FROM VIEW_MY_APPLY_GONGGU
 		WHERE B_USER_CODE = #{b_user_code}
 	</select>
-	
-	
+	<!-- 나의 제안 공동구매 현황  -->
+		<select id="gOfferList" resultType="com.banana.groupbuying.GPostDTO">
+		 SELECT TITLE, DIS_COST, COST, BUN_DATE, LOC_NAME, B_USER_CODE,MEMBER_NUM, PHOTO, PROGRESS, COUNT
+ 		 FROM VIEW_MY_OFFER_GONGGU
+		 WHERE B_USER_CODE = #{b_user_code}
+	</select>
 	
 </mapper>  
 
