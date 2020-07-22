@@ -103,22 +103,7 @@ public class MemberController
 		return view;
 	}
 	
-	@RequestMapping(value = "/adminnoticelist.action", method =RequestMethod.GET)
-	public String AdminNoticeList(Model model)
-	{
-		String view = null; 
-		
-		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
-		
-		
-		
-		model.addAttribute("list", dao.list());
-		
-		view = "/AdminNoticeList.jsp";
-		
-		
-		return view;
-	}
+	
 	
 	
 	@RequestMapping(value = "/restuser.action", method =RequestMethod.GET)
@@ -175,22 +160,7 @@ public class MemberController
 	
 	
 	
-	@RequestMapping(value = "/usernoticelist.action", method =RequestMethod.GET)
-	public String UserNoticeList(Model model)
-	{
-		String view = null; 
-		
-		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
-		
-		
-		
-		model.addAttribute("list", dao.list());
-		
-		view = "/UserNoticeList.jsp";
-		
-		
-		return view;
-	}
+	
 	
 	// 소상공인 조회
 	@RequestMapping(value = "/adminshopuserlist.action", method =RequestMethod.GET)

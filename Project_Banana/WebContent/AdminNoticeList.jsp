@@ -5,6 +5,12 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	 session = request.getSession();
+
+	String admin = (String)session.getAttribute("admin");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +80,7 @@
 						<c:forEach var="lists" items="${list }" varStatus="status" begin="0">
 						<tr>
 							<td><p>${status.count }</p></td>
-							<td>${lists.title }</td>
+							<td><a href="<%=cp%>/usernoticedetail.action?notice_code=${lists.notice_code}">${lists.title }</a></td>
 							<td>${lists.id }</td>
 							<td>${lists.wdate }</td>
 							<td>${lists.views }</td>
@@ -112,7 +118,7 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12 text-right">
-							<button type="button" class="btn">글쓰기</button>
+							<button type="button" class="btn" onclick="location.href='<%=cp%>/noticepostform.action?admin=<%=admin%>'">글쓰기</button>
 						</div>			
 					</div>
 				</div>
