@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IUserAttendanceListDAO">
+	
+	<select id="attendList" resultType="com.banana.my.UserAttendanceListDTO">	 
+ 	SELECT PHOTO, COUNT, TITLE, MEMBER_NUM, BUN_DATE, LOC_NAME, B_USER_CODE, G_SUCCESS_CODE, G_POST_CODE
+ 	FROM VIEW_ATTENDANCE_LIST
+	WHERE B_USER_CODE =#{b_user_code}
+	</select>	
+	
+	
+	
+</mapper>  
+

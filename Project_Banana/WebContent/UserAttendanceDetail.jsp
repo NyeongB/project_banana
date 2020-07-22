@@ -28,15 +28,13 @@
 			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 </div>
-<!-- content 영역 -->
 <div class="container-fluid">
-	
 	<div class="row">
-		<div class="col-md-3">
-			
+		<div class="col-md-2">
+			<jsp:include page="MenuUser.jsp"></jsp:include>
 		</div>
-		<div class="col-md-9">
-			<div class="row">
+		<div class="col-md-8">
+		<div class="row">
 				<div class="col-md-12">
 					<h3 class="highlight">출석부</h3>
 				</div>
@@ -80,9 +78,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-2">
+		</div>
 	</div>
-
 </div>
+
 <!-- footer 영역 -->
 <div class="row Footer">
 	<div class="col-md-12">

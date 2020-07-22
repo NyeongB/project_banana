@@ -122,7 +122,7 @@ String cp = request.getContextPath();
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="gOfferLists" items="${gOfferList }"></c:forEach>
+						<c:forEach var="gOfferLists" items="${gOfferList }">
 							<tr>
 								<td>1</td>
 								<td><img alt="Bootstrap Image Preview"
@@ -130,7 +130,7 @@ String cp = request.getContextPath();
 									style="width: 70px; height: 70px;"></td>
 								<td>${gOfferLists.title }</td>
 								<td><p id="price">${gOfferLists.cost }</p>${gOfferLists.dis_cost }</td>
-								<td>${gOfferLists.count }/ ${gOfferLists.member_num }</td>
+								<td>${gOfferLists.count+1 }/ ${gOfferLists.member_num }</td>
 								<td>${gOfferLists.bun_date }</td>
 								<td>${gOfferLists.loc_name}</td>
 								<td>${gOfferLists.progress }</td>
@@ -143,6 +143,7 @@ String cp = request.getContextPath();
 
 								</td>
 							</tr>
+							</c:forEach>
 						</tbody>
 					</table>	
 
