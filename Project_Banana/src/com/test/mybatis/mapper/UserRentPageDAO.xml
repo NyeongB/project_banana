@@ -6,14 +6,20 @@
   
 <mapper namespace="com.banana.my.IUserRentPageDAO">
 	
-	<select id="list" resultType="com.banana.my.RpostDTO">
-	SELECT BS.BANANA_SCORE_CODE AS BANANA_SCORE_CODE, J.B_USER_CODE AS B_USER_CODE, BS.BANANA_SCORE AS BANANA_SCORE, J.NICKNAME AS NICKNAME
-	FROM BANANA_SCORE BS LEFT JOIN JOIN J
-	ON BS.B_USER_CODE = J.B_USER_CODE
-	WHERE BS.B_USER_CODE =#{b_user_code}
+	<!-- 내가 신청한 렌트  -->
+	<select id="rApplyList" resultType="com.banana.rent.RPostDTO">
+	SELECT P_USER_CODE, TITLE, BRAND, A_USER_CODE, PHOTO, PROGRESS
+	FROM MY_APPLY_RENT
+	WHERE A_USER_CODE =#{b_user_code}
 	</select>	
 	
+	<!--내가 제안한 렌트   -->
 	
+	<select id="rOfferList" resultType="com.banana.rent.RPostDTO">
+	SELECT PHOTO, TITLE, BRAND, B_USER_CODE, PROGRESS
+	FROM VIEW_MY_OFFER_RENT
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>	
 	
 </mapper>  
 

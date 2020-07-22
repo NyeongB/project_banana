@@ -74,12 +74,7 @@ i + a
 		<ul class="menu thick">
 		<li><i class="fas fa-home"></i><a href="#">마이페이지 홈</a></li>
 		<li><i class="far fa-heart"></i><a href="#">찜</a></li>
-		<li><i class="fas fa-hand-holding-heart"></i><a href="#">렌트현황</a>
-			<ul class="sub" style="display: none;">
-					<li><a href="#">내가 제공한 렌트</a></li>
-					<li><a href="#">내가 신청한 렌트</a></li>
-			</ul>
-		</li>
+		<li><i class="fas fa-hand-holding-heart"></i><a href="userrentpage.action">나의 렌트 현황</a></li>
 		<li><i class="fas fa-clipboard-list"></i><a href="#">공동구매현황</a>
 			<ul class="sub" style="display: none;">
 					<!-- <li><a href="#">내가 제안한 함께사요</a></li>

@@ -38,6 +38,10 @@ public class ActivityRatingController
 			HttpSession session = request.getSession();        
 	        SessionInfo info = (SessionInfo)session.getAttribute("user");
 	        
+	        // 로그인 상태가 아닐 때
+	        if(info == null)
+	        	return "/loginmain.action";
+	        
 	        // 아이디가져오기
 	        String b_user_code = info.getB_user_code();
 	        nickName = info.getNickname();
