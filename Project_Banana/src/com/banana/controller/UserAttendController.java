@@ -38,6 +38,7 @@ public class UserAttendController
 		{	b_user_code = info.getB_user_code();
 			IUserAttendGroupBuyingDAO dao = sqlSession.getMapper(IUserAttendGroupBuyingDAO.class);
 			model.addAttribute("myGList", dao.myGList(b_user_code));
+			model.addAttribute("gOfferList", dao.gOfferList(b_user_code));
 			
 			
 		} catch (Exception e)
