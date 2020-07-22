@@ -11,9 +11,7 @@
 <title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" /> -->
-<script src="/js/jquery-ui-timepicker-addon.js" type="text/javascript" ></script>
-
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -196,7 +194,14 @@ p
          $("#returnDate").datetimepicker();
 	   
 	   */
-		$("#startDate").datetimepicker({ minDate: 0});
+		$("#startDate").datetimepicker({ 
+			minDate: 0,
+			
+		});
+	   
+	   $("#bunDate").datetimepicker();
+	   
+	   
 	   //var date = $("#startDate").val();
 	   //alert(date);
 	  
@@ -274,20 +279,50 @@ p
 	}
 	
 	
-	function test()
+	function dateCheck()
 	{
+		//모집시작 날짜 값 불러옴.
 		var date = $("#startDate").val();
-		alert(date);
+		//alert(date);
+		//종료날짜는 최소 5일 이상
+		var newdate = new Date(date);
+		newdate.setDate(newdate.getDate()+5);
+		var nd = new Date(newdate);
+		//alert(nd);
+		 
+		
+		var closedate = new Date(date);
+		closedate.setDate(closedate.getDate()+30);
+		var cd = new Date(closedate);
+		//alert(cd);
+	
 		
 		 $("#endDate").datetimepicker({
-			 minDate: new Date(date)
-		 	
-			   /* startDate : date */
-			  
-		   }); 
+			 //시작 날짜를 모집 시작 날 보다 5일 뒤로.
+			 minDate: new Date(nd),
+		 	 maxDate: new Date(cd)
+		 	,startDate : new Date(nd)
+		 	,icons: {
+	            primary: 'ui-icon-calendar'
+	        }
 		
+			  
+		   });  
 		 
+		 /*   var edate = $("#endDate").val();
+		   alert(edate);
+			var newdate2 = new Date(edate);
+			newdate2.setDate(newdate2.getDate()+1);
+			var end = new Date(newdate2);
+		 
+		 
+		$("#bunDate").datetimepicker({
+			
+			minDate: new Date(end)
+		});	 */
 	}
+	
+	
 
 	
 
@@ -449,8 +484,8 @@ p
 					<div class="col-md-12 gonggustart">	
 						<div class="col-md-4">
 							수요조사 시작일
-							<input type="text" id="startDate" class="form-control" onclick="test()">
-							
+							<input type="text" id="startDate" class="form-control">
+							<span class="glyphicon glyphicon-calendar"></span>
 						</div>
 			
 			
@@ -459,7 +494,8 @@ p
 				
 						 <div class="col-md-4">
 							수요조사 종료일
-							<input type="text" id="endDate" class="form-control" onclick="test()">	
+							<input type="text" id="endDate" class="form-control" onclick="dateCheck()">	
+							<label></label>
 						</div>
 					</div>
 					
