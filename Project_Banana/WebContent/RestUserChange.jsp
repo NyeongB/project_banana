@@ -28,7 +28,7 @@ String cp = request.getContextPath();
 	margin-right: auto;
 	background-color: #f9f0ca;
 	width: 100%;
-	height: 650px;
+	height: 700px;
 	margin-bottom: 80px;
 }
 
@@ -113,36 +113,106 @@ p
 {
 	display: none;
 }
-
+#action{
+	display: none;
+	
+}
+#check
+{
+display: none;
+}
 
 </style>
 <script type="text/javascript">
-
+	var phoneCheck;
+	
 	$(document).ready(function() 
 	{
+		
+		
+		// 휴면회원 신청
+		$("#action").click(function()
+		{	
+			var b_user_code = "<c:out value='${b_user_code}'/>";
+			location.href='restuseraction.action?b_user_code='+b_user_code;
+		});
+		
+		// 인증번호 전송
+		$("#telBtn").click(function()
+		{
+			ajaxRequest3();
+			$("#check").css("display", "inline-block");
+		});
+		
+		// 문자 인증 확인
+		$("#numBtn").click(function()
+		{
+			if($("#num").val()==phoneCheck)
+			{
+				alert("인증번호 확인!");
+				$("#action").css("display", "inline-block");	
+			}
+			else
+			{
+				alert("인증번호가 같지않습니다.");
+				$("#action").css("display", "none");
+			}
+		});
+		
+		
+		$("#passwordBtn").click(function()
+		{
+			if($("#answer").val()!= "<c:out value='${dto.pw_answer}'/>")
+			{
+				alert("답변이 다릅니다.");
+				$("#action").css("display", "none");
+			}
+			else
+			{
+				$("#action").css("display", "inline-block");	
+			}
+		});
+		
 		
 		$("#telCheck").click(function()
 		{
 			
 			$("#group1").css("display", "inline-block");	
+			$("#group2").css("display", "none");	
+			$("#action").css("display", "none");
 		});
 		
 		$("#pwQuestion").click(function()
 		{
+			$("#action").css("display", "none");
 			$("#group2").css("display", "inline-block");	
+			$("#group1").css("display", "none");	
+			$("#action").css("display", "none");
 			
 		});
 	});
 
 
-
+	// 휴대폰 인증 
+	function ajaxRequest3()
+	{
+		
+		alert("인증번호가 발송되었습니다.");
+		$.get("telcheck.action", {tel : $("#tele").val()}, function(data)
+		{
+			//alert(data);
+			phoneCheck = data.trim();
+			
+		});
+		
+	}
 </script>
 
 
 
 
 </head>
-<body>
+<body >
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
@@ -191,13 +261,19 @@ p
 										
 										<label for="" id="tel"> 전화번호 </label> 
 										
-										<select name="telList" class="form-control tel1">
-											<option value="010">010</option>
-											<option value="011">011</option>
-											<option value="02">02</option>
-										</select>
-											<input class="form-control" id="telinput" type="text" />	
-											<button class="btn btn-primary" type="submit">인증번호 받기</button>
+										
+											<input class="form-control" type="text" id="tele">	
+											<button class="btn btn-primary" type="button" id="telBtn">인증번호 받기</button>
+										
+  									</div>
+  									<BR>
+  									<div class="row form-inline" id="check">
+										
+										<label for="" id="tel"> 인증번호 </label> 
+										
+										
+											<input class="form-control" type="text" id="num">	
+											<button class="btn btn-primary" type="button" id="numBtn">인증번호 확인</button>
 										
   									</div>
 										
@@ -226,19 +302,20 @@ p
 								<div class="row form-inline" id="group2">
 										
 										<label for="" id="pwQ">비밀번호 질문</label> 
-										
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" value="${dto.pw_question }" readonly="readonly">
 										<br>
 										<label for="" id="Answer">답변</label> 
 										
-											<input class="form-control" id="an" type="text" />	
-											<button class="btn btn-primary" type="submit">제출 하기</button>
+											<input class="form-control" id="answer" type="text" />	
+											<button class="btn btn-primary" type="button" id="passwordBtn">제출 하기</button>
 										
   									
   								</div>
 								</form>
-
-
+									<br><Br>
+									<div class="text-center">
+									<button class="btn btn-primary " id="action" type="button" >휴면회원 해지</button>
+									</div>
 							</div>
 						</div> <!-- end center-block -->
 					</div> <!-- col-md-8 end -->
