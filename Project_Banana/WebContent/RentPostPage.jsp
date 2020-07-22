@@ -16,14 +16,20 @@ String cp = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
+
+
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">	
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
@@ -271,6 +277,20 @@ clear:both;
 				$("#rpost").submit();
 				
 			});
+			
+			
+			// 데이터피커 다시 하기...
+			$("#booking1").datepicker({
+				
+				dataFormat : "yy-mm-dd"
+				, maxDate: "+3D"
+				, todayHighlight : true
+				, monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+
+				
+			});
+			
+			
 			
 			
 			
@@ -640,7 +660,7 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="booking1" />
+									<input type="text" class="form-control" id="booking1" />
 								</div>
 								
 								
@@ -668,7 +688,7 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="booking2" />
+									<input type="text" class="form-control" id="booking2" />
 								</div>
 								
 								
