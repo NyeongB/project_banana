@@ -180,8 +180,15 @@ function orderItem(obj)
 {
 	var a = obj.getAttribute("id");
 
-	alert(${count});
-	alert(${member});
+	//alert(${count});
+	//alert(${member});
+	
+	if(${count}>=${member})
+	{
+		alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
+		return;
+	}
 	
 	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 }

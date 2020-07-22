@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
 <script type="text/javascript" src="<%=cp %>/js/bootstrap.min.js"></script>
 <style type="text/css">
 .glyphicon-bell

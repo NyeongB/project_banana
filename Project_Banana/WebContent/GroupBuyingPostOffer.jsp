@@ -9,16 +9,16 @@
 <head>
 <meta charset="UTF-8">
 <title>GroupBuyingPostOffer.jsp</title>
-
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
-
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
 
 <style type="text/css">
 
@@ -106,6 +106,8 @@ p
 		
 	}
 	
+	
+	
 	function requestCate(catecode)
 	{
 		$.get("ajaxcate.action", {cate : catecode}, function(data)
@@ -157,17 +159,22 @@ p
 		alert(scatcode);
 	}
 	
-	$().ready(function()
+	$(document).ready(function()
 	{
 		
+		 $("#date1").datepicker();                    
+         $("#date2").datepicker();
+		
 		//jquery-ui 캘린더(datepicker)를 불러오는 함수 처리
-		$("#date1").datepicker(
+		/* $("#date1").datepicker(
 		{
 			dateFormat : "yy-mm-dd"
 			, changeYear : true
 			, changeMonth : true
 			
-		});
+		}); */
+		
+		
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
 		$("input:text[numberOnly]").on("keyup", function() 
@@ -427,7 +434,7 @@ p
 						 <div>
 							수요조사 종료일
 							
-							<input type="date">
+							<input type="text" id="date2" class="datePicker">
 							
 							<select name="endDate">
 								<option value="">08:00</option>
