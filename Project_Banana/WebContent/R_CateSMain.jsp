@@ -259,6 +259,9 @@ $(document).ready(function()
 			});
 		});
 
+
+
+
 function rentPost() 
 {
 	
@@ -267,8 +270,26 @@ function rentPost()
 	
 	if(id1 == "null" || id1 ==" " )
 	{
-		alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		{
+			// 확인 버튼 클릭 시 동작
+			
 		location.href = "loginmain.action";
+			
+		}
+		else // 취소 버튼 클릭 시 동작
+		{
+			// 1. redirect:r_main.action
+			location.href = "redirect:r_main.action";
+		
+			// 2. redirect:RentMain.jsp
+			//location.href = "redirect:RentMain.jsp";
+		
+			// 3. history.go(0)
+			//location.href = "javascript:history.go(0)";
+			
+		}
+		
 		
 	}
 	else 
@@ -276,6 +297,58 @@ function rentPost()
 		location.href = "rentpostpage.action";
 		
 	}
+	
+}
+
+
+//버튼 클릭 시 로그인 유무 체크 후 동작 다르게
+function logincheck() 
+{
+	var id1 = "<%=info %>";
+   
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		{
+			// 확인 버튼 클릭 시 동작
+			
+		location.href = "loginmain.action";
+			
+		}
+		else // 취소 버튼 클릭 시 동작
+		{
+			location.href = "redirect:r_main.action";
+		}
+	}
+	else
+	{
+		// 회원일 때 회원정보 수정 페이지로 이동하기
+		
+		
+	}
+	
+}
+
+
+//위치 설정 회원 유무 체크해서 보여주기
+ window.onload = function() 
+{
+	var id1 = "<%=info%>";
+	
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		$("#loc").html("위치 설정하기");
+	}
+	else
+	{
+		$.get("locationajax.action", function(data) 
+		{
+			$("#loc").html(data);
+		}) 
+	}
+	 
 	
 }
 
@@ -335,11 +408,17 @@ function mouseout(obj)
 
 
 		<div class="row">
-			<div class="col-md-12 rentNav">
+			<div class="col-md-12 rentNav form-inline">
 
+				<!-- 주소설정한 값 뜨기 -->
+				<div class="col-md-1">
+					<img src="images/icons_b50.png" id="location">
+				</div>
 				
-					<img src="images/icons_b50.png" id="location"> <small>서울시
-						마포구 서교동</small>
+				<div class="col-md-11">
+					<small onclick="logincheck()" id="loc"></small>
+				</div>
+				
 				
 			</div>
 		</div>

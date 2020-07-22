@@ -76,8 +76,26 @@
 		
 		if(id1 == "null" || id1 ==" " )
 		{
-			alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
 			location.href = "loginmain.action";
+				
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				// 1. redirect:r_main.action
+				location.href = "redirect:r_main.action";
+			
+				// 2. redirect:RentMain.jsp
+				//location.href = "redirect:RentMain.jsp";
+			
+				// 3. history.go(0)
+				//location.href = "javascript:history.go(0)";
+				
+			}
+			
 			
 		}
 		else 
@@ -89,7 +107,7 @@
 	}
 	
 	
-	
+	// 버튼 클릭 시 로그인 유무 체크 후 동작 다르게
 	function logincheck() 
 	{
 		var id1 = "<%=info %>";
@@ -97,17 +115,29 @@
 		
 		if(id1 == "null" || id1 ==" " )
 		{
-			alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
 			location.href = "loginmain.action";
-			
+				
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:r_main.action";
+			}
 		}
-		else 
+		else
 		{
-			location.href = "redirect:RentMain.jsp";
+			// 회원일 때 회원정보 수정 페이지로 이동하기
+			
 			
 		}
+		
 	}
 	
+	
+	//위치 설정 회원 유무 체크해서 보여주기
 	 window.onload = function() 
 	{
 		var id1 = "<%=info%>";
