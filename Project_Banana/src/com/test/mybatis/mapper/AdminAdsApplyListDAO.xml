@@ -5,6 +5,19 @@
   
   
 <mapper namespace="com.banana.admin.IAdminAdsApplyListDAO">
+
+
+
+
+	<select id="success" statementType="CALLABLE" >
+
+     {call
+     
+     PRC_ADV_SUCCESS(#{adv_apply_code} ,#{id},' ',' ')
+     
+      }
+
+   </select>
 	
 	<select id="list" resultType="com.banana.admin.AdminAdsListDTO">
 	SELECT ADV_APPLY_CODE, ID
@@ -25,7 +38,7 @@ FROM ADV_APPLY AP LEFT JOIN ADV_TYPE AT
 ON AP.ADV_TYPE_CODE = AT.ADV_TYPE_CODE
 LEFT JOIN JOIN J
 ON J.B_USER_CODE = AP.B_USER_CODE
-WHERE ADV_APPLY_CODE <>(SELECT ADV_APPLY_CODE FROM ADV_APPLY_ACCEPT)
+WHERE ADV_APPLY_CODE NOT IN(SELECT ADV_APPLY_CODE FROM ADV_APPLY_ACCEPT)
 ; -->
 	
 	</select>

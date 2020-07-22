@@ -37,4 +37,14 @@
 		SELECT NICKNAME FROM JOIN WHERE ID=#{id}
 	</select>	
 	
+	
+	<select id="adminLogin" resultType="java.lang.String">			
+		SELECT ADMIN_CODE
+		FROM ADMIN
+		WHERE ID = #{id} AND PW = #{pw}
+	</select>	
+	
+	
+	
+	
 </mapper>  

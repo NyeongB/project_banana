@@ -94,7 +94,7 @@ img
 			<br><br><br>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<button class="btn btn-lg">광고 수락</button>
+					<button class="btn btn-lg" onclick="location.href='adminadsacceptok.action?adv_apply_code=${adv_apply_code }'">광고 수락</button>
 					<button class="btn btn-lg" onclick="history.back()">취소</button>
 				</div>
 			</div>
