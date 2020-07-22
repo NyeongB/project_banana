@@ -49,6 +49,9 @@
 			$("html, body").animate({scrollTop: $(document).height() }, "slow");
 			return false;
 		});
+		
+		
+		
 	
 	});
 
@@ -87,7 +90,7 @@
 	
 	
 	
-	function loc() 
+	function logincheck() 
 	{
 		var id1 = "<%=info %>";
 	   
@@ -124,6 +127,22 @@
 		 
 		
 	}
+	 
+	 
+	 function mouseon(obj)
+	 {
+	 	
+	 	var id = obj.getAttribute("id")
+	 	document.getElementById(id).style.background = "#E6E6E6";
+	 }
+
+	 function mouseout(obj)
+	 {
+	 	var id = obj.getAttribute("id")
+	 	
+	 	document.getElementById(id).style.background = "none";
+	 }
+
  
 
 </script>
@@ -311,7 +330,7 @@ b
 				</div>
 				
 				<div class="col-md-11">
-					<small onclick="loc()" id="loc"></small>
+					<small onclick="logincheck()" id="loc"></small>
 				</div>
 				
 				
@@ -501,20 +520,20 @@ b
 					<div><span class="highlight">카테고리 추천 게시물</span></div>
 					
 					
-					      <!-- 카테고리 추천 게시글 2열 -->
+					      <!-- 관심 카테고리 추천 게시글 2열 -->
 				<div class="row"> 
 					<div class="col-md-12">
 
 						
-							<div class="col-md-1"></div>
+							
 
 							
 							<!-- 2열 1번 -->
 							
-							<c:forEach var="rCateList" items="${rCateList }" varStatus="status" begin="1" end="5">
+							<c:forEach var="rCateList" items="${rCateList }" varStatus="status" begin="0" end="5">
 							  <div class="col-sm-2 col-md-2 thblock">
 							  <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           		<div class="thumbnail" id="${rCateList.r_post_code }" onclick="postDetail(this)" >
+	                           		<div class="thumbnail" id="${rCateList.r_post_code }" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)" >
 	                                ${rCateList.photo }
 	                                   
 	                                    <div class="caption">
@@ -528,18 +547,24 @@ b
 	  
 	                                      <b>${rCateList.title }</b>
 	                                      <p>${rCateList.offerloc }/${rCateList.collectloc }</p>
-	                                      <span class="price"><fmt:formatNumber value="${rCateList.cost }" ></fmt:formatNumber></span>원(1일)                    
+	                                      <span class="price">${rCateList.cost }</span>원(1일)                    
 	                                    </div>
 	                                </div>
 	                   		  </div>
 							</c:forEach>
 							
 						
-							<div class="col-md-1"></div>
+							<c:if test="${check eq '1' }">
+							<tr>
+								<td >
+								<b onclick="logincheck()">${noApply }</b>
+								</td>
+							</tr>
+						</c:if> 
 
 						
 					</div>
-				</div> <!-- end 카테고리 추천 게시글 2열  -->
+				</div> <!-- end 관심 카테고리 추천 게시글 2열  -->
 				</div>
 			</div>
 			

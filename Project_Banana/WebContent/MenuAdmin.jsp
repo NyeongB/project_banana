@@ -62,6 +62,13 @@
 				</ul>
 		</li>
 		
+		<li><a href="#">게시물/댓글 관리</a>
+				<ul class="sub" style="display: none;">
+					<li><a href="<%=cp%>/adminpostlist.action">게시물 목록</a></li>
+					<li><a href="<%=cp%>/adminreplylist.action">댓글 목록</a></li>
+				</ul>
+		</li>
+		
 		<li><a href="#">공지사항 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="<%=cp%>/adminnoticelist.action">공지사항 목록</a></li>

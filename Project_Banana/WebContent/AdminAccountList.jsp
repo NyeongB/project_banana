@@ -4,6 +4,11 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	session =  request.getSession();
+	
+    String admin = (String)session.getAttribute("admin");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,7 +139,7 @@
 						<form action="adminAdd.action" class="form-inline" id="adminAdd">
 							<label for="adminId">아이디</label>
 								<div class="input-group">								
-									<input type="text" class="form-control" id="adminId" name="adminId"/>
+									<input type="text" class="form-control" id="adminId" name="adminId" value="<%=admin%>">
 									<div class="input-group-btn">
 										<button type="button" class="btn" id="checkBtn">중복확인</button>
 									</div>

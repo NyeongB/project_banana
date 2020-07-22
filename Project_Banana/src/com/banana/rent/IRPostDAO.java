@@ -11,7 +11,7 @@ public interface IRPostDAO
 	public ArrayList<RPostDTO> cateMList(RCateDTO dto);
 		
 	// 렌트 관심 카테고리별  게시글 불러오기
-	public ArrayList<RPostDTO> rCateList();	
+	public ArrayList<RPostDTO> rCateList(RPostDTO dto);	
 	
 	
 	// 빌려드립니다 실시간 게시글 불러오기

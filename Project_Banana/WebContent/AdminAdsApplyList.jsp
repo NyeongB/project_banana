@@ -101,7 +101,7 @@ function goList(obj)
 							<td>
 								<div class="btn-group" role="group">
 
-									<button class="btn btn-primary" type="button" onclick="location.href='adminadsaccept.action?id=${AdApplyList.id }'">수락
+									<button class="btn btn-primary" type="button" onclick="location.href='adminadsaccept.action?adv_apply_code=${AdApplyList.adv_apply_code }'">수락
 									</button>
 									
 								</div>

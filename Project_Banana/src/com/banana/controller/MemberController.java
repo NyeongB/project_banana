@@ -335,6 +335,19 @@ public class MemberController
 			// 휴면
 			view = "/RestUserChange.jsp";
 		}
+		else if (state == 5)
+		{	
+			LoginDTO dto = new LoginDTO();
+			dto.setId(id);
+			dto.setPw(pw);
+			String admin = dao.adminLogin(dto);
+			
+			// 관리자 로그인시에는 관리자 코드만 떠나님 
+			session.setAttribute("admin", admin);
+			
+			
+			view = "/adminaccount.action";
+		}
 		
 		
 		//model.addAttribute("list", dao.list());
@@ -365,10 +378,23 @@ public class MemberController
 		dto.setId(id);
 		dto.setPw(pw);
 		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
+		
+		// 관리자 상태값
+		String admin = null;
+		
 		String login1 =null;
 		String login2=null;
 		String login3=null;
 		String login4=null;
+		
+		admin = dao.adminLogin(dto);
+		
+		if(admin!=null)
+		{
+			result = 5;
+			System.out.println("관리자");
+			return result;
+		}
 		
 		
 		// -- 디폴트(회원가입안됨) --0

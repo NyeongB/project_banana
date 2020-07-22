@@ -167,10 +167,11 @@ public class G_GroupBuyingMainController
 				dto.setG_post_code(code);
 				
 				//int member = dto.getMember_num();
-				
+				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
+				int member = list.get(0).getMember_num();
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
-				//model.addAttribute("member", member);
+				model.addAttribute("member", member);
 				
 				
 			} catch (Exception e)

@@ -11,4 +11,9 @@ public interface ILoginDAO
 	public String rest(LoginDTO dto);
 	
 	public String getNick(String id);
+	
+	// 관리자 로그인
+	public String adminLogin(LoginDTO dto);
+	
+
 }
