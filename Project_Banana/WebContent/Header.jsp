@@ -57,14 +57,42 @@
 
 </head>
 <body id="header_body">
+    	<c:choose>
+		<c:when test="${sessionScope.admin != null }">
+		
+		</c:when>
+		<c:when test="${sessionScope.user != null }">
+		
+		</c:when>
+		<c:otherwise>
+		
+		</c:otherwise>
+		</c:choose>
+
    <div id="header">
       
       <div id="logo"><a href=""><span id="logo_text">Banana</span></a></div>
       <ul id="nav_list">
          <li><a href="<%=cp%>/g_main.action">공동구매</a></li>
          <li><a href="<%=cp%>/r_main.action">렌트</a></li>
+         <c:choose>
+		<c:when test="${sessionScope.admin != null }">
+         <li><a href="<%=cp%>/adminaccount.action">관리자 페이지</a></li>	
+		</c:when>
+		<c:when test="${sessionScope.user != null }">
          <li><a href="">포인트충전</a></li>
-         <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>
+         <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
+		</c:when>
+		<c:otherwise>
+         <li><a href="<%=cp%>/loginmain.action"">포인트충전</a></li>
+         <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
+		</c:otherwise>
+		</c:choose>
+
+         
+         
+
+         
       </ul>
       
       <div id="search_bar">         
@@ -94,9 +122,22 @@
 					<li><input type="search" /></li>
 				</ul>
 			</li>
-                    
+             <c:choose>
+		<c:when test="${sessionScope.admin != null }">
+            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
+            <li>관리자 : ${sessionScope.admin }</a></li>			
+		</c:when>
+		<c:when test="${sessionScope.user != null }">
+            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
+            <li><a href="<%=cp%>/UserMyJJim.jsp">마이페이지</a></li>
+            <li>회원 : ${sessionScope.user.id }</a></li>		
+		</c:when>
+		<c:otherwise>
             <li><a href="<%=cp%>/loginmain.action">로그인</a></li>
-            <li><a href="<%=cp%>/join.action">회원가입</a></li>
+            <li><a href="<%=cp%>/join.action">회원가입</a></li>		
+		</c:otherwise>
+		</c:choose>       
+
          </ul>
       </div>
       <div class="nav_Btn">

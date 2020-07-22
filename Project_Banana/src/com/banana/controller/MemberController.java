@@ -241,6 +241,19 @@ public class MemberController
 			view = "/adminaccount.action";
 			return view;
 		}
+		
+		// 관리자 추가 메소드
+		@RequestMapping(value = "/logout.action", method =RequestMethod.GET)
+		public String logout(HttpServletRequest request)
+		{
+			
+			HttpSession session = request.getSession();
+			
+			session.removeAttribute("user");
+			session.removeAttribute("admin");
+			
+			return "/loginmain.action";
+		}	
 	
 	@RequestMapping(value = "/login.action", method =RequestMethod.GET)
 	public String loginCheck(Model model, HttpServletRequest request)
@@ -250,6 +263,10 @@ public class MemberController
 		
 		// 로그인할떄만 매개변수 true 초기화때문
 		HttpSession session = request.getSession(true);
+		session.removeAttribute("user");
+		session.removeAttribute("admin");
+		
+		
 		
 		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
 		ILeaveDAO dao2 = SqlSession.getMapper(ILeaveDAO.class);
