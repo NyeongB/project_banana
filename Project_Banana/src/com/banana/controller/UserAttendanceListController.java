@@ -53,6 +53,36 @@ public class UserAttendanceListController
 		return view;
 	}
 	// 출석부 디테일 
+	@RequestMapping(value="/userattendancedetail.action", method = RequestMethod.GET)
+	public String detail(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	{
+		String view = null;
+		try
+		{
+			String g_success_code = request.getParameter("g_success_code");
+			HttpSession session = request.getSession();
+			SessionInfo info = (SessionInfo)session.getAttribute("user");
+			//String b_user_code = info.getB_user_code();
+			
+			// 로그인 체크
+			if(info == null)
+				return "/loginmain.action";
+				
+			IUserAttendanceListDAO dao = SqlSession.getMapper(IUserAttendanceListDAO.class);
+			
+			model.addAttribute("attendDetail", dao.attendDetail(g_success_code));	
+			model.addAttribute("attendDetailInfo", dao.attendDetailInfo(g_success_code));	
+			
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		view = "UserAttendanceDetail.jsp";
+		
+		return view;
+	}
 }
 
 

@@ -17,11 +17,19 @@
    src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<script type="text/javascript"></script>
+<script type="text/javascript">
+
+
+function enterChul(obj)
+{
+	var g_success_code = obj.getAttribute("id");
+	alert(g_success_code);
+	location.href="userattendancedetail.action?g_success_code="+g_success_code;
+	
+}
+
+</script>
 <style type="text/css">
-
-
-
 </style>
 	
 </head>
@@ -62,7 +70,7 @@
 					<td>${attendLists.count+1 }/${attendLists.member_num }</td>
 					<td>${attendLists.bun_date }</td>
 					<td>${attendLists.loc_name }</td>
-					<td><button class="btn" value="${attendLists.g_success_code}">출석부</button></td>
+					<td><button class="btn" id="${attendLists.g_success_code}" onclick="enterChul(this)">출석부</button></td>
 					
 				</tr>
 				</C:forEach>

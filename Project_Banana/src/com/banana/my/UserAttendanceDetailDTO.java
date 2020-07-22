@@ -2,12 +2,22 @@ package com.banana.my;
 
 public class UserAttendanceDetailDTO
 {
-	private String nickname, attendance_state, bun_date, loc_name, g_success_code;
+	private String nickname, attendance_state, bun_date, loc_name, g_success_code, sdate;
 
 	// getter / setter 구성
 	public String getNickname()
 	{
 		return nickname;
+	}
+
+	public String getSdate()
+	{
+		return sdate;
+	}
+
+	public void setSdate(String sdate)
+	{
+		this.sdate = sdate;
 	}
 
 	public void setNickname(String nickname)

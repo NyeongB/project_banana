@@ -5,13 +5,26 @@
   
   
 <mapper namespace="com.banana.my.IUserAttendanceListDAO">
-	
+	<!-- 출석부 리스트  -->
 	<select id="attendList" resultType="com.banana.my.UserAttendanceListDTO">	 
  	SELECT PHOTO, COUNT, TITLE, MEMBER_NUM, BUN_DATE, LOC_NAME, B_USER_CODE, G_SUCCESS_CODE, G_POST_CODE
  	FROM VIEW_ATTENDANCE_LIST
 	WHERE B_USER_CODE =#{b_user_code}
 	</select>	
 	
+	<!-- 출석부 상세 페이지 속 정보  -->
+	<select id="attendDetailInfo" resultType="com.banana.my.UserAttendanceListDTO">	 
+ 	SELECT PHOTO, COUNT, TITLE, MEMBER_NUM, BUN_DATE, LOC_NAME, B_USER_CODE, G_SUCCESS_CODE, G_POST_CODE
+ 	FROM VIEW_ATTENDANCE_LIST
+	WHERE G_SUCCESS_CODE = #{g_success_code}
+	</select>
+		
+	<!-- 출석부 상세 페이지 출석부  -->
+	<select id="attendDetail" resultType="com.banana.my.UserAttendanceDetailDTO">	 
+ 	SELECT NICKNAME, ATTENDANCE_STATE, BUN_DATE, LOC_NAME, G_SUCCESS_CODE, SDATE
+	FROM VIEW_ATTENDANCE_DETAIL
+	WHERE G_SUCCESS_CODE = #{g_success_code}
+	</select>	
 	
 	
 </mapper>  
