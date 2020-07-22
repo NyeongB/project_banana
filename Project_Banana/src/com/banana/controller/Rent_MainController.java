@@ -102,27 +102,54 @@ public class Rent_MainController
 			
 		//  렌트 페이지로 이동 - >관심 카테고리별 추천 게시글/빌려드립니다. 실시간 게시글
 		@RequestMapping(value = "/r_main.action", method = RequestMethod.GET)
-		 public String rentMain(Model model) 
+		 public String rentMain(Model model, HttpServletRequest request) 
 		 {
 			
 			String view = null;
 			
 			try
 			{
-			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
-			
-			model.addAttribute("rnewList", dao.rnewList());
-			model.addAttribute("rCateList", dao.rCateList());
-			
-			view = "/RentMain.jsp";
+				HttpSession session = request.getSession();
+				
+				SessionInfo info = (SessionInfo)session.getAttribute("user");
+				
+				if(info == null)
+				{
+					model.addAttribute("noApply","비 회원 입니다. 로그인 시 이용 가능한 서비스 입니다.");
+					model.addAttribute("check","1");
+					
+					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+					model.addAttribute("rnewList", dao.rnewList());
+				}
+				else
+				{
+					
+					String userCode = info.getB_user_code();
+					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+					
+					RPostDTO dto = new RPostDTO();
+					dto.setB_user_code(userCode);
+					
+					model.addAttribute("rnewList", dao.rnewList());
+					model.addAttribute("rCateList", dao.rCateList(dto));
+				
+					
+				}
+				
+				
+				
 			}catch(Exception e)
 			{
 				System.out.println(e.toString());
 			}
 			
+			view = "/RentMain.jsp";
+			
 			return view;
 			
 		 }
+		
+	
 		
 		
 		
