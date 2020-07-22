@@ -11,7 +11,9 @@
 <title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" /> -->
+<script src="/js/jquery-ui-timepicker-addon.js" type="text/javascript" ></script>
+
 
 <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -168,78 +170,36 @@ p
 	$(document).ready(function()
 	{
 		
-	    
-	        $('#startDate').datetimepicker();
-	        $('#endDate').datetimepicker({
-	            useCurrent: false //Important! See issue #1075
-	        });
-	        $("#startDate").on("dp.change", function (e) {
-	            $('#endDate').data("DateTimePicker").minDate(e.date);
-	        });
-	        $("#endDate").on("dp.change", function (e) {
-	            $('#startDate').data("DateTimePicker").maxDate(e.date);
-	        });
+		
+		
+		
+	   /*  
+	   $("#startDate").datetimepicker();
 	   
+	   $("#endDate").datetimepicker({
+	    	
+	    	startDate : "$("#startDate").val()";
+	    });
+	   
+	   
+	   
+	    $('#startDate').datepicker().on('changeDate', function (ev) {
+	        $('#endDate').change();
+	    });
+	    $('#endDate').datetimepicker(startDate : $("#startDate").val());
+	    $('#endDate').change(function () {
+	        console.log($('#endDate').val());
+	    });
 		
-		
-	/* 	$("#startDate").datetimepicker();
-		//$('#endDate').datetimepicker();
-		
-		$("#startDate").datepicker({
-            onClose: function( selectedDate ) {    
-                $("#endDate").datepicker( "option", "minDate", selectedDate );
-                
-            }                
-        }); */
-		
-		
-		/* $("#startDate").datetimepicker("option", "onClose", function(selectedDate)
-		{
-		
-			$("#endDate").datetimepicker("option", "minDate" , selectedDate);
-		}); */
-		
-		
-		/* $('#startDate').datetimepicker();
-       
-		
-		$("#startDate").on("dp.change", function (e) {
-            $('#endDate').data("DateTimePicker").minDate(e.date);
-        });
-        $("#endDate").on("dp.change", function (e) {
-            $('#startDate').data("DateTimePicker").maxDate(e.date);
-        });
-		
-		/* */
-     
-       /*    $("#startDate").datetimepicker({
-        	 
-        	 dateFormat: "yy-mm-dd",           
-             changeMonth: true,   
-             mindate:0,
-             onClose: function(selectedDate){    
-                 
-                 $("#endDate").datetimepicker( "option", "minDate", selectedDate );
-             }                
-        	 
-         }); 
-		
-		$("#endDate").datetimepicker(); */
-        /*  $("#endDate").datetimepicker({
-        	 
-        	 dateFormat: "yy-mm-dd",
-             changeMonth: true,
-             onClose: function( selectedDate ) {
-                 // 종료일(toDate) datepicker가 닫힐때
-                 // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-                 $("#startDate").datepicker( "option", "maxDate", selectedDate );
-             }                
-
-         }); */
+	
          $("#bunDate").datetimepicker();
          $("#returnDate").datetimepicker();
-   
-		
+	   
+	   */
+		$("#startDate").datetimepicker({ minDate: 0});
+	   //var date = $("#startDate").val();
+	   //alert(date);
+	  
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
 		$("input:text[numberOnly]").on("keyup", function() 
@@ -314,7 +274,20 @@ p
 	}
 	
 	
-	
+	function test()
+	{
+		var date = $("#startDate").val();
+		alert(date);
+		
+		 $("#endDate").datetimepicker({
+			 minDate: new Date(date)
+		 	
+			   /* startDate : date */
+			  
+		   }); 
+		
+		 
+	}
 
 	
 
@@ -345,6 +318,9 @@ p
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
+				
+				
+
 				
 				<form role="form" class="form-group" name="postItem" id="postItem">
 				
@@ -473,7 +449,7 @@ p
 					<div class="col-md-12 gonggustart">	
 						<div class="col-md-4">
 							수요조사 시작일
-							<input type="text" id="startDate" class="form-control">
+							<input type="text" id="startDate" class="form-control" onclick="test()">
 							
 						</div>
 			
@@ -483,10 +459,10 @@ p
 				
 						 <div class="col-md-4">
 							수요조사 종료일
-							<input type="text" id="endDate" class="form-control">	
+							<input type="text" id="endDate" class="form-control" onclick="test()">	
 						</div>
 					</div>
-						
+					
 						
 					<div class="col-md-12">	
 						<div class="col-md-4">
@@ -494,6 +470,8 @@ p
 							<input type="text" id="bunDate" class="form-control">
 							
 						</div>
+						
+					
 						
 						<div class="col-md-2"></div>
 						

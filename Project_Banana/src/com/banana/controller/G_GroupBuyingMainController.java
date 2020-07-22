@@ -169,6 +169,7 @@ public class G_GroupBuyingMainController
 				//int member = dto.getMember_num();
 				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
 				int member = list.get(0).getMember_num();
+				
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);

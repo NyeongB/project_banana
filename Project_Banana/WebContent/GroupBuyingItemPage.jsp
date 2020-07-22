@@ -157,6 +157,8 @@ textarea
 <script type="text/javascript">
 $().ready(function() 
 {
+	
+	
 	$('.carousel').carousel();
 	
 	$('.carousel').carousel
