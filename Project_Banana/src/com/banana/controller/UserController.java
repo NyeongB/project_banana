@@ -17,11 +17,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.banana.my.IPasswordAnswerDAO;
+import com.banana.my.PasswordAnswerDTO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.ILeaveDAO;
+import com.banana.user.IUserDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LeaveDTO;
 import com.banana.user.LocDTO;
+import com.banana.user.PasswordDTO;
 import com.banana.util.Send;
 import com.banana.util.SessionInfo;
 
@@ -466,20 +470,58 @@ public class UserController
 		
 		
 		// 휴면회원 메인 페이지 
-		// 탈퇴 처리 페이지
 		@RequestMapping(value = "/restuserchange.action", method =RequestMethod.GET)
 		public String restUser(Model model,HttpServletRequest request)
 		{
 			
-			System.out.println("휴면오는지확인");
+			//System.out.println("휴면오는지확인");
 			
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			
-			System.out.println("id " + id );
-			System.out.println("pw " + pw);
+			
+			  System.out.println("id " + id ); System.out.println("pw " + pw);
+			 
+			IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
+			
+			IUserDAO dao2 = SqlSession.getMapper(IUserDAO.class);
+			
+			
+			PasswordAnswerDTO dto = dao.getPasswordAnser(id);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("b_user_code", dao2.getBUser(id));
+			//model.addAttribute("answer", dto.getPw_answer());
+			
+			//System.out.println(dto.getPw_answer());
+			
+			
+			
 			
 			return "/RestUserChange.jsp";
+		}
+		
+		// 휴면회원 → 일반회원 액션
+		
+		@RequestMapping(value = "/restuseraction.action", method =RequestMethod.GET)
+		public String restAction(Model model,HttpServletRequest request)
+		{
+			
+			//System.out.println("휴면오는지확인");
+			
+			String b_user_code = request.getParameter("b_user_code");
+			
+			
+			 
+			IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
+			
+			
+			
+			//System.out.println(b_user_code);
+			
+			dao.delete(b_user_code);
+			
+			return "/Login.jsp";
 		}
 		
 }
