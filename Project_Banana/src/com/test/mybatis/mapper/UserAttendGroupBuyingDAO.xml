@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IUserAttendGroupBuyingDAO">
+	
+	<!-- 나의 공동구매 현황  -->
+	<select id="myGList" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT TITLE, COST, DIS_COST, LOC_NAME, PHOTO, G_POST_CODE, G_APPLY_CODE, B_USER_CODE, BUN_DATE, END_DATE, PROGRESS, MEMBER_NUM, COUNT
+		FROM MY_GONGGU
+		WHERE B_USER_CODE = #{b_user_code}
+	</select>
+	
+	
+	
+</mapper>  
+
+

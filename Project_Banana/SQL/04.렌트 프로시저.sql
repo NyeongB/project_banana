@@ -88,12 +88,14 @@ V_COST               R_POST.COST%TYPE;           -- 해당 렌트 게시물 일�
 DDEPOSIT            R_POST.DEPOSIT%TYPE;         -- 해당 렌트 게시물 보증금
 V_R_POST_CODE       R_POST.R_POST_CODE%TYPE;     -- 신청한 게시물 코드
 V_SUCCESS_USER      B_USER.B_USER_CODE%TYPE;     -- 성사된 사용자 코드
+V_R_APPLY_CODE2      R_APPLY.R_APPLY_CODE%TYPE;  -- 취소된 사용자 신청코드
+V_POINT_LIST_CODE2   POINT_LIST.POINT_LIST_CODE%TYPE;-- PL2 취소된사람들 
 
 -- 커서 선언
--- 취소된 사람의 사용자 찾기(취소된 사람의 유저 코드, 렌트 시작일, 렌트 종료일)
+-- 취소된 사람의 사용자 찾기(취소된 사람의 유저 코드, 렌트 시작일, 렌트 종료일, 신청코드)
 CURSOR CUR_DELETE_USER
 IS
-SELECT B_USER_CODE, START_DATE, END_DATE
+SELECT B_USER_CODE, START_DATE, END_DATE, R_APPLY_CODE
 FROM R_APPLY
 WHERE END_DATE >= ( SELECT START_DATE
                      FROM R_APPLY
@@ -143,14 +145,23 @@ WHERE R_POST_CODE = V_R_POST_CODE;
 OPEN CUR_DELETE_USER;
 
 LOOP
-FETCH CUR_DELETE_USER INTO D_B_USER_CODE, SDATE, EDATE;
+FETCH CUR_DELETE_USER INTO D_B_USER_CODE, SDATE, EDATE, V_R_APPLY_CODE2  ;
 EXIT WHEN CUR_DELETE_USER%NOTFOUND;
 
+-- 시퀀스 담기 
+V_POINT_LIST_CODE2 := 'POLIS' || SEQ_POINT_LIST.NEXTVAL;
+
+-- 포인트 내역 등록
 INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT)
-VALUES('POLIS' || SEQ_POINT_LIST.NEXTVAL, D_B_USER_CODE, ((EDATE-SDATE+1))*V_COST+DDEPOSIT); 
+VALUES(V_POINT_LIST_CODE2, D_B_USER_CODE, ((EDATE-SDATE+1))*V_COST+DDEPOSIT); 
+
+--3-2 취소 테이블 등록
+INSERT INTO R_CANCEL(R_CANCEL_CODE, R_APPLY_CODE, POINT_LIST_CODE)
+VALUES('R_CAN'|| SEQ_R_CANCEL.NEXTVAL,V_R_APPLY_CODE2 ,V_POINT_LIST_CODE2 );
 
 
---3-2. 취소된 사람 알람가기 프로시저 추가
+
+--3-3. 취소된 사람 알람가기 프로시저 추가
     PRC_ALARM('AR_C31',V_URL1,D_B_USER_CODE);   -- 렌트 취소 되었습니다.
     PRC_ALARM('AR_C2',' ',D_B_USER_CODE);    -- 환불 처리 되었습니다.
     
@@ -177,6 +188,7 @@ WHERE R_APPLY_CODE = V_R_APPLY_CODE;
 -- 6. 커밋
 -- COMMIT;
 END;
+
 
 --================================================================================================================
 --==>> Procedure PRC_R_SUCCESS이(가) 컴파일되었습니다.

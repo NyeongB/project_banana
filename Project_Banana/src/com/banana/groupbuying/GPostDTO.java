@@ -7,6 +7,8 @@ public class GPostDTO
 		   title, content, wDate,views, brand,start_date, end_date,photo;
 	private int cost, dis_cost, member_num,count;
 	private String bun_loc, bun_date, return_date, receipt_date;
+	private String progress;	// 나의 공동구매 진행 상황
+	
 	
 	//getter/setter 설정
 	public String getG_post_code()
@@ -185,7 +187,14 @@ public class GPostDTO
 	{
 		this.g_apply_code = g_apply_code;
 	}
-	
+	public String getProgress()
+	{
+		return progress;
+	}
+	public void setProgress(String progress)
+	{
+		this.progress = progress;
+	}
 	
 	
 	

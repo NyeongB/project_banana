@@ -82,10 +82,10 @@ i + a
 		</li>
 		<li><i class="fas fa-clipboard-list"></i><a href="#">공동구매현황</a>
 			<ul class="sub" style="display: none;">
-					<li><a href="#">내가 제안한 함께사요</a></li>
-					<li><a href="#">내가 신청한 함께사요</a></li>
+					<!-- <li><a href="#">내가 제안한 함께사요</a></li>
+					<li><a href="#">내가 참여한 함께사요</a></li> -->
 					<li><a href="#">내가 제안한 나눠사요</a></li>
-					<li><a href="#">내가 신청한 나눠사요</a></li>
+					<li><a href="userattendGonggu.action">내가 참여한 나눠사요</a></li>
 			</ul>
 		</li>
 				

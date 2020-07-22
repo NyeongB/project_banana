@@ -6,7 +6,7 @@ public class RPostDTO
 	// 주요 속성 구성
 	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
 	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
-	
+	private String progress, a_user_code;	
 
 	private int cost, deposit;
 	
@@ -14,14 +14,30 @@ public class RPostDTO
 
 	
 	// getter / setter 구성
-	
-	
-	
-	
 
 	public String getContent() 
 	{
 		return content;
+	}
+
+	public String getProgress()
+	{
+		return progress;
+	}
+
+	public void setProgress(String progress)
+	{
+		this.progress = progress;
+	}
+
+	public String getA_user_code()
+	{
+		return a_user_code;
+	}
+
+	public void setA_user_code(String a_user_code)
+	{
+		this.a_user_code = a_user_code;
 	}
 
 	public void setContent(String content) 
