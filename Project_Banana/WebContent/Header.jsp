@@ -80,11 +80,11 @@
          <li><a href="<%=cp%>/adminaccount.action">관리자 페이지</a></li>	
 		</c:when>
 		<c:when test="${sessionScope.user != null }">
-         <li><a href="">포인트충전</a></li>
+         <li><a href="<%=cp%>/pointchargepage.action">포인트충전</a></li>
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:when>
 		<c:otherwise>
-         <li><a href="<%=cp%>/loginmain.action"">포인트충전</a></li>
+         <li><a href="<%=cp%>/loginmain.action">포인트충전</a></li>
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:otherwise>
 		</c:choose>

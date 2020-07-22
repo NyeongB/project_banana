@@ -50,6 +50,14 @@ public class MyPointController
 		return view;
 	}
 	
+	//포인트 충전 메인 
+	@RequestMapping(value="/pointchargepage.action")
+	public String pointChargePage() 
+	{	
+		
+		return "/PointChargePage.jsp";
+	}
+	
 	
 	
 }
