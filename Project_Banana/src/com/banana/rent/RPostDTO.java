@@ -10,11 +10,7 @@ public class RPostDTO
 
 	private int cost, deposit;
 	
-	
-
-	
 	// getter / setter 구성
-
 	public String getContent() 
 	{
 		return content;
