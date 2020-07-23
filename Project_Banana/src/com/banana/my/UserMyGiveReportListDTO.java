@@ -4,26 +4,16 @@ public class UserMyGiveReportListDTO
 {	
 	
 	// 사용자가 접수한 신고 
-	private String g_deal_report_type, content, title, sdate, type, reported, reporter, progress;
-	
-	public String getProgress()
+	private String deal_report_type, content, title, sdate, type, reported, reporter, progress;
+
+	public String getDeal_report_type()
 	{
-		return progress;
+		return deal_report_type;
 	}
 
-	public void setProgress(String progress)
+	public void setDeal_report_type(String deal_report_type)
 	{
-		this.progress = progress;
-	}
-
-	public String getG_deal_report_type()
-	{
-		return g_deal_report_type;
-	}
-
-	public void setG_deal_report_type(String g_deal_report_type)
-	{
-		this.g_deal_report_type = g_deal_report_type;
+		this.deal_report_type = deal_report_type;
 	}
 
 	public String getContent()
@@ -85,6 +75,15 @@ public class UserMyGiveReportListDTO
 	{
 		this.reporter = reporter;
 	}
-	
+
+	public String getProgress()
+	{
+		return progress;
+	}
+
+	public void setProgress(String progress)
+	{
+		this.progress = progress;
+	}
 	
 }
