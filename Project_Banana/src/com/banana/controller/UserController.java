@@ -25,7 +25,6 @@ import com.banana.user.IUserDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LeaveDTO;
 import com.banana.user.LocDTO;
-import com.banana.user.PasswordDTO;
 import com.banana.util.Send;
 import com.banana.util.SessionInfo;
 
@@ -86,6 +85,7 @@ public class UserController
 		
 		// 우편주소 - 우편주소2, 주소, 상세주소
 		String postcode = request.getParameter("postcode");
+		System.out.println(postcode);
 		String roadAddress = request.getParameter("roadAddress");
 		String detailAddress = request.getParameter("detailAddress");
 		

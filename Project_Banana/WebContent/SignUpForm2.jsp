@@ -429,7 +429,7 @@ input
 			<!-- 우편번호 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-					<input class="form-control" id="postcode" placeholder="우편번호" disabled="disabled" name="postcode" type="text">
+					<input class="form-control" id="postcode" placeholder="우편번호" readonly="readonly" name="postcode" type="text">
 					<button class="btn btn-primary" type="button" onclick="execDaumPostcode()" >우편번호 찾기</button>
 				</div>
 			</div>
