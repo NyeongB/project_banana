@@ -6,13 +6,20 @@
 %>
 
 <c:forEach var="rreplyList" items="${rreplyList }">
-	<div>
-		<div>${rreplyList.nickname }</div>
+					<div>
+						<div class="form-inline">
+						<div class="col-md-10">${rreplyList.nickname }</div><div class="col-md-2 text-right">${rreplyList.wdate }</div>
+						</div>
 		
-		<div class="form-inline">
-		<div class="col-md-10">${rreplyList.reply }</div> <div class="col-md-2 text-right">${rreplyList.wdate }</div>
-		</div>
-	</div>
-	<hr>
+						<div id="Rreply">${rreplyList.reply }</div> 
+						<div class="form-inline text-right">
+						<div class="col-md-9"></div>
+						<div class="col-md-1" id="rreplyinsert">댓글달기</div>
+						<div class="col-md-1">좋아요</div>
+						<div class="col-md-1">신고하기</div>
+						</div>
+					</div>
+					<hr>	
+					
 </c:forEach>
 

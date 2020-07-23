@@ -4,8 +4,4 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<c:forEach var="rreplyList" items="${rreplyList }">
-${rreplyList.nickname }
-${rreplyList.reply }
-${rreplyList.wdate }
-</c:forEach>
+<!-- 대댓글 뿌려주기!! userrentdetail l_level 확인 후 1이면 페이지에서  화살표 넣어주기 -->

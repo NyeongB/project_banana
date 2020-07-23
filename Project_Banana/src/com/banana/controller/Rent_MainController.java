@@ -17,6 +17,7 @@ import com.banana.rent.IRPostDAO;
 import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RCateDTO;
 import com.banana.rent.RPostDTO;
+import com.banana.reply.r_reply.IRreplyDAO;
 import com.banana.user.ILocDAO;
 
 import com.banana.user.LocDTO;
@@ -259,14 +260,18 @@ public class Rent_MainController
 				try
 				{
 				
-				IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+				IRreplyDAO dao1 = SqlSession.getMapper(IRreplyDAO.class);
+				IRPostDAO dao2 = SqlSession.getMapper(IRPostDAO.class);
 				RPostDTO dto = new RPostDTO();
 				String rpost_code = request.getParameter("r_post_code");
 				
 				dto.setR_post_code(rpost_code);
 				
-				model.addAttribute("rpostDetail", dao.rpostDetail(dto));
-				model.addAttribute("dealLoc", dao.dealLoc(dto));
+				// 상품 내용 조회
+				model.addAttribute("rpostDetail", dao2.rpostDetail(dto));
+				model.addAttribute("dealLoc", dao2.dealLoc(dto));
+				// 댓글 조회
+				model.addAttribute("rreplyList", dao1.rreplyList(rpost_code));
 				
 				view = "/UserRentDetail.jsp";
 				}catch(Exception e)

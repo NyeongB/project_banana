@@ -8,10 +8,11 @@
 
 	<!-- 렌트 댓글 조회 -->
 	<select id="rreplyList" resultType="com.banana.reply.r_reply.RreplyDTO">
-		SELECT J.NICKNAME, R.REPLY, R.WDATE
+		SELECT R.R_REPLY_CODE, J.NICKNAME, R.REPLY, TO_CHAR(TO_DATE(R.WDATE, 'YY-MM-DD'), 'YY-MM-DD') AS WDATE
 		FROM R_REPLY R LEFT JOIN JOIN J
 		ON R.B_USER_CODE = J.B_USER_CODE
 		WHERE R.R_POST_CODE = #{r_post_code}
+		ORDER BY R.WDATE DESC
 	</select>
 	
 	

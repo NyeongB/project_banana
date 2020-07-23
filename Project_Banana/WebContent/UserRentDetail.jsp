@@ -175,6 +175,17 @@ textarea
 	
 }
 
+#replyinsert
+{
+	margin-bottom: 20px;
+}
+
+#Rreply
+{
+	padding-top: 30px;
+	font-weight: bold;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -194,7 +205,7 @@ $().ready(function()
 	
 	}); // 이게 뭐지....? */
 			
-	showReplyList();		
+	var a = null;
 			
 			
 
@@ -262,10 +273,12 @@ $().ready(function()
 					location.href = "redirect:rpostdetailpage.action";
 				}
 			}
-			else
+			else// 회원이면
 			{
 				
-				
+				// 댓글 코드 가지고 있으면 대댓글 작성 아니면 댓글 작성
+				if($(".reply").val() != a )
+				{
 					var formData = $("#replyForm").serialize();
 					
 					$.ajax({
@@ -282,77 +295,81 @@ $().ready(function()
 							alert(data);
 						}
 						
+					});// end ajax	
+				
+				}else
+				{
+					var formData = $("#replyForm").serialize();
+					
+					$.ajax({
+						
+						type : "POST"
+						, url : "r_rreplyinsert.action?refcode=" + a  
+						, data : formData
+						, success : function(data) 
+						{
+							$("#resultReply").html(data);
+						}
+						, error : function(data) 
+						{
+							alert(data);
+						}
+						
 					});		
+				}
 				
 			}	
 
 		});
+	
+	
+	
+	// 대댓글 등록
+	$(".rreplyinsert").click(function() 		
+	{
+		var id1 = "<%=info %>";
+		   
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
+				location.href = "loginmain.action";
+					
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:rpostdetailpage.action";
+			}
+		}
+		else
+		{
+			
+			function(obj) 
+			{
+				// 댓글 코드 
+				a = obj.getAttribute("id");
+				$(".reply").val(a);
+				
+			}
+		
+		}	
+			
+		
+	});
+	
+	
+	
 
 });
 
 
 
-// 댓글 조회 리스트
-function showReplyList() 
-{
-	var rPostCode = "<%=rpostCode %>";
-	// r_post_code 가 안넘어감...
-	
-	$.ajax({
-		
-		type : "POST"
-	, url : "r_replylist.action"
-	, data : {rPostCode : rPostCode} 
-	, success : function(data) 
-	{
-		var addText = "";
-		if(data.length <1)
-			$("#resultReply").html("등록된 댓글이 없습니다.");
-		else
-		{
-			var result = data.rreplyList;
-			
-			$.each(result, function(i) 
-			{
-				
-				
-				addText += '<div>'; 
-				addText += '<div>' + result[i].nickname + '</div>'; 
-				System.out.println("result[i].nickname");
-				addText += '<div class="form-inline">'; 
-				addText += '<div class="col-md-10">' + result[i].reply + '</div>' + '<div class="col-md-2 text-right">' + result[i].wdate  + '</div>'; 
-				addText += '</div>'; 
-				addText += '</div>'; 
-				addText += '<hr>'; 
-				
-			});
-			
-			
-		}
-
-		$("#resultReply").html(addText);
-	}
-	, error : function(data) 
-	{
-		alert(data)	;
-	}
-		
-		
-	});
-	
-	
-}
 
 
-
-
-
-
-
-
-
-
-
+// 찜 추가
 function jjim() 
 {
 	
@@ -619,8 +636,25 @@ function jjim()
 				</form>
 				</div>
 				
+				<!-- 댓글 INSERT -->
 				<div  id="resultReply">
-				
+				<c:forEach var="rreplyList" items="${rreplyList }">
+					<div>
+						<div class="form-inline">
+						<div class="col-md-10">${rreplyList.nickname }</div><div class="col-md-2 text-right">${rreplyList.wdate }</div>
+						</div>
+		
+						<div id="Rreply">${rreplyList.reply }</div> 
+						<div class="form-inline text-right">
+						<div class="col-md-9"></div>
+						<div class="col-md-1 rreplyinsert" id="${rreplyList.r_reply_code }" >댓글달기</div>
+						<div class="col-md-1">좋아요</div>
+						<div class="col-md-1">신고하기</div>
+						</div>
+					</div>
+					<hr>	
+					
+				</c:forEach>
 				
 				</div>
 			

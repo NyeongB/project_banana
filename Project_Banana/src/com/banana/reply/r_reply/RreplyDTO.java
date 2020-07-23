@@ -1,11 +1,11 @@
 package com.banana.reply.r_reply;
 
-import java.security.Timestamp;
+
 
 public class RreplyDTO
 {
 	private String r_reply_code, r_post_code, r_reply_ref_code, b_user_code, reply, nickname;
-	private Timestamp wdate;
+	private String wdate;
 	int l_level, replyCount;
 	
 	
@@ -66,11 +66,11 @@ public class RreplyDTO
 	{
 		this.reply = reply;
 	}
-	public Timestamp getWdate() 
+	public String getWdate() 
 	{
 		return wdate;
 	}
-	public void setWdate(Timestamp wdate) 
+	public void setWdate(String wdate) 
 	{
 		this.wdate = wdate;
 	}
