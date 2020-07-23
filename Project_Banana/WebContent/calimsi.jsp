@@ -17,6 +17,7 @@
 		obj.put("title","[시작일]"+list.get(i).getTitle());
 		System.out.println(list.get(i).getTitle());
 		obj.put("start",list.get(i).getStart_date());
+		obj.put("end",list.get(i).getStart_date());
 		jarr.add(obj);
 		
 	}	

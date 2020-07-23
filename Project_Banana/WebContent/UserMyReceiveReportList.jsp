@@ -112,7 +112,7 @@
 							<td><a href="">${receiveReportLists.title }</a></td>
 							<td>${receiveReportLists.sdate }</td>
 							<td>${receiveReportLists.type }</td>
-							<td>${receiveReportLists.deal_report_type_name }</td>
+							<td>${receiveReportLists.deal_report_type }</td>
 							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
 							<td>2020-06-06 18:05:03</td>
 							<td><p id="blueAnswer">${receiveReportLists.progress }</p></td>

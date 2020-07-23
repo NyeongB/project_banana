@@ -89,7 +89,7 @@ i + a
 		<li><i class="fas fa-bomb"></i><a href="#">신고내역</a>
 			<ul class="sub" style="display: none;">
 					<li><a href="usermygivereportlist.action">접수한 신고</a></li>
-					<li><a href="mycredit.action">당한 신고</a></li>
+					<li><a href="usermyreceivereportlist.action">당한 신고</a></li>
 			</ul>
 		</li>
 		

@@ -58,7 +58,7 @@ public class UserMyGiveReportListController
 	}
 	
 	// 내가 당한 신고
-		@RequestMapping(value="/usermygivereportlist.action", method = RequestMethod.GET)
+		@RequestMapping(value="/usermyreceivereportlist.action", method = RequestMethod.GET)
 		public String receiveReportList(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 		{
 			String view = null;
