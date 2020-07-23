@@ -5,12 +5,21 @@ public class GPostDTO
 	
 	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,g_apply_code,
 		   title, content, wDate,views, brand,start_date, end_date,photo;
-	private int cost, dis_cost, member_num,count;
+	private int cost, dis_cost, member_num, count, type;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	private String progress;	// 나의 공동구매 진행 상황
 	
 	
+	
 	//getter/setter 설정
+	public int getType()
+	{
+		return type;
+	}
+	public void setType(int type)
+	{
+		this.type = type;
+	}
 	public String getG_post_code()
 	{
 		return g_post_code;

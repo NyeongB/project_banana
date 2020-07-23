@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IUserMyJJimDAO">
+	
+	<select id="jjimList" resultType="com.banana.my.ActivityRatingDTO">
+	SELECT TYPE, G_POST_CODE , NICKNAME, TITLE, LOC_NAME, SDATE, COST, DIS_COST, B_USER_CODE
+	FROM VIEW_JJIM
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>	
+	
+	
+	
+</mapper>  
+

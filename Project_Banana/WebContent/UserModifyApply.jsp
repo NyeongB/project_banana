@@ -21,6 +21,76 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+	function clickBtn()
+	{
+		alert("안녕");
+		
+		var pw = document.getElementById("pw").value;
+		alert(pw);
+		var flag ;
+		
+		
+		
+		$.get("usermodifyapplycheck.action", {password :pw}, function(data)
+				{
+					alert("hi");
+					alert(data);
+					flag = data;
+					if(flag == 1)
+					{
+						alert("비밀번호가 틀렸습니다");
+						document.getElementById("err").style.display ='block';
+						return;
+						
+					}
+					else
+					{
+						document.getElementById("err").style.display ='none';
+						location.href="usermodifyform.action";
+					}
+				//$("#positionForm").submit();
+				
+			});
+		
+		
+		
+		/* $.ajax(
+   				{
+   					type:"GET"
+   					,url : "Project_Banana/usermodifyapplycheck.action"
+   					,data : {password : pw }
+   					,success:function(args)
+   					{
+   						alert(args);
+   						alert(args.check);
+   						
+   						flag = args.check;
+   						if(flag==1)
+   						{
+   							document.getElementById("err").style.display ='block';
+   							return;
+   							
+   						}else
+   						{
+   							
+   							document.getElementById("err").style.display ='none';
+   							return;
+   						}
+   						
+   					},
+   					 error:function(request,status,error)
+   					{
+			        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   					}   					
+   				});		  */  		
+		
+	}
+
+</script>
+
 <style type="text/css">
 
 .ULA_content *
@@ -103,7 +173,7 @@ p
 								
 							</div>
 							<div class="col-md-12">
-								<h2 class="">Banana</h2>
+								<h2 class="thick">Banana</h2>
 							</div>
 							<div class="col-md-12">
 								<div class="text-center">
@@ -111,9 +181,10 @@ p
 										<p>"비밀번호를 입력해 주세요"</p>
 										<form action="" class="form-inline">
 											<label for="">비밀번호</label>
-											<input type="password" class="form-control"/>
-											<button class="btn btn-primary" type="button" id="pw_submit">확인</button>
+											<input type="password" class="form-control" name="password" id="pw"/>
+											<button class="btn btn-primary" type="button" id="pw_submit" onclick="clickBtn()">확인</button>
 										</form>
+										<span style="display :none;" id="err">비밀번호가 일치하지 않습니다</span>
 
 									
 

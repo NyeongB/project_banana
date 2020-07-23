@@ -16,11 +16,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
-*
+/* *
 {
 text-align: center;
 
-}
+} */
 h2
 {
 color: var(--back-color);
@@ -35,7 +35,7 @@ input
 
 .Cn
 {
-	margin-left: 52px;
+	/* margin-left: 52px; */
 	width: 295px;
 }
 
@@ -47,6 +47,14 @@ input
 .bo
 {
 	margin-bottom: 30px;
+}
+#logo_text2
+{
+	color: var(--back-color) !important];
+	font-family: 'Noto Sans KR', sans-serif !important;
+	font-size: 40pt;
+
+
 }
 
 </style>
@@ -287,19 +295,19 @@ input
 
 <!-- content  -->
 
-<div class="container-fluid">
+<div class="container-fluid text-left thick">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-4">
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="row">
 				<div class="col-md-12 ">
-					<h2>Banana</h2>
+					<h2 class="thick" id="logo_text2">Banana</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-				<h4>회원가입을 통해 바나나 서비스를 이용하세요.</h4>
+				<h5 class="thick">&nbsp;회원가입을 통해 바나나 서비스를 이용하세요.</h5>
 				
 				</div>
 			</div>
@@ -315,31 +323,27 @@ input
 			</div>
 			
 			  <!-- 비밀번호 -->
-			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+			<div class="row text-left">
+		
+				<div class="col-md-12  Cn">
 				
 				<input type="password" name="pw" id="pw" placeholder="비밀번호(*)" class="form-control">
 				</div>
-				<div class="col-md-4"></div>
+		
 			</div>
 			
 			<!-- 비밀번호  확인-->
-			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
-				<input type="password" name="pwcon" id="pwcon" placeholder="비밀번호 확인(*)" class="form-control">
-				</div>
-				<div class="col-md-4"></div>
+			<div class="row">			
+				<div class="col-md-12 Cn">
+					<input type="password" name="pwcon" id="pwcon" placeholder="비밀번호 확인(*)" class="form-control">
+				</div>				
 			</div>
 			
 			<!-- 이름-->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
-				<input type="text" name="name" id="name" placeholder="이름" class="form-control">
+				<div class="col-md-12 Cn">
+					<input type="text" name="name" id="name" placeholder="이름" class="form-control">
 				</div>
-				<div class="col-md-4"></div>
 			</div>
 			
 			<!-- 주민등록번호 -->
@@ -352,22 +356,19 @@ input
 			
 			<!-- 휴대폰번호 입력 --> <!-- 인증하기 -->
 			<div class="row">
-				<div class="col-md-12 form-inline">
-				
-				<input type="text" name="tel" id="tel" placeholder="휴대폰 번호" class="form-control">
-				<button type="button" class="btn btn-primary" type="submit" id="telBtn">인증 하기</button>
+				<div class="col-md-12 form-inline">				
+					<input type="text" name="tel" id="tel" placeholder="휴대폰 번호" class="form-control">
+					<button type="button" class="btn btn-primary" type="submit" id="telBtn">인증 하기</button>
 				</div>
 			</div>
 			
 			
 			<!-- 인증번호 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
-				<input type="text" name="num" id="num" placeholder="인증번호" class="form-control">
-				<button type="button" class="btn btn-primary" id="numBtn">인증확인</button>
+				<div class="col-md-12 form-inline">
+					<input type="text" name="num" id="num" placeholder="인증번호" class="form-control">
+					<button type="button" class="btn btn-primary" id="numBtn">인증확인</button>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
@@ -383,77 +384,57 @@ input
 			<!-- 우편번호 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-				<input class="form-control" id="shopLocation1" name ="shopLocation1"type="text" /> - 
-				<input class="form-control" id="shopLocation2" name="shopLocation2"type="text" />
-				<button class="btn btn-primary" type="submit">우편번호</button>
+					<input class="form-control" id="shopLocation1" name ="shopLocation1"type="text" /> - 
+					<input class="form-control" id="shopLocation2" name="shopLocation2"type="text" />
+					<button class="btn btn-primary" type="submit">우편번호</button>
 				</div>
 			</div>
 			
 			
 			<!-- 주소 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+				<div class="col-md-12  Cn">
 				<input class="form-control" id="shopLocation3" name="shopLocation3"type="text" placeholder="주소"/>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 상세주소 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
-				<input class="form-control" id="shopLocation4" name="shopLocation4"type="text" placeholder="상세주소"/>
+				<div class="col-md-12  Cn">
+					<input class="form-control" id="shopLocation4" name="shopLocation4"type="text" placeholder="상세주소"/>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 패스워드 찾기 질문 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center ">
-				
-				<div class="form-inline">
-				
-				<span>비밀번호찾기 질문: </span> 
-				
-
-
-
-				
-				<select class="form-control" name="pwQuestion">
-					<option value="">선택</option>
-					<c:forEach var="list" items="${pwList }">
-						<option value="${list.pw_question_type_code }">${list.pw_question }</option>
-					</c:forEach>
-				</select>
-				
+				<div class="col-md-12">				
+					<div class="form-inline">				
+					<span>비밀번호찾기 질문: </span> 				
+						<select class="form-control" name="pwQuestion">
+							<option value="">선택</option>
+							<c:forEach var="list" items="${pwList }">
+								<option value="${list.pw_question_type_code }">${list.pw_question }</option>
+							</c:forEach>
+						</select>				
+					</div>			
 				</div>
-				
-				
-				</div>
-				<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 패스워드 찾기 답변 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+				<div class="col-md-12 Cn">
 				<input class="form-control" id="pwReply" name="pwReply" type="text" placeholder="패스워드 찾기 답변"/>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 이메일!!!! -->
 			<div class="row">
 				<div class="col-md-12">
-				<div class="col-md-3 ">
-				</div>
-				<div class="col-md-5 form-inline">
+				<div class="col-md-12 form-inline">
 						<select name="selectEmail" class="selectField form-control" onchange="changeEmail()">
 							<option value="">선택</option>
 							<option value="gmail.com"
@@ -472,13 +453,7 @@ input
 						<input type="text" name="email2" 
 							 class="form-control" value="${dto.email2 }"
 							readonly = "readonly">
-				</div>
-				
-				<div class="col-md-4">
-				
-				</div>
-				
-        	
+				</div>        	
 				</div>
 			</div>
 			
@@ -490,8 +465,7 @@ input
 			
 			<div class="row">
 				<div class="col-md-12">
-				<div class="col-md-3"></div>
-				<div class="col-md-5">
+				<div class="col-md-12">
 				
 				<div class="form-inline">
 				
@@ -511,12 +485,7 @@ input
 				
 				<div class="form-inline">
 				
-				<span>렌트거래 관심 카테고리: </span> 
-				
-
-
-
-				
+				<span>렌트거래 관심 카테고리: </span> 				
 				<select class="form-control" name="rCate">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${rentList }">
@@ -529,7 +498,6 @@ input
 				
 				
 				</div>
-				<div class="col-md-4"></div>
 				
 				
 				
@@ -568,8 +536,7 @@ input
 			
 			<!-- 은행명 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+				<div class="col-md-12 text-left Cn">
 				<div class="form-inline">
 				
 				<span>은행 : </span> 
@@ -583,27 +550,22 @@ input
 				</select>
 				</div>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 예금주 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+				<div class="col-md-12 text-left Cn">
 				<input class="form-control" id="bank2" name="bank2" type="text" placeholder="예금주"/>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
 			<!-- 계좌번호 -->
 			<div class="row">
-			<div class="col-md-3"></div>
-				<div class="col-md-5 text-center Cn">
+				<div class="col-md-12 text-left Cn">
 				<input class="form-control" id="banknum" name="banknum" type="text" placeholder="계좌번호"/>
 				</div>
-			<div class="col-md-4"></div>
 			</div>
 			
 			
@@ -619,7 +581,7 @@ input
 			
 			</form>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 		</div>
 	</div>
 </div>
@@ -628,10 +590,10 @@ input
 <!-- content end -->
 
 <!-- footer  -->
-<%-- <div class="row">
+<div class="row">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>
-</div> --%>
+</div>
 </body>
 </html>
