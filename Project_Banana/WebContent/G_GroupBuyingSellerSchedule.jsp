@@ -38,7 +38,7 @@
 	
 </style>
 
-<script src='fullcalendar/core/locales/ko.js'></script>
+<!-- <script src='fullcalendar/core/locales/ko.js'></script> -->
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
@@ -83,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		  
 	    themeSystem: 'bootstrap',
 	    plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
-	    defaultView: 'dayGridMonth',
+	    defaultView: 'dayGridMonth',	    
+	    navLinks: true,
 	    defaultDate: new Date(),
 	    dateClick: function() {
 	        
@@ -93,11 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: 'title',
 	      right: ''
 	    },
-	   /*  locale: 'ko',  */  
-	   
-	    eventSources: [{
+	   /*  locale: 'ko',  */ 
+	
+	  
+	     eventSources: [{
 	       
-	    	events: function(info, callback, failureCallback)// 이건 무슨 의미지?
+	    	 events: function(info, callback, failureCallback)// 이건 무슨 의미지?
 	    	{
 	    		$.ajax(
    				{
@@ -117,9 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
    					}   					
    				});		   		
 	    		
-	    	}    	
+	    	} 
 	    	
-	    }]
+	     		
+			
+	    	
+	    }] 
 	   
 	    
 	  });
