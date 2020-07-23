@@ -9,7 +9,7 @@
 	<select id="list" resultType="com.banana.admin.AdminPointDTO">
 		SELECT * FROM VIEW_POINT_MANAGE
 		ORDER BY SDATE
-		<!-- 
+		<!--     0 실시간계좌이체, 카드결제, 핸드폰결제
 		CREATE OR REPLACE VIEW VIEW_POINT_MANAGE
 		AS
 		SELECT J.ID AS ID, C.SDATE AS "SDATE", '포인트 충전' AS TYPE
