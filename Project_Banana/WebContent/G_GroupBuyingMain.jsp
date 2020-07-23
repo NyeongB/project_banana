@@ -423,24 +423,18 @@ p
 		<div>
 			오늘 본 상품
 			<%
-			
-			    if (ck != null) {
-			
-			        for (Cookie c : ck) {
-			
-			            if (c.getName().indexOf("item") != -1) {
-			
-			 
-			
-			                out.println(java.net.URLDecoder.decode(c.getValue(),"UTF-8") + "<br/>");
-			
-			            }
-			
-			        }
-			
-			    }
-			
-			%>
+			     Cookie[] cookies = request.getCookies();
+			     for(Cookie cookie : cookies){ 
+			           out.println("<h1>전송된 쿠키 : " + cookie.getName() + "</h1>"); 
+			      String code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
+			      out.println(java.net.URLDecoder.decode(cookie.getValue(),"UTF-8") + "<br/>");
+			      out.println(code);   
+			     }
+			     //location.href = " groupbuyingitempage.action?postcode="+code;
+			    
+			 %> 
+			<c:forEach var="newlist" items="${gNewList }" varStatus="status" begin="1" end="3">${newlist.photo }</c:forEach>
+
 		</div>
 		
 </div>
