@@ -56,6 +56,38 @@ public class UserMyGiveReportListController
 		view="/UserMyGiveReportList.jsp";
 		return view;
 	}
+	
+	// 내가 당한 신고
+		@RequestMapping(value="/usermygivereportlist.action", method = RequestMethod.GET)
+		public String receiveReportList(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+		{
+			String view = null;
+			
+			try
+			{
+				HttpSession session = request.getSession();        
+		        SessionInfo info = (SessionInfo)session.getAttribute("user");
+		        
+		        // 로그인 상태가 아닐 때
+		        if(info == null)
+		        	return "/loginmain.action";
+		        
+		        // 아이디가져오기
+		        String id = info.getId();
+		        IUserMyGiveReportListDAO dao = SqlSession.getMapper(IUserMyGiveReportListDAO.class); 
+		        
+				model.addAttribute("receiveReportList",  dao.receiveReportList(id));
+				
+				
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			
+			view="/UserMyReceiveReportList.jsp";
+			return view;
+		}
 }
 
 

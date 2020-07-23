@@ -106,45 +106,18 @@
 									
 						</tr>
 					</thead>
-					 <tbody>	
+					 <tbody>
+					 <c:forEach var="receiveReportLists" items="${receiveReportList }">
 						<tr>
-							<td><a href="">물 나눠사요</a></td>
-							<td>2020-06-03 18:05:03</td>
-							<td>댓글</td>
-							<td>욕설/비방</td>
+							<td><a href="">${receiveReportLists.title }</a></td>
+							<td>${receiveReportLists.sdate }</td>
+							<td>${receiveReportLists.type }</td>
+							<td>${receiveReportLists.deal_report_type_name }</td>
 							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
 							<td>2020-06-06 18:05:03</td>
-							<td><p id="blueAnswer">처리중</p></td>
+							<td><p id="blueAnswer">${receiveReportLists.progress }</p></td>
 						</tr>
-						<tr>
-							<td><a href="">고데기 빌려드립니다</a></td>
-							<td>2020-04-21 09:00:03</td>
-							<td>게시물</td>
-							<td>대여자노쇼</td>
-							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>						
-							<td>2020-04-24 09:00:03</td>
-							<td><p id="redAnswer">환불</p></td>
-						</tr>
-						
-						<tr>
-							<td><a href="">고구마 함께 사요</a></td>
-							<td>2020-03-21 09:00:03</td>
-							<td>댓글</td>
-							<td>욕설/비방</td>
-							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
-							<td>2020-03-24 09:00:03</td>
-							<td><p id="redAnswer">경고</p></td>
-						</tr>
-						
-						<tr>
-							<td><a href="">빔 프로젝트 쓸 사람~</a></td>
-							<td>2020-02-18 13:00:03</td>
-							<td>게시물</td>
-							<td>상품하자</td>
-							<td><button type="button" name="objection" class="btn btn-primary">이의제기</button></td>	
-							<td>2020-02-21 13:00:00</td>
-							<td><p id="greenAnswer">부적절한 사유</p></td>
-						</tr>
+					</c:forEach>	
 						
 					</tbody>
 							

@@ -4,7 +4,17 @@ public class UserMyGiveReportListDTO
 {	
 	
 	// 사용자가 접수한 신고 
-	private String deal_report_type, content, title, sdate, type, reported, reporter, progress;
+	private String deal_report_type, content, title, sdate, type, reported, reporter, progress,deal_report_type_name;
+
+	public String getDeal_report_type_name()
+	{
+		return deal_report_type_name;
+	}
+
+	public void setDeal_report_type_name(String deal_report_type_name)
+	{
+		this.deal_report_type_name = deal_report_type_name;
+	}
 
 	public String getDeal_report_type()
 	{
