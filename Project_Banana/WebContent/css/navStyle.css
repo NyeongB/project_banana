@@ -19,6 +19,7 @@
 
 	margin: 0;
 	
+	
 }
 
 #logo a
@@ -115,6 +116,7 @@
 {
 	padding-left:10px;
 	letter-spacing: 0.3em;
+	color: var(--text-color);
 }
 
 #nav_icons a

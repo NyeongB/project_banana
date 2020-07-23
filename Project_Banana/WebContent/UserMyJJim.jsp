@@ -77,7 +77,7 @@ img
 
 			<div class="col-md-8">
 				<div>
-					<h3>나의 찜한 상품</h3><p class="thick"> &#128155; 임효임효님이 좋아하시는 상품입니다.</p>
+					<h3>나의 찜한 상품</h3><p class="thick"> &#128155; <span>${nickName }</span>님이 좋아하시는 상품입니다.</p>
 					<hr>
 				</div>
 				<div class="text-right">
@@ -107,7 +107,7 @@ img
 
 				<!-- table -->
 				<div class="col-md-12">
-					<table class="table">
+					<table class="table thick">
 						<thead>
 							<tr>
 								<th>&nbsp;</th>
@@ -120,7 +120,7 @@ img
 								<th>등록 날짜</th>
 							</tr>
 						</thead>
-						<tbody>
+						<c:forEach var="jjims" items="${jjim }" varStatus="status">
 							<tr>
 								<td >
 									<!-- Default checked -->
@@ -128,32 +128,17 @@ img
   										<input type="checkbox" class="custom-control-input" id="defaultChecked2">
 									</div>
 								</td>
-								<td>1</td>
+								<td>${status.count }</td>
 								<td><img alt="Bootstrap Image Preview"
 									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>자전거 빌려드립니다~~</td>
-								<td>2,000원</td>
-								<td>홍대입구역</td>
-								<td>제안자11</td>
-								<td>2020.06.30</td>
+								<td>${jjims.title }</td>
+								<td>${jjims.cost }/${jjims.dis_cost }</td>
+								<td>${jjims.loc_name }</td>
+								<td>${jjims.nickname }</td>
+								<td>${jjims.sdate }</td>
 							</tr>
-
-							<tr>
-								<td>
-									<div class="custom-control custom-checkbox">
-  										<input type="checkbox" class="custom-control-input" id="defaultChecked2">
-									</div>
-								</td>
-								<td>2</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
-								<td>자전거 상태 굿굿굿!</td>
-								<td>3,000원</td>
-								<td>신촌역</td>
-								<td>제공자222</td>
-								<td>2020.07.01</td>
-							</tr>
-						</tbody>
+						</c:forEach>
+							
 					</table>
 				</div>
 				<!-- table end -->
