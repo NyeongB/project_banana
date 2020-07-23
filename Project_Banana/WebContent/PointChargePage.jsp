@@ -176,7 +176,7 @@ function requestPay(p,t) {
 	        
 	        // 결제 완료시 결제창으로 이동
 	        // 가격과 결제유형 같이 넘ㄱ
-	        location.href="<%=cp%>/PointChargeComplete.jsp";
+	        location.href="<%=cp%>/pointcharge.action?point="+p+"&type="+t;
 	        
 	        
 	        /* msg += '고유ID : ' + rsp.imp_uid;

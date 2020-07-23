@@ -6,5 +6,7 @@ public interface IAdminReportListDAO
 {
 	public ArrayList<AdminReportListDTO> list();
 	
+	public ArrayList<AdminReportListDTO> list2();
+	
 	
 }

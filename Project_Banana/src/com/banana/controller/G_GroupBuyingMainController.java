@@ -111,9 +111,12 @@ public class G_GroupBuyingMainController
 		      String code = info.getB_user_code();
 		      //System.out.println(code);
 		      
+		     
+		      
 		      IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 		      GPostDTO dto = new GPostDTO();
 			  dto.setB_user_code(code);
+			  
 		      
 			  model.addAttribute("gNewList", dao.gNewList());
 			  model.addAttribute("gCateList", dao.gCateList());
@@ -131,6 +134,7 @@ public class G_GroupBuyingMainController
 					System.out.println(0);
 					
 					model.addAttribute("myList", dao.gMyList(dto));
+					
 				}
 		      
 			  
@@ -160,7 +164,7 @@ public class G_GroupBuyingMainController
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
-				
+		
 				
 				
 				GPostDTO dto = new GPostDTO();
@@ -169,10 +173,12 @@ public class G_GroupBuyingMainController
 				//int member = dto.getMember_num();
 				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
 				int member = list.get(0).getMember_num();
+				//String title = list.get(0).getTitle();
 				
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);
+				//model.addAttribute("title", title);
 				
 				
 			} catch (Exception e)

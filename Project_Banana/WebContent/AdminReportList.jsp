@@ -68,7 +68,7 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>게시물 / 댓글 신고</h3>
+					<h3>거래 신고 목록</h3>
 					<hr>
 				</div>
 				<br>

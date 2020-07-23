@@ -1,10 +1,35 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.net.URLDecoder"%>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
+<%
+        //쿠키로 상품명 저장
+        Cookie cookie = new Cookie("hrCookie", "hrCookie"); 
+     	cookie.setDomain("groupbuyingitempage.action"); 
+     	response.addCookie(cookie);
+
+        
+        
+		String postcode = request.getParameter("postcode");
+
+		//String title = request.getParameter("title");
+		//System.out.println(title);
+		
+        /* Cookie c = new Cookie("item",URLEncoder.encode("견과류","utf-8")); */
+        Cookie c = new Cookie("item",postcode);
+
+        c.setMaxAge(60*60*24);
+
+        response.addCookie(c);
+        
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,32 +180,44 @@ textarea
 </style>
 
 <script type="text/javascript">
-$().ready(function() 
-{
 	
+	var a;
+	$().ready(function() 
+	{
+		
+		
+		$('.carousel').carousel();
+		
+		$('.carousel').carousel
+		({
 	
-	$('.carousel').carousel();
-	
-	$('.carousel').carousel
-	({
-
-	  interval: 2000,
-	
-	  pause: 'hover',
-	
-	  wrap: true
-	
+		  interval: 2000,
+		
+		  pause: 'hover',
+		
+		  wrap: true
+		
+		});
+		
+		
+		
+		
+		
 	});
-	
-	
 
+/* function test()
+{
+	//alert("확인");
 	
+	var title = "<c:out value='${title}'/>";
 	
-});
+	window.location.replace("groupbuyingitempage.action?title="+title+"&postcode="+a);
+}
+ */
 
 function orderItem(obj)
 {
-	var a = obj.getAttribute("id");
+	a = obj.getAttribute("id");
 
 	//alert(${count});
 	//alert(${member});
@@ -302,6 +339,8 @@ function orderItem(obj)
 							
 								<div class="col-md-12">
 								 <h2>${lists.title }</h2>
+								
+								 
 								 <p><fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원(1인)</p>
 								 
 								</div>

@@ -2,10 +2,16 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
 	String cp = request.getContextPath();
+
+	 //쿠키 가져오기
+
+    Cookie [] ck = request.getCookies();
+	
 %>
 <%
 	session = request.getSession();
@@ -388,9 +394,49 @@ p
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+				<div>
+					오늘 본 상품
+					<%
+					
+					    if (ck != null) {
+					
+					        for (Cookie c : ck) {
+					
+					            if (c.getName().indexOf("item") != -1) {
+					
+					 
+					
+					                out.println(java.net.URLDecoder.decode(c.getValue(),"UTF-8") + "<br/>");
+					
+					            }
+					
+					        }
+					
+					    }
+					
+					%>
+				</div>
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
 		</div>
+		
+		<div>
+			오늘 본 상품
+			<%
+			     Cookie[] cookies = request.getCookies();
+			     for(Cookie cookie : cookies){ 
+			           out.println("<h1>전송된 쿠키 : " + cookie.getName() + "</h1>"); 
+			      String code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
+			      out.println(java.net.URLDecoder.decode(cookie.getValue(),"UTF-8") + "<br/>");
+			      out.println(code);   
+			     }
+			     //location.href = " groupbuyingitempage.action?postcode="+code;
+			    
+			 %> 
+			<c:forEach var="newlist" items="${gNewList }" varStatus="status" begin="1" end="3">${newlist.photo }</c:forEach>
+
+		</div>
+		
 </div>
 
 
