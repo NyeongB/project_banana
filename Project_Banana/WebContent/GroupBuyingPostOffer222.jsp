@@ -278,9 +278,10 @@ p
 			document.getElementById("mCate").insertRow(-1);
 	}
 	
-	
-	function dateCheck()
+	//수요조사 종료일 조건
+	function endCheck()
 	{
+		
 		//모집시작 날짜 값 불러옴.
 		var date = $("#startDate").val();
 		//alert(date);
@@ -290,7 +291,7 @@ p
 		var nd = new Date(newdate);
 		//alert(nd);
 		 
-		
+		//최대 날짜 설정
 		var closedate = new Date(date);
 		closedate.setDate(closedate.getDate()+30);
 		var cd = new Date(closedate);
@@ -298,7 +299,7 @@ p
 	
 		
 		 $("#endDate").datetimepicker({
-			 //시작 날짜를 모집 시작 날 보다 5일 뒤로.
+			 //시작 날짜를 모집 시작 날 보다 5일 뒤로.모집시작부터 최대 한달까지만.
 			 minDate: new Date(nd),
 		 	 maxDate: new Date(cd)
 		 	,startDate : new Date(nd)
@@ -309,21 +310,81 @@ p
 			  
 		   });  
 		 
-		 /*   var edate = $("#endDate").val();
-		   alert(edate);
-			var newdate2 = new Date(edate);
-			newdate2.setDate(newdate2.getDate()+1);
-			var end = new Date(newdate2);
-		 
+		
+	}
+	
+	//분배일시 조건
+	function bunCheck()
+	{
+		//수요조사 종료일 불러옴
+		var edate = $("#endDate").val();
+	    alert(edate);
+		var newdate = new Date(edate);
+		newdate.setDate(newdate.getDate()+1);
+		var nd = new Date(newdate);
+			
+		//최대 날짜 설정
+		var closedate = new Date(nd);
+		closedate.setDate(closedate.getDate()+3);
+		var cd = new Date(closedate); 
+	 
 		 
 		$("#bunDate").datetimepicker({
 			
-			minDate: new Date(end)
-		});	 */
+			minDate: new Date(nd)
+			,startDate : new Date(nd)
+			,maxDate: new Date(cd)
+		});	
+
+	
 	}
 	
+	//상품반환일시 조건
+	function returnCheck()
+	{
+		//alert("확인");
+		
+		//분배일자 불러옴
+		var bdate = $("#bunDate").val();
+	    alert(bdate);
+		var newdate = new Date(bdate);
+		newdate.setDate(newdate.getDate()+1);
+		var nd = new Date(newdate);
+			
+		//최대 날짜 설정
+		var closedate = new Date(nd);
+		closedate.setDate(closedate.getDate()+7);
+		var cd = new Date(closedate); 
+		
+		$("#returnDate").datetimepicker({
+			
+			minDate: new Date(nd)
+			,startDate : new Date(nd)
+			,maxDate: new Date(cd)
+		});	
+		
 	
+	}
+	
+	//영수증 첨부일 조건
+	function receiptCheck()
+	{
+		//수요조사 종료일 불러옴
+		var edate = $("#endDate").val();
+	
+			
+		//분배일자 불러옴
+		var bdate = $("#bunDate").val();
+	    
 
+		
+		$("#receiptDate").datetimepicker({
+			
+			minDate: new Date(edate)
+			,startDate : new Date(edate)
+			,maxDate: new Date(bdate)
+		});	
+	}
 	
 
 </script>
@@ -342,7 +403,7 @@ p
 
 <div class="container-fluid">
 
-<div class="row">
+<div class="row thick">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-3">
@@ -481,7 +542,7 @@ p
 						</div>	
 					</div>
 						
-					<div class="col-md-12 gonggustart">	
+					<div class="col-md-12 ">	
 						<div class="col-md-4">
 							수요조사 시작일
 							<input type="text" id="startDate" class="form-control">
@@ -494,7 +555,7 @@ p
 				
 						 <div class="col-md-4">
 							수요조사 종료일
-							<input type="text" id="endDate" class="form-control" onclick="dateCheck()">	
+							<input type="text" id="endDate" class="form-control" onclick="endCheck()">	
 							<label></label>
 						</div>
 					</div>
@@ -503,7 +564,7 @@ p
 					<div class="col-md-12">	
 						<div class="col-md-4">
 							분배일시    
-							<input type="text" id="bunDate" class="form-control">
+							<input type="text" id="bunDate" class="form-control" onclick="bunCheck()">
 							
 						</div>
 						
@@ -513,15 +574,23 @@ p
 						
 						 <div class="col-md-4">
 							상품반환 일시	
-							<input type="text" id="returnDate" class="form-control">
+							<input type="text" id="returnDate" class="form-control" onclick="returnCheck()">
 
 						</div>
+				  </div>		
 						
-						<div class="col-md-12 notice">
-							<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
+				  <div class="col-md-12 gonggustart">
+						<div class="col-md-4">
+							영수증 첨부일	
+							<input type="text" id="receiptDate" class="form-control" onclick="receiptCheck()">
 						</div>
+				  </div>
+				  	
+				<div class="col-md-12 notice">
+					<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
+				</div>
 									
-						<div class="col-md-12 Btn">
+					<div class="col-md-12 Btn">
 						<button type="button" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
 						</div>
@@ -530,9 +599,7 @@ p
 				</form>
 				</div><!--end col-md-8  -->
 				
-				
-				</div>
-				
+
 				<div class="col-md-3">
 				</div>
 			</div>

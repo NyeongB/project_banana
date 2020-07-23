@@ -8,20 +8,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GroupBuyingPostOffer.jsp</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<title>Banana</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
+<script type="text/javascript" src="js/jquery.datetimepicker.full.min.js"></script>
 
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
 
 
 <style type="text/css">
@@ -157,40 +157,22 @@ p
 	}
 	
 	//소분류 카테고리 클릭
+	
 	function cateFinal(obj)
 	{
 		scatecode = obj.getAttribute("id");
 		alert(scatcode);
 	}
 	
+	
 	$(document).ready(function()
 	{
 		
-		
-		
-		
-		    $("#startDate").datepicker( {
-		        onClose : function( selectedDate ) {  // 날짜를 설정 후 달력이 닫힐 때 실행
-		                      if( selectedDate != "" ) {
-		                          // yyy의 minDate를 xxx의 날짜로 설정
-		                          $("#endDate").datepicker("option", "startDate", selectedDate);
-		                      }
-		                  }
-		    } );
-
-		    $("#endDate").datepicker( {
-		        onClose : function( selectedDate ) {  // 날짜를 설정 후 달력이 닫힐 때 실행
-		                      if( selectedDate != "" ) {
-		                          // xxx의 maxDate를 yyy의 날짜로 설정
-		                          $("#startDate").datepicker("option", "maxDate", selectedDate);
-		                      }
-		                  }
-		    } );
-	
-
-
-
-		
+		$("#startDate").datetimepicker({ 
+			minDate: 0,
+			
+		});
+	   
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
 		$("input:text[numberOnly]").on("keyup", function() 
@@ -264,9 +246,113 @@ p
 			document.getElementById("mCate").insertRow(-1);
 	}
 	
+	//수요조사 종료일 조건
+	function endCheck()
+	{
+		
+		//모집시작 날짜 값 불러옴.
+		var date = $("#startDate").val();
+		//alert(date);
+		//종료날짜는 최소 5일 이상
+		var newdate = new Date(date);
+		newdate.setDate(newdate.getDate()+5);
+		var nd = new Date(newdate);
+		//alert(nd);
+		 
+		//최대 날짜 설정
+		var closedate = new Date(date);
+		closedate.setDate(closedate.getDate()+30);
+		var cd = new Date(closedate);
+		//alert(cd);
 	
+		
+		 $("#endDate").datetimepicker({
+			 //시작 날짜를 모집 시작 날 보다 5일 뒤로.모집시작부터 최대 한달까지만.
+			 minDate: new Date(nd),
+		 	 maxDate: new Date(cd)
+		 	,startDate : new Date(nd)
+		 	,icons: {
+	            primary: 'ui-icon-calendar'
+	        }
+		
+			  
+		   });  
+		 
+		
+	}
 	
+	//분배일시 조건
+	function bunCheck()
+	{
+		//수요조사 종료일 불러옴
+		var edate = $("#endDate").val();
+	    //alert(edate);
+		var newdate = new Date(edate);
+		newdate.setDate(newdate.getDate()+1);
+		var nd = new Date(newdate);
+			
+		//최대 날짜 설정
+		var closedate = new Date(nd);
+		closedate.setDate(closedate.getDate()+3);
+		var cd = new Date(closedate); 
+	 
+		 
+		$("#bunDate").datetimepicker({
+			
+			minDate: new Date(nd)
+			,startDate : new Date(nd)
+			,maxDate: new Date(cd)
+		});	
 
+	
+	}
+	
+	//상품반환일시 조건
+	function returnCheck()
+	{
+		//alert("확인");
+		
+		//분배일자 불러옴
+		var bdate = $("#bunDate").val();
+	    //alert(bdate);
+		var newdate = new Date(bdate);
+		newdate.setDate(newdate.getDate()+1);
+		var nd = new Date(newdate);
+			
+		//최대 날짜 설정
+		var closedate = new Date(nd);
+		closedate.setDate(closedate.getDate()+7);
+		var cd = new Date(closedate); 
+		
+		$("#returnDate").datetimepicker({
+			
+			minDate: new Date(nd)
+			,startDate : new Date(nd)
+			,maxDate: new Date(cd)
+		});	
+		
+	
+	}
+	
+	//영수증 첨부일 조건
+	function receiptCheck()
+	{
+		//수요조사 종료일 불러옴
+		var edate = $("#endDate").val();
+	
+			
+		//분배일자 불러옴
+		var bdate = $("#bunDate").val();
+	    
+
+		
+		$("#receiptDate").datetimepicker({
+			
+			minDate: new Date(edate)
+			,startDate : new Date(edate)
+			,maxDate: new Date(bdate)
+		});	
+	}
 	
 
 </script>
@@ -285,7 +371,7 @@ p
 
 <div class="container-fluid">
 
-<div class="row">
+<div class="row thick">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-3">
@@ -296,6 +382,9 @@ p
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
+				
+				
+
 				
 				<form role="form" class="form-group" name="postItem" id="postItem">
 				
@@ -421,112 +510,55 @@ p
 						</div>	
 					</div>
 						
-					<div class="col-md-12 gonggustart">	
-						<div class="col-md-6">
+					<div class="col-md-12 ">	
+						<div class="col-md-4">
 							수요조사 시작일
-							<input type="text" id="startDate" class="datePicker">
-							
-							<select name="startDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
-							
+							<input type="text" id="startDate" class="form-control">
+							<!-- <span class="glyphicon glyphicon-calendar"></span> -->
 						</div>
+			
+			
+						<div class="col-md-2"></div>
 					
 				
-						 <div>
+						 <div class="col-md-4">
 							수요조사 종료일
-							
-							<input type="text" id="endDate" class="datePicker">
-							
-							<select name="endDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
+							<input type="text" id="endDate" class="form-control" onclick="endCheck()">	
+							<label></label>
 						</div>
 					</div>
-						
+					
 						
 					<div class="col-md-12">	
-						<div class="col-md-6">
+						<div class="col-md-4">
 							분배일시    
-							<input type="date">
+							<input type="text" id="bunDate" class="form-control" onclick="bunCheck()">
 							
-							<select name="startDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
-							
-					</div>
-						
-						 <div>
-							상품반환 일시
-							
-							<input type="date">
-							
-							<select name="endDate">
-								<option value="">08:00</option>
-								<option value="">09:00</option>
-								<option value="">10:00</option>
-								<option value="">11:00</option>
-								<option value="">12:00</option>
-								<option value="">13:00</option>
-								<option value="">14:00</option>
-								<option value="">15:00</option>
-								<option value="">16:00</option>
-								<option value="">17:00</option>
-								<option value="">18:00</option>
-								<option value="">19:00</option>
-								<option value="">20:00</option>
-								<option value="">21:00</option>
-								<option value="">22:00</option>
-							</select>
 						</div>
 						
-						<div class="col-md-12 notice">
-							<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
+					
+						
+						<div class="col-md-2"></div>
+						
+						 <div class="col-md-4">
+							상품반환 일시	
+							<input type="text" id="returnDate" class="form-control" onclick="returnCheck()">
+
 						</div>
+				  </div>		
+						
+				  <div class="col-md-12 gonggustart">
+						<div class="col-md-4">
+							영수증 첨부일	
+							<input type="text" id="receiptDate" class="form-control" onclick="receiptCheck()">
+						</div>
+				  </div>
+				  	
+				<div class="col-md-12 notice">
+					<p>※ 상품 반환 일시는 주말을 권고합니다.</p>
+				</div>
 									
-						<div class="Btn">
+					<div class="col-md-12 Btn">
 						<button type="button" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
 						</div>
@@ -535,9 +567,7 @@ p
 				</form>
 				</div><!--end col-md-8  -->
 				
-				
-				</div>
-				
+
 				<div class="col-md-3">
 				</div>
 			</div>
