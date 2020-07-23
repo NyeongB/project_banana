@@ -125,18 +125,7 @@ public class G_GroupBuyingMainController
 		      GPostDTO dto = new GPostDTO();
 			  dto.setB_user_code(code);
 			  
-			  
-			  //System.out.println(pageContext.getAttribute("code"));
-			  
-			  //String remotecode = request.getParameter("remotecode"); 
-
-			 
-			  
 			
-				
-			//model.addAttribute("gRecentList",dao.gRecentList(dto));
-
-			  
 		      
 			  model.addAttribute("gNewList", dao.gNewList());
 			  model.addAttribute("gCateList", dao.gCateList());

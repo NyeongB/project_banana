@@ -350,13 +350,21 @@ a:active
 									</div>
 									<!-- end 페이징 바 -->
 									<div class="col-md-2">
-										<div class="floating">
-											<div><span  class="thick">최근게시물</span></div>
-											<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-											<div><button class="btn">▲</button><button class="btn">▼</button></div>
+									<div class="floating">
+										<div><span  class="thick">최근게시물</span></div>
+										<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+										<div>
+											오늘 본 상품
+											<c:if test="${sessionScope.postcode != null }">	
+											<c:forEach var="gRecentLists" items="${gRecentList }">
+												<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+											</c:forEach>			
+											
+											</c:if>					
 										</div>
-							
+										<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 									</div>
+								</div>
 
 							</div><!--end col-md-12  -->
 						</div><!--end row  -->
@@ -371,7 +379,7 @@ a:active
 <!-- content end -->
 
 <!-- footer  -->
-<div class="row footer">
+<div class="row footer" id="bottom">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>

@@ -8,20 +8,7 @@
    String cp = request.getContextPath();
 %>
 <%
-        /* //쿠키로 상품명 저장
-        Cookie cookie = new Cookie("hrCookie", "hrCookie"); 
-     	//cookie.setDomain("groupbuyingitempage.action"); 
-     	response.addCookie(cookie);       
-        
-     	String postcode = request.getParameter("postcode");
-
-		//String title = request.getParameter("title");
-		//System.out.println(title);
-		
-        // Cookie c = new Cookie("item",URLEncoder.encode("견과류","utf-8")); 
-        Cookie c = new Cookie("item",postcode);
-        c.setMaxAge(60*60*24);
-        response.addCookie(c); */
+      
         
         String postcode = request.getParameter("postcode");
 			
@@ -436,9 +423,17 @@ function orderItem(obj)
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-				<div><button class="btn">▲</button><button class="btn">▼</button></div>
+				<div>
+					오늘 본 상품
+					<c:if test="${sessionScope.postcode != null }">	
+					<c:forEach var="gRecentLists" items="${gPostDetailList }">
+						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+					</c:forEach>			
+					
+					</c:if>					
+				</div>
+				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
-		
 		</div>
 		
 		
@@ -449,7 +444,7 @@ function orderItem(obj)
 <!-- content end -->
 
 <!-- footer  -->
-<div class="row">
+<div class="row"  id="bottom">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>
