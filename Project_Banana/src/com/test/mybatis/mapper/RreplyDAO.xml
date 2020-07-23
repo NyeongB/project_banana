@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.reply.r_reply.IRreplyDAO">
+
+	<!-- 렌트 댓글 조회 -->
+	<select id="rreplyList" resultType="com.banana.reply.r_reply.RreplyDTO">
+		SELECT J.NICKNAME, R.REPLY, R.WDATE
+		FROM R_REPLY R LEFT JOIN JOIN J
+		ON R.B_USER_CODE = J.B_USER_CODE
+		WHERE R.R_POST_CODE = #{r_post_code}
+	</select>
+	
+	
+	<!-- 렌트 댓글 insert -->
+	<insert id="replyInsert">
+		INSERT INTO R_REPLY(R_REPLY_CODE,R_POST_CODE,B_USER_CODE,REPLY,L_LEVEL)
+		VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL, #{r_post_code}, #{b_user_code}, #{reply}, 0 )
+	</insert>
+	
+	
+	
+	<!-- 렌트 대댓글 insert -->
+	<insert id="rreplyInsert">
+		INSERT INTO R_REPLY(R_REPLY_CODE,R_POST_CODE,R_REPLY_REF_CODE,B_USER_CODE,REPLY,L_LEVEL)
+		VALUES('R_REP'||SEQ_R_REPLY.NEXTVAL,#{r_post_code},  #{r_reply_ref_code}, #{b_user_code}, #{reply}, 1)
+	</insert>
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

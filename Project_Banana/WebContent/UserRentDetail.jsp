@@ -40,7 +40,10 @@
 
 <style type="text/css">
 
-
+.btn-sm, .txt
+{
+	display : inline;
+}
 
 .breadcrumb-item+.breadcrumb-item::before 
 { 
@@ -151,14 +154,12 @@ textarea
 	padding: 20px;
 	width: 100%;
 	height: 100px;
+	resize: none;
+	
 	
 }
 
-.bu
-{
-	border: 1px solid gray;
-	
-}
+
 
 .photo
 {
@@ -239,8 +240,56 @@ $().ready(function()
 
 	
 	
-	
+		// 댓글 등록
+		$("#replyinsert").click(function() 
+		{
+			var id1 = "<%=info %>";
+			   
+			
+			if(id1 == "null" || id1 ==" " )
+			{
+				if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+				{
+					// 확인 버튼 클릭 시 동작
+					
+					location.href = "loginmain.action";
+						
+				}
+				else // 취소 버튼 클릭 시 동작
+				{
+					location.href = "redirect:rpostdetailpage.action";
+				}
+			}
+			else
+			{
+					
+				var formData = $("#replyForm").serialize();
+				
+				$.ajax({
+					
+					type : "POST"
+					, url : "r_replyinsert.action"
+					, data : formData
+					, success : function(data) 
+					{
+						$("#resultReply").html(data);
+					}
+					, error : function(data) 
+					{
+						alert(data);
+					}
+					
+				});	
+				
+			}	
+					
+			
 		
+			
+			
+		});
+	
+	
 		
 
 	
@@ -257,21 +306,37 @@ function jjim()
    
    
 	
-	if(id1 == "null" || id1 ==" " )
+   if(id1 == "null" || id1 ==" " )
 	{
-		alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
-		location.href = "loginmain.action";
-		
+		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		{
+			// 확인 버튼 클릭 시 동작
+			
+			location.href = "loginmain.action";
+				
+		}else // 취소 버튼 클릭 시 동작
+		{
+				location.href = "redirect:rpostdetailpage.action";
+		}
 	}
 	else 
 	{
-		alert("찜 목록에 추가하시겠습니까?")
-		<% session.setAttribute("rpostCode",  rpostCode); %>
-		
-		$.get("rjjiminsert.action", function(data) 
+        
+		if(confirm("찜 목록에 추가하시겠습니까?"))
 		{
-			alert(data);
-		});
+			
+			// 확인 버튼 클릭 시 동작
+			<% session.setAttribute("rpostCode",  rpostCode); %>
+			$.get("rjjiminsert.action", function(data) 
+			{
+				alert(data);
+			});
+			
+		}else // 취소 버튼 클릭 시 동작
+		{
+			location.href = "redirect:rpostdetailpage.action";
+		}
+		
 		
 		
 	}
@@ -466,7 +531,7 @@ function jjim()
 				<div class="col-md-12">
 					<ul class="nav nav-tabs">
   						<li role="presentation" ><a href="#" >상세정보</a></li>
-  						<li role="presentation"><a href="#" id="qa" class="active">Q ＆ A</a></li>
+  						<li role="presentation"><a href="#QA" id="qa" class="active">Q ＆ A</a></li>
 
 					</ul>
 				</div>
@@ -487,12 +552,24 @@ function jjim()
 				<div class="col-md-12 detail">
 				<h3 id="QA">Q ＆ A</h3>
 				
-				<div>
-					<textarea rows="" cols="" placeholder="상품문의 입력"></textarea>
+				<div class="form-inline">
+				<form action="" id="replyForm">
+					<div>
+					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" ></textarea>
+					</div>
+					<div>
+					<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+					</div>
+					<input type="hidden" name="rpostCode" value="<%=rpostCode %>">
+				</form>
 				</div>
-				<div class="bu text-right">
-					<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+				
+				<div  id="resultReply">
+				
+				
 				</div>
+			
+				
 				
 				
 				</div>
