@@ -4,15 +4,8 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-
 <c:forEach var="rreplyList" items="${rreplyList }">
-	<div>
-		<div>${rreplyList.nickname }</div>
-		
-		<div class="form-inline">
-		<div class="col-md-10">${rreplyList.reply }</div> <div class="col-md-2 text-right">${rreplyList.wdate }</div>
-		</div>
-	</div>
-	<hr>
+${rreplyList.nickname }
+${rreplyList.reply }
+${rreplyList.wdate }
 </c:forEach>
-

@@ -10,8 +10,8 @@
 
 	SessionInfo info = (SessionInfo)session.getAttribute("user");
 
-	if(info== null)
-	System.out.println(info);
+	//if(info== null)
+	//System.out.println(info);
 	
 	String rpostCode = request.getParameter("r_post_code");
 
@@ -194,6 +194,8 @@ $().ready(function()
 	
 	}); // 이게 뭐지....? */
 			
+	showReplyList();		
+			
 			
 
 	$( ".top" ).click( function() {
@@ -262,38 +264,91 @@ $().ready(function()
 			}
 			else
 			{
-					
-				var formData = $("#replyForm").serialize();
 				
-				$.ajax({
+				
+					var formData = $("#replyForm").serialize();
 					
-					type : "POST"
-					, url : "r_replyinsert.action"
-					, data : formData
-					, success : function(data) 
-					{
-						$("#resultReply").html(data);
-					}
-					, error : function(data) 
-					{
-						alert(data);
-					}
-					
-				});	
+					$.ajax({
+						
+						type : "POST"
+						, url : "r_replyinsert.action"
+						, data : formData
+						, success : function(data) 
+						{
+							$("#resultReply").html(data);
+						}
+						, error : function(data) 
+						{
+							alert(data);
+						}
+						
+					});		
 				
 			}	
-					
-			
-		
-			
-			
-		});
-	
-	
-		
 
-	
+		});
+
 });
+
+
+
+// 댓글 조회 리스트
+function showReplyList() 
+{
+	var rPostCode = "<%=rpostCode %>";
+	// r_post_code 가 안넘어감...
+	
+	$.ajax({
+		
+		type : "POST"
+	, url : "r_replylist.action"
+	, data : {rPostCode : rPostCode} 
+	, success : function(data) 
+	{
+		var addText = "";
+		if(data.length <1)
+			$("#resultReply").html("등록된 댓글이 없습니다.");
+		else
+		{
+			var result = data.rreplyList;
+			
+			$.each(result, function(i) 
+			{
+				
+				
+				addText += '<div>'; 
+				addText += '<div>' + result[i].nickname + '</div>'; 
+				System.out.println("result[i].nickname");
+				addText += '<div class="form-inline">'; 
+				addText += '<div class="col-md-10">' + result[i].reply + '</div>' + '<div class="col-md-2 text-right">' + result[i].wdate  + '</div>'; 
+				addText += '</div>'; 
+				addText += '</div>'; 
+				addText += '<hr>'; 
+				
+			});
+			
+			
+		}
+
+		$("#resultReply").html(addText);
+	}
+	, error : function(data) 
+	{
+		alert(data)	;
+	}
+		
+		
+	});
+	
+	
+}
+
+
+
+
+
+
+
 
 
 

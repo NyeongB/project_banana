@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.reply.r_reply.IRreplyDAO;
 import com.banana.reply.r_reply.RreplyDTO;
@@ -20,10 +21,43 @@ public class RentReplyController
 	private SqlSession SqlSession;
 	
 	
+	// 렌트 댓글 조회 시
+	@RequestMapping(value="/r_replylist.action", method = RequestMethod.POST)
+	public String replyList(Model model, HttpServletRequest request) 
+	{
+		String view = null;
+		
+		try 
+		{
+			IRreplyDAO dao = SqlSession.getMapper(IRreplyDAO.class);
+      		String r_post_code = request.getParameter("rPostCode");
+			
+      		System.out.println(r_post_code);
+      		
+			model.addAttribute("rreplyList", dao.rreplyList(r_post_code));
+			
+			view = "/AjaxR_replyList.jsp";
+			
+			
+		} catch (Exception e) 
+		{
+			System.out.println(e.toString());
+		}
+		
+		
+		
+		return view;
+	}
+		
+	
+	
+	
+	
+	
 	
 	// 렌트 댓글 작성 시
-	@RequestMapping(value="/r_replyinsert.action")
-	public String list(Model model, HttpServletRequest request) 
+	@RequestMapping(value="/r_replyinsert.action", method = RequestMethod.POST)
+	public String replyInsert(Model model, HttpServletRequest request) 
 	{
 		String view = null;
 		

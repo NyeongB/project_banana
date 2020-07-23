@@ -11,8 +11,8 @@
 
 	SessionInfo info = (SessionInfo)session.getAttribute("user");
 	
-	if(info== null)
-	System.out.println(info);
+	//if(info== null)
+	//System.out.println(info);
 	
 
 	
