@@ -24,24 +24,21 @@
 
 <script type="text/javascript">
 
+
 	function clickBtn()
 	{
-		alert("안녕");
-		
+			
 		var pw = document.getElementById("pw").value;
-		alert(pw);
 		var flag ;
-		
-		
 		
 		$.get("usermodifyapplycheck.action", {password :pw}, function(data)
 				{
-					alert("hi");
-					alert(data);
+					//alert("hi");
+					//alert(data);
 					flag = data;
 					if(flag == 1)
 					{
-						alert("비밀번호가 틀렸습니다");
+						//alert("비밀번호가 틀렸습니다");
 						document.getElementById("err").style.display ='block';
 						return;
 						

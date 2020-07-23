@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IUserMyGiveReportListDAO">
+	
+	<select id="giveReportList" resultType="com.banana.my.UserMyGiveReportListDTO">
+	SELECT G_DEAL_REPORT_TYPE, CONTENT, TITLE, SDATE, TYPE, REPORTED, REPORTER, PROGRESS
+	FROM VIEW_MY_GIVE_REPORT
+	WHERE REPORTER = #{id}
+	</select>	
+	
+	
+	
+</mapper>  
+

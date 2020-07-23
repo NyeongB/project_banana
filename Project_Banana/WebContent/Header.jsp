@@ -53,6 +53,7 @@
 	 display:block;
 
 }
+
 </style>
 
 </head>
@@ -125,12 +126,12 @@
              <c:choose>
 		<c:when test="${sessionScope.admin != null }">
             <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
-            <li>관리자 : ${sessionScope.admin }</a></li>			
+            <li>관리자 : ${sessionScope.admin }</li>			
 		</c:when>
 		<c:when test="${sessionScope.user != null }">
             <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
-            <li><a href="<%=cp%>/UserMyJJim.jsp">마이페이지</a></li>
-            <li>회원 : ${sessionScope.user.id }</a></li>		
+            <li><a href="<%=cp%>/usermyjjim.action">마이페이지</a></li>
+            <li> ${sessionScope.user.id } 님</li>		
 		</c:when>
 		<c:otherwise>
             <li><a href="<%=cp%>/loginmain.action">로그인</a></li>

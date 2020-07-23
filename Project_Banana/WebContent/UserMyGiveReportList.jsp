@@ -98,7 +98,7 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>신고 제목</th>
+									<th>번호</th>
 									<th>신고 대상자</th>
 									<th>접수 유형</th>
 									<th>게시물 제목</th>
@@ -108,27 +108,19 @@
 								</tr>
 							</thead>
 						    <tbody>
+						    <c:forEach var="giveReportLists" items="${giveReportList }" varStatus="status">
 								<tr>
-									<td><a href="">사기 신고합니다.</a></td>
-									<td>cjfsud23</td>
-									<td>게시물</td>
-									<td><a href="">고구마 같이 사요~</a></td>
-									<td><a href="">고구마가 다 썩었어요</a></td>
-									<td>2020-06-08 15:00:03</td>
-									<td><p id="standby">접수</p></td>
+									<td><a href="">${status.count}</a></td>
+									<td>${giveReportLists.reported }</td>
+									<td>${giveReportLists.type }</td>
+									<td><a href="">${giveReportLists.title }</a></td>
+									<td><a href="">${giveReportLists.content }</a></td>
+									<td>2${giveReportLists.sdate }</td>
+									<td><p id="standby">${giveReportLists.progress }</p></td>
 								</tr>
+							</c:forEach>
 							</tbody>
-							<tbody>
-								<tr>
-									<td><a href="">댓글 신고합니다.</a></td>
-									<td>ehdehd95</td>
-									<td>댓글</td>
-									<td><a href="">물 나눠 사요~</a></td>
-									<td><a href="">욕설이 너무 많아요</a></td>
-									<td>2020-07-30 19:30:03</td>
-									<td><p id="accept">처리완료</p></td>
-								</tr>
-							</tbody>
+							
 						</table>
 					</div><!--end col-md-12  -->
 			</div>	<!-- end row  -->

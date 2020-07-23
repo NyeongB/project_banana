@@ -71,9 +71,9 @@ i + a
 </div>
 
 <div id="nav">
-		<ul class="menu thick">
+		<ul class="menu">
 		<li><i class="fas fa-home"></i><a href="#">마이페이지 홈</a></li>
-		<li><i class="far fa-heart"></i><a href="#">찜</a></li>
+		<li><i class="far fa-heart"></i><a href="usermyjjim.action">찜</a></li>
 		<li><i class="fas fa-hand-holding-heart"></i><a href="userrentpage.action">나의 렌트 </a></li>
 		<li><i class="fas fa-clipboard-list"></i><a href="userattendGonggu.action">나의 공동구매</a>
 			<!-- <ul class="sub" style="display: none;">
@@ -86,7 +86,13 @@ i + a
 				
 		
 		<li><i class="far fa-address-book"></i><a href="userattendancelist.action">출석부</a></li>
-		<li><i class="fas fa-bomb"></i><a href="#">신고내역</a></li>
+		<li><i class="fas fa-bomb"></i><a href="#">신고내역</a>
+			<ul class="sub" style="display: none;">
+					<li><a href="usermygivereportlist.action">접수한 신고</a></li>
+					<li><a href="mycredit.action">당한 신고</a></li>
+			</ul>
+		</li>
+		
 		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a></li>
 		<li><i class="far fa-comment-dots"></i><a href="userreplylist.action">내가쓴댓글</a></li>
 		<li><i class="far fa-address-card"></i><a href="usermodifyapply.action">개인정보수정</a></li>

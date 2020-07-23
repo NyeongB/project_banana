@@ -18,6 +18,8 @@ String cp = request.getContextPath();
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
+
 <style type="text/css">
 .row
 {
@@ -34,6 +36,230 @@ String cp = request.getContextPath();
 
 
 </style>
+<script type="text/javascript">
+	//아이디중복변수
+	var stateId = 0;
+	// 닉네임 중복 변수
+	var stateNick = 0;
+	
+	// 문자인증번호 
+	var phoneCheck;
+	
+	// 문자인증완료했는지 보는 변수 
+	var statePhone = 0;
+	
+	$(document).ready(function()
+	{
+		
+		// 서브밋 유효성 검사
+		 $("#submitBtn").click(function()
+		{
+			if(stateId>0 && stateNick>0)
+			{
+				
+				if(statePhone >0)
+				{
+					if($("#pw").val() == $("#pwcon").val())
+					{
+						$("#memberForm").submit();
+					}
+					else
+					{
+						alert("비밀번호를 확인해주세요.");	
+					}
+					
+				}
+				else
+				{
+					alert("핸드폰인증을 해야합니다.");
+					return;
+				}
+			}
+			else
+			{
+				alert("중복검사를 하지않았습니다.");
+				return;
+			}
+			
+		}); 
+		
+		// 문자 인증 확인
+		$("#numBtn").click(function()
+		{
+			if($("#num").val()==phoneCheck)
+			{
+				alert("인증번호 확인!");
+				statePhone =1;
+			}
+			else
+			{
+				alert("인증번호가 같지않습니다.");
+				statePhone = 0;
+			}
+		});
+		
+		
+		// 인증번호 전송
+		$("#telBtn").click(function()
+		{
+			ajaxRequest3();
+		});
+		
+		// 아이디 중복검사 
+		$("#idBtn").click(function()
+		{
+			if( $("#id").val().trim()=="")
+			{
+				alert("아이디를 입력해야합니다.");
+				return;
+			}
+			//alert("중복검사");
+			ajaxRequest1();
+		});
+		
+		// 닉네임 중복검사 
+		$("#nickBtn").click(function()
+		{
+			if( $("#nickname").val().trim()=="")
+			{
+				alert("닉네임을 입력해야합니다.");
+				return;
+			}
+			//alert("중복검사");
+			ajaxRequest2();
+		});
+	});
+	
+	
+	// 함수부분 
+	
+	// 이메일 변경 메소드
+	function changeEmail()
+	{
+		var f = document.memberForm;
+		var str = f.selectEmail.value;
+		//alert(str);
+		
+		if(str!="direct")
+		{
+			f.email2.value = str;
+			f.email2.readOnly = true;
+			f.email1.focus();
+		}
+		else
+		{
+			f.email2.value = "";
+			f.email2.readOnly = false;
+			f.email1.focus();
+		}	
+	}
+	
+	// 시/도 변경시 시/군/구 불러오는 메소드 
+	function changeLoc()
+	{
+		var f = document.memberForm;
+		var str = f.selectLoc.value;
+		//alert(str);
+		ajaxRequest(str);
+		
+	}
+	
+	// 시/군/구 ajax
+	function ajaxRequest(str)
+	{
+		//alert(str);
+	
+		$.get("ajaxloc.action", {loc : str}, function(data)
+		{
+		
+		//alert(data);
+		$("#sel").html(data);
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+	}
+	
+	// 아이디 중복검사 ajax
+	function ajaxRequest1()
+	{
+		
+	
+		$.get("idcheck.action", {id : $("#id").val()}, function(data)
+		{
+		
+		if(Number(data) >0)
+		{
+			alert("아이디 중복 발생!!");
+			//alert("state : " + state);
+			stateId=0;
+			return;
+		}
+		else
+		{
+			// 아이디가 중복되지않음
+			// 상태를 1로 바꿈 
+			alert("사용가능한 아이디입니다.");
+			stateId = 1;
+			//alert("state : " + state);
+			
+		}
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+		}
+	// 닉네임 중복검사 ajax
+	function ajaxRequest2()
+	{
+		
+	
+		$.get("nickcheck.action", {nickname : $("#nickname").val()}, function(data)
+		{
+		
+		if(Number(data) >0)
+		{
+			alert("닉네임 중복 발생!!");
+			//alert("state : " + state);
+			stateNick=0;
+			return;
+		}
+		else
+		{
+			// 아이디가 중복되지않음
+			// 상태를 1로 바꿈 
+			alert("사용가능한 닉네임입니다.");
+			stateNick = 1;
+			//alert("state : " + state);
+			
+		}
+		
+		
+		//$("#positionForm").submit();
+		
+	});
+		}
+	
+	
+	// 휴대폰 인증 
+	function ajaxRequest3()
+	{
+		
+		alert("인증번호가 발송되었습니다.");
+		$.get("telcheck.action", {tel : $("#tel").val()}, function(data)
+		{
+			//alert(data);
+			phoneCheck = data.trim();
+			
+		});
+		
+	}
+
+
+
+</script>
 
 </head>
 <body>

@@ -9,6 +9,11 @@
 %>
 <%
         //쿠키로 상품명 저장
+        Cookie cookie = new Cookie("hrCookie", "hrCookie"); 
+     	cookie.setDomain("groupbuyingitempage.action"); 
+     	response.addCookie(cookie);
+
+        
         
 		String postcode = request.getParameter("postcode");
 
