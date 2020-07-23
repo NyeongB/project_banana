@@ -121,16 +121,46 @@ input
 </style>
 
 <script type="text/javascript">
+var point=0;
+var type;
+$(document).ready(function()
+{
+	$("#payment").click(function()
+	{	
+		
+		//alert("결제요청");
+		//alert("결제 금액 : " + point + "결제 타입 : " + type);
+		
+		if(type=='type1')
+  		t='trans';
+  		else if(type=='type2')
+  		t='card';
+  		else if(type=='type3')
+  		t='phone';
+		
+		
+		
+		requestPay(point,t);
+	});
+	
+	$("#cancel").click(function()
+	{
+		alert("취소");
+	});
+});
 
-function requestPay() {
+
+
+
+function requestPay(p,t) {
 	IMP.init('imp63967210');
     // IMP.request_pay(param, callback) 호출
 	IMP.request_pay({
 	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
+	    pay_method : t, //card 
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 14000,
+	    name : 'BANANA401 : 포인트 결제',
+	    amount : p,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
@@ -140,16 +170,51 @@ function requestPay() {
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
+	        alert(msg);
+	        
+	        
+	        
+	        // 결제 완료시 결제창으로 이동
+	        // 가격과 결제유형 같이 넘ㄱ
+	        location.href="<%=cp%>/PointChargeComplete.jsp";
+	        
+	        
+	        /* msg += '고유ID : ' + rsp.imp_uid;
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        msg += '카드 승인번호 : ' + rsp.apply_num; */
+	        
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert(msg);
 	    }
-	    alert(msg);
+	    
 	});
+  }
+  
+  function getPoint(id)
+{
+	  
+	//alert(id);
+	point = Number(id);
+	document.getElementById('point').innerHTML=point;
+
+}
+  
+  function getType(id)
+  {
+  	var typeText;
+  	type = id;
+  	//alert(id);
+  	if(id=='type1')
+  		typeText='실시간 계좌이체';
+  	else if(id=='type2')
+  		typeText='카드 결제';
+  	else if(id=='type3')
+  		typeText='휴대폰 결제';
+  	document.getElementById('type').innerHTML=typeText;
+
   }
 
 </script>
@@ -197,23 +262,23 @@ function requestPay() {
 										<h2>충전할 금액</h2>
 									</div>
 								</div><br>
-
+						
 								<div class="row">
-									<div class="col-md-12 check"> 
-									   <label for="m5000"><input type="radio" name="charge" id="m5000"/>5,000원</label>
-									   <label for="m10000"><input type="radio" name="charge" id="m10000"/>10,000원</label>
-									   <label for="m20000"><input type="radio" name="charge" id="m20000"/>20,000원</label>
-									   <label for="m30000"><input type="radio" name="charge" id="m30000"/>30,000원</label>
-									   <label for="m40000"><input type="radio" name="charge" id="m40000"/>40,000원</label>
+									<div class="col-md-12 check" > 
+									   <label for="m5000"><input type="radio" name="charge" id="5000" onclick="getPoint(this.id)">5,000원</label>
+									   <label for="m10000"><input type="radio" name="charge" id="10000" onclick="getPoint(this.id)">10,000원</label>
+									   <label for="m20000"><input type="radio" name="charge" id="20000" onclick="getPoint(this.id)">20,000원</label>
+									   <label for="m30000"><input type="radio" name="charge" id="30000" onclick="getPoint(this.id)">30,000원</label>
+									   <label for="m40000"><input type="radio" name="charge" id="100" onclick="getPoint(this.id)">40,000원</label>
 									</div>
 								</div><br>
 
 								<div class="row">
 									<div class="col-md-12 text-right">
-										<p>선택된 금액 : <span>40,000</span>원</p> 
+										<p>선택된 금액 : <span id="point"></span>원</p> 
 									
 									</div>
-								</div><hr><br><br>
+								</div><hr><br>
 
 
 
@@ -231,49 +296,47 @@ function requestPay() {
 									
 									</div>
 								</div><br>
-								<div class="row">
+								
 									<div class="col-md-12 point2">
-										<div class="col-md-3"></div>
-									
-										<div class="col-md-6 center">
-											
-											<div class="col-md-12 paym" id="paym1">
-												<div class="col-md-4">					
-													<p>무통장 입금</p> 
-												</div>
-												<div class="col-md-8">
-													<button type="button" class="btn btn-default muPay"><i class="fa fa-money" aria-hidden="true" id="i1"></i>무통장 입금</button>
-												</div>
-											</div>
-											
-											<div class="col-md-12 paym" id="paym2">
-												<div class="col-md-4">			
-													<p>신용카드</p>
-												</div>
-												<div class="col-md-8">				
-													<button type="button" class="btn btn-default cardPay" onclick="requestPay()"><i class="fa fa-credit-card-alt" aria-hidden="true" id="i2"></i>신용카드</button>
-												</div>
-											</div>
+										<div class="col-md-12">
 										
+										<div class="row">
+								</div><br>
+
+								<div class="row">
+									<div class="col-md-12 check" > 
+									   <label for="m5000"><input type="radio" name="type" id="type1" onclick="getType(this.id)">실시간 계좌이체</label>
+									   <label for="m10000"><input type="radio" name="type" id="type2" onclick="getType(this.id)">카드 결제</label>
+									   <label for="m20000"><input type="radio" name="type" id="type3" onclick="getType(this.id)">휴대폰 결제</label>
+									</div>
+								</div><br>
+
+								<div class="row">
+									<div class="col-md-12 text-right">
+										<p>선택된 결제수단 : <span id="type"></span></p> 
+									
+									</div>
+								</div>
 										
 										
 										</div>
 									
+										
 									
-										<div class="col-md-3"></div>
+									
 									</div>
-								</div><hr><br> <!-- end 결제수단 div -->
+								<hr><br> <!-- end 결제수단 div -->
 								
 								
-								
+								<br />
+								<br />
+								<br />
 								<div class="row">
 									<div class="col-md-12 pointBtn">
-										<div class="col-md-2"></div>
-										<div class="col-md-8 text-right">
-											<button class="btn btn-primary" type="button" id="Payment">결제하기</button>
-											<button class="btn btn-primary" type="button" id="Cancel">취소하기</button>
+										<div class="col-md-12 text-right">
+											<button class="btn btn-primary" type="button" id="payment">결제하기</button>
+											<button class="btn btn-primary" type="button" id="cancel">취소하기</button>
 										</div>	
-										<div class="col-md-2"></div>
 									</div>
 								</div> <!-- end 결제&취소 버튼 -->
 								
