@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,26 +101,46 @@ public class G_GroupBuyingMainController
 		  
 		  try
 		{
-			  HttpSession session = request.getSession();
-		         
+			  HttpSession session = request.getSession();		         
 		      SessionInfo info = (SessionInfo)session.getAttribute("user");
+		      
+		      String postcode = (String)session.getAttribute("postcode");
+		      System.out.println(postcode);
 		      
 		      if(info == null)
 		    	  return "/loginmain.action";
 		      
+		     
 		      //코드 가져오기
 		      String code = info.getB_user_code();
 		      //System.out.println(code);
-		      
+		    
 		     
 		      
 		      IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+		      
+		      if(postcode != null)
+		    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
+		      
 		      GPostDTO dto = new GPostDTO();
 			  dto.setB_user_code(code);
+			  
+			  
+			  //System.out.println(pageContext.getAttribute("code"));
+			  
+			  //String remotecode = request.getParameter("remotecode"); 
+
+			 
+			  
+			
+				
+			//model.addAttribute("gRecentList",dao.gRecentList(dto));
+
 			  
 		      
 			  model.addAttribute("gNewList", dao.gNewList());
 			  model.addAttribute("gCateList", dao.gCateList());
+			  
 			  
 		      ArrayList<GPostDTO> list = dao.gMyList(dto);
 		      
@@ -283,5 +304,36 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 	
+	  //리모콘 바 최근 게시물
+	  @RequestMapping(value = "/recent.action", method =RequestMethod.GET)
+		public String Recent(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			
+			try
+			{
+				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+				
+				
+				String code = request.getParameter("remotecode"); 
+
+				GPostDTO dto = new GPostDTO();
+				dto.setG_post_code(code);
+			
+				
+				//model.addAttribute("gRecentList",dao.gRecentList(dto));
+	
+				
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			
+			
+			view =  "/g_main.action";
+			
+			return view;
+		}
 
 }

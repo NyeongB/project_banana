@@ -1,3 +1,4 @@
+<%@page import="java.util.function.Function"%>
 <%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,6 +24,28 @@
 	
 
 %>
+<%
+			
+			
+			 	 String code;
+			     Cookie[] cookies = request.getCookies();
+			     code = cookies[0].getValue();
+			     
+			     code = java.net.URLDecoder.decode(cookies[0].getValue(),"UTF-8");
+			      //out.println(java.net.URLDecoder.decode(cookies[0].getValue(),"UTF-8") + "<br/>");
+			      out.println(code);  
+			     
+			      session.setAttribute("code", code);
+			     /*  
+			     for(Cookie cookie : cookies){ 
+			           out.println("<h1>전송된 쿠키 : " + cookie.getName() + "</h1>"); 
+			       code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
+			      //code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
+			      out.println(java.net.URLDecoder.decode(cookie.getValue(),"UTF-8") + "<br/>");
+			      //out.println(code);  
+			      pageContext.setAttribute("code", code);
+			     } */
+			%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,28 +179,7 @@ p
 	$().ready(function()
 	{
 		
-		/* 
-		$("#postItem").click(function()
-		{
-			//alert("확인");
-			$(location).attr("href","groupbuyingpostoffer.action");
-		}); */
-		
-		
-		/*  $(".thumbnail").mouseover(function()
-		{
-			
-			
-			$(".thumbnail").css("background","#E6E6E6");
-		}); 
-		
-		$(".thumbnail").mouseout(function()
-		{
-			$(".thumbnail").css("background","none");
-		});  */
-		
-		
-		
+	
 		
 	});
 	
@@ -230,6 +232,7 @@ p
 		}
 		
 	}
+	
 
 
 </script>
@@ -396,46 +399,18 @@ p
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
 				<div>
 					오늘 본 상품
-					<%
+					<c:if test="${sessionScope.postcode != null }">	
+					<c:forEach var="gRecentLists" items="${gRecentList }">
+						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+					</c:forEach>			
 					
-					    if (ck != null) {
-					
-					        for (Cookie c : ck) {
-					
-					            if (c.getName().indexOf("item") != -1) {
-					
-					 
-					
-					                out.println(java.net.URLDecoder.decode(c.getValue(),"UTF-8") + "<br/>");
-					
-					            }
-					
-					        }
-					
-					    }
-					
-					%>
+					</c:if>					
 				</div>
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 			</div>
 		</div>
 		
-		<div>
-			오늘 본 상품
-			<%
-			     Cookie[] cookies = request.getCookies();
-			     for(Cookie cookie : cookies){ 
-			           out.println("<h1>전송된 쿠키 : " + cookie.getName() + "</h1>"); 
-			      String code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
-			      out.println(java.net.URLDecoder.decode(cookie.getValue(),"UTF-8") + "<br/>");
-			      out.println(code);   
-			     }
-			     //location.href = " groupbuyingitempage.action?postcode="+code;
-			    
-			 %> 
-			<c:forEach var="newlist" items="${gNewList }" varStatus="status" begin="1" end="3">${newlist.photo }</c:forEach>
-
-		</div>
+		
 		
 </div>
 

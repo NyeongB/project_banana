@@ -33,4 +33,7 @@ public interface IGPostDAO
 	
 	//나의 공동구매 리스트
 	public ArrayList<GPostDTO> gMyList(GPostDTO dto);
+	
+	//리모콘바 최근 리스트
+	public ArrayList<GPostDTO> gRecentList(String postcode);
 }

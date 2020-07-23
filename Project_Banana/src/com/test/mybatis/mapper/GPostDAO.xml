@@ -79,5 +79,12 @@
 		WHERE B_USER_CODE = #{b_user_code}
 	</select>
 	
+	<!--리모콘바-->
+	<select id="gRecentList" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT *
+		FROM VIEW_RECENT
+		WHERE G_POST_CODE = #{g_post_code}
+	</select>
+	
 	
 </mapper>

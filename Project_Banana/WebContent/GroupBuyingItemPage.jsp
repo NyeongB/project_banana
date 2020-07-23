@@ -8,24 +8,28 @@
    String cp = request.getContextPath();
 %>
 <%
-        //쿠키로 상품명 저장
+        /* //쿠키로 상품명 저장
         Cookie cookie = new Cookie("hrCookie", "hrCookie"); 
-     	cookie.setDomain("groupbuyingitempage.action"); 
-     	response.addCookie(cookie);
-
+     	//cookie.setDomain("groupbuyingitempage.action"); 
+     	response.addCookie(cookie);       
         
-        
-		String postcode = request.getParameter("postcode");
+     	String postcode = request.getParameter("postcode");
 
 		//String title = request.getParameter("title");
 		//System.out.println(title);
 		
-        /* Cookie c = new Cookie("item",URLEncoder.encode("견과류","utf-8")); */
+        // Cookie c = new Cookie("item",URLEncoder.encode("견과류","utf-8")); 
         Cookie c = new Cookie("item",postcode);
-
         c.setMaxAge(60*60*24);
-
-        response.addCookie(c);
+        response.addCookie(c); */
+        
+        String postcode = request.getParameter("postcode");
+			
+        session.setAttribute("postcode", postcode);
+        // 확인
+        //System.out.println(session.getAttribute("postcode"));
+        
+        
         
 
 %>
