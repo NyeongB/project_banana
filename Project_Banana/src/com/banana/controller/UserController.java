@@ -85,10 +85,9 @@ public class UserController
 		String nickname = request.getParameter("nickname");
 		
 		// 우편주소 - 우편주소2, 주소, 상세주소
-		String shopLoc1 = request.getParameter("shopLocation1");
-		String shopLoc2 = request.getParameter("shopLocation2");
-		String shopLoc3 = request.getParameter("shopLocation3");
-		String shopLoc4 = request.getParameter("shopLocation4");
+		String postcode = request.getParameter("postcode");
+		String roadAddress = request.getParameter("roadAddress");
+		String detailAddress = request.getParameter("detailAddress");
 		
 		// 비번찾기유형, 비번찾기 답변
 		String pwQuestion = request.getParameter("pwQuestion");
@@ -138,7 +137,7 @@ public class UserController
 		dto.setSsn(ssn);
 		dto.setProfile("123.jpg");
 		dto.setNickname(nickname);
-		dto.setAddr(shopLoc1+"-"+shopLoc2+" "+shopLoc3+" "+shopLoc4);
+		dto.setAddr(postcode+" "+roadAddress+" "+detailAddress);
 		dto.setPw_question_type_code(pwQuestion);
 		dto.setPw_answer(pwReply);
 		dto.setEmail(email1+"@"+email2);

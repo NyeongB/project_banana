@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 /* *
@@ -282,6 +283,50 @@ input
 		
 	}
 	
+	
+	// 주소
+	function execDaumPostcode()
+	{
+		new daum.Postcode(
+		{
+			oncomplete : function(data)
+			{
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 수신한 변수 값이 없는 경우엔 공백("")값을 가지므로, 이를 참고하여 분기한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ""; // 참고 항목 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if (data.bname !== "" && /[동|로|가]$/g.test(data.bname))
+				{
+					extraRoadAddr += data.bname;
+				}
+				
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if (data.buildingName !== "" && data.apartment === "Y")
+				{
+					extraRoadAddr += (extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName);
+				}
+				// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if (extraRoadAddr !== "")
+				{
+					extraRoadAddr = " (" + extraRoadAddr + ")";
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById("postcode").value = data.zonecode;
+				document.getElementById("roadAddress").value = roadAddr;
+
+				
+
+				
+			}
+		}).open();
+	}
+	
 </script>
 
 </head>
@@ -384,9 +429,8 @@ input
 			<!-- 우편번호 -->
 			<div class="row">
 				<div class="col-md-12 form-inline">
-					<input class="form-control" id="shopLocation1" name ="shopLocation1"type="text" /> - 
-					<input class="form-control" id="shopLocation2" name="shopLocation2"type="text" />
-					<button class="btn btn-primary" type="submit">우편번호</button>
+					<input class="form-control" id="postcode" placeholder="우편번호" disabled="disabled" name="postcode" type="text">
+					<button class="btn btn-primary" type="button" onclick="execDaumPostcode()" >우편번호 찾기</button>
 				</div>
 			</div>
 			
@@ -394,7 +438,7 @@ input
 			<!-- 주소 -->
 			<div class="row">
 				<div class="col-md-12  Cn">
-				<input class="form-control" id="shopLocation3" name="shopLocation3"type="text" placeholder="주소"/>
+				<input class="form-control" type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
 				</div>
 			</div>
 			
@@ -402,7 +446,7 @@ input
 			<!-- 상세주소 -->
 			<div class="row">
 				<div class="col-md-12  Cn">
-					<input class="form-control" id="shopLocation4" name="shopLocation4"type="text" placeholder="상세주소"/>
+					<input class="form-control" type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
 				</div>
 			</div>
 			
