@@ -108,12 +108,13 @@
 						    	
 								<tr>
 									
-									<td>${lists.id1 }</td>
+									<td>${lists.reported }</td>
 									<td>${lists.type }</td>
-									<td>${lists.rType }</td>
-									<td>${lists.content }</td>
-									<td>${lists.sDate }</td>
-									<td>${lists.id2 }</td>
+									<td>${lists.deal_report_type }</td>
+									<td><a href="<%=cp%>/adminpostreportlistdetail.action?type=${lists.type}&deal_report_code=${lists.deal_report_code}">
+									${lists.content }</a></td>
+									<td>${lists.sdate }</td>
+									<td>${lists.reporter }</td>
 									
 								</tr>
 								

@@ -88,10 +88,9 @@
            JOIN JOIN J
            ON J.B_USER_CODE = RR.B_USER_CODE;	   
            -->
-	<select id="list2" resultType="com.banana.admin.AdminReportListDTO">
+	<select id="list2" resultType="com.banana.my.UserMyGiveReportListDTO">
 	<!-- ID1 신고당한사람 ,ID2 신고한사람  -->
-	SELECT ID1,ID2, TYPE, RTYPE, CONTENT, SDATE 
-    FROM REPORTLIST_VIEW
+	SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
 	</select>	
 	
 	
