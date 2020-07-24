@@ -18,6 +18,8 @@ import com.banana.groupbuying.GCateDTO;
 import com.banana.groupbuying.GPostDTO;
 import com.banana.groupbuying.IGPostDAO;
 import com.banana.my.MyReviewDTO;
+import com.banana.rent.IRPostDAO;
+import com.banana.rent.RPostDTO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
 import com.banana.util.SessionInfo;
@@ -39,7 +41,7 @@ public class G_GroupBuyingMainController
 		     //System.out.println(postcode);
 			
 			String view = null; 
-			
+		
 			try
 			{
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
@@ -118,55 +120,64 @@ public class G_GroupBuyingMainController
 		  
 		  try
 		{
-			  HttpSession session = request.getSession();		         
-		      SessionInfo info = (SessionInfo)session.getAttribute("user");
-		      
-		      String postcode = (String)session.getAttribute("postcode");
-		      //System.out.println(postcode);
-		      
-		      if(info == null)
-		    	  return "/loginmain.action";
-		      
-		     
-		      //코드 가져오기
-		      String code = info.getB_user_code();
-		      //System.out.println(code);
-		    
-		     
-		      
-		      IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-		      
-		      if(postcode != null)
-		    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
-		      
-		      GPostDTO dto = new GPostDTO();
-			  dto.setB_user_code(code);
+			 
+
+			  HttpSession session = request.getSession(); 
+			  SessionInfo info = (SessionInfo)session.getAttribute("user");
 			  
-			
-		      
-			  model.addAttribute("gNewList", dao.gNewList());
-			  model.addAttribute("gCateList", dao.gCateList());
+			  String postcode = (String)session.getAttribute("postcode");
+			  //System.out.println(postcode);
 			  
 			  
-		      ArrayList<GPostDTO> list = dao.gMyList(dto);
-		      
-		      
-		      if(list.isEmpty()) 
-				{
-					//System.out.println(1);
-					model.addAttribute("noApply","신청한 거래가 없습니다.");
-					model.addAttribute("check","1");
-				}else
-				{
-					System.out.println(0);
-					
-					model.addAttribute("myList", dao.gMyList(dto));
-					
-				}
-		      
+			  GPostDTO dto = new GPostDTO(); 
+			  IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 			  
-		      
+			  //리모콘바에 최근 본 게시물
+			  if(postcode != null) 
+				  model.addAttribute("gRecentList",dao.gRecentList(postcode));
 			  
+			  if(info == null) //로그인 안 했을 시
+			  {
+				  model.addAttribute("noApply","로그인 시 이용가능한 서비스입니다.");
+				  model.addAttribute("check","1"); 
+				  
+				  //새로 올라온 게시물
+				  model.addAttribute("gNewList", dao.gNewList());
+				  //카테고리게시물
+				  model.addAttribute("gCateList", dao.gCateList());
+				  
+				  
+			  }
+			  else if(info !=null)  //로그인 시 
+			  {
+				//사용자 코드 가져오기 
+				  String code = info.getB_user_code(); 
+				  dto.setB_user_code(code);
+				  
+				  //새로 올라온 게시물
+				  model.addAttribute("gNewList", dao.gNewList());
+				  //카테고리게시물
+				  model.addAttribute("gCateList", dao.gCateList());
+				  
+				  //나의 현황
+				  ArrayList<GPostDTO> list = dao.gMyList(dto);
+				  
+				  //로그인 되어있고 현황이 없을 시 
+				  if(list.isEmpty()) 
+				  { 
+					  //System.out.println(1);
+					  model.addAttribute("noApply","신청한 거래가 없습니다.");
+					  model.addAttribute("check","1"); 
+				  }
+				  else 
+				  { 
+			  
+					  model.addAttribute("myList", dao.gMyList(dto));
+				  
+				  }
+			      
+			  }
+			  	  
 			  
 		} catch (Exception e)
 		{
@@ -299,7 +310,7 @@ public class G_GroupBuyingMainController
 				dto.setG_cate_bcode(request.getParameter("cate"));
 				
 				model.addAttribute("postMCateList", dao.cateMList(dto));
-				/* model.addAttribute("cateList", dao.cateList(dto)); */
+				 model.addAttribute("cateList", dao.cateList(dto)); 
 				
 				
 				
