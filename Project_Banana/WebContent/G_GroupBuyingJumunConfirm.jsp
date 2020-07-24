@@ -108,7 +108,9 @@
 					<h3 class="thick">결제 예정 금액</h3>
 						<ul>
 							<li>주문 합계 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
-							<li>보유 포인트 : 1000원</li>
+							<%-- <c:forEach var="point" items="${sumPoint }">
+							<li>보유 포인트 : ${point.sumPoint }원</li>
+							</c:forEach>	 --%>	
 							<li>부족한 포인트 : 1500원</li>
 							<li>※ 포인트 잔액이 부족하여 결제 할 수 없습니다.</li>
 						</ul>

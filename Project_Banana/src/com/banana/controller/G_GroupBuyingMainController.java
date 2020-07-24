@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.banana.groupbuying.GCateDTO;
 import com.banana.groupbuying.GPostDTO;
 import com.banana.groupbuying.IGPostDAO;
+import com.banana.my.IMyPointDAO;
 import com.banana.my.MyReviewDTO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.RPostDTO;
@@ -244,13 +245,25 @@ public class G_GroupBuyingMainController
 			{
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
+				IMyPointDAO pointdao = SqlSession.getMapper(IMyPointDAO.class);
+				
+				// 세션 찾기
+				HttpSession session = request.getSession();		
+				SessionInfo info = (SessionInfo) session.getAttribute("user");
+				
+				if(info == null)
+					return "/loginmain.action";
+				
+				String b_user_code = info.getB_user_code();
+				
 				String code = request.getParameter("postcode"); 
 				//System.out.println(code);
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
 				
 				model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
-			
+				model.addAttribute("pointList", pointdao.pointList(b_user_code));	
+				model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
 				
 				
 				
@@ -325,36 +338,30 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 	
-	  //리모콘 바 최근 게시물
-	  @RequestMapping(value = "/recent.action", method =RequestMethod.GET)
-		public String Recent(Model model,HttpServletRequest request)
-		{
-			String view = null; 
-			
-			try
-			{
-				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-				
-				
-				String code = request.getParameter("remotecode"); 
-
-				GPostDTO dto = new GPostDTO();
-				dto.setG_post_code(code);
-			
-				
-				//model.addAttribute("gRecentList",dao.gRecentList(dto));
-	
-				
-				
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-			}
-			
-			
-			view =  "/g_main.action";
-			
-			return view;
-		}
+		/*
+		 * //리모콘 바 최근 게시물
+		 * 
+		 * @RequestMapping(value = "/recent.action", method =RequestMethod.GET) public
+		 * String Recent(Model model,HttpServletRequest request) { String view = null;
+		 * 
+		 * try { IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+		 * 
+		 * 
+		 * String code = request.getParameter("remotecode");
+		 * 
+		 * GPostDTO dto = new GPostDTO(); dto.setG_post_code(code);
+		 * 
+		 * 
+		 * //model.addAttribute("gRecentList",dao.gRecentList(dto));
+		 * 
+		 * 
+		 * 
+		 * } catch (Exception e) { System.out.println(e.toString()); }
+		 * 
+		 * 
+		 * view = "/g_main.action";
+		 * 
+		 * return view; }
+		 */
 
 }

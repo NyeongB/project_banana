@@ -19,33 +19,11 @@
 
 	SessionInfo info = (SessionInfo)session.getAttribute("user");
 	
-	if(info== null)
-	System.out.println(info);
+	/* if(info== null)
+	System.out.println(info); */
 	
 
 %>
-<%
-			
-			
-			 	 String code;
-			     Cookie[] cookies = request.getCookies();
-			     code = cookies[0].getValue();
-			     
-			     code = java.net.URLDecoder.decode(cookies[0].getValue(),"UTF-8");
-			      //out.println(java.net.URLDecoder.decode(cookies[0].getValue(),"UTF-8") + "<br/>");
-			      out.println(code);  
-			     
-			      session.setAttribute("code", code);
-			     /*  
-			     for(Cookie cookie : cookies){ 
-			           out.println("<h1>전송된 쿠키 : " + cookie.getName() + "</h1>"); 
-			       code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
-			      //code = java.net.URLDecoder.decode(cookie.getValue(),"UTF-8");
-			      out.println(java.net.URLDecoder.decode(cookie.getValue(),"UTF-8") + "<br/>");
-			      //out.println(code);  
-			      pageContext.setAttribute("code", code);
-			     } */
-			%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,18 +151,12 @@ p
 	height: 150px;
 }
 
+
+
 </style>
 <script type="text/javascript">
 	
-	$().ready(function()
-	{
-		
-	
-		
-	});
-	
-	
-	
+
 	
 	function goList(obj)
 	{
@@ -256,7 +228,11 @@ p
 </div>
 
 <!-- content  -->
+
+
+
 <div class="container-fluid">
+
 	<div class="row">
 		<div class="col-md-2">
 		</div>
