@@ -14,79 +14,181 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
 
+<script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
+<script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
+<script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
+<script type="text/javascript" src="<%=cp%>/util/interaction/main.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/core/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/daygrid/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/timegrid/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/util/interaction/main.css">
 
+
+
 <style type="text/css">
 
-	#apply
-	{	
-		/* margin: 20px;
-		
-		height: 120px; */
-		width: 100%;
-		border: 0.5px solid black;
-		padding: 10px;
-	}
+#apply
+{	
+	/* margin: 20px;
 	
+	height: 120px; */
+	width: 100%;
+	border: 0.5px solid black;
+	padding: 10px;
+}
+#calendar *
+{
+	font-size: medium;
+}
+
+.yellow
+{
+	color: var(--back-color);
+}
+.blue
+{
+	color: var(--hover-color1);
+}
+.green
+{
+	color: var(--hover-color);
+}
+.pink
+{
+	color: #ff8fb8;
+}	
+.date_detail
+{
+	font-size: medium;
+	margin-top: 100px;
+	
+}
+
 </style>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<!-- <script src='fullcalendar/core/locales/ko.js'></script> -->
 
-
-
-
-<script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
-<script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
-<script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
-<script type="text/javascript" src="<%=cp%>/util/interaction/main.js"></script>
 
 <script type="text/javascript">
-
-$(document).ready(function()
-		{
-			$('#openModalBtn').on('click', function(){
-				$('#modalBox').modal('show');
-			});
-				// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn1').on('click', function(){
-					$('#modalBox').modal('hide');
-			});
-				
-			$("#openCompleteBtn").click(function()
-			{
-				//alert("!");
-				$('#modalBox2').modal('show');
-			});
+	
+	$(document).ready(function()
+	{
+		$('#openModalBtn').on('click', function(){
+			$('#modalBox').modal('show');
+		});
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+		$('#closeModalBtn1').on('click', function(){
+			$('#modalBox').modal('hide');
+		});
 			
-			$('#closeModalBtn2').on('click', function(){
-				$('#modalBox2').modal('hide');
+		$("#openCompleteBtn").click(function()
+		{
+			//alert("!");
+			$('#modalBox2').modal('show');
 		});
+		
+		$('#closeModalBtn2').on('click', function(){
+			$('#modalBox2').modal('hide');
+	});
+	
+	
+	});		
 
 
-		});
+		
+		
 
 document.addEventListener('DOMContentLoaded', function() {
+	
+	  //var events = readData();
 	  var calendarEl = document.getElementById('calendar');
 	  
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
-	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-	    defaultView: 'dayGridMonth',
+		  
+	    themeSystem: 'bootstrap',
+	    plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+	    defaultView: 'dayGridMonth',	    
+	    navLinks: true,
 	    defaultDate: new Date(),
+	     eventClick: function(info) {
+	    	 
+	    	 var postcode = info.event.id;
+	    	 $('#openModalBtn').click();
+	       
+	        alert('id: ' + info.event.id);
+	        // 모달 데이터 불러오기 
+	        $.ajax(
+	   				{
+	   					type : "GET"
+	   					,data : { postcode : postcode }
+	   					,url : "/Project_Banana/ggroupbuyingbscheduledetail.action"
+	   					,success:function(args)
+	   					{
+	   						var detailList = document.getElementById("detail-list");
+	   						//var myModalLabel = document.getElementById("myModalLabel");
+	   						
+	   						
+	   						detailList.innerHTML = args;
+	   						
+	   						
+	   					},
+	   					 error:function(request,status,error)
+	   					{
+				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   					}   					
+	   				});		 
+	        
+
+	        
+	      }, 
 	    header: {
 	      left: 'prev,next today',
 	      center: 'title',
 	      right: ''
 	    },
+	    locale: 'ko',  		  
+	      eventSources: [{
+	       
+	    	 events: function(info, callback, failureCallback)// 이건 무슨 의미지?
+	    	{
+	    		$.ajax(
+   				{
+   					type : "GET"
+   					,url : "/Project_Banana/ggroupbuyingbscheduleajax.action"
+   					,dataType: "json"
+   					,success:function(args)
+   					{
+   						callback(args);
+   						//alert(args);
+   						
+   					},
+   					 error:function(request,status,error)
+   					{
+			        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   					}   					
+   				});		   		
+	    		
+	    	} 
+	    	
+	     		
+			
+	    	
+	    }]  
+	   
+	    
 	  });
 	  calendar.render();
 	});
 
 
 </script>
+
+
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
+
 
 </head>
 <body>
@@ -99,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- content  -->
 
-<div class="container-fluid">
+<div class="container-fluid thick">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -118,14 +220,13 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="text-right
 							form-inline md-form form-sm form-2 pl-0 search_bar">
 						   <select name="" id="search" class="form-control">
-						  		<option value="">공통협력구매 참여 일정표</option>
 						  		<option value="">공통협력구매 제공 일정표</option>
 						  		<option value="">자율협력구매 제공 일정표</option>
 						   		<option value="">역렌트 제공 일정표</option>
 						   		<option value="">렌트 제공 일정표</option>
 						   		<option value="">렌트 참여 일정표</option>
 						   		
-						   		
+						   		<option value="">공통협력구매 참여 일정표</option>
 						   		
 						   		<option value="">자율협력구매 참여 일정표</option>
 						   		
@@ -133,53 +234,23 @@ document.addEventListener('DOMContentLoaded', function() {
 						   </div>
 							
 							<hr />
+							<div class="row">
+								<div class="col-md-10"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-2">
+									<div class="col-md-12">
+										<ul class="date_detail">
+											<li><span class="glyphicon glyphicon-heart yellow"></span> 시작일</li>
+											<li><span class="glyphicon glyphicon-heart blue"></span> 종료일</li>
+											<li><span class="glyphicon glyphicon-heart pink"></span> 영수증첨부일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 분배일자</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							
-							
-							<div id="calendar" style="width: 80%; height: 80%;" class="text-center"></div>
-							
-							
-						</div>
-						
-						
-					</div>
-					
-					
-					<div class="row">
-						<div class="col-md-12" >
-						<hr />
-							
-							<h3>
-								상세정보
-							</h3>
-							
-						<div class="row" id="apply"><!-- 렌트상세정보 -->
-						<div class="col-md-2 img-area">
-							
-							<img src="https://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/02/12/20190212000467_0.jpg"
-							style="width: 120px; height: auto;">
-						
-						</div>
-						<div class="col-md-5" style="padding-left: 20px;">
-						
-							
-								
-								<p>제목 : 고구마 꿀맛! 10kg 10명만 모아봅니다.</p>
-								<p>모집기간 : 20.07.01~20.07.10</p>
-								<p>가격 : 10,000원</p>
-						
-						</div>
-						<div class="col-md-5" >
-						
-								<p>분재장소 : 수유역</p>
-								<p>목표량 현황 <strong>8/10</strong> 명</p>
-								<p><input type="button" class="btn" value="출석부" id="openModalBtn"></p>
-						
-						</div>
-					</div><!-- 렌트 상세정보 종료  -->	
-					
-						
 							
 					
+									
 						</div>
 					</div>
 				</div>
@@ -208,76 +279,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="modal-header"><!-- 모달헤더 -->
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel" style="text-align: center">신청자 목록 현황</h4>
+<h4 class="modal-title thick" id="myModalLabel" style="text-align: center">상세정보</h4>
 </div><!-- 모달 헤더 끝 -->
 
 <div class="modal-body"><!-- 모달바디 -->
 
+	<ul id="detail-list" class="thick">
+	</ul>
 
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>신청자 닉네임</th>
-					<th>신청기한</th>
-					<th>버튼</th>
-				</tr>
-			</thead>
-
-
-
-			<tbody> <!-- 테이블 한줄 시작 -->
-				<tr>
-					<td>1</td>
-					
-					<td>닉닉12</td>
-					<td>2020.06.20 ~ 2020.06.22</td>
-
-
-					<td>
-						<div class="btn-group" role="group">
-
-							<button class="btn btnDefault" type="button" id="openModalBtn">
-								<span class=""></span>수락
-							</button>
-							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
-								<span class=""></span>거절
-							</button>
-							
-						</div>
-
-					</td>
-				</tr>
-
-			</tbody> <!-- 테이블 한줄 끝   -->
+		
+		
 			
-			<tbody> <!-- 테이블 한줄 시작 -->
-				<tr>
-					<td>1</td>
-					
-					<td>닉닉12</td>
-					<td>2020.06.20 ~ 2020.06.22</td>
-
-
-					<td>
-						<div class="btn-group" role="group">
-
-							<button class="btn btnDefault" type="button" id="openModalBtn">
-								<span class=""></span>수락
-							</button>
-							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
-								<span class=""></span>거절
-							</button>
-							
-						</div>
-
-					</td>
-				</tr>
-
-			</tbody> <!-- 테이블 한줄 끝   -->
 			
-			<tbody> <!-- 테이블 한줄 시작 -->
+			<!-- 테이블 한줄 시작 -->
+			<!-- <tbody> 
 				<tr>
 					<td>1</td>
 					
@@ -300,13 +315,13 @@ document.addEventListener('DOMContentLoaded', function() {
 					</td>
 				</tr>
 
-			</tbody> <!-- 테이블 한줄 끝   -->
+			</tbody>  -->
+			<!-- 테이블 한줄 끝   -->
 
 
 
 
 
-		</table>
 
 </div><!-- 모달바드끝 -->
 

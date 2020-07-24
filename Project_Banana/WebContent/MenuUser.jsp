@@ -96,6 +96,7 @@ i + a
 		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a>
 			<ul class="sub" style="display: none;">
 					<li><a href="ggroupbuyingschedule.action">내가 제안한 공동구매 일정표</a></li>
+					<li><a href="ggroupbuyingbschedule.action">내가 참여한 공동구매 일정표</a></li>
 					<!-- <li><a href="usermyreceivereportlist.action">당한 신고</a></li> -->
 			</ul>		
 		</li>

@@ -114,15 +114,34 @@ document.addEventListener('DOMContentLoaded', function() {
 	    defaultDate: new Date(),
 	     eventClick: function(info) {
 	    	 
+	    	 var postcode = info.event.id;
 	    	 $('#openModalBtn').click();
-	        alert('Event: ' + info.event.title);
-	        alert('Event: ' + info.event.start);
-	        alert('description: ' + info.event.description);
-	        alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-	        alert('View: ' + info.view.type);
+	       
+	        alert('id: ' + info.event.id);
+	        // 모달 데이터 불러오기 
+	        $.ajax(
+	   				{
+	   					type : "GET"
+	   					,data : { postcode : postcode }
+	   					,url : "/Project_Banana/ggroupbuyingscheduledetail.action"
+	   					,success:function(args)
+	   					{
+	   						var detailList = document.getElementById("detail-list");
+	   						//var myModalLabel = document.getElementById("myModalLabel");
+	   						
+	   						
+	   						detailList.innerHTML = args;
+	   						
+	   						
+	   					},
+	   					 error:function(request,status,error)
+	   					{
+				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   					}   					
+	   				});		 
+	        
 
-	        // change the border color just for funIG_GroupBuyingScheduleDAO.java
-	        info.el.style.borderColor = 'red';
+	        
 	      }, 
 	    header: {
 	      left: 'prev,next today',
@@ -230,50 +249,9 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 							
 							
-							
-							
-						</div>
-						
-						
-					</div>
+
 					
-					
-					<div class="row">
-						<div class="col-md-12" >
-						<hr />
-							
-							<h3>
-								상세정보
-							</h3>
-							
-						<div class="row" id="apply"><!-- 렌트상세정보 -->
-						<div class="col-md-2 img-area">
-							
-							<img src="https://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/02/12/20190212000467_0.jpg"
-							style="width: 120px; height: auto;">
-						
-						</div>
-						<div class="col-md-5" style="padding-left: 20px;">
-						
-							
-								
-								<p>제목 : 고구마 꿀맛! 10kg 10명만 모아봅니다.</p>
-								<p>모집기간 : 20.07.01~20.07.10</p>
-								<p>&nbsp</p>
-						
-						</div>
-						<div class="col-md-5" >
-						
-								<p>분재장소 : 수유역</p>
-								<p>목표량 현황 <strong>8/10</strong> 명</p>
-								<p><input type="button" class="btn" value="출석부" id="openModalBtn"></p>
-						
-						</div>
-					</div><!-- 렌트 상세정보 종료  -->	
-					
-						
-							
-					
+									
 						</div>
 					</div>
 				</div>
@@ -302,76 +280,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="modal-header"><!-- 모달헤더 -->
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel" style="text-align: center">신청자 목록 현황</h4>
+<h4 class="modal-title thick" id="myModalLabel" style="text-align: center">상세정보</h4>
 </div><!-- 모달 헤더 끝 -->
 
 <div class="modal-body"><!-- 모달바디 -->
 
+	<ul id="detail-list" class="thick">
+	</ul>
 
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>신청자 닉네임</th>
-					<th>신청기한</th>
-					<th>버튼</th>
-				</tr>
-			</thead>
-
-
-
-			<tbody> <!-- 테이블 한줄 시작 -->
-				<tr>
-					<td>1</td>
-					
-					<td>닉닉12</td>
-					<td>2020.06.20 ~ 2020.06.22</td>
-
-
-					<td>
-						<div class="btn-group" role="group">
-
-							<button class="btn btnDefault" type="button" id="openModalBtn">
-								<span class=""></span>수락
-							</button>
-							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
-								<span class=""></span>거절
-							</button>
-							
-						</div>
-
-					</td>
-				</tr>
-
-			</tbody> <!-- 테이블 한줄 끝   -->
+		
+		
 			
-			<tbody> <!-- 테이블 한줄 시작 -->
-				<tr>
-					<td>1</td>
-					
-					<td>닉닉12</td>
-					<td>2020.06.20 ~ 2020.06.22</td>
-
-
-					<td>
-						<div class="btn-group" role="group">
-
-							<button class="btn btnDefault" type="button" id="openModalBtn">
-								<span class=""></span>수락
-							</button>
-							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
-								<span class=""></span>거절
-							</button>
-							
-						</div>
-
-					</td>
-				</tr>
-
-			</tbody> <!-- 테이블 한줄 끝   -->
 			
-			<tbody> <!-- 테이블 한줄 시작 -->
+			<!-- 테이블 한줄 시작 -->
+			<!-- <tbody> 
 				<tr>
 					<td>1</td>
 					
@@ -394,13 +316,13 @@ document.addEventListener('DOMContentLoaded', function() {
 					</td>
 				</tr>
 
-			</tbody> <!-- 테이블 한줄 끝   -->
+			</tbody>  -->
+			<!-- 테이블 한줄 끝   -->
 
 
 
 
 
-		</table>
 
 </div><!-- 모달바드끝 -->
 

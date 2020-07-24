@@ -13,7 +13,7 @@
 	WHERE B_USER_CODE = #{B_USER_CODE}
 	</select> 
 	
-	<!-- 공동구매 제안자 분배일 영수증 첨주일 -->
+	<!-- 공동구매 제안자 분배일 영수증 첨부일 -->
 	<select id="bunReci" resultType="com.banana.my.ScheduleDTO">
 	SELECT BUN_DATE, RECEIPT_DATE, G_SUCCESS_CODE AS SUCCESS_CODE,P.G_POST_CODE AS POST_CODE, P.TITLE,P.B_USER_CODE
 	FROM G_SUCCESS S LEFT JOIN G_POST P
@@ -21,7 +21,24 @@
 	WHERE B_USER_CODE = #{B_USER_CODE}
 	</select> 
 	
+	<!-- 상품의 디테일 정보  -->
+	<select id="itemDetail" resultType="com.banana.groupbuying.GPostDTO">
+	SELECT *
+	FROM VIEW_SCHE_GPOST
+	WHERE G_POST_CODE = #{G_POST_CODE}
+	</select> 
 	
+	<!-- 공동구매 참여자 분배일 영수증 첨부일 뿌려주기  -->
+	<select id="gBunReci" resultType="com.banana.my.ScheduleDTO">
+	SELECT P.BUN_DATE,P.RECEIPT_DATE, P.G_POST_CODE AS POST_CODE,S.G_SUCCESS_CODE AS SUCCESS_CODE, P.TITLE,P.B_USER_CODE
+	FROM G_SUCCESS S LEFT JOIN G_POST P
+	ON S.G_POST_CODE = P.G_POST_CODE
+	                 LEFT JOIN G_APPLY A
+	ON A.G_POST_CODE = P.G_POST_CODE
+	WHERE A.B_USER_CODE = #{B_USER_CODE}
+	</select> 
+	
+
 	
 	
 	
