@@ -216,18 +216,28 @@ p
 	function groupBuyingPost() 
 	{
 		
-	   var id1 = "<%=info %>";
+		
+		var id1 = "<%=info %>";
 	   
 		
 		if(id1 == "null" || id1 ==" " )
 		{
-			alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?");
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
 			location.href = "loginmain.action";
-			
+				
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingpostoffer.action";
+			}
 		}
-		else 
+		else
 		{
-			location.href = "groupbuyingpostoffer.action";
+			// 회원일 때 회원정보 수정 페이지로 이동하기
+			
 			
 		}
 		
