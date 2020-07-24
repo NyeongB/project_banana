@@ -131,6 +131,8 @@ nav
 									<th>금액</th>
 								</tr>
 							</thead>
+							
+						<c:set var="n" value="0"></c:set>
 							<c:forEach var="dto" items="${list }" varStatus="status" begin="0">
 							<tbody>
 								<tr>
@@ -142,12 +144,32 @@ nav
 									<td><fmt:formatNumber value="${dto.point }" ></fmt:formatNumber>원</td>
 								</tr>
 							</tbody>
+							<c:set var="n" value="${n+1 }"></c:set>
 							</c:forEach>
 							
 						</table>
+						
+						
+						
+						
+						
+							
+						
+								
+						
+						
+						
+						
+						
 					</div>
 				</div>
 				
+				<tr style="background-color: #FFFFFF">
+			 	<td align="center" colspan="3">
+			 		${pageIndexList }
+			 	</td>
+			 	</tr>
+								
 
 				<div class="row">
 					<div class="col-md-12 text-center">
