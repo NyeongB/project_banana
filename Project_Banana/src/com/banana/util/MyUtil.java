@@ -56,6 +56,7 @@ public class MyUtil
 
 	public String pageIndexList(int current_page, int total_page, String list_url)
 	{
+		
 		if (current_page < 1 || total_page < 1)
 			return "";
 
@@ -76,6 +77,9 @@ public class MyUtil
 
 		// 1 페이지, [Prev]:10 페이지를 이전페이지로 이동
 		n = current_page - numPerBlock;
+		System.out.println("current_page : " + current_page);
+		System.out.println("numPerBlock : " + numPerBlock);
+		System.out.println(n);
 		if (total_page > numPerBlock && currentPageSetup > 0)
 		{
 			sb.append("<a href='" + list_url + "pageNum=1'>1</a>&nbsp;");
