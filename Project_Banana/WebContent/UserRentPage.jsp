@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -76,9 +76,10 @@ String cp = request.getContextPath();
 
 
 
-<div class="Header">
+<!-- Header  -->
+<div class="row Header">
 	<div class="col-md-12">
-		<jsp:include page="Header.jsp"></jsp:include>
+		<jsp:include page="Header.jsp"></jsp:include>	
 	</div>
 </div>
 <!-- content -->
@@ -111,7 +112,7 @@ String cp = request.getContextPath();
 						</tr>
 					</thead>
 					<tbody>
-					<C:forEach var="rApplyLists" items="${rApplyList }" varStatus="status">
+					<c:forEach var="rApplyLists" items="${rApplyList }" varStatus="status">
 						<tr>
 							<td>${status.count }</td>
 							<td><img alt="Bootstrap Image Preview"
@@ -122,24 +123,23 @@ String cp = request.getContextPath();
 							<td>${rApplyLists.progress}</td>
 							<td>${rApplyLists.p_user_code }</td>
 							<td>
-								<div class="btn-group" role="group" style="margin-left: 30px;">
-
-									<button class="btn b1" type="button" >
-										<span class=""></span> 후기버튼
-									</button>
-									
-									<button class="btn b1" type="button" id="openModalBtn">일자입력</button>
-									<button class="btn b1" type="button">
-										<span class=" glyphicon glyphicon-warning-sign"></span>
-									</button>
-									<button class="btn b1" type="button">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button>
-								</div>
-
+							<c:choose>								
+								<c:when test="${rApplyLists.progress eq '신청취소'}">																				
+								</c:when>
+								<c:when test="${rApplyLists.progress eq '수락 대기중'}">
+									<div class="btn-group" role="group">	
+										<button class="btn btn-secondary" type="button">신청취소</button>
+									</div>																				
+								</c:when>
+								<c:when test="${rApplyLists.progress eq '렌트 이용 종료'}">
+									<div class="btn-group" role="group">	
+										<button class="btn btn-secondary" type="button">리뷰작성</button>
+									</div>																				
+								</c:when>																
+							</c:choose>								
 							</td>
 						</tr>
-					</C:forEach>
+					</c:forEach>
 					</tbody>
 
 
@@ -170,7 +170,7 @@ String cp = request.getContextPath();
 						</thead>							
 	
 						<tbody><!-- 테이블 한줄 시작 -->
-						<C:forEach var="rOfferLists" items="${rOfferList }" varStatus="status">
+						<c:forEach var="rOfferLists" items="${rOfferList }" varStatus="status">
 							<tr>
 								<td>1</td>
 								<td><img alt="Bootstrap Image Preview"
@@ -179,29 +179,22 @@ String cp = request.getContextPath();
 								<td>${rOfferLists.title }</td>
 								<td>${rOfferLists.brand }</td>
 								<td>${rOfferLists.progress}</td>
-								
-								
 								<td>
-									<div class="btn-group" role="group">
-	
+									<div class="btn-group" role="group">	
 										<button class="btn btnDefault" type="button" id="openModalBtn">
 											<span class=""></span> 신청자 목록
-										</button>
-										
+										</button>										
 									</div>
-	
 								</td>
 								<td>
-									<div class="btn-group" role="group">
-	
+									<div class="btn-group" role="group">	
 										<button class="btn btnDefault" type="button" id="openCompleteBtn">
 											<span class=""></span> 확정자 목록
-										</button>
-																	
+										</button>																	
 									</div>	
 								</td>
 							</tr>
-							</C:forEach>	
+							</c:forEach>	
 						</tbody><!-- 테이블 한줄 끝   -->						
 					</table>	
 				</div>

@@ -27,6 +27,7 @@ public class UserAttendController
 	{
 		String view = null;
 		String b_user_code = "";
+		String nickname ="";
 		
 		// 세션 정보 얻어오기
 		HttpSession session = request.getSession();
@@ -39,9 +40,12 @@ public class UserAttendController
 		
 		try
 		{	b_user_code = info.getB_user_code();
+			nickname = info.getNickname();
+		
 			IUserAttendGroupBuyingDAO dao = sqlSession.getMapper(IUserAttendGroupBuyingDAO.class);
 			model.addAttribute("myGList", dao.myGList(b_user_code));
 			model.addAttribute("gOfferList", dao.gOfferList(b_user_code));
+			model.addAttribute("nickname", nickname);
 			ArrayList<GPostDTO> list = dao.gOfferList(b_user_code);
 			
 			//System.out.println(list.get(0).getB_user_code()+"222");

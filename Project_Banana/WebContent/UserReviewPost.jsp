@@ -29,10 +29,7 @@
 	{
 		$(".glyphicon-heart-empty").click(function()
 		{
-			$(".glyphicon-heart-empty").css("color","red");
-			
-			
-			
+			$(".glyphicon-heart-empty").css("color","red");		
 			
 		});
 
