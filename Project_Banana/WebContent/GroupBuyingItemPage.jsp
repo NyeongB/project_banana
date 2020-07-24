@@ -248,9 +248,14 @@ function orderItem(obj)
 				<div class="col-md-12">
 					 <ol class="breadcrumb">
            				<li class="breadcrumb-item"><a>Home</a></li>
-            			<li class="breadcrumb-item"><a>공동구매</a></li>
-            			<li class="breadcrumb-item"><a>유아동/반려동물</a></li>
-            			<li class="breadcrumb-item"><a>강아지 용품</a></li>
+           				<c:forEach var="cate" items="${gPostDetailList }">
+            			<li class="breadcrumb-item"><a href="g_main.action?postcode=${cate.g_post_code}">공동구매</a></li>
+            			
+            				<li class="breadcrumb-item"><a href="g_catemain.action?bid=${cate.g_cate_bcode }">${cate.bigcate_name }</a></li>
+            				
+            				<li class="breadcrumb-item"><a href="g_catesmain.action?bid=${cate.g_cate_bcode }&mid=${cate.g_cate_mcode}">${cate.midcate_name }</a></li>
+            			</c:forEach>
+            			
             			<%-- <c:forEach var="catelist" items="${gCatemMainList }">
             				<li class="breadcrumb-item"><a>${catelist.dis_cost }</a></li>
             			</c:forEach> --%>

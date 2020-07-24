@@ -36,7 +36,7 @@ public class G_GroupBuyingMainController
 			HttpSession session = request.getSession();
 			
 			 String postcode = (String)session.getAttribute("postcode");
-		      System.out.println(postcode);
+		     //System.out.println(postcode);
 			
 			String view = null; 
 			
@@ -79,7 +79,7 @@ public class G_GroupBuyingMainController
 		  String view = null;
 		  
 		  String postcode = (String)session.getAttribute("postcode");
-	      System.out.println(postcode);
+	      //System.out.println(postcode);
 		  
 	  
 		  try
@@ -122,7 +122,7 @@ public class G_GroupBuyingMainController
 		      SessionInfo info = (SessionInfo)session.getAttribute("user");
 		      
 		      String postcode = (String)session.getAttribute("postcode");
-		      System.out.println(postcode);
+		      //System.out.println(postcode);
 		      
 		      if(info == null)
 		    	  return "/loginmain.action";

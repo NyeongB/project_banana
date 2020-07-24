@@ -8,7 +8,7 @@ public class GPostDTO
 	private int cost, dis_cost, member_num, count;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	private String progress;	// 나의 공동구매 진행 상황
-	
+	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
 	
 	
 	//getter/setter 설정
@@ -214,6 +214,46 @@ public class GPostDTO
 	public void setProgress(String progress)
 	{
 		this.progress = progress;
+	}
+	public String getBigcate_name()
+	{
+		return bigcate_name;
+	}
+	public void setBigcate_name(String bigcate_name)
+	{
+		this.bigcate_name = bigcate_name;
+	}
+	public String getCate_name()
+	{
+		return cate_name;
+	}
+	public void setCate_name(String cate_name)
+	{
+		this.cate_name = cate_name;
+	}
+	public String getMidcate_name()
+	{
+		return midcate_name;
+	}
+	public void setMidcate_name(String midcate_name)
+	{
+		this.midcate_name = midcate_name;
+	}
+	public String getG_cate_bcode()
+	{
+		return g_cate_bcode;
+	}
+	public void setG_cate_bcode(String g_cate_bcode)
+	{
+		this.g_cate_bcode = g_cate_bcode;
+	}
+	public String getG_cate_mcode()
+	{
+		return g_cate_mcode;
+	}
+	public void setG_cate_mcode(String g_cate_mcode)
+	{
+		this.g_cate_mcode = g_cate_mcode;
 	}
 	
 	
