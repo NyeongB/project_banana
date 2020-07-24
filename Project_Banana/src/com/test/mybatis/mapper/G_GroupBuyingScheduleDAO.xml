@@ -6,13 +6,21 @@
   
 <mapper namespace="com.banana.my.IG_GroupBuyingScheduleDAO">
 	
-	<!-- 스케줄러 스케줄 불러오기  -->
-	<select id="list" resultType="com.banana.groupbuying.GPostDTO">
-	SELECT TITLE, START_DATE, END_DATE, BUN_LOC
-	FROM G_APPLY A LEFT JOIN G_POST P
-	ON A.G_POST_CODE = P.G_POST_CODE
-	WHERE A.B_USER_CODE = #{B_USER_CODE}
+	<!-- 공동구매 제안자 시작일 종료일 불러오기  -->
+	<select id="startEnd" resultType="com.banana.my.ScheduleDTO">
+	SELECT POST_CODE, START_DATE, END_DATE, B_USER_CODE, TITLE
+	FROM VIEW_G_START_END
+	WHERE B_USER_CODE = #{B_USER_CODE}
 	</select> 
+	
+	<!-- 공동구매 제안자 분배일 영수증 첨주일 -->
+	<select id="bunReci" resultType="com.banana.my.ScheduleDTO">
+	SELECT BUN_DATE, RECEIPT_DATE, G_SUCCESS_CODE AS SUCCESS_CODE,P.G_POST_CODE AS POST_CODE, P.TITLE,P.B_USER_CODE
+	FROM G_SUCCESS S LEFT JOIN G_POST P
+	ON S.G_POST_CODE = P.G_POST_CODE
+	WHERE B_USER_CODE = #{B_USER_CODE}
+	</select> 
+	
 	
 	
 	

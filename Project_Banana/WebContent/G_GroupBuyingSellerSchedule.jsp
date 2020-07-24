@@ -14,61 +14,87 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
 
-
-<link rel="stylesheet" type="text/css" href="<%=cp%>/util/core/main.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/util/daygrid/main.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/util/timegrid/main.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/util/interaction/main.css">
-
-<style type="text/css">
-
-	#apply
-	{	
-		/* margin: 20px;
-		
-		height: 120px; */
-		width: 100%;
-		border: 0.5px solid black;
-		padding: 10px;
-	}
-	#calendar *
-	{
-		font-size: x-small;
-	}
-	
-</style>
-
-<!-- <script src='fullcalendar/core/locales/ko.js'></script> -->
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/timegrid/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/interaction/main.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="<%=cp%>/util/core/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/util/daygrid/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/util/timegrid/main.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/util/interaction/main.css">
+
+
+
+<style type="text/css">
+
+#apply
+{	
+	/* margin: 20px;
+	
+	height: 120px; */
+	width: 100%;
+	border: 0.5px solid black;
+	padding: 10px;
+}
+#calendar *
+{
+	font-size: medium;
+}
+
+.yellow
+{
+	color: var(--back-color);
+}
+.blue
+{
+	color: var(--hover-color1);
+}
+.green
+{
+	color: var(--hover-color);
+}
+.pink
+{
+	color: #ff8fb8;
+}	
+.date_detail
+{
+	font-size: large;
+	margin-top: 100px;
+	
+}
+
+</style>
+
+<!-- <script src='fullcalendar/core/locales/ko.js'></script> -->
+
+
 <script type="text/javascript">
-
-$(document).ready(function()
-		{
-			$('#openModalBtn').on('click', function(){
-				$('#modalBox').modal('show');
-			});
-				// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn1').on('click', function(){
-					$('#modalBox').modal('hide');
-			});
-				
-			$("#openCompleteBtn").click(function()
-			{
-				//alert("!");
-				$('#modalBox2').modal('show');
-			});
-			
-			$('#closeModalBtn2').on('click', function(){
-				$('#modalBox2').modal('hide');
+	
+	$(document).ready(function()
+	{
+		$('#openModalBtn').on('click', function(){
+			$('#modalBox').modal('show');
 		});
-
-
-		});		
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+		$('#closeModalBtn1').on('click', function(){
+			$('#modalBox').modal('hide');
+		});
+			
+		$("#openCompleteBtn").click(function()
+		{
+			//alert("!");
+			$('#modalBox2').modal('show');
+		});
+		
+		$('#closeModalBtn2').on('click', function(){
+			$('#modalBox2').modal('hide');
+	});
+	
+	
+	});		
 
 
 		
@@ -86,26 +112,32 @@ document.addEventListener('DOMContentLoaded', function() {
 	    defaultView: 'dayGridMonth',	    
 	    navLinks: true,
 	    defaultDate: new Date(),
-	    dateClick: function() {
-	        
-	      },
+	     eventClick: function(info) {
+	    	 
+	    	 $('#openModalBtn').click();
+	        alert('Event: ' + info.event.title);
+	        alert('Event: ' + info.event.start);
+	        alert('description: ' + info.event.description);
+	        alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+	        alert('View: ' + info.view.type);
+
+	        // change the border color just for funIG_GroupBuyingScheduleDAO.java
+	        info.el.style.borderColor = 'red';
+	      }, 
 	    header: {
 	      left: 'prev,next today',
 	      center: 'title',
 	      right: ''
 	    },
-	   /*  locale: 'ko',  */ 
-	
-	  
-	     eventSources: [{
+	    locale: 'ko',  		  
+	      eventSources: [{
 	       
 	    	 events: function(info, callback, failureCallback)// 이건 무슨 의미지?
 	    	{
 	    		$.ajax(
    				{
-   					type:"POST"
-   					,url : "/Project_Banana/ggroupbuyingschedule.action"
-   					,data : {userId :'USER39'}
+   					type : "GET"
+   					,url : "/Project_Banana/ggroupbuyingscheduleajax.action"
    					,dataType: "json"
    					,success:function(args)
    					{
@@ -124,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	     		
 			
 	    	
-	    }] 
+	    }]  
 	   
 	    
 	  });
@@ -150,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- content  -->
 
-<div class="container-fluid">
+<div class="container-fluid thick">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -183,9 +215,21 @@ document.addEventListener('DOMContentLoaded', function() {
 						   </div>
 							
 							<hr />
+							<div class="row">
+								<div class="col-md-10"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-2">
+									<div class="col-md-12">
+										<ul class="date_detail">
+											<li><span class="glyphicon glyphicon-heart yellow"></span> 시작일</li>
+											<li><span class="glyphicon glyphicon-heart blue"></span> 종료일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 영수증첨부일</li>
+											<li><span class="glyphicon glyphicon-heart pink"></span> 분배일자</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							
 							
-							<div id="calendar" style="width: 100%; height: 100%;" class="text-center"></div>
 							
 							
 						</div>

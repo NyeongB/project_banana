@@ -1,6 +1,4 @@
-<%@page import="java.awt.Color"%>
-<%@page import="java.util.Random"%>
-<%@page import="com.banana.groupbuying.GPostDTO"%>
+<%@page import="com.banana.my.ScheduleDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="net.sf.json.JSONArray"%>
 <%@page import="net.sf.json.JSONObject"%>
@@ -10,27 +8,57 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	ArrayList<GPostDTO> list = (ArrayList<GPostDTO>)request.getAttribute("list");
+	ArrayList<ScheduleDTO> startEnd = (ArrayList<ScheduleDTO>) request.getAttribute("startEnd");
+	ArrayList<ScheduleDTO> bunReci = (ArrayList<ScheduleDTO>) request.getAttribute("bunReci");
 	JSONArray jarr = new JSONArray();
 	
-	/*   int r,g,b;
-	  Random generator=new Random();
-	  r=generator.nextInt(256);      //0~256 사이값이 랜덤으로 선택된다
-	  g=generator.nextInt(256);
-	  b=generator.nextInt(256);
-	  System.out.println(new Color(r,g,b)); */
+
 	
-	for(int i =0; i<list.size(); i++)
+	// 시작일 json 에 넣기
+	for(int i =0; i<startEnd.size(); i++)
 	{
 		JSONObject obj = new JSONObject();
-		obj.put("title","[ 종료일 ]"+list.get(i).getTitle());
-		System.out.println(list.get(i).getTitle());
-		//obj.put("start",list.get(i).getStart_date());
-		obj.put("start",list.get(i).getEnd_date());
-		obj.put("display","list-item");
+		obj.put("title",startEnd.get(i).getTitle());
+		obj.put("start",startEnd.get(i).getStart_date());
+		obj.put("desciption",startEnd.get(i).getPost_code());
+		obj.put("color","#FFCC4F");
 		jarr.add(obj);
 		
-	}	
+	}
+	// 종료일 json 에 넣기
+	for(int i =0; i<startEnd.size(); i++)
+	{
+		JSONObject obj = new JSONObject();
+		obj.put("title",startEnd.get(i).getTitle());
+		obj.put("start",startEnd.get(i).getEnd_date());
+		obj.put("desciption",startEnd.get(i).getPost_code());
+		obj.put("color","#2383ed");
+		jarr.add(obj);
+		
+	}
+	// 분배일자 json 에 넣기
+	for(int i =0; i<bunReci.size(); i++)
+	{
+		JSONObject obj = new JSONObject();
+		obj.put("title",bunReci.get(i).getTitle());
+		obj.put("start",bunReci.get(i).getBun_date());
+		obj.put("desciption",bunReci.get(i).getPost_code());
+		obj.put("color","#52BF88");
+		jarr.add(obj);
+		
+	}
+	// 영수증 첨부일자
+	for(int i =0; i<bunReci.size(); i++)
+	{
+		JSONObject obj = new JSONObject();
+		obj.put("title",bunReci.get(i).getTitle());
+		obj.put("start",bunReci.get(i).getReceipt_date());
+		obj.put("desciption",bunReci.get(i).getPost_code());
+		obj.put("color","#ff8fb8");
+		jarr.add(obj);
+		
+	}
+	
 	out.println(jarr.toString());
 	
 %>

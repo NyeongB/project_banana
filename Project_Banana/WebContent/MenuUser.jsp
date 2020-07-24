@@ -93,7 +93,13 @@ i + a
 			</ul>
 		</li>
 		
-		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a></li>
+		<li><i class="far fa-calendar-alt"></i><a href="#">일정표</a>
+			<ul class="sub" style="display: none;">
+					<li><a href="ggroupbuyingschedule.action">내가 제안한 공동구매 일정표</a></li>
+					<!-- <li><a href="usermyreceivereportlist.action">당한 신고</a></li> -->
+			</ul>		
+		</li>
+		
 		<li><i class="far fa-comment-dots"></i><a href="userreplylist.action">내가쓴댓글</a></li>
 		<li><i class="far fa-address-card"></i><a href="usermodifyapply.action">개인정보수정</a></li>
 		<li><i class="far fa-user"></i><a href="#">마이바나나</a>
