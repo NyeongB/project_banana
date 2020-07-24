@@ -424,6 +424,7 @@ function orderItem(obj)
 				<div><span  class="thick">최근게시물</span></div>
 				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
 				<div>
+			
 					오늘 본 상품
 					<c:if test="${sessionScope.postcode != null }">	
 					<c:forEach var="gRecentLists" items="${gPostDetailList }">

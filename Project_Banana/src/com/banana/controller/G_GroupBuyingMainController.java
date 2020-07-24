@@ -31,8 +31,13 @@ public class G_GroupBuyingMainController
 		
 		// 중분류 불러오는 메소드
 		@RequestMapping(value = "/g_catemain.action", method = RequestMethod.GET)
-		public String cateList(Model model, String bid)
+		public String cateList(Model model, String bid, HttpServletRequest request)
 		{
+			HttpSession session = request.getSession();
+			
+			 String postcode = (String)session.getAttribute("postcode");
+		      System.out.println(postcode);
+			
 			String view = null; 
 			
 			try
@@ -41,6 +46,9 @@ public class G_GroupBuyingMainController
 				
 				GCateDTO dto = new GCateDTO();
 				dto.setG_cate_bcode(bid);
+				
+				if(postcode != null)
+			    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 				
 				model.addAttribute("cateList", dao.cateList(dto));
 				model.addAttribute("gCateMainList", dao.gCateMainList(dto));
@@ -64,9 +72,15 @@ public class G_GroupBuyingMainController
 	  // 소분류 불러오는 메소드(G_CateMain에서 G_CateSMain으로 넘어감)
 	 
 	  @RequestMapping(value = "/g_catesmain.action", method = RequestMethod.GET)
-	  public String cateList(Model model, String bid, String mid) 
+	  public String cateList(Model model, String bid, String mid, HttpServletRequest request) 
 	  { 
+		  HttpSession session = request.getSession();
+		  
 		  String view = null;
+		  
+		  String postcode = (String)session.getAttribute("postcode");
+	      System.out.println(postcode);
+		  
 	  
 		  try
 		{
@@ -75,6 +89,9 @@ public class G_GroupBuyingMainController
 			  GCateDTO dto = new GCateDTO();
 			  dto.setG_cate_bcode(bid);
 			  dto.setG_cate_code(mid);
+			  
+			  if(postcode != null)
+		    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 			  
 			  model.addAttribute("cateMList", dao.cateMList(dto));
 			  model.addAttribute("cateList", dao.cateList(dto));
@@ -169,8 +186,12 @@ public class G_GroupBuyingMainController
 		{
 			String view = null; 
 			
+			
 			try
 			{
+				
+				 HttpSession session = request.getSession();		
+			      
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
