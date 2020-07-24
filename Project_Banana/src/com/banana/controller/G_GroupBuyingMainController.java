@@ -363,5 +363,40 @@ public class G_GroupBuyingMainController
 		 * 
 		 * return view; }
 		 */
+	  
+	  //공동구매 참여
+	  @RequestMapping(value = "/applyItem.action", method =RequestMethod.GET)
+		public String applyItem(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			System.out.println("왔음");
+			
+			try
+			{
+				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+				
+				GCateDTO dto = new GCateDTO();
+				
+				String code = request.getParameter("postcode");
+				String cost = request.getParameter("cost");
+				String url = request.getParameter("url");
+				System.out.println(code);
+				System.out.println(cost);
+				System.out.println(url);
+				
+		
+				
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			
+			
+			view = "/G_GroupBuyingJumunConfirm.jsp";
+			
+			return view;
+		}
 
+	  
 }

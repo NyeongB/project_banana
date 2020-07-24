@@ -53,6 +53,21 @@
 		
 		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
 	}
+	
+	function pay(obj)
+	{
+		var a = obj.getAttribute("id");
+		var cost = Number(document.getElementById("cost").value);
+		//alert(cost);
+		//alert("확인");
+		//var a = request.getParameter("postcode");
+		//alert(a);
+		var url = window.location.href;
+		alert(url);
+		
+		$(location).attr("href","applyItem.action?postcode=" + a +"&cost=" + cost + "&url=" +url);
+		
+	}
 
 </script>
 </head>
@@ -102,16 +117,18 @@
 					</div>
 				</div>
 			</div>
+			<input type="hidden"  value="${ lists.dis_cost/lists.member_num }" id="cost">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="line"></div>
-					<h3 class="thick">결제 예정 금액</h3>
+					<h3 class="thick">결제 예정 금액</h3>	
 						<ul>
-							<li>주문 합계 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
-							<%-- <c:forEach var="point" items="${sumPoint }">
-							<li>보유 포인트 : ${point.sumPoint }원</li>
-							</c:forEach>	 --%>	
-							<li>부족한 포인트 : 1500원</li>
+							
+							<li>주문 합계 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</li>
+							
+							<li>보유 포인트 : ${sumPoint }원</li>
+									
+							<li>부족한 포인트 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num -sumPoint }"></fmt:formatNumber>원</li>
 							<li>※ 포인트 잔액이 부족하여 결제 할 수 없습니다.</li>
 						</ul>
 				
@@ -120,7 +137,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<button class="btn">포인트충전</button>
-					<button class="btn">결제하기</button>
+					<button class="btn" id="${lists.g_post_code }"  onclick="pay(this)">결제하기</button>
 					<button class="btn" id="${lists.g_post_code }" onclick="cancle(this)">결제취소</button>
 				</div>
 			</div>

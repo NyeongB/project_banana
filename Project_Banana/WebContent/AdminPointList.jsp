@@ -133,10 +133,10 @@ nav
 							</thead>
 							
 						<c:set var="n" value="0"></c:set>
-							<c:forEach var="dto" items="${list }" varStatus="status" begin="0">
+							<c:forEach var="dto" items="${list }" >
 							<tbody>
 								<tr>
-									<td>${status.count }</td>
+									<td>${dto.rnum }</td>
 									<td>${dto.id }</td>
 									<td>${dto.sdate }</td>
 									<td>${dto.type }</td>
@@ -164,14 +164,24 @@ nav
 					</div>
 				</div>
 				
-				<tr style="background-color: #FFFFFF">
-			 	<td align="center" colspan="3">
-			 		${pageIndexList }
-			 	</td>
-			 	</tr>
-								
-
+				
+				
+				
 				<div class="row">
+					<div class="col-md-12 text-center">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								${pageIndexList }
+								<li><a href="#" aria-label="Next"><span
+										aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				
+				<!-- <div class="row">
 					<div class="col-md-12 text-center">
 						<nav>
 							<ul class="pagination">
@@ -187,7 +197,7 @@ nav
 							</ul>
 						</nav>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 			<!-- end col-md-8 -->

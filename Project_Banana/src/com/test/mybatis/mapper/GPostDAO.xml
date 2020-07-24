@@ -86,5 +86,15 @@
 		WHERE G_POST_CODE = #{g_post_code}
 	</select>
 	
+	<!-- <select id="add" statementType="CALLABLE" >
+
+     {call
+     
+     PRC_G_APPLY(#{b_user_code},#{point},#{g_post_code},#{url})
+
+     }
+
+	</select> -->
+	
 	
 </mapper>
