@@ -4,6 +4,21 @@ public class AdminPointDTO
 {
 	private String id, sdate, type, detail, point;
 
+	private String rnum;
+	
+	
+	
+	
+	public String getRnum()
+	{
+		return rnum;
+	}
+
+	public void setRnum(String rnum)
+	{
+		this.rnum = rnum;
+	}
+
 	public String getId()
 	{
 		return id;

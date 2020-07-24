@@ -82,8 +82,8 @@ public class MyUtil
 		System.out.println(n);
 		if (total_page > numPerBlock && currentPageSetup > 0)
 		{
-			sb.append("<a href='" + list_url + "pageNum=1'>1</a>&nbsp;");
-			sb.append("[<a href='" + list_url + "pageNum=" + n + "'>Prev</a>]&nbsp;");
+			sb.append("<li><a href='" + list_url + "pageNum=1'>1</a></li>");
+			sb.append("<li>[<a href='" + list_url + "pageNum=" + n + "'>Prev</a>]</li>");
 		}
 
 		// 바로가기 페이지
@@ -92,10 +92,10 @@ public class MyUtil
 		{
 			if (page == current_page)
 			{
-				sb.append("<font color='Fuchsia'>" + page + "</font>&nbsp;");
+				sb.append("<li><a>" + page + "</a></li>");
 			} else
 			{
-				sb.append("<a href='" + list_url + "pageNum=" + page + "'>" + page + "</a>&nbsp;");
+				sb.append("<li><a href='" + list_url + "pageNum=" + page + "'>" + page + "</a></li>");
 			}
 			page++;
 		}
@@ -104,8 +104,8 @@ public class MyUtil
 		n = current_page + numPerBlock;
 		if (total_page - currentPageSetup > numPerBlock)
 		{
-			sb.append("[<a href='" + list_url + "pageNum=" + n + "'>Next</a>]&nbsp;");
-			sb.append("<a href='" + list_url + "pageNum=" + total_page + "'>" + total_page + "</a>");
+			sb.append("<li>[<a href='" + list_url + "pageNum=" + n + "'>Next</a>]</li>");
+			sb.append("<li><a href='" + list_url + "pageNum=" + total_page + "'>" + total_page + "</a></li>");
 		}
 
 		return sb.toString();
