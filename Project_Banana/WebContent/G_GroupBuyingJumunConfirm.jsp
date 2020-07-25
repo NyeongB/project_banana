@@ -63,7 +63,7 @@
 		//var a = request.getParameter("postcode");
 		//alert(a);
 		var url = window.location.href;
-		alert(url);
+		//alert(url);
 		
 		$(location).attr("href","applyItem.action?postcode=" + a +"&cost=" + cost + "&url=" +url);
 		

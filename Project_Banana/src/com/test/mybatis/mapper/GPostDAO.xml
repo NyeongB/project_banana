@@ -86,7 +86,7 @@
 		WHERE G_POST_CODE = #{g_post_code}
 	</select>
 	
-	<!-- <select id="add" statementType="CALLABLE" >
+	<select id="add" statementType="CALLABLE" >
 
      {call
      
@@ -94,7 +94,7 @@
 
      }
 
-	</select> -->
+	</select>
 	
 	
 </mapper>
