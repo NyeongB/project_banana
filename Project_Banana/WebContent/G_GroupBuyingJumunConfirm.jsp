@@ -37,12 +37,32 @@
 	margin: 10px;
 }
 
-
+#msg
+{
+	color: red;
+}
 
 
 
 </style>
 <script type="text/javascript">
+
+	$().ready(function()
+	{
+		//alert("확인");
+		var remainPoint = Number(document.getElementById("remainPay").value);
+		//alert(remainPoint);
+		var msg = document.getElementById("msg").value;
+		//alert(msg);
+		if(remainPoint<0)
+		{
+			$("#payAfter").hide();
+			$("#msg").show();
+			$(".payItem").attr('disabled', true);
+
+			
+		}
+	});
 	
 	function cancle(obj)
 	{
@@ -118,6 +138,7 @@
 				</div>
 			</div>
 			<input type="hidden"  value="${ lists.dis_cost/lists.member_num }" id="cost">
+			<input type="hidden" value="${sumPoint- lists.dis_cost/lists.member_num }" id="remainPay">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="line"></div>
@@ -128,16 +149,16 @@
 							
 							<li>보유 포인트 : ${sumPoint }원</li>
 									
-							<li>부족한 포인트 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num -sumPoint }"></fmt:formatNumber>원</li>
-							<li>※ 포인트 잔액이 부족하여 결제 할 수 없습니다.</li>
+							<li id="payAfter">결제 후포인트 : <fmt:formatNumber value="${sumPoint - lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</li>
+							<span style="display:none;" id="msg" >※ 포인트 잔액이 부족하여 결제 할 수 없습니다 </span>
 						</ul>
 				
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<button class="btn">포인트충전</button>
-					<button class="btn" id="${lists.g_post_code }"  onclick="pay(this)">결제하기</button>
+					<button class="btn" onclick="location.href='pointchargepage.action'")">포인트충전</button>
+					<button class="btn payItem" id="${lists.g_post_code }"  onclick="pay(this)">결제하기</button>
 					<button class="btn" id="${lists.g_post_code }" onclick="cancle(this)">결제취소</button>
 				</div>
 			</div>
