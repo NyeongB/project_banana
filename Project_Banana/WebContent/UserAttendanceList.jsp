@@ -23,7 +23,7 @@
 function enterChul(obj)
 {
 	var g_success_code = obj.getAttribute("id");
-	alert(g_success_code);
+	//alert(g_success_code);
 	location.href="userattendancedetail.action?g_success_code="+g_success_code;
 	
 }

@@ -4,15 +4,33 @@ public class GPostDTO
 {
 	
 	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,g_apply_code,
-		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate;
+		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code;
+
 	private int cost, dis_cost, member_num, count;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	private String progress;	// 나의 공동구매 진행 상황
 	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
 	
+	// 출석체크
+	private int chulCheck;
 	
-	//getter/setter 설정
-	
+	//getter/setter 설정	
+	public String getG_success_code()
+	{
+		return g_success_code;
+	}
+	public int getChulCheck()
+	{
+		return chulCheck;
+	}
+	public void setChulCheck(int chulCheck)
+	{
+		this.chulCheck = chulCheck;
+	}
+	public void setG_success_code(String g_success_code)
+	{
+		this.g_success_code = g_success_code;
+	}
 	public String getSdate()
 	{
 		return sdate;

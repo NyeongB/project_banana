@@ -19,12 +19,19 @@
 	WHERE G_SUCCESS_CODE = #{g_success_code}
 	</select>
 		
-	<!-- 출석부 상세 페이지 출석부  -->
+	<!-- 출석부 상세 페이지 사용자 정보 -->
 	<select id="attendDetail" resultType="com.banana.my.UserAttendanceDetailDTO">	 
- 	SELECT NICKNAME, ATTENDANCE_STATE, BUN_DATE, LOC_NAME, G_SUCCESS_CODE, SDATE
+ 	SELECT NICKNAME, ATTENDANCE_STATE, BUN_DATE, LOC_NAME, G_SUCCESS_CODE, SDATE, G_APPLY_CODE 
 	FROM VIEW_ATTENDANCE_DETAIL
 	WHERE G_SUCCESS_CODE = #{g_success_code}
 	</select>	
+	
+	<!-- 출석 체크 프로시저  -->
+	<select id="chulCheck" statementType="CALLABLE" >
+     {call     
+      PRC_G_ATTENDANCE(#{g_apply_code},#{chulCheck})
+     }
+	</select>
 	
 	
 </mapper>  

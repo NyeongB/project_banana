@@ -15,8 +15,48 @@ String cp = request.getContextPath();
 <link rel="icon" href="images/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript">
+
+
+	$(document).ready(function()
+	{
+		$('#openModalBtn').on('click', function(){
+			$('#modalBox').modal('show');
+		});
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+		$('#closeModalBtn1').on('click', function(){
+			$('#modalBox').modal('hide');
+		});
+			
+		$("#openCompleteBtn").click(function()
+		{
+			//alert("!");
+			$('#modalBox2').modal('show');
+		});
+		
+		$('#closeModalBtn2').on('click', function(){
+			$('#modalBox2').modal('hide');
+		});	
 	
+	});	
+
+	function chulClick(obj)
+	{
+		var id = obj.getAttribute("id");
+		var g_success_code = id;
+		
+		location.href ='userattendancedetail.action?g_success_code='+g_success_code;
+	}
 	
+	function writeReview()
+	{
+		
+		
+		$('#openModalBtn').click();
+		
+	}
+	
+</script>
 <style type="text/css">
 
 /* .container-fluid
@@ -55,9 +95,10 @@ String cp = request.getContextPath();
 			<div class="col-md-8">
 				
 
-				<div class="col-md-12">
+				<div class="col-md-12">                       
 					<div>
 					<h4 class="thick">참여한 공동구매</h4>
+					<span class="thick">&#127820; ${nickname }님이 참여한 공동구매 입니다.</span>
 					</div>
 				</div>
 				<div class="col-md-12 text-right">
@@ -106,7 +147,8 @@ String cp = request.getContextPath();
 										</c:when>									
 										<c:otherwise>
 											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" type="button">리뷰작성</button>
+												
+												<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
 											</div>
 										</c:otherwise>								
 									</c:choose>										
@@ -157,22 +199,26 @@ String cp = request.getContextPath();
 								<td>${gOfferLists.progress }</td>
 								<td>
 									<c:choose>								
-										<c:when test="${myGLists.progress eq '공구실패'}">																				
+										<c:when test="${gOfferLists.progress eq '공구실패'}">																				
 										</c:when>	
-										<c:when test="${myGLists.progress eq '모집완료'}">																				
+										<c:when test="${gOfferLists.progress eq '모집완료'}">																				
 										</c:when>									
-										<c:when test="${myGLists.progress eq '영수증첨부'}">
+										<c:when test="${gOfferLists.progress eq '영수증첨부'}">
 											<div class="btn-group" role="group">	
 												<button class="btn btn-secondary" type="button">영수증첨부</button>
 											</div>									
 										</c:when>
-										<c:when test="${myGLists.progress eq '분배날짜'}">	
+										<c:when test="${gOfferLists.progress eq '분배날짜'}">	
 											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" type="button">출석부</button>
+												<button class="btn btn-secondary" id="${gOfferLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
 											</div>									
-										</c:when>																	
+										</c:when>
+										<%-- <c:otherwise>
+											<div class="btn-group" role="group">	
+												<button class="btn btn-secondary" id="${myGLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
+											</div>											
+										</c:otherwise>	 --%>																
 									</c:choose>
-
 								</td>
 							</tr>
 							</c:forEach>
@@ -186,18 +232,135 @@ String cp = request.getContextPath();
 		
 	</div>
 
+<!-- -------------------신청자 모달 영역 시작 ----------------------------------- -->
+<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+
+<div class="modal-header"><!-- 모달헤더 -->
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title thick" id="myModalLabel" style="text-align: center">리뷰작성</h4>
+</div><!-- 모달 헤더 끝 -->
+
+<div class="modal-body"><!-- 모달바디 -->
+
+	<table class="table">
+   		<tr>
+   			<th>거래 유형</th>
+   			<td colspan="2"><input type="text" value="공동구매" disabled="disabled" class="form-control"></td>
+   		</tr>
+   		<tr>
+   			<th>글 제목</th>
+   			<td colspan="4">
+   			<input type="text" value="자전거 빌려드려요!" disabled="disabled"  class="form-control">
+   			</td>
+   		</tr>
+   		<tr>
+   			<th>내용</th>
+   			<td colspan="4">
+   			<textarea rows="7" cols="4" class="form-control"></textarea>
+   			</td>
+   		</tr>
+		<tr>
+			<th>점수</th>
+			<td colspan="4">
+			<select name="star" id="" class="form-control">
+				<option value="">&#11088;</option>
+				<option value="">&#11088; &#11088;</option>
+				<option value="">&#11088; &#11088; &#11088;</option>
+				<option value="">&#11088; &#11088; &#11088; &#11088;</option>
+				<option value="">&#11088; &#11088; &#11088; &#11088; &#11088;</option>
+			</select>
+			</td>
+		</tr>
+		<tr class="file">	
+			<th>첨부파일</th>
+			<td colspan="4"><input type="file" value="" class="form-control"></td>
+		</tr>
+	</table>  		
+</div><!-- 모달바드끝 -->
+
+<div class="modal-footer"><!-- 모달 푸터 -->
+<button type="button" class="btn btn-primary">확인</button>
+<button type="button" class="btn btn-default" id="closeModalBtn1">취소</button>
+</div><!-- 모달 푸터 끝 -->
+
+
+</div>
+</div>
+</div>
+<!-- 신청자 모달 영역 끝 -->
+<!-- ------------------------확정자 모달 시작-------------------------------- -->
+<div id="modalBox2" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+
+<div class="modal-header"><!-- 모달헤더 -->
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel" style="text-align: center">확정자 목록 현황</h4>
+</div><!-- 모달 헤더 끝 -->
+
+<div class="modal-body"><!-- 모달바디 -->
+
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>확정자 닉네임</th>
+					<th>신청기한</th>
+					<th>버튼</th>
+				</tr>
+			</thead>
+
+
+
+			<tbody> <!-- 테이블 한줄 시작 -->
+				<tr>
+					<td>1</td>
+					
+					<td>닉닉12</td>
+					<td>2020.06.20 ~ 2020.06.22</td>
+
+
+					<td>
+						<div class="btn-group" role="group">
+
+							<button class="btn btnDefault" type="button" id="openModalBtn">
+								<span class=""></span>일자 재입력
+							</button>
+							
+						</div>
+
+					</td>
+				</tr>
+
+			</tbody> <!-- 테이블 한줄 끝   -->
+
+		</table>
+
+</div><!-- 모달바드끝 -->
+
+<div class="modal-footer"><!-- 모달 푸터 -->
+<button type="button" class="btn btn-primary">확인</button>
+<button type="button" class="btn btn-default" id="closeModalBtn2">취소</button>
+</div><!-- 모달 푸터 끝 -->
+
+
+</div>
+</div>
+</div>
+<!-- 확정자모달 끝----------------------------------------------------------------- -->
+
 	
-<!-- footer  -->
+
+</div>
 <div class="row">
    <div class="col-md-12">
       <jsp:include page="Footer.jsp"></jsp:include>
    </div>
 </div>
 
-
-
-
-<!-- content end -->
-</div>
 </body>
 </html>

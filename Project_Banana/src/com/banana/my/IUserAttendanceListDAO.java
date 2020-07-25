@@ -12,4 +12,7 @@ public interface IUserAttendanceListDAO
 	public ArrayList<UserAttendanceDetailDTO> attendDetail(String g_success_code);
 	// 출석부 상세 페이지 정보
 	public UserAttendanceListDTO attendDetailInfo(String g_success_code);
+	
+	// 출석체크 프로시저 호출
+	public void chulCheck(GPostDTO dto);
 }
