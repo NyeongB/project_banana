@@ -5,13 +5,13 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<%
+<%-- <%
 	session = request.getSession(); 
 	SessionInfo info = (SessionInfo)session.getAttribute("user");		
 	String addr = info.getAddr();
 	
 	
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,9 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b8d90e556f5b3dab2cb72fc9100e3ef"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b8d90e556f5b3dab2cb72fc9100e3ef&libraries=services,clusterer,drawing"></script>
+
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b8d90e556f5b3dab2cb72fc9100e3ef"></script> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
@@ -96,11 +98,11 @@ p
 </style>
 <script type="text/javascript">
 
-	var catecode;
-	var mcatecode;
-	
+
 	function initialize()
 	{
+<<<<<<< HEAD
+=======
 		
 		container = document.getElementById("map");
 	
@@ -109,11 +111,57 @@ p
 			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
 			, level: 3 											// 지도의 확대 레벨
 		};
+>>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 		
-		map = new kakao.maps.Map(container, options);
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+	    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+		    };  
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch("${addr}", function(result, status) {
+
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        /* var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		        });
+		        infowindow.open(map, marker); */
+
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		});    
+		  
+		
+		
+	          
+
 		
 		
 	}
+		
+	
+				
+
+	
 
 	function panTo2()
 	{
@@ -395,8 +443,55 @@ p
 </script>
 </head>
 <body onload="initialize()">
+<!-- <script type="text/javascript">
+
+	
+	
+	$(window).load(function()
+	{
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+		    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
+		    level: 3 // 지도의 확대 레벨
+		};  
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch("경기도 고양시 일산서구 원일로 2120", function(result, status) {
+
+		// 정상적으로 검색이 완료됐으면 
+		 if (status === kakao.maps.services.Status.OK) {
+
+		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+		    // 결과값으로 받은 위치를 마커로 표시합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map,
+		        position: coords
+		    });
+
+		    // 인포윈도우로 장소에 대한 설명을 표시합니다
+		    var infowindow = new kakao.maps.InfoWindow({
+		        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		    });
+		    infowindow.open(map, marker);
+
+		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		    map.setCenter(coords);
+		} 
+		});    
+			
+	});
+	
 	
 
+</script>
+ -->
 <!-- Header  -->
 <div class="row Header">
    <div class="col-md-12">
@@ -419,7 +514,7 @@ p
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
-				
+				${addr }
 				
 
 				
@@ -545,6 +640,8 @@ p
 						<!-- <div class="col-md-12 img-area">
 						<img src="images/IlsanStation.JPG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
 						</div>	 -->
+						<div id="coordXY">${addr }</div>
+						
 						
 					</div>
 					<div class="col-md-12 ">	

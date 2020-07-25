@@ -31,6 +31,10 @@ public interface IRPostDAO
 	// 거래지역 불러오기
 	public ArrayList<RPostDTO> dealLoc(RPostDTO dto); 
 	
+	// 성사된 예약기간 불러오기
+	public ArrayList<RPostDTO> reservationTime(String r_post_code);
+	
+	
 	// 상품등록 insert
 	//public int rpostinsert(RPostDTO dto);
 }
