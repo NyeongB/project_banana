@@ -15,9 +15,11 @@
 	
 	String rpostCode = request.getParameter("r_post_code");
 
+	
 
 	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +27,15 @@
 <title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
- <%-- 
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/jquery-ui.css">
-<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script> --%> 
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="js/jquery.datetimepicker.full.min.js"></script>
 
 
 <style type="text/css">
@@ -189,7 +189,10 @@ textarea
 </style>
 
 <script type="text/javascript">
+	var replyCode;
 
+	
+	
 $().ready(function() 
 {
 	/* $('.carousel').carousel();
@@ -204,8 +207,6 @@ $().ready(function()
 	  wrap: true
 	
 	}); // 이게 뭐지....? */
-			
-	var a = null;
 			
 			
 
@@ -276,8 +277,14 @@ $().ready(function()
 			else// 회원이면
 			{
 				
-				// 댓글 코드 가지고 있으면 대댓글 작성 아니면 댓글 작성
-				if($(".reply").val() != a )
+				<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
+				   
+				var replyCode = "<%=r_replycode %>"; --%>
+				
+				
+				
+				// replyCode 가 null이면 댓글 작성
+				if(replyCode == null ) 
 				{
 					var formData = $("#replyForm").serialize();
 					
@@ -285,7 +292,7 @@ $().ready(function()
 						
 						type : "POST"
 						, url : "r_replyinsert.action"
-						, data : formData
+						, data : {formData :formData, replyCode:replyCode}
 						, success : function(data) 
 						{
 							$("#resultReply").html(data);
@@ -297,83 +304,154 @@ $().ready(function()
 						
 					});// end ajax	
 				
-				}else
+				}else// 댓글 코드 가지고 있으면(null 아니면) 대댓글 작성
 				{
-					var formData = $("#replyForm").serialize();
+					
+				
+					var formData = document.getElementById("reply_text").innerHTML;
+					console.log(formData);
+					
 					
 					$.ajax({
 						
 						type : "POST"
-						, url : "r_rreplyinsert.action?refcode=" + a  
-						, data : formData
+						, url : "r_rreplyinsert.action" 
+						, data : {formData :formData, replyCode:replyCode}
 						, success : function(data) 
 						{
 							$("#resultReply").html(data);
 						}
-						, error : function(data) 
-						{
-							alert(data);
-						}
-						
-					});		
+						,error:function(request,status,error)
+	                  {
+	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                  }      
+					});	 
 				}
 				
 			}	
 
 		});
-	
-	
-	
-	// 대댓글 등록
-	$(".rreplyinsert").click(function() 		
-	{
-		var id1 = "<%=info %>";
-		   
-		
-		if(id1 == "null" || id1 ==" " )
-		{
-			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
-			{
-				// 확인 버튼 클릭 시 동작
-				
-				location.href = "loginmain.action";
-					
-			}
-			else // 취소 버튼 클릭 시 동작
-			{
-				location.href = "redirect:rpostdetailpage.action";
-			}
-		}
-		else
-		{
-			
-			function(obj) 
-			{
-				// 댓글 코드 
-				a = obj.getAttribute("id");
-				$(".reply").val(a);
-				
-			}
-		
-		}	
-			
-		
-	});
-	
-	
-	
 
 });
 
 
 
+	var dis = ['2020/07/30', '2020/07/31']
+	
+	// 비활성화할 성사테이블의 기한 조회하기 
+	
+	
+	
+	var disableDates = new Array();
+	
+	/* 
+	for(var b=1; b<a; b++)
+	{
+		
+		disableDates +=  $("#s1")
+	}
+	*/
+	
+	var e1 = $(".endD #e1").val();
+	
+	console.log(e1);
+	
+	
+	
+	 
+	
+function sstartDate() 
+{
+
+		jQuery.datetimepicker.setLocale('kr');
+		$("#date1").datetimepicker({
+			
+			timepicker : false
+			, format : 'Y-m-d'
+			, minDate : 0
+			
+			
+			
+			
+		});
+			
+}
+	
+	
+	
+	
+	
+
+function eendDate() 
+{
+	var sdate = $("#date1").val();
+	
+	
+	
+	
+	$("#date2").datetimepicker({
+		
+		timepicker : false
+		, format : 'Y-m-d'
+		, minDate: new Date(sdate)
+		, disabledDates : dis
+		
+		
+	});
+}
 
 
+
+//댓글 달기 클릭 시 대댓글 입력 가능 하게 동작
+function rreplyadd(obj) 
+{
+	
+	var id1 = "<%=info %>";
+	   
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		{
+			// 확인 버튼 클릭 시 동작
+			
+			location.href = "loginmain.action";
+				
+		}
+		else // 취소 버튼 클릭 시 동작
+		{
+			location.href = "redirect:rpostdetailpage.action";
+		}
+	}
+	else
+	{
+	
+	
+  	replyCode = obj.getAttribute("id");
+  
+	//console.log(replyCode);
+  	
+  	
+    var nickname = document.getElementById(replyCode).classList.item(2);
+   
+  	
+ 	$(".reply").html("@"+nickname+" :");
+ 	
+ 	
+	
+	}
+	
+}
+
+	
+	
+	
+	
 // 찜 추가
 function jjim() 
 {
 	
-   var id1 = "<%=info %>";
+	var id1 = "<%=info %>";
    
    
    
@@ -555,8 +633,17 @@ function jjim()
 										<div class="Ss">
 										<div class="col-md-5">
 										<b>수령일</b><br>
-										<input type="text" placeholder="수령일을 입력하세요." class="form-control" id="date1">
+										<input type="text" placeholder="수령일을 입력하세요." class="form-control" id="date1" onclick="sstartDate()">
 										</div>
+										
+										<c:forEach var="reservationTime" items="${reservationTime }" varStatus="status">
+											<input type="hidden" value="${reservationTime.start_date }" id="s${status.count }" class="startD">
+											<input type="hidden" value="${reservationTime.end_date }" id="e${status.count }" class="endD">
+						
+											<c:if test="${status.last eq true}"><input type="hidden" value="${status.count }" id="num"></c:if>           
+										
+										</c:forEach>
+									
 										
 										<div class="col-md-2">
 											<strong>~</strong>
@@ -564,7 +651,7 @@ function jjim()
 										
 										<div class="col-md-5">
 										<b>반납일</b><br>
-										<input type="text" placeholder="반납일을 입력하세요." class="form-control" id="date2">
+										<input type="text" placeholder="반납일을 입력하세요." class="form-control" id="date2" onclick="eendDate()">
 										</div>
 										
 										<div class="col-md-12 text-right">
@@ -615,6 +702,7 @@ function jjim()
 				<c:forEach var="rpostDetail" items="${rpostDetail }">
 					${rpostDetail.content }
 				</c:forEach>
+				
 				</div>
 			</div>
 			
@@ -627,7 +715,7 @@ function jjim()
 				<div class="form-inline">
 				<form action="" id="replyForm">
 					<div>
-					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" ></textarea>
+					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
 					</div>
 					<div>
 					<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
@@ -640,14 +728,29 @@ function jjim()
 				<div  id="resultReply">
 				<c:forEach var="rreplyList" items="${rreplyList }">
 					<div>
+						
 						<div class="form-inline">
-						<div class="col-md-10">${rreplyList.nickname }</div><div class="col-md-2 text-right">${rreplyList.wdate }</div>
+						<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
+						<c:if test="${rreplyList.l_level == 1}">
+						<div class="col-md-1">
+						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
+						</div>
+						</c:if>
+						<div class="col-md-9">${rreplyList.nickname }</div><div class="col-md-2 text-right">${rreplyList.wdate }</div>
 						</div>
 		
 						<div id="Rreply">${rreplyList.reply }</div> 
 						<div class="form-inline text-right">
 						<div class="col-md-9"></div>
-						<div class="col-md-1 rreplyinsert" id="${rreplyList.r_reply_code }" >댓글달기</div>
+						
+						<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
+						<c:if test="${rreplyList.l_level == 0}">
+						<div class="col-md-1 rreplyinsert ${rreplyList.nickname}" id="${rreplyList.r_reply_code }" onclick="rreplyadd(this)">댓글달기</div>
+						
+						
+							
+						</c:if>
+						
 						<div class="col-md-1">좋아요</div>
 						<div class="col-md-1">신고하기</div>
 						</div>

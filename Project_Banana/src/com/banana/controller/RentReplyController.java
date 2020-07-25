@@ -86,7 +86,12 @@ public class RentReplyController
 		    // insert 할 r_post_code
 			String r_post_code = (String)session.getAttribute("rpostCode");
 			// insert 할 r_reply_ref_code
-			String r_reply_ref_code = request.getParameter("refcode");
+			// 1. session 에 담을 때
+			//String r_reply_ref_code = (String)session.getAttribute("replycode");
+			// 2. 파람으로 가져올 때
+			String r_reply_ref_code = request.getParameter("replyCode");
+			
+			
 			// insert 할 b_user_code
 			String b_user_code = info.getB_user_code();
 			// insert 할 댓글
@@ -96,13 +101,14 @@ public class RentReplyController
 			RreplyDTO dto = new RreplyDTO();
 						
 			// 회원 댓글 insert
+			System.out.println("대댓글등록 action");
 			System.out.println(r_post_code);
 			System.out.println(b_user_code);
 			System.out.println(reply);
 			System.out.println(r_reply_ref_code);
 			
 			dto.setR_post_code(r_post_code);
-			dto.setR_post_code(r_reply_ref_code);
+			dto.setR_reply_ref_code(r_reply_ref_code);
 			dto.setB_user_code(b_user_code);
 			dto.setReply(reply);
 			

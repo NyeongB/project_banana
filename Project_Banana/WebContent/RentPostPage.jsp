@@ -16,21 +16,19 @@ String cp = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/jquery-ui.css">
-
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
+<script type="text/javascript" src="js/jquery.datetimepicker.full.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">	
-<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
 
@@ -143,31 +141,17 @@ clear:both;
 
 }
 
+textarea
+{
+	resize: none;
+}
+
 </style>
 <script type="text/javascript">
 	
 	$().ready(function() 
 	{
-		 // 예약가능시간 반복문
-		   var html1 = [];
-		   var value = "";
-
-		   
-		   
-		   for(var i = 0; i<24; i++)
-			{
-				if(i<10)
-					value="0" + i + ":00";
-				else
-					value = i + ":00";
-				
-				html1[i] =  "<option value="+value+">" +value+ "</option>";
-			   
-			}
-		   $("#BookingStartDate").append(html1.join(""));
-		   $("#BookingEndDate").append(html1.join(""));
-		
-		
+		 
 		   
 			
 			//가격에 해당하는 부분은 숫자만 가능하도록
@@ -225,10 +209,10 @@ clear:both;
 				}
 				
 				// 제공 시간 빈칸인지 체크
-				if($("#OfferDate").val()=="")
+				if($("#offerDate").val()=="")
 				{
 					alert("제공 시간을 선택해 주세요");
-					$("#OfferDate").focus();
+					$("#offerDate").focus();
 					return;
 				}
 				
@@ -249,27 +233,22 @@ clear:both;
 					
 				}
 				
-				// 대여가능 시작시간 빈칸인지 체크
-				if($("#BookingStartDate").val()=="")
-				{
-					alert("대여가능 시작 시간을 선택해 주세요");
-					$("#BookingStartDate").focus();
-					return;
-					
-				}
-				
-				
-				// 대여가능 종료시간 빈칸인지 체크
-				if($("#BookingEndDate").val()=="")
-				{
-					alert("대여가능 종료 시간을 선택해 주세요");
-					$("#BookingEndDate").focus();
-					return;
-					
-				}
 				
 				// 대여 가능 시작, 종료 일시 유효성 체크 데이터 피커 후에 추가하기!!!!
+				if($("#booking1").val()=="")
+				{
+					alert("대여가능 시작일시를 선택해 주세요");
+					$("#booking1").focus();
+					return;
+				}
 				
+				if($("#booking2").val()=="")
+				{
+					alert("대여가능 종료일시를 선택해 주세요");
+					$("#booking2").focus();
+					return;
+				}
+			
 				
 				
 				
@@ -278,25 +257,96 @@ clear:both;
 				
 			});
 			
+			// 한글로 바꾸기
+			jQuery.datetimepicker.setLocale('kr');
+			var newdate = new Date();
+			var closedate = new Date(newdate);
+			closedate.setDate(closedate.getDate()+14);
+			var cd = new Date(closedate);
 			
-			// 데이터피커 다시 하기...
-			$("#booking1").datepicker({
+			// 대여 가능 일
+			$("#booking1").datetimepicker
+			({
 				
-				dataFormat : "yy-mm-dd"
-				, maxDate: "+3D"
-				, todayHighlight : true
-				, monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-
+				// 현재시간 + 14일까지 선택 가능
+				minDate: 0
+				, maxDate : new Date(cd)
 				
 			});
 			
 			
 			
-			
+			// 제공시간 오전 8시 부터 오후 8시까지
+			$("#offerDate").datetimepicker
+			({
+				
+				datepicker : false
+				, format : 'H:i'
+				, minTime : '08:00'
+				, maxTime : '21:00'
+				
+			});
 			
 	});
 	
-
+	
+	
+	function endtime() 
+	{
+		var endtime = $("#offerDate").val();
+		
+		
+		
+		
+		// 회수시간  선택한 제공시간 이후의 시간 8시까지
+		$("#EndDate").datetimepicker
+		({
+			
+			datepicker : false
+			, format : 'H:i'
+			, minTime : endtime
+			, maxTime : '21:00'
+			
+			
+		});
+		
+		
+		
+	}
+	
+	
+	
+	
+	function endbooking() 
+	{
+		
+		// 대여 종료일의 minDate
+		var date = $("#booking1").val();
+		var newdate = new Date(date);
+		newdate.setDate(newdate.getDate()+31);
+		var nd = new Date(newdate);
+		
+		// 대여 종료일의 maxDate
+		var maxdate = new Date(nd);
+		maxdate.setDate(maxdate.getDate()+30);
+		var maxd = new Date(maxdate);
+		
+		
+		
+	// 대여 종료 일
+	$("#booking2").datetimepicker
+	({
+		
+		// 대여 가능 일 + 2달까지 가능
+		// minDate는 선택한 대여 가능일 + 한달 부터
+		minDate : new Date(nd)
+	   , maxDate : new Date(maxd)
+		, defaultDate : new Date(nd)
+		
+	});
+		
+	}
+	
 	
 	
 	
@@ -582,23 +632,8 @@ clear:both;
 								</div>
 								<div class="col-md-4">
 									<div>
-										<select name="OfferDate" id="OfferDate" class="form-control">
-											<option value="">시간 선택</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00">10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option> 
-										
-										</select>
+										<input type="text" class="form-control" id="offerDate" />
+									
 									</div>
 								</div>
 
@@ -627,23 +662,8 @@ clear:both;
 								</div>
 								<div class="col-md-4">
 									<div>
-										<select name="EndDate" id="EndDate" class="form-control">
-											<option value="">시간 선택</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00">10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option> 
-									
-										</select>
+									<input type="text" class="form-control" id="EndDate" onclick="endtime()"/>
+										
 									</div>
 								</div>
 
@@ -663,17 +683,7 @@ clear:both;
 									<input type="text" class="form-control" id="booking1" />
 								</div>
 								
-								
-								<div class="col-md-5">
-									<div>
-										<select name="BookingStartDate" id="BookingStartDate" class="form-control">
-											<option value="" >시간선택</option>
-											
-											
-											
-										</select>
-									</div>
-								</div>
+							
 
 							</div>
 							<!-- end 대여 가능 시작 일시 -->
@@ -688,17 +698,10 @@ clear:both;
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="text" class="form-control" id="booking2" />
+									<input type="text" class="form-control" id="booking2" onclick="endbooking()"/>
 								</div>
 								
 								
-								<div class="col-md-5">
-									<div>
-										<select name="BookingEndDate" id="BookingEndDate" class="form-control">
-											<option value="" >시간선택</option>
-										</select>
-									</div>
-								</div>
 
 							</div>
 							<!-- end 대여 종료 일시 -->
