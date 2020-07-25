@@ -1,8 +1,16 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+%>
+<%
+	session = request.getSession(); 
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	String addr = info.getAddr();
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +22,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b8d90e556f5b3dab2cb72fc9100e3ef"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
@@ -90,6 +99,32 @@ p
 	var catecode;
 	var mcatecode;
 	
+	function initialize()
+	{
+		container = document.getElementById("map");
+	
+		options = 
+		{
+			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
+			, level: 3 											// 지도의 확대 레벨
+		};
+		
+		map = new kakao.maps.Map(container, options);
+		
+		
+	}
+
+	function panTo2()
+	{
+		// 중심을 이동할 위도 경도 위치 생성
+		var moveLatLng = new kakao.maps.LatLng(37.557502, 126.919079);
+		
+		// 지도의 중심 좌표 이동 (단, 부드럽게)
+		//-- 이동 과정에서 이동할 거리가 지도에서 표현되는 범위 밖에 있다면
+		//   즉, 이동 거리가 지도 화면보다 크다면
+		//   부드럽게 이동하는 효과 없이 이동하게 된다.
+		map.panTo(moveLatLng);
+	}
 	
 	
 
@@ -357,7 +392,7 @@ p
 
 </script>
 </head>
-<body>
+<body onload="initialize()">
 	
 
 <!-- Header  -->
@@ -503,13 +538,13 @@ p
 					
 					
 					<div class="col-md-12 ">
-						분배 장소 <button type="button" class="btn" ><span class="glyphicon glyphicon-map-marker"></span></button>
-						<br>
-						<div class="col-md-12 img-area">
+						분배 장소 <button type="button" class="btn" onclick="panTo()"><span class="glyphicon glyphicon-map-marker"></span></button>
+						<div id="map" style="width: 60%; height: 250px;"></div>
+						<!-- <div class="col-md-12 img-area">
 						<img src="images/IlsanStation.JPG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
-						</div>	
-					</div>
+						</div>	 -->
 						
+					</div>
 					<div class="col-md-12 ">	
 						<div class="col-md-4">
 							수요조사 시작일

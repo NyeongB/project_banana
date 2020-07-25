@@ -15,5 +15,9 @@ public interface ILoginDAO
 	// 관리자 로그인
 	public String adminLogin(LoginDTO dto);
 	
+	public String getLoc(String id);
+	
+	public String getAddr(String id);
+	
 
 }

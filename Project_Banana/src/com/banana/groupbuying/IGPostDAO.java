@@ -36,4 +36,7 @@ public interface IGPostDAO
 	
 	//리모콘바 최근 리스트
 	public ArrayList<GPostDTO> gRecentList(String postcode);
+	
+	//공동구매 신청하기
+	public ArrayList<GPostDTO> add(GPostDTO dto);
 }

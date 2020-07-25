@@ -250,7 +250,13 @@ public class MemberController
 		
 		String nick = dao.getNick(id);
 		String b_user_code = dao2.getUser(id);
+		String loc_code = dao.getLoc(id);
+		String addr = dao.getAddr(id);
+		
 		System.out.println(nick);
+		System.out.println(b_user_code);
+		System.out.println(loc_code);
+		System.out.println(addr);
 		
 		if(state==0)
 		{
@@ -268,6 +274,8 @@ public class MemberController
 			info.setId(id);
 			info.setNickname(nick);
 			info.setB_user_code(b_user_code);
+			info.setLoc_code(loc_code);
+			info.setAddr(addr);
 			
 			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
 			session.setAttribute("user", info);

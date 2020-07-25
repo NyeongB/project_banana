@@ -369,22 +369,34 @@ public class G_GroupBuyingMainController
 		public String applyItem(Model model,HttpServletRequest request)
 		{
 			String view = null; 
-			System.out.println("왔음");
+			//System.out.println("왔음");
 			
 			try
 			{
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
-				GCateDTO dto = new GCateDTO();
+				GPostDTO dto = new GPostDTO();
 				
 				String code = request.getParameter("postcode");
 				String cost = request.getParameter("cost");
 				String url = request.getParameter("url");
+				
+				HttpSession session = request.getSession();		
+				SessionInfo info = (SessionInfo) session.getAttribute("user");
+			
+				String b_user_code = info.getB_user_code();
+				
 				System.out.println(code);
 				System.out.println(cost);
 				System.out.println(url);
+				System.out.println(b_user_code);
 				
-		
+				dto.setB_user_code(b_user_code);
+				dto.setPoint(Integer.parseInt(cost));
+				dto.setG_post_code(code);
+				dto.setUrl(url);
+				
+				dao.add(dto);
 				
 				
 			} catch (Exception e)
@@ -393,7 +405,7 @@ public class G_GroupBuyingMainController
 			}
 			
 			
-			view = "/G_GroupBuyingJumunConfirm.jsp";
+			view = "/G_GroupBuyingJumunComplete.jsp";
 			
 			return view;
 		}

@@ -4,9 +4,9 @@ public class GPostDTO
 {
 	
 	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,g_apply_code,
-		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code;
+		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code,url;
 
-	private int cost, dis_cost, member_num, count;
+	private int cost, dis_cost, member_num, count,point;
 	private String bun_loc, bun_date, return_date, receipt_date;
 	private String progress;	// 나의 공동구매 진행 상황
 	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
@@ -273,6 +273,24 @@ public class GPostDTO
 	{
 		this.g_cate_mcode = g_cate_mcode;
 	}
+	public String getUrl()
+	{
+		return url;
+	}
+	public void setUrl(String url)
+	{
+		this.url = url;
+	}
+	public int getPoint()
+	{
+		return point;
+	}
+	public void setPoint(int point)
+	{
+		this.point = point;
+	}
+	
+	
 	
 	
 	

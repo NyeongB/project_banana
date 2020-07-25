@@ -188,7 +188,6 @@ p
 	function groupBuyingPost() 
 	{
 		
-		
 		var id1 = "<%=info %>";
 	   
 		
@@ -203,13 +202,13 @@ p
 			}
 			else // 취소 버튼 클릭 시 동작
 			{
-				location.href = "redirect:groupbuyingpostoffer.action";
+				location.href = "g_main.action";
 			}
 		}
 		else
 		{
-			// 회원일 때 회원정보 수정 페이지로 이동하기
 			
+			location.href = "groupbuyingpostoffer.action";
 			
 		}
 		

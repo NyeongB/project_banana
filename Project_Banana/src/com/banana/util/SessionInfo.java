@@ -2,7 +2,27 @@ package com.banana.util;
 
 public class SessionInfo
 {
-	private String id, nickname, b_user_code;
+	private String id, nickname, b_user_code,loc_code, addr;
+
+	public String getAddr()
+	{
+		return addr;
+	}
+
+	public void setAddr(String addr)
+	{
+		this.addr = addr;
+	}
+
+	public String getLoc_code()
+	{
+		return loc_code;
+	}
+
+	public void setLoc_code(String loc_code)
+	{
+		this.loc_code = loc_code;
+	}
 
 	public String getB_user_code()
 	{

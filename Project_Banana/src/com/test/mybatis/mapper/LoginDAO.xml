@@ -44,6 +44,15 @@
 		WHERE ID = #{id} AND PW = #{pw}
 	</select>	
 	
+	<select id="getLoc" resultType="java.lang.String">			
+		SELECT LOC_CODE FROM JOIN WHERE ID =#{id}
+	</select>	
+	
+	<select id="getAddr" resultType="java.lang.String">			
+		SELECT ADDR FROM JOIN WHERE ID =#{id}
+	</select>	
+	
+	
 	
 	
 	
