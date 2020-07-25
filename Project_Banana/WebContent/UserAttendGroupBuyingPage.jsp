@@ -55,6 +55,13 @@ String cp = request.getContextPath();
 		$('#openModalBtn').click();
 		
 	}
+	// 공동구매 취소 
+	function gCancel(obj)
+	{
+		var g_apply_code = obj.getAttribute("id");
+		location.href = "gcancel.action?=g_apply_code"+g_apply_code;
+		
+	}
 	
 </script>
 <style type="text/css">
@@ -140,14 +147,13 @@ String cp = request.getContextPath();
 										</c:when>									
 										<c:when test="${myGLists.progress eq '모집중'}">
 											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" type="button">신청취소</button>
+												<button class="btn btn-secondary" id="${myGLists.g_apply_code }" onclick="gCancel(this)"type="button">신청취소</button>
 											</div>									
 										</c:when>
 										<c:when test="${myGLists.progress eq '공구실패'}">										
 										</c:when>									
 										<c:otherwise>
-											<div class="btn-group" role="group">	
-												
+											<div class="btn-group" role="group">													
 												<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
 											</div>
 										</c:otherwise>								

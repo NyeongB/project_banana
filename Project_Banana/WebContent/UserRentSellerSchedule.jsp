@@ -47,27 +47,27 @@
 <script type="text/javascript">
 
 $(document).ready(function()
-		{
-			$('#openModalBtn').on('click', function(){
-				$('#modalBox').modal('show');
-			});
-				// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn1').on('click', function(){
-					$('#modalBox').modal('hide');
-			});
-				
-			$("#openCompleteBtn").click(function()
-			{
-				//alert("!");
-				$('#modalBox2').modal('show');
-			});
-			
-			$('#closeModalBtn2').on('click', function(){
-				$('#modalBox2').modal('hide');
-		});
+{
+	$('#openModalBtn').on('click', function(){
+		$('#modalBox').modal('show');
+	});
+		// 모달 안의 취소 버튼에 이벤트를 건다.
+	$('#closeModalBtn1').on('click', function(){
+			$('#modalBox').modal('hide');
+	});
+		
+	$("#openCompleteBtn").click(function()
+	{
+		//alert("!");
+		$('#modalBox2').modal('show');
+	});
+	
+	$('#closeModalBtn2').on('click', function(){
+		$('#modalBox2').modal('hide');
+	});
 
 
-		});
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 	  var calendarEl = document.getElementById('calendar');

@@ -21,15 +21,42 @@
 
 <style type="text/css">
 
-	#apply
-	{	
-		/* margin: 20px;
-		
-		height: 120px; */
-		width: 100%;
-		border: 0.5px solid black;
-		padding: 10px;
-	}
+#apply
+{	
+	/* margin: 20px;
+	
+	height: 120px; */
+	width: 100%;
+	border: 0.5px solid black;
+	padding: 10px;
+}
+#calendar *
+{
+	font-size: 10pt;
+}
+
+.yellow
+{
+	color: var(--back-color);
+}
+.blue
+{
+	color: var(--hover-color1);
+}
+.green
+{
+	color: var(--hover-color);
+}
+.pink
+{
+	color: #ff8fb8;
+}	
+.date_detail
+{
+	font-size: medium;
+	margin-top: 100px;
+	
+}
 	
 </style>
 
@@ -76,6 +103,28 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: 'title',
 	      right: ''
 	    },
+	    locale: 'ko',  		  
+	    eventSources: [{
+	    	 events: function(info, callback, failureCallback)
+	    	{
+	    		$.ajax(
+ 				{
+ 					type : "GET"
+ 					,url : "/Project_Banana/rentbuyerscheduleajax.action"
+ 					,dataType: "json"
+ 					,success:function(args)
+ 					{
+ 						callback(args);
+ 						//alert(args);
+ 						
+ 					},
+ 					 error:function(request,status,error)
+ 					{
+			        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 					}   					
+ 				});	
+	    	}  		     	
+	    }]  
 	  });
 	  calendar.render();
 	});
@@ -124,6 +173,19 @@ document.addEventListener('DOMContentLoaded', function() {
 						   </div>
 							
 							<hr />
+							<div class="row">
+								<div class="col-md-9"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-3">
+									<div class="col-md-12">
+										<ul class="date_detail thick text-left">
+											<li><span class="glyphicon glyphicon-heart yellow"></span> 시작일</li>
+											<li><span class="glyphicon glyphicon-heart blue"></span> 종료일</li>
+											<li><span class="glyphicon glyphicon-heart pink"></span> 영수증첨부일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 분배일자</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							
 							
 							<div id="calendar" style="width: 80%; height: 80%;" class="text-center"></div>
@@ -150,16 +212,12 @@ document.addEventListener('DOMContentLoaded', function() {
 							style="width: 120px; height: auto;">
 						
 						</div>
-						<div class="col-md-5" style="padding-left: 20px;">
-						
-							
-								<p>카테고리 : 생활용품</p>
-								<p>제목 : ○○○ 빌려드립니다~!!</p>
-								<p>일 단위 비용 : 3,000원</p>
-								<p>렌트 수령일 : 2020.06.12</p>
-								<p>수령장소 & 수령시간 : 홍대입구역 13:00</p>
-								
-						
+						<div class="col-md-5" style="padding-left: 20px;">							
+							<p>카테고리 : 생활용품</p>
+							<p>제목 : ○○○ 빌려드립니다~!!</p>
+							<p>일 단위 비용 : 3,000원</p>
+							<p>렌트 수령일 : 2020.06.12</p>
+							<p>수령장소 & 수령시간 : 홍대입구역 13:00</p>
 						</div>
 						<div class="col-md-5" >
 						

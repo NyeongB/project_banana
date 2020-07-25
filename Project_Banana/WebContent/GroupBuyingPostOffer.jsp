@@ -95,7 +95,7 @@ p
 
 	function initialize()
 	{
-		
+
 		container = document.getElementById("map");
 	
 		options = 
@@ -562,10 +562,6 @@ p
 					<div class="col-md-12 ">
 						분배 장소 <button type="button" class="btn" onclick="panTo()"><span class="glyphicon glyphicon-map-marker"></span></button>
 						<div id="map" style="width: 60%; height: 250px;"></div>
-						<!-- <div class="col-md-12 img-area">
-						<img src="images/IlsanStation.JPG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
-						</div>	 -->
-						<div id="coordXY">${addr }</div>
 						
 						
 					</div>

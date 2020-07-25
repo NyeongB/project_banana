@@ -19,6 +19,12 @@
 		 WHERE B_USER_CODE = #{b_user_code}
 	</select>
 	
+	<!-- 신청 취소 프로시저 -->
+	<select id="gCancel" statementType="CALLABLE" >
+     {call     
+      PRC_G_CANCEL(#{g_apply_code},#{b_user_code})
+     }
+	</select>
 </mapper>  
 
 
