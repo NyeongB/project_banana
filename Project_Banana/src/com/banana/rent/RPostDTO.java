@@ -7,9 +7,42 @@ public class RPostDTO
 	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
 	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
 	private String progress, a_user_code, p_user_code;	
+	private String start_date, end_date;
 
 	private int cost, deposit;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getStart_date() 
+	{
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) 
+	{
+		this.start_date = start_date;
+	}
+
+	public String getEnd_date() 
+	{
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) 
+	{
+		this.end_date = end_date;
+	}
+
 	public String getP_user_code()
 	{
 		return p_user_code;

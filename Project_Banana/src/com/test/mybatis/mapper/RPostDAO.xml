@@ -93,6 +93,17 @@
 	
 	
 	</select>
+
+
+	<!-- 성사된 렌트 예약기간 불러오기 -->
+	<select id="reservationTime" resultType="com.banana.rent.RPostDTO">
+	SELECT TO_DATE(A.START_DATE, 'YYYY-MM-DD') AS START_DATE, TO_DATE( A.END_DATE, 'YYYY-MM-DD') AS END_DATE
+	FROM R_SUCCESS S LEFT JOIN R_APPLY A
+	ON S.R_APPLY_CODE = A.R_APPLY_CODE
+	WHERE A.R_POST_CODE = #{r_post_code}
+	</select>
+
+
 	
 	<!-- 상품등록 INSERT -->
 	<!-- <select id="rpostinsert" resultType="com.banana.rent.RPostDTO">

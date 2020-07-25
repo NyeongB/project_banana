@@ -273,6 +273,12 @@ public class Rent_MainController
 				// 댓글 조회
 				model.addAttribute("rreplyList", dao1.rreplyList(rpost_code));
 				
+				
+				// 성사테이블의 성사된 기한 조회
+				model.addAttribute("reservationTime", dao2.reservationTime(rpost_code));
+				
+				
+				
 				view = "/UserRentDetail.jsp";
 				}catch(Exception e)
 				{
