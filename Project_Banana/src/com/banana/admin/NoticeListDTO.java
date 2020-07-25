@@ -2,17 +2,19 @@ package com.banana.admin;
 
 public class NoticeListDTO
 {
-	private String num,title,id,wdate, notice_code, name, content, admin, file;
+	private String num,title,id,wdate, notice_code, name, content, admin,f_file;
 	
 	
 	
-	public String getFile()
+
+
+	public String getF_file()
 	{
-		return file;
+		return f_file;
 	}
-	public void setFile(String file)
+	public void setF_file(String f_file)
 	{
-		this.file = file;
+		this.f_file = f_file;
 	}
 	public String getAdmin()
 	{

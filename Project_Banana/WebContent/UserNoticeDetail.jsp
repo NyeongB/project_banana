@@ -57,8 +57,13 @@
             <td colspan="6" class="notice_content">
             	<p>${notice.content }</p>              
             </td>
+           
         </tr>
-         
+         <tr>
+          <td>
+            <img src="${notice.f_file }" style="width: 180px; height: 180px;">
+            </td>
+         </tr>
 
          
         <tr>

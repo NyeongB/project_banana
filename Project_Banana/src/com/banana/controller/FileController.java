@@ -37,9 +37,9 @@ public class FileController
 		
 		HttpSession session = request.getSession();
 		String root = session.getServletContext().getRealPath("/");
-		System.out.println("root : " + root);
+		//System.out.println("root : " + root);
 		String savePath = root + "pds" + File.separator + "image";
-		System.out.println("savePath : " + savePath);
+		//System.out.println("savePath : " + savePath);
 		File dir = new File(savePath);
 		
 		// 폴더만들기
@@ -48,7 +48,8 @@ public class FileController
 		
 		String encType = "UTF-8";
 		int maxFileSize = 5*1024*1024;
-		
+		String imagePath =null;
+		String saveFileName =null;
 		try
 		{
 			MultipartRequest req = null;
@@ -56,15 +57,15 @@ public class FileController
 					, new DefaultFileRenamePolicy());
 			
 			String text = req.getParameter("text");
-			System.out.println(text);
+			//System.out.println(text);
 			String file = req.getParameter("upload");
-			System.out.println(file);
-			String saveFileName = req.getFilesystemName("upload");
-			System.out.println("saveFileName : " + saveFileName);
+			//System.out.println(file);
+			 saveFileName = req.getFilesystemName("upload");
+			//System.out.println("saveFileName : " + saveFileName);
 			
 			
 			String cp = request.getContextPath();
-			String imagePath = cp + "/pds/image";
+			 imagePath = cp + "/pds/image";
 			
 			
 			model.addAttribute("saveFileName", saveFileName);
@@ -85,7 +86,7 @@ public class FileController
 		{
 			System.out.println(e.toString());
 		}
-		
+		System.out.println(imagePath+"/"+saveFileName);
 		view = "/FileTest2.jsp";
 
 		return view;
