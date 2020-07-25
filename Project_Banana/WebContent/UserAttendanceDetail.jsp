@@ -92,7 +92,7 @@
 							<td>${attendDetails.sdate }</td>
 							<td>
 								<button type="button" class="btn" id="${attendDetails.g_apply_code }" 
-									<c:if test="${attendDetails.attendance_state eq 0 ||ttendDetails.attendance_state eq 1 }">disabled</c:if>
+								<c:if test="${attendDetails.attendance_state eq 0 ||attendDetails.attendance_state eq 1 ||bundate <= sysdate }">disabled</c:if>
 								onclick="chulCheck(this)">출석</button></td>
 						</tr>
 						</c:forEach>

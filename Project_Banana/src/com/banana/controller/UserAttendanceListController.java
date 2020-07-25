@@ -2,6 +2,9 @@ package com.banana.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.groupbuying.GPostDTO;
 import com.banana.my.IUserAttendanceListDAO;
+import com.banana.my.UserAttendanceListDTO;
 import com.banana.util.SessionInfo;
 
 @Controller
@@ -22,12 +26,14 @@ public class UserAttendanceListController
 
 	@Autowired
 	private SqlSession SqlSession;
+	private String sysdate, bundate;
 
 	// 출석부 리스트 
 	@RequestMapping(value="/userattendancelist.action", method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
+		
 		try
 		{
 			
@@ -38,9 +44,23 @@ public class UserAttendanceListController
 			if(info == null)
 				return "/loginmain.action";
 			
-			String b_user_code = info.getB_user_code();		
-			IUserAttendanceListDAO dao = SqlSession.getMapper(IUserAttendanceListDAO.class);
+			// 오늘 날짜 얻어오기
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH)+1;
+			int date = cal.get(Calendar.DATE)+1;
+			// date 포맷 맞추기 
+			sysdate += year + "-" + month +"-" + date + " "; 
 			
+			String b_user_code = info.getB_user_code();		
+			IUserAttendanceListDAO dao = SqlSession.getMapper(IUserAttendanceListDAO.class);			
+			
+			// 분배 날짜 뽑아 오기 
+			ArrayList<UserAttendanceListDTO> list = dao.attendList(b_user_code);
+			bundate = list.get(0).getBun_date();
+			
+			// 현재시간 구하기 
+			sysdate += bundate.substring(11);			
 			model.addAttribute("attendList", dao.attendList(b_user_code));	
 			
 			
@@ -73,7 +93,9 @@ public class UserAttendanceListController
 			IUserAttendanceListDAO dao = SqlSession.getMapper(IUserAttendanceListDAO.class);
 			
 			model.addAttribute("attendDetail", dao.attendDetail(g_success_code));	
-			model.addAttribute("attendDetailInfo", dao.attendDetailInfo(g_success_code));	
+			model.addAttribute("attendDetailInfo", dao.attendDetailInfo(g_success_code));
+			model.addAttribute("sysdate", sysdate);	
+			model.addAttribute("bundate", bundate);	
 			
 			
 		} catch (Exception e)
