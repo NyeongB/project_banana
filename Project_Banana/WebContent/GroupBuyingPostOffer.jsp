@@ -101,17 +101,28 @@ p
 		options = 
 		{
 			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
-			, level: 3 											// 지도의 확대 레벨
+			, level: 3							// 지도의 확대 레벨
 		};
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-	    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
-		    };  
+		mapOption =
+		{
+	    	center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
+	    	level: 3 // 지도의 확대 레벨
+		    
+		};  
 
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 지도를 클릭한 위치에 표출할 마커입니다
+		var marker = new kakao.maps.Marker({ 
+		    // 지도 중심좌표에 마커를 생성합니다 
+		    position: map.getCenter() 
+		}); 
+		// 지도에 마커를 표시합니다
+		marker.setMap(map);
+		map.setZoomable(false); 
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
@@ -142,6 +153,24 @@ p
 		});    
 		  
 		
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+		    
+		    // 클릭한 위도, 경도 정보를 가져옵니다 
+		    var latlng = mouseEvent.latLng; 
+		    
+		    // 마커 위치를 클릭한 위치로 옮깁니다
+		    marker.setPosition(latlng);
+		    
+		    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+		    message += '경도는 ' + latlng.getLng() + ' 입니다';
+		    
+		    var resultDiv = document.getElementById('clickLatlng'); 
+		    resultDiv.innerHTML = message;
+		    
+		});
+		
+		
+		
 		
 	          
 
@@ -149,7 +178,11 @@ p
 		
 	}
 		
-	
+	function setZoomable(zoomable) {
+	    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+	 	//alert("확인");
+	    map.setZoomable(zoomable);    
+	}
 				
 	
 
@@ -298,6 +331,8 @@ p
 			$("#postItem").submit();
 			
 		});
+		
+		
 	});
 	
 	function addRow()
@@ -515,7 +550,7 @@ p
 						사진(*)<br>
 						(앞,뒤,양,옆)
 						
-						<img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
+						<img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg" onclick="setZoomable(false)"/>
 						
 						
 						<div class="file-field big">
@@ -560,8 +595,15 @@ p
 					
 					
 					<div class="col-md-12 ">
-						분배 장소 <button type="button" class="btn" onclick="panTo()"><span class="glyphicon glyphicon-map-marker"></span></button>
+						분배 장소 <button type="button" class="btn" onclick="setZoomable(false)" ><span class="glyphicon glyphicon-map-marker" ></span></button>
 						<div id="map" style="width: 60%; height: 250px;"></div>
+						<input type="hidden" id="clickLatlng">
+						
+						
+						<div class="col-md-4">
+							상세 분배 장소
+							<input type="text" id="detailLoc" class="form-control"> 
+						</div>
 						
 						
 					</div>
@@ -569,7 +611,6 @@ p
 						<div class="col-md-4">
 							수요조사 시작일
 							<input type="text" id="startDate" class="form-control">
-							<!-- <span class="glyphicon glyphicon-calendar"></span> -->
 						</div>
 			
 			
