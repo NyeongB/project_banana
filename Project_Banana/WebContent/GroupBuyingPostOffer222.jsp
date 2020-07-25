@@ -1,9 +1,17 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
+<%-- <%
+	session = request.getSession(); 
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	String addr = info.getAddr();
+	
+	
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +22,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" >
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4b8d90e556f5b3dab2cb72fc9100e3ef"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
@@ -90,6 +99,67 @@ p
 	var catecode;
 	var mcatecode;
 	
+	function initialize()
+	{
+		/* container = document.getElementById("map");
+	
+		options = 
+		{
+			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
+			, level: 3 											// 지도의 확대 레벨
+		};
+		
+		map = new kakao.maps.Map(container, options); */
+		
+		
+		
+		var coordXY = document.getElementById("coordXY"); //검색 지도 경도위도 알아내기 
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스 
+		var options = { center: new kakao.maps.LatLng(33.450701, 126.570667), 
+				// 위도경도 
+				level: 3 
+				//지도의 레벨(확대, 축소 정도)
+		}; 
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 // 지도타입 컨트롤, 줌 컨트롤 생성 
+		var mapTypeControl = new kakao.maps.MapTypeControl(); 
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT); 
+		var zoomControl = new kakao.maps.ZoomControl(); 
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // ★ 주소-좌표 변환 객체를 생성 
+		var geocoder = new kakao.maps.services.Geocoder(); // ★ 주소로 좌표를 검색 
+		geocoder.addressSearch('신 주소 입력', function(result, status) { 
+			// 정상적으로 검색이 완료됐으면 
+			if (status === kakao.maps.services.Status.OK) 
+			{ var coords = new kakao.maps.LatLng(result[0].y, result[0].x); yy = result[0].x; xx = result[0].y; 
+			// 결과값으로 받은 위치를 마커로 표시 
+			var marker = new kakao.maps.Marker({ map: map, position: coords }); 
+			// 인포윈도우로 장소에 대한 설명을 표시 
+			var iwContent = '<div style="padding:5px;">이피엔스<br>' + '<a href="https://map.kakao.com/link/map/이피엔스,37.51128, 127.04232" style="color:blue" target="_blank">큰지도보기</a>' + '<a href="https://map.kakao.com/link/to/이피엔스,37.51128, 127.04232" style="color:blue" target="_blank">길찾기</a>' +'</div>' var infowindow = new kakao.maps.InfoWindow({ content : iwContent }); infowindow.open(map, marker); 
+			
+			// 지도의 중심을 결과값으로 받은 위치로 이동 map.setCenter(coords); 
+			// ★ resize 마커 중심 
+			var markerPosition = marker.getPosition(); $(window).on('resize', function(){ map.relayout(); map.setCenter(markerPosition); }); 
+			// ★ 검색 경도위도 표시 
+			coordXY.innerHTML = "<br>X좌표 : " + xx + "<br><br>Y좌표 : " + yy; } else { console.log('에러'); } });
+
+		
+
+
+		
+		
+	}
+
+	function panTo2()
+	{
+		
+		// 중심을 이동할 위도 경도 위치 생성
+		var moveLatLng = new kakao.maps.LatLng(37.557502, 126.919079);
+		
+		// 지도의 중심 좌표 이동 (단, 부드럽게)
+		//-- 이동 과정에서 이동할 거리가 지도에서 표현되는 범위 밖에 있다면
+		//   즉, 이동 거리가 지도 화면보다 크다면
+		//   부드럽게 이동하는 효과 없이 이동하게 된다.
+		map.panTo(moveLatLng);
+	}
 	
 	
 
@@ -168,43 +238,11 @@ p
 	$(document).ready(function()
 	{
 		
-		
-		
-		
-	   /*  
-	   $("#startDate").datetimepicker();
-	   
-	   $("#endDate").datetimepicker({
-	    	
-	    	startDate : "$("#startDate").val()";
-	    });
-	   
-	   
-	   
-	    $('#startDate').datepicker().on('changeDate', function (ev) {
-	        $('#endDate').change();
-	    });
-	    $('#endDate').datetimepicker(startDate : $("#startDate").val());
-	    $('#endDate').change(function () {
-	        console.log($('#endDate').val());
-	    });
-		
-	
-         $("#bunDate").datetimepicker();
-         $("#returnDate").datetimepicker();
-	   
-	   */
 		$("#startDate").datetimepicker({ 
 			minDate: 0,
 			
 		});
 	   
-	   $("#bunDate").datetimepicker();
-	   
-	   
-	   //var date = $("#startDate").val();
-	   //alert(date);
-	  
 		
 		//가격에 해당하는 부분은 숫자만 가능하도록
 		$("input:text[numberOnly]").on("keyup", function() 
@@ -215,6 +253,8 @@ p
 		//폼 전송 전 유효성 검사
 		$("#postBtn").click(function()
 		{
+			
+			
 			//제목 빈칸인지 체크
 			if($("#title").val().trim()=="")
 			{
@@ -318,7 +358,7 @@ p
 	{
 		//수요조사 종료일 불러옴
 		var edate = $("#endDate").val();
-	    alert(edate);
+	    //alert(edate);
 		var newdate = new Date(edate);
 		newdate.setDate(newdate.getDate()+1);
 		var nd = new Date(newdate);
@@ -346,7 +386,7 @@ p
 		
 		//분배일자 불러옴
 		var bdate = $("#bunDate").val();
-	    alert(bdate);
+	    //alert(bdate);
 		var newdate = new Date(bdate);
 		newdate.setDate(newdate.getDate()+1);
 		var nd = new Date(newdate);
@@ -389,7 +429,7 @@ p
 
 </script>
 </head>
-<body>
+<body onload="initialize()">
 	
 
 <!-- Header  -->
@@ -414,7 +454,7 @@ p
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
-				
+				${addr }
 				
 
 				
@@ -535,18 +575,19 @@ p
 					
 					
 					<div class="col-md-12 ">
-						분배 장소 <button type="button" class="btn" ><span class="glyphicon glyphicon-map-marker"></span></button>
-						<br>
-						<div class="col-md-12 img-area">
+						분배 장소 <button type="button" class="btn" onclick="panTo()"><span class="glyphicon glyphicon-map-marker"></span></button>
+						<div id="map" style="width: 60%; height: 250px;"></div>
+						<!-- <div class="col-md-12 img-area">
 						<img src="images/IlsanStation.JPG" alt=""  class="img-responsive img-rounded" id="locationImg"/>
-						</div>	
-					</div>
+						</div>	 -->
+						<div id="coordXY">${addr }</div>
 						
+					</div>
 					<div class="col-md-12 ">	
 						<div class="col-md-4">
 							수요조사 시작일
 							<input type="text" id="startDate" class="form-control">
-							<span class="glyphicon glyphicon-calendar"></span>
+							<!-- <span class="glyphicon glyphicon-calendar"></span> -->
 						</div>
 			
 			
