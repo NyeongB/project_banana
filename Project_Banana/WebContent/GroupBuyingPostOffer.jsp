@@ -7,7 +7,7 @@
 %>
 <%
 	session = request.getSession(); 
-	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	SessionInfo info = (SessionInfo)session.getAttribute("user");		
 	String addr = info.getAddr();
 	
 	

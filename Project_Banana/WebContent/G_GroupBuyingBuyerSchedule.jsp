@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    locale: 'ko',  		  
 	      eventSources: [{
 	       
-	    	 events: function(info, callback, failureCallback)// 이건 무슨 의미지?
+	    	 events: function(info, callback, failureCallback)
 	    	{
 	    		$.ajax(
    				{
@@ -170,11 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
    					}   					
    				});		   		
 	    		
-	    	} 
-	    	
+	    	}  	
 	     		
-			
-	    	
 	    }]  
 	   
 	    

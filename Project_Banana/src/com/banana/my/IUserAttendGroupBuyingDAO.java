@@ -11,5 +11,7 @@ public interface IUserAttendGroupBuyingDAO
 	
 	// 내가 제안한 공동구매
 	public ArrayList<GPostDTO> gOfferList(String b_user_code);
-	
+		
+	// 공동구매 취소
+	public void gCancel(GPostDTO dto);
 }
