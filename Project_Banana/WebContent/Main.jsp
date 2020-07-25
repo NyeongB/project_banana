@@ -3,12 +3,21 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<!doctype html>
-<html lang="ko">
-
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>홈페이지</title>
+<meta charset="UTF-8">
+<title>Banana</title>
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="stylesheet" type="text/css"
+	href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/css/bootstrap.min.css">
+<link rel="icon" href="images/favicon.ico" />
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -65,7 +74,7 @@ li { list-style: none; }
 
 
 			<div class="col-md-8">
-				
+				<br><br><br><br>
 			<ul class="bxslider">
       <li><a href="#"><img src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg" alt="" title="이미지1"></a></li>
       <li><a href="#"><img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg" alt="" title="이미지2"></a></li>
