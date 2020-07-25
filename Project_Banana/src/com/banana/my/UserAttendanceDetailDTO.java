@@ -1,8 +1,15 @@
 package com.banana.my;
 
+// 출석부 속 사용자 정보
 public class UserAttendanceDetailDTO
 {
-	private String nickname, attendance_state, bun_date, loc_name, g_success_code, sdate;
+	private String nickname			// 사용자 닉네임
+			, attendance_state		// 출 / 결석 상태
+			, bun_date				// 분배 시간
+			, loc_name				// 분재 장소 
+			, g_success_code		// 성사 코드
+			, sdate					// 출석 날짜
+			, g_apply_code;			// 신청 코드
 
 	// getter / setter 구성
 	public String getNickname()
@@ -13,6 +20,16 @@ public class UserAttendanceDetailDTO
 	public String getSdate()
 	{
 		return sdate;
+	}
+
+	public String getG_apply_code()
+	{
+		return g_apply_code;
+	}
+
+	public void setG_apply_code(String g_apply_code)
+	{
+		this.g_apply_code = g_apply_code;
 	}
 
 	public void setSdate(String sdate)

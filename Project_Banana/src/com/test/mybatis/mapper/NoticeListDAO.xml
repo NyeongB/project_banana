@@ -22,7 +22,7 @@ ON N.ADMIN_CODE = A.ADMIN_CODE;
 	<select id="insert">
 
     INSERT INTO NOTICE(NOTICE_CODE,ADMIN_CODE,TITLE,CONTENT,F_FILE)
-    VALUES('NOTI' || SEQ_NOTI.NEXTVAL,#{admin},#{title},#{content},#{file})
+    VALUES('NOTI' || SEQ_NOTI.NEXTVAL,#{admin},#{title},#{content},#{f_file})
 
    </select>
 	

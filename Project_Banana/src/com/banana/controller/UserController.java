@@ -137,7 +137,7 @@ public class UserController
 		dto.setSsn(ssn);
 		dto.setProfile("123.jpg");
 		dto.setNickname(nickname);
-		dto.setAddr(postcode+" "+roadAddress+" "+detailAddress);
+		dto.setAddr(roadAddress);
 		dto.setPw_question_type_code(pwQuestion);
 		dto.setPw_answer(pwReply);
 		dto.setEmail(email1+"@"+email2);

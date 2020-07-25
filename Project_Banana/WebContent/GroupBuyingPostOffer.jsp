@@ -101,6 +101,17 @@ p
 
 	function initialize()
 	{
+<<<<<<< HEAD
+=======
+		
+		container = document.getElementById("map");
+	
+		options = 
+		{
+			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
+			, level: 3 											// 지도의 확대 레벨
+		};
+>>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -154,6 +165,7 @@ p
 
 	function panTo2()
 	{
+		
 		// 중심을 이동할 위도 경도 위치 생성
 		var moveLatLng = new kakao.maps.LatLng(37.557502, 126.919079);
 		
@@ -496,7 +508,7 @@ p
 			<div class="row">
 				<div class="col-md-3">
 				
-				
+				<%=addr %>
 				</div>
 				<div class="col-md-6">
 				

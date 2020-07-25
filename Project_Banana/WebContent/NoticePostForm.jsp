@@ -78,7 +78,7 @@
 					</h4>
 				</div>
 			</div> -->
-			<form action="noticeinsert.action" id="noticeInsert">
+			<form action="noticeinsert.action" method="post"  id="noticeInsert" enctype="multipart/form-data" >
 			
 				<input type="text" style="display: none;" name="admin" value="${admin }">
 			
@@ -101,7 +101,7 @@
 					<label for="exampleInputFile">
 						파일 첨부
 					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" name="file">
+					<input type="file" class="form-control-file" id="exampleInputFile" name="file" >
 					<p class="help-block">
 						파일을 첨부 해주세요
 					</p>

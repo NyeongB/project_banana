@@ -291,32 +291,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 			
 			
-			<!-- 테이블 한줄 시작 -->
-			<!-- <tbody> 
-				<tr>
-					<td>1</td>
-					
-					<td>닉닉12</td>
-					<td>2020.06.20 ~ 2020.06.22</td>
-
-
-					<td>
-						<div class="btn-group" role="group">
-
-							<button class="btn btnDefault" type="button" id="openModalBtn">
-								<span class=""></span>수락
-							</button>
-							<button class="btn btnDefault" type="button" id="closeModalBtn" style="margin-left: 5px;">
-								<span class=""></span>거절
-							</button>
-							
-						</div>
-
-					</td>
-				</tr>
-
-			</tbody>  -->
-			<!-- 테이블 한줄 끝   -->
 
 
 
@@ -397,7 +371,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 <!-- 확정자모달 끝----------------------------------------------------------------- -->
-
+<!-- footer 영역 -->
+<div class="row Footer">
+	<div class="col-md-12">
+		<jsp:include page="Footer.jsp"></jsp:include>
+	</div>
+</div>
 
 
 </body>

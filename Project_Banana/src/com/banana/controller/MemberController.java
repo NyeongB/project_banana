@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.admin.AdminAccountDTO;
 import com.banana.admin.IAdminAccountDAO;
-import com.banana.admin.IAdminAdsApplyListDAO;
-import com.banana.admin.IAdminReportListDAO;
-import com.banana.admin.IAdminReportListDAO2;
 import com.banana.admin.IAdminShopUserListDAO;
 import com.banana.admin.IAdminUserListDAO;
-import com.banana.admin.INoticeListDAO;
 import com.banana.user.ILeaveDAO;
 import com.banana.user.ILoginDAO;
 import com.banana.user.IRestDAO;
@@ -252,11 +248,10 @@ public class MemberController
 		String b_user_code = dao2.getUser(id);
 		String loc_code = dao.getLoc(id);
 		String addr = dao.getAddr(id);
-		
-		System.out.println(nick);
-		System.out.println(b_user_code);
-		System.out.println(loc_code);
-		System.out.println(addr);
+		/*
+		 * System.out.println(nick); System.out.println(b_user_code);
+		 * System.out.println(loc_code); System.out.println(addr);
+		 */
 		
 		if(state==0)
 		{
