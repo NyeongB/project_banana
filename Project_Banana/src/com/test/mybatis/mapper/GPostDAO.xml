@@ -32,15 +32,22 @@
 	
 	<!--관심카테고리 기반 추천 게시물  -->
 	<select id="gCateList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO,G.G_POST_CODE
-		FROM G_POST G  LEFT JOIN LOC L
+		SELECT TITLE,DIS_COST, L.LOC_NAME, PT.PHOTO, G.G_POST_CODE
+		FROM G_POST G  LEFT JOIN JOIN J
+        ON G.B_USER_CODE = J.B_USER_CODE
+        LEFT JOIN G_PHOTO PT
+        ON G.G_POST_CODE = PT.G_POST_CODE
+        LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE
-		        LEFT JOIN G_PHOTO P
-		ON G.G_POST_CODE = P.G_POST_CODE
-		        JOIN G_CATE T
-		ON G.G_CATE_CODE = T.G_CATE_CODE
-		WHERE G_CATE_BCODE = 'G_CATE5'
-		ORDER BY WDATE DESC
+        WHERE G_CATE_CODE IN
+        (SELECT G_CATE_CODE
+         FROM G_CATE
+         WHERE G_CATE_BCODE =  (SELECT G_CATE_CODE
+                                FROM G_CATE_INPUT
+                                WHERE B_USER_CODE = #{b_user_code})
+        AND G_CATE_MCODE IS NOT NULL
+        )
+        AND G.B_USER_CODE != #{b_user_code}
 	</select>
 	
 	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->

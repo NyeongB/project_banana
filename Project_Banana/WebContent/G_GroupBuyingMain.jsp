@@ -168,7 +168,12 @@ p
 	height: 150px;
 }
 
-
+.logC
+{
+	margin-bottom: 150px;
+	padding: 10px;
+	padding-top: 15px;
+}
 
 </style>
 <script type="text/javascript">
@@ -383,10 +388,20 @@ function logincheck()
 	                     </div>
 	                     </c:forEach> 
 	                     <c:if test="${check eq '1' }">
-							<tr>
-								<td>${noApply }</td>
-							</tr>
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noLogin }</b>
+							
+						</div>
 						</c:if> 
+						 <c:if test="${check eq '3' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noApply }</b>
+							
+						</div>
+						</c:if> 
+						
 	                     </div>
 	                     <!-- <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">2</span></h4>
@@ -451,9 +466,28 @@ function logincheck()
 	                           </div>
 	                     </div>
 	                     </c:forEach>  
+	                     
+	                      <c:if test="${check eq '1' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noLogin }</b>
+							
+						</div>
+						</c:if> 
+						 <c:if test="${check eq '2' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noGcate }</b>
+							
+						</div>
+						</c:if> 
+	                     
+	                     
 	                	</div>
 	            </div>    
-			</div>			
+			</div>	
+			
+					
 			<div class="row">
 				<div class="col-md-12">
 				<div><span class="highlight">방금 올라온 나눠사요</span></div>

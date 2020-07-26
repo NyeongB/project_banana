@@ -14,7 +14,7 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> gNewList();
 	
 	//카테고리별 
-	public ArrayList<GPostDTO> gCateList();
+	public ArrayList<GPostDTO> gCateList(GPostDTO dto);
 	
 	//대분류 카테고리 선택 시 메인페이지
 	public ArrayList<GPostDTO> gCateMainList(GCateDTO dto);

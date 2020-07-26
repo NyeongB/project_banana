@@ -139,13 +139,12 @@ public class G_GroupBuyingMainController
 			  
 			  if(info == null) //로그인 안 했을 시
 			  {
-				  model.addAttribute("noApply","로그인 시 이용가능한 서비스입니다.");
+				  model.addAttribute("noLogin","로그인 시 이용가능한 서비스입니다.");
 				  model.addAttribute("check","1"); 
 				  
 				  //새로 올라온 게시물
 				  model.addAttribute("gNewList", dao.gNewList());
-				  //카테고리게시물
-				  model.addAttribute("gCateList", dao.gCateList());
+				  
 				  
 				  
 			  }
@@ -157,8 +156,26 @@ public class G_GroupBuyingMainController
 				  
 				  //새로 올라온 게시물
 				  model.addAttribute("gNewList", dao.gNewList());
+
+				  
 				  //카테고리게시물
-				  model.addAttribute("gCateList", dao.gCateList());
+				  ArrayList<GPostDTO> gcateL = dao.gCateList(dto);
+				  
+				  if(gcateL.isEmpty())
+				  {
+					  model.addAttribute("noGcate","설정한 관심카테고리와 같은 공동구매 게시물이 없습니다.");
+					  model.addAttribute("check","2"); 
+					  
+				  }
+				  else
+				  {
+					  
+					  model.addAttribute("gCateList", dao.gCateList(dto));
+					  
+				  }
+				  
+				  
+
 				  
 				  //나의 현황
 				  ArrayList<GPostDTO> list = dao.gMyList(dto);
@@ -168,7 +185,7 @@ public class G_GroupBuyingMainController
 				  { 
 					  //System.out.println(1);
 					  model.addAttribute("noApply","신청한 거래가 없습니다.");
-					  model.addAttribute("check","1"); 
+					  model.addAttribute("check","3"); 
 				  }
 				  else 
 				  { 
