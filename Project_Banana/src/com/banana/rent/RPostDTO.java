@@ -7,7 +7,7 @@ public class RPostDTO
 	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
 	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
 	private String progress, a_user_code, p_user_code;	
-	private String start_date, end_date;
+	private String start_date, end_date, success_date, booking_end_date;
 
 	private int cost, deposit;
 	
@@ -23,6 +23,26 @@ public class RPostDTO
 	
 	
 	
+	public String getBooking_end_date() 
+	{
+		return booking_end_date;
+	}
+
+	public void setBooking_end_date(String booking_end_date) 
+	{
+		this.booking_end_date = booking_end_date;
+	}
+
+	public String getSuccess_date() 
+	{
+		return success_date;
+	}
+
+	public void setSuccess_date(String success_date) 
+	{
+		this.success_date = success_date;
+	}
+
 	public String getStart_date() 
 	{
 		return start_date;
