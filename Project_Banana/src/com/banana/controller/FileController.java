@@ -37,9 +37,11 @@ public class FileController
 		
 		HttpSession session = request.getSession();
 		String root = session.getServletContext().getRealPath("/");
-		//System.out.println("root : " + root);
-		String savePath = root + "pds" + File.separator + "image";
-		//System.out.println("savePath : " + savePath);
+		System.out.println("root : " + root);
+		String savePath = "http://13.231.82.47:8090" + "pds" + File.separator + "image";
+		System.out.println("savePath : " + savePath);
+		savePath="http://13.231.82.47:8090/Project_Banana/pds/image";
+		System.out.println("savePath : " + savePath);
 		File dir = new File(savePath);
 		
 		// 폴더만들기
@@ -65,8 +67,7 @@ public class FileController
 			
 			
 			String cp = request.getContextPath();
-			 imagePath = cp + "/pds/image";
-			
+			 imagePath ="http://13.231.82.47:8090"+ cp + "/pds/image";
 			
 			model.addAttribute("saveFileName", saveFileName);
 			model.addAttribute("imagePath", imagePath);
