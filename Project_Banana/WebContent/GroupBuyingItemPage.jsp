@@ -177,7 +177,7 @@ textarea
 	{
 		
 		
-		$('.carousel').carousel();
+		/*$('.carousel').carousel();
 		
 		$('.carousel').carousel
 		({
@@ -189,9 +189,19 @@ textarea
 		  wrap: true
 		
 		});
+		*/
+		
+		$( ".top" ).click( function() {
+			$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+			return false;
+		} );
 		
 		
-		
+		$(".bottom").click(function() 
+		{
+			$("html, body").animate({scrollTop: $(document).height() }, "slow");
+			return false;
+		});
 		
 		
 	});
@@ -396,9 +406,9 @@ function orderItem(obj)
 			
 			<div class="row">
 				<div class="col-md-12 detail">
-				
-					상세정보.....
-				
+					<c:forEach var="list" items="${gPostDetailList }">
+						${list.content }
+					</c:forEach>
 				</div>
 			</div>
 			
