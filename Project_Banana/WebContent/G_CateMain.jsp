@@ -303,9 +303,9 @@ a:active
 		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 		                           		
-		                           			<!-- <img src="images/oz.jpg" > -->
+		                           			<img src="${glists.photo }" >
 		                           	
-		                           			${glists.photo }
+		                           			
 		                           			<div class="caption">
 		                      
 		                                      <h5 class="thick">${glists.title }</h5>

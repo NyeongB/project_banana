@@ -98,6 +98,36 @@ document.addEventListener('DOMContentLoaded', function() {
 	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
 	    defaultView: 'dayGridMonth',
 	    defaultDate: new Date(),
+	     eventClick: function(info) {
+	    	 
+	    	 var applycode = info.event.id;
+	    	 $('#openModalBtn').click();
+	       
+	        //alert('id: ' + info.event.id);
+	        // 모달 데이터 불러오기 
+	        $.ajax(
+	   				{
+	   					type : "GET"
+	   					,data : { applycode : applycode }
+	   					,url : "/Project_Banana/rentscheduledetail.action"
+	   					,success:function(args)
+	   					{
+	   						var detailList = document.getElementById("detail-list");
+	   						//var myModalLabel = document.getElementById("myModalLabel");
+	   						
+	   						
+	   						detailList.innerHTML = args;
+	   						
+	   						
+	   					},
+	   					 error:function(request,status,error)
+	   					{
+				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   					}   					
+	   				});	     
+
+	        
+	      }, 
 	    header: {
 	      left: 'prev,next today',
 	      center: 'title',
@@ -178,10 +208,8 @@ document.addEventListener('DOMContentLoaded', function() {
 								<div class="col-md-3">
 									<div class="col-md-12">
 										<ul class="date_detail thick text-left">
-											<li><span class="glyphicon glyphicon-heart yellow"></span> 시작일</li>
-											<li><span class="glyphicon glyphicon-heart blue"></span> 종료일</li>
-											<li><span class="glyphicon glyphicon-heart pink"></span> 영수증첨부일</li>
-											<li><span class="glyphicon glyphicon-heart green"></span> 분배일자</li>
+											<li><span class="glyphicon glyphicon-heart pink"></span> 상품 수령일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 상품 반납일</li>
 										</ul>
 									</div>
 								</div>
@@ -197,44 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 					
 					
-					<div class="row">
-						<div class="col-md-12" >
-						<hr />
-							
-							<h3>
-								상세정보
-							</h3>
-							
-						<div class="row" id="apply"><!-- 한 구성요소 시작 -->
-						<div class="col-md-2 img-area">
-							
-							<img src="https://www.sisaweek.com/news/photo/201902/118581_103236_572.jpg" alt=""  class="img-responsive img-rounded"/
-							style="width: 120px; height: auto;">
-						
-						</div>
-						<div class="col-md-5" style="padding-left: 20px;">							
-							<p>카테고리 : 생활용품</p>
-							<p>제목 : ○○○ 빌려드립니다~!!</p>
-							<p>일 단위 비용 : 3,000원</p>
-							<p>렌트 수령일 : 2020.06.12</p>
-							<p>수령장소 & 수령시간 : 홍대입구역 13:00</p>
-						</div>
-						<div class="col-md-5" >
-						
-							<p>렌트 제공자 닉네임 : 바나나</p>
-								<p>총 비용 : 20,000원</p>
-								<p>보증금 : 10,000원</p>
-								<p>물품 반납일 : 2020.06.12</p>
-								<p>반납장소 & 반납시간 : 홍대입구역 13:00</p>
-							
-						
-						</div>
-					</div><!-- 한 구성요소 종료  -->	
 					
 					<!-- 버튼 -->
 					<br />
 					<div class="ReportBtn text-right" style="padding-right: 20px;">
-		       		 <input type="button" class="btn" value="일자 재입력" id="openModalBtn">
+		       		 <input type="button" class="btn" value="상세정보" id="openModalBtn">
 		   			 </div>
 					<!-- 버튼 끝 -->		
 							
@@ -270,23 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="modal-body">
 
-<dl>
-	<dt>
-		cjfsud23님의 기존 반납일자
-	</dt>
-	<dd>
-		2020.06.22
-	</dd>
-</dl>
-<hr />
-<dl>
-	<dt>
-		반납일자 재입력
-	</dt>
-	<dd>
-		<input type="date" class="form-control">
-	</dd>
-</dl>
+<ul id="detail-list" class="thick">
+</ul>
 
 </div>
 <div class="modal-footer">

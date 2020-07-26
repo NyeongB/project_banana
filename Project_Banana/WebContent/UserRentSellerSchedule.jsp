@@ -21,16 +21,29 @@
 
 <style type="text/css">
 
-	#apply
-	{	
-		/* margin: 20px;
-		
-		height: 120px; */
-		width: 100%;
-		border: 0.5px solid black;
-		padding: 10px;
-	}
+#apply
+{	
+	/* margin: 20px;
 	
+	height: 120px; */
+	width: 100%;
+	border: 0.5px solid black;
+	padding: 10px;
+}
+.green
+{
+	color: var(--hover-color);
+}
+.pink
+{
+	color: #ff8fb8;
+}	
+.date_detail
+{
+	font-size: medium;
+	margin-top: 100px;
+	
+}
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -56,6 +69,14 @@ $(document).ready(function()
 			$('#modalBox').modal('hide');
 	});
 		
+	$('#openModalBtn0').on('click', function(){
+		$('#modalBox0').modal('show');
+	});
+		// 모달 안의 취소 버튼에 이벤트를 건다.
+	$('#closeModalBtn0').on('click', function(){
+			$('#modalBox0').modal('hide');
+	});
+		
 	$("#openCompleteBtn").click(function()
 	{
 		//alert("!");
@@ -76,11 +97,65 @@ document.addEventListener('DOMContentLoaded', function() {
 	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
 	    defaultView: 'dayGridMonth',
 	    defaultDate: new Date(),
+	    eventClick: function(info) {
+	    	 
+	    	 var applycode = info.event.id;
+	    	 
+	    	 
+	       
+	        alert('id: ' + info.event.id);
+	       
+	        // 모달 데이터 불러오기 
+	        $.ajax(
+	   				{
+	   					type : "GET"
+	   					,data : { applycode : applycode }
+	   					,url : "/Project_Banana/srentscheduledetail.action"
+	   					,success:function(args)
+	   					{	   						
+	   						document.getElementById("apply").innerHTML = args;
+	   						$('#openModalBtn0').click();
+	   						
+	   						
+	   					},
+	   					 error:function(request,status,error)
+	   					{
+				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   					}   					
+	   				});		 
+	        
+
+	        
+	      }, 
 	    header: {
 	      left: 'prev,next today',
 	      center: 'title',
 	      right: ''
-	    },
+	    },locale: 'ko'
+	    , eventSources: [{
+		       
+		    	 events: function(info, callback, failureCallback)
+		    	{
+		    		$.ajax(
+	   				{
+	   					type : "GET"
+	   					,url : "/Project_Banana/rentsellerscheduleajax.action"
+	   					,dataType: "json"
+	   					,success:function(args)
+	   					{
+	   						callback(args);
+	   						//alert(args);
+	   						
+	   					},
+	   					 error:function(request,status,error)
+	   					{
+				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   					}   					
+	   				});		   		
+		    		
+		    	} 			
+		    	
+		    }]  
 	  });
 	  calendar.render();
 	});
@@ -131,56 +206,28 @@ document.addEventListener('DOMContentLoaded', function() {
 							<hr />
 							
 							
-							<div id="calendar" style="width: 80%; height: 80%;" class="text-center"></div>
+							<div class="row">
+								<div class="col-md-10"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-2">
+									<div class="col-md-12">
+										<ul class="date_detail">
+											<li><span class="glyphicon glyphicon-heart pink"></span> 렌트 제공일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 렌트 회수일</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 							
 							
-						</div>
-						
+						</div>			
 						
 					</div>
-					
-					
-					<div class="row">
-						<div class="col-md-12" >
-						<hr />
-							
-							<h3>
-								상세정보
-							</h3>
-							
-						<div class="row" id="apply"><!-- 렌트상세정보 -->
-						<div class="col-md-2 img-area">
-							
-							<img src="https://www.sisaweek.com/news/photo/201902/118581_103236_572.jpg" alt=""  class="img-responsive img-rounded"/
-							style="width: 120px; height: auto;">
 						
-						</div>
-						<div class="col-md-5" style="padding-left: 20px;">
-						
-							
-								<p>카테고리 : 생활용품</p>
-								<p>제목 : ○○○ 빌려드립니다~!!</p>
-								<p>일 단위 비용 : 3,000원</p>
-								<p>렌트 수령일 : 2020.06.12</p>
-								<p>수령장소 & 수령시간 : 홍대입구역 13:00</p>
-								
-						
-						</div>
-						<div class="col-md-5" >
-						
-							<p>렌트 제공자 닉네임 : 바나나</p>
-								<p>총 비용 : 20,000원</p>
-								<p>보증금 : 10,000원</p>
-								<p>물품 반납일 : 2020.06.12</p>
-								<p>반납장소 & 반납시간 : 홍대입구역 13:00</p>
-							
-						
-						</div>
-					</div><!-- 렌트 상세정보 종료  -->	
 					
 					<!-- 버튼 -->
 					<br />
 					<div class="ReportBtn text-right" style="padding-right: 20px;">
+					<input type="button" class="btn" value="상세정보" id="openModalBtn0">
 		       		 <input type="button" class="btn" value="신청자 목록 현황" id="openModalBtn">
 		         	<input type="button" class="btn " value="확정자 목록 현황" id="openCompleteBtn">
 		   			 </div>
@@ -194,8 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 <!-- content end -->
 
@@ -206,7 +251,34 @@ document.addEventListener('DOMContentLoaded', function() {
    </div>
 </div>
 
+<!-- ------------------- 상세정보 모달 영역 시작 ----------------------------------- -->
+<div id="modalBox0" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
 
+<div class="modal-header"><!-- 모달헤더 -->
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<h4 class="modal-title" id="myModalLabel" style="text-align: center">상세정보</h4>
+</div><!-- 모달 헤더 끝 -->
+
+<div class="modal-body text-left"><!-- 모달바디 -->
+	<div class="row" id="apply"><!-- 렌트상세정보 -->
+		
+	</div><!-- 렌트 상세정보 종료  -->	
+
+	
+
+
+</div><!-- 모달바드끝 -->
+
+<div class="modal-footer"><!-- 모달 푸터 -->
+<button type="button" class="btn btn-primary">확인</button>
+<button type="button" class="btn btn-default" id="closeModalBtn1">취소</button>
+</div><!-- 모달 푸터 끝 -->
+
+</div>
+</div>
+</div>
 
 <!-- -------------------신청자 모달 영역 시작 ----------------------------------- -->
 <div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

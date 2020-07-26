@@ -134,7 +134,7 @@ public class G_GroupBuyingScheduleController
 			String b_user_code = info.getB_user_code();		
 			
 			IG_GroupBuyingScheduleDAO dao = SqlSession.getMapper(IG_GroupBuyingScheduleDAO.class);
-			
+			System.out.println("여기");
 			
 			model.addAttribute("gBunReci",dao.gBunReci(b_user_code));
 			model.addAttribute("check",1);

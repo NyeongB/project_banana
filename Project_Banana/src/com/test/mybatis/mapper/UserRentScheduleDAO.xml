@@ -7,17 +7,32 @@
 <mapper namespace="com.banana.my.IUserRentScheduleDAO">	
 	<!-- 신청자 목록 -->
 	<select id="applyList" resultType="com.banana.rent.RPostDTO">
-	SELECT *                     
-	FROM VIEW_RENT_APPLY_LIST
-    WHERE B_USER_CODE = #{B_USER_CODE}
+	SELECT R_POST_CODE, R_APPLY_CODE, START_DATE, END_DATE, TITLE, OFFER_TIME, B_USER_CODE , NICKNAME 
+	FROM VIEW_APPLY_LIST
+	WHERE R_POST_CODE = #{post_code}
 	</select>	
 	
-	<!-- 렌트 일정 뿌려주기  -->
+	<!-- 렌트 제안자 일정 뿌려주기  -->
 	<select id="schedule" resultType="com.banana.rent.RPostDTO">
-	SELECT *    
-	FROM VIEW_APPLY_LIST
-    WHERE B_USER_CODE = #{B_USER_CODE}
+	SELECT R_APPLY_CODE, START_DATE, END_DATE, A_USER_CODE, P_USER_CODE, TITLE, R_POST_CODE
+	FROM VIEW_R_SELLER_SCHEDULE
+    WHERE P_USER_CODE = #{B_USER_CODE}
 	</select>	
+	
+	<!-- 렌트 일정클릭시 확정자 정보  -->
+	<select id="rentSuccessDetail" resultType="com.banana.rent.RPostDTO">
+	SELECT CATE_NAME, TITLE, COST, START_DATE, END_DATE, NICKNAME, DEPOSIT, OFFER_TIME, OFFER_LOC, R_APPLY_CODE, R_POST_CODE
+	FROM VIEW_RENT_SUCCESS_LIST
+	WHERE R_APPLY_CODE = #{R_APPLY_CODE}
+	</select>	
+	
+	<!-- 렌트 참여자 일정 뿌려주기  -->
+	<select id="rentSchedule" resultType="com.banana.rent.RPostDTO">
+	SELECT R_APPLY_CODE, START_DATE, END_DATE, A_USER_CODE, P_USER_CODE, TITLE, R_POST_CODE
+	FROM VIEW_R_SELLER_SCHEDULE
+    WHERE A_USER_CODE = #{B_USER_CODE}
+	</select>
+	
 	
 </mapper>  
 

@@ -8,21 +8,29 @@ public class RPostDTO
 	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
 	private String progress, a_user_code, p_user_code;	
 	private String start_date, end_date;
-
+	private String r_apply_code;
 	private int cost, deposit;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private String cate_name;
+
+	public String getCate_name()
+	{
+		return cate_name;
+	}
+
+	public void setCate_name(String cate_name)
+	{
+		this.cate_name = cate_name;
+	}
+
+	public String getR_apply_code()
+	{
+		return r_apply_code;
+	}
+
+	public void setR_apply_code(String r_apply_code)
+	{
+		this.r_apply_code = r_apply_code;
+	}	
 	public String getStart_date() 
 	{
 		return start_date;
