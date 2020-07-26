@@ -361,8 +361,8 @@ p
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${newlist.photo }
+	                           			<img src="http://13.231.82.47:8090/Project_Banana/pds/image/%EA%B0%90%EC%9E%90%EA%B9%A1.png" >
+	                           			<%-- ${newlist.photo } --%>
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
 	                                      <p>${newlist.loc_name }</p>

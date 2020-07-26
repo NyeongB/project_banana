@@ -89,6 +89,12 @@ p
 
 }
 
+
+#map
+{
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
 </style>
 <script type="text/javascript">
 
@@ -97,17 +103,13 @@ p
 	{
 
 		container = document.getElementById("map");
-	
-		options = 
-		{
-			center: new kakao.maps.LatLng(37.5565426,126.9190014) // 지도의 중심 좌표(홍대입구역)	
-			, level: 3 											// 지도의 확대 레벨
-		};
+
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 	    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
+	    level: 5, // 지도의 확대 레벨
+	    draggable: false //지도 드래그로 이동 금지
 		    };  
 
 		// 지도를 생성합니다    
@@ -116,9 +118,10 @@ p
 		
 		// 지도를 클릭한 위치에 표출할 마커입니다
 		var marker = new kakao.maps.Marker({ 
-		    // 지도 중심좌표에 마커를 생성합니다 
+		 // 지도 중심좌표에 마커를 생성합니다 
 		    position: map.getCenter() 
 		}); 
+		
 		// 지도에 마커를 표시합니다
 		marker.setMap(map);
 		map.setZoomable(false); 
@@ -140,39 +143,76 @@ p
 		            position: coords
 		        });
 
-		        // 인포윈도우로 장소에 대한 설명을 표시합니다
-		        /* var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		       // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">나의 위치</div>'
 		        });
-		        infowindow.open(map, marker); */
+		        infowindow.open(map, marker);
 
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
 		    } 
-		});    
+		});   
 		  
 		
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		    
-		    // 클릭한 위도, 경도 정보를 가져옵니다 
-		    var latlng = mouseEvent.latLng; 
-		    
-		    // 마커 위치를 클릭한 위치로 옮깁니다
-		    marker.setPosition(latlng);
-		    
-		    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-		    message += '경도는 ' + latlng.getLng() + ' 입니다';
-		    
-		    var resultDiv = document.getElementById('clickLatlng'); 
-		    resultDiv.innerHTML = message;
-		    
-		});
 		
-	          
+		
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent) 
+		{
+			
+    		searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) 
+    		{
+    		
+	        	if (status === kakao.maps.services.Status.OK)
+	        	{
+	            
+		              var detailAddr = result[0].address.address_name ;
+		           
+		            
+		          
+		              
+		              document.getElementById('detailLoc').value= detailAddr;
+		              
+		              marker.setPosition(mouseEvent.latLng);
+		              marker.setMap(map);
+		           
+            
+         
+           		}   
+          });
+	   });
+		
+		 
+         
+         
+         
+		
+		
+		function searchDetailAddrFromCoords(coords, callback)
+		{
+    		// 좌표로 법정동 상세 주소 정보를 요청합니다
+    		geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	    }
+		
+		function searchAddrFromCoords(coords, callback)
+		{
+		    // 좌표로 행정동 주소 정보를 요청합니다
+		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+		}
 
+		function searchDetailAddrFromCoords(coords, callback) 
+		{
+		    // 좌표로 법정동 상세 주소 정보를 요청합니다
+		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+		}
 		
 		
-	}
+		
+	}//initialize()
+	
+	
+	
+	
 		
 	function setZoomable(zoomable) {
 	    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
@@ -589,18 +629,24 @@ p
 					
 					
 					<div class="col-md-12 ">
-						분배 장소 <button type="button" class="btn" onclick="setZoomable(false)"><span class="glyphicon glyphicon-map-marker"></span></button>
+						분배 장소 <span class="glyphicon glyphicon-map-marker"></span>
 						<div id="map" style="width: 60%; height: 250px;"></div>
-						<input type="hidden" id="clickLatlng">
+						<!-- <input type="hidden" id="clickLatlng"> -->
+						<!-- <div id="clickLatlng"></div>
+						<div id="click"></div> -->
 						
-						
-						<div class="col-md-4">
-							상세 분배 장소
-							<input type="text" id="detailLoc" class="form-control"> 
+						<div class="col-md-4 loc">
+						상세 분배 장소
+						<input type="text" id="detailLoc" class="form-control"> 
 						</div>
 						
 						
+						
 					</div>
+					
+					
+					
+					
 					<div class="col-md-12 ">	
 						<div class="col-md-4">
 							수요조사 시작일
