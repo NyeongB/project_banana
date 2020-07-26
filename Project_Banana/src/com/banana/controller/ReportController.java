@@ -39,6 +39,7 @@ public class ReportController
 		return view;
 	}
 	
+	// 신고접수받은것들 
 	@RequestMapping(value = "/reportlist2.action", method =RequestMethod.GET)
 	public String reportList2(Model model)
 	{
@@ -51,6 +52,24 @@ public class ReportController
 		model.addAttribute("list", dao.list2());
 		
 		view = "/AdminReportList2.jsp";
+		
+		
+		return view;
+	}
+	
+	// 신고처리 완료된것들 
+	@RequestMapping(value = "/reportlist3.action", method =RequestMethod.GET)
+	public String reportList3(Model model)
+	{
+		String view = null; 
+		
+		IAdminReportListDAO dao = SqlSession.getMapper(IAdminReportListDAO.class);
+		
+		
+		//model.addAttribute("list", 명단);
+		model.addAttribute("list", dao.listPrc());
+		
+		view = "/AdminReportListComplete.jsp";
 		
 		
 		return view;

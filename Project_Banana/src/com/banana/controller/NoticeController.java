@@ -124,6 +124,7 @@ public class NoticeController
 				
 				
 				HttpSession session = request.getSession();
+				
 				String root = session.getServletContext().getRealPath("/");
 				String savePath = root + "pds" + File.separator + "image";
 				File dir = new File(savePath);
@@ -134,12 +135,21 @@ public class NoticeController
 				
 				String encType = "UTF-8";
 				int maxFileSize = 5*1024*1024;
+				String imagePath = null;
+				String cp = request.getContextPath();
+				imagePath = cp + "/pds/image";
 				
+				
+				// 각자 dto에 들어갈 정보들 
 				String title = null;
 				String content = null;
 				String file = null;
 				String admin= null;
-				String imagePath = null;
+				
+				
+				
+				
+				
 				try
 				{
 					MultipartRequest req = null;
@@ -148,16 +158,15 @@ public class NoticeController
 					
 					
 
-					// 클릭한 광고 코드 가져오기
+					// 들어 갈정보들 폼에서 받아오기 
 					 title = req.getParameter("title");
 					 content = req.getParameter("content");
-					 file = 	req.getFilesystemName("file");
 					 admin = req.getParameter("admin");
 					
+					 file = 	req.getFilesystemName("file");
 					
 					
-					String cp = request.getContextPath();
-					imagePath = cp + "/pds/image";
+					
 					
 					
 					
