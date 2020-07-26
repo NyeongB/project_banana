@@ -84,43 +84,30 @@ public class UserRentScheduleController
 		public String rentSellerList(Model model, HttpServletRequest request) 
 		{
 			String view=null;
-					
+			String b_user_code = "";		
 			HttpSession session = request.getSession();
 			SessionInfo info = (SessionInfo) session.getAttribute("user");
+			
+			b_user_code = info.getB_user_code();
 			
 			// 비로그인 시 
 			if(info == null)
 				return "/loginmain.action";
-			
+			try
+			{
+				// 렌트 신청자 리스트
+				IUserRentScheduleDAO dao = SqlSession.getMapper(IUserRentScheduleDAO.class);
+				model.addAttribute("", dao.applyList(b_user_code));
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+					
 			view = "/UserRentSellerSchedule.jsp";	
 			
 			return view;
 		}
-		 // 렌트 제안자  
-		  @RequestMapping(value="/rentsellerscheduleajax.action") 
-		  public String rentSellerscheduleAjax(Model model, HttpServletRequest request) 
-		  { 
-			  String view=null;
-		  
-			  HttpSession session = request.getSession(); SessionInfo info = (SessionInfo)
-			  session.getAttribute("user");
-			  
-			  if(info == null) return "/loginmain.action";
-			  
-			  String b_user_code = info.getB_user_code();
-			  
-			  IG_GroupBuyingScheduleDAO dao = SqlSession.getMapper(IG_GroupBuyingScheduleDAO.class);
-			  
-			  model.addAttribute("startEnd",dao.startEnd(b_user_code));
-			  model.addAttribute("bunReci",dao.bunReci(b_user_code));
-			  
-			  model.addAttribute("check",0);
-			  
-			  view = "/calimsi.jsp";
-			  
-			  
-			  return view; 
-		  } 
+		
 	  // 이벤트 클릭시 모달창 띄우기
 		/*
 		 * @RequestMapping(value="/ggroupbuyingscheduledetail.action") public String

@@ -41,9 +41,11 @@ body {
 	font: 17px 'Nanum Gothic', sans-serif;
 }
 
-ul {
+.bxslider ul {
 	width: 700px;
+	
 }
+
 
 li {
 	list-style: none;
@@ -96,24 +98,20 @@ li {
 
 
 			<div class="col-md-8">
-				<br>
-				<br>
-				<br>
-				<br>
 				<ul class="bxslider">
 					<li><a href="#"><img
 							src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
-							alt="" title="example1"></a></li>
+							alt="" ></a></li>
 					<li><a href="#"><img
 							src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
-							alt="" title="example2"></a></li>
+							alt=""></a></li>
 					<li><a href="#"><img
 							src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
-							alt="" title="example3"></a></li>
+							alt="" ></a></li>
 							
 					<li><a href="#"><img
 					src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
-					alt="" title="example4"></a></li>
+					alt="" ></a></li>
 				</ul>
 
 
