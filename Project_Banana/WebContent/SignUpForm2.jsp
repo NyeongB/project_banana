@@ -74,8 +74,74 @@ input
 	// 문자인증완료했는지 보는 변수 
 	var statePhone = 0;
 	
+	// 정규식 숫자만
+	var numCheck = RegExp(/[^0-9]$/);
+	
+	// 정규식 한글만 2~6자리
+	var nameCheck = RegExp(/^[가-힣]{2,6}$/);
+	
+	// 정규식 ID체크 소문자와 숫자 조합만
+	var userIdCheck = RegExp(/^[a-z0-9_\-]{5,20}$/);
+	
 	$(document).ready(function()
 	{
+		
+		// ID 정규식 체크
+		$("#id").keyup(function()
+		{
+			if(userIdCheck.test($("#id").val()))
+			{
+				alert("아이디는 6~20자리 소문자,숫자조합만 가능합니다.");
+				$("#id").val('');
+				return;
+			}
+		});
+		
+		// 이름 유효성 체크 
+		$("#name").keyup(function()
+		{
+			if(nameCheck.test($("#name").val()))
+			{
+				alert("2~6자리 한글만 입력하세요");
+				$("#name").val('');
+				return;
+			}
+		});
+		
+		
+		// 전화번호는 숫자만
+		$("#tel").keyup(function()
+		{
+			if(numCheck.test($("#tel").val()))
+			{
+				alert("숫자만 입력 가능합니다.");
+				$("#tel").val('');
+				return;
+			}
+		});
+		
+		//주민번호 숫자
+		$("#ssn1").keyup(function()
+		{
+			if(numCheck.test($("#ssn1").val()))
+			{
+				alert("숫자만 입력 가능합니다.");
+				$("#ssn1").val('');
+				return;
+			}
+		});
+		// 주민뒷자리 숫자
+		$("#ssn2").keyup(function()
+		{
+			if(numCheck.test($("#ssn2").val()))
+			{
+				alert("숫자만 입력 가능합니다.");
+				$("#ssn2").val('');
+				return;
+			}
+		});
+
+		
 		
 		// 서브밋 유효성 검사
 		 $("#submitBtn").click(function()
@@ -479,7 +545,8 @@ input
 			<div class="row">
 				<div class="col-md-12">
 				<div class="col-md-12 form-inline">
-						<select name="selectEmail" class="selectField form-control" onchange="changeEmail()">
+							<select name="selectEmail" class="selectField form-control" onchange="changeEmail()"
+							style="width: 200px;">
 							<option value="">선택</option>
 							<option value="gmail.com"
 							${dto.email2=="gmail.com" ? "selected='selected'" : "" 
@@ -492,6 +559,10 @@ input
 							}>naver.com</option>
 							<option value="direct">직접입력</option> 
 						</select>
+				</div>
+				
+				<div class="col-md-12 form-inline">
+						
 						<input type="text" name="email1"
 							 class="form-control" value="${dto.email1 }"> @
 						<input type="text" name="email2" 
