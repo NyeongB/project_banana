@@ -134,9 +134,10 @@
 		   		<tr>
 		            <th class="col-md-1">처리 유형</th>
 		            <td>
-		            	<label><input type="radio" name="radio" value="reject">부적절한 사유</label>
+		            <label><input type="radio" name="radio" value="0">환불 조치</label>
+		            	<label><input type="radio" name="radio" value="1">부적절한 사유</label>
 		            	
-		            	<label><input type="radio" name="radio" value="ok">환불 조치</label>
+		            	
 		            </td>
 		        </tr>                    
 		        <tr>
@@ -153,7 +154,9 @@
 		   
 		   	<!-- 유형  -->
 			<input type="text" value="${dealType }" name="type" style="display: none;">
-	
+			
+			<input type="hidden" value="${deal_report_code}" name="deal_report_code">
+			
 		    <div class="ReportBtn">
 		        <input type="submit" class="btn" value="확인" >
 		         <input type="button" class="btn btn-light" value="취소">

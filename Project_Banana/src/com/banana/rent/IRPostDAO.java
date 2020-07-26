@@ -34,6 +34,9 @@ public interface IRPostDAO
 	// 성사된 예약기간 불러오기
 	public ArrayList<RPostDTO> reservationTime(String r_post_code);
 	
+	// 게시물 예약 마감기간 불러오기
+	public String bookingEnd(String r_post_code);
+	
 	
 	// 상품등록 insert
 	//public int rpostinsert(RPostDTO dto);

@@ -8,7 +8,7 @@
 	
 	<select id="list" resultType="com.banana.admin.AdminReportListDTO">
 	SELECT ID1,ID2, TYPE, RTYPE, CONTENT, SDATE 
-            FROM REPORTLIST_VIEW
+            FROM REPORTLIST_VIEW 
 	</select>	
 	
 	

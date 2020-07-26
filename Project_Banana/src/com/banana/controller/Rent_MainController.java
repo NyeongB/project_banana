@@ -2,6 +2,8 @@ package com.banana.controller;
 
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -273,12 +275,10 @@ public class Rent_MainController
 				// 댓글 조회
 				model.addAttribute("rreplyList", dao1.rreplyList(rpost_code));
 				
-				
-				// 성사테이블의 성사된 기한 조회
-				model.addAttribute("reservationTime", dao2.reservationTime(rpost_code));
-				
-				
-				
+				// 예약 마감기간 조회
+				model.addAttribute("bookingEnd", dao2.bookingEnd(rpost_code));
+			
+						
 				view = "/UserRentDetail.jsp";
 				}catch(Exception e)
 				{
@@ -287,6 +287,98 @@ public class Rent_MainController
 				return view;
 				
 			 }
+			
+	
+			
+			// 렌트 성사 예약기간 불러오기
+			@RequestMapping(value = "/ajaxsuccesstime.action", method = RequestMethod.POST)
+			 public String reservationTime(Model model, HttpServletRequest request) 
+			 {
+				
+				String view = null;
+				
+				try 
+				{
+				
+					System.out.println("성사예약기간 action");
+					String rpost_code = request.getParameter("rpostCode"); 
+					
+					int successCheck = successCheck(rpost_code);
+					System.out.println(successCheck + "확인");
+					
+					
+					// 성사된 렌트예약이 있으면 1
+					if(successCheck == 1)
+					{
+						IRPostDAO dao2 = SqlSession.getMapper(IRPostDAO.class);
+						
+						// 성사테이블의 성사된 기한 조회
+						model.addAttribute("reservationTime", dao2.reservationTime(rpost_code));
+						
+						view = "AjaxSuccessTime.jsp";
+					}
+					else if(successCheck == 0)
+					{
+						view = "redirect:UserRentDetail.jsp";
+					}
+					
+					
+				} catch (Exception e) 
+				{
+					System.out.println(e.toString());
+				}
+				return view;
+				
+			 }
+			
+			
+			
+			
+			// 렌트 성사된 예약기간 유무 판단
+			public int successCheck(String rpost_code)
+			{
+				System.out.println(rpost_code);
+				int result = 0;
+				
+				try 
+				{
+				
+					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+					
+					ArrayList<RPostDTO> success = null;
+					success = dao.reservationTime(rpost_code);
+						
+					System.out.println(success);
+					// 성사된 예약기간이 있으면 1
+					if(success!=null)
+						result = 1;
+					
+					
+					// 없으면 0
+					else
+						result = 0;
+
+					
+				} catch (Exception e) 
+				{
+					System.out.println(e.toString());
+				}
+				
+				return result;
+				
+			}	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			// 찜하기 클릭 시

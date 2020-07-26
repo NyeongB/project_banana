@@ -88,43 +88,38 @@
            JOIN JOIN J
            ON J.B_USER_CODE = RR.B_USER_CODE;	   
            -->
+	<select id="r_report_proc" statementType="CALLABLE" >
+
+     {call
+     PRC_R_DEAL_REPORT_PROC(#{deal_report_code}, #{admin_code}, #{answer}, #{check})
+     }
+
+	</select>
+	
+	<select id="g_report_proc" statementType="CALLABLE" >
+
+     {call
+     PRC_G_DEAL_REPORT_PROC(#{deal_report_code}, #{admin_code}, #{answer}, #{check})
+     }
+
+	</select>
+	
+	
 	<select id="list2" resultType="com.banana.my.UserMyGiveReportListDTO">
 	<!-- ID1 신고당한사람 ,ID2 신고한사람  -->
 	SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
+	WHERE PROGRESS='접수'
 	</select>	
 	
 	
-	<!-- SELECT CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO3' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
-            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
-            END AS ID1,
-            CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO4' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
-            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
-            END AS ID2 
-            , '공통협력구매' AS TYPE, D.G_DEAL_REPORT_TYPE AS RTYPE
-            , R.CONTENT AS CONTENT, R.SDATE  
-            FROM G_DEAL_REPORT	 R JOIN G_SUCCESS S
-            ON R.G_SUCCESS_CODE = S.G_SUCCESS_CODE
-            JOIN G_POST P 
-            ON P.G_POST_CODE = S.G_POST_CODE
-            JOIN G_APPLY A
-            ON A.G_APPLY_CODE = R.G_APPLY_CODE    
-            JOIN G_DEAL_REPORT_TYPE D
-            ON D.G_DEAL_REPORT_TYPE_CODE = R.G_DEAL_REPORT_TYPE_CODE
-            UNION
-             SELECT CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO2' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
-            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
-            END AS ID1,CASE WHEN R.DEAL_REPORTER_TYPE_CODE ='DREPO1' THEN (SELECT ID FROM JOIN WHERE B_USER_CODE = P.B_USER_CODE)
-            ELSE (SELECT ID FROM JOIN WHERE B_USER_CODE = A.B_USER_CODE)
-            END AS ID2 
-            , '렌트거래' AS TYPE, D.R_DEAL_REPORT_TYPE AS RTYPE
-            , R.CONTENT AS CONTENT, R.SDATE  
-            FROM R_DEAL_REPORT R JOIN R_SUCCESS S
-            ON R.R_SUCCESS_CODE = S.R_SUCCESS_CODE
-            JOIN R_APPLY A
-            ON S.R_APPLY_CODE = A.R_APPLY_CODE
-            JOIN R_POST P 
-            ON A.R_POST_CODE = P.R_POST_CODE
-            JOIN R_DEAL_REPORT_TYPE D
-            ON D.R_DEAL_REPORT_TYPE_CODE = R.DEAL_REPORTER_TYPE_CODE; -->
+	<select id="listPrc" resultType="com.banana.my.UserMyGiveReportListDTO">
+	<!-- ID1 신고당한사람 ,ID2 신고한사람  -->
+	SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
+	WHERE PROGRESS='처리완료'
+	</select>	
+	
+	
+            
+     
 </mapper>  
 

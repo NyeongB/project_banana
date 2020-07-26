@@ -16,7 +16,7 @@
 	String rpostCode = request.getParameter("r_post_code");
 
 	
-
+	String bookingEnd = (String)request.getAttribute("bookingEnd");
 	
 %>
 
@@ -190,8 +190,9 @@ textarea
 
 <script type="text/javascript">
 	var replyCode;
-
-	
+	var rpostCode = "<%=rpostCode%>";
+	var disable;
+	var bookingEnd = "<%=bookingEnd %>";
 	
 $().ready(function() 
 {
@@ -240,18 +241,9 @@ $().ready(function()
 			
 		});
 	});
-	
-	
-/* 
-		$("#date1").datepicker(
-				{
-					dateFormat : "yy-mm-dd"
-					, changeYear : true
-					, changeMonth : true
-				
-				});
-	데이트피커...	 */
 
+	
+	
 	
 	
 		// 댓글 등록
@@ -336,46 +328,54 @@ $().ready(function()
 
 
 
-	var dis = ['2020/07/30', '2020/07/31']
-	
-	// 비활성화할 성사테이블의 기한 조회하기 
-	
-	
-	
-	var disableDates = new Array();
-	
-	/* 
-	for(var b=1; b<a; b++)
-	{
-		
-		disableDates +=  $("#s1")
-	}
-	*/
-	
-	var e1 = $(".endD #e1").val();
-	
-	console.log(e1);
-	
-	
-	
 	 
-	
-function sstartDate() 
+
+function sstartDate()
 {
 
-		jQuery.datetimepicker.setLocale('kr');
-		$("#date1").datetimepicker({
+	$.ajax
+	({
+		
+		type: "POST"
+		, url : "ajaxsuccesstime.action"
+		, data : {rpostCode : rpostCode}
+		, success : function(data) 
+		{
+			disable = data;
 			
-			timepicker : false
-			, format : 'Y-m-d'
-			, minDate : 0
+
+			console.log(disable);
 			
 			
 			
-			
-		});
-			
-}
+		}
+		,  error:function(request,status,error)
+          {
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+          }    
+		
+	});
+	
+	
+	jQuery.datetimepicker.setLocale('kr');
+	$("#date1").datetimepicker({
+		
+		
+		timepicker : false
+		, format : 'Y-m-d'
+		, minDate : 0
+		, maxDate : new Date(bookingEnd)
+		, disabledDates : disable
+		
+		
+		
+	});
+	
+	
+	
+	
+};
+
 	
 	
 	
@@ -387,14 +387,14 @@ function eendDate()
 	var sdate = $("#date1").val();
 	
 	
-	
-	
 	$("#date2").datetimepicker({
 		
 		timepicker : false
 		, format : 'Y-m-d'
 		, minDate: new Date(sdate)
-		, disabledDates : dis
+		, maxDate : new Date(bookingEnd)
+		, disabledDates : disable
+		
 		
 		
 	});

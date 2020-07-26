@@ -97,7 +97,7 @@
 			<a href="#">신고 관리</a>
 				<ul class="sub" style="display: none;">
 					<li><a href="<%=cp%>/reportlist2.action">접수된 신고</a></li>
-					<li><a href="#">처리 완료 신고</a></li>
+					<li><a href="<%=cp%>/reportlist3.action">처리 완료 신고</a></li>
 				</ul>
 		</li>
 		
