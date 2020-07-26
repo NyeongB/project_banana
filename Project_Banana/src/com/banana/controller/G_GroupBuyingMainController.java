@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.groupbuying.GCateDTO;
 import com.banana.groupbuying.GPostDTO;
+import com.banana.groupbuying.IGJjimDAO;
 import com.banana.groupbuying.IGPostDAO;
 import com.banana.my.IMyPointDAO;
 import com.banana.my.MyReviewDTO;
 import com.banana.rent.IRPostDAO;
+import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RPostDTO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
@@ -428,4 +431,73 @@ public class G_GroupBuyingMainController
 		}
 
 	  
+	  
+	  
+	  
+	// 찜하기 클릭 시
+		
+		 @RequestMapping(value = "/gjjiminsert.action", method = RequestMethod.GET)
+		 public String gjjiminsert(HttpServletRequest request, HttpServletResponse response) 
+		 {
+			 String view = null;
+			 
+			 try 
+			 {
+			
+				 
+				 HttpSession session = request.getSession();
+				 
+				 String gpostCode = (String)session.getAttribute("postcode");
+				 SessionInfo info = (SessionInfo)session.getAttribute("user");
+				 String UserCode = info.getB_user_code();
+				
+				 //System.out.println(rpostCode);
+				 //System.out.println(UserCode);
+				 
+				 GPostDTO dto = new GPostDTO();
+				 dto.setG_post_code(gpostCode);
+				 dto.setB_user_code(UserCode);
+				 
+				 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
+				
+				 dao.GJjim(dto);
+			 
+				
+				 
+				 view = "/AjaxJJimComplete.jsp";
+				 
+			 }catch(Exception e)
+			 {
+			  	 System.out.println(e.toString());
+			 }
+			 
+			 
+			 
+			 return view;
+		 
+		 }
+	
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 }
+
+
+
+
+
+
+
+
+
+
+

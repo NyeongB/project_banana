@@ -1,3 +1,4 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,6 +10,9 @@
 %>
 <%
       
+		session = request.getSession();
+
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
         
         String postcode = request.getParameter("postcode");
 			
@@ -145,6 +149,7 @@ textarea
 	padding: 20px;
 	width: 100%;
 	height: 100px;
+	resize: none;
 	
 }
 
@@ -203,6 +208,24 @@ textarea
 			return false;
 		});
 		
+		$("#qa").click(function() 
+				{
+					$("html, body").animate({scrollTop : $(document).height() }, "slow");	
+					
+				});
+				
+				$(function() 
+				{
+					var dBtn = $(".nav ul > li");
+					dBtn.find("a").click(function()
+					{
+						dBtn.removeClass("active");
+						$(this).parent().addClass("active");
+						
+						
+					});
+				});
+		
 		
 	});
 
@@ -215,6 +238,56 @@ textarea
 	window.location.replace("groupbuyingitempage.action?title="+title+"&postcode="+a);
 }
  */
+ 
+ 
+//찜 추가
+ function jjim() 
+ {
+ 	
+ 	var id1 = "<%=info %>";
+    
+    
+    
+ 	
+    if(id1 == "null" || id1 ==" " )
+ 	{
+ 		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+ 		{
+ 			// 확인 버튼 클릭 시 동작
+ 			
+ 			location.href = "loginmain.action";
+ 				
+ 		}else // 취소 버튼 클릭 시 동작
+ 		{
+ 				location.href = "redirect:groupbuyingitempage.action";
+ 		}
+ 	}
+ 	else // 회원이면
+ 	{
+         
+ 		if(confirm("찜 목록에 추가하시겠습니까?"))
+ 		{
+ 			
+ 			// 확인 버튼 클릭 시 동작
+ 			$.get("gjjiminsert.action", function(data) 
+ 			{
+ 				alert(data);
+ 			});
+ 			
+ 		}else // 취소 버튼 클릭 시 동작
+ 		{
+ 			location.href = "redirect:groupbuyingitempage.action";
+ 		}
+ 		
+ 		
+ 		
+ 	}
+ 	
+ 	
+ 	
+ }
+ 
+ 
 
 function orderItem(obj)
 {
@@ -372,7 +445,7 @@ function orderItem(obj)
 							
 							<div class="row">
 								<div class="col-md-12 text-center Btn">
-								<button type="button" class="btn btn-default" id="btn1">찜 하기</button>
+								<button type="button" class="btn btn-default" id="btn1" onclick="jjim()">찜 하기</button>
 								<button type="button" class="btn btn-default" id="${lists.g_post_code }" onclick="orderItem(this)">주문 하기</button>
 								
 								</div>
@@ -396,8 +469,8 @@ function orderItem(obj)
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-tabs">
-  						<li role="presentation" class="active"><a href="#">상세정보</a></li>
-  						<li role="presentation"><a href="#">Q ＆ A</a></li>
+  						<li role="presentation" ><a href="#">상세정보</a></li>
+  						<li role="presentation"><a href="#QA" id="qa">Q ＆ A</a></li>
 
 					</ul>
 				</div>
@@ -416,7 +489,7 @@ function orderItem(obj)
 			
 			<div class="row">
 				<div class="col-md-12 detail">
-				<h3>Q ＆ A</h3>
+				<h3 id="QA">Q ＆ A</h3>
 				
 				<div>
 					<textarea rows="" cols="" placeholder="상품문의 입력"></textarea>
