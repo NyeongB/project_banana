@@ -220,7 +220,6 @@ p
 	    map.setZoomable(zoomable);    
 	}
 				
-	
 
 	//대분류 카테고리 눌렀을 때 
 	function cate(obj)
@@ -290,7 +289,10 @@ p
 	function cateFinal(obj)
 	{
 		scatecode = obj.getAttribute("id");
-		alert(scatcode);
+		
+		//alert(scatecode);
+		document.getElementById('scate').value= scatecode;
+		
 	}
 	
 	
@@ -365,6 +367,7 @@ p
 			}
 			
 			$("#postItem").submit();
+			
 			
 		});
 	});
@@ -508,11 +511,9 @@ p
 				
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
-				${addr }
-				
-
-				
-				<form role="form" class="form-group" name="postItem" id="postItem">
+		
+	
+				<form action="postitem.action"  method="post"  id="postItem" enctype="multipart/form-data">
 				
 					<div>제목(*) <input type="text" class="form-control" id="title" name="title"/></div>
 					
@@ -573,26 +574,55 @@ p
 							</div>
 					
 					</div><!--end col-md-4  -->
+					<input type="hidden" id="scate" name="scate">
 					
 				</div>	<!--end col-md-12  -->
+				
+			
 					
 					
 			
-					<div>브랜드명(*) <input type="text" class="form-control" id="brand" /></div>
+					<div>브랜드명(*) <input type="text" class="form-control" id="brand" name="brand"/></div>
 					
 					<div>
 						사진(*)<br>
-						(앞,뒤,양,옆)
-						
-						<img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg" onclick="setZoomable(false)"/>
 						
 						
-						<div class="file-field big">
-					    <a class="btn-floating btn-lg pink lighten-1 mt-0 float-left">
-					      <i class="fas fa-paperclip" aria-hidden="true"></i>
-					      <input type="file" multiple>
-					    </a>
-					    </div>
+						<!-- <img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg" onclick="setZoomable(false)"/>
+ -->						
+						
+						<!-- <div class="txt col-sm-3" style="line-height: 30px;">
+			            <span style="color: #828282; font-size: 12px; width: 600px;">
+			               ※ 가로 150px 세로 150px 크기의 사진을 권장합니다.
+			            </span>
+			            <form action="" method="">
+			                 <input type='file' id="imgInp" />
+			                 <div style="width: 150px; height: 150px; overflow: hidden">
+			                    <img id="foo"src="#" />
+			                  </div>
+			             </form>
+			         	</div>
+			         	
+						 -->
+						<input type="file" id="gdsImg" name="file">
+						<div class="select_img"><img src=""></div>
+						
+						<script type="text/javascript">
+						
+						 $("#gdsImg").change(function(){
+						   if(this.files && this.files[0]) {
+						    var reader = new FileReader;
+						    reader.onload = function(data) {
+						     $(".select_img img").attr("src", data.target.result).width(150);        
+						    }
+						    reader.readAsDataURL(this.files[0]);
+						   }
+						  });
+						
+						</script>
+					    
+					  
+					    
 					    
 					    <p>
 					    ＊상품 이미지는 640x640에 최적화 되어 있습니다.<br>
@@ -611,19 +641,19 @@ p
 					<div class="col-md-12">
 						
 						<div class="col-md-4">가격(*)<p>숫자만 입력 가능</p>
-						<input type="text" class="form-control" id="cost" numberonly = "true" /></div>
+						<input type="text" class="form-control" id="cost" name="cost" numberonly = "true" /></div>
 					</div>
 					
 					<div class="col-md-12">	
 						<div class="col-md-4">할인가(*)<p>숫자만 입력 가능</p>
-						<input type="text" class="form-control" id="dis_cost" numberonly = "true"/></div>
+						<input type="text" class="form-control" id="dis_cost" name="dis_cost" numberonly = "true"/></div>
 					</div>
 					
 					<div class="col-md-12">
 						<div class="col-md-12">목표인원(*)<p>숫자만 입력 가능</p></div>
 						
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="goal" numberonly = "true" />
+							<input type="text" class="form-control" id="goal" name="goal" numberonly = "true" />
 						</div>
 					</div>
 					
@@ -637,7 +667,7 @@ p
 						
 						<div class="col-md-4 loc">
 						상세 분배 장소
-						<input type="text" id="detailLoc" class="form-control"> 
+						<input type="text" id="detailLoc" name="detailLoc" class="form-control"> 
 						</div>
 						
 						
@@ -650,7 +680,7 @@ p
 					<div class="col-md-12 ">	
 						<div class="col-md-4">
 							수요조사 시작일
-							<input type="text" id="startDate" class="form-control">
+							<input type="text" id="startDate" name="startDate" class="form-control">
 							<!-- <span class="glyphicon glyphicon-calendar"></span> -->
 						</div>
 			
@@ -660,7 +690,7 @@ p
 				
 						 <div class="col-md-4">
 							수요조사 종료일
-							<input type="text" id="endDate" class="form-control" onclick="endCheck()">	
+							<input type="text" id="endDate" name="endDate" class="form-control" onclick="endCheck()">	
 							<label></label>
 						</div>
 					</div>
@@ -669,7 +699,7 @@ p
 					<div class="col-md-12">	
 						<div class="col-md-4">
 							분배일시    
-							<input type="text" id="bunDate" class="form-control" onclick="bunCheck()">
+							<input type="text" id="bunDate" name="bunDate" class="form-control" onclick="bunCheck()">
 							
 						</div>
 						
@@ -679,7 +709,7 @@ p
 						
 						 <div class="col-md-4">
 							상품반환 일시	
-							<input type="text" id="returnDate" class="form-control" onclick="returnCheck()">
+							<input type="text" id="returnDate" name="returnDate" class="form-control" onclick="returnCheck()">
 
 						</div>
 				  </div>		
@@ -687,7 +717,7 @@ p
 				  <div class="col-md-12 gonggustart">
 						<div class="col-md-4">
 							영수증 첨부일	
-							<input type="text" id="receiptDate" class="form-control" onclick="receiptCheck()">
+							<input type="text" id="receiptDate" name="receiptDate" class="form-control" onclick="receiptCheck()">
 						</div>
 				  </div>
 				  	
@@ -701,9 +731,9 @@ p
 						</div>
 					</div><!--end col-md-12  -->
 					
-				</form>
-				</div><!--end col-md-8  -->
 				
+				</div><!--end col-md-8  -->
+				</form>
 
 				<div class="col-md-3">
 				</div>
