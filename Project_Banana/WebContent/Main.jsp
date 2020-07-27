@@ -32,16 +32,28 @@ String cp = request.getContextPath();
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>-->
 
 <style type="text/css">
-* {
+
+@font-face 
+{ 
+	font-family: 'yg-jalnan';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+	font-weight: normal; 
+	font-style: normal; 
+ }
+
+* 
+{
 	margin: 0;
 	padding: 0;
 }
 
-body {
+body 
+{
 	font: 17px 'Nanum Gothic', sans-serif;
 }
 
-.bxslider ul {
+.bxslider ul 
+{
 	width: 700px;
 	
 }
@@ -58,6 +70,21 @@ li {
 #allCheck, #selectDelete {
 	margin-left: 10px;
 }
+
+.introduce
+{
+	width: 100vw;
+	height: 300px;
+
+}
+.introduce li
+{
+	list-style: none;
+	font-family: 'yg-jalnan';
+	color: var(--back-color);
+	font-size: 30pt;
+}
+
 </style>
 <script src="script/script.js"></script>
 <script type="text/javascript">
@@ -98,22 +125,36 @@ li {
 
 
 			<div class="col-md-8">
-				<ul class="bxslider">
-					<li><a href="#"><img
-							src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
-							alt="" ></a></li>
-					<li><a href="#"><img
-							src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
-							alt=""></a></li>
-					<li><a href="#"><img
-							src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
-							alt="" ></a></li>
-							
-					<li><a href="#"><img
-					src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
-					alt="" ></a></li>
-				</ul>
-
+				<div class="col-md-12">
+					<ul class="bxslider">
+						<li><a href="#"><img
+								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
+								alt="" ></a></li>
+						<li><a href="#"><img
+								src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
+								alt=""></a></li>
+						<li><a href="#"><img
+								src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
+								alt="" ></a></li>
+								
+						<li><a href="#"><img
+						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
+						alt="" ></a></li>
+					</ul>
+				</div>
+				<div class="col-md-12 introduce text-center">
+				<div class="col-md-3 text-right">
+					<img src="images/town.png" style="width:500px;" alt="" />
+				</div>
+				<div class="col-md-9 text-left">
+					<ul>					
+						<li>바로옆과</li>
+						<li>나눠쓰고</li>
+						<li>나눠주는</li>
+					</ul>				
+				</div>
+					
+				</div>
 
 			</div>
 			<!-- col-md-8 end -->
