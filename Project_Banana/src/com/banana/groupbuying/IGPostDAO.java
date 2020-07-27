@@ -41,5 +41,5 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> add(GPostDTO dto);
 	
 	//공동구매 상품등록
-	public ArrayList<GPostDTO> postItem(GPostDTO dto);
+	public void postItem(GPostDTO dto);
 }
