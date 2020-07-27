@@ -65,7 +65,7 @@ function enterChul(obj)
 				<C:forEach var="attendLists" items="${attendList }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td><img src="images/oz.jpg" class="img-rounded" alt="오즈.jpg" width="100px" /></td>
+					<td><img src="${attendLists.photo }" class="img-rounded" alt="오즈.jpg" width="100px" /></td>
 					<td>${attendLists.title }</td>
 					<td>${attendLists.count+1 }/${attendLists.member_num }</td>
 					<td>${attendLists.bun_date }</td>

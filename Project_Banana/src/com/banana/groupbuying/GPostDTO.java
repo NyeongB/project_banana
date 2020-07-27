@@ -3,11 +3,12 @@ package com.banana.groupbuying;
 public class GPostDTO
 {
 	
-	private String g_post_code, b_user_code, g_cate_code,loc_name,loc_code,nickname,g_apply_code,
+	private String g_post_code, b_user_code, g_cate_code,loc_name,loc_code,nickname,g_apply_code, 
 		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code,url;
 
-	private int cost, dis_cost, member_num, count,point;
+	private int cost, dis_cost, member_num, count,point; 
 	private String bun_loc, bun_date, return_date, receipt_date;
+	
 	private String progress;	// 나의 공동구매 진행 상황
 	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
 	
@@ -16,7 +17,28 @@ public class GPostDTO
 	// 출석체크
 	private int chulCheck;
 	
+	// 리뷰를 위한
+	private String review;
+	private int star;
 	
+	
+	//getter/setter 설정	
+	public String getReview()
+	{
+		return review;
+	}
+	public int getStar()
+	{
+		return star;
+	}
+	public void setStar(int star)
+	{
+		this.star = star;
+	}
+	public void setReview(String review)
+	{
+		this.review = review;
+	}
 	public int getStart()
 	{
 		return start;
@@ -34,7 +56,6 @@ public class GPostDTO
 		this.end = end;
 	}
 
-	//getter/setter 설정	
 	public String getG_success_code()
 	{
 		return g_success_code;
