@@ -7,8 +7,22 @@
 <mapper namespace="com.banana.admin.IAdminReplyPostDAO">
 	
 	<select id="postList" resultType="com.banana.admin.PostDTO">
-	SELECT * FROM VIEW_POST
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT TITLE, CONTENT, ID, TYPE, WDATE, NICKNAME,CODE FROM VIEW_POST ORDER BY WDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+	
+	
+	]]>
 	</select>	
+	
+	<select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_POST
+	</select>
 	
 	<select id="replyList" resultType="com.banana.admin.ReplyDTO">
 	SELECT * FROM VIEW_REPLY
