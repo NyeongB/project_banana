@@ -434,7 +434,7 @@ function orderItem(obj)
 									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
 									
 									<li>분배일시 : ${lists.bun_date }</li>
-									<li>분배장소 :${lists.loc_name }</li>
+									<li>분배장소 :${lists.bun_loc }</li>
 								
 									
 								</ul>
