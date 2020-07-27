@@ -269,7 +269,8 @@ function requestPay(p,t) {
 									   <label for="m10000"><input type="radio" name="charge" id="10000" onclick="getPoint(this.id)">10,000원</label>
 									   <label for="m20000"><input type="radio" name="charge" id="20000" onclick="getPoint(this.id)">20,000원</label>
 									   <label for="m30000"><input type="radio" name="charge" id="30000" onclick="getPoint(this.id)">30,000원</label>
-									   <label for="m40000"><input type="radio" name="charge" id="100" onclick="getPoint(this.id)">40,000원</label>
+									   <label for="m40000"><input type="radio" name="charge" id="40000" onclick="getPoint(this.id)">40,000원</label>
+									   <label for="m50000"><input type="radio" name="charge" id="50000" onclick="getPoint(this.id)">50,000원</label>
 									</div>
 								</div><br>
 
