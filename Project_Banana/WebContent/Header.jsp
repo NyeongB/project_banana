@@ -172,17 +172,27 @@
          <!-- <input type="search" id="sear"/> -->
          <ul id="nav_icons">
          
-         	 <!-- 드롭다운 -->
+         
+         
+         <c:choose>
+		
+		<c:when test="${sessionScope.user != null }">
+		<!-- 드롭다운 -->
 	        <!-- Single button -->
 			<div class="btn-group alarm">
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="ajax()">
-			    Action <span class="caret"></span>
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
+			    <span class="glyphicon glyphicon-bell"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu" id="alram">
 			  <div id="in"></div>
 				</ul>
 			</div>
 			<!-- 드롭다운 끝  -->
+		</c:when>
+		
+		</c:choose>
+         
+         	 
 			
 			<!-- 검색기능 잠정중단
 			<li class="search_bar"><a href="">search</a>
