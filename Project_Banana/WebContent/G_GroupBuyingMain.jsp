@@ -423,8 +423,8 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${catelist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${catelist.photo }
+	                           			<img src="${catelist.photo }" style="width: 180px; height: 180px;">
+	                           			
 	                           			<div class="caption">
 	                                      <h5 class="thick">${catelist.title }</h5>
 	                                      <p>${catelist.loc_name }</p>

@@ -32,7 +32,8 @@
 	
 	<!--관심카테고리 기반 추천 게시물  -->
 	<select id="gCateList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST, L.LOC_NAME, PT.PHOTO, G.G_POST_CODE
+		
+        SELECT TITLE,DIS_COST, L.LOC_NAME, PT.PHOTO, G.G_POST_CODE
 		FROM G_POST G  LEFT JOIN JOIN J
         ON G.B_USER_CODE = J.B_USER_CODE
         LEFT JOIN G_PHOTO PT
@@ -47,7 +48,9 @@
                                 WHERE B_USER_CODE = #{b_user_code})
         AND G_CATE_MCODE IS NOT NULL
         )
-        AND G.B_USER_CODE != #{b_user_code}
+        AND G.B_USER_CODE !=  #{b_user_code}
+        ORDER BY G.WDATE DESC
+        
 	</select>
 	
 	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->
