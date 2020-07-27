@@ -21,7 +21,7 @@
         //System.out.println(session.getAttribute("postcode"));
         
         
-        String nickName = info.getNickname();
+       /*  String nickName = info.getNickname(); */
 
 %>
 
@@ -190,7 +190,7 @@ textarea
 
 <script type="text/javascript">
 	var replyCode;
-	var nick = "<%=nickName %>";
+	<%-- var nick = "<%=nickName %>"; --%>
 	
 	var a;
 	$().ready(function() 
@@ -366,11 +366,11 @@ textarea
 	  	
 	    var nickname = document.getElementById(replyCode).classList.item(2);
 	   
-	    if(nickname != nick)
-	    {
+	   // if(nickname != nick)
+	    //{
 	 		$(".reply").html("@"+nickname+" :");
 	 	
-	    }
+	    //}
 		
 		}
 		
