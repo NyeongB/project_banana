@@ -68,7 +68,15 @@
          
         <tr>
             <td colspan="6" class="text-right">
-              <input type="button" class="btn" value="목록보기" onclick="location.href='<%=cp%>/adminnoticelist.action'">
+            	<c:choose>
+		<c:when test="${sessionScope.admin != null }">
+			 <input type="button" class="btn" value="목록보기" onclick="location.href='<%=cp%>/adminnoticelist.action'">
+		</c:when>
+		
+		<c:otherwise>
+			 <input type="button" class="btn" value="목록보기" onclick="location.href='<%=cp%>/usernoticelist.action'">
+		</c:otherwise>
+		</c:choose>
             </td>
         </tr>          
          

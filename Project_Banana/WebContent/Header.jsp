@@ -7,7 +7,7 @@
 %>
 <%
 	session =  request.getSession();
-	String id = "t";
+	String id = "";
     SessionInfo info = (SessionInfo)session.getAttribute("user");
     // 아이디가져오기
     if(info !=null)
