@@ -115,11 +115,21 @@ p
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		
+		 imageSrc = "images/markerGif03.gif"
+		      
+		      
+		 imageSize = new kakao.maps.Size(54,59)  //마커 이미지 크기
+		 imageOption = {offset: new kakao.maps.Point(27,69)};
+		
+		 
+		//구성된 마커의 속성을 활용하여 마커 이미지 생성
+	     markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 		
 		// 지도를 클릭한 위치에 표출할 마커입니다
 		var marker = new kakao.maps.Marker({ 
 		 // 지도 중심좌표에 마커를 생성합니다 
 		    position: map.getCenter() 
+		    , image : markerImage
 		}); 
 		
 		// 지도에 마커를 표시합니다
@@ -667,7 +677,7 @@ p
 						
 						<div class="col-md-4 loc">
 						상세 분배 장소
-						<input type="text" id="detailLoc" name="detailLoc" class="form-control"> 
+						<input type="text" id="detailLoc" name="detailLoc" class="form-control" readOnly="readonly"> 
 						</div>
 						
 						
