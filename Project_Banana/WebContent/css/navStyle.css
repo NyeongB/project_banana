@@ -54,6 +54,8 @@
 	background-color: var(--back-color);
 	opacity:92%;
 	display: flex;
+	position:relative;
+	z-index:9000;
 	width:100%;
 	align-items: center;
 	justify-content: space-between;
