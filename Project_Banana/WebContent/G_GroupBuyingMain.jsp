@@ -486,12 +486,12 @@ function logincheck()
 		<div class="col-md-2">
 			<div class="floating">
 				<div><span  class="thick">최근게시물</span></div>
-				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+				<div><img src="${gRecentLists.photo }" class="lastest_img img-rounded"></div>
 				<div>
 					오늘 본 상품
 					<c:if test="${sessionScope.postcode != null }">	
 					<c:forEach var="gRecentLists" items="${gRecentList }">
-						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span><%-- ${gRecentLists.photo}  --%></span></a>
 					</c:forEach>			
 					
 					</c:if>					

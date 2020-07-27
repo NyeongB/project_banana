@@ -354,8 +354,9 @@ a:active
 				<div class="row"> 
 					<div class="col-md-12">
 						<div class="row item_content">
+						<c:if test="${ status.count%6 eq 0 || status.count%12 eq 0}" ></c:if>
 	                  	<c:forEach var="gslists" items="${gCatemMainList }" varStatus="status"  >
-	                  	<c:if test="${ status.count%6 eq 0 }" ><br/></c:if>
+	                  	
 
 	                     <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
@@ -388,6 +389,7 @@ a:active
 	                           		    
 	                           </div>
 	                     </div>
+		                 
 	                     </c:forEach>  
 							
 							
