@@ -21,7 +21,7 @@
         //System.out.println(session.getAttribute("postcode"));
         
         
-        
+        String nickName = info.getNickname();
 
 %>
 
@@ -172,10 +172,25 @@ textarea
 	
 	
 }
+#replyinsert
+{
+	margin-bottom: 20px;
+}
+
+#Rreply
+{
+	padding-top: 30px;
+	font-weight: bold;
+}
+
+
+
 
 </style>
 
 <script type="text/javascript">
+	var replyCode;
+	var nick = "<%=nickName %>";
 	
 	var a;
 	$().ready(function() 
@@ -225,9 +240,141 @@ textarea
 						
 					});
 				});
+				
+				
+				
+				
+				
+				
+				// 댓글 등록
+				$("#replyinsert").click(function() 
+				{
+					var id1 = "<%=info %>";
+					   
+					
+					if(id1 == "null" || id1 ==" " )
+					{
+						if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+						{
+							// 확인 버튼 클릭 시 동작
+							
+							location.href = "loginmain.action";
+								
+						}
+						else // 취소 버튼 클릭 시 동작
+						{
+							location.href = "redirect:groupbuyingitempage.action";
+						}
+					}
+					else// 회원이면
+					{
+						
+						<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
+						   
+						var replyCode = "<%=r_replycode %>"; --%>
+						
+						
+						
+						// replyCode 가 null이면 댓글 작성
+						if(replyCode == null ) 
+						{
+							var formData = $("#replyForm").serialize();
+							
+							$.ajax({
+								
+								type : "POST"
+								, url : "g_replyinsert.action"
+								, data : formData
+								, success : function(data) 
+								{
+									$("#resultReply").html(data);
+								}
+							,error:function(request,status,error)
+			                  {
+			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			                  }    
+								
+							});// end ajax	
+						
+						}else// 댓글 코드 가지고 있으면(null 아니면) 대댓글 작성
+						{
+							
+						
+							var formData = document.getElementById("reply_text").innerHTML;
+							console.log(formData);
+							
+							
+							$.ajax({
+								
+								type : "POST"
+								, url : "g_rreplyinsert.action" 
+								, data : {formData :formData, replyCode:replyCode}
+								, success : function(data) 
+								{
+									$("#resultReply").html(data);
+								}
+								,error:function(request,status,error)
+			                  {
+			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			                  }      
+							});	 
+						}
+						
+					}	
+
+				});	
+				
+				
 		
 		
 	});
+	
+	
+
+	//댓글 달기 클릭 시 대댓글 입력 가능 하게 동작
+	function rreplyadd(obj) 
+	{
+		
+		var id1 = "<%=info %>";
+		   
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
+				location.href = "loginmain.action";
+					
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingitempage.action";
+			}
+		}
+		else
+		{
+		
+		
+	  	replyCode = obj.getAttribute("id");
+	  
+		//console.log(replyCode);
+	  	
+	  	
+	    var nickname = document.getElementById(replyCode).classList.item(2);
+	   
+	    if(nickname != nick)
+	    {
+	 		$(".reply").html("@"+nickname+" :");
+	 	
+	    }
+		
+		}
+		
+	}
+
+	
+	
 
 /* function test()
 {
@@ -491,12 +638,60 @@ function orderItem(obj)
 				<div class="col-md-12 detail">
 				<h3 id="QA">Q ＆ A</h3>
 				
-				<div>
-					<textarea rows="" cols="" placeholder="상품문의 입력"></textarea>
+				
+				<div class="form-inline">
+				<form action="" id="replyForm">
+					<div>
+					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
+					</div>
+					<div>
+					<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+					</div>
+					<input type="hidden" name="postcode" value="<%=postcode %>">
+				</form>
 				</div>
-				<div class="bu text-right">
-					<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+				
+				<!-- 댓글 INSERT -->
+				<div  id="resultReply">
+				<c:forEach var="greplyList" items="${greplyList }">
+					<div>
+						
+						<div class="form-inline">
+						<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
+						<c:if test="${greplyList.l_level == 1}">
+						<div class="col-md-1">
+						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
+						</div>
+						</c:if>
+						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-2 text-right">${gkList.wdate }</div>
+						</div>
+		
+						<div id="Rreply">${greplyList.reply }</div> 
+						<div class="form-inline text-right">
+						<div class="col-md-9"></div>
+						
+						<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
+						<c:if test="${greplyList.l_level == 0}">
+						<div class="col-md-1 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)">댓글달기</div>
+						
+						
+							
+						</c:if>
+						
+						<div class="col-md-1">좋아요</div>
+						<div class="col-md-1">신고하기</div>
+						</div>
+					</div>
+					<hr>	
+					
+				</c:forEach>
+				
 				</div>
+				
+				
+				
+				
+				
 				
 				
 				</div>

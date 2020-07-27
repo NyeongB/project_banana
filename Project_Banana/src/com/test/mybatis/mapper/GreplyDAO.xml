@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.reply.g_reply.IGreplyDAO">
+
+	<!-- 공동구매 댓글 조회 -->
+	<select id="greplyList" resultType="com.banana.reply.g_reply.GreplyDTO">
+		SELECT G.G_REPLY_CODE, J.NICKNAME, G.REPLY, TO_CHAR(TO_DATE(G.WDATE, 'YY-MM-DD'), 'YY-MM-DD') AS WDATE, L_LEVEL
+		FROM G_REPLY G LEFT JOIN JOIN J
+		ON G.B_USER_CODE = J.B_USER_CODE
+		WHERE G.G_POST_CODE = #{g_post_code}
+		ORDER BY G.WDATE DESC
+	</select>
+
+	<!-- 공동구매 댓글 insert -->
+	<insert id="greplyInsert">
+		INSERT INTO G_REPLY( G_REPLY_CODE, G_POST_CODE, B_USER_CODE, REPLY, L_LEVEL)
+   		VALUES('G_REP'||SEQ_G_REPLY.NEXTVAL, #{g_post_code}, #{b_user_code}, #{reply}, 0)
+	</insert>
+	
+	<!-- 공동구매 대댓글 insert -->
+	<insert id="gRreplyInsert">
+		INSERT INTO G_REPLY( G_REPLY_CODE, G_POST_CODE, B_USER_CODE, REPLY, G_REPLY_REF_CODE, L_LEVEL)
+   		VALUES('G_REP'||SEQ_G_REPLY.NEXTVAL, #{g_post_code}, #{b_user_code}, #{reply},  #{g_reply_ref_code}, 1)
+	</insert>
+
+</mapper>
