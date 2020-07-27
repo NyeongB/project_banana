@@ -80,10 +80,10 @@ nav
 							<div class="text-right">
 					
 						
-						   <div class="form-inline"><h4>총 수입 : <input type="text" 
+						  <!--  <div class="form-inline"><h4>총 수입 : <input type="text" 
 						   class="form-control" readonly="readonly" value="30,000원"></h4></div>
 						   <div class="form-inline"><h4>총 지출 : <input type="text" 
-						   class="form-control" readonly="readonly" value="20,000원"></h4></div>
+						   class="form-control" readonly="readonly" value="20,000원"></h4></div> -->
 						
 					</div>
 						나의 잔여 포인트 <span>${sumPoint }</span>점 <input type="button"
