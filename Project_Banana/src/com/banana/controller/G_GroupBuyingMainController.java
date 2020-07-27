@@ -24,6 +24,7 @@ import com.banana.my.MyReviewDTO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RPostDTO;
+import com.banana.reply.g_reply.IGreplyDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
 import com.banana.util.Paging;
@@ -239,10 +240,8 @@ public class G_GroupBuyingMainController
 			
 			
 			try
-			{
-				
-				HttpSession session = request.getSession(); 		
-			      
+			{		
+			    IGreplyDAO dao2 = SqlSession.getMapper(IGreplyDAO.class);
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
@@ -260,6 +259,7 @@ public class G_GroupBuyingMainController
 				}
 				//String title = list.get(0).getTitle();
 				
+				model.addAttribute("greplyList", dao2.greplyList(code));
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);
@@ -276,6 +276,8 @@ public class G_GroupBuyingMainController
 			
 			return view;
 		}
+	  
+	  
 		
 	  //주문상세 확인 페이지
 	  @RequestMapping(value = "/groupbuyingjumunconfirm.action", method =RequestMethod.GET)
