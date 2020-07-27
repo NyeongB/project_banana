@@ -652,7 +652,7 @@ input
 				<span>시/군/구 : </span> 
 				
 				<!-- 시/군/구 들어올부분  -->
-				<div id="sel"></div>
+				<span id="sel"></span>
 				</div>
 				
 				</div>

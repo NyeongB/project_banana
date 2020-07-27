@@ -140,7 +140,7 @@ p
 								</div>
 
 							</div> 
-						</div> <!-- end center-block -->
+						</div> <!w-- end center-block -->
 					</div>  <!-- col-md-8 end -->
 					
 					

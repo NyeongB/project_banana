@@ -4,10 +4,22 @@ public class NoticeListDTO
 {
 	private String num,title,id,wdate, notice_code, name, content, admin,f_file;
 	
+	private String rnum;
+	
+	
+	
 	
 	
 
 
+	public String getRnum()
+	{
+		return rnum;
+	}
+	public void setRnum(String rnum)
+	{
+		this.rnum = rnum;
+	}
 	public String getF_file()
 	{
 		return f_file;

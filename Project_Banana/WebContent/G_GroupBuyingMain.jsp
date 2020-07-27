@@ -42,6 +42,12 @@
 
 <style type="text/css">
 
+
+small
+{
+	font-weight: bold;
+}
+
 .rentNav 
 {
 	margin-top: 40px;
@@ -387,8 +393,16 @@ function logincheck()
 	                           			${mylist.photo }
 	                           			<div class="caption">
 	                                      <h5 class="thick">${mylist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>${mylist.nickname }</small>
+	                                        </div>
 	                                      <p>${mylist.loc_name }</p>
-	                                      <p><span class="price"><fmt:formatNumber value="${mylist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"><fmt:formatNumber value="${mylist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -427,8 +441,15 @@ function logincheck()
 	                           			
 	                           			<div class="caption">
 	                                      <h5 class="thick">${catelist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                      <div class="col-md-12 text-right wr">
+	                                        	<small>${catelist.nickname }</small>
+	                                        </div>
 	                                      <p>${catelist.loc_name }</p>
-	                                      <p><span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -470,8 +491,16 @@ function logincheck()
 	                           			<%-- --%>
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>${newlist.nickname }</small>
+	                                        </div>
 	                                      <p>${newlist.loc_name }</p>
-	                                      <p><span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		   
 	                           </div>

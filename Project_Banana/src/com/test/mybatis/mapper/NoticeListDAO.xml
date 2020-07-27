@@ -7,15 +7,15 @@
 <mapper namespace="com.banana.admin.INoticeListDAO">
 	
 	<select id="list" resultType="com.banana.admin.NoticeListDTO">
+	<![CDATA[
 	SELECT *
-	FROM VIEW_NOTICELIST	
-	
-	<!-- 공지사항 코드, 작성자 이름, 콘텐츠 추가 
-	  CREATE OR REPLACE FORCE VIEW "BANANA"."VIEW_NOTICELIST" ("NUM", "TITLE", "ID", "WDATE", "VIEWS","NOTICE_CODE","NAME","CONTENT") AS 
-  SELECT SUBSTR(N.NOTICE_CODE,5) AS NUM,N.TITLE,A.ID,N.WDATE,N.VIEWS, N.NOTICE_CODE AS NOTICE_CODE , a.name as NAME , content 
-FROM NOTICE N JOIN ADMIN A
-ON N.ADMIN_CODE = A.ADMIN_CODE;
-	 -->
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT TITLE, ID,WDATE,VIEWS,NOTICE_CODE,NAME,CONTENT, F_FILE
+	FROM VIEW_NOTICELIST ORDER BY WDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+	]]>
 	</select>	
 	
 	
@@ -25,6 +25,11 @@ ON N.ADMIN_CODE = A.ADMIN_CODE;
     VALUES('NOTI' || SEQ_NOTI.NEXTVAL,#{admin},#{title},#{content},#{f_file})
 
    </select>
+   
+   <select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_NOTICELIST
+	</select>
 	
 </mapper>  
 
