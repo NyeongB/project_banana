@@ -241,12 +241,12 @@ public class G_GroupBuyingMainController
 			try
 			{
 				
-				 HttpSession session = request.getSession();		
+				HttpSession session = request.getSession(); 		
 			      
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
-		
+				
 				
 				
 				GPostDTO dto = new GPostDTO();
