@@ -247,14 +247,17 @@ public class G_GroupBuyingMainController
 				
 				String code = request.getParameter("postcode"); 
 				
-				
+				int member = 0;
 				
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
 				
 				//int member = dto.getMember_num();
 				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
-				int member = list.get(0).getMember_num();
+				if( list.size() !=0)
+				{
+					member = list.get(0).getMember_num();
+				}
 				//String title = list.get(0).getTitle();
 				
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
