@@ -41,6 +41,23 @@
 
 
 <style type="text/css">
+
+.rentNav 
+{
+	margin-top: 40px;
+	margin-left: 200px;
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+
+
+#location 
+{
+	width: 23px;
+	height: 20px;
+}
+
 .price
 {
 	color:var(--hover-color);
@@ -151,11 +168,85 @@ p
 	height: 150px;
 }
 
-
+.logC
+{
+	margin-bottom: 150px;
+	padding: 10px;
+	padding-top: 15px;
+}
 
 </style>
 <script type="text/javascript">
 	
+//위치 설정 회원 유무 체크해서 보여주기
+window.onload = function() 
+{
+	var id1 = "<%=info%>";
+	
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		$("#loc").html("위치 설정하기");
+	}
+	else
+	{
+		$.get("locationajax.action", function(data) 
+		{
+			$("#loc").html(data);
+		}) 
+	}
+	 
+	
+}	
+
+
+
+// 버튼 클릭 시 로그인 유무 체크 후 동작 다르게
+function logincheck() 
+{
+	var id1 = "<%=info %>";
+   
+	
+	if(id1 == "null" || id1 ==" " )
+	{
+		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		{
+			// 확인 버튼 클릭 시 동작
+			
+		location.href = "loginmain.action";
+			
+		}
+		else // 취소 버튼 클릭 시 동작
+		{
+			location.href = "redirect:r_main.action";
+		}
+	}
+	else
+	{
+		// 회원일 때 회원정보 수정 페이지로 이동하기
+		
+		
+	}
+	
+}
+	
+	
+
+ $(document).ready(function() 
+{
+	
+	 $( ".top" ).click( function() {
+			$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+			return false;
+		} );
+		
+		
+		$(".bottom").click(function() 
+		{
+			$("html, body").animate({scrollTop: $(document).height() }, "slow");
+			return false;
+		});
+});
 
 	
 	function goList(obj)
@@ -202,7 +293,7 @@ p
 			}
 			else // 취소 버튼 클릭 시 동작
 			{
-				location.href = "g_main.action";
+				location.href = "redirect:g_main.action";
 			}
 		}
 		else
@@ -231,6 +322,23 @@ p
 
 
 <div class="container-fluid">
+	<div class="row">
+			<div class="col-md-12 rentNav form-inline">
+
+				<!-- 주소설정한 값 뜨기 -->
+				<div class="col-md-1">
+					<img src="images/icons_b50.png" id="location">
+				</div>
+				
+				<div class="col-md-11">
+					<small onclick="logincheck()" id="loc"></small>
+				</div>
+				
+				
+			</div>
+
+		</div>
+
 
 	<div class="row">
 		<div class="col-md-2">
@@ -280,10 +388,20 @@ p
 	                     </div>
 	                     </c:forEach> 
 	                     <c:if test="${check eq '1' }">
-							<tr>
-								<td>${noApply }</td>
-							</tr>
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noLogin }</b>
+							
+						</div>
 						</c:if> 
+						 <c:if test="${check eq '3' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noApply }</b>
+							
+						</div>
+						</c:if> 
+						
 	                     </div>
 	                     <!-- <div class="col-sm-2 col-md-2">
 	                        <h4 class="thick"><span class="line">2</span></h4>
@@ -348,9 +466,28 @@ p
 	                           </div>
 	                     </div>
 	                     </c:forEach>  
+	                     
+	                      <c:if test="${check eq '1' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noLogin }</b>
+							
+						</div>
+						</c:if> 
+						 <c:if test="${check eq '2' }">
+	                     <div class="logC">
+							
+								<b onclick="logincheck()">${noGcate }</b>
+							
+						</div>
+						</c:if> 
+	                     
+	                     
 	                	</div>
 	            </div>    
-			</div>			
+			</div>	
+			
+					
 			<div class="row">
 				<div class="col-md-12">
 				<div><span class="highlight">방금 올라온 나눠사요</span></div>

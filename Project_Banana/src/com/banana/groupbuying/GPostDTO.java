@@ -3,7 +3,7 @@ package com.banana.groupbuying;
 public class GPostDTO
 {
 	
-	private String g_post_code, b_user_code, g_cate_code,loc_name,nickname,g_apply_code,
+	private String g_post_code, b_user_code, g_cate_code,loc_name,loc_code,nickname,g_apply_code,
 		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code,url;
 
 	private int cost, dis_cost, member_num, count,point;
@@ -288,6 +288,14 @@ public class GPostDTO
 	public void setPoint(int point)
 	{
 		this.point = point;
+	}
+	public String getLoc_code()
+	{
+		return loc_code;
+	}
+	public void setLoc_code(String loc_code)
+	{
+		this.loc_code = loc_code;
 	}
 	
 	

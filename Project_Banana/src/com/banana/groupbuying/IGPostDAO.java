@@ -14,7 +14,7 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> gNewList();
 	
 	//카테고리별 
-	public ArrayList<GPostDTO> gCateList();
+	public ArrayList<GPostDTO> gCateList(GPostDTO dto);
 	
 	//대분류 카테고리 선택 시 메인페이지
 	public ArrayList<GPostDTO> gCateMainList(GCateDTO dto);
@@ -39,4 +39,7 @@ public interface IGPostDAO
 	
 	//공동구매 신청하기
 	public ArrayList<GPostDTO> add(GPostDTO dto);
+	
+	//공동구매 상품등록
+	public ArrayList<GPostDTO> postItem(GPostDTO dto);
 }

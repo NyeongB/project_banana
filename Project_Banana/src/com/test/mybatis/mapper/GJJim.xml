@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.groupbuying.IGJjimDAO">
+
+	<insert id="GJjim" >
+		INSERT INTO G_POST_JJIM(G_POST_JJIM_CODE,G_POST_CODE,B_USER_CODE)
+		VALUES('G_PJ'||SEQ_G_POST_JJIM.NEXTVAL, #{g_post_code}, #{b_user_code})
+	</insert>
+
+</mapper>

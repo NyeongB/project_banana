@@ -323,6 +323,56 @@ $().ready(function()
 			}	
 
 		});
+		
+		
+		
+		
+		$("#btn2").click(function() 
+		{
+			var id1 = "<%=info %>";
+			   
+			
+			if(id1 == "null" || id1 ==" " )
+			{
+				if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+				{
+					// 확인 버튼 클릭 시 동작
+					
+					location.href = "loginmain.action";
+						
+				}
+				else // 취소 버튼 클릭 시 동작
+				{
+					location.href = "redirect:rpostdetailpage.action";
+				}
+			}
+			else// 회원이면
+			{
+				
+				// !!! 여기부터 시작하기
+				if($("#date1").val()=="")
+				{
+					$("#date1").css({'border-color':"red"});
+					
+				}
+				if($("#date2").val()=="")
+				{
+					$("#date2").css({'border-color':"red"});
+					
+				}
+				
+					
+					
+			}
+			
+		});
+		
+		
+		
+		
+		
+		
+		
 
 });
 
@@ -636,13 +686,7 @@ function jjim()
 										<input type="text" placeholder="수령일을 입력하세요." class="form-control" id="date1" onclick="sstartDate()">
 										</div>
 										
-										<c:forEach var="reservationTime" items="${reservationTime }" varStatus="status">
-											<input type="hidden" value="${reservationTime.start_date }" id="s${status.count }" class="startD">
-											<input type="hidden" value="${reservationTime.end_date }" id="e${status.count }" class="endD">
-						
-											<c:if test="${status.last eq true}"><input type="hidden" value="${status.count }" id="num"></c:if>           
 										
-										</c:forEach>
 									
 										
 										<div class="col-md-2">
@@ -655,7 +699,7 @@ function jjim()
 										</div>
 										
 										<div class="col-md-12 text-right">
-											<h3>총 비용 : 20,000원</h3>
+											<h3 id="totalcost">총 비용 : 20,000원</h3>
 										</div>
 										</div>
 																	
@@ -690,7 +734,7 @@ function jjim()
 				<div class="col-md-12">
 					<ul class="nav nav-tabs">
   						<li role="presentation" ><a href="#" >상세정보</a></li>
-  						<li role="presentation"><a href="#QA" id="qa" class="active">Q ＆ A</a></li>
+  						<li role="presentation"><a href="#QA" id="qa" >Q ＆ A</a></li>
 
 					</ul>
 				</div>

@@ -123,6 +123,7 @@ public class Rent_MainController
 					model.addAttribute("noApply","비 회원 입니다. 로그인 시 이용 가능한 서비스 입니다.");
 					model.addAttribute("check","1");
 					
+					// 실시간 게시글
 					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 					model.addAttribute("rnewList", dao.rnewList());
 				}
@@ -135,7 +136,10 @@ public class Rent_MainController
 					RPostDTO dto = new RPostDTO();
 					dto.setB_user_code(userCode);
 					
+					// 실시간 게시글 조회
 					model.addAttribute("rnewList", dao.rnewList());
+					
+					// 관심 렌트 카테고리 추천 게시물 조회
 					model.addAttribute("rCateList", dao.rCateList(dto));
 				
 					
