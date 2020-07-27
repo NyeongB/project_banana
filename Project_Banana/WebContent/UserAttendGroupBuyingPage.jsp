@@ -63,6 +63,20 @@ String cp = request.getContextPath();
 		
 	}
 	
+	
+	// 리뷰 보내기
+	function review()
+	{
+		var successcode = document.getElementById("g_success_code").value;
+		var star = document.getElementById("star").value;
+		
+		console.log(star);
+		
+		//location.href = "greview.action?successcode="+successcode;
+		
+		
+	}
+	
 </script>
 <style type="text/css">
 
@@ -148,14 +162,18 @@ String cp = request.getContextPath();
 										<c:when test="${myGLists.progress eq '모집중'}">
 											<div class="btn-group" role="group">	
 												<button class="btn btn-secondary" id="${myGLists.g_apply_code }" onclick="gCancel(this)"type="button">신청취소</button>
+												
 											</div>									
 										</c:when>
 										<c:when test="${myGLists.progress eq '공구실패'}">										
-										</c:when>									
-										<c:otherwise>
+										</c:when>	
+										<c:when test="${myGLists.progress eq '공구성공'}">	
 											<div class="btn-group" role="group">													
 												<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
-											</div>
+												<input type="hidden" value="${myGLists.g_success_code }" id="g_success_code" />
+											</div>									
+										</c:when>								
+										<c:otherwise>											
 										</c:otherwise>								
 									</c:choose>										
 									
@@ -249,17 +267,11 @@ String cp = request.getContextPath();
 </div><!-- 모달 헤더 끝 -->
 
 <div class="modal-body"><!-- 모달바디 -->
-
+	<form action="" id="myForm">
 	<table class="table">
    		<tr>
    			<th>거래 유형</th>
    			<td colspan="2"><input type="text" value="공동구매" disabled="disabled" class="form-control"></td>
-   		</tr>
-   		<tr>
-   			<th>글 제목</th>
-   			<td colspan="4">
-   			<input type="text" value="자전거 빌려드려요!" disabled="disabled"  class="form-control">
-   			</td>
    		</tr>
    		<tr>
    			<th>내용</th>
@@ -270,24 +282,21 @@ String cp = request.getContextPath();
 		<tr>
 			<th>점수</th>
 			<td colspan="4">
-			<select name="star" id="" class="form-control">
-				<option value="">&#11088;</option>
-				<option value="">&#11088; &#11088;</option>
-				<option value="">&#11088; &#11088; &#11088;</option>
-				<option value="">&#11088; &#11088; &#11088; &#11088;</option>
-				<option value="">&#11088; &#11088; &#11088; &#11088; &#11088;</option>
+			<select name="star" id="star" class="form-control">
+				<option value="1">&#11088;</option>
+				<option value="2">&#11088; &#11088;</option>
+				<option value="3">&#11088; &#11088; &#11088;</option>
+				<option value="4">&#11088; &#11088; &#11088; &#11088;</option>
+				<option value="5">&#11088; &#11088; &#11088; &#11088; &#11088;</option>
 			</select>
 			</td>
 		</tr>
-		<tr class="file">	
-			<th>첨부파일</th>
-			<td colspan="4"><input type="file" value="" class="form-control"></td>
-		</tr>
-	</table>  		
-</div><!-- 모달바드끝 -->
+	</table>
+	</form>  		
+</div><!-- 모달바디끝 -->
 
 <div class="modal-footer"><!-- 모달 푸터 -->
-<button type="button" class="btn btn-primary">확인</button>
+<button type="button" class="btn btn-primary" onclick="review()">확인</button>
 <button type="button" class="btn btn-default" id="closeModalBtn1">취소</button>
 </div><!-- 모달 푸터 끝 -->
 

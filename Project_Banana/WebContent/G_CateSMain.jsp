@@ -361,8 +361,8 @@ a:active
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${gslists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${gslists.photo }
+	                           			<img src="${gslists.photo }" >
+	                           			
 	                           			<div class="caption">
 	                      
 	                                      <h5 class="thick">${gslists.title }</h5>
@@ -419,12 +419,12 @@ a:active
 						<div class="col-md-2">
 						<div class="floating">
 							<div><span  class="thick">최근게시물</span></div>
-							<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+							<div><img src="${gslists.photo }" class="lastest_img img-rounded"></div>
 							<div>
 								오늘 본 상품
 								<c:if test="${sessionScope.postcode != null }">	
 								<c:forEach var="gRecentLists" items="${gRecentList }">
-									<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+									<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span></span></a>
 								</c:forEach>			
 								
 								</c:if>					
