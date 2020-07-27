@@ -175,6 +175,12 @@ p
 	padding-top: 15px;
 }
 
+#locImg
+{
+	text-align: right;
+}
+
+
 </style>
 <script type="text/javascript">
 	
@@ -323,15 +329,16 @@ function logincheck()
 
 <div class="container-fluid">
 	<div class="row">
-			<div class="col-md-12 rentNav form-inline">
+			<div class="col-md-12 rentNav">
 
 				<!-- 주소설정한 값 뜨기 -->
-				<div class="col-md-1">
-					<img src="images/icons_b50.png" id="location">
+				<div class="col-md-1" id="locImg">
+				<img src="images/icons_b50.png" id="location">
 				</div>
-				
-				<div class="col-md-11">
-					<small onclick="logincheck()" id="loc"></small>
+			
+				<div class="col-md-10" >
+				<small onclick="logincheck()" id="loc"></small>
+					
 				</div>
 				
 				
@@ -403,46 +410,7 @@ function logincheck()
 						</c:if> 
 						
 	                     </div>
-	                     <!-- <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">2</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">3</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">4</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">5</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>                                  -->   
+	                   
 	               </div>	
 				</div>
 			
