@@ -668,7 +668,7 @@ function orderItem(obj)
 						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
 						</div>
 						</c:if>
-						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-2 text-right">${gkList.wdate }</div>
+						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-2 text-right">${greplyList.wdate }</div>
 						</div>
 		
 						<div id="Rreply">${greplyList.reply }</div> 
