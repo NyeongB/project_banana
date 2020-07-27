@@ -26,6 +26,7 @@ import com.banana.user.IUserDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LeaveDTO;
 import com.banana.user.LocDTO;
+import com.banana.user.PasswordDTO;
 import com.banana.util.Send;
 import com.banana.util.SessionInfo;
 
@@ -347,10 +348,15 @@ public class UserController
 		
 		// 비밀번호찾기 메인
 		@RequestMapping(value = "/userfindpw.action", method =RequestMethod.GET)
-		public String userFindPw(Model model)
+		public String userFindPw(Model model,HttpServletRequest request)
 		{
 			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
 			
+			HttpSession session = request.getSession();
+	         
+	        
+	        
+	        
 			model.addAttribute("pwList", dao.pwList());
 			
 			return "/UserPasswordFind.jsp";
