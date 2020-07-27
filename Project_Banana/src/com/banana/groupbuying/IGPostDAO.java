@@ -40,8 +40,9 @@ public interface IGPostDAO
 	//공동구매 신청하기
 	public ArrayList<GPostDTO> add(GPostDTO dto);
 	
+
 	//공동구매 상품등록
-	public ArrayList<GPostDTO> postItem(GPostDTO dto);
+	public void postItem(GPostDTO dto);
 	
 	// 공동구매 상품 전체 개수 구하기
 	public int getCount(String g_cate_bcode);
