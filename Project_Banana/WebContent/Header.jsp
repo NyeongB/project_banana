@@ -72,19 +72,33 @@
 
    <div id="header">
       
-      <div id="logo"><a href=""><span id="logo_text">Banana</span></a></div>
+      
+      
+      <c:choose>
+		<c:when test="${sessionScope.admin != null }">
+		<div id="logo"><a href="<%=cp%>/adminaccount.action"><span id="logo_text">Banana</span></a></div>
+		</c:when>
+		
+		<c:otherwise>
+		<div id="logo"><a href="<%=cp%>"><span id="logo_text">Banana</span></a></div>
+		</c:otherwise>
+		</c:choose>
+      
+      
       <ul id="nav_list">
-         <li><a href="<%=cp%>/g_main.action">공동구매</a></li>
-         <li><a href="<%=cp%>/r_main.action">렌트</a></li>
+         
          <c:choose>
 		<c:when test="${sessionScope.admin != null }">
-         <li><a href="<%=cp%>/adminaccount.action">관리자 페이지</a></li>	
 		</c:when>
 		<c:when test="${sessionScope.user != null }">
+		<li><a href="<%=cp%>/g_main.action">공동구매</a></li>
+         <li><a href="<%=cp%>/r_main.action">렌트</a></li>
          <li><a href="<%=cp%>/pointchargepage.action">포인트충전</a></li>
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:when>
 		<c:otherwise>
+		<li><a href="<%=cp%>/g_main.action">공동구매</a></li>
+         <li><a href="<%=cp%>/r_main.action">렌트</a></li>
          <li><a href="<%=cp%>/loginmain.action">포인트충전</a></li>
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:otherwise>
@@ -96,35 +110,36 @@
          
       </ul>
       
-      <div id="search_bar">         
          <!-- <input type="search" id="sear"/> -->
          <ul id="nav_icons">
          
          	 <!-- 드롭다운 -->
-	         <li>
-		         <div class="dropdown">
-		  			<button class="btn dropdown-toggle Btn" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
-		    
-				    <span class="glyphicon glyphicon-bell"></span>
-				  	</button>
-				  <%-- <div class="alram" ><jsp:include page="NotificationList.jsp"></jsp:include>
-				  </div>--%>
-				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-		    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-		   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-		    		 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-		   			 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-		  		  </ul>
-				</div>
-			</li>
+	        <!-- Single button -->
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			    Action <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#">Action</a></li>
+			    <li><a href="#">Another action</a></li>
+			    <li><a href="#">Something else here</a></li>
+			    <li class="divider"></li>
+			    <li><a href="#">Separated link</a></li>
+			  </ul>
+			</div>
 			<!-- 드롭다운 끝  -->
+			
+			<!-- 검색기능 잠정중단
 			<li class="search_bar"><a href="">search</a>
 				<ul>
 					<li><input type="search" /></li>
 				</ul>
 			</li>
+			 -->
+			 
              <c:choose>
 		<c:when test="${sessionScope.admin != null }">
+		
             <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
             <li>관리자 : ${sessionScope.admin }</li>			
 		</c:when>
@@ -140,7 +155,6 @@
 		</c:choose>       
 
          </ul>
-      </div>
       <div class="nav_Btn">
       	<a href=""><i class="fas fa-bars"></i></a>
       </div>

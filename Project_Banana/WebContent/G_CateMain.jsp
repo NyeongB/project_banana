@@ -302,12 +302,8 @@ a:active
 		                     <div class="col-sm-2 col-md-2">
 		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-		                           		
-		                           			<img src="${glists.photo }" >
-		                           	
-		                           			
-		                           			<div class="caption">
-		                      
+		                           		    <img src="${glists.photo }" >                       			
+		                           			<div class="caption">		                      				
 		                                      <h5 class="thick">${glists.title }</h5>
 		                                      <div class="col-md-12">
 	                                   			<div class="col-md-6">
@@ -352,7 +348,7 @@ a:active
 									<div class="col-md-2">
 									<div class="floating">
 										<div><span  class="thick">최근게시물</span></div>
-										<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+										<div><img src="${gslists.photo }" class="lastest_img img-rounded"></div>
 										<div>
 											오늘 본 상품
 											<c:if test="${sessionScope.postcode != null }">	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.groupbuying.GCateDTO;
 import com.banana.groupbuying.GPostDTO;
+import com.banana.groupbuying.IGJjimDAO;
 import com.banana.groupbuying.IGPostDAO;
 import com.banana.my.IMyPointDAO;
 import com.banana.my.MyReviewDTO;
 import com.banana.rent.IRPostDAO;
+import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RPostDTO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
@@ -139,13 +142,12 @@ public class G_GroupBuyingMainController
 			  
 			  if(info == null) //로그인 안 했을 시
 			  {
-				  model.addAttribute("noApply","로그인 시 이용가능한 서비스입니다.");
+				  model.addAttribute("noLogin","로그인 시 이용가능한 서비스입니다.");
 				  model.addAttribute("check","1"); 
 				  
 				  //새로 올라온 게시물
 				  model.addAttribute("gNewList", dao.gNewList());
-				  //카테고리게시물
-				  model.addAttribute("gCateList", dao.gCateList());
+				  
 				  
 				  
 			  }
@@ -157,8 +159,26 @@ public class G_GroupBuyingMainController
 				  
 				  //새로 올라온 게시물
 				  model.addAttribute("gNewList", dao.gNewList());
+
+				  
 				  //카테고리게시물
-				  model.addAttribute("gCateList", dao.gCateList());
+				  ArrayList<GPostDTO> gcateL = dao.gCateList(dto);
+				  
+				  if(gcateL.isEmpty())
+				  {
+					  model.addAttribute("noGcate","설정한 관심카테고리와 같은 공동구매 게시물이 없습니다.");
+					  model.addAttribute("check","2"); 
+					  
+				  }
+				  else
+				  {
+					  
+					  model.addAttribute("gCateList", dao.gCateList(dto));
+					  
+				  }
+				  
+				  
+
 				  
 				  //나의 현황
 				  ArrayList<GPostDTO> list = dao.gMyList(dto);
@@ -168,7 +188,7 @@ public class G_GroupBuyingMainController
 				  { 
 					  //System.out.println(1);
 					  model.addAttribute("noApply","신청한 거래가 없습니다.");
-					  model.addAttribute("check","1"); 
+					  model.addAttribute("check","3"); 
 				  }
 				  else 
 				  { 
@@ -411,4 +431,73 @@ public class G_GroupBuyingMainController
 		}
 
 	  
+	  
+	  
+	  
+	// 찜하기 클릭 시
+		
+		 @RequestMapping(value = "/gjjiminsert.action", method = RequestMethod.GET)
+		 public String gjjiminsert(HttpServletRequest request, HttpServletResponse response) 
+		 {
+			 String view = null;
+			 
+			 try 
+			 {
+			
+				 
+				 HttpSession session = request.getSession();
+				 
+				 String gpostCode = (String)session.getAttribute("postcode");
+				 SessionInfo info = (SessionInfo)session.getAttribute("user");
+				 String UserCode = info.getB_user_code();
+				
+				 //System.out.println(rpostCode);
+				 //System.out.println(UserCode);
+				 
+				 GPostDTO dto = new GPostDTO();
+				 dto.setG_post_code(gpostCode);
+				 dto.setB_user_code(UserCode);
+				 
+				 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
+				
+				 dao.GJjim(dto);
+			 
+				
+				 
+				 view = "/AjaxJJimComplete.jsp";
+				 
+			 }catch(Exception e)
+			 {
+			  	 System.out.println(e.toString());
+			 }
+			 
+			 
+			 
+			 return view;
+		 
+		 }
+	
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 }
+
+
+
+
+
+
+
+
+
+
+
