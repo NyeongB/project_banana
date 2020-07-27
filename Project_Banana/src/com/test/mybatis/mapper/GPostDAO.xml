@@ -52,9 +52,17 @@
 	
 	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->
 	<select id="gCateMainList" resultType="com.banana.groupbuying.GPostDTO">
+		<![CDATA[
 		SELECT *
+		FROM
+		(
+		SELECT ROWNUM AS RNUM ,DATA.*
+		FROM
+		(SELECT *
 		FROM  VIEW_CATEMAINLIST
-		WHERE G_CATE_BCODE=  #{g_cate_bcode}
+		WHERE G_CATE_BCODE= #{g_cate_bcode}) DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+		]]>
 	</select>
 	
 	<!--중분류 카테고리 눌렀을 때 실시간 게시물  -->
@@ -103,14 +111,27 @@
 
 	</select>
 	
-	<select id="postItem">
 	
-	INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
-	VALUES('G_POST'||SEQ_G_POST.NEXTVAL,#{b_user_code},#{g_cate_code},#{loc_code},#{title},${content},33,#{brand},TO_DATE(#{start_date},'YYYY-MM-DD HH24:MI:SS')
-            ,TO_DATE(#{end_date},'YYYY-MM-DD HH24:MI:SS'),#{cost},#{dis_cost},#{member_num},#{bun_loc},TO_DATE(#{bun_date},'YYYY-MM-DD HH24:MI:SS'),TO_DATE(#{return_date},'YYYY-MM-DD HH24:MI:SS')
-            ,TO_DATE(#{receipt_date},'YYYY-MM-DD HH24:MI:SS'));
+	<select id="postItem" statementType="CALLABLE"  >
+	
+	 {call
+     
+     PRC_GPOST(#{b_user_code},#{g_cate_code},#{loc_code},#{title},#{content},#{brand}
+     ,TO_DATE(#{start_date},'YYYY-MM-DD HH24:MI:SS'),TO_DATE(#{end_date},'YYYY-MM-DD HH24:MI:SS'),#{cost},#{dis_cost},#{member_num},#{bun_loc}
+     ,TO_DATE(#{bun_date},'YYYY-MM-DD HH24:MI:SS'),TO_DATE(#{return_date},'YYYY-MM-DD HH24:MI:SS')
+     ,TO_DATE(#{receipt_date},'YYYY-MM-DD HH24:MI:SS'),#{photo})
+
+     }
+
 
    </select>
+   
+   <!-- 전체 개수 구하기  -->
+   <select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_CATEMAINLIST
+	WHERE G_CATE_BCODE = #{g_cate_bcode}
+	</select>
 	
 	
 </mapper>

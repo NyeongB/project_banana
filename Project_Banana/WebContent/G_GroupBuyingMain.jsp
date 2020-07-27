@@ -159,7 +159,7 @@ p
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 210px;
+ 	  height: 330px;
  	 margin-right: 3px;
 } 
 
@@ -348,7 +348,7 @@ function logincheck()
 					<div class="col-md-12">
 						<ul class="cate_icons text-center">
 							<li><div><a href="g_catemain.action?bid=G_CATE5"><i class="fas fa-utensils"></i></a></div><div>식품</div></li>
-							<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
+							<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-bath"></i></a></div><div>생활용품</div></li>
 							<li><div><a href="g_catemain.action?bid=G_CATE2"><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
 							<li><div><a href="g_catemain.action?bid=G_CATE3"><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
 							<li><div><a href="g_catemain.action?bid=G_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
@@ -498,8 +498,8 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<img src="http://13.231.82.47:8090/Project_Banana/pds/image/%EA%B0%90%EC%9E%90%EA%B9%A1.png" >
-	                           			<%-- ${newlist.photo } --%>
+	                           			<img src="${newlist.photo }" style="width: 180px; height: 180px;">
+	                           			<%-- --%>
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
 	                                      <p>${newlist.loc_name }</p>

@@ -277,7 +277,7 @@ a:active
 				<div class="col-md-12">
 					<ul class="cate_icons text-center">
 						<li><div><a href="g_catemain.action?bid=G_CATE5"><i class="fas fa-utensils"></i></a></div><div>식품</div></li>
-						<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
+						<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-bath"></i></a></div><div>생활용품</div></li>
 						<li><div><a href="g_catemain.action?bid=G_CATE2"><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
 						<li><div><a href="g_catemain.action?bid=G_CATE3"><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
 						<li><div><a href="g_catemain.action?bid=G_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
@@ -361,8 +361,8 @@ a:active
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${gslists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${gslists.photo }
+	                           			<img src="${gslists.photo }" >
+	                           			
 	                           			<div class="caption">
 	                      
 	                                      <h5 class="thick">${gslists.title }</h5>
@@ -419,12 +419,12 @@ a:active
 						<div class="col-md-2">
 						<div class="floating">
 							<div><span  class="thick">최근게시물</span></div>
-							<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+							<div><img src="${gslists.photo }" class="lastest_img img-rounded"></div>
 							<div>
 								오늘 본 상품
 								<c:if test="${sessionScope.postcode != null }">	
 								<c:forEach var="gRecentLists" items="${gRecentList }">
-									<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
+									<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span></span></a>
 								</c:forEach>			
 								
 								</c:if>					

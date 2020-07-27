@@ -90,13 +90,13 @@ body
 .container-fluid
 {
 	min-height: 100%;
-	position: relative;
 	padding-bottom: 19px; /* footer height */
 
 }
 .Footer
 {
 	position: absolute;
+	z-index: -1;
 
 }
 h3

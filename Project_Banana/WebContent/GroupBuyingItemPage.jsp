@@ -296,12 +296,12 @@ function orderItem(obj)
 	//alert(${count});
 	//alert(${member});
 	
-	if(${count}>=${member})
+	/* if(${count}>=${member})
 	{
 		alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
 		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
 		return;
-	}
+	} */
 	
 	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 }
@@ -369,7 +369,7 @@ function orderItem(obj)
 							<div class="row">
 								<div class="col-md-12 imgbox">
 									 <!-- 상품 사진 -->
-									 <img src="images/imagePost.PNG"> 
+									 <img src="${lists.photo}"> 
 				
 				
 				<!--  -->					  
@@ -434,7 +434,7 @@ function orderItem(obj)
 									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
 									
 									<li>분배일시 : ${lists.bun_date }</li>
-									<li>분배장소 :${lists.loc_name }</li>
+									<li>분배장소 :${lists.bun_loc }</li>
 								
 									
 								</ul>

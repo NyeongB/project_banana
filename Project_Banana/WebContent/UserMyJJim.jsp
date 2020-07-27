@@ -50,12 +50,21 @@ img
 	height: 70px;
 }
 
+.jjim
+{
+	/* position: relative; */
+
+}
+.Header 
+{
+	 z-index:9000 !important;
+}
 </style>
 
 
 
 </head>
-<body>
+<body class="jjim">
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">

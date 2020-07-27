@@ -68,6 +68,12 @@
 	 display:block;
 	
 }
+.alarm a
+{
+	color: gray!important;
+	
+
+}
 
 
 
@@ -168,7 +174,7 @@
          
          	 <!-- 드롭다운 -->
 	        <!-- Single button -->
-			<div class="btn-group">
+			<div class="btn-group alarm">
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="ajax()">
 			    Action <span class="caret"></span>
 			  </button>

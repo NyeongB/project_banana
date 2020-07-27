@@ -11,9 +11,29 @@ public class GPostDTO
 	private String progress;	// 나의 공동구매 진행 상황
 	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
 	
+	//페이징처리를 위한
+	private int start, end;
 	// 출석체크
 	private int chulCheck;
 	
+	
+	public int getStart()
+	{
+		return start;
+	}
+	public void setStart(int start)
+	{
+		this.start = start;
+	}
+	public int getEnd()
+	{
+		return end;
+	}
+	public void setEnd(int end)
+	{
+		this.end = end;
+	}
+
 	//getter/setter 설정	
 	public String getG_success_code()
 	{
