@@ -26,6 +26,7 @@ import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RPostDTO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
+import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
 
 @Controller
@@ -42,7 +43,7 @@ public class G_GroupBuyingMainController
 			HttpSession session = request.getSession();
 			
 			 String postcode = (String)session.getAttribute("postcode");
-		     //System.out.println(postcode);
+		    
 			
 			String view = null; 
 		
@@ -50,15 +51,33 @@ public class G_GroupBuyingMainController
 			{
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
+				// 리스트의 총페이지를 가져오는 메소드
+				int count = dao.getCount(bid);
+				System.out.println("count:"+count);
+				
+				// 페이징 처리 
+				Paging paging = new Paging();
+				String pageNum = request.getParameter("pageNum");				
+				
+				//테이블에서 가져올 리스트의 시작과 끝 위치
+				int start = paging.getStart(pageNum,count );
+				int end = paging.getEnd(pageNum, count);
+				
+				// 페이지번호를 받아온 
+				String pageIndexList = paging.pageIndexList(pageNum, count,bid);
+				
 				GCateDTO dto = new GCateDTO();
 				dto.setG_cate_bcode(bid);
+				dto.setStart(start);
+				dto.setEnd(end);
+				
 				
 				if(postcode != null)
 			    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 				
 				model.addAttribute("cateList", dao.cateList(dto));
 				model.addAttribute("gCateMainList", dao.gCateMainList(dto));
-				
+				model.addAttribute("pageIndexList", pageIndexList);
 				
 			} catch (Exception e)
 			{

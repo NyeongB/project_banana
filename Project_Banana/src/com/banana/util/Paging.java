@@ -98,4 +98,35 @@ public class Paging
 
 		return result;
 	}
+	public String pageIndexList(String pageNum, int count,String bid)
+	{
+		String result = null;
+
+		MyUtil util = new MyUtil();
+
+		int currentPage = 1;
+
+		if (pageNum != null && pageNum.length() != 0)
+		{
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		// 전체 데이터 개수
+		int dataCount = count;
+
+		// 전체 페이지 수 구하기
+		int numPerPage = 10;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+
+		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
+		if (totalPage < currentPage)
+		{
+			currentPage = totalPage;
+		}
+
+		result = util.pageIndexList(currentPage, totalPage, "",bid);
+
+		return result;
+	}
+	
 }

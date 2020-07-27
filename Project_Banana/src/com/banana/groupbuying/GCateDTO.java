@@ -4,6 +4,27 @@ public class GCateDTO
 {
 	private String bid,mid;
 	private String  cate_name, g_cate_bcode,g_cate_code;
+	private int start, end;
+
+	public int getStart()
+	{
+		return start;
+	}
+
+	public void setStart(int start)
+	{
+		this.start = start;
+	}
+
+	public int getEnd()
+	{
+		return end;
+	}
+
+	public void setEnd(int end)
+	{
+		this.end = end;
+	}
 
 	public String getBid()
 	{

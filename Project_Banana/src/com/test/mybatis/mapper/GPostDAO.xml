@@ -52,9 +52,17 @@
 	
 	<!--대분류 카테고리 눌렀을 때 실시간 게시물  -->
 	<select id="gCateMainList" resultType="com.banana.groupbuying.GPostDTO">
+		<![CDATA[
 		SELECT *
+		FROM
+		(
+		SELECT ROWNUM AS RNUM ,DATA.*
+		FROM
+		(SELECT *
 		FROM  VIEW_CATEMAINLIST
-		WHERE G_CATE_BCODE=  #{g_cate_bcode}
+		WHERE G_CATE_BCODE= #{g_cate_bcode}) DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+		]]>
 	</select>
 	
 	<!--중분류 카테고리 눌렀을 때 실시간 게시물  -->
@@ -111,6 +119,13 @@
             ,TO_DATE(#{receipt_date},'YYYY-MM-DD HH24:MI:SS'));
 
    </select>
+   
+   <!-- 전체 개수 구하기  -->
+   <select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_CATEMAINLIST
+	WHERE G_CATE_BCODE = #{g_cate_bcode}
+	</select>
 	
 	
 </mapper>
