@@ -159,7 +159,7 @@ p
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 210px;
+ 	  height: 330px;
  	 margin-right: 3px;
 } 
 
@@ -498,8 +498,8 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<img src="http://13.231.82.47:8090/Project_Banana/pds/image/%EA%B0%90%EC%9E%90%EA%B9%A1.png" >
-	                           			<%-- ${newlist.photo } --%>
+	                           			<img src="${newlist.photo }" style="width: 180px; height: 180px;">
+	                           			<%-- --%>
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
 	                                      <p>${newlist.loc_name }</p>

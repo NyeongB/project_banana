@@ -44,7 +44,7 @@
 	 border:0px; 
 	 position:absolute; 
 	 width:200px; 
-	 z-index:200;
+
 
 }
 .search_bar:hover ul
@@ -53,11 +53,27 @@
 	 display:block;
 
 }
+.dropdown-menu 
+{
+	
 
+
+}
+.alarm a
+{
+	color: gray!important;
+	
+
+}
+.header_body{
+
+
+
+}
 </style>
 
 </head>
-<body id="header_body">
+<body >
     	<c:choose>
 		<c:when test="${sessionScope.admin != null }">
 		
@@ -70,7 +86,7 @@
 		</c:otherwise>
 		</c:choose>
 
-   <div id="header">
+   <div id="header" class="header_body">
       
       
       
@@ -109,13 +125,9 @@
 
          
       </ul>
-      
-         <!-- <input type="search" id="sear"/> -->
-         <ul id="nav_icons">
-         
-         	 <!-- 드롭다운 -->
+      	 <!-- 드롭다운 -->
 	        <!-- Single button -->
-			<div class="btn-group">
+			<div class="btn-group alarm">
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 			    Action <span class="caret"></span>
 			  </button>
@@ -127,6 +139,10 @@
 			    <li><a href="#">Separated link</a></li>
 			  </ul>
 			</div>
+         <!-- <input type="search" id="sear"/> -->
+         <ul id="nav_icons">
+         
+         	
 			<!-- 드롭다운 끝  -->
 			
 			<!-- 검색기능 잠정중단
