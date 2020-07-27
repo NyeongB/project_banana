@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.user.IAlarmDAO">
+	
+	
+	<!-- 최신순  -->
+	<select id="list" resultType="com.banana.user.AlarmDTO">
+	SELECT * FROM VIEW_ALARM
+	WHERE B_USER_CODE IN (SELECT B_USER_CODE FROM JOIN WHERE ID = #{id})
+	</select>		
+	
+	
+	
+</mapper>  
+

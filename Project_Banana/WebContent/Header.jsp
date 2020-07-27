@@ -1,8 +1,21 @@
+<%@page import="com.banana.util.SessionInfo"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+%>
+<%
+	session =  request.getSession();
+	String id = "t";
+    SessionInfo info = (SessionInfo)session.getAttribute("user");
+    // 아이디가져오기
+    if(info !=null)
+    {
+    	 id = info.getId();	
+    }
+   // System.out.println(id);
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +32,8 @@
 
 <script type="text/javascript" src="<%=cp %>/js/bootstrap.min.js"></script>
 <style type="text/css">
+
+
 .glyphicon-bell
 {
 
@@ -51,10 +66,48 @@
 {
 
 	 display:block;
-
+	
 }
 
+
+
 </style>
+
+<script type="text/javascript">
+	
+	var id = "<%=id%>";
+
+	$(document).ready(function()
+	{
+		
+	});
+	
+	
+	
+	
+	
+	
+	function ajax()
+	{
+		
+	
+		$.get("alarm.action", {id : id}, function(data)
+				{
+				
+				$("#in").html(data);
+				
+			});
+		
+		
+	}
+	
+	
+
+	
+	
+	
+</script>
+
 
 </head>
 <body id="header_body">
@@ -116,16 +169,12 @@
          	 <!-- 드롭다운 -->
 	        <!-- Single button -->
 			<div class="btn-group">
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="ajax()">
 			    Action <span class="caret"></span>
 			  </button>
-			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#">Action</a></li>
-			    <li><a href="#">Another action</a></li>
-			    <li><a href="#">Something else here</a></li>
-			    <li class="divider"></li>
-			    <li><a href="#">Separated link</a></li>
-			  </ul>
+			  <ul class="dropdown-menu" role="menu" id="alram">
+			  <div id="in"></div>
+				</ul>
 			</div>
 			<!-- 드롭다운 끝  -->
 			

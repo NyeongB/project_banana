@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.my.IPasswordAnswerDAO;
 import com.banana.my.PasswordAnswerDTO;
+import com.banana.user.IAlarmDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.ILeaveDAO;
 import com.banana.user.IUserDAO;
@@ -34,7 +35,20 @@ public class UserController
 	@Autowired
 	private SqlSession SqlSession;
 	
-
+	@RequestMapping(value = "/alarm.action", method =RequestMethod.GET)
+	public String alarm(Model model,HttpServletRequest request)
+	{
+		String view = null; 
+		
+		IAlarmDAO dao = SqlSession.getMapper(IAlarmDAO.class);
+		
+		model.addAttribute("list", dao.list(request.getParameter("id"))); 
+		
+		view = "/AjaxAlarm.jsp";
+		
+		
+		return view;
+	}
 	
 	@RequestMapping(value = "/join.action", method =RequestMethod.GET)
 	public String join(Model model)

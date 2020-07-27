@@ -22,6 +22,14 @@
 	
 }
 
+#alram a
+{
+	
+	z-index:1500;
+	color: black;
+}
+
+/* 
 #logo a
 {
 	text-decoration: none; 
@@ -47,7 +55,7 @@
 	border-radius: 10em;
 	
 
-}
+} */
 #header
 {
 
