@@ -324,6 +324,9 @@ textarea
 
 				});	
 				
+			
+				
+				
 				
 		
 		
@@ -601,6 +604,8 @@ function orderItem(obj)
 						</div> <!-- end col-md-6 -->
 						</c:forEach>		
 	
+						
+						
 						<div class="col-md-1"></div>
 
 					</div>
