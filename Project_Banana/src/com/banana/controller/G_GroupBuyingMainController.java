@@ -237,31 +237,27 @@ public class G_GroupBuyingMainController
 		{
 			String view = null; 
 			
+			
 			try
 			{
 				
-				 HttpSession session = request.getSession();		
+				HttpSession session = request.getSession(); 		
 			      
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
-					
-				int member = 0;
 				
+				int member = 0;
 				
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
 				
 				//int member = dto.getMember_num();
 				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
-				
 				if( list.size() !=0)
 				{
 					member = list.get(0).getMember_num();
 				}
-
-
-				
 				//String title = list.get(0).getTitle();
 				
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
