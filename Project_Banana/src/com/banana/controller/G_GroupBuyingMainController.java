@@ -27,6 +27,7 @@ import com.banana.rent.RPostDTO;
 import com.banana.reply.g_reply.IGreplyDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
+import com.banana.util.IndexDTO;
 import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
 
@@ -304,9 +305,10 @@ public class G_GroupBuyingMainController
 				//System.out.println(code);
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
-				
+				IndexDTO dto2 = new IndexDTO();
+				dto2.setB_user_code(b_user_code);
 				model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
-				model.addAttribute("pointList", pointdao.pointList(b_user_code));	
+				model.addAttribute("pointList", pointdao.pointList(dto2));	
 				model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
 				
 				
