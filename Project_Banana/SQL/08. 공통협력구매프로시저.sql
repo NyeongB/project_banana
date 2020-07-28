@@ -809,8 +809,46 @@ END;
 EXEC PRC_FOLLOW('USER17','USER8');
 
 
+----------------------------------------------------------------------
+--○ 공통협력 구매 상품 등록
+create or replace PROCEDURE PRC_GPOST
+(
+V_B_USER_CODE               IN B_USER.B_USER_CODE%TYPE     --사용자 코드
+,V_G_CATE_CODE            IN G_CATE.G_CATE_CODE%TYPE          -- 공동구매 카테고리
+,V_LOC_CODE                 IN LOC.LOC_CODE%TYPE                            -- 지역 카테고리 코드
+,V_TITLE                        IN G_POST.TITLE%TYPE            --게시물 제목 코드
+,V_CONTENT                  IN G_POST.CONTENT%TYPE      --내용
+,V_BRAND                    IN G_POST.BRAND%TYPE                    --브랜트 
+,V_START_DATE                   IN G_POST.CONTENT%TYPE  --시작날짜
+,V_END_DATE                     IN G_POST.CONTENT%TYPE     --종료날짜
+,V_COST                             IN G_POST.COST%TYPE        --원가
+,V_DIS_COST                     IN G_POST.DIS_COST%TYPE     --할인가
+,V_MEMBER_NUM              IN G_POST.MEMBER_NUM%TYPE  --목표인원
+,V_BUN_LOC                      IN G_POST.BUN_LOC%TYPE   --분배장소
+,V_BUN_DATE                     IN G_POST.CONTENT%TYPE     --분배날짜
+,V_RETURN_DATE                IN G_POST.CONTENT%TYPE  --환불날짜
+,V_RECEIPT_DATE                 IN G_POST.CONTENT%TYPE  --영수증 첨부 날짜
+,V_PHOTO                       IN G_PHOTO.PHOTO%TYPE        --사진
+)
+IS
+V_G_POST_CODE   G_POST.G_POST_CODE%TYPE := 'G_POST'||SEQ_G_POST.NEXTVAL; -- 공동구매 게시물 코드
+
+BEGIN
+
+-- 1. 게시물 등록 INSERT
+INSERT INTO G_POST(G_POST_CODE,B_USER_CODE,G_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,START_DATE,END_DATE,COST,DIS_COST,MEMBER_NUM,BUN_LOC,BUN_DATE,RETURN_DATE,RECEIPT_DATE)
+VALUES(V_G_POST_CODE,V_B_USER_CODE,V_G_CATE_CODE,V_LOC_CODE,V_TITLE,V_CONTENT,33,V_BRAND,TO_DATE(V_START_DATE,'YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE(V_END_DATE,'YYYY-MM-DD HH24:MI:SS'),V_COST,V_DIS_COST,V_MEMBER_NUM,V_BUN_LOC,TO_DATE(V_BUN_DATE,'YYYY-MM-DD HH24:MI:SS'),TO_DATE(V_RETURN_DATE,'YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE(V_RECEIPT_DATE,'YYYY-MM-DD HH24:MI:SS'));
+
+-- 2. 사진 INSERT
+INSERT INTO G_PHOTO(G_PHOTO_CODE,G_POST_CODE,PHOTO)
+VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,V_G_POST_CODE,V_PHOTO);
 
 
+-- 5. 커밋
+-- COMMIT;
+END;
 
 
 
