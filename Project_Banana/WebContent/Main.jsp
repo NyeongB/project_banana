@@ -41,7 +41,7 @@ body {
 	font: 17px 'Nanum Gothic', sans-serif;
 }
 
-.bxslider ul {
+.bxslider  {
 	width: 700px;
 	
 }
@@ -57,6 +57,24 @@ li {
 
 #allCheck, #selectDelete {
 	margin-left: 10px;
+}
+
+.introduce
+{
+	width: 100%;
+	background-color: var(--back-color);
+	height: 500px;
+
+}
+.introduce li
+{
+	font-size: 30pt;
+	color: var(--text-color);
+	font-weight: 900;
+	text-align: center;
+	list-style: none;
+
+
 }
 </style>
 <script src="script/script.js"></script>
@@ -113,12 +131,19 @@ li {
 					src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
 					alt="" ></a></li>
 				</ul>
-
-
 			</div>
+			<div class=""></div>
 			<!-- col-md-8 end -->
 
-			<div class="col-md-2"></div>
+			<div class="col-md-12 introduce text-center" >	
+			
+			<ul>
+				<li>바로옆과</li>
+				<li>나눠주고</li>
+				<li>나눠쓰고</li>
+			</ul>					
+					
+			</div>
 
 		</div>
 		<!-- content end -->
