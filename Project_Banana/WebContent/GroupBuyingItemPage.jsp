@@ -746,18 +746,18 @@ function orderItem(obj)
 		
 						<div id="Rreply">${greplyList.reply }</div> 
 						<div class="form-inline text-right">
-						<div class="col-md-9"></div>
+						<div class="col-md-8"></div>
 						
 						<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
 						<c:if test="${greplyList.l_level == 0}">
-						<div class="col-md-1 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)">댓글달기</div>
+						<div class="col-md-2 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)"><span class="glyphicon glyphicon-pencil">&nbsp;댓글달기</span></div>
 						
 						
 							
 						</c:if>
 						
-						<div class="col-md-1">좋아요</div>
-						<div class="col-md-1">신고하기</div>
+						<div class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;좋아요</div>
+						<div class="col-md-1 text-rigth"><span class="glyphicon glyphicon-warning-sign">&nbsp;신고</span></div>
 						</div>
 					</div>
 					<hr>	
