@@ -50,6 +50,7 @@
 	background-color: white;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 
 
@@ -77,7 +78,7 @@ img
 
 p
 {
-	font-size: 20px;
+	font-size: 25px;
 }
 
 .option
@@ -128,19 +129,19 @@ p
 	
 }
 
-.Btn
-{
-	margin: 20px;
-}
+
+
 
 
 #btn1
 {
+	width : 113px;
 	margin-right: 10px;
 }
 
-#btn2
+.btn2
 {
+	
 	margin-left: 10px;
 }
 
@@ -183,8 +184,80 @@ textarea
 	font-weight: bold;
 }
 
+.Rep
+{
+	margin-bottom: 35px;
+	
+}
 
+.warning
+{
+	margin-bottom: 30px;
+	
+}
 
+.item_detail
+{
+	margin-top: 20px;
+}
+
+.fa-circle
+{
+	font-size: 1pt;
+	color: #cacaca;
+	margin-bottom: 22px;
+}
+
+.sPans
+{
+	color : black;
+	font-weight: bold;
+	
+}
+
+.Span
+{
+	color: #808080;
+}
+
+#scost
+{
+	margin-left: 83px;
+}
+
+#cost1
+{
+	margin-left: 58px;
+
+}
+
+#num1
+{
+	margin-left: 24px;
+
+}
+
+#bunD
+{
+	margin-left: 56px;
+
+}
+
+#bunL
+{
+	margin-left: 56px;
+
+}
+
+.nav
+{
+	font-weight: bold;
+}
+
+#QA
+{
+	font-weight: bold;
+}
 
 </style>
 
@@ -566,7 +639,7 @@ function orderItem(obj)
 							 
 							<div class="row">
 							
-								<div class="col-md-12">
+								<div class="col-md-12" style="font-weight: bold;">
 								 <h2>${lists.title }</h2>
 								
 								 
@@ -577,16 +650,15 @@ function orderItem(obj)
 							
 							<div class="row">
 							<div class="col-md-12 text-left item_detail">
-								<ul>
+								<ul style="padding-left: 0px; list-style: none; color: #cacaca; font-weight: bold; margin-bottom: 30px; ">
 									
-									<li>원가 : ${lists.cost }원 / 할인가 : ${lists.dis_cost }원</li>
-									<li>1인 비용 :<fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
-									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 현재 달성인원 </span> <span class="sPans" id="num1">${count }/${lists.member_num }명</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 원가 </span> <span class="sPans" id="scost"> ${lists.cost }원 / 할인가 : ${lists.dis_cost }원 </span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 1인 비용 </span> <span class="sPans" id="cost1"><fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</span></li>
 									
-									<li>분배일시 : ${lists.bun_date }</li>
-									<li>분배장소 :${lists.bun_loc }</li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배일시 </span> <span class="sPans" id="bunD">${lists.bun_date }</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배장소 </span> <span class="sPans" id="bunL">${lists.bun_loc }</span></li>
 								
-									
 								</ul>
 							</div>
 							
@@ -594,9 +666,9 @@ function orderItem(obj)
 							
 							
 							<div class="row">
-								<div class="col-md-12 text-center Btn">
-								<button type="button" class="btn btn-default" id="btn1" onclick="jjim()">찜 하기</button>
-								<button type="button" class="btn btn-default" id="${lists.g_post_code }" onclick="orderItem(this)">주문 하기</button>
+								<div class="col-md-12 GBtn" style="margin-left: 100px;">
+								<button type="button" class="btn btn-lg" id="btn1" onclick="jjim()" style="font-weight : bold;">찜 하기</button>
+								<button type="button" class="btn btn-lg btn2" id="${lists.g_post_code }" style="font-weight : bold;" onclick="orderItem(this)">주문 하기</button>
 								
 								</div>
 							</div>
@@ -606,8 +678,7 @@ function orderItem(obj)
 	
 						
 						
-						<div class="col-md-1"></div>
-
+						
 					</div>
 				</div>
 			</div>  <!-- end  -->
@@ -659,7 +730,7 @@ function orderItem(obj)
 				<!-- 댓글 INSERT -->
 				<div  id="resultReply">
 				<c:forEach var="greplyList" items="${greplyList }">
-					<div>
+					<div class="Rep">
 						
 						<div class="form-inline">
 						<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
@@ -668,7 +739,7 @@ function orderItem(obj)
 						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
 						</div>
 						</c:if>
-						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-2 text-right">${greplyList.wdate }</div>
+						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-3 text-right">${greplyList.wdate }</div>
 						</div>
 		
 						<div id="Rreply">${greplyList.reply }</div> 
