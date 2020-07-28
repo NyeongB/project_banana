@@ -425,14 +425,12 @@ a:active
 							<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
 							</a>
 							</div>
-							<div>
-								
-								
+							<div>	
 							</c:forEach>			
-								
 							</c:if>					
-							</div>
+							
 							<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
+						</div>
 						</div>
 					</div><!--end col-md-2  -->
 							
