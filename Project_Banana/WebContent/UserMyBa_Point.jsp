@@ -76,7 +76,7 @@ nav
 
 			<div class="col-md-8">
 				<div>
-					<h3>포인트 관리</h3>
+					<h3>포인트 관리</h3><p class="thick"> &#128155; <span>${nickName }</span>님의 포인트 내역입니다.</p>
 					<div class="col-md-12 text-right">
 							<div class="text-right">
 					

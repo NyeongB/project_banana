@@ -113,7 +113,7 @@ img
 
 				<!-- table -->
 				<div class="col-md-12">
-					<table class="table thick">
+					<table class="table thick text-center">
 						<thead>
 							<tr>
 								<th>&nbsp;</th>
@@ -136,7 +136,7 @@ img
 								</td>
 								<td>${status.count }</td>
 								<td><img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
+									src="${jjims.photo }"></td>
 								<td>${jjims.title }</td>
 								<td>${jjims.cost }/${jjims.dis_cost }</td>
 								<td>${jjims.loc_name }</td>
