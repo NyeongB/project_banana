@@ -27,6 +27,7 @@ import com.banana.rent.RPostDTO;
 import com.banana.reply.g_reply.IGreplyDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
+import com.banana.util.IndexDTO;
 import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
 
@@ -116,12 +117,30 @@ public class G_GroupBuyingMainController
 			  dto.setG_cate_bcode(bid);
 			  dto.setG_cate_code(mid);
 			  
+			  // 리스트의 총페이지를 가져오는 메소드
+			  int count = dao.mGetCount(dto);
+			  System.out.println(count+"count");
+			  
+			  // 페이징 처리 
+				Paging paging = new Paging();
+				String pageNum = request.getParameter("pageNum");				
+				
+				//테이블에서 가져올 리스트의 시작과 끝 위치
+				int start = paging.getStart(pageNum,count );
+				int end = paging.getEnd(pageNum, count);
+			  
+				dto.setStart(start);
+				dto.setEnd(end);
+				// 페이지번호를 받아온 
+				String pageIndexList = paging.pageIndexList(pageNum, count,bid,mid);
+				
 			  if(postcode != null)
 		    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 			  
 			  model.addAttribute("cateMList", dao.cateMList(dto));
 			  model.addAttribute("cateList", dao.cateList(dto));
 			  model.addAttribute("gCatemMainList", dao.gCatemMainList(dto));
+			  model.addAttribute("pageIndexList", pageIndexList);
 
 			
 		} catch (Exception e)
@@ -304,9 +323,10 @@ public class G_GroupBuyingMainController
 				//System.out.println(code);
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
-				
+				IndexDTO dto2 = new IndexDTO();
+				dto2.setB_user_code(b_user_code);
 				model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
-				model.addAttribute("pointList", pointdao.pointList(b_user_code));	
+				model.addAttribute("pointList", pointdao.pointList(dto2));	
 				model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
 				
 				

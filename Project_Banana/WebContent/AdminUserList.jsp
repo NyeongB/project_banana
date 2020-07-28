@@ -131,22 +131,20 @@ li
 
 			
 
-			<div class="text-center">
-				<div class="col-md-12">
-					<nav>
-						<ul class="pagination">
-							<li class="disabled"><a href="#" aria-label="Previous"><span
-									aria-hidden="true">&laquo;</span></a></li>
-							<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
-							<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
-							<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
-							<li class="disabled"><a href="#" aria-label=""><span
-									aria-hidden="false">&laquo;</span></a></li>
-						</ul>
-					</nav>
+			<!-- 페이징 인덱스 반드시 추가  -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								${pageIndexList }
+								<li><a href="#" aria-label="Next"><span
+										aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
 				</div>
-			</div>
 
 		</div>
 

@@ -46,4 +46,7 @@ public interface IGPostDAO
 	
 	// 공동구매 상품 전체 개수 구하기
 	public int getCount(String g_cate_bcode);
+	
+	// 공동구매 상품 중분류 전체 개수 구하기
+	public int mGetCount(GCateDTO dto);
 }
