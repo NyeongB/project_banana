@@ -94,7 +94,7 @@
 					<label for="exampleInputPassword1">
 						공지사항 내용
 					</label>
-					<textarea class="form-control content" rows="3" name="content" id="content"></textarea>
+					<textarea class="form-control content" rows="10" name="content" id="content" cols="30" style="resize: none;"></textarea>
 				</div>
 				<div class="form-group">
 					 
