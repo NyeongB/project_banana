@@ -525,10 +525,10 @@ function logincheck()
 				</div>
 				<div>
 				</c:forEach>			
-					
 				</c:if>					
-				</div>
+				
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
+				</div>
 			</div>
 		</div>
 		

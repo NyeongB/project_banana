@@ -246,11 +246,13 @@ public class NoticeController
 				INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 				NoticeListDTO dto = new NoticeListDTO();
 				
+				
+				
+				
+				dto.setF_file(imagePath+"/"+file);
 				dto.setTitle(title);
 				dto.setAdmin(admin);
-				dto.setContent(content);
-				dto.setF_file(imagePath+"/"+file);
-				
+				dto.setContent(content.replaceAll("\n", "<br>"));
 				dao.insert(dto);
 				view = "/adminnoticelist.action";
 				

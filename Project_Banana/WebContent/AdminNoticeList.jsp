@@ -67,7 +67,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table">
+					<table class="table" style="text-align: center;">
 						<tr>
 							<th class="col-md-1">번호</th>
 							<th class="col-md-5">제목</th>
