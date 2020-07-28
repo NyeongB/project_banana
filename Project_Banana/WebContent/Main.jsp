@@ -75,6 +75,7 @@ li {
 {
 	width: 100vw;
 	height: 300px;
+	background-color: #F3BE8C5;
 
 }
 .introduce li
@@ -143,16 +144,10 @@ li {
 					</ul>
 				</div>
 				<div class="col-md-12 introduce text-center">
-				<div class="col-md-3 text-right">
-					<img src="images/town.png" style="width:500px;" alt="" />
-				</div>
-				<div class="col-md-9 text-left">
-					<ul>					
-						<li>바로옆과</li>
-						<li>나눠쓰고</li>
-						<li>나눠주는</li>
-					</ul>				
-				</div>
+				
+					<img src="images/banana_1.png" style="width:200px;" alt="" />
+				
+				
 					
 				</div>
 

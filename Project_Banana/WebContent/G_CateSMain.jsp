@@ -188,7 +188,7 @@ a:active
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 210px;
+ 	 height: 310px;
  	 margin-right: 3px;
 } 
 
@@ -363,7 +363,7 @@ a:active
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${gslists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<img src="${gslists.photo }" >
+	                           			<img src="${gslists.photo }" style="width: 200px; ">
 	                           			
 	                           			<div class="caption">
 	                      
@@ -408,11 +408,7 @@ a:active
 								<ul class="pagination">
 									<li class="disabled"><a href="#" aria-label="Previous"><span
 											aria-hidden="true">&laquo;</span></a></li>
-									<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
+									${pageIndexList }
 									<li><a href="#" aria-label="Next"><span
 											aria-hidden="true">&raquo;</span></a></li>
 								</ul>
