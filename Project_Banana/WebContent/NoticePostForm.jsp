@@ -8,10 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Banana</title>
 
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/noticePostFormStyle.css">
+<link rel="icon" href="images/favicon.ico" />
 <link rel="stylesheet" type="text/css"
    href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -26,6 +27,9 @@
 		
 		$("#insertBtn").click(function()
 		{
+			
+			//alert($("#content").val());
+			
 			if($("#title").val().trim()=="")
 			{
 				alert("제목을 입력하십시오.");
