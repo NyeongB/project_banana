@@ -43,7 +43,6 @@
 
 <!-- content  -->
 <div class="container-fluid">
-	<div class="row">
 		<div class="col-md-2">
 			<jsp:include page="MenuAdmin.jsp"></jsp:include>
 		</div>
@@ -68,7 +67,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table">
+					<table class="table" style="text-align: center;">
 						<tr>
 							<th class="col-md-1">번호</th>
 							<th class="col-md-5">제목</th>
@@ -79,7 +78,7 @@
 						
 						<c:forEach var="lists" items="${list }" varStatus="status" begin="0">
 						<tr>
-							<td><p>${status.count }</p></td>
+							<td><p>${lists.rnum }</p></td>
 							<td><a href="<%=cp%>/usernoticedetail.action?notice_code=${lists.notice_code}">${lists.title }</a></td>
 							<td>${lists.id }</td>
 							<td>${lists.wdate }</td>
@@ -127,6 +126,20 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
+				<!-- 페이징 인덱스 반드시 추가  -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								${pageIndexList }
+								<li><a href="#" aria-label="Next"><span
+										aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
 				</div>
 				<div class="col-md-2">
 				</div>
@@ -135,7 +148,6 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-</div>
 
 
 <!-- content end -->

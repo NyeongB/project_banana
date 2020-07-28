@@ -17,6 +17,8 @@ import com.banana.admin.INoticeListDAO;
 import com.banana.admin.NoticeListDTO;
 import com.banana.my.ActivityRatingDTO;
 import com.banana.my.IActivityRatingDAO;
+import com.banana.util.IndexDTO;
+import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -29,15 +31,40 @@ public class NoticeController
 	private SqlSession SqlSession;
 
 	@RequestMapping(value = "/adminnoticelist.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String AdminNoticeList(Model model)
+	public String AdminNoticeList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
 		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 		
+		int count = dao.getCount();
+		
+		// 두개 반드시 선언
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
 		
 		
-		model.addAttribute("list", dao.list());
+		
+		//테이블에서 가져올 리스트의 시작과 끝 위치
+		int start = paging.getStart(pageNum,count );
+		int end = paging.getEnd(pageNum, count);
+		
+		// 페이지번호를 받아온 
+		String pageIndexList = paging.pageIndexList(pageNum, count);
+		
+		
+		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		// 리스트 불러올때 시작과 끝점 추가해야함 
+		// 참고 com.banana.admin.IAdminPointDAO
+		
+		
+		model.addAttribute("pageIndexList", pageIndexList);
+	
+		model.addAttribute("list", dao.list(dto));
 		
 		view = "/AdminNoticeList.jsp";
 		
@@ -46,15 +73,40 @@ public class NoticeController
 	}
 	
 	@RequestMapping(value = "/usernoticelist.action", method =RequestMethod.GET)
-	public String UserNoticeList(Model model)
+	public String UserNoticeList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
 		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 		
+		int count = dao.getCount();
+		
+		// 두개 반드시 선언
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
 		
 		
-		model.addAttribute("list", dao.list());
+		
+		//테이블에서 가져올 리스트의 시작과 끝 위치
+		int start = paging.getStart(pageNum,count );
+		int end = paging.getEnd(pageNum, count);
+		
+		// 페이지번호를 받아온 
+		String pageIndexList = paging.pageIndexList(pageNum, count);
+		
+		
+		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		// 리스트 불러올때 시작과 끝점 추가해야함 
+		// 참고 com.banana.admin.IAdminPointDAO
+		
+		
+		model.addAttribute("pageIndexList", pageIndexList);
+		
+		model.addAttribute("list", dao.list(dto));
 		
 		view = "/UserNoticeList.jsp";
 		
@@ -73,7 +125,11 @@ public class NoticeController
 		
 		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 		
-		ArrayList<NoticeListDTO> list =  dao.list();
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(1);
+		dto.setEnd(dao.getCount());
+		
+		ArrayList<NoticeListDTO> list =  dao.list(dto);
 		
 		// 클릭한 광고 코드 가져오기
 		String notice_code = request.getParameter("notice_code");
@@ -190,11 +246,13 @@ public class NoticeController
 				INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 				NoticeListDTO dto = new NoticeListDTO();
 				
+				
+				
+				
+				dto.setF_file(imagePath+"/"+file);
 				dto.setTitle(title);
 				dto.setAdmin(admin);
-				dto.setContent(content);
-				dto.setF_file(imagePath+"/"+file);
-				
+				dto.setContent(content.replaceAll("\n", "<br>"));
 				dao.insert(dto);
 				view = "/adminnoticelist.action";
 				

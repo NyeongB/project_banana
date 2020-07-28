@@ -11,7 +11,7 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> cateMList(GCateDTO dto);
 	
 	//공통구매 메인화면 최근 올라온 게시물 리스트
-	public ArrayList<GPostDTO> gNewList();
+	public ArrayList<GPostDTO> gNewList(GPostDTO dto);
 	
 	//카테고리별 
 	public ArrayList<GPostDTO> gCateList(GPostDTO dto);
@@ -40,6 +40,13 @@ public interface IGPostDAO
 	//공동구매 신청하기
 	public ArrayList<GPostDTO> add(GPostDTO dto);
 	
+
 	//공동구매 상품등록
-	public ArrayList<GPostDTO> postItem(GPostDTO dto);
+	public void postItem(GPostDTO dto);
+	
+	// 공동구매 상품 전체 개수 구하기
+	public int getCount(String g_cate_bcode);
+	
+	// 공동구매 상품 중분류 전체 개수 구하기
+	public int mGetCount(GCateDTO dto);
 }

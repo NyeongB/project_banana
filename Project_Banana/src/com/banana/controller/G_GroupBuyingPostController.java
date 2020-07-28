@@ -142,7 +142,7 @@ public class G_GroupBuyingPostController
 	
 		
 		
-		view = "/J_GroupBuyingPostComplete";
+		view = "/J_GroupBuyingPostComplete.jsp";
 		
 		
 		return view;

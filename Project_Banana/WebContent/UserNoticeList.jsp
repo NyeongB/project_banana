@@ -53,7 +53,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table">
+					<table class="table" style="text-align: center;">
 						<tr>
 							<th class="col-md-1">번호</th>
 							<th class="col-md-5">제목</th>
@@ -63,7 +63,7 @@
 						</tr>
 						<c:forEach var="lists" items="${list }">
 							<tr>
-							<td>${lists.num }</td>
+							<td>${lists.rnum }</td>
 							<td><a href="<%=cp%>/usernoticedetail.action?notice_code=${lists.notice_code}">${lists.title }</a></td>
 							<td>${lists.id }</td>
 							<td>${lists.wdate }</td>
@@ -82,6 +82,20 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
+				<!-- 페이징 인덱스 반드시 추가  -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								${pageIndexList }
+								<li><a href="#" aria-label="Next"><span
+										aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
 				</div>
 				<div class="col-md-2">
 				</div>

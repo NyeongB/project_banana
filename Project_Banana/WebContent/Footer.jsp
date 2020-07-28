@@ -22,18 +22,20 @@
 	display: flex;
 	/* text-align: center; */
 	justify-content: center; 
-		position: absolute;
+	position: absolute;
+	z-index: -1;
 	
 }
 
 
 </style>
 </head>
-<body id="footer_body">
+<body>
    <div id="footer">
       <ul id="footer_list">
          <li>ⓒBananaProject401 corp.</li>
          <li><a href="">공지 사항</a></li>
+         
       </ul>
    </div>
 

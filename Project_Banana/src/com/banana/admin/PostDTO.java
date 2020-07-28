@@ -5,6 +5,18 @@ public class PostDTO
 	
 	
 	private String title, content, id, type, wdate, nickname;
+	
+	private String rnum;
+
+	public String getRnum()
+	{
+		return rnum;
+	}
+
+	public void setRnum(String rnum)
+	{
+		this.rnum = rnum;
+	}
 
 	public String getTitle()
 	{

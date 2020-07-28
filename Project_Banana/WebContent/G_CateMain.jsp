@@ -46,13 +46,14 @@
 	position: fixed; 
 	right: 50%; 
 	top: 180px; 
-	margin-right: -720px; 
+	margin-right: -690px;  
 	text-align:center; 
-	width: 130px; 
-	height: 120px;
+	width: 120px; 
+	height: 180px;
 	background-color: var(--back-color);
 	border-radius: 3em;
 	margin-top: 5px;
+	padding-top: 10px;
 }
 .lastest_img
 {
@@ -171,13 +172,20 @@ a:active
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 210px;
+ 	 height: 330px;
  	 margin-right: 3px;
+	margin-left: 3px;
 } 
 
 .caption
 {
 	height: 150px;
+}
+
+.page
+{
+	margin-top: 30px;
+	margin-bottom: 70px;
 }
 </style>
 <script type="text/javascript">
@@ -240,7 +248,7 @@ a:active
 				<div class="col-md-12">
 					<ul class="cate_icons text-center">
 						<li><div><a href="g_catemain.action?bid=G_CATE5"><i class="fas fa-utensils"></i></a></div><div>식품</div></li>
-						<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
+						<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-bath"></i></i></a></div><div>생활용품</div></li>
 						<li><div><a href="g_catemain.action?bid=G_CATE2"><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
 						<li><div><a href="g_catemain.action?bid=G_CATE3"><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
 						<li><div><a href="g_catemain.action?bid=G_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
@@ -302,15 +310,12 @@ a:active
 		                     <div class="col-sm-2 col-md-2">
 		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-		                           		    <img src="${glists.photo }" >                       			
-		                           			<div class="caption">		                      				
+		                           		    <img src="${glists.photo }" style="width: 200px; ">                       			
+		                           			<div class="caption thick">		                      				
 		                                      <h5 class="thick">${glists.title }</h5>
 		                                      <div class="col-md-12">
 	                                   			<div class="col-md-6">
-	                                   			</div>
-	                                  			<div class="col-md-6 text-right">
-	                                    			<small>5분전</small>
-	                                    		</div>
+	                                   			</div>	                            
 	                                        </div>
 	                                        
 	                                        <div class="col-md-12 text-right wr">
@@ -322,23 +327,19 @@ a:active
 	                     		 </div>
 	                   		</div>
 	                     	</c:forEach> 
-						 <hr>
+						 
 					
 
 							<div class="row">
 								<div class="col-md-12">
 			
 									<!-- 페이징 바 -->
-									<div class="col-md-12 text-center">
+									<div class="col-md-12 text-center page">
 										<nav>
 											<ul class="pagination">
 												<li class="disabled"><a href="#" aria-label="Previous"><span
 														aria-hidden="true">&laquo;</span></a></li>
-												<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-												<li><a href="#">2</a></li>
-												<li><a href="#">3</a></li>
-												<li><a href="#">4</a></li>
-												<li><a href="#">5</a></li>
+														${pageIndexList }
 												<li><a href="#" aria-label="Next"><span
 														aria-hidden="true">&raquo;</span></a></li>
 											</ul>
@@ -347,19 +348,23 @@ a:active
 									<!-- end 페이징 바 -->
 									<div class="col-md-2">
 									<div class="floating">
-										<div><span  class="thick">최근게시물</span></div>
-										<div><img src="${gslists.photo }" class="lastest_img img-rounded"></div>
+										<div><span  class="thick">오늘 본 상품</span></div>
+										<c:if test="${sessionScope.postcode != null }">	
+										<c:forEach var="gRecentLists" items="${gRecentList }">
 										<div>
-											오늘 본 상품
-											<c:if test="${sessionScope.postcode != null }">	
-											<c:forEach var="gRecentLists" items="${gRecentList }">
-												<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
-											</c:forEach>			
-											
-											</c:if>					
+										<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
+										<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
+										</a>
 										</div>
+										<div>
+											
+											
+										</c:forEach>			
+											
+										</c:if>					
 										<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 									</div>
+								   </div>
 								</div>
 
 							</div><!--end col-md-12  -->

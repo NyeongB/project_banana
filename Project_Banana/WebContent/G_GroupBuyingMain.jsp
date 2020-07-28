@@ -42,6 +42,12 @@
 
 <style type="text/css">
 
+
+small
+{
+	font-weight: bold;
+}
+
 .rentNav 
 {
 	margin-top: 40px;
@@ -80,13 +86,14 @@
 	position: fixed; 
 	right: 50%; 
 	top: 180px; 
-	margin-right: -720px; 
+	margin-right: -690px;  
 	text-align:center; 
-	width: 130px; 
-	height: 120px;
+	width: 120px; 
+	height: 180px;
 	background-color: var(--back-color);
 	border-radius: 3em;
 	margin-top: 5px;
+	padding-top: 10px;
 }
 .lastest_img
 {
@@ -159,7 +166,7 @@ p
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 210px;
+ 	  height: 330px;
  	 margin-right: 3px;
 } 
 
@@ -174,6 +181,12 @@ p
 	padding: 10px;
 	padding-top: 15px;
 }
+
+#locImg
+{
+	text-align: right;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -323,15 +336,16 @@ function logincheck()
 
 <div class="container-fluid">
 	<div class="row">
-			<div class="col-md-12 rentNav form-inline">
+			<div class="col-md-12 rentNav">
 
 				<!-- 주소설정한 값 뜨기 -->
-				<div class="col-md-1">
-					<img src="images/icons_b50.png" id="location">
+				<div class="col-md-1" id="locImg">
+				<img src="images/icons_b50.png" id="location">
 				</div>
-				
-				<div class="col-md-11">
-					<small onclick="logincheck()" id="loc"></small>
+			
+				<div class="col-md-10" >
+				<small onclick="logincheck()" id="loc"></small>
+					
 				</div>
 				
 				
@@ -348,7 +362,7 @@ function logincheck()
 					<div class="col-md-12">
 						<ul class="cate_icons text-center">
 							<li><div><a href="g_catemain.action?bid=G_CATE5"><i class="fas fa-utensils"></i></a></div><div>식품</div></li>
-							<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-utensils"></i></a></div><div>생활용품</div></li>
+							<li><div><a href="g_catemain.action?bid=G_CATE1"><i class="fas fa-bath"></i></a></div><div>생활용품</div></li>
 							<li><div><a href="g_catemain.action?bid=G_CATE2"><i class="fas fa-dumbbell"></i></a></div><div>스포츠</div></li>													
 							<li><div><a href="g_catemain.action?bid=G_CATE3"><i class="fas fa-baby-carriage"></i></a></div><div>유아동/반려동물</div></li>
 							<li><div><a href="g_catemain.action?bid=G_CATE4"><i class="fas fa-couch"></i></a></div><div>디지털/가전/가구</div></li>									
@@ -380,8 +394,16 @@ function logincheck()
 	                           			${mylist.photo }
 	                           			<div class="caption">
 	                                      <h5 class="thick">${mylist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>${mylist.nickname }</small>
+	                                        </div>
 	                                      <p>${mylist.loc_name }</p>
-	                                      <p><span class="price"><fmt:formatNumber value="${mylist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"><fmt:formatNumber value="${mylist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -403,46 +425,7 @@ function logincheck()
 						</c:if> 
 						
 	                     </div>
-	                     <!-- <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">2</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">3</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">4</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>   
-	                     <div class="col-sm-2 col-md-2">
-	                        <h4 class="thick"><span class="line">5</span></h4>
-	                           <div class="thumbnail">
-	                                 <img src="images/oz.jpg" >
-	                                    <div class="caption">
-	                                      <h5 class="thick">오레오 매니아들 3명만 모여주세요</h5>
-	                                      <p><span class="price">9900원</span></p>                          
-	                                    </div>
-	                             </div>
-	                     </div>                                  -->   
+	                   
 	               </div>	
 				</div>
 			
@@ -455,12 +438,19 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${catelist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${catelist.photo }
+	                           			<img src="${catelist.photo }" style="width: 180px; height: 180px;">
+	                           			
 	                           			<div class="caption">
 	                                      <h5 class="thick">${catelist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                      <div class="col-md-12 text-right wr">
+	                                        	<small>${catelist.nickname }</small>
+	                                        </div>
 	                                      <p>${catelist.loc_name }</p>
-	                                      <p><span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -498,12 +488,20 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${newlist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<img src="http://13.231.82.47:8090/Project_Banana/pds/image/%EA%B0%90%EC%9E%90%EA%B9%A1.png" >
-	                           			<%-- ${newlist.photo } --%>
+	                           			<img src="${newlist.photo }" style="width: 180px; height: 180px;">
+	                           			<%-- --%>
 	                           			<div class="caption">
 	                                      <h5 class="thick">${newlist.title }</h5>
+	                                       <div class="col-md-12">
+	                                   			<div class="col-md-6">
+	                                   			</div>	                            
+	                                        </div>
+	                                        
+	                                        <div class="col-md-12 text-right wr">
+	                                        	<small>${newlist.nickname }</small>
+	                                        </div>
 	                                      <p>${newlist.loc_name }</p>
-	                                      <p><span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span></p>                          
+	                                      <span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span>                          
 	                                    </div>
 	                           		   
 	                           </div>
@@ -517,18 +515,20 @@ function logincheck()
 		</div>
 		<div class="col-md-2">
 			<div class="floating">
-				<div><span  class="thick">최근게시물</span></div>
-				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
-				<div>
-					오늘 본 상품
-					<c:if test="${sessionScope.postcode != null }">	
+				<div><span  class="thick">오늘 본 상품</span></div>
+				<c:if test="${sessionScope.postcode != null }">	
 					<c:forEach var="gRecentLists" items="${gRecentList }">
-						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
-					</c:forEach>			
-					
-					</c:if>					
+				<div>
+				<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
+				<img src="${gRecentLists.photo}" class="lastest_img img-rounded">
+				</a>
 				</div>
+				<div>
+				</c:forEach>			
+				</c:if>					
+				
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
+				</div>
 			</div>
 		</div>
 		

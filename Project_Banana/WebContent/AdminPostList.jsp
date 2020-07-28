@@ -10,11 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
-<link rel="icon" href="images/favicon.ico" />
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/MyMenuStyle.css">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
 
@@ -88,10 +90,10 @@
 								
 								</tr>
 							</thead>
-						    <c:forEach var="dto" items="${postList }" varStatus="status" begin="0">
+						    <c:forEach var="dto" items="${postList }" >
 							<tbody>
 								<tr>
-									<td>${stats.count }</td>
+									<td>${dto.rnum }</td>
 									<td>${dto.title }</td>
 									<td>${dto.content }</td>
 									<td>${dto.id }</td>
@@ -126,22 +128,21 @@
 
 		</div>
 		
-			<!-- 페이징 바 -->
+			<!-- 페이징 인덱스 반드시 추가  -->
+				<div class="row">
 					<div class="col-md-12 text-center">
 						<nav>
 							<ul class="pagination">
 								<li class="disabled"><a href="#" aria-label="Previous"><span
 										aria-hidden="true">&laquo;</span></a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
+								${pageIndexList }
 								<li><a href="#" aria-label="Next"><span
 										aria-hidden="true">&raquo;</span></a></li>
 							</ul>
 						</nav>
-					</div> <!-- end 페이징 바 -->
+					</div>
+				</div>
+				
 
 	
 			

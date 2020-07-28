@@ -31,6 +31,7 @@ public class RentReplyController
 		try 
 		{
 		
+			System.out.println("댓글 action");
 			HttpSession session = request.getSession();
 			SessionInfo info = (SessionInfo)session.getAttribute("user");
 		    // insert 할 r_post_code

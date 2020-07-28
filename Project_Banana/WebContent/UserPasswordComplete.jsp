@@ -118,7 +118,7 @@ p
 									<p>비밀번호 재설정이 완료되었습니다.</p>
 									
 								    
-  									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
+  									<button class="btn btn-primary" type="button" id="mainList" onclick="location.href='<%=cp%>/loginmain.action' ">로그인</button>
 								</div>
 
 							</div> 

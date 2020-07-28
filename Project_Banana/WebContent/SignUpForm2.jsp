@@ -78,7 +78,7 @@ input
 	var numCheck = RegExp(/[^0-9]$/);
 	
 	// 정규식 한글만 2~6자리
-	var nameCheck = RegExp(/^[가-힣]{2,6}$/);
+	var nameCheck =  /^[가-힣]{2,4}$/;
 	
 	// 정규식 ID체크 소문자와 숫자 조합만
 	var userIdCheck = RegExp(/^[a-z0-9_\-]{5,20}$/);
@@ -86,8 +86,8 @@ input
 	$(document).ready(function()
 	{
 		
-		// ID 정규식 체크
-		$("#id").keyup(function()
+		/* // ID 정규식 체크
+		$("#id").keypress(function()
 		{
 			if(userIdCheck.test($("#id").val()))
 			{
@@ -95,12 +95,14 @@ input
 				$("#id").val('');
 				return;
 			}
-		});
+		}); */
 		
+		
+
 		// 이름 유효성 체크 
-		$("#name").keyup(function()
+		$("#name").keypress(function()
 		{
-			if(nameCheck.test($("#name").val()))
+			if(!nameCheck.test( $("#name").val() ))
 			{
 				alert("2~6자리 한글만 입력하세요");
 				$("#name").val('');
@@ -200,9 +202,19 @@ input
 		// 아이디 중복검사 
 		$("#idBtn").click(function()
 		{
+			
+			
+			
 			if( $("#id").val().trim()=="")
 			{
 				alert("아이디를 입력해야합니다.");
+				return;
+			}
+			
+			if(!userIdCheck.test($("#id").val()))
+			{
+				alert("아이디는 6~20자리 소문자,숫자조합만 가능합니다.");
+				$("#id").val('');
 				return;
 			}
 			//alert("중복검사");
@@ -393,6 +405,7 @@ input
 		}).open();
 	}
 	
+	
 </script>
 
 </head>
@@ -453,7 +466,7 @@ input
 			<!-- 이름-->
 			<div class="row">
 				<div class="col-md-12 Cn">
-					<input type="text" name="name" id="name" placeholder="이름" class="form-control">
+					<input type="text" name="name" id="name" placeholder="이름" class="form-control" >
 				</div>
 			</div>
 			
@@ -639,7 +652,7 @@ input
 				<span>시/군/구 : </span> 
 				
 				<!-- 시/군/구 들어올부분  -->
-				<div id="sel"></div>
+				<span id="sel"></span>
 				</div>
 				
 				</div>

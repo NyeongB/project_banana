@@ -21,7 +21,7 @@
         //System.out.println(session.getAttribute("postcode"));
         
         
-        
+       /*  String nickName = info.getNickname(); */
 
 %>
 
@@ -50,6 +50,7 @@
 	background-color: white;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 
 
@@ -69,7 +70,7 @@ img
 	height: 450px;  */
 
 	width: 110%;
-	height : 450px;
+	height : 500px;
 	
 
 }
@@ -77,7 +78,7 @@ img
 
 p
 {
-	font-size: 20px;
+	font-size: 25px;
 }
 
 .option
@@ -98,15 +99,15 @@ p
 	position: fixed; 
 	right: 50%; 
 	top: 180px; 
-	margin-right: -720px; 
+	margin-right: -690px;  
 	text-align:center; 
-	width: 130px; 
-	height: 120px;
+	width: 120px; 
+	height: 180px;
 	background-color: var(--back-color);
 	border-radius: 3em;
 	margin-top: 5px;
+	padding-top: 10px;
 }
-
 .lastest_img
 {
 	width:80px;
@@ -128,19 +129,19 @@ p
 	
 }
 
-.Btn
-{
-	margin: 20px;
-}
+
+
 
 
 #btn1
 {
+	width : 113px;
 	margin-right: 10px;
 }
 
-#btn2
+.btn2
 {
+	
 	margin-left: 10px;
 }
 
@@ -167,15 +168,102 @@ textarea
 
 .mid
 {
-	margin-right: 10px;
+	
 	padding: 20px;
+	margin-left: 20px;
 	
+}
+#replyinsert
+{
+	margin-bottom: 20px;
+}
+
+#Rreply
+{
+	padding-top: 30px;
+	font-weight: bold;
+}
+
+.Rep
+{
+	margin-bottom: 35px;
 	
+}
+
+.warning
+{
+	margin-bottom: 30px;
+	
+}
+
+.item_detail
+{
+	margin-top: 20px;
+}
+
+.fa-circle
+{
+	font-size: 1pt;
+	color: #cacaca;
+	margin-bottom: 22px;
+}
+
+.sPans
+{
+	color : black;
+	font-weight: bold;
+	
+}
+
+.Span
+{
+	color: #808080;
+}
+
+#scost
+{
+	margin-left: 83px;
+}
+
+#cost1
+{
+	margin-left: 58px;
+
+}
+
+#num1
+{
+	margin-left: 24px;
+
+}
+
+#bunD
+{
+	margin-left: 56px;
+
+}
+
+#bunL
+{
+	margin-left: 56px;
+
+}
+
+.nav
+{
+	font-weight: bold;
+}
+
+#QA
+{
+	font-weight: bold;
 }
 
 </style>
 
 <script type="text/javascript">
+	var replyCode;
+	<%-- var nick = "<%=nickName %>"; --%>
 	
 	var a;
 	$().ready(function() 
@@ -225,9 +313,146 @@ textarea
 						
 					});
 				});
+				
+				
+				
+				
+				
+				
+				// 댓글 등록
+				$("#replyinsert").click(function() 
+				{
+					var id1 = "<%=info %>";
+					   
+					
+					if(id1 == "null" || id1 ==" " )
+					{
+						if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+						{
+							// 확인 버튼 클릭 시 동작
+							
+							location.href = "loginmain.action";
+								
+						}
+						else // 취소 버튼 클릭 시 동작
+						{
+							location.href = "redirect:groupbuyingitempage.action";
+						}
+					}
+					else// 회원이면
+					{
+						
+						<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
+						   
+						var replyCode = "<%=r_replycode %>"; --%>
+						
+						
+						
+						// replyCode 가 null이면 댓글 작성
+						if(replyCode == null ) 
+						{
+							var formData = $("#replyForm").serialize();
+							
+							$.ajax({
+								
+								type : "POST"
+								, url : "g_replyinsert.action"
+								, data : formData
+								, success : function(data) 
+								{
+									$("#resultReply").html(data);
+									$(".reply").val("");
+								}
+							,error:function(request,status,error)
+			                  {
+			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			                  }    
+								
+							});// end ajax	
+						
+						}else// 댓글 코드 가지고 있으면(null 아니면) 대댓글 작성
+						{
+							
+						
+							var formData = document.getElementById("reply_text").innerHTML;
+							console.log(formData);
+							
+							
+							$.ajax({
+								
+								type : "POST"
+								, url : "g_rreplyinsert.action" 
+								, data : {formData :formData, replyCode:replyCode}
+								, success : function(data) 
+								{
+									$("#resultReply").html(data);
+									$(".reply").val("");
+								}
+								,error:function(request,status,error)
+			                  {
+			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			                  }      
+							});	 
+						}
+						
+					}	
+
+				});	
+				
+			
+				
+				
+				
 		
 		
 	});
+	
+	
+
+	//댓글 달기 클릭 시 대댓글 입력 가능 하게 동작
+	function rreplyadd(obj) 
+	{
+		
+		var id1 = "<%=info %>";
+		   
+		
+		if(id1 == "null" || id1 ==" " )
+		{
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
+				location.href = "loginmain.action";
+					
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingitempage.action";
+			}
+		}
+		else
+		{
+		
+		
+	  	replyCode = obj.getAttribute("id");
+	  
+		//console.log(replyCode);
+	  	
+	  	
+	    var nickname = document.getElementById(replyCode).classList.item(2);
+	   
+	   // if(nickname != nick)
+	    //{
+	 		$(".reply").html("@"+nickname+" :");
+	 	
+	    //}
+		
+		}
+		
+	}
+
+	
+	
 
 /* function test()
 {
@@ -296,12 +521,12 @@ function orderItem(obj)
 	//alert(${count});
 	//alert(${member});
 	
-	if(${count}>=${member})
+	/* if(${count}>=${member})
 	{
 		alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
 		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
 		return;
-	}
+	} */
 	
 	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 }
@@ -369,7 +594,7 @@ function orderItem(obj)
 							<div class="row">
 								<div class="col-md-12 imgbox">
 									 <!-- 상품 사진 -->
-									 <img src="images/imagePost.PNG"> 
+									 <img src="${lists.photo}"> 
 				
 				
 				<!--  -->					  
@@ -416,7 +641,7 @@ function orderItem(obj)
 							 
 							<div class="row">
 							
-								<div class="col-md-12">
+								<div class="col-md-12" style="font-weight: bold;">
 								 <h2>${lists.title }</h2>
 								
 								 
@@ -427,16 +652,15 @@ function orderItem(obj)
 							
 							<div class="row">
 							<div class="col-md-12 text-left item_detail">
-								<ul>
+								<ul style="padding-left: 0px; list-style: none; color: #cacaca; font-weight: bold; margin-bottom: 30px; ">
 									
-									<li>원가 : ${lists.cost }원 / 할인가 : ${lists.dis_cost }원</li>
-									<li>1인 비용 :<fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
-									<li>현재 달성인원 : ${count }/${lists.member_num }명</li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 현재 달성인원 </span> <span class="sPans" id="num1">${count }/${lists.member_num }명</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 원가 </span> <span class="sPans" id="scost"> ${lists.cost }원 / 할인가 : ${lists.dis_cost }원 </span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 1인 비용 </span> <span class="sPans" id="cost1"><fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</span></li>
 									
-									<li>분배일시 : ${lists.bun_date }</li>
-									<li>분배장소 :${lists.loc_name }</li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배일시 </span> <span class="sPans" id="bunD">${lists.bun_date }</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배장소 </span> <span class="sPans" id="bunL">${lists.bun_loc }</span></li>
 								
-									
 								</ul>
 							</div>
 							
@@ -444,9 +668,9 @@ function orderItem(obj)
 							
 							
 							<div class="row">
-								<div class="col-md-12 text-center Btn">
-								<button type="button" class="btn btn-default" id="btn1" onclick="jjim()">찜 하기</button>
-								<button type="button" class="btn btn-default" id="${lists.g_post_code }" onclick="orderItem(this)">주문 하기</button>
+								<div class="col-md-12 GBtn" style="margin-left: 100px;">
+								<button type="button" class="btn btn-lg" id="btn1" onclick="jjim()" style="font-weight : bold;">찜 하기</button>
+								<button type="button" class="btn btn-lg btn2" id="${lists.g_post_code }" style="font-weight : bold;" onclick="orderItem(this)">주문 하기</button>
 								
 								</div>
 							</div>
@@ -454,8 +678,9 @@ function orderItem(obj)
 						</div> <!-- end col-md-6 -->
 						</c:forEach>		
 	
-						<div class="col-md-1"></div>
-
+						
+						
+						
 					</div>
 				</div>
 			</div>  <!-- end  -->
@@ -491,12 +716,60 @@ function orderItem(obj)
 				<div class="col-md-12 detail">
 				<h3 id="QA">Q ＆ A</h3>
 				
-				<div>
-					<textarea rows="" cols="" placeholder="상품문의 입력"></textarea>
+				
+				<div class="form-inline">
+				<form action="" id="replyForm">
+					<div>
+					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
+					</div>
+					<div>
+					<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+					</div>
+					<input type="hidden" name="postcode" value="<%=postcode %>">
+				</form>
 				</div>
-				<div class="bu text-right">
-					<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+				
+				<!-- 댓글 INSERT -->
+				<div  id="resultReply">
+				<c:forEach var="greplyList" items="${greplyList }">
+					<div class="Rep">
+						
+						<div class="form-inline">
+						<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
+						<c:if test="${greplyList.l_level == 1}">
+						<div class="col-md-1">
+						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
+						</div>
+						</c:if>
+						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-3 text-right">${greplyList.wdate }</div>
+						</div>
+		
+						<div id="Rreply">${greplyList.reply }</div> 
+						<div class="form-inline text-right">
+						<div class="col-md-8"></div>
+						
+						<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
+						<c:if test="${greplyList.l_level == 0}">
+						<div class="col-md-2 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)"><span class="glyphicon glyphicon-pencil">&nbsp;댓글달기</span></div>
+						
+						
+							
+						</c:if>
+						
+						<div class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;좋아요</div>
+						<div class="col-md-1 text-rigth"><span class="glyphicon glyphicon-warning-sign">&nbsp;신고</span></div>
+						</div>
+					</div>
+					<hr>	
+					
+				</c:forEach>
+				
 				</div>
+				
+				
+				
+				
+				
 				
 				
 				</div>
@@ -509,19 +782,18 @@ function orderItem(obj)
 		
 		<div class="col-md-2">
 			<div class="floating">
-				<div><span  class="thick">최근게시물</span></div>
-				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+				<div><span  class="thick">오늘 본 상품</span></div>
+				<c:if test="${sessionScope.postcode != null }">	
+				<c:forEach var="gRecentLists" items="${gPostDetailList }">
+				<div><a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
+				<img src="${gRecentLists.photo }" class="lastest_img img-rounded"></a></div>
 				<div>
-			
-					오늘 본 상품
-					<c:if test="${sessionScope.postcode != null }">	
-					<c:forEach var="gRecentLists" items="${gPostDetailList }">
-						<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
-					</c:forEach>			
+
+				</c:forEach>			
 					
-					</c:if>					
+				</c:if>					
 				</div>
-				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
+				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></div>
 			</div>
 		</div>
 		

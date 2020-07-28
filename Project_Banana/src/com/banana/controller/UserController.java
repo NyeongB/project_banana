@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.my.IPasswordAnswerDAO;
 import com.banana.my.PasswordAnswerDTO;
+import com.banana.user.IAlarmDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.ILeaveDAO;
 import com.banana.user.IUserDAO;
 import com.banana.user.JoinDTO;
 import com.banana.user.LeaveDTO;
 import com.banana.user.LocDTO;
+import com.banana.user.PasswordDTO;
 import com.banana.util.Send;
 import com.banana.util.SessionInfo;
 
@@ -34,7 +36,20 @@ public class UserController
 	@Autowired
 	private SqlSession SqlSession;
 	
-
+	@RequestMapping(value = "/alarm.action", method =RequestMethod.GET)
+	public String alarm(Model model,HttpServletRequest request)
+	{
+		String view = null; 
+		
+		IAlarmDAO dao = SqlSession.getMapper(IAlarmDAO.class);
+		
+		model.addAttribute("list", dao.list(request.getParameter("id"))); 
+		
+		view = "/AjaxAlarm.jsp";
+		
+		
+		return view;
+	}
 	
 	@RequestMapping(value = "/join.action", method =RequestMethod.GET)
 	public String join(Model model)
@@ -333,10 +348,15 @@ public class UserController
 		
 		// 비밀번호찾기 메인
 		@RequestMapping(value = "/userfindpw.action", method =RequestMethod.GET)
-		public String userFindPw(Model model)
+		public String userFindPw(Model model,HttpServletRequest request)
 		{
 			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
 			
+			HttpSession session = request.getSession();
+	         
+	        
+	        
+	        
 			model.addAttribute("pwList", dao.pwList());
 			
 			return "/UserPasswordFind.jsp";

@@ -82,7 +82,7 @@ td
 <!-- Header  -->
 <div class="row Header">
 	<div class="col-md-12">
-		<jsp:include page="../../Header.jsp"></jsp:include>	
+		<jsp:include page="Header.jsp"></jsp:include>	
 	</div>
 </div>
 
@@ -91,7 +91,7 @@ td
 		<div class="content">
 			
 			<div class="col-md-2">
-			<jsp:include page="../../MenuUser.jsp"></jsp:include>
+			<jsp:include page="MenuUser.jsp"></jsp:include>
 			</div><!-- 왼쪽 MenuUser end  -->
 			
 		
@@ -129,9 +129,9 @@ td
 									<th>삭제</th>
 								</tr>			
     								<tbody id="tbody">
-									    <c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
+									    <c:forEach var="rReplyLists" items="${rReplyList }" >
 											<tr>
-												<td>${status.count }</td>									
+												<td>${rReplyLists.rnum }</td>									
 												<td>${rReplyLists.title }</td>
 												<td>${rReplyLists.reply }</td>
 												<td>${rReplyLists.wDate }</td>
@@ -166,20 +166,20 @@ td
 			<div class="text-center">
 					<div class="col-md-12 a">
 						<nav>
-							<ul class="pagination">
-								<li class="disabled"><a href="#" aria-label="Previous"><span
-										aria-hidden="true">&laquo;</span></a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						
-						
-						
-						
-								<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
-								<li class="disabled"><a href="#" aria-label=""><span
-										aria-hidden="false">&laquo;</span></a></li>
-							</ul>
+							<!-- 페이징 인덱스 반드시 추가  -->
+            <div class="row">
+               <div class="col-md-12 text-center">
+                  <nav>
+                     <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span
+                              aria-hidden="true">&laquo;</span></a></li>
+                        ${pageIndexList }
+                        <li><a href="#" aria-label="Next"><span
+                              aria-hidden="true">&raquo;</span></a></li>
+                     </ul>
+                  </nav>
+               </div>
+            </div>
 						</nav>
 					</div>
 			</div>
@@ -199,7 +199,7 @@ td
 <!-- footer  -->
 <div class="row">
 	<div class="col-md-12">
-		<jsp:include page="../../Footer.jsp"></jsp:include>
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
 

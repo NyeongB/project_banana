@@ -18,6 +18,8 @@
 	
 	String bookingEnd = (String)request.getAttribute("bookingEnd");
 	
+	String nickName = info.getNickname();
+	
 %>
 
 <!DOCTYPE html>
@@ -193,7 +195,7 @@ textarea
 	var rpostCode = "<%=rpostCode%>";
 	var disable;
 	var bookingEnd = "<%=bookingEnd %>";
-	
+	var nick = "<%=nickName %>";
 $().ready(function() 
 {
 	/* $('.carousel').carousel();
@@ -284,15 +286,15 @@ $().ready(function()
 						
 						type : "POST"
 						, url : "r_replyinsert.action"
-						, data : {formData :formData, replyCode:replyCode}
+						, data : formData 
 						, success : function(data) 
 						{
 							$("#resultReply").html(data);
 						}
-						, error : function(data) 
-						{
-							alert(data);
-						}
+					,error:function(request,status,error)
+	                  {
+	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                  }    
 						
 					});// end ajax	
 				
@@ -485,8 +487,10 @@ function rreplyadd(obj)
     var nickname = document.getElementById(replyCode).classList.item(2);
    
   	
- 	$(".reply").html("@"+nickname+" :");
- 	
+    if(nickname != nick)
+    {	
+ 		$(".reply").html("@"+nickname+" :");
+    }
  	
 	
 	}

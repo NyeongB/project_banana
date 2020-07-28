@@ -32,6 +32,14 @@ String cp = request.getContextPath();
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>-->
 
 <style type="text/css">
+
+@font-face 
+{ 
+	font-family: 'yg-jalnan';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+	font-weight: normal; 
+	font-style: normal; 
+ }
 * {
 	margin: 0;
 	padding: 0;
@@ -68,12 +76,10 @@ li {
 }
 .introduce li
 {
-	font-size: 30pt;
-	color: var(--text-color);
-	font-weight: 900;
-	text-align: center;
 	list-style: none;
-
+	font-family: 'yg-jalnan';
+	color: var(--back-color);
+	font-size: 30pt;
 
 }
 </style>
@@ -116,34 +122,35 @@ li {
 
 
 			<div class="col-md-8">
-				<ul class="bxslider">
-					<li><a href="#"><img
-							src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
-							alt="" ></a></li>
-					<li><a href="#"><img
-							src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
-							alt=""></a></li>
-					<li><a href="#"><img
-							src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
-							alt="" ></a></li>
-							
-					<li><a href="#"><img
-					src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
-					alt="" ></a></li>
-				</ul>
+			<div class="col-md-12">
+					<ul class="bxslider">
+						<li><a href="#"><img
+								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
+								alt="" ></a></li>
+						<li><a href="#"><img
+								src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
+								alt=""></a></li>
+						<li><a href="#"><img
+								src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
+								alt="" ></a></li>
+								
+						<li><a href="#"><img
+						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
+						alt="" ></a></li>
+					</ul>
+				</div>
+				<div class="col-md-12 introduce text-center">
+				
+					<img src="images/banana_1.png" style="width:200px;" alt="" />
+				
+				
+					
+				</div>
 			</div>
 			<div class=""></div>
 			<!-- col-md-8 end -->
 
-			<div class="col-md-12 introduce text-center" >	
-			
-			<ul>
-				<li>바로옆과</li>
-				<li>나눠주고</li>
-				<li>나눠쓰고</li>
-			</ul>					
-					
-			</div>
+			<div class="col-md-2"></div>
 
 		</div>
 		<!-- content end -->

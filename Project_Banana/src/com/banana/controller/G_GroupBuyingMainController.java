@@ -24,8 +24,11 @@ import com.banana.my.MyReviewDTO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RPostDTO;
+import com.banana.reply.g_reply.IGreplyDAO;
 import com.banana.user.IJoinDAO;
 import com.banana.user.LocDTO;
+import com.banana.util.IndexDTO;
+import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
 
 @Controller
@@ -42,7 +45,10 @@ public class G_GroupBuyingMainController
 			HttpSession session = request.getSession();
 			
 			 String postcode = (String)session.getAttribute("postcode");
-		     //System.out.println(postcode);
+			 
+			 SessionInfo info = (SessionInfo)session.getAttribute("user");
+			 String loc = info.getLoc_code();
+		    
 			
 			String view = null; 
 		
@@ -50,15 +56,34 @@ public class G_GroupBuyingMainController
 			{
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
+				// 리스트의 총페이지를 가져오는 메소드
+				int count = dao.getCount(bid);
+				System.out.println("count:"+count);
+				
+				// 페이징 처리 
+				Paging paging = new Paging();
+				String pageNum = request.getParameter("pageNum");				
+				
+				//테이블에서 가져올 리스트의 시작과 끝 위치
+				int start = paging.getStart(pageNum,count );
+				int end = paging.getEnd(pageNum, count);
+				
+				// 페이지번호를 받아온 
+				String pageIndexList = paging.pageIndexList(pageNum, count,bid);
+				
 				GCateDTO dto = new GCateDTO();
 				dto.setG_cate_bcode(bid);
+				dto.setStart(start);
+				dto.setEnd(end);
+				dto.setLoc_code(loc);
+				
 				
 				if(postcode != null)
 			    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 				
 				model.addAttribute("cateList", dao.cateList(dto));
 				model.addAttribute("gCateMainList", dao.gCateMainList(dto));
-				
+				model.addAttribute("pageIndexList", pageIndexList);
 				
 			} catch (Exception e)
 			{
@@ -81,12 +106,12 @@ public class G_GroupBuyingMainController
 	  public String cateList(Model model, String bid, String mid, HttpServletRequest request) 
 	  { 
 		  HttpSession session = request.getSession();
-		  
 		  String view = null;
 		  
 		  String postcode = (String)session.getAttribute("postcode");
 	      //System.out.println(postcode);
-		  
+		  //SessionInfo info = (SessionInfo)session.getAttribute("user");
+		  //String loc = info.getLoc_code();
 	  
 		  try
 		{
@@ -95,13 +120,32 @@ public class G_GroupBuyingMainController
 			  GCateDTO dto = new GCateDTO();
 			  dto.setG_cate_bcode(bid);
 			  dto.setG_cate_code(mid);
+			  //dto.setLoc_code(loc);
 			  
+			  // 리스트의 총페이지를 가져오는 메소드
+			  int count = dao.mGetCount(dto);
+			  System.out.println(count+"count");
+			  
+			  // 페이징 처리 
+				Paging paging = new Paging();
+				String pageNum = request.getParameter("pageNum");				
+				
+				//테이블에서 가져올 리스트의 시작과 끝 위치
+				int start = paging.getStart(pageNum,count );
+				int end = paging.getEnd(pageNum, count);
+			  
+				dto.setStart(start);
+				dto.setEnd(end);
+				// 페이지번호를 받아온 
+				String pageIndexList = paging.pageIndexList(pageNum, count,bid,mid);
+				
 			  if(postcode != null)
 		    	  model.addAttribute("gRecentList", dao.gRecentList(postcode));
 			  
 			  model.addAttribute("cateMList", dao.cateMList(dto));
 			  model.addAttribute("cateList", dao.cateList(dto));
 			  model.addAttribute("gCatemMainList", dao.gCatemMainList(dto));
+			  model.addAttribute("pageIndexList", pageIndexList);
 
 			
 		} catch (Exception e)
@@ -131,6 +175,7 @@ public class G_GroupBuyingMainController
 			  
 			  String postcode = (String)session.getAttribute("postcode");
 			  //System.out.println(postcode);
+			  String loc = info.getLoc_code();
 			  
 			  
 			  GPostDTO dto = new GPostDTO(); 
@@ -146,7 +191,8 @@ public class G_GroupBuyingMainController
 				  model.addAttribute("check","1"); 
 				  
 				  //새로 올라온 게시물
-				  model.addAttribute("gNewList", dao.gNewList());
+				  dto.setLoc_code(loc);
+				  model.addAttribute("gNewList", dao.gNewList(dto));
 				  
 				  
 				  
@@ -156,9 +202,10 @@ public class G_GroupBuyingMainController
 				//사용자 코드 가져오기 
 				  String code = info.getB_user_code(); 
 				  dto.setB_user_code(code);
+				  dto.setLoc_code(loc);
 				  
 				  //새로 올라온 게시물
-				  model.addAttribute("gNewList", dao.gNewList());
+				  model.addAttribute("gNewList", dao.gNewList(dto));
 
 				  
 				  //카테고리게시물
@@ -220,24 +267,26 @@ public class G_GroupBuyingMainController
 			
 			
 			try
-			{
-				
-				 HttpSession session = request.getSession();		
-			      
+			{		
+			    IGreplyDAO dao2 = SqlSession.getMapper(IGreplyDAO.class);
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
 				String code = request.getParameter("postcode"); 
-		
 				
+				int member = 0;
 				
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
 				
 				//int member = dto.getMember_num();
 				ArrayList<GPostDTO> list =	dao.gPostDetailList(dto);
-				int member = list.get(0).getMember_num();
+				if( list.size() !=0)
+				{
+					member = list.get(0).getMember_num();
+				}
 				//String title = list.get(0).getTitle();
 				
+				model.addAttribute("greplyList", dao2.greplyList(code));
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);
@@ -254,6 +303,8 @@ public class G_GroupBuyingMainController
 			
 			return view;
 		}
+	  
+	  
 		
 	  //주문상세 확인 페이지
 	  @RequestMapping(value = "/groupbuyingjumunconfirm.action", method =RequestMethod.GET)
@@ -280,9 +331,10 @@ public class G_GroupBuyingMainController
 				//System.out.println(code);
 				GPostDTO dto = new GPostDTO();
 				dto.setG_post_code(code);
-				
+				IndexDTO dto2 = new IndexDTO();
+				dto2.setB_user_code(b_user_code);
 				model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
-				model.addAttribute("pointList", pointdao.pointList(b_user_code));	
+				model.addAttribute("pointList", pointdao.pointList(dto2));	
 				model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
 				
 				
@@ -358,31 +410,6 @@ public class G_GroupBuyingMainController
 			return view;
 		}
 	
-		/*
-		 * //리모콘 바 최근 게시물
-		 * 
-		 * @RequestMapping(value = "/recent.action", method =RequestMethod.GET) public
-		 * String Recent(Model model,HttpServletRequest request) { String view = null;
-		 * 
-		 * try { IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-		 * 
-		 * 
-		 * String code = request.getParameter("remotecode");
-		 * 
-		 * GPostDTO dto = new GPostDTO(); dto.setG_post_code(code);
-		 * 
-		 * 
-		 * //model.addAttribute("gRecentList",dao.gRecentList(dto));
-		 * 
-		 * 
-		 * 
-		 * } catch (Exception e) { System.out.println(e.toString()); }
-		 * 
-		 * 
-		 * view = "/g_main.action";
-		 * 
-		 * return view; }
-		 */
 	  
 	  //공동구매 참여
 	  @RequestMapping(value = "/applyItem.action", method =RequestMethod.GET)
