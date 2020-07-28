@@ -29,6 +29,7 @@
 		ON G.G_POST_CODE = P.G_POST_CODE
                 LEFT JOIN JOIN J
         ON G.B_USER_CODE = J.B_USER_CODE
+        WHERE J.LOC_CODE = #{loc_code}
 		ORDER BY WDATE DESC
 	</select>
 	
@@ -51,6 +52,7 @@
         AND G_CATE_MCODE IS NOT NULL
         )
         AND G.B_USER_CODE !=  #{b_user_code}
+        AND J.LOC_CODE = #{loc_code}
         ORDER BY G.WDATE DESC
         
 	</select>

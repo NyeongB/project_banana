@@ -39,6 +39,7 @@ public class MyPointController
 			if(info == null)
 				return "/loginmain.action";
 			String b_user_code = info.getB_user_code();
+			String nickName = info.getNickname();
 			
 			
 			// 리스트의 총페이지 가져오는 메소드(각자 따로 구현해야함)
@@ -72,6 +73,7 @@ public class MyPointController
 			
 			model.addAttribute("pointList", dao.pointList(dto));
 			model.addAttribute("sumPoint", dao.sumPoint(b_user_code));
+			model.addAttribute("nickName", nickName);
 			
 			view = "/UserMyBa_Point.jsp";
 			

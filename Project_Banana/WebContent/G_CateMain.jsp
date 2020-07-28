@@ -172,7 +172,7 @@ a:active
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 310px;
+ 	 height: 330px;
  	 margin-right: 3px;
 	margin-left: 3px;
 } 
@@ -180,6 +180,12 @@ a:active
 .caption
 {
 	height: 150px;
+}
+
+.page
+{
+	margin-top: 30px;
+	margin-bottom: 70px;
 }
 </style>
 <script type="text/javascript">
@@ -321,14 +327,14 @@ a:active
 	                     		 </div>
 	                   		</div>
 	                     	</c:forEach> 
-						 <hr>
+						 
 					
 
 							<div class="row">
 								<div class="col-md-12">
 			
 									<!-- 페이징 바 -->
-									<div class="col-md-12 text-center">
+									<div class="col-md-12 text-center page">
 										<nav>
 											<ul class="pagination">
 												<li class="disabled"><a href="#" aria-label="Previous"><span

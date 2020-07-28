@@ -11,7 +11,7 @@ public interface IGPostDAO
 	public ArrayList<GPostDTO> cateMList(GCateDTO dto);
 	
 	//공통구매 메인화면 최근 올라온 게시물 리스트
-	public ArrayList<GPostDTO> gNewList();
+	public ArrayList<GPostDTO> gNewList(GPostDTO dto);
 	
 	//카테고리별 
 	public ArrayList<GPostDTO> gCateList(GPostDTO dto);
