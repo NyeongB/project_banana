@@ -70,7 +70,7 @@ img
 	height: 450px;  */
 
 	width: 110%;
-	height : 450px;
+	height : 500px;
 	
 
 }
@@ -168,9 +168,9 @@ textarea
 
 .mid
 {
-	margin-right: 10px;
-	padding: 20px;
 	
+	padding: 20px;
+	margin-left: 20px;
 	
 }
 #replyinsert

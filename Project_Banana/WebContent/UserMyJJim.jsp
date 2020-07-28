@@ -135,8 +135,7 @@ img
 									</div>
 								</td>
 								<td>${status.count }</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="https://www.costco.co.kr/medias/sys_master/images/h57/h94/13108550959134.jpg"></td>
+								<td>${jjims.photo }</td>
 								<td>${jjims.title }</td>
 								<td>${jjims.cost }/${jjims.dis_cost }</td>
 								<td>${jjims.loc_name }</td>
