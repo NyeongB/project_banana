@@ -361,6 +361,7 @@ textarea
 								, success : function(data) 
 								{
 									$("#resultReply").html(data);
+									$(".reply").val("");
 								}
 							,error:function(request,status,error)
 			                  {
@@ -385,6 +386,7 @@ textarea
 								, success : function(data) 
 								{
 									$("#resultReply").html(data);
+									$(".reply").val("");
 								}
 								,error:function(request,status,error)
 			                  {
