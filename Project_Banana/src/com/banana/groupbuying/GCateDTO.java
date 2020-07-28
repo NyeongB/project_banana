@@ -2,7 +2,7 @@ package com.banana.groupbuying;
 
 public class GCateDTO
 {
-	private String bid,mid;
+	private String bid,mid,loc_code;
 	private String  cate_name, g_cate_bcode,g_cate_code;
 	private int start, end;
 
@@ -74,6 +74,16 @@ public class GCateDTO
 	public void setG_cate_code(String g_cate_code)
 	{
 		this.g_cate_code = g_cate_code;
+	}
+
+	public String getLoc_code()
+	{
+		return loc_code;
+	}
+
+	public void setLoc_code(String loc_code)
+	{
+		this.loc_code = loc_code;
 	}
 	
 	
