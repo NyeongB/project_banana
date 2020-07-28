@@ -6,11 +6,19 @@
   
 <mapper namespace="com.banana.my.IUserMyJJimDAO">
 	
+	<!-- 사용자 찜 목록 가져오기  -->
 	<select id="jjimList" resultType="com.banana.groupbuying.GPostDTO">
 	SELECT TYPE, G_POST_CODE , NICKNAME, TITLE, LOC_NAME, SDATE, COST, DIS_COST, B_USER_CODE
 	FROM VIEW_JJIM
 	WHERE B_USER_CODE = #{b_user_code}
-	</select>	
+	</select>
+	
+	<!--  -->
+	<select id="getCount" resultType="Integer">
+	SELECT COUNT(*)
+	FROM VIEW_JJIM
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>		
 	
 	
 	
