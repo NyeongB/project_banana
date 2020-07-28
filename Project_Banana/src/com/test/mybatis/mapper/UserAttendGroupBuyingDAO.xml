@@ -8,7 +8,8 @@
 	
 	<!-- 나의 신청공동구매 현황  -->
 	<select id="myGList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE, COST, DIS_COST, LOC_NAME, PHOTO, G_POST_CODE, G_APPLY_CODE, B_USER_CODE, BUN_DATE, END_DATE, PROGRESS, MEMBER_NUM, COUNT
+		SELECT TITLE, COST, DIS_COST, LOC_NAME, PHOTO, G_POST_CODE, G_APPLY_CODE
+				, B_USER_CODE, BUN_DATE, END_DATE, PROGRESS, MEMBER_NUM, COUNT, G_SUCCESS_CODE
 		FROM VIEW_MY_APPLY_GONGGU
 		WHERE B_USER_CODE = #{b_user_code}
 	</select>
@@ -19,12 +20,30 @@
 		 WHERE B_USER_CODE = #{b_user_code}
 	</select>
 	
+	<!-- 리뷰 작성 여부  -->
+	<select id="reviewCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM G_REVIEW R LEFT JOIN G_ATTENDANCE G
+		ON R.G_ATTENDANCE_CODE = G.G_ATTENDANCE_CODE
+		WHERE G.G_APPLY_CODE =#{G_APPLY_CODE}
+	</select>
+	
 	<!-- 신청 취소 프로시저 -->
 	<select id="gCancel" statementType="CALLABLE" >
      {call     
       PRC_G_CANCEL(#{g_apply_code},#{b_user_code})
      }
 	</select>
+	
+	<!-- 공통협력구매 리뷰 남기기 : 신뢰도점수, 유저코드, 공통협력구매 성사코드, 리뷰내용-->
+	<select id="review" statementType="CALLABLE" >
+     {call     
+      PRC_G_REVIEW (#{star},#{b_user_code},#{g_success_code},#{review},#{g_apply_code})
+     }
+	</select>
+
+	
+	
 </mapper>  
 
 

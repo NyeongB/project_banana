@@ -8,9 +8,16 @@
 	
 	<!--  포인트 내역 리스트 -->
 	<select id="pointList" resultType="com.banana.my.MyPointDTO">
-	SELECT POINT_LIST_CODE, B_USER_CODE ,SDATE, TYPE, DETAIL, POINT
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT POINT_LIST_CODE, B_USER_CODE ,SDATE, TYPE, DETAIL, POINT
 	FROM VIEW_MY_POINT
-	WHERE B_USER_CODE = #{b_user_code}
+	WHERE B_USER_CODE =#{b_user_code} ORDER BY sdate DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+	]]>
 	</select>	
 	
 	<!-- 남은 포인트  -->
@@ -20,6 +27,11 @@
 	WHERE B_USER_CODE = #{b_user_code}
 	</select>	
 	
+	<select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_MY_POINT
+	WHERE B_USER_CODE = #{b_user_code}
+	</select>
 	
 	
 </mapper>  

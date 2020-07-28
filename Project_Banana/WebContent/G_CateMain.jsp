@@ -46,13 +46,14 @@
 	position: fixed; 
 	right: 50%; 
 	top: 180px; 
-	margin-right: -720px; 
+	margin-right: -690px;  
 	text-align:center; 
-	width: 130px; 
-	height: 120px;
+	width: 120px; 
+	height: 180px;
 	background-color: var(--back-color);
 	border-radius: 3em;
 	margin-top: 5px;
+	padding-top: 10px;
 }
 .lastest_img
 {
@@ -171,7 +172,7 @@ a:active
 {
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
- 	 height: 330px;
+ 	 height: 310px;
  	 margin-right: 3px;
 	margin-left: 3px;
 } 
@@ -303,7 +304,7 @@ a:active
 		                     <div class="col-sm-2 col-md-2">
 		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-		                           		    <img src="${glists.photo }" style="width: 180px; height: 180px;">                       			
+		                           		    <img src="${glists.photo }" style="width: 200px; ">                       			
 		                           			<div class="caption thick">		                      				
 		                                      <h5 class="thick">${glists.title }</h5>
 		                                      <div class="col-md-12">
@@ -341,16 +342,20 @@ a:active
 									<!-- end 페이징 바 -->
 									<div class="col-md-2">
 									<div class="floating">
-										<div><span  class="thick">최근게시물</span></div>
-										<div><img src="${gslists.photo }" class="lastest_img img-rounded"></div>
+										<div><span  class="thick">오늘 본 상품</span></div>
+										<c:if test="${sessionScope.postcode != null }">	
+										<c:forEach var="gRecentLists" items="${gRecentList }">
 										<div>
-											오늘 본 상품
-											<c:if test="${sessionScope.postcode != null }">	
-											<c:forEach var="gRecentLists" items="${gRecentList }">
-												<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }"><span>${gRecentLists.photo }</span></a>
-											</c:forEach>			
+										<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
+										<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
+										</a>
+										</div>
+										<div>
 											
-											</c:if>					
+											
+										</c:forEach>			
+											
+										</c:if>					
 										</div>
 										<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 									</div>

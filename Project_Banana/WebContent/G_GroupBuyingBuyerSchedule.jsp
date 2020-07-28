@@ -65,6 +65,24 @@
 	margin-top: 100px;
 	
 }
+#itemImg
+{
+	width:500px;
+	height:300px;
+	padding-bottom: 30px;
+
+
+}
+#calendar td
+{
+	font-size: 10pt;
+}
+
+#calendar h2
+{
+	font-weight: bold;
+
+}
 
 </style>
 
@@ -213,6 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
 							<h3>
 								일정표
 							</h3>
+							<div class="col-md-12">
+								<p class="thick">&#11088; 일정표를 통해 보다 쉽게 거래일정을 확인하세요.</p>
+							</div>
 							
 							<div class="text-right
 							form-inline md-form form-sm form-2 pl-0 search_bar">
@@ -276,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="modal-header"><!-- 모달헤더 -->
 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title thick" id="myModalLabel" style="text-align: center">상세정보</h4>
+<h4 class="modal-title thick" id="myModalLabel" style="text-align: center">&#11088; 상세정보 &#11088;</h4>
 </div><!-- 모달 헤더 끝 -->
 
 <div class="modal-body"><!-- 모달바디 -->
@@ -368,12 +389,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 <!-- 확정자모달 끝----------------------------------------------------------------- -->
-<!-- footer 영역 -->
-<div class="row Footer">
-	<div class="col-md-12">
-		<jsp:include page="Footer.jsp"></jsp:include>
-	</div>
-</div>
 
 
 </body>

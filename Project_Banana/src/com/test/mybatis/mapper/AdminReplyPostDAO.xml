@@ -25,9 +25,20 @@
 	</select>
 	
 	<select id="replyList" resultType="com.banana.admin.ReplyDTO">
-	SELECT * FROM VIEW_REPLY
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT REPLY, NICKNAME, WDATE, CODE, ID FROM VIEW_REPLY ORDER BY WDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+		]]>
 	</select>	
 	
+	<select id="getCount2" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_REPLY
+	</select>
 	
 </mapper>  
 

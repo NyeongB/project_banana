@@ -7,45 +7,20 @@
 <mapper namespace="com.banana.admin.IAdminUserListDAO">
 	
 	<select id="list" resultType="com.banana.admin.AdminUserListDTO">			
-SELECT 
-        J.NAME AS NAME
-      , J.SSN AS SSN
-      , J.TEL AS TEL
-      , B.SDATE AS SIGNDATE
-      , J.ADDR AS ADDR
-      , J.ID AS ID
-      , J.EMAIL AS EMAIL
-      , J.ACCOUNT_USER AS ACCOUNT_USER
-      , J.ACCOUNT AS ACCOUNT
-      , T.BANK_NAME AS BANK_NAME
-      , NVL((SELECT MAX(SDATE)
-        FROM CONNECTION
-        WHERE B_USER_CODE = B.B_USER_CODE
-        ),TO_DATE('1111-11-11'))AS CONDATE 
-     ,  NVL((
-        SELECT SUM(POINT)
-        FROM POINT_LIST 
-        WHERE B_USER_CODE = B.B_USER_CODE ), 0)AS POINT
-     ,  NVL((
-        SELECT SUM(BANANA_SCORE)
-        FROM BANANA_SCORE 
-        WHERE B_USER_CODE = B.B_USER_CODE ), 0)AS BANANA_SCORE
-    , NVL((
-        SELECT SUM(CREDIT_SCORE)
-        FROM CREDIT_SCORE 
-        WHERE B_USER_CODE = B.B_USER_CODE ), 0)AS CREDIT_SCORE
-    , NVL((
-        SELECT COUNT(*)
-        FROM OUT 
-        WHERE B_USER_CODE = B.B_USER_CODE ), 0)AS OUT
-    , NVL((
-        SELECT COUNT(*)
-        FROM WARNING 
-        WHERE B_USER_CODE = B.B_USER_CODE ), 0)AS WARNING
-FROM B_USER B RIGHT JOIN JOIN J
-ON B.B_USER_CODE = J.B_USER_CODE
-              LEFT JOIN BANK_TYPE T
-ON T.BANK_TYPE_CODE = J.BANK_TYPE_CODE
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT NAME, SSN, TEL, SIGNDATE, ADDR, ID, EMAIL, ACCOUNT_USER, ACCOUNT, BANK_NAME, CONDATE, POINT, BANANA_SCORE, CREDIT_SCORE, OUT, WARNING
+		FROM VIEW_USER ORDER BY SIGNDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+	]]>
 	</select>	
+	
+	
+	<select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*) FROM VIEW_USER
+	</select>
 	
 </mapper>  

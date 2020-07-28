@@ -3,6 +3,18 @@ package com.banana.util;
 public class IndexDTO
 {
 	private int start, end;
+	
+	private String b_user_code;
+
+	public String getB_user_code()
+	{
+		return b_user_code;
+	}
+
+	public void setB_user_code(String b_user_code)
+	{
+		this.b_user_code = b_user_code;
+	}
 
 	public int getStart()
 	{

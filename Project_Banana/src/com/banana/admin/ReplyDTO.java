@@ -3,6 +3,20 @@ package com.banana.admin;
 public class ReplyDTO
 {
 	private String reply, nickname, id, wdate;
+	
+	private String rnum;
+	
+	
+
+	public String getRnum()
+	{
+		return rnum;
+	}
+
+	public void setRnum(String rnum)
+	{
+		this.rnum = rnum;
+	}
 
 	public String getReply()
 	{
