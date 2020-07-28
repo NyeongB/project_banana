@@ -5,6 +5,17 @@ public class MyPointDTO
 	private String id, sdate, type, detail;
 	private int point;
 	
+	private String rnum;
+	
+	
+	public String getRnum()
+	{
+		return rnum;
+	}
+	public void setRnum(String rnum)
+	{
+		this.rnum = rnum;
+	}
 	// getter / setter 구성
 	public String getId()
 	{

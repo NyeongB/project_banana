@@ -11,4 +11,8 @@ public interface IUserReplyDAO
 	public int rReplyDelete(String reply_code);
 	// 내가 쓴 공동구매 댓글 삭제 
 	public int gReplyDelete(String reply_code);
+
+	public int getCount(String user_code);
+	
+	
 }

@@ -82,7 +82,7 @@ td
 <!-- Header  -->
 <div class="row Header">
 	<div class="col-md-12">
-		<jsp:include page="../../Header.jsp"></jsp:include>	
+		<jsp:include page="Header.jsp"></jsp:include>	
 	</div>
 </div>
 
@@ -91,7 +91,7 @@ td
 		<div class="content">
 			
 			<div class="col-md-2">
-			<jsp:include page="../../MenuUser.jsp"></jsp:include>
+			<jsp:include page="MenuUser.jsp"></jsp:include>
 			</div><!-- 왼쪽 MenuUser end  -->
 			
 		
@@ -129,7 +129,7 @@ td
 									<th>삭제</th>
 								</tr>			
     								<tbody id="tbody">
-									    <c:forEach var="rReplyLists" items="${rReplyList }" varStatus="status">
+									    <c:forEach var="rReplyLists" items="${rReplyList }" >
 											<tr>
 												<td>${rReplyLists.rnum }</td>									
 												<td>${rReplyLists.title }</td>
@@ -199,7 +199,7 @@ td
 <!-- footer  -->
 <div class="row">
 	<div class="col-md-12">
-		<jsp:include page="../../Footer.jsp"></jsp:include>
+		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </div>
 

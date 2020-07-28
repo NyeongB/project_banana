@@ -9,10 +9,17 @@
 	
 	<!-- 최신순  -->
 	<select id="rReplyList" resultType="com.banana.my.UserReplyDTO">
-	SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE, REPLY_CODE
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT TITLE, WDATE, REPLY, B_USER_CODE, REPLY_LIKE, REPLY_CODE
 	FROM VIEW_USER_REPLY_LIST
-	WHERE B_USER_CODE =#{user_code}
-	ORDER BY
+	WHERE B_USER_CODE =#{user_code})DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end} 
+		ORDER BY
+	]]>
 	<choose>
 		<when test="order == 'WDATE_DESC'">WDATE DESC</when>
 		<when test="order == 'WDATE_ASC'">WDATE ASC</when>
@@ -30,6 +37,12 @@
 	SET REPLY ='삭제된 댓글입니다.'
 	WHERE G_REPLY_CODE = #{reply_code}	
 	</update>
+	
+	<select id="getCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_USER_REPLY_LIST
+    WHERE B_USER_CODE=#{b_user_code}
+	</select>
 	
 	
 </mapper>  

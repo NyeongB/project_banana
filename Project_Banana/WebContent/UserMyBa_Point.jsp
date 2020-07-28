@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -145,13 +146,13 @@ nav
 								</tr>
 							</thead>
 							<tbody class="text-center">
-							<c:forEach var="pointLists"  items="${pointList }" varStatus="status">
+							<c:forEach var="pointLists"  items="${pointList }" >
 								<tr>
-									<td>${status.count }</td>
+									<td>${pointLists.rnum }</td>
 									<td>${pointLists.sdate }</td>
 									<td>${pointLists.type }</td>
 									<td>${pointLists.detail }</td>
-									<td>${pointLists.point }</td>
+									<td><fmt:formatNumber value="${pointLists.point }" ></fmt:formatNumber></td>
 								</tr>
 							</c:forEach>
 							</tbody>
