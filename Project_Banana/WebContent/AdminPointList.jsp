@@ -83,7 +83,7 @@ nav
 				<div class="row">
 					<div class="col-md-12 form-inline">
 						<div class="col-xs-3">
-							기간 <input type="date" class="form-control">
+							
 						</div>
 						<div class="col-md-9 text-right">
 							<!-- search bar  -->
