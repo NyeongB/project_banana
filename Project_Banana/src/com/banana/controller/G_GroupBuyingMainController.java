@@ -45,6 +45,7 @@ public class G_GroupBuyingMainController
 			HttpSession session = request.getSession();
 			
 			 String postcode = (String)session.getAttribute("postcode");
+			 System.out.println(postcode);
 			 
 			 SessionInfo info = (SessionInfo)session.getAttribute("user");
 			 String loc = info.getLoc_code();
@@ -72,10 +73,11 @@ public class G_GroupBuyingMainController
 				String pageIndexList = paging.pageIndexList(pageNum, count,bid);
 				
 				GCateDTO dto = new GCateDTO();
-				dto.setG_cate_bcode(bid);
+				
+				dto.setG_cate_bcode(bid);				
+				//dto.setLoc_code(loc);				
 				dto.setStart(start);
 				dto.setEnd(end);
-				dto.setLoc_code(loc);
 				
 				
 				if(postcode != null)

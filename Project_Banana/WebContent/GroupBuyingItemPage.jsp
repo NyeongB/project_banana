@@ -63,6 +63,11 @@
 	
 }
 
+.floating span
+{
+	margin: 5px;
+	color: var(--text-color);
+}
 
 img
 {
@@ -660,7 +665,11 @@ function orderItem(obj)
 									
 									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배일시 </span> <span class="sPans" id="bunD">${lists.bun_date }</span></li>
 									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 분배장소 </span> <span class="sPans" id="bunL">${lists.bun_loc }</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span class="Span"> 모집기간 </span> <span class="sPans" id="bunL">${lists.start_date } ~ ${lists.end_date }</span>
+									
 								
+									</li>
+									
 								</ul>
 							</div>
 							
@@ -780,7 +789,7 @@ function orderItem(obj)
 		</div> <!-- end col-md-8 -->
 		
 		
-		<div class="col-md-2">
+		<%-- <div class="col-md-2">
 			<div class="floating">
 				<div><span  class="thick">오늘 본 상품</span></div>
 				<c:if test="${sessionScope.postcode != null }">	
@@ -796,6 +805,26 @@ function orderItem(obj)
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></div>
 			</div>
 		</div>
+		 --%>
+		
+		<div class="col-md-2">
+						<div class="floating">
+							<div><span  class="thick">오늘 본 상품</span></div>
+							<c:if test="${sessionScope.postcode != null }">	
+							<c:forEach var="gRecentLists" items="${gPostDetailList }">
+							<div>
+							<a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
+							<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
+							</a>
+							</div>
+							<div>	
+							</c:forEach>			
+							</c:if>					
+							
+							<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
+						</div>
+						</div>
+					</div><!--end col-md-2  -->
 		
 		
 	</div>
