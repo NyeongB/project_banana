@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.banana.admin.AdminDealReportPrcDTO;
 import com.banana.admin.IAdminReportListDAO;
 import com.banana.my.UserMyGiveReportListDTO;
+import com.banana.util.IndexDTO;
+import com.banana.util.Paging;
 
 @Controller
 public class ReportController
@@ -41,15 +43,42 @@ public class ReportController
 	
 	// 신고접수받은것들 
 	@RequestMapping(value = "/reportlist2.action", method =RequestMethod.GET)
-	public String reportList2(Model model)
+	public String reportList2(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
 		IAdminReportListDAO dao = SqlSession.getMapper(IAdminReportListDAO.class);
 		
 		
-		//model.addAttribute("list", 명단);
-		model.addAttribute("list", dao.list2());
+
+		int count = dao.getCount1();
+		
+		// 두개 반드시 선언
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
+		
+		
+		
+		//테이블에서 가져올 리스트의 시작과 끝 위치
+		int start = paging.getStart(pageNum,count );
+		int end = paging.getEnd(pageNum, count);
+		
+		// 페이지번호를 받아온 
+		String pageIndexList = paging.pageIndexList(pageNum, count);
+		
+		
+		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		// 리스트 불러올때 시작과 끝점 추가해야함 
+		// 참고 com.banana.admin.IAdminPointDAO
+		
+		
+		model.addAttribute("pageIndexList", pageIndexList);
+		
+		model.addAttribute("list", dao.list2(dto));
 		
 		view = "/AdminReportList2.jsp";
 		
@@ -59,15 +88,45 @@ public class ReportController
 	
 	// 신고처리 완료된것들 
 	@RequestMapping(value = "/reportlist3.action", method =RequestMethod.GET)
-	public String reportList3(Model model)
+	public String reportList3(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
 		IAdminReportListDAO dao = SqlSession.getMapper(IAdminReportListDAO.class);
 		
 		
+		int count = dao.getCount2();
+		
+		// 두개 반드시 선언
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
+		
+		
+		
+		//테이블에서 가져올 리스트의 시작과 끝 위치
+		int start = paging.getStart(pageNum,count );
+		int end = paging.getEnd(pageNum, count);
+		
+		// 페이지번호를 받아온 
+		String pageIndexList = paging.pageIndexList(pageNum, count);
+		
+		
+		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		// 리스트 불러올때 시작과 끝점 추가해야함 
+		// 참고 com.banana.admin.IAdminPointDAO
+		
+		
+		model.addAttribute("pageIndexList", pageIndexList);
+		
+		
+		
+		
 		//model.addAttribute("list", 명단);
-		model.addAttribute("list", dao.listPrc());
+		model.addAttribute("list", dao.listPrc(dto));
 		
 		view = "/AdminReportListComplete.jsp";
 		
@@ -82,8 +141,13 @@ public class ReportController
 		
 		IAdminReportListDAO dao = SqlSession.getMapper(IAdminReportListDAO.class);
 		
+		IndexDTO dto = new IndexDTO();
+		int start = 1;
+		int end = dao.getCount1();
+		dto.setStart(start);
+		dto.setEnd(end);
 		int index = 0;
-		ArrayList<UserMyGiveReportListDTO> list = dao.list2();
+		ArrayList<UserMyGiveReportListDTO> list = dao.list2(dto);
 			
 		String type = request.getParameter("type");
 		String deal_report_code = request.getParameter("deal_report_code");

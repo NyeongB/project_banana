@@ -131,7 +131,7 @@ ins
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
-			<jsp:include page="../../Header.jsp"></jsp:include>
+			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 	</div>
 
@@ -140,7 +140,7 @@ ins
 	<div class="container-fluid">
 		<div class="content">
 			<div class="col-md-2">
-				<jsp:include page="../../MenuUser.jsp"></jsp:include>
+				<jsp:include page="MenuUser.jsp"></jsp:include>
 			</div>
 			<!-- 왼쪽 MenuUser end  -->
 
@@ -181,7 +181,7 @@ ins
 							<div class="col-md-12 ">
 
 									<p>&#128170; 활동 등급 안내</p><br>
-									<p>1. 초록 바나나 한 송이 : 회원 가입 ~ 1,000점  <img alt="" src="images/bananagreen_icon.png" id="green"></p>
+									<p>1. 초록 바나나 한 송이 : 회원 가입 ~ 1,000점  <img alt="" src="images/banana_green.png" id="green"></p>
 									<p>2. 노란 바나나 한 송이 : 1,001점 ~ 5000점    <img alt="" src="images/banana_icon.png" id="bana1"></p>
 									<p>3. 노란 바나나 두 송이 : 5,001점 ~ 12,000점   <img alt="" src="images/banana_icon2.png" id="bana2"></p>
 									<p>4. 노란 바나나 세 송이 : 12,001점 ~ 22,000점	<img alt="" src="images/banana_icon3.png" id="bana3"></p>
@@ -204,7 +204,7 @@ ins
 	<!-- footer  -->
 	<div class="row">
 		<div class="col-md-12">
-			<jsp:include page="../../Footer.jsp"></jsp:include>
+			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

@@ -16,4 +16,13 @@ public class HomeController {
 		
 		return "/WEB-INF/admin/AdminAccountComplete.jsp";
 	}
+	
+	
+	@RequestMapping(value = "/main.action", method = RequestMethod.GET)
+	public String main(Model model)
+	{
+		
+		
+		return "/Main.jsp";
+	}
 }

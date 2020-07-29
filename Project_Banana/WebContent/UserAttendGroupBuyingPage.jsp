@@ -149,44 +149,55 @@ String cp = request.getContextPath();
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="myGLists" items="${myGList }" varStatus="status">
-							<tr>
-								<td>${status.count }</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="${myGLists.photo }"
-									style="width: 70px; height: 70px;"></td>
-								<td>${myGLists.title }</td>
-								<td><p id="price">${myGLists.cost }</p>${myGLists.dis_cost }</td>
-								<td>${myGLists.count+1 } / ${myGLists.member_num }</td>
-								<td>${myGLists.bun_date }</td>
-								<td>${myGLists.loc_name }</td>
-								<td>${myGLists.progress }</td>
-								<td>
-									<c:choose>								
-										<c:when test="${myGLists.progress eq '신청취소'}">																				
-										</c:when>									
-										<c:when test="${myGLists.progress eq '모집중'}">
-											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" id="${myGLists.g_apply_code }" onclick="gCancel(this)"type="button">신청취소</button>
+							
+								<c:choose>
+									<c:when test="${empty myGList}">
+										<tr class="text-center" >
+											<td colspan="9"><p>참여한 공동구매가 없습니다.</p></td>
+										</tr>
+									</c:when>	
+									<c:otherwise>
+									<c:forEach var="myGLists" items="${myGList }" varStatus="status">									
+										<tr>
+											<td>${status.count }</td>
+											<td><img alt="Bootstrap Image Preview"
+												src="${myGLists.photo }"
+												style="width: 70px; height: 70px;"></td>
+											<td>${myGLists.title }</td>
+											<td><p id="price">${myGLists.cost }</p>${myGLists.dis_cost }</td>
+											<td>${myGLists.count+1 } / ${myGLists.member_num }</td>
+											<td>${myGLists.bun_date }</td>
+											<td>${myGLists.loc_name }</td>
+											<td>${myGLists.progress }</td>
+											<td>
+												<c:choose>								
+													<c:when test="${myGLists.progress eq '신청취소'}">																				
+													</c:when>									
+													<c:when test="${myGLists.progress eq '모집중'}">
+														<div class="btn-group" role="group">	
+															<button class="btn btn-secondary" id="${myGLists.g_apply_code }" onclick="gCancel(this)"type="button">신청취소</button>
+															
+														</div>									
+													</c:when>
+													<c:when test="${myGLists.progress eq '공구실패'}">										
+													</c:when>	
+													<c:when test="${myGLists.progress eq '공구성공' }">	
+														<div class="btn-group" role="group">													
+															<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
+															<input type="hidden" value="${myGLists.g_success_code }" id="g_success_code" />
+															<input type="hidden" value="${myGLists.g_apply_code }" id="g_apply_code" />
+														</div>									
+													</c:when>								
+													<c:otherwise>											
+													</c:otherwise>								
+												</c:choose>										
 												
-											</div>									
-										</c:when>
-										<c:when test="${myGLists.progress eq '공구실패'}">										
-										</c:when>	
-										<c:when test="${myGLists.progress eq '공구성공' }">	
-											<div class="btn-group" role="group">													
-												<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
-												<input type="hidden" value="${myGLists.g_success_code }" id="g_success_code" />
-												<input type="hidden" value="${myGLists.g_apply_code }" id="g_apply_code" />
-											</div>									
-										</c:when>								
-										<c:otherwise>											
-										</c:otherwise>								
-									</c:choose>										
-									
-								</td>
-							</tr>
-							</c:forEach>
+											</td>
+										</tr>	
+										</c:forEach>
+									</c:otherwise>						
+								</c:choose>						
+							
 							
 						</tbody>
 					
@@ -216,43 +227,54 @@ String cp = request.getContextPath();
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="gOfferLists" items="${gOfferList }" varStatus="status">
-							<tr>
-								<td>${status.count }</td>
-								<td><img alt="Bootstrap Image Preview"
-									src="${gOfferLists.photo }"
-									style="width: 70px; height: 70px;"></td>
-								<td>${gOfferLists.title }</td>
-								<td><p id="price">${gOfferLists.cost }</p>${gOfferLists.dis_cost }</td>
-								<td>${gOfferLists.count+1 }/ ${gOfferLists.member_num }</td>
-								<td>${gOfferLists.bun_date }</td>
-								<td>${gOfferLists.loc_name}</td>
-								<td>${gOfferLists.progress }</td>
-								<td>
-									<c:choose>								
-										<c:when test="${gOfferLists.progress eq '공구실패'}">																				
-										</c:when>	
-										<c:when test="${gOfferLists.progress eq '모집완료'}">																				
-										</c:when>									
-										<c:when test="${gOfferLists.progress eq '영수증첨부'}">
-											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" type="button">영수증첨부</button>
-											</div>									
-										</c:when>
-										<c:when test="${gOfferLists.progress eq '분배날짜'}">	
-											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" id="${gOfferLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
-											</div>									
-										</c:when>
-										<%-- <c:otherwise>
-											<div class="btn-group" role="group">	
-												<button class="btn btn-secondary" id="${myGLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
-											</div>											
-										</c:otherwise>	 --%>																
-									</c:choose>
-								</td>
-							</tr>
-							</c:forEach>
+						<c:choose>
+							<c:when test="${empty gOfferList}">
+										<tr class="text-center" >
+											<td colspan="9"><p>제안한 공동구매가 없습니다.</p></td>
+										</tr>
+									</c:when>	
+							<c:otherwise>
+							
+							<c:forEach var="gOfferLists" items="${gOfferList }" varStatus="status">
+								<tr>
+									<td>${status.count }</td>
+									<td><img alt="Bootstrap Image Preview"
+										src="${gOfferLists.photo }"
+										style="width: 70px; height: 70px;"></td>
+									<td>${gOfferLists.title }</td>
+									<td><p id="price">${gOfferLists.cost }</p>${gOfferLists.dis_cost }</td>
+									<td>${gOfferLists.count+1 }/ ${gOfferLists.member_num }</td>
+									<td>${gOfferLists.bun_date }</td>
+									<td>${gOfferLists.loc_name}</td>
+									<td>${gOfferLists.progress }</td>
+									<td>
+										<c:choose>								
+											<c:when test="${gOfferLists.progress eq '공구실패'}">																				
+											</c:when>	
+											<c:when test="${gOfferLists.progress eq '모집완료'}">																				
+											</c:when>									
+											<c:when test="${gOfferLists.progress eq '영수증첨부'}">
+												<div class="btn-group" role="group">	
+													<button class="btn btn-secondary" type="button">영수증첨부</button>
+												</div>									
+											</c:when>
+											<c:when test="${gOfferLists.progress eq '분배날짜'}">	
+												<div class="btn-group" role="group">	
+													<button class="btn btn-secondary" id="${gOfferLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
+												</div>									
+											</c:when>
+											<%-- <c:otherwise>
+												<div class="btn-group" role="group">	
+													<button class="btn btn-secondary" id="${myGLists.g_success_code}"type="button" onclick="chulClick(this)">출석부</button>
+												</div>											
+											</c:otherwise>	 --%>																
+										</c:choose>
+									</td>
+								</tr>
+								</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							
 						</tbody>
 					</table>	
 

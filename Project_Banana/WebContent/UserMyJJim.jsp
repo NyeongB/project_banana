@@ -135,12 +135,9 @@ img
 									</div>
 								</td>
 								<td>${status.count }</td>
-<<<<<<< HEAD
+
 								<td><img alt="Bootstrap Image Preview"
 									src="${jjims.photo }"></td>
-=======
-								<td>${jjims.photo }</td>
->>>>>>> branch 'master' of https://github.com/NyeongB/project_banana.git
 								<td>${jjims.title }</td>
 								<td>${jjims.cost }/${jjims.dis_cost }</td>
 								<td>${jjims.loc_name }</td>

@@ -38,13 +38,11 @@
 	border: 0.5px solid black;
 	padding: 10px;
 }
-#calendar td
-{
-	font-size: 10pt !important;
-}
+
 #calendar h2
 {
 	font-weight: bold !important;
+	font-size: 25pt;
 
 }
 
@@ -66,8 +64,9 @@
 }	
 .date_detail
 {
-	font-size: large;
+	font-size: 11pt;
 	margin-top: 100px;
+	margin-bottom: 10px;
 	
 }
 #itemImg
@@ -76,6 +75,17 @@
 	height:300px;
 	padding-bottom: 30px;
 
+
+}
+tr:first-child > td > .fc-day-grid-event
+{
+	font-size: 3pt;
+
+}
+.calendar_area
+{
+
+	margin-bottom: 50px;
 
 }
 
@@ -130,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    	 var postcode = info.event.id;
 	    	 $('#openModalBtn').click();
 	       
-	        alert('id: ' + info.event.id);
+	       // alert('id: ' + info.event.id);
 	        // 모달 데이터 불러오기 
 	        $.ajax(
 	   				{
@@ -218,47 +228,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-2">
 				
 				<jsp:include page="MenuUser.jsp"></jsp:include>
 				
 				</div>
-				<div class="col-md-6 ">
+				<div class="col-md-8 ">
 					<div class="row">
 						<div class="col-md-12">
 							<h3>
-								일정표
+								제안한 공동구매 일정표
 							</h3>
 							<div class="col-md-12">
 								<p class="thick">&#11088; 일정표를 통해 보다 쉽게 거래일정을 확인하세요.</p>
+								<hr />
 							</div>
-							
-							<div class="text-right
-							form-inline md-form form-sm form-2 pl-0 search_bar">
-						   <select name="" id="search" class="form-control">
-						  		<option value="">공통협력구매 제공 일정표</option>
-						  		<option value="">자율협력구매 제공 일정표</option>
-						   		<option value="">역렌트 제공 일정표</option>
-						   		<option value="">렌트 제공 일정표</option>
-						   		<option value="">렌트 참여 일정표</option>
-						   		
-						   		<option value="">공통협력구매 참여 일정표</option>
-						   		
-						   		<option value="">자율협력구매 참여 일정표</option>
-						   		
-						   </select>
-						   </div>
-							
-							<hr />
+						
 							<div class="row">
-								<div class="col-md-10"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-10 calendar_area"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
 								<div class="col-md-2">
 									<div class="col-md-12">
 										<ul class="date_detail">
-											<li><span class="glyphicon glyphicon-heart yellow"></span> 시작일</li>
-											<li><span class="glyphicon glyphicon-heart blue"></span> 종료일</li>
-											<li><span class="glyphicon glyphicon-heart green"></span> 영수증첨부일</li>
-											<li><span class="glyphicon glyphicon-heart pink"></span> 분배일자</li>
+											<li><span class="glyphicon glyphicon-heart yellow"></span> 모집 시작일</li>
+											<li><span class="glyphicon glyphicon-heart blue"></span> 모집 종료일</li>
+											<li><span class="glyphicon glyphicon-heart green"></span> 영수증 첨부일</li>
+											<li><span class="glyphicon glyphicon-heart pink"></span> 분배 일자</li>
 										</ul>
 									</div>
 								</div>
@@ -271,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 				</div>
 			</div>
 		</div>
