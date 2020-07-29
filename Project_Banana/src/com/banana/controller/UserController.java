@@ -174,22 +174,17 @@ public class UserController
 	
 	
 	@RequestMapping(value = "/ajaxloc.action", method =RequestMethod.GET)
-	public String ajaxloc(Model model,HttpServletRequest request)
+	public String ajaxLoc(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
 		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-		
-		
-		//model.addAttribute("list", 명단);
-		//model.addAttribute("list", dao.list());
 		
 		ArrayList<LocDTO> list = dao.locAjaxList(request.getParameter("loc"));
 		
 		model.addAttribute("locList2", list);
 		
 		view = "/Ajax2.jsp";
-		
 		
 		return view;
 	}
@@ -289,7 +284,7 @@ public class UserController
 		}
 		
 		@RequestMapping(value = "/idcheckfind.action", method =RequestMethod.GET)
-		public String idcheck(Model model,HttpServletRequest request)
+		public String idCheck(Model model,HttpServletRequest request)
 		{
 			String view = null; 
 			String tel1 = (request.getParameter("num1") + request.getParameter("num2")).trim();
@@ -375,8 +370,6 @@ public class UserController
 			String answer = request.getParameter("answer");
 			
 			
-			  System.out.println(id); System.out.println(question);
-			  System.out.println(answer);
 			 
 			JoinDTO dto = new JoinDTO();
 			dto.setId(id);
@@ -399,10 +392,9 @@ public class UserController
 		
 
 		@RequestMapping(value = "/pwset.action", method =RequestMethod.GET)
-		public String pwset(Model model,HttpServletRequest request)
+		public String pwSet(Model model,HttpServletRequest request)
 		{
 			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
 			
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
@@ -411,13 +403,8 @@ public class UserController
 			
 			dto.setId(id);
 			dto.setPw(pw);
-			
-			  System.out.println(id); 
 			  
 			  dao.setPw(dto);
-			 
-			
-			
 			
 			return "/UserPasswordComplete.jsp";
 		}
@@ -425,7 +412,7 @@ public class UserController
 		
 		// 탈퇴 메인 
 		@RequestMapping(value = "/leaveapply.action", method =RequestMethod.GET)
-		public String leaveApply(Model model,HttpServletRequest request)
+		public String leaveApplyMain(Model model,HttpServletRequest request)
 		{
 			
 			return "/UserLeaveApply.jsp";

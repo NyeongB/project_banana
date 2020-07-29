@@ -23,7 +23,7 @@ public class UserRentPageController
 	private SqlSession SqlSession;
 
 	@RequestMapping(value="/userrentpage.action", method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	public String rentPageMain(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
 				
@@ -44,9 +44,6 @@ public class UserRentPageController
 			model.addAttribute("rApplyList",dao.rApplyList(b_user_code));
 			model.addAttribute("rOfferList",dao.rOfferList(b_user_code));
 			
-			
-			
-			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
@@ -56,20 +53,3 @@ public class UserRentPageController
 		return view;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

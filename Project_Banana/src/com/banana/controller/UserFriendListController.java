@@ -25,9 +25,9 @@ public class UserFriendListController
 	@Autowired
 	private SqlSession SqlSession;
 
-	// 사용자 바나나 점수 합 구하기
+	
 	@RequestMapping(value="/userfriendlist.action", method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	public String friendList(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
 		

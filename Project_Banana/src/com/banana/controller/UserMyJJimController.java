@@ -25,16 +25,13 @@ public class UserMyJJimController
 	@Autowired
 	private SqlSession SqlSession;
 
-	// 사용자 바나나 점수 합 구하기
 	@RequestMapping(value="/usermyjjim.action", method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	public String jjimList(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
-	
 
 		try
 		{	
-			
 			// 세션 받아오기
 			HttpSession session = request.getSession();
 			SessionInfo info = (SessionInfo) session.getAttribute("user");
