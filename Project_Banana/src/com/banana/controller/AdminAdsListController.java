@@ -26,13 +26,13 @@ public class AdminAdsListController
 		private SqlSession SqlSession;
 		
 		@RequestMapping(value = "/adminadsconfirmlist.action", method =RequestMethod.GET)
-		public String memberList(Model model)
+		public String adsConfrimList(Model model)
 		{
 			//System.out.println("오는지 테스트");
 			String view = null; 
 			
 			IAdminAdsListDAO dao = SqlSession.getMapper(IAdminAdsListDAO.class);
-//System.out.println(dao.list());
+			//System.out.println(dao.list());
 			model.addAttribute("list", dao.list());
 			
 			view = "/AdminAdsConfirmList.jsp";
@@ -74,7 +74,7 @@ public class AdminAdsListController
 		
 		// 광고신청 조회 
 		@RequestMapping(value ="/adminadapplylist.action", method =RequestMethod.GET)
-		public String AdminAdApplyList(Model model)
+		public String adminAdApplyList(Model model)
 		{
 			String view = null; 
 			
@@ -94,7 +94,7 @@ public class AdminAdsListController
 		
 		// 광고 최종 수락 
 		@RequestMapping(value ="/adminadsacceptok.action", method =RequestMethod.GET)
-		public String rejectFinal(HttpServletRequest request)
+		public String acceptFinal(HttpServletRequest request)
 		{
 			String view = null; 
 			
