@@ -310,7 +310,7 @@ a:active
 		                     <div class="col-sm-2 col-md-2">
 		                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 		                           <div class="thumbnail" id="${glists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-		                           		    <img src="${glists.photo }" style="width: 200px; ">                       			
+		                           		    <img src="${glists.photo }" style="width: 200px; height: 180px; ">                       			
 		                           			<div class="caption thick">		                      				
 		                                      <h5 class="thick">${glists.title }</h5>
 		                                      <div class="col-md-12">
