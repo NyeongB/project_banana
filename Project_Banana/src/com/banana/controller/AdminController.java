@@ -29,7 +29,7 @@ public class AdminController
 	
 	// 관리자 포인트 리스트 
 	@RequestMapping(value = "/adminpointlist.action", method = RequestMethod.GET)
-	public String join(Model model, HttpServletRequest request)
+	public String pointList(Model model, HttpServletRequest request)
 	{
 		String view = null;
 
