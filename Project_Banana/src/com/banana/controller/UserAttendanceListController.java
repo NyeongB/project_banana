@@ -30,7 +30,7 @@ public class UserAttendanceListController
 
 	// 출석부 리스트 
 	@RequestMapping(value="/userattendancelist.action", method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	public String chulList(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
 		
@@ -75,7 +75,7 @@ public class UserAttendanceListController
 	}
 	// 출석부 디테일 
 	@RequestMapping(value="/userattendancedetail.action", method = RequestMethod.GET)
-	public String detail(Model model, HttpServletRequest request) 
+	public String chulDetail(Model model, HttpServletRequest request) 
 	{
 		String view = null;
 		try

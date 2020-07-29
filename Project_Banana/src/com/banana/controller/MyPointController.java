@@ -27,7 +27,6 @@ public class MyPointController
 	{	
 		String view = null;
 		
-		
 		try
 		{
 			IMyPointDAO dao = SqlSession.getMapper(IMyPointDAO.class);
@@ -94,46 +93,38 @@ public class MyPointController
 		return "/PointChargePage.jsp";
 	}
 	
-	
 	//포인트 충전 액션 
-		@RequestMapping(value="/pointcharge.action")
-		public String pointCharge(HttpServletRequest request) 
-		{	
-			
-			// 아이디정보, 
-			HttpSession session = request.getSession();
-	         
-	         SessionInfo info = (SessionInfo)session.getAttribute("user");
-	         // 유저코드 가져오기
-	         String b_user_code = info.getB_user_code();
-			
-	         
-	         // DAO, DTO 선언
-	         IPointChargeDAO dao  = SqlSession.getMapper(IPointChargeDAO.class);
-	         PointChargeDTO dto = new PointChargeDTO();
-	         
-	         
-			//충전금액, 충전유형
-			String point = request.getParameter("point");
-			String type = request.getParameter("type");
-			
-			
-			
-			if(type.equals("trans"))
-				dto.setType("0");
-			else if(type.equals("card"))
-				dto.setType("1");
-			else
-				dto.setType("2");
-			
-			dto.setB_user_code(b_user_code);
-			dto.setPoint(point);
-			
-			dao.pointCharge(dto);
-			
-			return "/PointChargeComplete.jsp";
-		}
-	
-	
-	
+	@RequestMapping(value="/pointcharge.action")
+	public String pointCharge(HttpServletRequest request) 
+	{	
+		
+		// 아이디정보, 
+		HttpSession session = request.getSession();
+         
+         SessionInfo info = (SessionInfo)session.getAttribute("user");
+         // 유저코드 가져오기
+         String b_user_code = info.getB_user_code();
+         
+         // DAO, DTO 선언
+         IPointChargeDAO dao  = SqlSession.getMapper(IPointChargeDAO.class);
+         PointChargeDTO dto = new PointChargeDTO();
+         
+		//충전금액, 충전유형
+		String point = request.getParameter("point");
+		String type = request.getParameter("type");
+		
+		if(type.equals("trans"))
+			dto.setType("0");
+		else if(type.equals("card"))
+			dto.setType("1");
+		else
+			dto.setType("2");
+		
+		dto.setB_user_code(b_user_code);
+		dto.setPoint(point);
+		
+		dao.pointCharge(dto);
+		
+		return "/PointChargeComplete.jsp";
+	}
 }

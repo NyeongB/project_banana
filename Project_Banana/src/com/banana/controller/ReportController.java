@@ -24,8 +24,9 @@ public class ReportController
 	@Autowired
 	private SqlSession SqlSession;
 	
+	// 모든 테이블의 댓글신고 리스트 
 	@RequestMapping(value = "/reportlist.action", method =RequestMethod.GET)
-	public String reportList(Model model)
+	public String reportReplyList(Model model)
 	{
 		String view = null; 
 		
@@ -41,9 +42,9 @@ public class ReportController
 		return view;
 	}
 	
-	// 신고접수받은것들 
+	// 모든 공동,자율,역렌트,렌트의 게시물 신고접수받은것들 
 	@RequestMapping(value = "/reportlist2.action", method =RequestMethod.GET)
-	public String reportList2(Model model,HttpServletRequest request)
+	public String reportPostList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
@@ -86,9 +87,9 @@ public class ReportController
 		return view;
 	}
 	
-	// 신고처리 완료된것들 
+	// 거래신고 완료 처리 신고처리 완료된것들 
 	@RequestMapping(value = "/reportlist3.action", method =RequestMethod.GET)
-	public String reportList3(Model model,HttpServletRequest request)
+	public String reportProcList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		

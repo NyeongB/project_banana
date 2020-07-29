@@ -24,7 +24,7 @@ public class MyCreditController
 
 	// 사용자 바나나 점수 합 구하기
 	@RequestMapping(value="/mycredit.action", method = RequestMethod.GET)
-	public String list(Model model,HttpServletRequest request) // 나중에 session 으로 받기
+	public String getSumBanana(Model model,HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
 		int brixMul=0;

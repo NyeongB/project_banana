@@ -26,10 +26,10 @@ public class MyReviewController
 
 	// 사용자 바나나 점수 합 구하기
 	@RequestMapping(value="/myreview.action", method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) // 나중에 session 으로 받기
+	public String getSumReview(Model model, HttpServletRequest request) // 나중에 session 으로 받기
 	{
 		String view = null;
-
+		
 		try
 		{	
 			// 세션 받아오기

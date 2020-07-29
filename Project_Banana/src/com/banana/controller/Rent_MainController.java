@@ -168,7 +168,7 @@ public class Rent_MainController
 	
 		// 렌트 상품 등록 클릭 시 페이지 이동
 		@RequestMapping(value = "/rentpostpage.action", method = RequestMethod.GET)
-		 public String rentpostpage(Model model) 
+		 public String rentPostPage(Model model) 
 		 {
 			
 			
@@ -258,7 +258,7 @@ public class Rent_MainController
 		
 		// 렌트 게시물 클릭 시 상세 페이지로 이동
 			@RequestMapping(value = "/rpostdetailpage.action", method = RequestMethod.GET)
-			 public String rpostDetailpage(Model model, HttpServletRequest request) 
+			 public String rPostDetailPage(Model model, HttpServletRequest request) 
 			 {
 				
 				String view = null;
@@ -388,7 +388,7 @@ public class Rent_MainController
 			// 찜하기 클릭 시
 				
 			 @RequestMapping(value = "/rjjiminsert.action", method = RequestMethod.GET)
-			 public String jjiminsert(HttpServletRequest request, HttpServletResponse response) 
+			 public String jjimInsert(HttpServletRequest request, HttpServletResponse response) 
 			 {
 				 String view = null;
 				 
@@ -434,7 +434,7 @@ public class Rent_MainController
 			
 			// 유저에 따라 다른 주소 설정 값 받아오기
 			@RequestMapping(value = "/locationajax.action", method = RequestMethod.GET)
-			 public String locationajax(Model model, HttpServletRequest request) 
+			 public String locationAjax(Model model, HttpServletRequest request) 
 			 {
 				
 				String view = null;

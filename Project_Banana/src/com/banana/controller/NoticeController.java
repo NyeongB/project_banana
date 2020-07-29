@@ -31,7 +31,7 @@ public class NoticeController
 	private SqlSession SqlSession;
 
 	@RequestMapping(value = "/adminnoticelist.action", method= {RequestMethod.GET, RequestMethod.POST})
-	public String AdminNoticeList(Model model,HttpServletRequest request)
+	public String adminNoticeList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
@@ -73,7 +73,7 @@ public class NoticeController
 	}
 	
 	@RequestMapping(value = "/usernoticelist.action", method =RequestMethod.GET)
-	public String UserNoticeList(Model model,HttpServletRequest request)
+	public String userNoticeList(Model model,HttpServletRequest request)
 	{
 		String view = null; 
 		
@@ -85,15 +85,12 @@ public class NoticeController
 		Paging paging = new Paging();
 		String pageNum = request.getParameter("pageNum");
 		
-		
-		
 		//테이블에서 가져올 리스트의 시작과 끝 위치
 		int start = paging.getStart(pageNum,count );
 		int end = paging.getEnd(pageNum, count);
 		
 		// 페이지번호를 받아온 
 		String pageIndexList = paging.pageIndexList(pageNum, count);
-		
 		
 		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
 		IndexDTO dto = new IndexDTO();
@@ -102,8 +99,6 @@ public class NoticeController
 		
 		// 리스트 불러올때 시작과 끝점 추가해야함 
 		// 참고 com.banana.admin.IAdminPointDAO
-		
-		
 		model.addAttribute("pageIndexList", pageIndexList);
 		
 		model.addAttribute("list", dao.list(dto));
@@ -147,9 +142,6 @@ public class NoticeController
 		
 		return view;
 	}
-	
-	
-	
 	// 공지사항 작성 폼
 		@RequestMapping(value = "/noticepostform.action", method= {RequestMethod.GET, RequestMethod.POST})
 		public String noticeForm(Model model, HttpServletRequest request)
@@ -157,16 +149,12 @@ public class NoticeController
 			String view = null;
 			
 			// 특정광고 인덱스 
-			
 			// 클릭한 광고 코드 가져오기
 			String admin = request.getParameter("admin");
 			
-			 
-			 
 			model.addAttribute("admin", admin);
 			
 			view = "/NoticePostForm.jsp";
-			
 			
 			return view;
 		}
@@ -261,20 +249,3 @@ public class NoticeController
 			}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
