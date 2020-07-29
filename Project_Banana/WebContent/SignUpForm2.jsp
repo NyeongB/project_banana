@@ -22,6 +22,9 @@
 text-align: center;
 
 } */
+
+
+
 h2
 {
 color: var(--back-color);
@@ -56,6 +59,112 @@ input
 	font-size: 40pt;
 
 
+}
+
+#pwQuestion
+{
+	width: 54%
+}
+
+.pwQ, #g_lickCate, #r_likeCate, .sigungu, #Bank
+{
+	margin-left: 10px;
+	margin-right: 12px;
+	
+}
+#selectEmail
+{
+	width: 78%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#pw, #pwcon, #name, #roadAddress, #detailAddress,  #pwReply, #bank2, #banknum
+{
+	width: 145%;
+}
+
+#id, #tel, #num, #nickname, #postcode
+{
+	width: 55%;
+}
+
+#nickBtn, #numBtn, #telBtn, #idBtn
+{
+	width: 112px;
+}
+
+.pwqu
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#email1
+{
+	margin-left: 0px;
+	
+}
+
+#ssn2
+{
+	width: 36%;
+}
+
+#gCate, #rCate
+{
+	width: 48%;
+}
+
+#gCate
+{
+	margin-top: 10px;
+}
+
+ .selectLocResult
+{
+	margin-top: 20px;
+	
+}
+
+#selectLoc
+{
+	margin-top: 20px;
+	margin-bottom :20px;
+	width: 65%;
+}
+
+#bank1
+{
+	width: 76%;
+	margin-bottom: 10px;
+}
+
+#banknum
+{
+	margin-bottom: 40px;
+}
+
+.signBtn
+{
+	text-align: center;
+	margin-right: 90px;
+	margin-bottom: 70px;
+}
+
+#submitBtn
+{
+	margin-right: 10px;
+	height: 40px;
+	width: 30%;
+}
+
+#resetBtn
+{
+	margin-left: 10px;
+	height: 40px;
+	width: 30%;
 }
 
 </style>
@@ -474,7 +583,7 @@ input
 			<div class="row">
 				<div class="col-md-12 form-inline">
 				<input class="form-control" id="ssn1" name ="ssn1"type="text"  placeholder="주민번호 앞자리" > - 
-				<input class="form-control" id="ssn2" name="ssn2"type="text"  placeholder="주민번호 뒷자리" >
+				<input class="form-control" id="ssn2" name="ssn2"type="password"  placeholder="주민번호 뒷자리" >
 				</div>
 			</div>
 			
@@ -533,9 +642,9 @@ input
 			<!-- 패스워드 찾기 질문 -->
 			<div class="row">
 				<div class="col-md-12">				
-					<div class="form-inline">				
-					<span>비밀번호찾기 질문: </span> 				
-						<select class="form-control" name="pwQuestion">
+					<div class="form-inline pwqu">				
+					<span class="pwQ">비밀번호찾기 질문: </span> 				
+						<select class="form-control" name="pwQuestion" id="pwQuestion">
 							<option value="">선택</option>
 							<c:forEach var="list" items="${pwList }">
 								<option value="${list.pw_question_type_code }">${list.pw_question }</option>
@@ -556,10 +665,10 @@ input
 			
 			<!-- 이메일!!!! -->
 			<div class="row">
-				<div class="col-md-12">
 				<div class="col-md-12 form-inline">
-							<select name="selectEmail" class="selectField form-control" onchange="changeEmail()"
-							style="width: 200px;">
+				
+				<div >
+							<select name="selectEmail" class="selectField form-control" onchange="changeEmail()" id="selectEmail">
 							<option value="">선택</option>
 							<option value="gmail.com"
 							${dto.email2=="gmail.com" ? "selected='selected'" : "" 
@@ -573,15 +682,17 @@ input
 							<option value="direct">직접입력</option> 
 						</select>
 				</div>
-				
-				<div class="col-md-12 form-inline">
+				<div class="col-md-12 ">
 						
 						<input type="text" name="email1"
-							 class="form-control" value="${dto.email1 }"> @
-						<input type="text" name="email2" 
+							 class="form-control" value="${dto.email1 }">@
+							 <input type="text" name="email2" id="email2"
 							 class="form-control" value="${dto.email2 }"
 							readonly = "readonly">
-				</div>        	
+				</div>        
+				
+				
+					
 				</div>
 			</div>
 			
@@ -597,10 +708,10 @@ input
 				
 				<div class="form-inline">
 				
-				<span>공동구매 관심 카테고리: </span> 
+				<span id="g_lickCate">공동구매 관심 카테고리: </span> 
 				
 
-				<select class="form-control" name="gCate">
+				<select class="form-control" name="gCate" id="gCate">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${groupList }">
 						<option value="${list.g_cate_code }">${list.cate_name }</option>
@@ -613,8 +724,8 @@ input
 				
 				<div class="form-inline">
 				
-				<span>렌트거래 관심 카테고리: </span> 				
-				<select class="form-control" name="rCate">
+				<span id="r_likeCate">렌트거래 관심 카테고리: </span> 				
+				<select class="form-control" name="rCate" id="rCate">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${rentList }">
 						<option value="${list.r_cate_code }">${list.cate_name }</option>
@@ -638,17 +749,22 @@ input
 			<div class="row">
 				<div class="col-md-12">
 				
-					<div class="form-inline">
+					<div class="form-inline sigungu">
 				
-				<span>시/도 : </span> 
+				<div class="col-md-4">
+				<span id="sido">시/도 : </span> 
 
-				<select name="selectLoc" class="selectField form-control" onchange="changeLoc()">
+				<select name="selectLoc" class="selectField form-control" onchange="changeLoc()" id="selectLoc">
 					<option value="">선택</option>
 					<c:forEach var="list" items="${locList }">
 						<option value="${list.loc_code }">${list.loc_name }</option>
 					</c:forEach>
 				</select>
-				<div class="form-inline">
+				
+				</div>
+				
+				
+				<div class="col-md-8 selectLocResult text-left">
 				<span>시/군/구 : </span> 
 				
 				<!-- 시/군/구 들어올부분  -->
@@ -664,18 +780,21 @@ input
 			
 			<!-- 은행명 -->
 			<div class="row">
-				<div class="col-md-12 text-left Cn">
+				<div class="col-md-12">
 				<div class="form-inline">
 				
-				<span>은행 : </span> 
-				
-				<select class="form-control" name="bank1">
+				<div class="col-md-2">
+				<span id="Bank">은행 :</span> 
+				</div>
+				<div class="col-md-10">
+				<select class="form-control" name="bank1" id="bank1">
 				<option>선택</option>
 				<c:forEach var="list" items="${bankList }">
 					
 					<option value="${list.bank_type_code }">${list.bank_name }</option>
 				</c:forEach>
 				</select>
+				</div>
 				</div>
 				</div>
 			</div>
@@ -698,10 +817,10 @@ input
 			
 			
 			<!-- 확인버튼, 취소버튼 -->
-			<div class="row">
+			<div class="row signBtn">
 				<div class="col-md-12 form-inline">
 				<button class="btn btn-primary" type="button" id="submitBtn">확인</button>
-				<button  class="btn btn-primary" type="reset">취소</button>
+				<button  class="btn btn-primary" type="reset" id="resetBtn">취소</button>
 				</div>
 			</div>
 			
