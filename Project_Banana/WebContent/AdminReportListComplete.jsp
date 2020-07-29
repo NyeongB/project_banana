@@ -68,7 +68,7 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>게시물 / 댓글 신고</h3>
+					<h3>처리완료된 거래 신고</h3>
 					<hr>
 				</div>
 				<br>
@@ -111,8 +111,8 @@
 									<td>${lists.reported }</td>
 									<td>${lists.type }</td>
 									<td>${lists.deal_report_type }</td>
-									<td><a href="<%=cp%>/adminpostreportlistdetail.action?type=${lists.type}&deal_report_code=${lists.deal_report_code}">
-									${lists.content }</a></td>
+									<td>
+									${lists.content }</td>
 									<td>${lists.sdate }</td>
 									<td>${lists.reporter }</td>
 									
@@ -143,22 +143,19 @@
 
 		</div>
 		
-			<div class="text-center">
-					<div class="col-md-12 a">
-						<nav>
-							<ul class="pagination">
-								<li class="disabled"><a href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span></a></li>
-								<li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">2 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">3 <span class="sr-only">(current)</span></a></li>
-								<li ><a href="#">4 <span class="sr-only">(current)</span></a></li>
-								<li class="disabled"><a href="#" aria-label="">
-								<span aria-hidden="false">&laquo;</span></a></li>
-							</ul>
-						</nav>
-					</div>
-			</div>
+			<div class="row">
+               <div class="col-md-12 text-center">
+                  <nav>
+                     <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span
+                              aria-hidden="true">&laquo;</span></a></li>
+                        ${pageIndexList }
+                        <li><a href="#" aria-label="Next"><span
+                              aria-hidden="true">&raquo;</span></a></li>
+                     </ul>
+                  </nav>
+               </div>
+            </div>
 
 	
 			

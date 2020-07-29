@@ -104,18 +104,47 @@
 
 	</select>
 	
+	<!-- 접수한 신고 카운트 -->
+	<select id="getCount1" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_MY_REPORT
+	WHERE PROGRESS='접수'
+	</select>
 	
+	<!-- 신고완료된것들 카운트 -->
+	<select id="getCount2" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_MY_REPORT
+	WHERE PROGRESS='처리완료'
+	</select>
+	
+	
+	<!-- 접수된 신고 -->
 	<select id="list2" resultType="com.banana.my.UserMyGiveReportListDTO">
 	<!-- ID1 신고당한사람 ,ID2 신고한사람  -->
-	SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
-	WHERE PROGRESS='접수'
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
+	WHERE PROGRESS='접수' ORDER BY SDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+	]]>
 	</select>	
 	
-	
+	<!-- 신고완료리스트 -->
 	<select id="listPrc" resultType="com.banana.my.UserMyGiveReportListDTO">
 	<!-- ID1 신고당한사람 ,ID2 신고한사람  -->
-	SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
-	WHERE PROGRESS='처리완료'
+	<![CDATA[
+	SELECT *
+		FROM
+		(
+		SELECT DATA.*, ROWNUM AS RNUM FROM
+		(SELECT DEAL_REPORT_CODE, DEAL_REPORT_TYPE, CONTENT, TITLE,SDATE,PROGRESS, TYPE, REPORTED, REPORTER FROM VIEW_MY_REPORT
+	WHERE PROGRESS='처리완료' ORDER BY SDATE DESC)DATA)
+		WHERE #{start} <= RNUM AND RNUM <= #{end}
+		]]>
 	</select>	
 	
 	
