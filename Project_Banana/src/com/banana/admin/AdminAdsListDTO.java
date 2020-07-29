@@ -5,14 +5,18 @@ public class AdminAdsListDTO
 	
 	
 	// 관리자 광고 신청자 조회
-	// 신청자, 광고위치, 광고 시작일, 광고 종료일, 광고 사진, 광고주소, 광고내용
 	// 주요 속성 구성
-	private String adv_apply_code,id, adloc, adsdate, adedate, photo, adlink, content;
+	private String adv_apply_code	//	광고 신청 코드 	
+				  ,	id				//	신청자 아이디
+				  , adloc			//	광고 신청 위치
+				  , adsdate			//	광고 시작 날짜
+				  , adedate			//	광고 종료 날짜
+				  , photo			//  광고 사진
+				  , adlink			// 	클릭 시 넘어갈 사이트 url
+				  , content;		//	광고 글 내용
+	
 
-	
-	
-	
-	
+	// getter / setter 구성
 	public String getAdv_apply_code()
 	{
 		return adv_apply_code;
@@ -23,7 +27,6 @@ public class AdminAdsListDTO
 		this.adv_apply_code = adv_apply_code;
 	}
 
-	// getter / setter 구성
 	public String getId() {
 		return id;
 	}
