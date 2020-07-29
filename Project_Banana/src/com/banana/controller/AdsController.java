@@ -30,7 +30,7 @@ public class AdsController
 	
 	// 광고비 재설정 페이지 불러오기
 	@RequestMapping(value = "/adminadscost.action", method =RequestMethod.GET)
-	public String admincost(Model model, HttpServletRequest request)
+	public String costList(Model model, HttpServletRequest request)
 	{
 		
 		String view = null; 
@@ -52,7 +52,7 @@ public class AdsController
 	
 		// 광고비 재설정 액션
 		@RequestMapping(value = "/adminadscostset.action", method =RequestMethod.GET)
-		public String adminCostSet(Model model, HttpServletRequest request)
+		public String resetCost(Model model, HttpServletRequest request)
 		{
 			
 			String view = null; 
@@ -105,7 +105,7 @@ public class AdsController
 		
 		// 광고수익 페이지 조회 
 		@RequestMapping(value = "/adminadsrevenu.action", method =RequestMethod.GET)
-		public String adminrevenu(Model model)
+		public String showRevenue(Model model)
 		{
 			
 			String view = null; 

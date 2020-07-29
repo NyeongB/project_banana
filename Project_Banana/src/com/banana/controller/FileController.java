@@ -28,7 +28,7 @@ public class FileController
 	private SqlSession SqlSession;
 
 	@RequestMapping(value = "/filetest.action", method = RequestMethod.POST)
-	public String join(Model model, HttpServletRequest request)
+	public String fileInsert(Model model, HttpServletRequest request)
 	{
 		String view = null;
 

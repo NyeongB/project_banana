@@ -23,7 +23,7 @@ public class G_GroupBuyingScheduleController
 	//---------------------------------------------------------- 공동구매 제안자 입장 
 	// 스케줄 최초 요청 메소드
 	@RequestMapping(value="/ggroupbuyingschedule.action")
-	public String list(Model model, HttpServletRequest request) 
+	public String showSellerSchedule(Model model, HttpServletRequest request) 
 	{
 		String view=null;
 				
@@ -97,7 +97,7 @@ public class G_GroupBuyingScheduleController
 	}
 	//---------------------------------------------------------- 공동구매 참여자 입장 
 	@RequestMapping(value="/ggroupbuyingbschedule.action")
-	public String bList(Model model, HttpServletRequest request) 
+	public String showBuyerSchedule(Model model, HttpServletRequest request) 
 	{
 		String view=null;
 				

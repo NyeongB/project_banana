@@ -9,17 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value = "/test.action", method = RequestMethod.GET)
-	public String hello(Model model)
-	{
 		
-		
-		return "/WEB-INF/admin/AdminAccountComplete.jsp";
-	}
-	
-	
 	@RequestMapping(value = "/main.action", method = RequestMethod.GET)
-	public String main(Model model)
+	public String showMain(Model model)
 	{
 		
 		

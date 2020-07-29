@@ -29,7 +29,7 @@ public class G_GroupBuyingPostController
 	{
 		String view = null;
 		
-		System.out.println("1234");
+		//System.out.println("1234");
 		
 		HttpSession session = request.getSession();
 		String root = session.getServletContext().getRealPath("/");
@@ -136,7 +136,7 @@ public class G_GroupBuyingPostController
 	}
 	
 	@RequestMapping(value = "/groupbuyingcomplete.action",  method= {RequestMethod.GET, RequestMethod.POST})
-	public String GroupBuyingPostOffer()
+	public String groupBuyingPostComplete()
 	{
 		String view = null; 
 	

@@ -22,7 +22,7 @@ import com.banana.util.MyUtil;
 import com.banana.util.Paging;
 
 @Controller
-public class AdminController
+public class AdminPointController
 {
 	@Autowired
 	private SqlSession SqlSession;
@@ -43,8 +43,6 @@ public class AdminController
 		Paging paging = new Paging();
 		String pageNum = request.getParameter("pageNum");
 		
-		
-		
 		//테이블에서 가져올 리스트의 시작과 끝 위치
 		int start = paging.getStart(pageNum,count );
 		int end = paging.getEnd(pageNum, count);
@@ -63,11 +61,7 @@ public class AdminController
 		
 		model.addAttribute("list", dao.list(dto));
 		
-		
 		model.addAttribute("pageIndexList", pageIndexList);
-		
-		
-		
 		
 		view = "/AdminPointList.jsp";
 

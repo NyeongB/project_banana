@@ -38,7 +38,7 @@ public class MemberController
 	private SqlSession SqlSession;
 	
 	@RequestMapping(value = "/adminaccount.action", method =RequestMethod.GET)
-	public String memberList(Model model)
+	public String adminList(Model model)
 	{
 		String view = null; 
 		
@@ -55,7 +55,7 @@ public class MemberController
 	}
 	
 	@RequestMapping(value = "/leaveuser.action", method =RequestMethod.GET)
-	public String LeaveList(Model model)
+	public String leaveList(Model model)
 	{
 		String view = null; 
 		
@@ -135,7 +135,7 @@ public class MemberController
 	
 	
 	@RequestMapping(value = "/restuser.action", method =RequestMethod.GET)
-	public String RestList(Model model)
+	public String restList(Model model)
 	{
 		String view = null; 
 		
@@ -238,7 +238,7 @@ public class MemberController
 			return view;
 		}
 		
-		// 관리자 추가 메소드
+		// 로그아웃 메소드
 		@RequestMapping(value = "/logout.action", method =RequestMethod.GET)
 		public String logout(HttpServletRequest request)
 		{
