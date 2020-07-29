@@ -17,24 +17,52 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
+.fa-circle
+{
+	font-size: 1pt;
+	color: #cacaca;
+	margin-bottom: 12px;
+	margin-right: 10px;
+	
+}
+
+.fa-check
+{
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
 .jumun_confirm
 {
 	background-color: var;
 	background-color: #f4f4f4;
 	width: 100%;
-	height: 200px;
+	height: 260px;
+	padding: 20px;
 
 }
+
+.payBtn
+{
+	margin-top: 20px;
+}
+
 .jumun_img
 {
 	width:100%;
 	margin: 10px;
+	height: 200px;
 
 }
 .jumun_list
 {
-
+	font-size : 12pt;
 	margin: 10px;
+}
+
+#pointC
+{
+	width: 100px;
 }
 
 #msg
@@ -42,6 +70,25 @@
 	color: red;
 }
 
+.totalPoint
+{
+	margin-left: 15px;
+}
+
+.totalCost
+{
+	margin-left: 45px;
+}
+
+.myPoint
+{
+	margin-left: 30px;
+}
+
+.Title
+{
+	margin-top: 40px;
+}
 
 
 </style>
@@ -110,7 +157,7 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12 thick">
-							<h3 class="thick" >
+							<h3 class="thick Title" >
 								주문확인
 							</h3>
 						</div>
@@ -119,17 +166,18 @@
 					<div class="row">
 						<div class="col-md-12 jumun_confirm">
 							<div class="col-md-4">
-								<img src="images/oz.jpg"  class="jumun_img img-rounded">
+								<img src="${lists.photo }"  class="jumun_img img-rounded">
+								
 							</div>
 							<div class="col-md-8">
 
-								<ul class="jumun_list">
+								<ul class="jumun_list" style=" list-style: none; font-weight: bold;" >
 								
-									<li><h3 class="thick">${lists.title }</h3></li>
-									<li>분배일시 : ${lists.bun_date }</li>
-									<li>분배장소 : ${lists.loc_name }</li>
-									<li>신청수량 : 1개</li>
-									<li>공구금액 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</li>
+									<li><h3 style="margin-bottom: 23px;" class="thick">${lists.title }</h3></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i><span class="Span">분배일시 : ${lists.bun_date }</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i><span class="Span">분배장소 : ${lists.bun_loc }</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i><span class="Span">신청수량 : 1개</span></li>
+									<li><i class="fa fa-circle" aria-hidden="true"></i><span class="Span">공구금액 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }" ></fmt:formatNumber>원</span></li>
 								
 								</ul>
 							</div>
@@ -142,24 +190,24 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="line"></div>
-					<h3 class="thick">결제 예정 금액</h3>	
-						<ul>
+					<h3 class="thick Title">결제 예정 금액</h3>	
+						<ul style=" list-style: none; font-weight: bold; font-size: 12pt;">
 							
-							<li>주문 합계 : <fmt:formatNumber value="${lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</li>
+							<li><i class="fa fa-check" aria-hidden="true"></i>주문 합계 : <span class="totalCost"><fmt:formatNumber value="${lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</span></li>
 							
-							<li>보유 포인트 : ${sumPoint }원</li>
+							<li><i class="fa fa-check" aria-hidden="true"></i>보유 포인트 : <span class="myPoint">${sumPoint }원</span></li>
 									
-							<li id="payAfter">결제 후포인트 : <fmt:formatNumber value="${sumPoint - lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</li>
+							<li id="payAfter"><i class="fa fa-check" aria-hidden="true"></i>결제 후포인트 : <span class="totalPoint"><fmt:formatNumber value="${sumPoint - lists.dis_cost/lists.member_num }"></fmt:formatNumber>원</span></li>
 							<span style="display:none;" id="msg" >※ 포인트 잔액이 부족하여 결제 할 수 없습니다 </span>
 						</ul>
 				
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12 text-center">
-					<button class="btn" onclick="location.href='pointchargepage.action'")">포인트충전</button>
-					<button class="btn payItem" id="${lists.g_post_code }"  onclick="pay(this)">결제하기</button>
-					<button class="btn" id="${lists.g_post_code }" onclick="cancle(this)">결제취소</button>
+				<div class="col-md-12 text-center payBtn">
+					<button class="btn" onclick="location.href='pointchargepage.action'")" id="pointC">포인트충전</button>
+					<button class="btn payItem" id="${lists.g_post_code }"  onclick="pay(this)" id="payM" style="width: 100px;">결제하기</button>
+					<button class="btn" id="${lists.g_post_code }" onclick="cancle(this)" id="cancle" style="width: 100px;">결제취소</button>
 				</div>
 			</div>
 			</c:forEach>

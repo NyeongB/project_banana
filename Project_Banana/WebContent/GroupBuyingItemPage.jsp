@@ -213,6 +213,7 @@ textarea
 	margin-bottom: 22px;
 }
 
+
 .sPans
 {
 	color : black;
