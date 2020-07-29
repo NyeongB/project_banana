@@ -28,6 +28,16 @@
 
 }
 
+.tbwid_10{width:5%;
+
+	text-align: center;
+}
+.tbwid_20{width:20%;}
+.tbwid_30{width:30%;}
+.tbwid_40{width:5%;}
+.tbwid_50{width:5%;}
+.tbwid_60{width:5%;}
+.tbwid_70{width:15%;}
 
 	
 </style>
@@ -79,13 +89,13 @@
 						<table class="table">
 							<thead class="reportTitle">
 								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>내용</th>
-									<th>아이디</th>
-									<th>닉네임</th>
-									<th>유형</th>
-									<th>작성일</th>
+									<th class="tbwid_10">번호</th>
+									<th class="tbwid_20">제목</th>
+									<th class="tbwid_30">내용</th>
+									<th class="tbwid_40">아이디</th>
+									<th class="tbwid_50">닉네임</th>
+									<th class="tbwid_60">유형</th>
+									<th class="tbwid_70">작성일</th>
 									
 								
 								</tr>
@@ -93,7 +103,7 @@
 						    <c:forEach var="dto" items="${postList }" >
 							<tbody>
 								<tr>
-									<td>${dto.rnum }</td>
+									<td style="text-align: center;">${dto.rnum }</td>
 									<td>${dto.title }</td>
 									<td>${dto.content }</td>
 									<td>${dto.id }</td>

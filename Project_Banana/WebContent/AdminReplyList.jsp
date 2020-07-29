@@ -21,10 +21,15 @@
 .table
 {
 	margin-top: 20px;
+	text-align: center;
 
 }
 
-
+.tbwid_10{width:5%;}
+.tbwid_20{width:30%;}
+.tbwid_30{width:10%;}
+.tbwid_40{width:10%;}
+.tbwid_50{width:10%;}
 	
 </style>
 
@@ -75,11 +80,11 @@
 						<table class="table">
 							<thead class="reportTitle">
 								<tr>
-									<th>번호</th>
-									<th>댓글내용</th>
-									<th>아이디</th>
-									<th>닉네임</th>
-									<th>작성일</th>
+									<th class="tbwid_10">번호</th>
+									<th class="tbwid_20" >댓글내용</th>
+									<th class="tbwid_30">아이디</th>
+									<th class="tbwid_40">닉네임</th>
+									<th class="tbwid_50">작성일</th>
 									
 								
 								</tr>
@@ -88,7 +93,7 @@
 							<tbody>
 								<tr>
 									<td>${dto.rnum }</td>
-									<td>${dto.reply }</td>
+									<td >${dto.reply }</td>
 									<td>${dto.id }</td>
 									<td>${dto.nickname }</td>
 									<td>${dto.wdate }</td>
