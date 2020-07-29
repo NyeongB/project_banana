@@ -59,6 +59,23 @@ h2
 
 </style>
 
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#mainback").click(function()
+		{
+			$(location).attr("href", "main.action");
+		});
+		
+		$("#chargemore").click(function()
+		{
+			$(location).attr("href", "pointchargepage.action");
+		});
+	});
+
+
+</script>
 
 </head>
 
@@ -90,8 +107,8 @@ h2
 									
 																	
 							<div class="col-md-12 pointBtn">
-								    <button class="btn btn-primary" type="button" id="mainback">메인으로 가기</button>
-								    <button class="btn btn-primary" type="button" id="chargemore">충전 더하기</button>
+								    <button class="btn btn-primary" type="button" id="mainback" href="">메인으로 가기</button>
+								    <button class="btn btn-primary" type="button" id="chargemore" >충전 더하기</button>
   								</div>
 								
 										
