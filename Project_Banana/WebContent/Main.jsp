@@ -46,7 +46,8 @@ String cp = request.getContextPath();
 }
 
 body {
-	font: 17px 'Nanum Gothic', sans-serif;
+	font-family: 'GmarketSansLight';
+	/* font: 17px 'Nanum Gothic', sans-serif; */
 }
 
 .bxslider  {
@@ -72,15 +73,32 @@ li {
 	width: 100%;
 	background-color: #fff5d9;
 	height: 400px;
-	margin: 0 auto ;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 }
-.introduce li
+
+
+.content_menu
 {
-	list-style: none;
-	font-family: 'yg-jalnan';
-	color: var(--back-color);
-	font-size: 30pt;
+	display:flex;
+	align-self: flex-end;
+		
+}
+.content_menu button
+{
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-radius: 10px;
+	text-align: center;
+	vertical-align: center;		
+	margin: 5px;	
+	font-size: 13pt;
+	font-weight: bold;	
+	color: var(--text-color);
+	line-height: 5px;
 
 }
 </style>
@@ -99,6 +117,13 @@ li {
 			captions : true, // 이미지 위에 텍스트를 넣을 수 있음
 		});
 	});
+	
+	function goGonggu()
+	{
+		
+		location.href="g_main.action";
+		
+	}
 </script>
 
 
@@ -123,8 +148,8 @@ li {
 
 
 			<div class="col-md-8">
-			<div class="col-md-12">
-					<ul class="bxslider">
+				<div class="col-md-12">
+				<!-- 	<ul class="bxslider">
 						<li><a href="#"><img
 								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
 								alt="" ></a></li>
@@ -138,17 +163,24 @@ li {
 						<li><a href="#"><img
 						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
 						alt="" ></a></li>
-					</ul>
+					</ul> -->
 				</div>
-				<div class="col-md-12 introduce text-center">
 				
-					<img src="images/banana_1.png" style="width:200px;" alt="" />
+					<div class="col-md-12 introduce">
+						<div class="text-center content">
+							<p class="thick" style="/* color:var(--hover-color); */">" 바나나 서비스를 통해 이웃과 나눠보세요 "</p>
+							<img src="images/banana_1.png" style="width:300px; height: 280px;" alt="" />
+							<div class="form-group form-inline content_menu">
+								<button class="btn form-control thick" onclick="goGonggu()">공동구매 하러가기</button>
+								<button class="btn form-control thick" onclick="goReng()">렌트 하러가기</button>					
+							</div>
+								
+						
+						</div>
+					</div>
+						
 				
-				
-					
-				</div>
 			</div>
-			<div class=""></div>
 			<!-- col-md-8 end -->
 
 			<div class="col-md-2"></div>
