@@ -25,7 +25,7 @@
 .center-block
 {
 /*	display: block;
-	margin-top : 100px;
+	margin-top : 100px
 	background-color: black;
 	height: 200px;
 */

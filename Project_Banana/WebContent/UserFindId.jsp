@@ -8,15 +8,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserFindId.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
+<link rel="icon" href="images/favicon.ico" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
+.center-block
+{
+	display: block;
+	margin-top : 100px;
+	background-color: black;
+	height: 200px;
 
+	display: block;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top : 20px;
+	background-color: #f4f4f4;
+	width: 50%;
+	height: 450px;
+	margin-bottom: 80px;	
+	border-radius: 30px;
+	
+}
 
 #pwfont
 {
@@ -94,68 +113,88 @@
 </script>
 
 </head>
+
+
 <body>
-<div class="header">
-	<jsp:include page="Header.jsp"></jsp:include>
-</div>
-
-
-<div class="container">
-
-			<div class="content">
-				<div class="col-md-3"></div>
-				
-				
-				<div class="col-md-6">
-				
-					<div>
-						<form role="form" class="form-inline" id="phoneForm" action="idcheckfind.action" method="get">
-						<br>
-							<!-- <input type="radio" name="phoneSearch" id="phoneSearch"><b>
-								휴대전화로 찾기</b> <br>
-							<br> -->
-							<h3>아이디 찾기</h3>
-
-							<div class="form-group">
-								<label for="name"> 이름 </label> <input type="text"
-									class="form-control" id="name" placeholder="이름" name="name">
-							</div>
-							<br>
-							<br>
-
-							<div class="form-group">
-								<label for="phoneNumber"> 핸드폰 번호 </label> 
-								<select id="localNum" name="num1" class="form-control">
-									<option value="010">010</option>
-									<option value="011">011</option>
-								</select> <input type="text" class="form-control" id="phoneNumber" name="num2"
-									placeholder="전화번호" />
-								<button type="button" class="btn btn-primary" id="findBtn">인증번호 받기</button>
-							</div>
-							<br>
-							<br>
-
-							<div class="form-group">
-								<input type="text" class="form-control" id="confirmNum"
-									placeholder="인증번호" />
-								<button type="button" class="btn btn-primary" id="checkBtn">인증번호 확인</button>
-							</div>
-
-							
-						</form>
-					</div>
-					<br />
-					
-			</div>
-			<!--col-md-6 div 끝  -->
-			<div class="col-md-3"></div>
+<!-- Header  -->
+	<div class="row Header">
+		<div class="col-md-12">
+			<jsp:include page="Header.jsp"></jsp:include>
+		</div>
 	</div>
-		<!--end content  -->
-
 	
+	
+<!-- content  -->
 
-</div>
-<!--end container  -->
+<div class="container-fluid">
+	<div class="content">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<div class="center-block">
+							<div class="col-md-12">
+								<div class="text-center">
+									<img alt="Bootstrap Image"
+									src="images/banana_icon.png" width="100px;" height="100px;">
+									
+								</div>
+								<div style="margin-left: 100px; margin-top: 20px;">
+								<form role="form" class="form-inline" id="phoneForm" action="idcheckfind.action" method="get">
+                  <br>
+                     <!-- <input type="radio" name="phoneSearch" id="phoneSearch"><b>
+                        휴대전화로 찾기</b> <br>
+                     <br> -->
+                     <h3>아이디 찾기</h3>
+
+                     <div class="form-group">
+                        <label for="name"> 이름 </label> <input type="text"
+                           class="form-control" id="name" placeholder="이름" name="name">
+                     </div>
+                     <br>
+                     <br>
+
+                     <div class="form-group">
+                        <label for="phoneNumber"> 핸드폰 번호 </label> 
+                        <select id="localNum" name="num1" class="form-control">
+                           <option value="010">010</option>
+                           <option value="011">011</option>
+                        </select> <input type="text" class="form-control" id="phoneNumber" name="num2"
+                           placeholder="전화번호" />
+                        <button type="button" class="btn btn-primary" id="findBtn">인증번호 받기</button>
+                     </div>
+                     <br>
+                     <br>
+
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="confirmNum"
+                           placeholder="인증번호" />
+                        <button type="button" class="btn btn-primary" id="checkBtn">인증번호 확인</button>
+                     </div>
+
+                     
+                  </form>
+								</div>
+							</div> 
+						</div> <!-- end center-block -->
+					</div>  <!-- col-md-8 end -->
+					
+					
+					<div class="col-md-2"></div>
+				</div>
+			</div>  <!-- end col-md-12 -->
+	</div> <!-- end content -->
+</div> <!-- end container-fluid -->
+
+
+
+
+
+
+
+
+
+<!-- content end -->
 
 <!-- footer  -->
 <div class="row">

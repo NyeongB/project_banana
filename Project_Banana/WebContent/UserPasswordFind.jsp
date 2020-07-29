@@ -96,6 +96,18 @@ img
 </style>
 
 
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#mainList").click(function()
+		{
+			location.href="<%=cp%>/main.action";
+		});
+	});
+
+</script>
+
 </head>
 
 
@@ -174,7 +186,7 @@ img
 							
 							<div class="col-md-12 spaceBtn">
 								<button class="btn btn-primary" type="submit" id="submit">비밀번호 찾기</button>
-  								<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>	
+  								<button class="btn btn-primary" type="button" id="mainList">메인으로 가기</button>	
 							
 							</div>		
 							</form>	    
