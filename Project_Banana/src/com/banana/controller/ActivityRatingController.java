@@ -116,7 +116,7 @@ public class ActivityRatingController
 			System.out.println(e.toString());
 		}
 		
-		view="WEB-INF/my/UserMyBa_ActivityRating.jsp";
+		view="/UserMyBa_ActivityRating.jsp";
 		return view;
 	}
 }

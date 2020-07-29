@@ -131,7 +131,7 @@ ins
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
-			<jsp:include page="../../Header.jsp"></jsp:include>
+			<jsp:include page="Header.jsp"></jsp:include>
 		</div>
 	</div>
 
@@ -140,7 +140,7 @@ ins
 	<div class="container-fluid">
 		<div class="content">
 			<div class="col-md-2">
-				<jsp:include page="../../MenuUser.jsp"></jsp:include>
+				<jsp:include page="MenuUser.jsp"></jsp:include>
 			</div>
 			<!-- 왼쪽 MenuUser end  -->
 
@@ -204,7 +204,7 @@ ins
 	<!-- footer  -->
 	<div class="row">
 		<div class="col-md-12">
-			<jsp:include page="../../Footer.jsp"></jsp:include>
+			<jsp:include page="Footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

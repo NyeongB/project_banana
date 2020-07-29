@@ -70,8 +70,9 @@ li {
 .introduce
 {
 	width: 100%;
-	background-color: var(--back-color);
-	height: 500px;
+	background-color: #fff5d9;
+	height: 400px;
+	margin: 0 auto ;
 
 }
 .introduce li
