@@ -10,10 +10,15 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
-	#nav
-	{
-		padding: 5px;
-	}
+#nav
+{
+	padding: 5px;
+}
+.admin_menu_logo
+{
+	padding-left: 20px;
+
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="../css/bootstrap.min.css">
@@ -42,7 +47,7 @@
 </head>
 <body>
 <div class="adminPage_logo">
-	<h3>관리자페이지</h3>
+	<h3 class="admin_menu_logo thick">관리자페이지</h3>
 </div>
 <div id="nav">
 		
