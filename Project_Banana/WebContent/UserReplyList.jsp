@@ -15,8 +15,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminReportList.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
+<link rel="icon" href="<%=cp %>/images/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
