@@ -70,11 +70,27 @@
 }
 .alarm a
 {
-	color: gray!important;
+	color: black !important;
+	font-size: small;
 	
+}
+.text
+{
+	color: black !important;
+	font-weight: 800 !important;
 
 }
+.text1
+{
+	color: black !important;
+	font-size: 9pt;
+	font-weight: 800 !important;
 
+}
+#in
+{
+	width: 300px;
+}
 
 
 </style>
@@ -102,11 +118,6 @@
 		
 		
 	}
-	
-	
-
-	
-	
 	
 </script>
 
@@ -179,9 +190,8 @@
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
 			    <span class="glyphicon glyphicon-bell"></span>
 			  </button>
-			  <ul class="dropdown-menu" role="menu" id="alram">
-			  <div id="in"></div>
-				</ul>
+			  <ul class="dropdown-menu" role="menu" id="in">
+			  </ul>
 			</div>
 			<!-- 드롭다운 끝  -->
 		</c:when>
