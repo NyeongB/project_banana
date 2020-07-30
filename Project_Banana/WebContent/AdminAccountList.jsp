@@ -22,6 +22,10 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 
+
+
+
+
 <script type="text/javascript">
 	
 	var state = 0;

@@ -24,12 +24,16 @@ $(document).ready(function() {
 })
 </script>
 <style type="text/css">
-li 
+
+
+
+.paging
 {
 	font-weight: bold;
 	font-size: 18px;
 	list-style-type: none;
 }
+
 
 .table 
 {
@@ -66,11 +70,10 @@ li
 	font-weight: 800;
 }
 
-.paging
-{
-	
 
-}
+
+
+
 
 </style>
 </head>
