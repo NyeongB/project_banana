@@ -30,7 +30,7 @@
                 LEFT JOIN JOIN J
         ON G.B_USER_CODE = J.B_USER_CODE
         WHERE J.LOC_CODE = #{loc_code}
-		ORDER BY WDATE DESC
+        ORDER BY G.WDATE DESC
 	</select>
 	
 	<!--관심카테고리 기반 추천 게시물  -->

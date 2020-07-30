@@ -86,11 +86,7 @@
 	$(document).ready(function()
 	{
 		
-	});
-	
-	
-	
-	
+	});	
 	
 	
 	function ajax()

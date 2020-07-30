@@ -9,18 +9,19 @@ String cp = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>Banana</title>
+<link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#nav1 ul.sub").hide();
-		$("#nav1 ul.menu li").click(function() {
-			$("ul", this).slideToggle("fast");
-		});
-	})
+$(document).ready(function() {
+	$("#nav1 ul.sub").hide();
+	$("#nav1 ul.menu li").click(function() {
+		$("ul", this).slideToggle("fast");
+	});
+})
 </script>
 <style type="text/css">
 li 
@@ -44,7 +45,7 @@ li
 	float: rigth;
 }
 
-.tbwid_10{width:9%;}
+.tbwid_10{width:7%;}
 .tbwid_20{width:8%;}
 .tbwid_30{width:10%;}
 .tbwid_40{width:20%;}
@@ -55,13 +56,21 @@ li
 .tbwid_90{width:5%;}
 .tbwid_100{width:10%;}
 .tbwid_110{width:10%;}
-.tbwid_120{width:5%;}
+.tbwid_120{width:7%;}
 .tbwid_130{width:10%;}
 .tbwid_140{width:5%;}
 .tbwid_150{width:5%;}
 
+.thick
+{
+	font-weight: 800;
+}
 
+.paging
+{
+	
 
+}
 
 </style>
 </head>
@@ -86,25 +95,13 @@ li
 		<div class="col-md-8">
 			<div class="fluid">
 				<div class="col-md-12">
-					<h2>사용자 조회</h2>
+					<h2 class="thick">사용자 조회</h2>
+					<p class="thick">&#11088; 모든 사용자의 정보를 조회 할 수 있습니다.</p>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<ul class="nav nav-pills">
-						<li role="presentation" class="active" ><a href="#">일반회원</a></li>
-						<li role="presentation"><a href="#">소상공인회원</a></li>
-						<li role="presentation"><a href="#">정지회원</a></li>
-						<li role="presentation"><a href="#">탈퇴회원</a></li>
-						<li role="presentation"><a href="#">휴면회원</a></li>
-					</ul>
-				</div>
-			</div>
-
-
-			<div class="table">
-				<table class="table table-striped">
-					<tr>
+			<div class="table thick">
+				<table class="table table-striped thick">
+					<tr class="thick">
 						<th class="tbwid_10">이름</th>
 						<th class="tbwid_20">주민번호</th>
 						<th class="tbwid_30">핸드폰</th>
@@ -150,13 +147,12 @@ li
 
 			</div>
 
-			
 
 			<!-- 페이징 인덱스 반드시 추가  -->
 				<div class="row">
-					<div class="col-md-12 text-center">
+					<div class="col-md-12 text-center">			
 						<nav>
-							<ul class="pagination">
+							<ul class="pagination paging">
 								<li class="disabled"><a href="#" aria-label="Previous"><span
 										aria-hidden="true">&laquo;</span></a></li>
 								${pageIndexList }
