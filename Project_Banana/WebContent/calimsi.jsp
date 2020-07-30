@@ -24,6 +24,8 @@
 		{
 			JSONObject obj = new JSONObject();
 			obj.put("title",startEnd.get(i).getTitle());
+			
+			System.out.println(startEnd.get(i).getTitle());
 			obj.put("start",startEnd.get(i).getStart_date());
 			obj.put("id",startEnd.get(i).getPost_code());
 			obj.put("color","#FFCC4F");
