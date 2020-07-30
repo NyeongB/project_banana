@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-md-8">
 			<div>
-				<h3>확정 광고 조회</h3>
+				<h3 class="thick">확정 광고 조회</h3>
 			</div>
 
 			<div class="col-md-12">

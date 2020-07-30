@@ -15,11 +15,11 @@
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/MyMenuStyle.css">
+<link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <style type="text/css">
-
 
 
 .table
@@ -36,8 +36,8 @@
 .tbwid_30{width:30%;}
 .tbwid_40{width:5%;}
 .tbwid_50{width:5%;}
-.tbwid_60{width:5%;}
-.tbwid_70{width:15%;}
+.tbwid_60{width:6%;}
+.tbwid_70{width:14%;}
 
 	
 </style>
@@ -63,8 +63,9 @@
 		
 			<div class="col-md-8">
 				<div>
-					<h3>게시물 관리</h3>
-					<hr>
+					<h3 class="thick">게시물 관리</h3>
+					<p class="thick">&#11088; 모든 게시물을 조회 할 수 있습니다.</p>
+					
 				</div>
 				<br>
 				
@@ -86,7 +87,7 @@
 				
 				<div class="row">
 					<div class="col-md-12">
-						<table class="table">
+						<table class="table thick">
 							<thead class="reportTitle">
 								<tr>
 									<th class="tbwid_10">번호</th>
