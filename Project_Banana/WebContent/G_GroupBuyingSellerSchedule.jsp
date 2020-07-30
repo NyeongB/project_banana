@@ -89,6 +89,26 @@ tr:first-child > td > .fc-day-grid-event
 
 }
 
+.Header
+{
+	z-index : 1;
+	position: relative;
+}
+
+#modalBox
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+#modalBox2
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
 </style>
 
 <!-- <script src='fullcalendar/core/locales/ko.js'></script> -->

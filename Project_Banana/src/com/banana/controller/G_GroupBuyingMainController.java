@@ -162,7 +162,9 @@ public class G_GroupBuyingMainController
 	  }
 	  
 	  //공동구매 메인 부르기
-	  @RequestMapping(value = "/g_main.action", method = RequestMethod.GET)
+	  
+	
+	@RequestMapping(value = "/g_main.action", method = RequestMethod.GET)
 	  public String gMain(Model model, HttpServletRequest request) 
 	  { 
 		  String view = null;
@@ -171,21 +173,21 @@ public class G_GroupBuyingMainController
 		  try
 		{
 			 
-
+			  
 			  HttpSession session = request.getSession(); 
 			  SessionInfo info = (SessionInfo)session.getAttribute("user");
 			  
 			  String postcode = (String)session.getAttribute("postcode");
 			  //System.out.println(postcode);
-			  String loc = info.getLoc_code();
+			  String locC = info.getLoc_code();
 			  
 			  
 			  GPostDTO dto = new GPostDTO(); 
 			  IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 			  
 			  //리모콘바에 최근 본 게시물
-			  if(postcode != null) 
-				  model.addAttribute("gRecentList",dao.gRecentList(postcode));
+			  if(postcode != null) 	
+			    model.addAttribute("gRecentList",dao.gRecentList(postcode));
 			  
 			  if(info == null) //로그인 안 했을 시
 			  {
@@ -193,7 +195,7 @@ public class G_GroupBuyingMainController
 				  model.addAttribute("check","1"); 
 				  
 				  //새로 올라온 게시물
-				  dto.setLoc_code(loc);
+				  dto.setLoc_code(locC);
 				  model.addAttribute("gNewList", dao.gNewList(dto));
 				  
 				  
@@ -204,7 +206,7 @@ public class G_GroupBuyingMainController
 				//사용자 코드 가져오기 
 				  String code = info.getB_user_code(); 
 				  dto.setB_user_code(code);
-				  dto.setLoc_code(loc);
+				  dto.setLoc_code(locC);
 				  
 				  //새로 올라온 게시물
 				  model.addAttribute("gNewList", dao.gNewList(dto));

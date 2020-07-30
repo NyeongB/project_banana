@@ -44,6 +44,30 @@
 	margin-top: 100px;
 	
 }
+
+
+.Header
+{
+	z-index : 1;
+	position: relative;
+}
+
+#modalBox
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+#modalBox2
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+
+
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>

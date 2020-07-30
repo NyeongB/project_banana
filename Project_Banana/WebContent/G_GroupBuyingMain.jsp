@@ -231,7 +231,7 @@ function logincheck()
 		}
 		else // 취소 버튼 클릭 시 동작
 		{
-			location.href = "redirect:r_main.action";
+			location.href = "redirect:g_main.action";
 		}
 	}
 	else
