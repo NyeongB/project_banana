@@ -23,7 +23,7 @@ VALUES('G_APPLY'||SEQ_G_APPLY.NEXTVAL, V_G_POST_CODE, V_B_USER_CODE, V_POINT_LIS
     PRC_ALARM('AR_C11',V_URL,V_B_USER_CODE);
 
 -- 3. 커밋
--- COMMIT;
+ COMMIT;
 END;
 
 -- 테스트 
@@ -258,7 +258,7 @@ BEGIN
     
 
     -- 4) 커밋
-    -- COMMIT;
+     COMMIT;
     
 END;
 
@@ -328,7 +328,7 @@ BEGIN
 
   PRC_ALARM('AR_C2','',V_B_USER_CODE);
 
---COMMIT;
+COMMIT;
  
  
 END;
@@ -383,7 +383,7 @@ BEGIN
      PRC_ALARM('AR_C5','',V_B_USER_CODE);
 	
     --4. 커밋
-	--COMMIT;
+	COMMIT;
 END;
 
 
@@ -454,7 +454,7 @@ BEGIN
 
 
     -- 3) 커밋
-    -- COMMIT;
+     COMMIT;
 
 END;
 
@@ -585,7 +585,7 @@ BEGIN
 
 
 -- 커밋
--- COMMIT;
+ COMMIT;
 
 END;
 
@@ -847,7 +847,7 @@ VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,V_G_POST_CODE,V_PHOTO);
 
 
 -- 5. 커밋
--- COMMIT;
+COMMIT;
 END;
 
 
