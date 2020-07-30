@@ -29,6 +29,28 @@
 
 <style type="text/css">
 
+.Header
+{
+	z-index : 1;
+	position: relative;
+}
+
+#modalBox
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+#modalBox2
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+
+
 #apply
 {	
 	/* margin: 20px;

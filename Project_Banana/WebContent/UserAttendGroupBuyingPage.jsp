@@ -15,6 +15,36 @@ String cp = request.getContextPath();
 <link rel="icon" href="images/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<style type="text/css">
+
+.Header
+{
+	z-index : 1;
+	position: relative;
+}
+
+#modalBox
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+#modalBox2
+{
+	z-index : 250;
+	position: absolute;
+	top : 0px;
+}
+
+textarea 
+{
+	resize: none;	
+}
+
+
+</style>
+
 <script type="text/javascript">
 
 
@@ -100,6 +130,8 @@ String cp = request.getContextPath();
 {
 	font-size: 12px;
 }
+	
+/* 모달 zindex 추가하기 */	
 	
 </style>
 
