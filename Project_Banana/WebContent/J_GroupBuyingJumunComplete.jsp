@@ -106,8 +106,8 @@ p
 									src="images/banana_icon.png" >
 									<p>"공동구매 신청이 완료 되었습니다."</p>
 									
-								    <button class="btn btn-primary" type="button" id="backhome">메인으로</button>
-  									<button class="btn btn-primary" type="button" id="backMypage">마이페이지로</button>
+								    <button class="btn btn-primary" type="button" id="backhome" onclick="location.href='main.action'">메인으로</button>
+  									<button class="btn btn-primary" type="button" id="backMypage" onclick="location.href='usermyjjim.action'">마이페이지로</button>
 								</div>
 
 							</div> 

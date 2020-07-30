@@ -101,7 +101,7 @@ p
 									src="images/banana_icon.png" >
 									<p>"회원가입이 완료되었습니다."</p>
 									
-								    <button class="btn btn-primary" type="button" id="backhome">홈으로 돌아가기</button>
+								    <button class="btn btn-primary" type="button" id="backhome" onclick="location.href='main.action'">홈으로 돌아가기</button>
   								
 								</div>
 
