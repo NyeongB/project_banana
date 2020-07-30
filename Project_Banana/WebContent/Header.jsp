@@ -91,6 +91,10 @@
 {
 	width: 300px;
 }
+hr
+{
+	margin: 0px important;
+}
 
 
 </style>
