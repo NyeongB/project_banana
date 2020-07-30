@@ -403,7 +403,7 @@ function logincheck()
 	                                        	<small>${mylist.nickname }</small>
 	                                        </div>
 	                                      <p>${mylist.loc_name }</p>
-	                                      <span class="price"><fmt:formatNumber value="${mylist.dis_cost }" ></fmt:formatNumber></span>                          
+	                                      <span class="price"><fmt:formatNumber value="${mylist.dis_cost/mylist.member_num }" ></fmt:formatNumber>원(1인)</span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -450,7 +450,7 @@ function logincheck()
 	                                        	<small>${catelist.nickname }</small>
 	                                        </div>
 	                                      <p>${catelist.loc_name }</p>
-	                                      <span class="price"><fmt:formatNumber value="${catelist.dis_cost }" ></fmt:formatNumber></span>                          
+	                                      <span class="price"><fmt:formatNumber value="${catelist.dis_cost/catelist.member_num }" ></fmt:formatNumber>원(1인)</span>                          
 	                                    </div>
 	                           		    
 	                           </div>
@@ -501,7 +501,7 @@ function logincheck()
 	                                        	<small>${newlist.nickname }</small>
 	                                        </div>
 	                                      <p>${newlist.loc_name }</p>
-	                                      <span class="price"> <fmt:formatNumber value="${newlist.dis_cost }" ></fmt:formatNumber></span>                          
+	                                      <span class="price"> <fmt:formatNumber value="${newlist.dis_cost/newlist.member_num }" ></fmt:formatNumber>원(1인)</span>                          
 	                                    </div>
 	                           		   
 	                           </div>

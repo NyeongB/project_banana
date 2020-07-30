@@ -22,7 +22,7 @@
 	
 	<!--공동구매 메인페이지에서 새로올라운 게시물  -->
 	<select id="gNewList" resultType="com.banana.groupbuying.GPostDTO">
-		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO,G.G_POST_CODE, J.NICKNAME
+		SELECT TITLE,DIS_COST,L.LOC_NAME,P.PHOTO,G.G_POST_CODE, J.NICKNAME,G.MEMBER_NUM
 		FROM G_POST G  LEFT JOIN LOC L
 		ON G.LOC_CODE = L.LOC_CODE
 		        LEFT JOIN G_PHOTO P
@@ -36,7 +36,7 @@
 	<!--관심카테고리 기반 추천 게시물  -->
 	<select id="gCateList" resultType="com.banana.groupbuying.GPostDTO">
 		
-        SELECT TITLE,DIS_COST, L.LOC_NAME, PT.PHOTO, G.G_POST_CODE, J.NICKNAME
+        SELECT TITLE,DIS_COST, L.LOC_NAME, PT.PHOTO, G.G_POST_CODE, J.NICKNAME,G.MEMBER_NUM
 		FROM G_POST G  LEFT JOIN JOIN J
         ON G.B_USER_CODE = J.B_USER_CODE
         LEFT JOIN G_PHOTO PT

@@ -302,6 +302,7 @@ p
 		
 		//alert(scatecode);
 		document.getElementById('scate').value= scatecode;
+		document.getElementById(scatecode).style.background = "#F2F2F2";
 		
 	}
 	
