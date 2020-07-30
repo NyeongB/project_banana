@@ -206,7 +206,7 @@ a:active
 		//alert("확인");	
 		//alert(obj.getAttribute("id"));
 		var a = obj.getAttribute("id");
-		alert(a);
+		//alert(a);
 		
 	
 		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
