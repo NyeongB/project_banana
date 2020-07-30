@@ -15,6 +15,14 @@
 <link rel="icon" href="images/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+	function goList()
+	{
+		$(location).attr("href","userattendGonggu.action");	
+	}
+	
+</script>
 <style type="text/css">
 
 *
@@ -118,7 +126,7 @@ p
 									<p>상품등록이 완료되었습니다.</p>
 									
 								    
-  									<button class="btn btn-primary" type="button" id="mainList">목록으로 가기</button>
+  									<button class="btn btn-primary" type="button" id="mainList" onclick="goList()">목록으로 가기</button>
 								</div>
 
 							</div> 
