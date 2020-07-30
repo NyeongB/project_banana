@@ -390,8 +390,8 @@ function logincheck()
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${mylist.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<!-- <img src="images/oz.jpg" > -->
-	                           			${mylist.photo }
+	                           			<img src="${mylist.photo }" >
+	                           			
 	                           			<div class="caption">
 	                                      <h5 class="thick">${mylist.title }</h5>
 	                                       <div class="col-md-12">
