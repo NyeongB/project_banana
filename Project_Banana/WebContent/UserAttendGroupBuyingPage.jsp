@@ -106,7 +106,7 @@ textarea
 		
 		//alert(star);
 		//alert(successcode);
-		alert(reviewText);
+		//alert(reviewText);
 		
 		location.href = "greview.action?successcode="+successcode+"&star="+star+"&reviewText="+reviewText+"&applycode=" +applycode;
 		
