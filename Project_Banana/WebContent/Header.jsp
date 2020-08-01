@@ -64,7 +64,6 @@
 }
 .search_bar:hover ul
 {
-
 	 display:block;
 	
 }
