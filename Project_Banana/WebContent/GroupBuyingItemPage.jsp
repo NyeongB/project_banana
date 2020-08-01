@@ -570,9 +570,7 @@ function orderItem(obj)
             				<li class="breadcrumb-item"><a href="g_catesmain.action?bid=${cate.g_cate_bcode }&mid=${cate.g_cate_mcode}">${cate.midcate_name }</a></li>
             			</c:forEach>
             			
-            			<%-- <c:forEach var="catelist" items="${gCatemMainList }">
-            				<li class="breadcrumb-item"><a>${catelist.dis_cost }</a></li>
-            			</c:forEach> --%>
+            			
             			
           			</ol>
 				
@@ -602,19 +600,9 @@ function orderItem(obj)
 									 <!-- 상품 사진 -->
 									 <img src="${lists.photo}"> 
 				
-				
-				<!--  -->					  
-				  
-				
-				
-				<!--  -->
-				
 								</div>
 							</div>
-							
-							
-							
-							
+
 							<div class="row">
 								<div class="col-md-12">
 									<!-- 사진 페이징 -->
@@ -691,7 +679,7 @@ function orderItem(obj)
 						
 						
 						
-					</div>
+					</div><!-- end col-md-8 -->
 				</div>
 			</div>  <!-- end  -->
 			
@@ -701,113 +689,93 @@ function orderItem(obj)
 			
 			<div class="mainbox">
 			
-			<div class="row">
-				<div class="col-md-12">
-					<ul class="nav nav-tabs">
-  						<li role="presentation" ><a href="#">상세정보</a></li>
-  						<li role="presentation"><a href="#QA" id="qa">Q ＆ A</a></li>
-
-					</ul>
-				</div>
-			</div>
-			
-			
-			<div class="row">
-				<div class="col-md-12 detail">
-					<c:forEach var="list" items="${gPostDetailList }">
-						${list.content }
-					</c:forEach>
-				</div>
-			</div>
-			
-					<hr>
-			
-			<div class="row">
-				<div class="col-md-12 detail">
-				<h3 id="QA">Q ＆ A</h3>
-				
-				
-				<div class="form-inline">
-				<form action="" id="replyForm">
-					<div>
-					<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="nav nav-tabs">
+	  						<li role="presentation" ><a href="#">상세정보</a></li>
+	  						<li role="presentation"><a href="#QA" id="qa">Q ＆ A</a></li>
+	
+						</ul>
 					</div>
-					<div>
-					<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
-					</div>
-					<input type="hidden" name="postcode" value="<%=postcode %>">
-				</form>
 				</div>
 				
-				<!-- 댓글 INSERT -->
-				<div  id="resultReply">
-				<c:forEach var="greplyList" items="${greplyList }">
-					<div class="Rep">
-						
-						<div class="form-inline">
-						<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
-						<c:if test="${greplyList.l_level == 1}">
-						<div class="col-md-1">
-						<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
-						</div>
-						</c:if>
-						<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-3 text-right">${greplyList.wdate }</div>
-						</div>
-		
-						<div id="Rreply">${greplyList.reply }</div> 
-						<div class="form-inline text-right">
-						<div class="col-md-8"></div>
-						
-						<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
-						<c:if test="${greplyList.l_level == 0}">
-						<div class="col-md-2 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)"><span class="glyphicon glyphicon-pencil">&nbsp;댓글달기</span></div>
-						
-						
-							
-						</c:if>
-						
-						<div class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;좋아요</div>
-						<div class="col-md-1 text-rigth"><span class="glyphicon glyphicon-warning-sign">&nbsp;신고</span></div>
-						</div>
+				
+				<div class="row">
+					<div class="col-md-12 detail">
+						<c:forEach var="list" items="${gPostDetailList }">
+							${list.content }
+						</c:forEach>
 					</div>
-					<hr>	
+				</div>
+				
+						<hr>
+				
+				<div class="row">
+					<div class="col-md-12 detail">
+					<h3 id="QA">Q ＆ A</h3>
 					
-				</c:forEach>
-				
+					
+					<div class="form-inline">
+					<form action="" id="replyForm">
+						<div>
+						<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
+						</div>
+						<div>
+						<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+						</div>
+						<input type="hidden" name="postcode" value="<%=postcode %>">
+					</form>
+					</div>
+					
+					<!-- 댓글 INSERT -->
+					<div  id="resultReply">
+					<c:forEach var="greplyList" items="${greplyList }">
+						<div class="Rep">
+							
+							<div class="form-inline">
+							<!-- rreplyList.l_level이 1이면 대댓글 표시 -->
+							<c:if test="${greplyList.l_level == 1}">
+							<div class="col-md-1">
+							<i class="fa fa-hand-o-right" aria-hidden="true"></i><b>→</b>
+							</div>
+							</c:if>
+							<div class="col-md-9">${greplyList.nickname }</div><div class="col-md-3 text-right">${greplyList.wdate }</div>
+							</div>
+			
+							<div id="Rreply">${greplyList.reply }</div> 
+							<div class="form-inline text-right">
+							<div class="col-md-8"></div>
+							
+							<!-- rreplyList.l_level이 0이면 댓글 달기 있음  1이면 댓글달기 없음 -->
+							<c:if test="${greplyList.l_level == 0}">
+							<div class="col-md-2 rreplyinsert ${greplyList.nickname}" id="${greplyList.g_reply_code }" onclick="rreplyadd(this)"><span class="glyphicon glyphicon-pencil">&nbsp;댓글달기</span></div>
+							
+							
+								
+							</c:if>
+							
+							<div class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;좋아요</div>
+							<div class="col-md-1 text-rigth"><span class="glyphicon glyphicon-warning-sign">&nbsp;신고</span></div>
+							</div>
+						</div>
+						<hr>	
+						
+					</c:forEach>
+					
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					</div>
 				</div>
-				
-				
-				
-				
-				
-				
-				
-				</div>
-			</div>
 			
 			</div> <!-- end mainbox -->			
-			
-		</div> <!-- end col-md-8 -->
 		
-		
-		<%-- <div class="col-md-2">
-			<div class="floating">
-				<div><span  class="thick">오늘 본 상품</span></div>
-				<c:if test="${sessionScope.postcode != null }">	
-				<c:forEach var="gRecentLists" items="${gPostDetailList }">
-				<div><a href="groupbuyingitempage.action?postcode=${gRecentLists.g_post_code }">
-				<img src="${gRecentLists.photo }" class="lastest_img img-rounded"></a></div>
-				<div>
-
-				</c:forEach>			
-					
-				</c:if>					
-				</div>
-				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></div>
-			</div>
-		</div>
-		 --%>
-		
+	
 		<div class="col-md-2">
 						<div class="floating">
 							<div><span  class="thick">오늘 본 상품</span></div>
@@ -818,18 +786,16 @@ function orderItem(obj)
 							<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
 							</a>
 							</div>
-							<div>	
+							<div></div>	
 							</c:forEach>			
 							</c:if>					
 							
 							<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
 						</div>
-						</div>
-					</div><!--end col-md-2  -->
+		</div><!--end col-md-2  -->
+					
 		
-		
-	</div>
-</div> <!-- end container-fluid -->
+	
 
 
 <!-- content end -->
