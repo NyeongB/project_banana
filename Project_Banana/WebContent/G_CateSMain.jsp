@@ -1,6 +1,6 @@
-
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	//필터 쓰기 전까지 사용하기
 	request.setCharacterEncoding("utf-8");
@@ -363,8 +363,8 @@ a:active
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${gslists.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-	                           			<img src="${gslists.photo }" style="width: 200px; height: 180px; ">
 	                           			
+	                           			<img src="${gslists.photo }" style="width: 200px; height: 180px; ">
 	                           			<div class="caption">
 	                      
 	                                      <h5 class="thick">${gslists.title }</h5>
@@ -384,7 +384,8 @@ a:active
 	                                 
 	                                    
                                       <p>${gslists.loc_name }</p>
-                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>            
+                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber>원(1인)</span>
+                                      <%-- <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>    --%>         
                                     </div>
 	                                    
 	                           		    
