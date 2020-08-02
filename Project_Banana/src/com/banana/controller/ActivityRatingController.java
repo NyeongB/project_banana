@@ -45,10 +45,7 @@ public class ActivityRatingController
 	        // 아이디가져오기
 	        String b_user_code = info.getB_user_code();
 	        nickName = info.getNickname();
-	        System.out.println(b_user_code + "a");
-	        
-			// 나중에 세션으로 받을 부분
-			//String b_user_code = "USER48";
+	           
 			
 			IActivityRatingDAO dao = SqlSession.getMapper(IActivityRatingDAO.class);
 			
