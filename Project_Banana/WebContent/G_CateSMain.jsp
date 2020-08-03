@@ -368,23 +368,15 @@ a:active
 	                           			<div class="caption">
 	                      
 	                                      <h5 class="thick">${gslists.title }</h5>
-	                                      <div class="col-md-12">
-                                   			<div class="col-md-6">
-                                    	
-                                   			</div>
-                                  			<div class="col-md-6 text-right">
-                                    			<small>5분전</small>
-                                    		</div>
-                                        </div>
+	                              
                                         
                                         <div class="col-md-12 text-right wr">
                                         	<small>${gslists.nickname }</small>
                                         </div>
 	                                      <p>${glists.loc_name }</p>
-	                                 
-	                                    
-                                      <p>${gslists.loc_name }</p>
-                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber>원(1인)</span>
+	                       
+                                     
+                                      <span class="price"><fmt:formatNumber value="${gslists.dis_cost/gslists.member_num }" ></fmt:formatNumber>원(1인)</span>
                                       <%-- <span class="price"><fmt:formatNumber value="${gslists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>    --%>         
                                     </div>
 	                                    
