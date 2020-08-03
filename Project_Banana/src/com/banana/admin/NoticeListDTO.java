@@ -6,11 +6,6 @@ public class NoticeListDTO
 	
 	private String rnum;
 	
-	
-	
-	
-	
-
 
 	public String getRnum()
 	{

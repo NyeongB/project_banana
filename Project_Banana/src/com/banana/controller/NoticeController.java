@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.admin.INoticeListDAO;
 import com.banana.admin.NoticeListDTO;
-import com.banana.my.ActivityRatingDTO;
-import com.banana.my.IActivityRatingDAO;
+
 import com.banana.util.IndexDTO;
 import com.banana.util.Paging;
 import com.banana.util.SessionInfo;
@@ -38,11 +37,11 @@ public class NoticeController
 		INoticeListDAO dao = SqlSession.getMapper(INoticeListDAO.class);
 		
 		int count = dao.getCount();
+		//System.out.println(count);
 		
 		// 두개 반드시 선언
 		Paging paging = new Paging();
-		String pageNum = request.getParameter("pageNum");
-		
+		String pageNum = request.getParameter("pageNum");		
 		
 		
 		//테이블에서 가져올 리스트의 시작과 끝 위치

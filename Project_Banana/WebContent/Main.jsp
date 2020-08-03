@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -158,6 +159,31 @@ li {
 								<button class="btn form-control thick" onclick="goReng()">렌트 하러가기</button>					
 							</div>
 								
+						
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="col-md-4">
+						</div>
+						<div class="col-md-8 notice-area">
+							<h3 class="thick">공지사항</h3>
+							<table class="table">
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>조회수</th>
+									<th>작성일</th>
+								</tr>
+							<c:forEach var="lists" items="${list }">
+								<tr>
+									<td>${lists.rnum }</td>
+									<td>${lists.title }</td>
+									<td>23</td>
+									<td>${lists.wdate }</td>
+								</tr>
+							</c:forEach>								
+							</table>
 						
 						</div>
 					</div>
