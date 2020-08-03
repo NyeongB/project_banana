@@ -322,7 +322,7 @@ a:active
 	                                        	<small>${glists.nickname }</small>
 	                                        </div>
 		                                      <p>${glists.loc_name }</p>
-		                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber></span>                         
+		                                      <span class="price"><fmt:formatNumber value="${glists.dis_cost/glists.member_num }" ></fmt:formatNumber>원(1인)</span>
 		                                    </div>		    
 	                     		 </div>
 	                   		</div>

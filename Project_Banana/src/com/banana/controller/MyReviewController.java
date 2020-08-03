@@ -64,7 +64,7 @@ public class MyReviewController
 		}
 		// 세션에 있는 유저코드 받아오기
 		
-		view = "WEB-INF/my/UserMyBa_Review.jsp";
+		view = "UserMyBa_Review.jsp";
 		return view;
 	}
 }

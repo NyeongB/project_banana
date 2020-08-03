@@ -337,6 +337,10 @@ b
 	font-size: 2em;
 	color:var(--hover-color);
 }
+#locImg
+{
+	text-align: right;
+}
 
 
 </style>
@@ -355,7 +359,7 @@ b
 			<div class="col-md-12 rentNav form-inline">
 
 				<!-- 주소설정한 값 뜨기 -->
-				<div class="col-md-1">
+				<div class="col-md-1"  id="locImg">
 					<img src="images/icons_b50.png" id="location">
 				</div>
 				

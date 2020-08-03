@@ -89,7 +89,7 @@ tr:first-child > td > .fc-day-grid-event
 
 }
 
-.Header
+/* .Header
 {
 	z-index : 1;
 	position: relative;
@@ -107,7 +107,7 @@ tr:first-child > td > .fc-day-grid-event
 	z-index : 250;
 	position: absolute;
 	top : 0px;
-}
+} */
 
 </style>
 
