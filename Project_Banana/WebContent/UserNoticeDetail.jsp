@@ -59,11 +59,11 @@
             </td>
            
         </tr>
-         <tr>
+         <%-- <tr>
           <td>
             <img src="${notice.f_file }" style="width: 180px; height: 180px;">
             </td>
-         </tr>
+         </tr> --%>
 
          
         <tr>
