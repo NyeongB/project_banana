@@ -72,7 +72,7 @@ i + a
 
 <div id="nav">
 		<ul class="menu">
-		<li><i class="fas fa-home"></i><a href="#">마이페이지 홈</a></li>
+		<li><i class="far fa-envelope"></i><a href="#">쪽지함</a></li>
 		<li><i class="far fa-heart"></i><a href="usermyjjim.action">찜</a></li>
 		<li><i class="fas fa-hand-holding-heart"></i><a href="userrentpage.action">나의 렌트 </a></li>
 		<li><i class="fas fa-clipboard-list"></i><a href="userattendGonggu.action">나의 공동구매</a>

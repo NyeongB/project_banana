@@ -268,10 +268,13 @@ public class G_GroupBuyingMainController
 		public String GroupBuyingItemPage(Model model,HttpServletRequest request)
 		{
 			String view = null; 
-			
+			String userCode = null;
 			
 			try
-			{		
+			{	
+				HttpSession session = request.getSession();
+				SessionInfo info = (SessionInfo)session.getAttribute("user");
+				userCode = info.getB_user_code();
 			    IGreplyDAO dao2 = SqlSession.getMapper(IGreplyDAO.class);
 				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
 				
@@ -294,6 +297,7 @@ public class G_GroupBuyingMainController
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);
+				model.addAttribute("userCode", userCode);
 				//model.addAttribute("title", title);
 				
 				

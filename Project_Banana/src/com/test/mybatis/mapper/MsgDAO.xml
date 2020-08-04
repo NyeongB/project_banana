@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.banana.my.IMsgDAO">
+	
+	<select id="msgList" resultType="com.banana.my.MsgDTO">
+	SELECT MSG_CODE, MSG ,OPENDATE, SENDDATE, TARGETUSER, SENDER
+	FROM VIEW_MSG
+	WHERE TARGETUSER = #{targetUser} OR SENDER =#{sender}
+	</select>	
+	
+	
+	
+</mapper>  
+

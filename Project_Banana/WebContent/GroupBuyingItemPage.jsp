@@ -79,8 +79,6 @@ img
 	
 
 }
-
-
 p
 {
 	font-size: 25px;
@@ -133,10 +131,6 @@ p
 	
 	
 }
-
-
-
-
 
 #btn1
 {
@@ -537,6 +531,20 @@ function orderItem(obj)
 	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 }
 
+function sendMsg()
+{
+	userCode = document.getElementById("userCode").value;
+	nickName = document.getElementById("nickName").value;
+	myUserCode = document.getElementById("myUserCode").value;
+	
+	 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
+     var name = "";
+     var option = "width = 300, height = 300, top = 100, left = 200, location = no"
+     window.open(url, name, option);
+	
+	
+}
+
 </script>
 
 
@@ -619,7 +627,10 @@ function orderItem(obj)
 								<div class="col-md-12">
 									
 									<div class="col-md-6 w1">
-										작성자 : ${lists.nickname }
+										작성자 : ${lists.nickname } <i class="far fa-envelope" onclick='sendMsg()'></i>
+										<input type="hidden" value="${lists.b_user_code }" id="userCode"/>
+										<input type="hidden" value="${lists.nickname }" id="nickName"/>
+										<input type="hidden" value="${userCode }" id="myUserCode" />
 									</div>
 									
 									<div class="col-md-6 text-right warning w2">
