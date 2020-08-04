@@ -340,8 +340,7 @@ a:active
 												<li class="disabled"><a href="#" aria-label="Previous"><span
 														aria-hidden="true">&laquo;</span></a></li>
 														${pageIndexList }
-												<li><a href="#" aria-label="Next"><span
-														aria-hidden="true">&raquo;</span></a></li>
+												<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 											</ul>
 										</nav>
 									</div>
@@ -356,7 +355,7 @@ a:active
 										<img src="${gRecentLists.photo }" class="lastest_img img-rounded">
 										</a>
 										</div>
-										<div>
+									<div>
 											
 											
 										</c:forEach>			
@@ -374,7 +373,7 @@ a:active
 			</div>
 		</div>
 	</div>
-</div>
+
 
 
 <!-- content end -->
