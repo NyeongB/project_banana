@@ -307,7 +307,7 @@ public class MemberController
 			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
 			session.setAttribute("user", info);
 			
-			view = "/Main.jsp";
+			view = "/main.action";
 			//view = "/LoginComplete.jsp";
 			
 		}
