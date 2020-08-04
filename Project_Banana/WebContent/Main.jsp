@@ -163,7 +163,27 @@ li {
 						</div>
 					</div>
 					
-					<div class="col-md-12">
+					
+						
+				<div class="col-md-12">
+					<ul class="bxslider">
+						<li><a href="#"><img
+								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
+								alt="" ></a></li>
+						<li><a href="#"><img
+								src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
+								alt=""></a></li>
+						<li><a href="#"><img
+								src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
+								alt="" ></a></li>
+								
+						<li><a href="#"><img
+						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
+						alt="" ></a></li>
+					</ul> 
+				</div>
+				
+				<div class="col-md-12">
 						<div class="col-md-4">
 						</div>
 						<div class="col-md-8 notice-area">
@@ -187,24 +207,6 @@ li {
 						
 						</div>
 					</div>
-						
-				<div class="col-md-12">
-					<ul class="bxslider">
-						<li><a href="#"><img
-								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
-								alt="" ></a></li>
-						<li><a href="#"><img
-								src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
-								alt=""></a></li>
-						<li><a href="#"><img
-								src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
-								alt="" ></a></li>
-								
-						<li><a href="#"><img
-						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
-						alt="" ></a></li>
-					</ul> 
-				</div>
 				
 				
 			</div>
