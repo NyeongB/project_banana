@@ -850,7 +850,88 @@ VALUES('G_PHOTO'||SEQ_G_PHOTO.NEXTVAL,V_G_POST_CODE,V_PHOTO);
 COMMIT;
 END;
 
+----------------------------------------------------
+--공통협력구매 성사 프로시저(잡스케줄러 )
+create or replace PROCEDURE PRC_G_SUCCESS
+(
+ V_G_POST_CODE         IN G_POST.G_POST_CODE%TYPE  -- 공통협력 게시물 등록 코드
+, V_URL                 IN  ALARM.URL%TYPE
+)
+IS
 
+    -- 커서 선언
+    -- 신청 코드 목록 커서 선언(거래가 성사 된 게시물의 신청자들)
+    CURSOR CUR_APPLY_USER             
+    IS 
+    SELECT A.G_APPLY_CODE,A.B_USER_CODE --신청 코드,신청자 코드
+    FROM G_POST G RIGHT JOIN G_APPLY A
+    ON G.G_POST_CODE = A.G_POST_CODE
+            LEFT JOIN G_CANCEL C
+    ON C.G_APPLY_CODE = A.G_APPLY_CODE
+    WHERE TO_CHAR(G.END_DATE,'YYYY-MM-DD') =TO_CHAR(SYSDATE,'YYYY-MM-DD') -- 모집 종료일이 오늘과 일치
+    AND G.MEMBER_NUM-1 =(SELECT COUNT(*) FROM G_APPLY WHERE G_POST_CODE = G.G_POST_CODE) -- 모집인원에서 한명(글쓴이) 뺀 인원과 신청인원이 같아야 함
+    AND (SELECT COUNT(*) FROM G_CANCEL WHERE G_APPLY_CODE = A.G_APPLY_CODE)=0; --취소 테이블에 없어야 함 
+
+
+V_POINT_LIST_CODE      POINT_LIST.POINT_LIST_CODE%TYPE := 'POLIS' || SEQ_POINT_LIST.NEXTVAL; --  공구장에게 갈 포인트리스트 시퀀스
+V_G_SUCCESS_CODE       G_SUCCESS.G_SUCCESS_CODE%TYPE := 'G_SUCCESS' || SEQ_G_SUCCESS.NEXTVAL; -- 공동구매 성사 시퀀스
+
+V_APPLY_CODE           G_APPLY.G_APPLY_CODE%TYPE;   -- 모든 사용자에게 받을 신청코드
+V_AL_USER_CODE         B_USER.B_USER_CODE%TYPE; -- 알람 보내줄 모든 사용자에 유저코드
+V_B_USER_CODE          B_USER.B_USER_CODE%TYPE; -- 공구장 유저코드
+
+V_DIS_COST             G_POST.DIS_COST%TYPE; --할인가격
+V_MEMBER_NUM           G_POST.MEMBER_NUM%TYPE;  -- 목표인원
+V_COST          G_POST.DIS_COST%TYPE;    -- 성사후 공구장에게 들어가는 돈
+
+
+BEGIN    
+
+    -- 할인가격, 목표멤버
+    SELECT DIS_COST,MEMBER_NUM INTO V_DIS_COST, V_MEMBER_NUM
+    FROM G_POST 
+    WHERE G_POST_CODE = V_G_POST_CODE;
+
+    V_COST := ( V_DIS_COST / V_MEMBER_NUM )*(V_MEMBER_NUM-1);
+
+
+
+    -- 공구장 유저 코드 
+    SELECT B_USER_CODE INTO V_B_USER_CODE
+    FROM G_POST
+    WHERE G_POST_CODE = V_G_POST_CODE;
+
+    -- 1. 포인트내역 등록 INSERT, 공구장에게 돈 입금(상태1)
+    INSERT INTO POINT_LIST(POINT_LIST_CODE, B_USER_CODE, POINT, STATE)
+    VALUES(V_POINT_LIST_CODE, V_B_USER_CODE, V_COST, 1);
+
+    
+
+
+    -- 4) 출/결석 INSERT
+    -- 커서 오픈
+    OPEN CUR_APPLY_USER;
+
+    LOOP
+
+        FETCH CUR_APPLY_USER INTO V_APPLY_CODE, V_AL_USER_CODE; -- 신청코드, 신청자 코드
+
+        EXIT WHEN CUR_APPLY_USER%NOTFOUND;    
+
+        -- 2. 거래성사 등록 INSERT
+        INSERT INTO G_SUCCESS(G_SUCCESS_CODE, G_POST_CODE, POINT_LIST_CODE)
+        VALUES(V_G_SUCCESS_CODE, V_G_POST_CODE, V_POINT_LIST_CODE);
+    
+        -- 출/결석 테이블 모든 신청자 INSERT
+        INSERT INTO G_ATTENDANCE(G_ATTENDANCE_CODE, G_SUCCESS_CODE, G_APPLY_CODE)
+        VALUES('G_ATT'||SEQ_G_ATTEND.NEXTVAL, V_G_SUCCESS_CODE, V_APPLY_CODE);
+
+        -- 모든 사용자에게 공통협력구매 성사 알림 
+        PRC_ALARM('AR_C12', V_URL, V_AL_USER_CODE);
+
+    END LOOP;
+
+END;
 
 
 
