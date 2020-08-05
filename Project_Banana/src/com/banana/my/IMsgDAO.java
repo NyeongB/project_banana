@@ -8,5 +8,5 @@ public interface IMsgDAO
 	public ArrayList<MsgDTO> msgList(MsgDTO dto);
 	
 	// 쪽지 보내는 프로시저
-	public int sendMsg(MsgDTO dto);
+	public void sendMsg(MsgDTO dto);
 }

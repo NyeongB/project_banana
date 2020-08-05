@@ -8,7 +8,7 @@
 	
 	<!-- 쪽지 리스트   -->
 	<select id="msgList" resultType="com.banana.my.MsgDTO">
-	SELECT MSG_CODE, MSG ,OPENDATE, SENDDATE, TARGETUSER, SENDER
+	SELECT MSG_CODE, MSG ,OPENDATE, SENDDATE, TARGETUSER, SENDER, TARGETCODE, SENDERCODE
 	FROM VIEW_MSG
 	WHERE TARGETUSER = #{targetUser} OR SENDER =#{sender}
 	</select>

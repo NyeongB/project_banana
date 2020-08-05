@@ -7,13 +7,35 @@ public class MsgDTO
 					, openDate		// 열람 일자
 					, sendDate 		// 보낸 날짜
 					, targetUser 	// 수신인
-					, sender ;		// 발신인
+					, sender 		// 발신인
+					, targetCode
+					, senderCode;
 
 	
 	// getter / setter 구성 
 	public String getMsg_code()
 	{
 		return msg_code;
+	}
+
+	public String getTargetCode()
+	{
+		return targetCode;
+	}
+
+	public void setTargetCode(String targetCode)
+	{
+		this.targetCode = targetCode;
+	}
+
+	public String getSenderCode()
+	{
+		return senderCode;
+	}
+
+	public void setSenderCode(String senderCode)
+	{
+		this.senderCode = senderCode;
 	}
 
 	public void setMsg_code(String msg_code)

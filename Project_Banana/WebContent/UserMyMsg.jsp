@@ -19,6 +19,25 @@ String cp = request.getContextPath();
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+
+	function replyMsg()
+	{
+		// 답장 보내기 
+		var userCode = document.getElementById("senderCode").value; // 쪽지 보낸사람
+		var myUserCode = document.getElementById("targetCode").value; // 쪽지 보낼사람(나)
+		var nickName = document.getElementById("sender").value;	// 상대방 닉네임
+		
+		 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
+	     var name = "";
+	     var option = "width = 350, height = 340, top = 100, left = 200, location = no"
+	     window.open(url, name, option);
+		
+		
+		
+	}
+	
+</script>
 <style type="text/css">
 
 .body
@@ -41,7 +60,13 @@ String cp = request.getContextPath();
 	border: 1px solid gray;
 	border-radius: 10px;
 	padding-left: 20px;
+	margin-bottom: 10px;
 	
+}
+.replyBtn
+{
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 .msg_content
 {
@@ -112,6 +137,14 @@ String cp = request.getContextPath();
 						<div class="col-md-12 msg_content ">
 							<span class="thick">${msgLists.msg }</span>
 						</div>
+						<c:if test="${nickName eq msgLists.targetUser }">
+							<div class="col-md-12 text-right">
+								<button type="button" class="btn replyBtn" onclick="replyMsg()">답장하기</button>
+								<input type="hidden" value="${msgLists.targetCode }" id="targetCode"/>
+								<input type="hidden" value="${msgLists.senderCode }" id="senderCode"/>
+								<input type="hidden" value="${msgLists.sender }" id="sender"/>
+							</div>
+						</c:if>
 					</div>
 				</c:forEach>
 				</div>
