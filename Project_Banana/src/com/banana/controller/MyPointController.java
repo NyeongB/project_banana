@@ -127,4 +127,21 @@ public class MyPointController
 		
 		return "/PointChargeComplete.jsp";
 	}
+	
+	
+	//포인트 출금 액션
+	@RequestMapping(value="/withdraw.action")
+	public String withdraw(HttpServletRequest request) 
+	{	
+		
+		// 아이디정보, 
+		HttpSession session = request.getSession();
+         
+         SessionInfo info = (SessionInfo)session.getAttribute("user");
+         // 유저코드 가져오기
+         String b_user_code = info.getB_user_code();
+        
+		
+		return "/UserPointWithdraw.jsp";
+	}
 }

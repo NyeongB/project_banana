@@ -116,7 +116,7 @@ i + a
 		<!-- <li><i class="fas fa-comments-dollar"></i><a href="#">가계부</a></li> -->
 		
 		<li><i class="far fa-check-square"></i><a href="#">출석체크</a></li>
-		<li><a href="#">포인트 출금</a></li>
+		<li><a href="withdraw.action">포인트 출금</a></li>
 	
 
 			
