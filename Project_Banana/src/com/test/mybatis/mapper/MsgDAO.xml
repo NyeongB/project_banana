@@ -6,10 +6,20 @@
   
 <mapper namespace="com.banana.my.IMsgDAO">
 	
+	<!-- 쪽지 리스트   -->
 	<select id="msgList" resultType="com.banana.my.MsgDTO">
 	SELECT MSG_CODE, MSG ,OPENDATE, SENDDATE, TARGETUSER, SENDER
 	FROM VIEW_MSG
 	WHERE TARGETUSER = #{targetUser} OR SENDER =#{sender}
+	</select>
+	
+	<!-- 쪽지 프로시저  -->
+	<select id="sendMsg" statementType="CALLABLE" >
+     {call
+     
+    	PRC_SENDMSG(#{msg},#{targetUser},#{sender})
+
+     }
 	</select>	
 	
 	

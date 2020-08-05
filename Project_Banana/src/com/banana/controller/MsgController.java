@@ -65,25 +65,43 @@ public class MsgController
 	public String sendMsg(Model model, HttpServletRequest request)
 	{
 		String view = null;
-		String nickName ="";
 		
 		try
 		{
+			IMsgDAO dao = SqlSession.getMapper(IMsgDAO.class);
+			
 			HttpSession session = request.getSession();        
 	        SessionInfo info = (SessionInfo)session.getAttribute("user");
 	        
 	        // 로그인 상태가 아닐 때
 	        if(info == null)
-	        	return "/loginmain.action";	        
-	       
+	        	return "/loginmain.action";
 	        System.out.println(request.getParameter("msg"));		
+	        System.out.println(request.getParameter("userCode"));	
+	        System.out.println(request.getParameter("myUserCode"));	
+	        
+	        // 보낸 데이터 받을 dto 생성
+	        MsgDTO dto = new MsgDTO();
+	        
+	        // Msg.jsp 에서 보낸 데이터 가져오기
+	        dto.setMsg(request.getParameter("msg"));
+	        dto.setTargetUser(request.getParameter("userCode"));
+	        dto.setSender(request.getParameter("myUserCode"));
+	        
+	        
+	        
+	        
+	        // 쪽지 보내는 프로시저 호출
+	        dao.sendMsg(dto);
+	        
+	        
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-		view="";
+		view="/MsgComplete.jsp";
 		return view;
 	}
 }

@@ -198,10 +198,7 @@ public class G_GroupBuyingMainController
 				  dto.setLoc_code(locC);
 				  model.addAttribute("gNewList", dao.gNewList(dto));
 				  
-				  
-				  
-			  }
-			  else if(info !=null)  //로그인 시 
+			  }else if(info !=null)  //로그인 시 
 			  {
 				//사용자 코드 가져오기 
 				  String code = info.getB_user_code(); 
@@ -469,49 +466,48 @@ public class G_GroupBuyingMainController
 	  
 	  
 	  
-	// 찜하기 클릭 시
-		
-		 @RequestMapping(value = "/gjjiminsert.action", method = RequestMethod.GET)
-		 public String gjjiminsert(HttpServletRequest request, HttpServletResponse response) 
-		 {
-			 String view = null;
-			 
-			 try 
-			 {
-			
-				 
-				 HttpSession session = request.getSession();
-				 
-				 String gpostCode = (String)session.getAttribute("postcode");
-				 SessionInfo info = (SessionInfo)session.getAttribute("user");
-				 String UserCode = info.getB_user_code();
-				
-				 //System.out.println(rpostCode);
-				 //System.out.println(UserCode);
-				 
-				 GPostDTO dto = new GPostDTO();
-				 dto.setG_post_code(gpostCode);
-				 dto.setB_user_code(UserCode);
-				 
-				 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
-				
-				 dao.GJjim(dto);
-			 
-				
-				 
-				 view = "/AjaxJJimComplete.jsp";
-				 
-			 }catch(Exception e)
-			 {
-			  	 System.out.println(e.toString());
-			 }
-			 
-			 
-			 
-			 return view;
+	// 찜하기 클릭 시		
+	 @RequestMapping(value = "/gjjiminsert.action", method = RequestMethod.GET)
+	 public String gjjiminsert(HttpServletRequest request, HttpServletResponse response) 
+	 {
+		 String view = null;
 		 
+		 try 
+		 {
+		
+			 
+			 HttpSession session = request.getSession();
+			 
+			 String gpostCode = (String)session.getAttribute("postcode");
+			 SessionInfo info = (SessionInfo)session.getAttribute("user");
+			 String UserCode = info.getB_user_code();
+			
+			 //System.out.println(rpostCode);
+			 //System.out.println(UserCode);
+			 
+			 GPostDTO dto = new GPostDTO();
+			 dto.setG_post_code(gpostCode);
+			 dto.setB_user_code(UserCode);
+			 
+			 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
+			
+			 dao.GJjim(dto);
+		 
+			
+			 
+			 view = "/AjaxJJimComplete.jsp";
+			 
+		 }catch(Exception e)
+		 {
+		  	 System.out.println(e.toString());
 		 }
-	
+		 
+		 
+		 
+		 return view;
+	 
+	 }
+
 	  
 	  
 	  

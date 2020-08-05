@@ -539,7 +539,7 @@ function sendMsg()
 	
 	 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
      var name = "";
-     var option = "width = 300, height = 300, top = 100, left = 200, location = no"
+     var option = "width = 350, height = 340, top = 100, left = 200, location = no"
      window.open(url, name, option);
 	
 	
