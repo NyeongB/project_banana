@@ -203,13 +203,13 @@ hr
          
          	 
 			
-			<!-- 검색기능 잠정중단
+			 
 			<li class="search_bar"><a href="">search</a>
-				<ul>
+				<ul class="dropdown-menu" role="menu" >
 					<li><input type="search" /></li>
 				</ul>
 			</li>
-			 -->
+			
 			 
              <c:choose>
 		<c:when test="${sessionScope.admin != null }">
