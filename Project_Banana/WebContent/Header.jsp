@@ -107,6 +107,15 @@ hr
     height: 28px !important;
     color : gray !important;
 }
+.filter
+{
+	height: 25px;
+    width: 100px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+}
 
 </style>
 
@@ -207,9 +216,14 @@ hr
 			</c:when>		
 		</c:choose>  
 			
-		<li class="">		
+		<li class="form-inline form-group">		
 			<form action="">		
-				<input class="search_bar" type="search" />	
+				<select name="filter" id="filter" class="form-control filter">
+					<option value="1">제목</option>
+					<option value="2">글내용</option>
+					<option value="3">제목+내용</option>
+				</select>
+				<input class="search_bar form-control" type="search" />	
 				<button type="button" class="btn"><span><i class="fas fa-search"></i></span></button>	
 			</form>				
 		</li>
