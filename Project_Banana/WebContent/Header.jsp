@@ -34,6 +34,11 @@
 <style type="text/css">
 
 
+#nav_icons
+{
+	vertical-align: center;
+
+}
 .glyphicon-bell
 {
 
@@ -94,7 +99,14 @@ hr
 {
 	margin: 0px important;
 }
-
+.search_bar
+{
+	border: solid 1px white !important;
+    border-radius: 10px !important;
+    width: 150px !important;
+    height: 28px !important;
+    color : gray !important;
+}
 
 </style>
 
@@ -179,56 +191,47 @@ hr
          
       </ul>
       
-         <!-- <input type="search" id="sear"/> -->
-         <ul id="nav_icons">
-         
-         
-         
-         <c:choose>
-		
-		<c:when test="${sessionScope.user != null }">
-		<!-- 드롭다운 -->
-	        <!-- Single button -->
-			<div class="btn-group alarm">
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
-			    <span class="glyphicon glyphicon-bell"></span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu" id="in">
-			  </ul>
-			</div>
-			<!-- 드롭다운 끝  -->
-		</c:when>
-		
-		</c:choose>
-         
-         	 
+	<ul id="nav_icons">          
+         <c:choose>		
+			<c:when test="${sessionScope.user != null }">
+			<!-- 드롭다운 -->
+		        <!-- Single button -->
+				<div class="btn-group alarm">
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
+				    <span class="glyphicon glyphicon-bell"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu" id="in">
+				  </ul>
+				</div>
+				<!-- 드롭다운 끝  -->
+			</c:when>		
+		</c:choose>  
 			
-			 
-			<li class="search_bar"><a href="">search</a>
-				<ul class="dropdown-menu" role="menu" >
-					<li><input type="search" /></li>
-				</ul>
-			</li>
-			
-			 
-             <c:choose>
-		<c:when test="${sessionScope.admin != null }">
+		<li class="">		
+			<form action="">		
+				<input class="search_bar" type="search" />	
+				<button type="button" class="btn"><span><i class="fas fa-search"></i></span></button>	
+			</form>				
+		</li>
 		
-            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
-            <li>관리자 : ${sessionScope.admin }</li>			
-		</c:when>
-		<c:when test="${sessionScope.user != null }">
-            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
-            <li><a href="<%=cp%>/usermyjjim.action">마이페이지</a></li>
-            <li> ${sessionScope.user.id } 님</li>		
-		</c:when>
-		<c:otherwise>
-            <li><a href="<%=cp%>/loginmain.action">로그인</a></li>
-            <li><a href="<%=cp%>/join.action">회원가입</a></li>		
-		</c:otherwise>
+			 
+		<c:choose>
+			<c:when test="${sessionScope.admin != null }">
+			
+	            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
+	            <li>관리자 : ${sessionScope.admin }</li>			
+			</c:when>
+			<c:when test="${sessionScope.user != null }">
+	            <li><a href="<%=cp%>/logout.action">로그아웃</a></li>
+	            <li><a href="<%=cp%>/usermyjjim.action">마이페이지</a></li>
+	            <li> ${sessionScope.user.id } 님</li>		
+			</c:when>
+			<c:otherwise>
+	            <li><a href="<%=cp%>/loginmain.action">로그인</a></li>
+	            <li><a href="<%=cp%>/join.action">회원가입</a></li>		
+			</c:otherwise>
 		</c:choose>       
-
-         </ul>
+	</ul>
       <div class="nav_Btn">
       	<a href=""><i class="fas fa-bars"></i></a>
       </div>
