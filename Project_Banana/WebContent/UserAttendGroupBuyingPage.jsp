@@ -211,15 +211,20 @@ textarea
 															
 														</div>									
 													</c:when>
+													
 													<c:when test="${myGLists.progress eq '공구실패'}">										
 													</c:when>	
+										
 													<c:when test="${myGLists.progress eq '공구성공' }">	
-														<div class="btn-group" role="group">													
+														<div class="btn-group" role="group">	
+															
+															<button class="btn btn-secondary" type="button" >신고</button>				
 															<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
 															<input type="hidden" value="${myGLists.g_success_code }" id="g_success_code" />
 															<input type="hidden" value="${myGLists.g_apply_code }" id="g_apply_code" />
 														</div>									
-													</c:when>								
+													</c:when>		
+												
 													<c:otherwise>											
 													</c:otherwise>								
 												</c:choose>										
