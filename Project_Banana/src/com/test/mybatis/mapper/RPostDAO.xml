@@ -38,6 +38,22 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	<!--나의 렌트현황 게시물 -->
+	<select id="rMyList" resultType="com.banana.rent.RPostDTO">
+		SELECT *
+		FROM VIEW_MYRENT
+		WHERE R_POST_CODE = (SELECT R_POST_CODE
+								FROM R_APPLY
+								WHERE B_USER_CODE = #{b_user_code})
+	</select>
+	
+	
+	
 
 	<!--관심카테고리 기반 추천 게시물  -->
 	<select id="rCateList" resultType="com.banana.rent.RPostDTO">
