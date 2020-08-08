@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -84,6 +86,10 @@ textarea
 		
 		$('#openModalBtn').click();
 		
+	}
+	function writeReport()
+	{
+		alert("확인");
 	}
 	// 공동구매 취소 
 	function gCancel(obj)
@@ -214,15 +220,45 @@ textarea
 													
 													<c:when test="${myGLists.progress eq '공구실패'}">										
 													</c:when>	
+													
+													
+												
 										
 													<c:when test="${myGLists.progress eq '공구성공' }">	
-														<div class="btn-group" role="group">	
-															
-															<button class="btn btn-secondary" type="button" >신고</button>				
+												
+												
+													<c:set var="now" value="<%=new java.util.Date()%>" />
+													<c:set var="today"><fmt:formatDate value="${now}" pattern="yyMMdd" /></c:set>
+													
+													
+													<fmt:parseDate var="dateStr" value="${myGLists.bun_date }" pattern="yyyy-MM-dd HH:mm:ss"/> 
+													<fmt:formatDate var="bunDate" value="${dateStr}" pattern="yyyyMMdd"/> 
+													
+													<!--테스트용  -->
+													<button class="btn btn-secondary" type="button" onclick="writeReport()">신고하기</button>
+													
+													<c:choose>
+													
+														<%--나중에 살리기 
+														<c:when test="${today - bunDate>=0}">
+															<button class="btn btn-secondary" type="button" onclick="writeReport()">신고하기</button>
+														</c:when> --%>
+														
+														<c:when test="${today-bunDate+1>=1 }">
 															<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
+														</c:when>
+													</c:choose>	
+												
+													<%-- <c:out value="${today}" />
+													<c:out value="${bunDate+1 }"/>
+													<c:out value="${today-bunDate }"></c:out> --%>
+													
+														<div class="btn-group" role="group">	
+																			
 															<input type="hidden" value="${myGLists.g_success_code }" id="g_success_code" />
 															<input type="hidden" value="${myGLists.g_apply_code }" id="g_apply_code" />
-														</div>									
+														</div>	
+																			
 													</c:when>		
 												
 													<c:otherwise>											
