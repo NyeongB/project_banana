@@ -78,7 +78,6 @@ small
 .item_content .col-md-2
 {
 	margin: 5px;
-
 }
 
 .floating 
