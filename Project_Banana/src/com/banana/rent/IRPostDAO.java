@@ -37,6 +37,8 @@ public interface IRPostDAO
 	// 게시물 예약 마감기간 불러오기
 	public String bookingEnd(String r_post_code);
 	
+	// 나의 렌트 현황 
+	public ArrayList<RPostDTO> rMyList(RPostDTO dto);
 	
 	// 상품등록 insert
 	//public int rpostinsert(RPostDTO dto);

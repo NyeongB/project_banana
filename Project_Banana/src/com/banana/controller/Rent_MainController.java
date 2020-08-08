@@ -118,7 +118,7 @@ public class Rent_MainController
 				
 				SessionInfo info = (SessionInfo)session.getAttribute("user");
 				
-				if(info == null)
+				if(info == null) // 비회원
 				{
 					model.addAttribute("noApply","비 회원 입니다. 로그인 시 이용 가능한 서비스 입니다.");
 					model.addAttribute("check","1");
@@ -127,8 +127,8 @@ public class Rent_MainController
 					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 					model.addAttribute("rnewList", dao.rnewList());
 				}
-				else
-				{
+				else //회원
+				{ 
 					
 					String userCode = info.getB_user_code();
 					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
@@ -136,13 +136,42 @@ public class Rent_MainController
 					RPostDTO dto = new RPostDTO();
 					dto.setB_user_code(userCode);
 					
+					System.out.println(userCode);
 					// 실시간 게시글 조회
 					model.addAttribute("rnewList", dao.rnewList());
 					
-					// 관심 렌트 카테고리 추천 게시물 조회
-					model.addAttribute("rCateList", dao.rCateList(dto));
-				
 					
+					// 관심 렌트 카테고리 추천 게시물 조회
+					ArrayList<RPostDTO> rcateL = dao.rCateList(dto);
+					if(rcateL.isEmpty()) // 추천게시물이 없으면
+					{
+						model.addAttribute("noRcate","설정한 관심카테고리와 같은 렌트 게시물이 없습니다.");
+						model.addAttribute("check","2"); 
+					}
+					else
+					{
+					
+						model.addAttribute("rCateList", dao.rCateList(dto));
+					}
+					
+					System.out.println("확인");
+					// 나의 렌트 현황
+					ArrayList<RPostDTO> myrentL = dao.rMyList(dto);
+					
+					
+					if(myrentL.isEmpty()) // 렌트 현황이 없으면 
+					{
+					  
+					  model.addAttribute("noMyrent","신청한 거래가 없습니다.");
+					  model.addAttribute("check","3"); 
+					}
+					else 
+					{ 
+						//System.out.println("1234");
+					    model.addAttribute("rMyList", dao.rMyList(dto));
+					  
+					}
+					 					
 				}
 				
 				
