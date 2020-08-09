@@ -50,29 +50,32 @@
 	</div>
 	<div class="col-md-8">
 		<div class="col-md-12">
-			<h5 class="thick"><span class="highlight">고구마</span>의 검색결과 23개</h5>
+			<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 23개</h5>
 		</div>	
 		
 		
 		<div class="col-md-12">
+		<c:forEach var="list" items="${searchList }">
 			<div class="thumbnail" id="" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                           		
-           			<img src="images/oz.jpg" style="width: 180px; height: 180px;">
+           			<img src="${list.photo }" style="width: 180px; height: 180px;">
            			<div class="caption">
-                      <h5 class="thick">오레오오즈 같이 먹어요</h5>
+                      <h5 class="thick">${list.title }</h5>
                        <div class="col-md-12">
                    			<div class="col-md-6">
                    			</div>	                            
                         </div>
                         
                         <div class="col-md-12 text-right wr">
-                        	<small>이묘이묘</small>
+                        	<small>${list.nickname }</small>
                         </div>
-                      <p>마포구</p>
-                      <span class="price">원(1인)</span>      
-                     <%-- <fmt:formatNumber value="${newlist.dis_cost/newlist.member_num }" ></fmt:formatNumber>--%>      
-                    </div>           		   
-           </div>		
+                      <p>${list.bun_loc }</p>
+                      <span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>      
+                        
+                    </div>  
+                		   
+           </div>	
+           </c:forEach> 	
 		
 		</div>
 	</div>

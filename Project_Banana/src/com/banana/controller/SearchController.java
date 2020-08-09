@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.banana.my.ActivityRatingDTO;
 import com.banana.my.IActivityRatingDAO;
+import com.banana.user.ISearchDAO;
+import com.banana.user.SearchDTO;
 import com.banana.util.SessionInfo;
 
 @Controller
@@ -30,10 +32,23 @@ public class SearchController
 		String filter = request.getParameter("filter");
 		String keyword = request.getParameter("keyword");
 		
+		// 의존성 주입?
+		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);
+		
+		// 데이터 넣어서 넘길 dto 생성
+		SearchDTO dto = new SearchDTO();
+		
 		//System.out.println(filter);
 		//System.out.println(keyword);
+		if(filter.equals("1"))
+			dto.setFilter("TITLE");
+		else if (filter.equals("2"))
+			dto.setFilter("CONTENT");
+
+		dto.setSearchKey(keyword);
 		
-		
+		model.addAttribute("searchList",dao.gPostList(dto));
+		model.addAttribute("keyword",keyword);
 		
 		
 		
