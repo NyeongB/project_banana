@@ -31,6 +31,8 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap.min.css">
 
 <script type="text/javascript" src="<%=cp %>/js/bootstrap.min.js"></script>
+
+
 <style type="text/css">
 
 
@@ -123,26 +125,32 @@ hr
 	
 	var id = "<%=id%>";
 
-	$(document).ready(function()
-	{
-		
-	});	
-	
-	
 	function ajax()
-	{
-		
-	
+	{	
 		$.get("alarm.action", {id : id}, function(data)
-				{
-				
-				$("#in").html(data);
-				
-			});
+		{
 		
+		$("#in").html(data);
 		
-	}
+		});
+
+	}	
 	
+		//검색버튼 클릭 시 이벤트 
+		function doSearch(obj)
+		{
+			var data = obj.previousSibling.previousSibling;	
+			
+			// 데이터 확인
+			// console.log(obj.previousSibling.previousSibling);
+			// console.log(data.value);
+			// console.log(filter);
+			var searchKeyword = data.value;
+			var filter = document.getElementById("filter").value;
+			
+			location.href="search.action?keyword=" +searchKeyword +"&filter="+filter;
+		}
+
 </script>
 
 
@@ -223,8 +231,8 @@ hr
 					<option value="2">글내용</option>
 					<option value="3">제목+내용</option>
 				</select>
-				<input class="search_bar form-control" type="search" />	
-				<button type="button" class="btn"><span><i class="fas fa-search"></i></span></button>	
+				<input class="search_bar form-control" type="search" id="searchKeyword"/>	
+				<button type="button" class="btn" onclick="doSearch(this)"><span><i class="fas fa-search"></i></span></button>	
 			</form>				
 		</li>
 		

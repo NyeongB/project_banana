@@ -125,6 +125,22 @@ li {
 		location.href="g_main.action";
 		
 	}
+	
+	
+</script>
+
+<script type="text/javascript">
+	//검색버튼 클릭 시 이벤트 
+	function doSearch(obj)
+	{
+		var data = obj.previousSibling.previousSibling;
+		
+		
+		//console.log(obj.previousSibling.previousSibling);
+		// 확인
+		console.log(data.value);
+		
+	}
 </script>
 
 
