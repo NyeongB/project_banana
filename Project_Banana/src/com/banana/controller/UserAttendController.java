@@ -166,5 +166,53 @@ public class UserAttendController
 		return view;
 		
 	}
+	
+	//공동구매 신고하기
+	// 신고 작성(게시물 신고 유형코드,신고한 사용자 식별코드,게시물 등록 코드)
+		@RequestMapping(value="/postreportapply.action")
+		public String postreportapply(Model model , HttpServletRequest request)  
+		{
+			
+			String view = null;
+			String b_user_code = "";
+			String title = "";
+			
+			
+			// 세션 정보 얻어오기
+			HttpSession session = request.getSession();
+			SessionInfo  info = (SessionInfo)session.getAttribute("user");	
+			// 로그인 여부 체크
+			if(info == null)
+				return "/loginmain.action";
+					
+			try
+			{	
+				request.setCharacterEncoding("UTF-8");
+				
+				// 신고 프로시저 속성 받아오기
+				b_user_code = info.getB_user_code();
+				title = request.getParameter("title");
+		
+				IUserAttendGroupBuyingDAO dao = sqlSession.getMapper(IUserAttendGroupBuyingDAO.class);
+				
+				// 유저코드, 신청코드 넘겨주기 
+				GPostDTO dto = new GPostDTO();
+				dto.setB_user_code(b_user_code);
+				dto.setTitle(title);
+				dao.report(dto);
+				
+			} catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			
+			
+			view = "/UserPostReportApply.jsp";
+			
+			
+			return view;
+			
+		}
+	
 
 }

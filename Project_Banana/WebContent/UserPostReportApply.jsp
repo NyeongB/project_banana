@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserPostReportApply.jsp</title>
+<title>Banana</title>
 <link rel="stylesheet" type="text/css" href="css/mainStyle2.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
@@ -77,7 +77,7 @@
     	<table class="table">
         <tr>
             <th class="col-md-1">글 제목</th>
-            <td colspan="3"><input type="text" value="" class="form-control"/></td>
+            <td colspan="3"><input type="text" value="${title }" class="form-control"/></td>
             <th class="col-md-1">신고대상자</th>
             <td><input type="text" value="" class="form-control"/></td>
         </tr>

@@ -15,7 +15,7 @@
 	</select>
 	<!-- 나의 제안 공동구매 현황  -->
 		<select id="gOfferList" resultType="com.banana.groupbuying.GPostDTO">
-		 SELECT TITLE, DIS_COST, COST, BUN_DATE, LOC_NAME, B_USER_CODE,MEMBER_NUM, PHOTO, PROGRESS, COUNT, G_SUCCESS_CODE
+		 SELECT TITLE, DIS_COST, COST, BUN_DATE, LOC_NAME, B_USER_CODE,MEMBER_NUM, PHOTO, PROGRESS, COUNT, G_SUCCESS_CODE ,ID
  		 FROM VIEW_MY_OFFER_GONGGU
 		 WHERE B_USER_CODE = #{b_user_code}
 	</select>

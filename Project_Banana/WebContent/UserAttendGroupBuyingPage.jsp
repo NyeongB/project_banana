@@ -79,7 +79,7 @@ textarea
 		
 		location.href ='userattendancedetail.action?g_success_code='+g_success_code;
 	}
-	
+	//리뷰하기
 	function writeReview()
 	{
 		
@@ -87,9 +87,14 @@ textarea
 		$('#openModalBtn').click();
 		
 	}
+	//신고하기
 	function writeReport()
 	{
-		alert("확인");
+		//alert("확인");
+		var title = document.getElementById("title").value;
+		//alert(title);
+		
+		location.href = "postreportapply.action";
 	}
 	// 공동구매 취소 
 	function gCancel(obj)
@@ -207,6 +212,8 @@ textarea
 											<td>${myGLists.bun_date }</td>
 											<td>${myGLists.loc_name }</td>
 											<td>${myGLists.progress }</td>
+											
+											
 											<td>
 												<c:choose>								
 													<c:when test="${myGLists.progress eq '신청취소'}">																				
@@ -297,7 +304,9 @@ textarea
 								<th>분배장소</th>
 								<th>진행상태</th>
 								<th>버튼</th>
+								
 							</tr>
+							
 						</thead>
 						<tbody>
 						<c:choose>
@@ -309,6 +318,9 @@ textarea
 							<c:otherwise>
 							
 							<c:forEach var="gOfferLists" items="${gOfferList }" varStatus="status">
+								<input type="hidden" value="${gOfferLists.title }" id="title" />
+								<%-- <input type="hidden" value="${gOfferLists.id}" id="id" /> --%>
+								
 								<tr>
 									<td>${status.count }</td>
 									<td><img alt="Bootstrap Image Preview"
@@ -320,6 +332,7 @@ textarea
 									<td>${gOfferLists.bun_date }</td>
 									<td>${gOfferLists.loc_name}</td>
 									<td>${gOfferLists.progress }</td>
+									
 									<td>
 										<c:choose>								
 											<c:when test="${gOfferLists.progress eq '공구실패'}">																				

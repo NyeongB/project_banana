@@ -4,7 +4,7 @@ public class GPostDTO
 {
 	
 	private String g_post_code, b_user_code, g_cate_code,loc_name,loc_code,nickname,g_apply_code, 
-		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code,url;
+		   title, content, wDate, views, brand, start_date, end_date, photo, type, sdate, g_success_code,url,id;
 
 	private int cost, dis_cost, member_num, count,point; 
 	private String bun_loc, bun_date, return_date, receipt_date;
@@ -337,6 +337,14 @@ public class GPostDTO
 	public void setLoc_code(String loc_code)
 	{
 		this.loc_code = loc_code;
+	}
+	public String getId()
+	{
+		return id;
+	}
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 	
 	

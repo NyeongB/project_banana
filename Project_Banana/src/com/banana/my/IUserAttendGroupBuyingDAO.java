@@ -20,4 +20,7 @@ public interface IUserAttendGroupBuyingDAO
 	
 	// 공동구매 리뷰
 	public void review(GPostDTO dto);
+	
+	//공동구매 신고
+	public void report(GPostDTO dto);
 }
