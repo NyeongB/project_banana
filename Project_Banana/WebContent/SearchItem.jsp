@@ -24,6 +24,7 @@
  	 height: 330px;
  	 width:180px;
  	 margin-right: 3px;
+ 	 display: inline-block !important;
 } 
 
 .caption
@@ -50,7 +51,7 @@
 	</div>
 	<div class="col-md-8">
 		<div class="col-md-12">
-			<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 23개</h5>
+			<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${gPostCount }개</h5>
 		</div>	
 		
 		

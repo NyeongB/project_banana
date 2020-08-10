@@ -25,6 +25,7 @@ public class SearchController
 	@Autowired
 	private SqlSession SqlSession;
 	
+	// 검색창에서 검색 했을 때 호출된다.
 	@RequestMapping(value = "/search.action", method = RequestMethod.GET)
 	public String search(Model model , HttpServletRequest request) 
 	{
@@ -47,7 +48,9 @@ public class SearchController
 
 		dto.setSearchKey(keyword);
 		
+		
 		model.addAttribute("searchList",dao.gPostList(dto));
+		model.addAttribute("gPostCount", dao.gPostCount(dto));
 		model.addAttribute("keyword",keyword);
 		
 		

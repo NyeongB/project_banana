@@ -6,8 +6,27 @@
   
 <mapper namespace="com.banana.user.ISearchDAO">
 	
+	<!-- 검색한 키워드와 일치하는 공동구매 게시물 리스트  -->
 	<select id="gPostList" resultType="com.banana.groupbuying.GPostDTO">
 	SELECT *
+	FROM VIEW_GPOST
+	<choose>
+		<when test="filter == 'TITLE'">
+		WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+		</when>
+		<when test="filter == 'CONTENT'">
+		WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+		</when>		
+		<otherwise>		
+		WHERE TITLE LIKE '%' ||#{searchKey} ||'%' OR CONTENT LIKE '%' ||#{searchKey} ||'%'
+		</otherwise>
+	</choose>
+	</select>	
+	
+	<!-- 검색한 키워드와 일치하는 공동구매 게시물 개수 -->
+	
+	<select id="gPostCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
 	FROM VIEW_GPOST
 	<choose>
 		<when test="filter == 'TITLE'">
