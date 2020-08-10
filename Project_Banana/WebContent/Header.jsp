@@ -56,24 +56,9 @@
 	/* var(--text-color) !important; */
 	
 }
-.search_bar ul
-{
-	background: rgb(109,109,109);
-	 display:none; /* 평상시에는 서브메뉴가 안보이게 하기 */ 
-	 height:auto; 
-	 padding:0px; 
-	 margin:0px; 
-	 border:0px; 
-	 position:absolute; 
-	 width:200px; 
-	 z-index:200;
 
-}
-.search_bar:hover ul
-{
-	 display:block;
-	
-}
+
+
 .alarm a
 {
 	color: black !important;
@@ -105,9 +90,11 @@ hr
 {
 	border: solid 1px white !important;
     border-radius: 10px !important;
-    width: 150px !important;
+    width: 100px !important;
     height: 28px !important;
     color : gray !important;
+    display:flex;
+    align-items: center;
 }
 .filter
 {
@@ -117,6 +104,10 @@ hr
     font-size: 11px;
 }
 
+#header_body li
+{
+	font-size : 9pt !important;
+	font-weight: 800 !important;
 }
 
 </style>
@@ -209,20 +200,7 @@ hr
       </ul>
       
 	<ul id="nav_icons">          
-         <c:choose>		
-			<c:when test="${sessionScope.user != null }">
-			<!-- 드롭다운 -->
-		        <!-- Single button -->
-				<div class="btn-group alarm">
-				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
-				    <span class="glyphicon glyphicon-bell"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu" id="in">
-				  </ul>
-				</div>
-				<!-- 드롭다운 끝  -->
-			</c:when>		
-		</c:choose>  
+         
 			
 		<li class="form-inline form-group">		
 			<form action="">		
@@ -236,6 +214,20 @@ hr
 			</form>				
 		</li>
 		
+		<c:choose>		
+			<c:when test="${sessionScope.user != null }">
+			<!-- 드롭다운 -->
+		        <!-- Single button -->
+				<div class="btn-group alarm">
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" onclick="ajax()">
+				    <span class="glyphicon glyphicon-bell"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu" id="in">
+				  </ul>
+				</div>
+				<!-- 드롭다운 끝  -->
+			</c:when>		
+		</c:choose>  
 			 
 		<c:choose>
 			<c:when test="${sessionScope.admin != null }">

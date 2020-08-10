@@ -55,16 +55,15 @@
 		
 		
 		<div class="col-md-12">
-		<c:forEach var="list" items="${searchList }">
-			<div class="thumbnail" id="" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-	                           		
+			<c:forEach var="list" items="${searchList }">
+				<div class="thumbnail" id="" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
            			<img src="${list.photo }" style="width: 180px; height: 180px;">
            			<div class="caption">
-                      <h5 class="thick">${list.title }</h5>
-                       <div class="col-md-12">
-                   			<div class="col-md-6">
-                   			</div>	                            
-                        </div>
+                    	<h5 class="thick">${list.title }</h5>
+                    		<div class="col-md-12">
+                   				<div class="col-md-6">
+                   				</div>	                            
+                        	</div>
                         
                         <div class="col-md-12 text-right wr">
                         	<small>${list.nickname }</small>
@@ -72,10 +71,9 @@
                       <p>${list.bun_loc }</p>
                       <span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>      
                         
-                    </div>  
-                		   
-           </div>	
-           </c:forEach> 	
+                    </div> 	                		   
+	           </div>	
+	           </c:forEach> 	
 		
 		</div>
 	</div>
