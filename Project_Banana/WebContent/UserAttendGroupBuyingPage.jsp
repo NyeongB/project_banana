@@ -88,13 +88,13 @@ textarea
 		
 	}
 	//신고하기
-	function writeReport()
+	function writeReport(obj)
 	{
-		//alert("확인");
-		var title = document.getElementById("title").value;
-		//alert(title);
-		
-		location.href = "postreportapply.action";
+		var id = obj.getAttribute("id");
+		var g_success_code = id;
+		alert(g_success_code);
+		//var successcode = document.getElementById("g_success_code").value;
+		location.href = "postreportapply.action?successcode="+g_success_code;
 	}
 	// 공동구매 취소 
 	function gCancel(obj)
@@ -225,7 +225,7 @@ textarea
 														</div>									
 													</c:when>
 													
-													<c:when test="${myGLists.progress eq '공구실패'}">										
+													<c:when test="${myGLists.progress eq '공구실패'}">		
 													</c:when>	
 													
 													
@@ -242,7 +242,7 @@ textarea
 													<fmt:formatDate var="bunDate" value="${dateStr}" pattern="yyyyMMdd"/> 
 													
 													<!--테스트용  -->
-													<button class="btn btn-secondary" type="button" onclick="writeReport()">신고하기</button>
+													<button class="btn btn-secondary" type="button" id="${myGLists.g_success_code }" onclick="writeReport(this)">신고하기</button>
 													
 													<c:choose>
 													

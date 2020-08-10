@@ -21,6 +21,9 @@ public interface IUserAttendGroupBuyingDAO
 	// 공동구매 리뷰
 	public void review(GPostDTO dto);
 	
-	//공동구매 신고
-	public void report(GPostDTO dto);
+	//거래 신고 페이지 내용
+	public GPostDTO reportPost(String g_successcode);
+
+	//거래 신고 접수
+	public GPostDTO reportOk(GPostDTO dto);
 }

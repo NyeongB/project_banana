@@ -41,8 +41,20 @@
       PRC_G_REVIEW (#{star},#{b_user_code},#{g_success_code},#{review},#{g_apply_code})
      }
 	</select>
-
 	
+	<!--공통협력구매 신고 페이지에서 게시물 내용 불러오기  -->
+	<select id="reportPost" resultType="com.banana.groupbuying.GPostDTO">
+		SELECT *
+		FROM VIEW_G_DEAL_REPORTVIEW
+		WHERE G_SUCCESS_CODE = #{g_success_code}
+	</select>
+	
+	<!-- 신고 접수 프로시저 -->
+	<select id="reportOk" statementType="CALLABLE" >
+     {call     
+      PRC_G_DEAL_REPORT(#{g_success_code},#{g_deal_report_code},#{deal_reporter_type_code},#{f_file},#{content},#{g_apply_code})
+     }
+	</select>
 	
 </mapper>  
 

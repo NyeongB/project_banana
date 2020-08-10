@@ -11,6 +11,7 @@ public class GPostDTO
 	
 	private String progress;	// 나의 공동구매 진행 상황
 	private String bigcate_name,cate_name,midcate_name,g_cate_bcode,g_cate_mcode; //카테고리 경로 이름
+	private String g_deal_report_type_code,g_deal_report_code,deal_reporter_type_code,f_file,reportTitle; //신고 처리
 	
 	//페이징처리를 위한
 	private int start, end;
@@ -345,6 +346,46 @@ public class GPostDTO
 	public void setId(String id)
 	{
 		this.id = id;
+	}
+	public String getG_deal_report_type_code()
+	{
+		return g_deal_report_type_code;
+	}
+	public void setG_deal_report_type_code(String g_deal_report_type_code)
+	{
+		this.g_deal_report_type_code = g_deal_report_type_code;
+	}
+	public String getG_deal_report_code()
+	{
+		return g_deal_report_code;
+	}
+	public void setG_deal_report_code(String g_deal_report_code)
+	{
+		this.g_deal_report_code = g_deal_report_code;
+	}
+	public String getDeal_reporter_type_code()
+	{
+		return deal_reporter_type_code;
+	}
+	public void setDeal_reporter_type_code(String deal_reporter_type_code)
+	{
+		this.deal_reporter_type_code = deal_reporter_type_code;
+	}
+	public String getF_file()
+	{
+		return f_file;
+	}
+	public void setF_file(String f_file)
+	{
+		this.f_file = f_file;
+	}
+	public String getReportTitle()
+	{
+		return reportTitle;
+	}
+	public void setReportTitle(String reportTitle)
+	{
+		this.reportTitle = reportTitle;
 	}
 	
 	
