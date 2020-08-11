@@ -49,6 +49,30 @@
 	</choose>
 	</select>	
 	
+	<!-- 검색한 키워드와 일치하는 렌트 게시물 리스트  -->
+	<select id="rPostList" resultType="com.banana.rent.RPostDTO">
+		SELECT *
+		FROM
+		(
+		SELECT ROWNUM AS RNUM, DATA.*
+		FROM 
+		(
+		SELECT *
+		FROM  VIEW_RCATEMAINLIST
+		<choose>
+			<when test="filter == 'TITLE'">
+			WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+			</when>
+			<when test="filter == 'CONTENT'">
+			WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+			</when>		
+			<otherwise>		
+			WHERE TITLE LIKE '%' ||#{searchKey} ||'%' OR CONTENT LIKE '%' ||#{searchKey} ||'%'
+			</otherwise>
+		</choose>		
+        ) DATA)
+		<![CDATA[WHERE #{start} <= RNUM AND RNUM <= #{end}]]>	
+	</select>	
 	
 	
 </mapper>  

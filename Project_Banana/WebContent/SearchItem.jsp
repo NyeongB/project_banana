@@ -63,12 +63,16 @@
 	
 	</div>
 	<div class="col-md-8">
-		<div class="col-md-12">
-			<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${gPostCount }개</h5>
-		</div>	
+			
 		
 		
 		<div class="col-md-12">
+			<div class="col-md-12">
+				<h4 class="thick">공동구매</h4>
+				<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${gPostCount }개</h5>
+				<hr />
+			</div>
+			
 			<c:forEach var="list" items="${searchList }">
 				<div class="thumbnail" id="${list.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
            			<img src="${list.photo }" style="width: 180px; height: 180px;">
@@ -87,23 +91,24 @@
                         
                     </div> 	                		   
 	           </div>	
-	           </c:forEach> 	
-	           <!-- 페이징 인덱스 반드시 추가  -->
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<nav>
-							<ul class="pagination">
-								<li class="disabled"><a href="#" aria-label="Previous"><span
-										aria-hidden="true">&laquo;</span></a></li>
-								${pageIndexList }
-								<li><a href="#" aria-label="Next"><span
-										aria-hidden="true">&raquo;</span></a></li>
-							</ul>
-						</nav>
-					</div>
+			</c:forEach> 	
+			
+           <!-- 페이징 인덱스 반드시 추가  -->
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<nav>
+						<ul class="pagination">
+							<li class="disabled"><a href="#" aria-label="Previous"><span
+									aria-hidden="true">&laquo;</span></a></li>
+							${pageIndexList }
+							<li><a href="#" aria-label="Next"><span
+									aria-hidden="true">&raquo;</span></a></li>
+						</ul>
+					</nav>
 				</div>
-		
+			</div>		
 		</div>
+		<hr />
 	</div>
 	<div class="col-md-2">
 	

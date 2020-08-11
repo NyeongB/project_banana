@@ -106,8 +106,13 @@ hr
 
 #header_body li
 {
-	font-size : 9pt !important;
+	font-size : 8.5pt !important;
 	font-weight: 800 !important;
+}
+.search
+{
+	margin-bottom: 0px;
+
 }
 
 </style>
@@ -186,7 +191,7 @@ hr
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:when>
 		<c:otherwise>
-		<li><a href="<%=cp%>/g_main.action">같이사요</a></li>
+		 <li><a href="<%=cp%>/g_main.action">같이사요</a></li>
          <li><a href="<%=cp%>/r_main.action">빌려드립니다</a></li>
          <li><a href="<%=cp%>/r_main.action">빌려드려요</a></li>
          <li><a href="<%=cp%>/loginmain.action">포인트충전</a></li>
@@ -203,7 +208,7 @@ hr
 	<ul id="nav_icons">          
          
 			
-		<li class="form-inline form-group">		
+		<li class="form-inline form-group search">		
 			<form action="">		
 				<select name="filter" id="filter" class="form-control filter">
 					<option value="1">제목</option>
