@@ -242,18 +242,20 @@ textarea
 													<fmt:formatDate var="bunDate" value="${dateStr}" pattern="yyyyMMdd"/> 
 													
 													<!--테스트용  -->
-													<button class="btn btn-secondary" type="button" id="${myGLists.g_success_code }" onclick="writeReport(this)">신고하기</button>
+													<%-- <button class="btn btn-secondary" type="button" id="${myGLists.g_success_code }" onclick="writeReport(this)">신고하기</button> --%>
 													
+													<!-- 나중에 살리기  -->
 													<c:choose>
 													
-														<%--나중에 살리기 
-														<c:when test="${today - bunDate>=0}">
-															<button class="btn btn-secondary" type="button" onclick="writeReport()">신고하기</button>
-														</c:when> --%>
 														
-														<c:when test="${today-bunDate+1>=1 }">
+														<c:when test="${today - bunDate>=0}">
+															<button class="btn btn-secondary" type="button" id="${myGLists.g_success_code }" onclick="writeReport(this)">신고하기</button>
+														</c:when>
+														
+														<c:when test="${today-bunDate+1>=0 }">
 															<button class="btn btn-secondary" type="button" onclick="writeReview()">리뷰작성</button>
 														</c:when>
+														
 													</c:choose>	
 												
 													<%-- <c:out value="${today}" />
