@@ -101,7 +101,7 @@ p
 
 	function initialize()
 	{
-
+		alert("확인");
 		container = document.getElementById("map");
 
 		
@@ -598,23 +598,6 @@ p
 					<div>
 						사진(*)<br>
 						
-						
-						<!-- <img src="images/imagePost.PNG" alt=""  class="img-responsive img-rounded" id="locationImg" onclick="setZoomable(false)"/>
- -->						
-						
-						<!-- <div class="txt col-sm-3" style="line-height: 30px;">
-			            <span style="color: #828282; font-size: 12px; width: 600px;">
-			               ※ 가로 150px 세로 150px 크기의 사진을 권장합니다.
-			            </span>
-			            <form action="" method="">
-			                 <input type='file' id="imgInp" />
-			                 <div style="width: 150px; height: 150px; overflow: hidden">
-			                    <img id="foo"src="#" />
-			                  </div>
-			             </form>
-			         	</div>
-			         	
-						 -->
 						<input type="file" id="gdsImg" name="file">
 						<div class="select_img"><img src=""></div>
 						
