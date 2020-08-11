@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -277,7 +278,7 @@ function requestPay(p,t) {
 
 								<div class="row">
 									<div class="col-md-12 text-right">
-										<p>선택된 금액 : <span id="point"></span>원</p> 
+										<p>선택된 금액 : <fmt:formatNumber><span id="point"></span></fmt:formatNumber>원</p> 
 									
 									</div>
 								</div><hr><br>
