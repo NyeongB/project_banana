@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.banana.my.IMyPointDAO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.IRentJJimDAO;
 import com.banana.rent.RCateDTO;
@@ -23,7 +25,7 @@ import com.banana.reply.r_reply.IRreplyDAO;
 import com.banana.user.ILocDAO;
 
 import com.banana.user.LocDTO;
-
+import com.banana.util.IndexDTO;
 import com.banana.util.SessionInfo;
 
 
@@ -311,7 +313,8 @@ public class Rent_MainController
 				// 예약 마감기간 조회
 				model.addAttribute("bookingEnd", dao2.bookingEnd(rpost_code));
 			
-						
+				
+				
 				view = "/UserRentDetail.jsp";
 				}catch(Exception e)
 				{
@@ -321,7 +324,103 @@ public class Rent_MainController
 				
 			 }
 			
+			
+			// 렌트 주문 상세 확인 페이지
+			@RequestMapping(value = "/rent_jumunconfirm.action", method = RequestMethod.GET)
+			 public String rjumunConfirm(Model model, HttpServletRequest request) 
+			 {
+				
+				String view = null;
+				
+				try
+				{
+					
+					IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+					IMyPointDAO pointdao = SqlSession.getMapper(IMyPointDAO.class);
 	
+					// 세션 찾기
+					HttpSession session = request.getSession();		
+					SessionInfo info = (SessionInfo) session.getAttribute("user");
+					RPostDTO dto = new RPostDTO();
+					
+					if(info == null)
+						return "/loginmain.action";
+						
+					String b_user_code = info.getB_user_code();
+					String rPCode = request.getParameter("rpostCode");
+					dto.setR_post_code(rPCode);
+					
+					// 렌트 기간(수령일, 반납일), 총비용 넘겨주기
+					String pickupD = request.getParameter("pickUpDate");
+					model.addAttribute("pickupD", pickupD);
+					
+					String ReturnD = request.getParameter("ReturnDate");
+					model.addAttribute("ReturnD", ReturnD);
+					
+					
+					
+					
+					// 렌트 게시글정보 넘겨주기
+					model.addAttribute("rpostDetail", dao.rpostDetail(dto));
+					
+					
+					// 포인트
+					IndexDTO dto2 = new IndexDTO();
+					dto2.setB_user_code(b_user_code);
+					model.addAttribute("pointList", pointdao.pointList(dto2));	
+					model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
+					
+					
+				}catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				
+			
+				view = "/Rent_JumunConfirm.jsp";
+			
+				return view;
+				
+			 }
+			
+			
+			
+			// 렌트 비용 계산하기 ajax
+			@RequestMapping(value = "/ajaxrentcost.action", method = RequestMethod.POST)
+			 public String ajaxRentCost(Model model, HttpServletRequest request) 
+			 {
+				String view = null;
+				
+				try 
+				{
+					System.out.println("비용확인컨트롤러");
+					 String sdate = request.getParameter("sdate");
+					 String edate = request.getParameter("edate");
+					 
+					 model.addAttribute("sdate", sdate);
+					 model.addAttribute("edate", edate);
+					 
+					 IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+					 RPostDTO dto = new RPostDTO();
+					 String rpostcode = request.getParameter("rpostCode");
+					 dto.setR_post_code(rpostcode);
+					 
+					 model.addAttribute("rpostDetail", dao.rpostDetail(dto));
+					 
+					 
+					 
+					
+				} catch (Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				
+				view = "AjaxRentCost.jsp";
+				return view;
+			 }
+			
+			
+			
 			
 			// 렌트 성사 예약기간 불러오기
 			@RequestMapping(value = "/ajaxsuccesstime.action", method = RequestMethod.POST)
