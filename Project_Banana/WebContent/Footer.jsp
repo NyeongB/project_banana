@@ -39,8 +39,8 @@
    <div id="footer">
       <ul id="footer_list">
          <li><a href="usernoticelist.action">공지 사항</a></li>
-         <li><a href="https://www.facebook.com/CheolNyeong" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
-         <li><a href="https://www.instagram.com/choi__nyeong/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+         <li><a href="" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+         <li><a href="" target="_blank"><i class="fab fa-instagram"></i></a></li>
          <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></a></li>
       	 <li>CopyRightⓒ BananaProject401 corp.</li>
          <li>   All Rights Reserved</li>
