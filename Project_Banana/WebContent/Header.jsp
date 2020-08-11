@@ -186,8 +186,9 @@ hr
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:when>
 		<c:otherwise>
-		<li><a href="<%=cp%>/g_main.action">공동구매</a></li>
-         <li><a href="<%=cp%>/r_main.action">렌트</a></li>
+		<li><a href="<%=cp%>/g_main.action">같이사요</a></li>
+         <li><a href="<%=cp%>/r_main.action">빌려드립니다</a></li>
+         <li><a href="<%=cp%>/r_main.action">빌려드려요</a></li>
          <li><a href="<%=cp%>/loginmain.action">포인트충전</a></li>
          <li><a href="<%=cp%>/usernoticelist.action">공지사항</a></li>		
 		</c:otherwise>

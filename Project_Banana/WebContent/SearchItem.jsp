@@ -33,7 +33,20 @@
 }
 
 </style>
+<script type="text/javascript">
 
+	function goList(obj)
+	{
+		//alert("확인");	
+		//alert(obj.getAttribute("id"));
+		var a = obj.getAttribute("id");
+		//alert(a);	
+	
+		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);	
+	}
+
+
+</script>
 </head>
 <body>
 <!-- Header  -->
@@ -57,7 +70,7 @@
 		
 		<div class="col-md-12">
 			<c:forEach var="list" items="${searchList }">
-				<div class="thumbnail" id="" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
+				<div class="thumbnail" id="${list.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
            			<img src="${list.photo }" style="width: 180px; height: 180px;">
            			<div class="caption">
                     	<h5 class="thick">${list.title }</h5>
@@ -75,6 +88,20 @@
                     </div> 	                		   
 	           </div>	
 	           </c:forEach> 	
+	           <!-- 페이징 인덱스 반드시 추가  -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								${pageIndexList }
+								<li><a href="#" aria-label="Next"><span
+										aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
 		
 		</div>
 	</div>
