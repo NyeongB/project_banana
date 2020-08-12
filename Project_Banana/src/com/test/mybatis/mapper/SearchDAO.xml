@@ -31,8 +31,7 @@
 		<![CDATA[WHERE #{start} <= RNUM AND RNUM <= #{end}]]>	
 	</select>	
 	
-	<!-- 검색한 키워드와 일치하는 공동구매 게시물 개수 -->
-	
+	<!-- 검색한 키워드와 일치하는 공동구매 게시물 개수 -->	
 	<select id="gPostCount" resultType="java.lang.Integer">
 	SELECT COUNT(*)
 	FROM VIEW_GPOST
@@ -72,6 +71,23 @@
 		</choose>		
         ) DATA)
 		<![CDATA[WHERE #{start} <= RNUM AND RNUM <= #{end}]]>	
+	</select>
+	
+	<!-- 검색한 키워드와 일치하는 렌트 게시물 개수 -->	
+	<select id="rPostCount" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM VIEW_RCATEMAINLIST
+	<choose>
+		<when test="filter == 'TITLE'">
+		WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+		</when>
+		<when test="filter == 'CONTENT'">
+		WHERE ${filter} LIKE '%' ||#{searchKey} ||'%'
+		</when>		
+		<otherwise>		
+		WHERE TITLE LIKE '%' ||#{searchKey} ||'%' OR CONTENT LIKE '%' ||#{searchKey} ||'%'
+		</otherwise>
+	</choose>
 	</select>	
 	
 	
