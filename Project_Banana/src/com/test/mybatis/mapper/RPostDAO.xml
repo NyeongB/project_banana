@@ -130,11 +130,17 @@
 	</select>
 	
 	<!-- 상품등록 INSERT -->
-	<!-- <select id="rpostinsert" resultType="com.banana.rent.RPostDTO">
+	<select id="rpostinsert" statementType="CALLABLE"  >
 	
-	</select> -->
+	 {call
+     
+     PRC_RPOST(#{b_user_code},#{r_cate_code},#{loc_code},#{title},#{content},#{brand},#{cost},#{deposit},#{offerloc},#{offer_time},#{collectloc}
+     ,#{collect_time},TO_DATE(#{booking_start_date},'YYYY-MM-DD HH24:MI:SS'),TO_DATE(#{booking_end_date},'YYYY-MM-DD HH24:MI:SS'),#{photo})
+
+     }
 
 
+   </select>
 	
 
 

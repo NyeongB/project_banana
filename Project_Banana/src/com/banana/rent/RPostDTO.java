@@ -7,10 +7,11 @@ public class RPostDTO
 	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
 	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
 	private String progress, a_user_code, p_user_code;	
-	private String start_date, end_date, success_date, booking_end_date;
+	private String start_date, end_date, success_date, booking_end_date ,booking_start_date;
 	private String r_apply_code;
 	private int cost, deposit;
 	private String cate_name;
+	private String loc_code;
 	
 	// getter/ setter 구성
 	public int getStart()
@@ -314,6 +315,26 @@ public class RPostDTO
 		this.success_date = success_date;
 	}
 
+	public String getLoc_code()
+	{
+		return loc_code;
+	}
+
+	public void setLoc_code(String loc_code)
+	{
+		this.loc_code = loc_code;
+	}
+
+	public String getBooking_start_date()
+	{
+		return booking_start_date;
+	}
+
+	public void setBooking_start_date(String booking_start_date)
+	{
+		this.booking_start_date = booking_start_date;
+	}
+	
 	
 	
 	

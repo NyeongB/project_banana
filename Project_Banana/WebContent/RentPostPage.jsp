@@ -413,9 +413,42 @@ textarea
 				 $(this).val($(this).val().replace(/[^0-9]/g,""));
 			});
 			
+			
+			// 한글로 바꾸기
+			jQuery.datetimepicker.setLocale('kr');
+			var newdate = new Date();
+			var closedate = new Date(newdate);
+			closedate.setDate(closedate.getDate()+14);
+			var cd = new Date(closedate);
+			
+			// 대여 가능 일
+			$("#booking1").datetimepicker
+			({
+				
+				// 현재시간 + 14일까지 선택 가능
+				minDate: 0
+				, maxDate : new Date(cd)
+				
+			});
+			
+			
+			
+			// 제공시간 오전 8시 부터 오후 8시까지
+			$("#offerDate").datetimepicker
+			({
+				
+				datepicker : false
+				, format : 'H:i'
+				, minTime : '08:00'
+				, maxTime : '21:00'
+				
+			});
+			
 			//폼 전송 전 유효성 검사
 			$("#postBtn").click(function()
 			{
+				
+				alert("확인");
 				//제목 빈칸인지 체크
 				if($("#title").val().trim()=="")
 				{
@@ -454,12 +487,13 @@ textarea
 					return;
 				}
 				//제공장소 빈칸인지 체크
-				if($("#offerloc").val().trim()=="")
+				if($("#detailLoc").val().trim()=="")
 				{
 					alert("상품을 제공할 장소를 적어주세요");
-					$("#offerloc").focus();
+					$("#detailLoc").focus();
 					return;
 				}
+			
 				
 				// 제공 시간 빈칸인지 체크
 				if($("#offerDate").val()=="")
@@ -470,10 +504,10 @@ textarea
 				}
 				
 				// 회수장소 빈칸인지 체크
-				if($("#collectloc").val().trim()=="")
+				if($("#returndetailLoc").val().trim()=="")
 				{
 					alert("상품을 회수할 장소를 적어주세요");
-					$("#collectloc").focus();
+					$("#returndetailLoc").focus();
 					return;
 				}
 				
@@ -502,43 +536,12 @@ textarea
 					return;
 				}
 			
-				
-				
-				
-				
+
 				$("#rpost").submit();
 				
 			});
 			
-			// 한글로 바꾸기
-			jQuery.datetimepicker.setLocale('kr');
-			var newdate = new Date();
-			var closedate = new Date(newdate);
-			closedate.setDate(closedate.getDate()+14);
-			var cd = new Date(closedate);
 			
-			// 대여 가능 일
-			$("#booking1").datetimepicker
-			({
-				
-				// 현재시간 + 14일까지 선택 가능
-				minDate: 0
-				, maxDate : new Date(cd)
-				
-			});
-			
-			
-			
-			// 제공시간 오전 8시 부터 오후 8시까지
-			$("#offerDate").datetimepicker
-			({
-				
-				datepicker : false
-				, format : 'H:i'
-				, minTime : '08:00'
-				, maxTime : '21:00'
-				
-			});
 			
 	});
 	
@@ -700,7 +703,6 @@ textarea
 						
 
 						<form action="r_postinsert.action"  method="post"  id="rpost" enctype="multipart/form-data">	
-						<!-- <form role="form" class="form-group" id="rpost" action="r_postinsert.action"> -->
 
 							<div class="col-md-12 Atitle">
 								<div class="col-md-2">
@@ -792,7 +794,7 @@ textarea
 									</div>
 								</div>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="brand"
+									<input type="text" class="form-control" id="brand" name="brand"
 										placeholder="내용을 입력해주세요." />
 								</div>
 							</div>
@@ -852,7 +854,7 @@ textarea
 									<div>글 내용</div>
 								</div>
 								<div class="col-md-10">
-									<textarea name="" id="content" cols="30" rows="10"
+									<textarea name="content" id="content" cols="30" rows="10"
 										class="form-control" placeholder="내용을 입력해주세요."></textarea>
 								</div>
 							</div>
@@ -865,7 +867,7 @@ textarea
 									</div>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control won" id="cost"
+									<input type="text" class="form-control won" id="cost" name="cost"
 										placeholder="숫자만 입력해주세요." numberonly = "true"/>원
 								</div>
 								<div class="col-md-2"></div>
@@ -880,7 +882,7 @@ textarea
 									</div>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control won" id="deposit"
+									<input type="text" class="form-control won" id="deposit" name="deposit"
 										placeholder="숫자만 입력해주세요." numberonly = "true"/>원
 								</div>
 								<div class="col-md-2"></div>
@@ -898,23 +900,7 @@ textarea
 								<input type="text" id="detailLoc" name="detailLoc" class="form-control" readOnly="readonly"> 
 							</div>
 
-							<!-- <div class="col-md-12 form-inline offer">
-								
-								<div class="col-md-2 ">
-									<div>
-										제공장소<span>*</span>
-									</div>
-								</div>
-								<div class="col-md-4 of1">
-									<input type="text" class="form-control" id="offerloc"
-										placeholder="클릭 시 지도가 나와야 함.." />
-								</div>
-	
-								
-							</div>
-					 -->
-								
-								
+
 								<div class="col-md-2 of2">
 									<div>
 										제공시간<span>*</span>
@@ -922,7 +908,7 @@ textarea
 								</div>
 								<div class="col-md-4">
 									<div>
-										<input type="text" class="form-control" id="offerDate" />
+										<input type="text" class="form-control" id="offerDate"  name="offerDate"/>
 									
 									</div>
 								</div>
@@ -932,17 +918,6 @@ textarea
 						
 						
 						
-						
-								<!-- 
-								<div class="col-md-2">
-									<div>
-										회수장소<span>*</span>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" id="collectloc"
-										placeholder="클릭 시 지도가 나와야 함.."/>
-								</div> -->
 								
 								<div class="col-md-12 ">
 								회수 장소 <span class="glyphicon glyphicon-map-marker"></span>
@@ -960,7 +935,7 @@ textarea
 								</div>
 								<div class="col-md-4">
 									<div>
-									<input type="text" class="form-control" id="EndDate" onclick="endtime()"/>
+									<input type="text" class="form-control" id="EndDate" name="EndDate" onclick="endtime()"/>
 										
 									</div>
 								</div>
@@ -977,7 +952,7 @@ textarea
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="text" class="form-control" id="booking1" />
+									<input type="text" class="form-control" id="booking1" name="booking1"/>
 								</div>
 								
 							
@@ -995,7 +970,7 @@ textarea
 									</div>
 								</div>
 								<div class="col-md-5">
-									<input type="text" class="form-control" id="booking2" onclick="endbooking()"/>
+									<input type="text" class="form-control" id="booking2" name="booking2" onclick="endbooking()"/>
 								</div>
 								
 								
