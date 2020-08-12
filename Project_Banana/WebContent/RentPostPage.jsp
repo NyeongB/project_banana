@@ -156,7 +156,7 @@ textarea
 	
 	function initialize()
 	{
-		alert("확인");
+		//제공장소 지도
 		container = document.getElementById("map");
 	
 		
@@ -181,14 +181,14 @@ textarea
 	     markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 		
 		// 지도를 클릭한 위치에 표출할 마커입니다
-		var marker = new kakao.maps.Marker({ 
+		var marker1 = new kakao.maps.Marker({ 
 		 // 지도 중심좌표에 마커를 생성합니다 
 		    position: map.getCenter() 
 		    , image : markerImage
 		}); 
 		
 		// 지도에 마커를 표시합니다
-		marker.setMap(map);
+		marker1.setMap(map);
 		map.setZoomable(false); 
 		
 		// 주소-좌표 변환 객체를 생성합니다
@@ -203,7 +203,7 @@ textarea
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	
 		        // 결과값으로 받은 위치를 마커로 표시합니다
-		        var marker = new kakao.maps.Marker({
+		        var marker1 = new kakao.maps.Marker({
 		            map: map,
 		            position: coords
 		        });
@@ -238,8 +238,8 @@ textarea
 		              
 		              document.getElementById('detailLoc').value= detailAddr;
 		              
-		              marker.setPosition(mouseEvent.latLng);
-		              marker.setMap(map);
+		              marker1.setPosition(mouseEvent.latLng);
+		              marker1.setMap(map);
 		           
 	        
 	     
@@ -273,6 +273,122 @@ textarea
 		
 		
 		
+		//회수 장소 지도 불러오기
+		container = document.getElementById("returnmap");
+	
+		
+		var mapContainer = document.getElementById('returnmap'), // 지도를 표시할 div 
+		mapOption = {
+	    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
+	    level: 5, // 지도의 확대 레벨
+	    draggable: false //지도 드래그로 이동 금지
+		    };  
+	
+		// 지도를 생성합니다    
+		var map2 = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		 imageSrc = "images/markerGif03.gif"
+		      
+		      
+		 imageSize = new kakao.maps.Size(54,59)  //마커 이미지 크기
+		 imageOption = {offset: new kakao.maps.Point(27,69)};
+		
+		 
+		//구성된 마커의 속성을 활용하여 마커 이미지 생성
+	     markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+		
+		// 지도를 클릭한 위치에 표출할 마커입니다
+		var marker2 = new kakao.maps.Marker({ 
+		 // 지도 중심좌표에 마커를 생성합니다 
+		    position: map2.getCenter() 
+		    , image : markerImage
+		}); 
+		
+		// 지도에 마커를 표시합니다
+		marker2.setMap(map2);
+		map2.setZoomable(false); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+	
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch("${addr}", function(result, status) {
+	
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+	
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker2 = new kakao.maps.Marker({
+		            map2: map2,
+		            position: coords
+		        });
+	
+		       // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">나의 위치</div>'
+		        });
+		        infowindow.open(map2, marker2);
+	
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map2.setCenter(coords);
+		    } 
+		});   
+		  
+		
+		
+		
+		kakao.maps.event.addListener(map2, 'click', function(mouseEvent) 
+		{
+			
+			searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) 
+			{
+			
+	        	if (status === kakao.maps.services.Status.OK)
+	        	{
+	            
+		              var returndetailAddr = result[0].address.address_name ;
+		           
+		            
+		          
+		              
+		              document.getElementById('returndetailLoc').value= returndetailAddr;
+		              
+		              marker2.setPosition(mouseEvent.latLng);
+		              marker2.setMap(map2);
+		           
+	        
+	     
+	       		}   
+	      });
+	   });
+		
+		 
+	     
+	     
+	     
+		
+		
+		function searchDetailAddrFromCoords(coords, callback)
+		{
+			// 좌표로 법정동 상세 주소 정보를 요청합니다
+			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	    }
+		
+		function searchAddrFromCoords(coords, callback)
+		{
+		    // 좌표로 행정동 주소 정보를 요청합니다
+		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+		}
+	
+		function searchDetailAddrFromCoords(coords, callback) 
+		{
+		    // 좌표로 법정동 상세 주소 정보를 요청합니다
+		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+		}
+		
+		
 	}//initialize()
 	
 	
@@ -282,7 +398,7 @@ textarea
 	function setZoomable(zoomable) {
 	    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
 	 	//alert("확인");
-	    map.setZoomable(zoomable);    
+	    map2.setZoomable(zoomable);    
 	}
 		   
 	
@@ -485,15 +601,76 @@ textarea
 	}
 	
 	
+
+	//대분류 카테고리 눌렀을 때 
+	function cate(obj)
+	{
+		//alert("확인");
+		
+		catecode = obj.getAttribute("id");
+		
+		//alert(catecode);
+		requestCate(catecode);
+		
+		document.getElementById(catecode).style.background = "#F2F2F2";
+		
+	}
 	
+	function requestCate(catecode)
+	{
+		$.get("ajaxrcate.action", {cate : catecode}, function(data)
+		{
+		
+			$("#cate").html(data);
+		});
+		
+	}
 	
+	//중분류 카테고리 눌렀을 때
+	function mCate(obj)
+	{
+		//alert("확인");
+		
+		mcatecode = obj.getAttribute("id");
+		
+		//alert(mcatecode);
+		requestMCate(mcatecode);
+		document.getElementById(mcatecode).style.background = "#F2F2F2";
+	
+	}
+	
+	function requestMCate(mcatecode)
+	{
+		$.get("ajaxrmcate.action", {mCate : mcatecode, cate : catecode}, function(data)
+		{
+		
+			//alert(data);
+			
+			$("#mCate").html(data);
+			
+			
+		});
+		
+	}
+	
+	//소분류 카테고리 클릭
+	
+	function cateFinal(obj)
+	{
+		scatecode = obj.getAttribute("id");
+		
+		//alert(scatecode);
+		document.getElementById('scate').value= scatecode;
+		document.getElementById(scatecode).style.background = "#F2F2F2";
+		
+	}
 	
 	
 </script>
 
 
 </head>
-<body>
+<body onload="initialize()">
 	<!-- Header  -->
 	<div class="row Header">
 		<div class="col-md-12">
@@ -522,8 +699,8 @@ textarea
 						</div>
 						
 
-							
-						<form role="form" class="form-group" id="rpost" action="r_postinsert.action">
+						<form action="r_postinsert.action"  method="post"  id="rpost" enctype="multipart/form-data">	
+						<!-- <form role="form" class="form-group" id="rpost" action="r_postinsert.action"> -->
 
 							<div class="col-md-12 Atitle">
 								<div class="col-md-2">
@@ -543,124 +720,71 @@ textarea
 
 
 
-							<div class="col-md-12 category">
+						<div class="col-md-12 category">
 
-								<div class="col-md-2">
-									<div>
-										카테고리<span>*</span>
-									</div>
+							<div class="col-md-2">
+								<div>
+									카테고리<span>*</span>
 								</div>
-
-								<div class="col-md-10">
-									<div class="col-md-4">
-
-										<div class="table-wrapper-scroll-y my-custom-scrollbar" >
-
-											<table class="table table-bordered mb-0">
-
-												<tbody>
-													<tr>
-														<td>식품</td>
-													</tr>
-													<tr>
-														<td>생활용품</td>
-
-													</tr>
-													<tr>
-														<td>스포츠</td>
-													</tr>
-													<tr>
-														<td>유아동/반려동물</td>
-													</tr>
-													<tr>
-														<td>디지털/가전/가구</td>
-													</tr>
-												</tbody>
-											</table>
-
-										</div>
-									</div>
-									<!-- end col-md-4 -->
-
-
-
-									<div class="col-md-4">
-
-										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-											<table class="table table-bordered mb-0">
-
-												<tbody>
-													<tr>
-
-														<td>잡화</td>
-
-													</tr>
-													<tr>
-														<td>유아동용품</td>
-
-													</tr>
-													<tr>
-														<td>기저귀/이유식</td>
-													</tr>
-													<tr>
-														<td>강아지 용품</td>
-													</tr>
-													<tr>
-														<td>고양이 용품</td>
-													</tr>
-												</tbody>
-											</table>
-
-										</div>
-									</div>
-									<!-- end col-md-4 -->
-
-
-
-									<div class="col-md-4">
-
-
-										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-											<table class="table table-bordered mb-0">
-
-												<tbody>
-													<tr>
-
-														<td>목줄</td>
-
-													</tr>
-													<tr>
-														<td>사료</td>
-
-													</tr>
-													<tr>
-														<td>간식</td>
-													</tr>
-													<tr>
-														<td>의류</td>
-													</tr>
-													<tr>
-														<td>장난감</td>
-													</tr>
-
-												</tbody>
-											</table>
-
-										</div>
-
-									</div>
-									<!--end col-md-4  -->
-									<div class="col-md-12 selectCate">
-										선택한 카테고리 : <span>ooo</span>
-									</div>
-								</div>
-								<!--end col-md-10  -->
 							</div>
-							<!--end col-md-12  -->
-							<!-- end 카테고리 -->
+								
+							<div class="col-md-10 category" > 
+					
+							<div class="col-md-4">
+								
+								<div class="table-wrapper-scroll-y my-custom-scrollbar">
+		
+									  <table class="table table-bordered mb-0 tb1" id="tblColor">							
+									    <tbody id="tblColor2">
+									    
+									  
+									      <tr>
+									        <td onclick="cate(this)" id="R_CATE1">생활용품</td>
+									      </tr>
+									      <tr>
+									        <td onclick="cate(this)" id="R_CATE2">스포츠</td>						      
+									      </tr>
+									      <tr>
+									        <td onclick="cate(this)" id="R_CATE3">유아동/반려동물</td>
+									      </tr>
+									      <tr>
+									        <td onclick="cate(this)" id="R_CATE4">디지털/가전/가구</td>
+									      </tr>
+									  
+									    </tbody>
+									  </table>
+									
+								</div>		
+							</div><!-- end col-md-4 -->
 
+							<div class="col-md-4">
+					
+								<div class="table-wrapper-scroll-y my-custom-scrollbar">
+										<!-- <div id="cate"></div> -->
+									     <table id="cate" class="table table-bordered mb-0 tb1"></table>  
+								</div>
+									
+							</div><!-- end col-md-4 -->
+						
+						
+						
+							<div class="col-md-4">
+						
+							
+								<div class="table-wrapper-scroll-y my-custom-scrollbar">
+		
+									  <table id="mCate" class="table table-bordered mb-0 tb2">
+								
+									  </table>
+										
+								</div>
+					
+						</div><!--end col-md-4  -->
+						<input type="hidden" id="scate" name="scate">
+					
+					</div>	<!--end col-md-12  -->
+
+								
 							<div class="col-md-12 brand">
 								<div class="col-md-2">
 									<div>
@@ -765,31 +889,30 @@ textarea
 							<!-- end 보증금 -->
 
 
-							<div class="col-md-12 form-inline offer">
-								
-								<!-- <div class="col-md-2 ">
-									<div>
-										제공장소<span>*</span>
-									</div>
-								</div> -->
-								<!-- <div class="col-md-4 of1">
-									<input type="text" class="form-control" id="offerloc"
-										placeholder="클릭 시 지도가 나와야 함.." />
-								</div> -->
-								
-								<div class="col-md-12 ">
+							<div class="col-md-12 ">
 								제공장소 <span class="glyphicon glyphicon-map-marker"></span>
 								<div id="map" style="width: 60%; height: 250px;"></div>
 								
 								<div class="col-md-4 loc">
 								상세 분배 장소
 								<input type="text" id="detailLoc" name="detailLoc" class="form-control" readOnly="readonly"> 
+							</div>
+
+							<!-- <div class="col-md-12 form-inline offer">
+								
+								<div class="col-md-2 ">
+									<div>
+										제공장소<span>*</span>
+									</div>
 								</div>
-								
-								
+								<div class="col-md-4 of1">
+									<input type="text" class="form-control" id="offerloc"
+										placeholder="클릭 시 지도가 나와야 함.." />
+								</div>
+	
 								
 							</div>
-					
+					 -->
 								
 								
 								<div class="col-md-2 of2">
@@ -809,8 +932,8 @@ textarea
 						
 						
 						
-						<div class="col-md-12 form-inline collect">
-								
+						
+								<!-- 
 								<div class="col-md-2">
 									<div>
 										회수장소<span>*</span>
@@ -819,8 +942,16 @@ textarea
 								<div class="col-md-4">
 									<input type="text" class="form-control" id="collectloc"
 										placeholder="클릭 시 지도가 나와야 함.."/>
-								</div>
+								</div> -->
 								
+								<div class="col-md-12 ">
+								회수 장소 <span class="glyphicon glyphicon-map-marker"></span>
+								<div id="returnmap" style="width: 60%; height: 250px;"></div>
+								
+								<div class="col-md-4 loc">
+								상세 분배 장소
+								<input type="text" id="returndetailLoc" name="returndetailLoc" class="form-control" readOnly="readonly"> 
+								</div>
 								
 								<div class="col-md-2 of2">
 									<div>
@@ -833,8 +964,7 @@ textarea
 										
 									</div>
 								</div>
-
-							</div>
+							
 							<!-- end 회수장소&회수시간 -->
 
 

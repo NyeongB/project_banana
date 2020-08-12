@@ -235,8 +235,6 @@ p
 	function cate(obj)
 	{
 		//alert("확인");
-		/* cdocument.getEonsole.log(document.getElementById("tblColor2").childNodes);
-		lementById("tblColor2").childNodes.style.backgroundColor = "#000000"; */
 
 		catecode = obj.getAttribute("id");
 		
@@ -255,9 +253,6 @@ p
 		$.get("ajaxcate.action", {cate : catecode}, function(data)
 		{
 		
-			//alert(data);
-			/* alert($(".tb1 td").length);
-			console.log($(".tb1 td")); */
 			$("#cate").html(data);
 		});
 		
@@ -284,10 +279,6 @@ p
 			//alert(data);
 			
 			$("#mCate").html(data);
-			/* alert($(".tb2 td").length);
-			if($(".tb2 td").length<4)
-				addRow();
-			alert($(".tb2 td").length) */
 			
 			
 		});

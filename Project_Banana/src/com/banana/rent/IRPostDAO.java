@@ -40,6 +40,8 @@ public interface IRPostDAO
 	// 나의 렌트 현황 
 	public ArrayList<RPostDTO> rMyList(RPostDTO dto);
 	
+	
+	
 	// 상품등록 insert
 	//public int rpostinsert(RPostDTO dto);
 }

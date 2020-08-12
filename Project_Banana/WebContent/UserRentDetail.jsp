@@ -188,6 +188,11 @@ textarea
 	font-weight: bold;
 }
 
+#Tcost
+{
+	display : none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -211,6 +216,8 @@ $().ready(function()
 	
 	}); // 이게 뭐지....? */
 			
+			
+	
 			
 
 	$( ".top" ).click( function() {
@@ -351,18 +358,31 @@ $().ready(function()
 			else// 회원이면
 			{
 				
-				// !!! 여기부터 시작하기
-				if($("#date1").val()=="")
+				// 예약 시 유효성 검사	
+				if($("#date1").val().trim()=="")
 				{
-					$("#date1").css({'border-color':"red"});
-					
-				}
-				if($("#date2").val()=="")
-				{
-					$("#date2").css({'border-color':"red"});
-					
+					alert("수령일을 선택해주세요.");
+					//$("#date1").css({'border-color':"red"});
+					$("#date1").focus();
+					return;
 				}
 				
+				if($("#date2").val().trim()=="")
+				{
+					alert("반납일을 선택해주세요.");
+					//$("#date2").css({'border-color':"red"});
+					$("#date2").focus();
+					return;
+				}
+				
+				/* else if($("#date1").val()!="" && $("#date2").val()!="")
+				{
+					$("#Tcost").css("display", "show");
+				} */
+				
+				
+				
+				$("#reservationform").submit();	
 					
 					
 			}
@@ -371,6 +391,7 @@ $().ready(function()
 		
 		
 		
+				
 		
 		
 		
@@ -396,7 +417,7 @@ function sstartDate()
 			disable = data;
 			
 
-			console.log(disable);
+			//console.log(disable);
 			
 			
 			
@@ -446,11 +467,35 @@ function eendDate()
 		, minDate: new Date(sdate)
 		, maxDate : new Date(bookingEnd)
 		, disabledDates : disable
-		
+		, onSelect : function(a) 
+		{
+			alert(a);
+		}
+			/* $.ajax
+			({
+				type: "POST"
+				, url : "ajaxrentcost.action"
+				, data : {sdate : sdate, edate : dateText}
+				, success : function(data)
+				{
+					$("#Tcost").html(data);
+				}
+			
+			}); */
 		
 		
 	});
+	
+
+	
+	
+	
+	
+		
 }
+
+
+
 
 
 
@@ -635,7 +680,7 @@ function jjim()
 						
 						<div class="col-md-1"></div>
 						
-						<form action=""  id="reservationform">
+						<form action="rent_jumunconfirm.action"  id="reservationform">
 						<div class="col-md-6 mid">
 							<div class="row">
 								<div class="col-md-12">
@@ -683,11 +728,11 @@ function jjim()
 								<div class="col-md-12 option">
 									<small>▶ 옵션 선택</small>
 									
-									
+								
 										<div class="Ss">
 										<div class="col-md-5">
 										<b>수령일</b><br>
-										<input type="text" placeholder="수령일을 입력하세요." class="form-control" id="date1" onclick="sstartDate()">
+										<input type="text" placeholder="수령일을 선택하세요." class="form-control" name="pickUpDate"  id="date1" onclick="sstartDate()">
 										</div>
 										
 										
@@ -699,11 +744,11 @@ function jjim()
 										
 										<div class="col-md-5">
 										<b>반납일</b><br>
-										<input type="text" placeholder="반납일을 입력하세요." class="form-control" id="date2" onclick="eendDate()">
+										<input type="text" placeholder="반납일을 선택하세요." class="form-control" name="ReturnDate" id="date2" onclick="eendDate()">
 										</div>
 										
 										<div class="col-md-12 text-right">
-											<h3 id="totalcost">총 비용 : 20,000원</h3>
+										<h3 id="totalcost">총 비용 : <span id="Tcost"> </span>원</h3>	
 										</div>
 										</div>
 																	
@@ -717,6 +762,9 @@ function jjim()
 								
 								</div>
 							</div>
+							
+							<input type="hidden" name="hide" value="<%=rpostCode %>">
+							
 							
 						</div> <!-- end col-md-6 -->
 						</form>
