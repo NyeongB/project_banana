@@ -43,5 +43,5 @@ public interface IRPostDAO
 	
 	
 	// 상품등록 insert
-	//public int rpostinsert(RPostDTO dto);
+	public void rpostinsert(RPostDTO dto);
 }
