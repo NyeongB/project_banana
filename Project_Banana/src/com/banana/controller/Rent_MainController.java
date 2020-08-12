@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.banana.groupbuying.GCateDTO;
+import com.banana.groupbuying.IGPostDAO;
 import com.banana.my.IMyPointDAO;
 import com.banana.rent.IRPostDAO;
 import com.banana.rent.IRentJJimDAO;
@@ -591,8 +593,63 @@ public class Rent_MainController
 			 }
 			
 			
+			//게시물 작성 시 대분류 카테고리 클릭 시 
+			  @RequestMapping(value = "/ajaxrcate.action", method =RequestMethod.GET)
+				public String ajaxRCate(Model model,HttpServletRequest request)
+				{
+					String view = null; 
+					
+					try
+					{
+						IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+						
+						RCateDTO dto = new RCateDTO();
+						dto.setR_cate_bcode(request.getParameter("cate"));
+						
+						model.addAttribute("postCateList", dao.cateList(dto));
+					
+						
+						
+						
+					} catch (Exception e)
+					{
+						System.out.println(e.toString());
+					}
+					
+					
+					view = "/RCateAjax.jsp";
+					
+					return view;
+				}
 		
-		
-		
+			  //게시물 작성 시 중분류 카테고리 클릭 시 
+			  @RequestMapping(value = "/ajaxrmcate.action", method =RequestMethod.GET)
+				public String ajaxRMCate(Model model,HttpServletRequest request)
+				{
+					String view = null; 
+					
+					try
+					{
+						IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
+						
+						RCateDTO dto = new RCateDTO();
+						dto.setR_cate_bcode(request.getParameter("cate"));
+						dto.setR_cate_code(request.getParameter("mCate"));
+						
+						model.addAttribute("postMCateList", dao.cateMList(dto));
+						model.addAttribute("cateList", dao.cateList(dto)); 
+						
+						
+						
+					} catch (Exception e)
+					{
+						System.out.println(e.toString());
+					}
+					
+					
+					view = "/RCateAjax2.jsp";
+					
+					return view;
+				}
 		
 }
