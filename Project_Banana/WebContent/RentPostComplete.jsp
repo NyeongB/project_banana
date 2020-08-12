@@ -67,7 +67,14 @@ h1
 	margin-right: 30px;
 }
 </style>
+<script type="text/javascript">
 
+	function goList()
+	{
+		$(location).attr("href","r_main.action");	
+	}
+
+</script>
 
 
 </head>
@@ -108,10 +115,7 @@ h1
 
 
 							<div class="col-md-12 CompleteBtn">
-								<button class="btn btn-primary" type="button" id="rentpage">게시물로
-									가기</button>
-								<button class="btn btn-primary" type="button" id="mainback">목록으로
-									가기</button>
+								<button class="btn btn-primary" type="button" id="mainback" onclick="goList()">목록으로 가기</button>
 							</div>
 
 

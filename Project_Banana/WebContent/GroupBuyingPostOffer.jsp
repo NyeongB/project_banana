@@ -101,7 +101,7 @@ p
 
 	function initialize()
 	{
-		alert("확인");
+		//alert("확인");
 		container = document.getElementById("map");
 
 		
