@@ -134,7 +134,7 @@
                         	</div>
                         
                         <div class="col-md-12 text-right wr">
-                        	<small>${lists.nickname }</small>
+                        	<small>${lists.nickname } </small>
                         </div>
                       <p>${lists.offerloc }</p>
                       <span class="price"><fmt:formatNumber value="${lists.cost}" ></fmt:formatNumber>원(1인)</span>      
