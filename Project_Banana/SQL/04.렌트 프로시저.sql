@@ -911,3 +911,41 @@ BEGIN
 
 END;
 
+--===================================================
+--렌트 상품 등록 프로시저
+create or replace PROCEDURE PRC_RPOST
+(
+V_B_USER_CODE               IN B_USER.B_USER_CODE%TYPE     --사용자 코드
+,V_R_CATE_CODE            IN R_CATE.R_CATE_CODE%TYPE          -- 공동구매 카테고리
+,V_LOC_CODE                 IN LOC.LOC_CODE%TYPE                -- 지역 카테고리 코드
+,V_TITLE                        IN R_POST.TITLE%TYPE            --게시물 제목 코드
+,V_CONTENT                  IN R_POST.CONTENT%TYPE               --내용
+,V_BRAND                    IN R_POST.BRAND%TYPE                    --브랜드
+,V_COST                             IN R_POST.COST%TYPE                 --원가
+,V_DEPOSIT                     IN R_POST.DEPOSIT%TYPE                 --보증금
+,V_OFFER_LOC                    IN R_POST.OFFER_LOC%TYPE          -- 제공장소
+,V_OFFER_TIME                   IN R_POST.OFFER_TIME%TYPE        --제공시간
+,V_COLLECT_LOC              IN R_POST.COLLECT_LOC%TYPE         --회수장소
+,V_COLLECT_TIME                      IN R_POST.COLLECT_TIME%TYPE    --회수시간
+,V_BOOKING_START_DATE        IN R_POST.BOOKING_START_DATE%TYPE     --대여시작날짜
+,V_BOOKING_END_DATE                IN R_POST.BOOKING_END_DATE%TYPE  --대여종료날짜
+,V_PHOTO                       IN R_PHOTO.PHOTO%TYPE        --사진
+)
+IS
+V_R_POST_CODE   R_POST.R_POST_CODE%TYPE := 'R_POST'||SEQ_R_POST.NEXTVAL; -- 렌트 게시물 코드
+
+BEGIN
+
+-- 1. 게시물 등록 INSERT
+INSERT INTO R_POST(R_POST_CODE,B_USER_CODE,R_CATE_CODE,LOC_CODE,TITLE,CONTENT,VIEWS,BRAND,COST,DEPOSIT,OFFER_LOC,OFFER_TIME,COLLECT_LOC,COLLECT_TIME,BOOKING_START_DATE ,BOOKING_END_DATE )
+VALUES(V_R_POST_CODE,V_B_USER_CODE,V_R_CATE_CODE,V_LOC_CODE,V_TITLE,V_CONTENT,43,V_BRAND,V_COST,V_DEPOSIT,V_OFFER_LOC,V_OFFER_TIME,V_COLLECT_LOC,V_COLLECT_TIME,TO_DATE(V_BOOKING_START_DATE ,'YYYY-MM-DD HH24:MI:SS')
+            ,TO_DATE(V_BOOKING_END_DATE ,'YYYY-MM-DD HH24:MI:SS'));
+
+-- 2. 사진 INSERT
+INSERT INTO R_PHOTO(R_PHOTO_CODE,R_POST_CODE,PHOTO)
+VALUES('R_PHOTO'||SEQ_R_PHOTO.NEXTVAL,V_R_POST_CODE,V_PHOTO);
+
+
+-- 5. 커밋
+COMMIT;
+END;
