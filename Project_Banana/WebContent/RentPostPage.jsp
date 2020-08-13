@@ -212,7 +212,7 @@ textarea
 		        var infowindow = new kakao.maps.InfoWindow({
 		            content: '<div style="width:150px;text-align:center;padding:6px 0;">나의 위치</div>'
 		        });
-		        infowindow.open(map, marker);
+		        infowindow.open(map, marker1);
 	
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);

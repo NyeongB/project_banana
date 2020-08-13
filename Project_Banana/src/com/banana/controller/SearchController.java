@@ -36,9 +36,7 @@ public class SearchController
 		String keyword = request.getParameter("keyword");
 		
 		// 의존성 주입?
-		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);
-		
-		
+		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);		
 
 		// 페이징 처리 
 		Paging paging = new Paging();
@@ -57,7 +55,7 @@ public class SearchController
 
 		dto.setSearchKey(keyword);
 		int count = dao.gPostCount(dto);
-		System.out.println(count);
+		//System.out.println(count);
 		
 		//테이블에서 가져올 리스트의 시작과 끝 위치
 		int start = paging.getStart(pageNum, count );
@@ -65,8 +63,8 @@ public class SearchController
 		
 		// 페이지번호를 받아온 
 		String pageIndexList = paging.pageIndexList(pageNum, count);
-		System.out.println(start);
-		System.out.println(end);
+		//System.out.println(start);
+		//System.out.println(end);
 	
 		
 		dto.setStart(start);
@@ -74,8 +72,10 @@ public class SearchController
 		
 		model.addAttribute("searchList",dao.gPostList(dto));
 		model.addAttribute("gPostCount", dao.gPostCount(dto));
+		model.addAttribute("rSearchList",dao.rPostList(dto));
+		model.addAttribute("rPostCount", dao.rPostCount(dto));
 		model.addAttribute("keyword",keyword);
-		model.addAttribute("pageIndexList", pageIndexList);
+		//model.addAttribute("pageIndexList", pageIndexList);
 		
 		
 		

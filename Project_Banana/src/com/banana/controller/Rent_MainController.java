@@ -201,7 +201,7 @@ public class Rent_MainController
 	
 		// 렌트 상품 등록 클릭 시 페이지 이동
 		@RequestMapping(value = "/rentpostpage.action", method = RequestMethod.GET)
-		 public String rentPostPage(Model model) 
+		 public String rentPostPage(Model model,HttpServletRequest request) 
 		 {
 			
 			
@@ -240,6 +240,11 @@ public class Rent_MainController
 				view = "/RentMain.jsp";
 
 			}*/
+				
+			HttpSession session = request.getSession(); 
+			SessionInfo info = (SessionInfo)session.getAttribute("user");
+			String addr = info.getAddr();
+			model.addAttribute("addr", addr);
 			
 			view = "RentPostPage.jsp";
 			}catch(Exception e)

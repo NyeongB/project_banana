@@ -45,7 +45,7 @@ public class G_GroupBuyingMainController
 			HttpSession session = request.getSession();
 			
 			 String postcode = (String)session.getAttribute("postcode");
-			 System.out.println(postcode);
+			 //System.out.println(postcode);
 			 
 			 SessionInfo info = (SessionInfo)session.getAttribute("user");
 			 String loc = info.getLoc_code();
@@ -508,8 +508,24 @@ public class G_GroupBuyingMainController
 	 
 	 }
 
-	  
-	  
+	  //상품등록 
+	 @RequestMapping(value = "/groupbuyingpostoffer.action", method =RequestMethod.GET)
+		public String GroupBuyingPostOffer(Model model,HttpServletRequest request)
+		{
+			String view = null; 
+			
+			HttpSession session = request.getSession(); 
+			SessionInfo info = (SessionInfo)session.getAttribute("user");
+			String addr = info.getAddr();
+			model.addAttribute("addr", addr);
+			//System.out.println(addr);
+			
+			
+			view = "/GroupBuyingPostOffer.jsp";
+			
+			
+			return view;
+		}
 	  
 	  
 	  
