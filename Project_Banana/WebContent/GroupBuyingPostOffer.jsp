@@ -166,7 +166,7 @@ p
 		  
 		
 		
-		
+		//마커 이동 시 상세 주소에 찍히는 것
 		kakao.maps.event.addListener(map, 'click', function(mouseEvent) 
 		{
 			
