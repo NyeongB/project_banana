@@ -462,31 +462,21 @@ function eendDate()
 	
 	$("#date2").datetimepicker({
 		
+		/* onSelect : function(dateText, inst) 
+		{
+			alert(dateText);
+		} */
 		timepicker : false
 		, format : 'Y-m-d'
 		, minDate: new Date(sdate)
 		, maxDate : new Date(bookingEnd)
 		, disabledDates : disable
-		, onSelect : function(a) 
-		{
-			alert(a);
-		}
-			/* $.ajax
-			({
-				type: "POST"
-				, url : "ajaxrentcost.action"
-				, data : {sdate : sdate, edate : dateText}
-				, success : function(data)
-				{
-					$("#Tcost").html(data);
-				}
-			
-			}); */
-		
-		
-	});
 	
 
+	});
+	
+	
+	callcostAjax(sdate);
 	
 	
 	
@@ -496,7 +486,29 @@ function eendDate()
 
 
 
+function callcostAjax(sdate) 
+{
+	var edate = $("#date2").val();
 
+	console.log(edate);
+	
+	
+	if(edate != "" || edate != null)
+	{
+		 $.ajax
+		({
+			type: "POST"
+			, url : "ajaxrentcost.action"
+			, data : {sdate : sdate, edate : edate}
+			, success : function(data)
+			{
+				$("#Tcost").html(data);
+			}
+		
+		}); 
+	
+	} 
+}
 
 
 //댓글 달기 클릭 시 대댓글 입력 가능 하게 동작

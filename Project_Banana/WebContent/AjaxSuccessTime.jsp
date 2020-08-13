@@ -10,28 +10,6 @@
 %>
 
 
-<%-- <%
-JSONArray jarr = new JSONArray();
-
-
-ArrayList<RPostDTO> successDates = (ArrayList<RPostDTO>)request.getAttribute("reservationTime");
-
-
-
-for(int i=0; i<successDates.size(); i++)
-{
-	JSONObject obj = new JSONObject();
-	
-	obj.put("success", successDates);
-	
-	jarr.add(obj);
-	
-}
-
-
-out.println(jarr.toString());
-
-%> --%>
 
 <c:forEach var="reservationTime" items="${reservationTime }">
 ${reservationTime.success_date }
