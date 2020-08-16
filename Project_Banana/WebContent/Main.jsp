@@ -62,7 +62,7 @@ li {
 }
 
 .form-inline {
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 }
 
 #allCheck, #selectDelete {
