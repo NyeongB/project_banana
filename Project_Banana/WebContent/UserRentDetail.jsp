@@ -333,6 +333,9 @@ $().ready(function()
 
 		});
 		
+
+		
+		
 		
 		
 		
@@ -375,10 +378,6 @@ $().ready(function()
 					return;
 				}
 				
-				/* else if($("#date1").val()!="" && $("#date2").val()!="")
-				{
-					$("#Tcost").css("display", "show");
-				} */
 				
 				
 				
@@ -448,10 +447,33 @@ function sstartDate()
 	
 	
 };
+ 
+	
+	
+/* $().ready(function() 
+{
+		
+	var sdate = $("#date1").val();
+	
+	$("#date2").click(function() 
+	{
+		$("#date2").datetimepicker({
+			
+			
+			timepicker : false
+			, format : 'Y-m-d'
+			, minDate: new Date(sdate)
+			, maxDate : new Date(bookingEnd)
+			, disabledDates : disable
+		
+
+		});
+		
+	});
+	
 
 	
-	
-	
+}); */
 	
 	
 
@@ -462,10 +484,7 @@ function eendDate()
 	
 	$("#date2").datetimepicker({
 		
-		/* onSelect : function(dateText, inst) 
-		{
-			alert(dateText);
-		} */
+		
 		timepicker : false
 		, format : 'Y-m-d'
 		, minDate: new Date(sdate)
@@ -477,20 +496,15 @@ function eendDate()
 	
 	
 	callcostAjax(sdate);
-	
-	
-	
-	
+		
 		
 }
-
-
-
+ 
 function callcostAjax(sdate) 
 {
 	var edate = $("#date2").val();
 
-	console.log(edate);
+	//	console.log(edate);
 	
 	
 	if(edate != "" || edate != null)
@@ -508,7 +522,8 @@ function callcostAjax(sdate)
 		}); 
 	
 	} 
-}
+} 
+ 
 
 
 //댓글 달기 클릭 시 대댓글 입력 가능 하게 동작
@@ -744,7 +759,7 @@ function jjim()
 										<div class="Ss">
 										<div class="col-md-5">
 										<b>수령일</b><br>
-										<input type="text" placeholder="수령일을 선택하세요." class="form-control" name="pickUpDate"  id="date1" onclick="sstartDate()">
+										<input type="text" placeholder="수령일을 선택하세요." class="form-control" name="pickUpDate"  id="date1" onclick="sstartDate()" >
 										</div>
 										
 										

@@ -404,8 +404,10 @@ public class Rent_MainController
 					 String sdate = request.getParameter("sdate");
 					 String edate = request.getParameter("edate");
 					 
+					 
 					 model.addAttribute("sdate", sdate);
 					 model.addAttribute("edate", edate);
+					 
 					 
 					 IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
 					 RPostDTO dto = new RPostDTO();
