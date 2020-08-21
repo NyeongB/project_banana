@@ -2,8 +2,10 @@ package com.banana.user;
 
 public class LoginDTO
 {
-	private String id,pw;
+	private String id,	// 아이디
+				   pw;	// 비번
 
+	// getter / setter 구성
 	public String getId()
 	{
 		return id;

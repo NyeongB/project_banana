@@ -1,9 +1,16 @@
 package com.banana.util;
 
+// 세션을 위한 클래스 
 public class SessionInfo
 {
-	private String id, nickname, b_user_code,loc_code, addr;
+	private String id			// 아이디
+				 , nickname		// 닉네임
+				 , b_user_code	// 유저코드
+				 ,loc_code		// 주소 코드
+				 , addr;		// 주소
 
+	
+	// getter / setter 구성
 	public String getAddr()
 	{
 		return addr;

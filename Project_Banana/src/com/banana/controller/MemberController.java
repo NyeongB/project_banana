@@ -79,34 +79,34 @@ public class MemberController
 		
 		
 		// 리스트의 총페이지 가져오는 메소드(각자 따로 구현해야함)
-				int count = dao.getCount();
-				
-				// 두개 반드시 선언
-				Paging paging = new Paging();
-				String pageNum = request.getParameter("pageNum");
-				
-				
-				
-				//테이블에서 가져올 리스트의 시작과 끝 위치
-				int start = paging.getStart(pageNum,count );
-				int end = paging.getEnd(pageNum, count);
-				
-				// 페이지번호를 받아온 
-				String pageIndexList = paging.pageIndexList(pageNum, count);
-				
-				
-				// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
-				IndexDTO dto = new IndexDTO();
-				dto.setStart(start);
-				dto.setEnd(end);
-				
-				// 리스트 불러올때 시작과 끝점 추가해야함 
-				// 참고 com.banana.admin.IAdminPointDAO
-				
-				model.addAttribute("list", dao.list(dto));
-				
-				
-				model.addAttribute("pageIndexList", pageIndexList);
+		int count = dao.getCount();
+		
+		// 두개 반드시 선언
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
+		
+		
+		
+		//테이블에서 가져올 리스트의 시작과 끝 위치
+		int start = paging.getStart(pageNum,count );
+		int end = paging.getEnd(pageNum, count);
+		
+		// 페이지번호를 받아온 
+		String pageIndexList = paging.pageIndexList(pageNum, count);
+		
+		
+		// 시작과 끝 dto에 담기( 여기선 IndexDTO로 했지만 매개변수로 DTO를 쓰고있는경우는 그 DTO안에 start,end만들어야함)
+		IndexDTO dto = new IndexDTO();
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		// 리스트 불러올때 시작과 끝점 추가해야함 
+		// 참고 com.banana.admin.IAdminPointDAO
+		
+		model.addAttribute("list", dao.list(dto));
+		
+		
+		model.addAttribute("pageIndexList", pageIndexList);
 		
 		
 		view ="/AdminUserList.jsp";
@@ -250,109 +250,102 @@ public class MemberController
 			
 			return "/loginmain.action";
 		}	
-	
-	@RequestMapping(value = "/login.action", method =RequestMethod.GET)
+	// 아이디 , 비밀번호 입력후 로그인 버튼 클릭시
+	@RequestMapping(value = "/login.action", method = {RequestMethod.POST, RequestMethod.GET})
 	public String loginCheck(Model model, HttpServletRequest request)
 	{
 		
-		// session 생성
-		
-		// 로그인할떄만 매개변수 true 초기화때문
+		// session 생성		
+		// 로그인할때만 매개변수 true 초기화 때문
 		HttpSession session = request.getSession(true);
 		session.removeAttribute("user");
 		session.removeAttribute("admin");
-		
-		
-		
+		 
 		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
 		ILeaveDAO dao2 = SqlSession.getMapper(ILeaveDAO.class);
 		
 		String view = null; 
+		
+		// login.jsp 에서 id, pw 넘겨받기 
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
-		System.out.println("id : " + id + " pw : " + pw);
 		
-		// state 0→비정상로그인 1→정상로그인 2→탈퇴회원 3→영구회원 4→휴면회원
+		// state 0→비정상로그인 1→정상로그인 2→탈퇴회원 3→영구제명회원 4→휴면회원
+		// 사용자 판별 로그인 메소드 호출 
 		int state = login(id,pw);
 		
+		// 세션을 위한 닉네임, 유저코드, 지역코드, 주소 
 		String nick = dao.getNick(id);
 		String b_user_code = dao2.getUser(id);
 		String loc_code = dao.getLoc(id);
 		String addr = dao.getAddr(id);
-		/*
-		 * System.out.println(nick); System.out.println(b_user_code);
-		 * System.out.println(loc_code); System.out.println(addr);
-		 */
 		
+		// 0. 비 정상 로그인일 경우
 		if(state==0)
 		{
 			// 다시 로그인
-			view = "/Login.jsp";
+			model.addAttribute("msg", 0);
+			view = "/loginmain.action";
 		}
 		else if(state == 1)
 		{
-			// 정상로그인
+			// 1. 정상로그인일 경우
 			
-			
+			// SessionInfo 객체 생성
 			SessionInfo info = new SessionInfo();
 			
-			// 아이디랑 닉네임 인포에 넣음
+			// 아이디, 닉네임, 유저코드 ,지역코드, 주소 info에 set
 			info.setId(id);
 			info.setNickname(nick);
 			info.setB_user_code(b_user_code);
 			info.setLoc_code(loc_code);
 			info.setAddr(addr);
 			
-			// 아이디랑 닉네임을 갖은 info 객체를 세션에 넣음 
+			// 사용자 정보를 담은 info를 세션에 담는다.
 			session.setAttribute("user", info);
 			
+			// 메인으로 돌아간다.
 			view = "/main.action";
-			//view = "/LoginComplete.jsp";
 			
 		}
 		else if(state == 2)
 		{
-			//  탈퇴 회원
+			// 2. 탈퇴 회원인 경우
 			view = "/LeaveUser.jsp";
 			
 		}
 		else if(state == 3)
 		{
-			
+			// 3. 영구 제명 회원인 경우
 		}
 		else if(state == 4)
 		{	
-			// 휴면
-			//view = "/RestUserChange.jsp";
-			
-			
-			
+			// 4. 휴면 회원일 경우			
 			return "/restuserchange.action";
 		}
 		else if (state == 5)
 		{	
+			// 5. 관리자 회원일 경우
 			LoginDTO dto = new LoginDTO();
 			dto.setId(id);
 			dto.setPw(pw);
+			
 			String admin = dao.adminLogin(dto);
 			
 			// 관리자 로그인시에는 관리자 코드만 떠나님 
 			session.setAttribute("admin", admin);
 			
-			
+			// 관리자 메인으로 이동
 			view = "/adminaccount.action";
 		}
-		
-		
-		//model.addAttribute("list", dao.list());
-		//model.addAttribute("check",check);
 		
 		
 		return view;
 	}
 	
-	@RequestMapping(value = "/loginmain.action", method =RequestMethod.GET)
+	// 로그인 버튼 클릭 시 호출되는 메소드 
+	@RequestMapping(value = "/loginmain.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginMain(Model model, HttpServletRequest request)
 	{
 		
@@ -360,53 +353,51 @@ public class MemberController
 		
 		view = "/Login.jsp";
 		
-		
-		
 		return view;
 	}
 	
-	
+	// 로그인 사용자 확인하는 메소드
 	public int login(String id, String pw)
 	{
+		
 		int result = 0 ;
+		// LoginDTO 객체 생성
 		LoginDTO dto = new LoginDTO();
+		// Login.jsp 페이지에서 id, pw를 넘겨 받는다. 
 		dto.setId(id);
 		dto.setPw(pw);
+		
 		ILoginDAO dao = SqlSession.getMapper(ILoginDAO.class);
 		
 		// 관리자 상태값
 		String admin = null;
 		
-		String login1 =null;
-		String login2=null;
-		String login3=null;
-		String login4=null;
+		// 유저 상태값
+		String login1 = null;
+		String login2 = null;
+		String login3 = null;
+		String login4 = null;
 		
+		// 입력받은 id pw가 관리자 테이블에 있는지 확인
 		admin = dao.adminLogin(dto);
 		
+		// admin인 경우 
 		if(admin!=null)
 		{
 			result = 5;
-			System.out.println("관리자");
 			return result;
 		}
-		
-		
+				
 		// -- 디폴트(회원가입안됨) --0
-		// 정상회원 --1
+		// 정상회원 -- 1
 		login1 = dao.general(dto);
-		// 탈퇴회원 --2
+		// 탈퇴회원 -- 2
 		login2 = dao.leave(dto);
-		// 영구정지 회원 --3
+		// 영구정지 회원 -- 3
 		login3 = dao.permanent(dto);
-		// 휴면회원 --4
+		// 휴면회원 -- 4
 		login4 = dao.rest(dto);
-		
-		/*
-		 * System.out.println(login1); System.out.println(login2);
-		 * System.out.println(login3); System.out.println(login4);
-		 */
-		
+				
 		
 		if(login1 !=null && login2==null && login3==null && login4==null)
 		{

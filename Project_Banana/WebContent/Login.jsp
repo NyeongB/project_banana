@@ -19,13 +19,47 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
-	$(document).ready(function()
+	// 로그인 버튼 클릭 시 이벤트
+	function login()
 	{
-		$("#loginBtn").click(function()
-		{
-			$("#login").submit();	
-		});
+		// 사용자가 입력한 아이디, 비밀번호 값 얻어오기
+		const id = document.getElementById("id").value
+		const pw = document.getElementById("pw").value
 		
+		// 아이디를 입력하지 않은 경우
+		if(id == "" || id == null || id == " ")
+		{
+			// 아이디 미입력 안내 메세지 노출
+			document.getElementById("idErr").style.display = "inline";
+			// 서브밋 하지 않는다.
+			return false;
+		}
+		
+		// 패스워드를 입력하지 않은 경우
+		if(pw == "" || pw == null || pw == "")
+		{
+			// 아이디 미입력 안내 메세지 숨긴다.
+			document.getElementById("idErr").style.display = "none";
+			// 비밀번호 미입력 메세지 노출
+			document.getElementById("pwErr").style.display = "inline";
+			// 서브밋 하지 않는다.
+			return false;
+			
+		}
+		
+		return true;
+		
+		
+	}	
+	
+	
+	$(document).ready(function()
+	{	
+		document.getElementById("idErr").style.display = "none";
+		document.getElementById("pwErr").style.display = "none";
+
+		
+		// 아이디 버튼 클릭시
 		$("#idBtn").click(function()
 		{
 			location.href='<%=cp%>/userfindid.action';
@@ -59,6 +93,23 @@
 	border-radius: 50px !important;
 
 }
+#idErr , #pwErr, #loginErr
+{
+	font-weight : 800;
+	color : #f04337;
+	margin-left: 30px;
+	font-size: 9pt;
+
+}
+.none
+{
+	display: none;
+
+}
+.show
+{
+	display: inline;
+}
 </style>
 </head>
 <body>
@@ -75,36 +126,28 @@
 		<div class="col-md-5">
 		</div>
 		<div class="col-md-2 login">
-			<form role="form" action="<%=cp %>/login.action" method="get" id="login">
+			<form role="form" action="<%=cp %>/login.action" method="get" id="login" onsubmit="return login();">
 				<div id="logo"><h1 id="logo_text_1">banana</h1></div>
-				<div class="form-group">
-					 
-					<label for="exampleInputEmail1">
-						아이디
-					</label>
-					<input type="text" class="form-control loginBox" id="id" name="id" required="required"
-					placeholder="아이디를 입력하시오.">
+				<div class="form-group">					 
+						<label for="id">아이디</label>
+						<input type="text" class="form-control loginBox" id="id" name="id"  placeholder="아이디를 입력하시오.">
+					<div id="idErr"> 아이디를 입력해주세요</div>
 				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputPassword1">
-						비밀번호
-					</label>
-					<input type="password" class="form-control loginBox" id="pw"  name="pw" required="required"
-					placeholder="비밀번호를 입력하시오.">
+				<div class="form-group">					 
+					<label for="pw">비밀번호</label>
+						<input type="password" class="form-control loginBox" id="pw"  name="pw" placeholder="비밀번호를 입력하시오.">
+						<div id="pwErr"> 비밀번호를 입력해주세요</div>
+					<c:if test="${msg eq '0' }">
+						<div id="loginErr">아이디 비밀번호가 일치하지 않습니다.</div>
+					</c:if>
 				</div>		
 				<div class="col-md-12 text-center form-inline">
-					<div class="col-md-6">
-					
-					<button type="submit" class="btn btn-primary loginBtn" id="loginBtn">
-						로그인
-					</button>
+					<div class="col-md-6">					
+						<button type="submit" class="btn btn-primary loginBtn" id="loginBtn" >로그인</button>
 					</div>
 					
 					<div class="col-md-6">
-					<button type="button" class="btn btn-primary loginBtn" id="idBtn">
-						아이디 찾기
-					</button>
+						<button type="button" class="btn btn-primary loginBtn" id="idBtn">아이디 찾기</button>
 					</div>
 				</div>
 			</form>
