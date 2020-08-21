@@ -142,6 +142,13 @@
 
    </select>
 	
+	
+	<!--리모콘바-->
+	<select id="rRecentList" resultType="com.banana.rent.RPostDTO">
+		SELECT *
+		FROM VIEW_RECENT_RENT
+		WHERE R_POST_CODE = #{r_post_code}
+	</select>
 
 
 </mapper>

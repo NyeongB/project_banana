@@ -576,10 +576,20 @@ b
 		</div> <!-- end col-md-8 -->
 		<div class="col-md-2">
 			<div class="floating">
-				<div><span  class="thick">최근게시물</span></div>
-				<div><img src="images/oz.jpg" class="lastest_img img-rounded"></div>
+				<div><span  class="thick">오늘 본 상품</span></div>
+				<c:if test="${sessionScope.postcode != null }">	
+					<c:forEach var="rRecentLists" items="${rRecentList }">
+				<div>
+				<a href="rpostdetailpage.action?r_post_code=${rRecentLists.r_post_code }">
+				<img src="${rRecentLists.photo}" class="lastest_img img-rounded">
+				</a>
+				</div>
+				
+				</c:forEach>			
+				</c:if>					
+				
 				<div><a href="#top"><button class="btn top">▲</button></a><a href="#bottom"><button class="btn bottom">▼</button></a></div>
-			</div>
+				</div>
 		
 		</div>
 	</div>
