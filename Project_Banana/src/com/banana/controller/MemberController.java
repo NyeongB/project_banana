@@ -37,7 +37,7 @@ public class MemberController
 	@Autowired
 	private SqlSession SqlSession;
 	
-	@RequestMapping(value = "/adminaccount.action", method =RequestMethod.GET)
+	@RequestMapping(value = "/adminaccount.action", method =RequestMethod.POST)
 	public String adminList(Model model)
 	{
 		String view = null; 
@@ -151,12 +151,7 @@ public class MemberController
 		return view;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	
 	// 소상공인 조회
 	@RequestMapping(value = "/adminshopuserlist.action", method =RequestMethod.GET)
@@ -214,44 +209,44 @@ public class MemberController
 	
 	
 	// 관리자 추가 메소드
-		@RequestMapping(value = "/adminAdd.action", method =RequestMethod.GET)
-		public String adminAdd(Model model, HttpServletRequest request)
-		{
-			
-			String view = null; 
-			
-			IAdminAccountDAO dao = SqlSession.getMapper(IAdminAccountDAO.class);
-			
-			
-			String adminId = request.getParameter("adminId");
-			String adminPw = request.getParameter("adminPw");
-			String adminName = request.getParameter("adminName");
-			System.out.println(adminId+" "+adminPw+" "+adminName);
-			AdminAccountDTO dto = new AdminAccountDTO();
-			dto.setId(adminId);
-			dto.setPw(adminPw);
-			dto.setName(adminName);
-			
-			dao.add(dto);
-			
-			view = "/adminaccount.action";
-			return view;
-		}
+	@RequestMapping(value = "/adminAdd.action", method =RequestMethod.GET)
+	public String adminAdd(Model model, HttpServletRequest request)
+	{
 		
-		// 로그아웃 메소드
-		@RequestMapping(value = "/logout.action", method =RequestMethod.GET)
-		public String logout(HttpServletRequest request)
-		{
-			
-			HttpSession session = request.getSession();
-			
-			session.removeAttribute("user");
-			session.removeAttribute("admin");
-			
-			return "/loginmain.action";
-		}	
+		String view = null; 
+		
+		IAdminAccountDAO dao = SqlSession.getMapper(IAdminAccountDAO.class);
+		
+		
+		String adminId = request.getParameter("adminId");
+		String adminPw = request.getParameter("adminPw");
+		String adminName = request.getParameter("adminName");
+		System.out.println(adminId+" "+adminPw+" "+adminName);
+		AdminAccountDTO dto = new AdminAccountDTO();
+		dto.setId(adminId);
+		dto.setPw(adminPw);
+		dto.setName(adminName);
+		
+		dao.add(dto);
+		
+		view = "/adminaccount.action";
+		return view;
+	}
+	
+	// 로그아웃 메소드
+	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request)
+	{
+		
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("user");
+		session.removeAttribute("admin");
+		
+		return "/loginmain.action";
+	}	
 	// 아이디 , 비밀번호 입력후 로그인 버튼 클릭시
-	@RequestMapping(value = "/login.action", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/login.action" ,method = {RequestMethod.POST, RequestMethod.GET })
 	public String loginCheck(Model model, HttpServletRequest request)
 	{
 		
@@ -273,13 +268,7 @@ public class MemberController
 		
 		// state 0→비정상로그인 1→정상로그인 2→탈퇴회원 3→영구제명회원 4→휴면회원
 		// 사용자 판별 로그인 메소드 호출 
-		int state = login(id,pw);
-		
-		// 세션을 위한 닉네임, 유저코드, 지역코드, 주소 
-		String nick = dao.getNick(id);
-		String b_user_code = dao2.getUser(id);
-		String loc_code = dao.getLoc(id);
-		String addr = dao.getAddr(id);
+		int state = login(id,pw);	
 		
 		// 0. 비 정상 로그인일 경우
 		if(state==0)
@@ -291,10 +280,15 @@ public class MemberController
 		else if(state == 1)
 		{
 			// 1. 정상로그인일 경우
-			
 			// SessionInfo 객체 생성
 			SessionInfo info = new SessionInfo();
 			
+			// 세션을 위한 닉네임, 유저코드, 지역코드, 주소 
+			String nick = dao.getNick(id);
+			String b_user_code = dao2.getUser(id);
+			String loc_code = dao.getLoc(id);
+			String addr = dao.getAddr(id);
+						
 			// 아이디, 닉네임, 유저코드 ,지역코드, 주소 info에 set
 			info.setId(id);
 			info.setNickname(nick);
@@ -321,6 +315,7 @@ public class MemberController
 		}
 		else if(state == 4)
 		{	
+			
 			// 4. 휴면 회원일 경우			
 			return "/restuserchange.action";
 		}
@@ -339,13 +334,12 @@ public class MemberController
 			// 관리자 메인으로 이동
 			view = "/adminaccount.action";
 		}
-		
-		
+				
 		return view;
 	}
 	
 	// 로그인 버튼 클릭 시 호출되는 메소드 
-	@RequestMapping(value = "/loginmain.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/loginmain.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public String loginMain(Model model, HttpServletRequest request)
 	{
 		
@@ -389,7 +383,7 @@ public class MemberController
 		}
 				
 		// -- 디폴트(회원가입안됨) --0
-		// 정상회원 -- 1
+		// 일반회원 -- 1
 		login1 = dao.general(dto);
 		// 탈퇴회원 -- 2
 		login2 = dao.leave(dto);
@@ -399,26 +393,31 @@ public class MemberController
 		login4 = dao.rest(dto);
 				
 		
+		// 일반 회원인 경우
 		if(login1 !=null && login2==null && login3==null && login4==null)
 		{
 			System.out.println("정상로그인");
 			result = 1 ;
-		}
+			
+		}// 탈퇴 회원인 경우
 		else if (login1 !=null && login2!=null && login3==null && login4==null)
 		{
 			System.out.println("탈퇴 회원");
 			result = 2 ;
-		}
+			
+		}// 영구정지 회원인 경우
 		else if (login1 !=null && login2==null && login3!=null && login4==null)
 		{
 			System.out.println("영구정지 회원");
 			result = 3 ;
-		}
+			
+		}// 휴면 회원인 경우
 		else if (login1 !=null && login2==null && login3==null && login4!=null)
 		{
 			System.out.println("휴면 회원");
 			result = 4 ;
-		}
+			
+		}// 아이디 비밀번호가 틀린경우
 		else
 		{
 			System.out.println("로그인 불가");

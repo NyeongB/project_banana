@@ -126,13 +126,17 @@
 		<div class="col-md-5">
 		</div>
 		<div class="col-md-2 login">
-			<form role="form" action="<%=cp %>/login.action" method="get" id="login" onsubmit="return login();">
+			<form role="form" method="post" action="login.action"  id="login" onsubmit="return login();">
+				<!-- 로고  -->
 				<div id="logo"><h1 id="logo_text_1">banana</h1></div>
+				<!-- 아이디 div -->
 				<div class="form-group">					 
 						<label for="id">아이디</label>
 						<input type="text" class="form-control loginBox" id="id" name="id"  placeholder="아이디를 입력하시오.">
 					<div id="idErr"> 아이디를 입력해주세요</div>
 				</div>
+				
+				<!-- 비밀번호 div -->
 				<div class="form-group">					 
 					<label for="pw">비밀번호</label>
 						<input type="password" class="form-control loginBox" id="pw"  name="pw" placeholder="비밀번호를 입력하시오.">
@@ -140,7 +144,9 @@
 					<c:if test="${msg eq '0' }">
 						<div id="loginErr">아이디 비밀번호가 일치하지 않습니다.</div>
 					</c:if>
-				</div>		
+				</div>
+						
+				<!-- 버튼 div  -->
 				<div class="col-md-12 text-center form-inline">
 					<div class="col-md-6">					
 						<button type="submit" class="btn btn-primary loginBtn" id="loginBtn" >로그인</button>

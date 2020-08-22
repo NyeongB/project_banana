@@ -21,7 +21,7 @@ public class HomeController {
 	@Autowired
 	private SqlSession SqlSession;
 		
-	@RequestMapping(value = "/main.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/main.action", method = {RequestMethod.POST ,RequestMethod.GET})
 	public String showMain(Model model, HttpServletRequest request)
 	{
 				
