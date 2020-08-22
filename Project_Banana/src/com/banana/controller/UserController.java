@@ -50,47 +50,41 @@ public class UserController
 		
 		return view;
 	}
-	
+	// 회원가입 버튼 클릭 시 요청되는 메소드
 	@RequestMapping(value = "/join.action", method =RequestMethod.GET)
 	public String join(Model model)
 	{
 		String view = null; 
 		
-		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);	
 		
-		
-		
-		// 비밀번호찾기 질문
+		// 비밀번호찾기 질문 리스트 불러오기
 		model.addAttribute("pwList", dao.pwList());
 		
-		// 공동구매 관심 카테고리
+		// 공동구매 관심 카테고리 리스트 불러오기
 		model.addAttribute("groupList", dao.groupList());
 		
-		// 렌트거래 관심 카테고리
+		// 렌트거래 관심 카테고리 리스트 불러오기
 		model.addAttribute("rentList",dao.rentList());
 		
-		// 시/도
+		// 시/도 리스트 불러오기 (계층형 테이블)
 		model.addAttribute("locList", dao.locList());
-		// 시/군/구
 		
-		// 은행
+		// 은행 리스트 불러오기
 		model.addAttribute("bankList", dao.bankList());
-		
-		
+				
 		view = "/SignUpForm2.jsp";
-		
 		
 		return view;
 	}
 	
-	
+	// 회원가입 완료 버튼 클릭 시 요청되는 메소드
 	@RequestMapping(value = "/joinInsert.action", method =RequestMethod.GET)
 	public String joinInsert(Model model, HttpServletRequest request)
 	{
 		String view = null; 
 		
-		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);		
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -170,7 +164,6 @@ public class UserController
 		
 		return view;
 	}
-	
 	
 	
 	@RequestMapping(value = "/ajaxloc.action", method =RequestMethod.GET)
