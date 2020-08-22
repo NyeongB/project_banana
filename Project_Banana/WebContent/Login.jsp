@@ -132,7 +132,15 @@
 				<!-- 아이디 div -->
 				<div class="form-group">					 
 						<label for="id">아이디</label>
-						<input type="text" class="form-control loginBox" id="id" name="id"  placeholder="아이디를 입력하시오.">
+						<c:choose >
+							<c:when test="${msg eq '0' }">
+								<input type="text" class="form-control loginBox" id="id" name="id"  value="${uid }">
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="form-control loginBox" id="id" name="id"  placeholder="아이디를 입력하시오.">
+							</c:otherwise>
+						</c:choose>
+						
 					<div id="idErr"> 아이디를 입력해주세요</div>
 				</div>
 				

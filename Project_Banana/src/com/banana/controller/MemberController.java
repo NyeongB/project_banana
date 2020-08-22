@@ -275,6 +275,7 @@ public class MemberController
 		{
 			// 다시 로그인
 			model.addAttribute("msg", 0);
+			model.addAttribute("uid", id);
 			view = "/loginmain.action";
 		}
 		else if(state == 1)
