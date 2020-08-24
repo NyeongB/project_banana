@@ -182,345 +182,343 @@ public class UserController
 		return view;
 	}
 	
+	// id 중복체크 ajax
+	@RequestMapping(value = "/idcheck.action", method =RequestMethod.GET)
+	public String userCheck(Model model, HttpServletRequest request)
+	{
+		
+		String view = null; 
+		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		ArrayList<JoinDTO> result = dao.userList();
+		
+		int check = 0;
+		
+		// ajax 요청으로부터 받은 값 받아오기 
+		String id = request.getParameter("id");
+		//System.out.println(admin);
+		
+		
+		for(int i=0; i<result.size(); i++) 
+		{
+				
+			if( id.equals( result.get(i).getId() )==true )
+			{	
+				// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
+				check = 1;
+				//System.out.println("중복됨");
+			}
+		}
+		
+		//model.addAttribute("list", dao.list());
+		model.addAttribute("check",check);
+		
+		view = "/ajax.jsp";
+		return view;
+	}
+		
 	// 중복체크 ajax
-		@RequestMapping(value = "/idcheck.action", method =RequestMethod.GET)
-		public String userCheck(Model model, HttpServletRequest request)
+	@RequestMapping(value = "/nickcheck.action", method =RequestMethod.GET)
+	public String nickCheck(Model model, HttpServletRequest request)
+	{
+		
+		String view = null; 
+		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		ArrayList<JoinDTO> result = dao.nickList();
+		
+		int check = 0;
+		
+		// ajax 요청으로부터 받은 값 받아오기 
+		String nick = request.getParameter("nickname");
+		System.out.println(nick);
+		
+		
+		for(int i=0; i<result.size(); i++) 
 		{
-			
-			String view = null; 
-			
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
-			ArrayList<JoinDTO> result = dao.userList();
-			
-			int check = 0;
-			
-			// ajax 요청으로부터 받은 값 받아오기 
-			String id = request.getParameter("id");
-			//System.out.println(admin);
-			
-			
-			for(int i=0; i<result.size(); i++) 
-			{
-				//System.out.println();
-				if( id.equals( result.get(i).getId() )==true )
-				{	
-					// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
-					check = 1;
-					//System.out.println("중복됨");
-				}
+			//System.out.println();
+			if( nick.equals( result.get(i).getNickname() )==true )
+			{	
+				// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
+				check = 1;
+				//System.out.println("중복됨");
 			}
-			
-			//model.addAttribute("list", dao.list());
-			model.addAttribute("check",check);
-			
-			view = "/ajax.jsp";
-			return view;
 		}
+		System.out.println(check);
+		//model.addAttribute("list", dao.list());
+		model.addAttribute("check",check);
 		
-		// 중복체크 ajax
-		@RequestMapping(value = "/nickcheck.action", method =RequestMethod.GET)
-		public String nickCheck(Model model, HttpServletRequest request)
+		view = "/ajax.jsp";
+		return view;
+	}
+		
+		
+	// 휴대폰 인증 메소드
+	@RequestMapping(value = "/telcheck.action", method = RequestMethod.GET)
+	public String telcheck(Model model,HttpServletRequest request)
+	{
+		
+		String view = null;
+		// 사용자가 입력한 휴대폰은 넘겨 받는다.
+		String tel = request.getParameter("tel");
+		
+		
+		String check = Send.send(tel.trim());
+		
+		model.addAttribute("check",check);
+		
+		view = "/ajax.jsp";
+		
+		return view;
+	}
+	
+	@RequestMapping(value = "/idcheckfind.action", method =RequestMethod.GET)
+	public String idCheck(Model model,HttpServletRequest request)
+	{
+		String view = null; 
+		String tel1 = (request.getParameter("num1") + request.getParameter("num2")).trim();
+		//System.out.println(tel);
+		String tel  = tel1.substring(0,3)+"-"+tel1.substring(3,7)+"-"+tel1.substring(7,11);
+		String name = request.getParameter("name");
+		/*
+		 * System.out.println(name); System.out.println(tel);
+		 */
+		
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		JoinDTO dto = new JoinDTO();
+		dto.setTel(tel);
+		dto.setName(name);
+		JoinDTO join = new JoinDTO();
+		
+		try
 		{
-			
-			String view = null; 
-			
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
-			ArrayList<JoinDTO> result = dao.nickList();
-			
-			int check = 0;
-			
-			// ajax 요청으로부터 받은 값 받아오기 
-			String nick = request.getParameter("nickname");
-			System.out.println(nick);
-			
-			
-			for(int i=0; i<result.size(); i++) 
-			{
-				//System.out.println();
-				if( nick.equals( result.get(i).getNickname() )==true )
-				{	
-					// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
-					check = 1;
-					//System.out.println("중복됨");
-				}
+			join = dao.findId(dto);
+			if(name.equals( join.getName()))
+			{	
+				//System.out.println("회원정보있다~!");
+				model.addAttribute("join", join);
+				view = "/UserFindIdCheck.jsp";
 			}
-			System.out.println(check);
-			//model.addAttribute("list", dao.list());
-			model.addAttribute("check",check);
-			
-			view = "/ajax.jsp";
-			return view;
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+			System.out.println("회원정보없다.");
+			view = "/UserFindId.jsp";
 		}
 		
+		join =	dao.findId(dto);
+		
+		//회원정보가 없을시 
 		
 		
-		@RequestMapping(value = "/telcheck.action", method =RequestMethod.GET)
-		public String telcheck(Model model,HttpServletRequest request)
+		// 회원정보가 있을시 
+		
+		
+		
+		
+		
+		
+		return view;
+	}
+	
+	// 아이디찾기 메인 
+	@RequestMapping(value = "/userfindid.action", method =RequestMethod.GET)
+	public String userFindId()
+	{
+		
+		
+		return "/UserFindId.jsp";
+	}
+	
+	// 비밀번호찾기 메인
+	@RequestMapping(value = "/userfindpw.action", method =RequestMethod.GET)
+	public String userFindPw(Model model,HttpServletRequest request)
+	{
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		HttpSession session = request.getSession();
+	     
+	    
+	    
+	    
+		model.addAttribute("pwList", dao.pwList());
+		
+		return "/UserPasswordFind.jsp";
+	}
+	
+	
+	@RequestMapping(value = "/findpwcheck.action", method =RequestMethod.GET)
+	public String findPwCheck(Model model,HttpServletRequest request)
+	{
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		
+		model.addAttribute("pwList", dao.pwList());
+		
+		String id = request.getParameter("id");
+		String question = request.getParameter("question");
+		String answer = request.getParameter("answer");
+		
+		
+		 
+		JoinDTO dto = new JoinDTO();
+		dto.setId(id);
+		dto.setPw_question_type_code(question);
+		dto.setPw_answer(answer);
+		String pw = dao.findPw(dto);
+		//System.out.println(pw);
+		
+		if(pw==null)
 		{
-			String view = null; 
-			String tel = request.getParameter("tel");
-			//System.out.println(tel);
-			
-			
-			
-			String check = Send.send(tel.trim());
-			//System.out.println("??");
-			
-			
-			model.addAttribute("check",check);
-			
-			view = "/ajax.jsp";
-			
-			return view;
-		}
-		
-		@RequestMapping(value = "/idcheckfind.action", method =RequestMethod.GET)
-		public String idCheck(Model model,HttpServletRequest request)
-		{
-			String view = null; 
-			String tel1 = (request.getParameter("num1") + request.getParameter("num2")).trim();
-			//System.out.println(tel);
-			String tel  = tel1.substring(0,3)+"-"+tel1.substring(3,7)+"-"+tel1.substring(7,11);
-			String name = request.getParameter("name");
-			/*
-			 * System.out.println(name); System.out.println(tel);
-			 */
-			
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			JoinDTO dto = new JoinDTO();
-			dto.setTel(tel);
-			dto.setName(name);
-			JoinDTO join = new JoinDTO();
-			
-			try
-			{
-				join = dao.findId(dto);
-				if(name.equals( join.getName()))
-				{	
-					//System.out.println("회원정보있다~!");
-					model.addAttribute("join", join);
-					view = "/UserFindIdCheck.jsp";
-				}
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-				System.out.println("회원정보없다.");
-				view = "/UserFindId.jsp";
-			}
-			
-			join =	dao.findId(dto);
-			
-			//회원정보가 없을시 
-			
-			
-			// 회원정보가 있을시 
-			
-			
-			
-			
-			
-			
-			return view;
-		}
-		
-		// 아이디찾기 메인 
-		@RequestMapping(value = "/userfindid.action", method =RequestMethod.GET)
-		public String userFindId()
-		{
-			
-			
-			return "/UserFindId.jsp";
-		}
-		
-		// 비밀번호찾기 메인
-		@RequestMapping(value = "/userfindpw.action", method =RequestMethod.GET)
-		public String userFindPw(Model model,HttpServletRequest request)
-		{
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
-			HttpSession session = request.getSession();
-	         
-	        
-	        
-	        
-			model.addAttribute("pwList", dao.pwList());
-			
+			// 정보를 찾을수없어서 다시 입력받게함
 			return "/UserPasswordFind.jsp";
 		}
 		
+		model.addAttribute("id", id);
 		
-		@RequestMapping(value = "/findpwcheck.action", method =RequestMethod.GET)
-		public String findPwCheck(Model model,HttpServletRequest request)
-		{
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
-			model.addAttribute("pwList", dao.pwList());
-			
-			String id = request.getParameter("id");
-			String question = request.getParameter("question");
-			String answer = request.getParameter("answer");
-			
-			
-			 
-			JoinDTO dto = new JoinDTO();
-			dto.setId(id);
-			dto.setPw_question_type_code(question);
-			dto.setPw_answer(answer);
-			String pw = dao.findPw(dto);
-			//System.out.println(pw);
-			
-			if(pw==null)
-			{
-				// 정보를 찾을수없어서 다시 입력받게함
-				return "/UserPasswordFind.jsp";
-			}
-			
-			model.addAttribute("id", id);
-			
-			return "/UserPasswordFindCheck.jsp";
-		}
+		return "/UserPasswordFindCheck.jsp";
+	}
+	
+	
+	
+	@RequestMapping(value = "/pwset.action", method =RequestMethod.GET)
+	public String pwSet(Model model,HttpServletRequest request)
+	{
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
 		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
 		
-
-		@RequestMapping(value = "/pwset.action", method =RequestMethod.GET)
-		public String pwSet(Model model,HttpServletRequest request)
-		{
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			
-			JoinDTO dto = new JoinDTO();
-			
-			dto.setId(id);
-			dto.setPw(pw);
-			  
-			  dao.setPw(dto);
-			
-			return "/UserPasswordComplete.jsp";
-		}
+		JoinDTO dto = new JoinDTO();
 		
+		dto.setId(id);
+		dto.setPw(pw);
+		  
+		  dao.setPw(dto);
 		
-		// 탈퇴 메인 
-		@RequestMapping(value = "/leaveapply.action", method =RequestMethod.GET)
-		public String leaveApplyMain(Model model,HttpServletRequest request)
-		{
-			
-			return "/UserLeaveApply.jsp";
-		}
+		return "/UserPasswordComplete.jsp";
+	}
+	
+	
+	// 탈퇴 메인 
+	@RequestMapping(value = "/leaveapply.action", method =RequestMethod.GET)
+	public String leaveApplyMain(Model model,HttpServletRequest request)
+	{
 		
-		// 탈퇴 의사 페이지
-		@RequestMapping(value = "/leavecheck.action", method =RequestMethod.GET)
-		public String leaveCheck(Model model,HttpServletRequest request)
-		{
-			// 비밀번호 맞는지 확인
-			IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-			HttpSession session = request.getSession();
-	         
-	         SessionInfo info = (SessionInfo)session.getAttribute("user");
-	         // 아이디가져오기
-	         String id = info.getId();
-				/* System.out.println(id); */
-	         
-			String pwSession = dao.findPw2(id);
-			String pw = request.getParameter("pw");
-			/*
-			 * System.out.println("세션 pw : " + pwSession); System.out.println(pw);
-			 */
-			
-	        if(pw.equals(pwSession))
-	        	return "/UserLeaveCheck.jsp";
-	        else
-	        	return "/UserLeaveApply.jsp";
-		}
+		return "/UserLeaveApply.jsp";
+	}
+	
+	// 탈퇴 의사 페이지
+	@RequestMapping(value = "/leavecheck.action", method =RequestMethod.GET)
+	public String leaveCheck(Model model,HttpServletRequest request)
+	{
+		// 비밀번호 맞는지 확인
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
+		HttpSession session = request.getSession();
+	     
+	     SessionInfo info = (SessionInfo)session.getAttribute("user");
+	     // 아이디가져오기
+	     String id = info.getId();
+			/* System.out.println(id); */
+	     
+		String pwSession = dao.findPw2(id);
+		String pw = request.getParameter("pw");
+		/*
+		 * System.out.println("세션 pw : " + pwSession); System.out.println(pw);
+		 */
 		
-		// 탈퇴 처리 페이지
-		@RequestMapping(value = "/leave.action", method =RequestMethod.GET)
-		public String leave(Model model,HttpServletRequest request)
-		{
-			String id = request.getParameter("id");
-			String type = request.getParameter("type");
-			
-			ILeaveDAO dao = SqlSession.getMapper(ILeaveDAO.class);
-			String bUser = dao.getUser(id);
-			LeaveDTO dto = new LeaveDTO();
-			
-			/*
-			 * System.out.println(bUser); System.out.println(type);
-			 */
-			
-			dto.setB_user_code(bUser);
-			dto.setLeave_type_code(type);
-			
-			dao.leave(dto);
-			
-			// 세션도 끊음
-	          HttpSession session = request.getSession();
-	          
-	          session.removeAttribute("user");
-	          session.invalidate();
-			
-			
-			return "/UserLeaveApplyAccept.jsp";
-		}
+	    if(pw.equals(pwSession))
+	    	return "/UserLeaveCheck.jsp";
+	    else
+	    	return "/UserLeaveApply.jsp";
+	}
+	
+	// 탈퇴 처리 페이지
+	@RequestMapping(value = "/leave.action", method =RequestMethod.GET)
+	public String leave(Model model,HttpServletRequest request)
+	{
+		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+		
+		ILeaveDAO dao = SqlSession.getMapper(ILeaveDAO.class);
+		String bUser = dao.getUser(id);
+		LeaveDTO dto = new LeaveDTO();
+		
+		/*
+		 * System.out.println(bUser); System.out.println(type);
+		 */
+		
+		dto.setB_user_code(bUser);
+		dto.setLeave_type_code(type);
+		
+		dao.leave(dto);
+		
+		// 세션도 끊음
+	      HttpSession session = request.getSession();
+	      
+	      session.removeAttribute("user");
+	      session.invalidate();
 		
 		
+		return "/UserLeaveApplyAccept.jsp";
+	}
+	
+	
+	
+	// 휴면회원 메인 페이지 
+	@RequestMapping(value = "/restuserchange.action", method =RequestMethod.GET)
+	public String restUser(Model model,HttpServletRequest request)
+	{
 		
-		// 휴면회원 메인 페이지 
-		@RequestMapping(value = "/restuserchange.action", method =RequestMethod.GET)
-		public String restUser(Model model,HttpServletRequest request)
-		{
-			
-			//System.out.println("휴면오는지확인");
-			
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			
-			
-			  System.out.println("id " + id ); System.out.println("pw " + pw);
-			 
-			IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
-			
-			IUserDAO dao2 = SqlSession.getMapper(IUserDAO.class);
-			
-			
-			PasswordAnswerDTO dto = dao.getPasswordAnser(id);
-			
-			model.addAttribute("dto", dto);
-			model.addAttribute("b_user_code", dao2.getBUser(id));
-			//model.addAttribute("answer", dto.getPw_answer());
-			
-			//System.out.println(dto.getPw_answer());
-			
-			
-			
-			
-			return "/RestUserChange.jsp";
-		}
+		//System.out.println("휴면오는지확인");
 		
-		// 휴면회원 → 일반회원 액션
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
 		
-		@RequestMapping(value = "/restuseraction.action", method =RequestMethod.GET)
-		public String restAction(Model model,HttpServletRequest request)
-		{
-			
-			//System.out.println("휴면오는지확인");
-			
-			String b_user_code = request.getParameter("b_user_code");
-			
-			
-			 
-			IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
-			
-			
-			
-			//System.out.println(b_user_code);
-			
-			dao.delete(b_user_code);
-			
-			return "/Login.jsp";
-		}
+		
+		  System.out.println("id " + id ); System.out.println("pw " + pw);
+		 
+		IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
+		
+		IUserDAO dao2 = SqlSession.getMapper(IUserDAO.class);
+		
+		
+		PasswordAnswerDTO dto = dao.getPasswordAnser(id);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("b_user_code", dao2.getBUser(id));
+		//model.addAttribute("answer", dto.getPw_answer());
+		
+		//System.out.println(dto.getPw_answer());
+		
+		
+		
+		
+		return "/RestUserChange.jsp";
+	}
+	
+	// 휴면회원 → 일반회원 액션
+	
+	@RequestMapping(value = "/restuseraction.action", method =RequestMethod.GET)
+	public String restAction(Model model,HttpServletRequest request)
+	{
+		
+		//System.out.println("휴면오는지확인");
+		
+		String b_user_code = request.getParameter("b_user_code");
+		
+		
+		 
+		IPasswordAnswerDAO dao = SqlSession.getMapper(IPasswordAnswerDAO.class);
+		
+		
+		
+		//System.out.println(b_user_code);
+		
+		dao.delete(b_user_code);
+		
+		return "/Login.jsp";
+	}
 		
 }

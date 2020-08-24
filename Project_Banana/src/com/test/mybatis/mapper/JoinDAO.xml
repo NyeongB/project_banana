@@ -7,7 +7,6 @@
 <mapper namespace="com.banana.user.IJoinDAO">
 	
 	<select id="add" statementType="CALLABLE" >
-
      {call
      
      PRC_SIGNUP(#{loc_code},#{bank_type_code},#{pw_question_type_code},#{id},#{name}
@@ -15,7 +14,6 @@
      ,#{nickname},#{profile},#{g_cate_code},#{r_cate_code})
 
      }
-
 	</select>
 	
 	<select id="findId" resultType="com.banana.user.JoinDTO"> 

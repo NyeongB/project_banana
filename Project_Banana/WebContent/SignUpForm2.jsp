@@ -289,7 +289,7 @@ input
 		// 문자 인증 확인
 		$("#numBtn").click(function()
 		{
-			if($("#num").val()==phoneCheck)
+			if($("#num").val() == phoneCheck)
 			{
 				alert("인증번호 확인!");
 				statePhone =1;
@@ -305,7 +305,7 @@ input
 		// 인증번호 전송
 		$("#telBtn").click(function()
 		{
-			ajaxRequest3();
+			phoneRequest();
 		});
 		
 		// 아이디 중복검사 
@@ -457,16 +457,19 @@ input
 	
 	
 	// 휴대폰 인증 
-	function ajaxRequest3()
+	function phoneRequest()
 	{
-		
+		// 인증번호 발송 안내 메세지 출력	
 		alert("인증번호가 발송되었습니다.");
-		$.get("telcheck.action", {tel : $("#tel").val()}, function(data)
-		{
-			//alert(data);
-			phoneCheck = data.trim();
+		
+		// 휴대폰 인증 ajax 처리
+		$.get("telcheck.action"
+			, {tel : $("#tel").val()}
+			, function(data)
+			{
+				phoneCheck = data.trim();
 			
-		});
+			});
 		
 	}
 	
