@@ -33,7 +33,7 @@ public interface IJoinDAO
 	public ArrayList<LocDTO> locAjaxList(String loc);
 	
 	// 아이디 중복체크
-	public ArrayList<JoinDTO> userList();
+	public int userList(String id);
 	
 	// 닉네임 중복체크
 	public ArrayList<JoinDTO> nickList();

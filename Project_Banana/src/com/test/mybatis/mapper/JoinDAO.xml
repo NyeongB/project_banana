@@ -50,8 +50,10 @@
 	WHERE LOC_BCODE = #{loc}
 	</select> 
 	
-	<select id="userList" resultType="com.banana.user.JoinDTO">
-	SELECT ID FROM JOIN
+	<select id="userList" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM JOIN
+	WHERE ID = #{id}
 	</select> 
 	
 	<select id="nickList" resultType="com.banana.user.JoinDTO">

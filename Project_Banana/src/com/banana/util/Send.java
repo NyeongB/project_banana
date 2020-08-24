@@ -17,7 +17,7 @@ public class Send
 		
 		// 난수 발생을 위한 RandomCheck 클래스 객체 생성
 		RandomCheck rc = new RandomCheck();
-		// 난수 발생 메소드 호출
+		// 랜덤코드 발생 메소드
 		String str = rc.randomNum();
 		
 		// 문자 메세지 설정

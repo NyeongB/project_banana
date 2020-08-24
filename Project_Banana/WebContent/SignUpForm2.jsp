@@ -187,10 +187,10 @@ input
 	var numCheck = RegExp(/[^0-9]$/);
 	
 	// 정규식 한글만 2~6자리
-	var nameCheck =  /^[가-힣]{2,4}$/;
+	var nameCheck = RegExp(/^[가-힣]{2,4}$/);
 	
 	// 정규식 ID체크 소문자와 숫자 조합만
-	var userIdCheck = RegExp(/^[a-z0-9_\-]{5,20}$/);
+	var userIdCheck = RegExp(/^[a-z]+[a-z0-9]{5,19}$/g);
 	
 	$(document).ready(function()
 	{
@@ -289,13 +289,14 @@ input
 		// 문자 인증 확인
 		$("#numBtn").click(function()
 		{
+			// 랜덤코드가 일치하는 경우
 			if($("#num").val() == phoneCheck)
 			{
 				alert("인증번호 확인!");
 				statePhone =1;
 			}
 			else
-			{
+			{	// 랜덤코드가 일치하지 않은 경우
 				alert("인증번호가 같지않습니다.");
 				statePhone = 0;
 			}
@@ -305,29 +306,28 @@ input
 		// 인증번호 전송
 		$("#telBtn").click(function()
 		{
+			// 휴대폰 인증 발송 메소드 phoneRequest() 호출
 			phoneRequest();
 		});
 		
-		// 아이디 중복검사 
+		// 아이디 유효성 검사 
 		$("#idBtn").click(function()
 		{
-			
-			
-			
+			// 아이디 미입력 시 
 			if( $("#id").val().trim()=="")
 			{
 				alert("아이디를 입력해야합니다.");
 				return;
 			}
-			
+			// 아이디 유효성 검사 (6 ~ 20 자리 소문자 ,숫자 조합만 가능)
 			if(!userIdCheck.test($("#id").val()))
 			{
 				alert("아이디는 6~20자리 소문자,숫자조합만 가능합니다.");
 				$("#id").val('');
 				return;
 			}
-			//alert("중복검사");
-			ajaxRequest1();
+			// 아이디 중복 체크 메소드 호출
+			idCheck();
 		});
 		
 		// 닉네임 중복검사 
@@ -395,35 +395,34 @@ input
 	}
 	
 	// 아이디 중복검사 ajax
-	function ajaxRequest1()
-	{
+	function idCheck()
+	{		
+		$.get("idcheck.action"
+			  , {id : $("#id").val()}
+			  , function(data)
+			   {
+				// 아이디가 중복인 경우
+				if(Number(data) > 0)
+				{
+					alert("중복된 아이디 입니다.");
+					
+					// 아이디 상태 변수
+					// 중복일 경우 stateId 를 0 
+					stateId = 0;
+					return;
+				}// 아이디가 중복되지 않은 경우
+				else
+				{
+					alert("사용가능한 아이디입니다.");
+					// 사용가능한 아이디일 경우 stateId를 1로 둔다
+					stateId = 1;
+					
+				}
 		
+			  });
 	
-		$.get("idcheck.action", {id : $("#id").val()}, function(data)
-		{
-		
-		if(Number(data) >0)
-		{
-			alert("아이디 중복 발생!!");
-			//alert("state : " + state);
-			stateId=0;
-			return;
-		}
-		else
-		{
-			// 아이디가 중복되지않음
-			// 상태를 1로 바꿈 
-			alert("사용가능한 아이디입니다.");
-			stateId = 1;
-			//alert("state : " + state);
-			
-		}
-		
-		
-		//$("#positionForm").submit();
-		
-	});
-		}
+	}
+	
 	// 닉네임 중복검사 ajax
 	function ajaxRequest2()
 	{
@@ -456,7 +455,7 @@ input
 		}
 	
 	
-	// 휴대폰 인증 
+	// 휴대폰 인증 메세지 발송 메소드
 	function phoneRequest()
 	{
 		// 인증번호 발송 안내 메세지 출력	

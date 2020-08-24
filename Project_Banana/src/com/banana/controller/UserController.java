@@ -182,37 +182,24 @@ public class UserController
 		return view;
 	}
 	
-	// id 중복체크 ajax
+	// id 중복체크 ajax에서 요청한 주소에 매핑되는 메소드
 	@RequestMapping(value = "/idcheck.action", method =RequestMethod.GET)
 	public String userCheck(Model model, HttpServletRequest request)
 	{
 		
 		String view = null; 
 		
-		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);
-		
-		ArrayList<JoinDTO> result = dao.userList();
-		
-		int check = 0;
-		
-		// ajax 요청으로부터 받은 값 받아오기 
-		String id = request.getParameter("id");
-		//System.out.println(admin);
-		
-		
-		for(int i=0; i<result.size(); i++) 
-		{
+		IJoinDAO dao = SqlSession.getMapper(IJoinDAO.class);		
 				
-			if( id.equals( result.get(i).getId() )==true )
-			{	
-				// 하나라도 같은값이 있으면 check상태를 1로 바꿈 
-				check = 1;
-				//System.out.println("중복됨");
-			}
-		}
+		// ajax 요청으로부터 받은 아이디 받아오기 
+		String id = request.getParameter("id");		
+
+		// count가 0일 때 중복 되지 않음 1일 때 중복 
+		int result = dao.userList(id);
 		
-		//model.addAttribute("list", dao.list());
-		model.addAttribute("check",check);
+		
+		// 중복 여부를 model에 넣어준다.
+		model.addAttribute("check",result);
 		
 		view = "/ajax.jsp";
 		return view;
@@ -255,18 +242,19 @@ public class UserController
 	}
 		
 		
-	// 휴대폰 인증 메소드
+	// 휴대폰 인증 랜덤코드 발생 매핑 메소드
 	@RequestMapping(value = "/telcheck.action", method = RequestMethod.GET)
 	public String telcheck(Model model,HttpServletRequest request)
 	{
 		
 		String view = null;
 		// 사용자가 입력한 휴대폰은 넘겨 받는다.
-		String tel = request.getParameter("tel");
+		String tel = request.getParameter("tel");		
 		
-		
+		// send() 메소드를 통해 리턴받은 난수 
 		String check = Send.send(tel.trim());
 		
+		// 난수를 담은 check를  model 에 저장 
 		model.addAttribute("check",check);
 		
 		view = "/ajax.jsp";

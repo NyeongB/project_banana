@@ -2,18 +2,19 @@ package com.banana.util;
 
 import java.util.Random;
 
-// 난수 발생 클래스
+//  랜덤코드 생성 클래스
 public class RandomCheck
 {
 	
-	// 난수 발생을 위한 메소드
+	// 랜덤코드 생성을 위한 메소드
 	public String randomNum()
 	{
 
 		// 난수 발생 문자  
 		final char[] possibleCharacters =
-		{ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-				'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+		{ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+		, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'
+		, 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 		
 		// 난수 발생 문자 배열의 길이를 저장
 		final int possibleCharacterCount = possibleCharacters.length;
@@ -34,6 +35,7 @@ public class RandomCheck
 		// StringBuffer 를 String으로 변환
 		String randomNum = buf.toString();
 		
+		// 랜덤코드 리턴
 		return randomNum;
 	}
 }
