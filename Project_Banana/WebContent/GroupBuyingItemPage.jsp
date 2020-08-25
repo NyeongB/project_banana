@@ -8,20 +8,15 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<%
-      
-		session = request.getSession();
-
-		SessionInfo info = (SessionInfo)session.getAttribute("user");
-        
-        String postcode = request.getParameter("postcode");
-			
-        session.setAttribute("postcode", postcode);
-        // 확인
-        //System.out.println(session.getAttribute("postcode"));
-        
-        
-       /*  String nickName = info.getNickname(); */
+<%  
+	// 세션 받아오기
+	session = request.getSession();	
+	// 세션에서 사용자 정보 받아오기
+	SessionInfo info = (SessionInfo)session.getAttribute("user");
+	// 게시물 코드 받아오기      
+	String postcode = request.getParameter("postcode");
+	// 게시물 코드 세션에 저장하기	
+	session.setAttribute("postcode", postcode);  
 
 %>
 
@@ -297,108 +292,104 @@ textarea
 		});
 		
 		$("#qa").click(function() 
+		{
+			$("html, body").animate({scrollTop : $(document).height() }, "slow");	
+			
+		});
+		
+		$(function() 
+		{
+			var dBtn = $(".nav ul > li");
+			dBtn.find("a").click(function()
+			{
+				dBtn.removeClass("active");
+				$(this).parent().addClass("active");
+				
+				
+			});
+		});
+				
+		
+		// 댓글 등록
+		$("#replyinsert").click(function() 
+		{
+			var id1 = "<%=info %>";
+			   
+			
+			if(id1 == "null" || id1 ==" " )
+			{
+				if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
 				{
-					$("html, body").animate({scrollTop : $(document).height() }, "slow");	
+					// 확인 버튼 클릭 시 동작
 					
-				});
-				
-				$(function() 
-				{
-					var dBtn = $(".nav ul > li");
-					dBtn.find("a").click(function()
-					{
-						dBtn.removeClass("active");
-						$(this).parent().addClass("active");
+					location.href = "loginmain.action";
 						
-						
-					});
-				});
-				
-				
-				
-				
-				
-				
-				// 댓글 등록
-				$("#replyinsert").click(function() 
+				}
+				else // 취소 버튼 클릭 시 동작
 				{
-					var id1 = "<%=info %>";
-					   
+					location.href = "redirect:groupbuyingitempage.action";
+				}
+			}
+			else// 회원이면
+			{
+				
+				<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
+				   
+				var replyCode = "<%=r_replycode %>"; --%>
+				
+				
+				
+				// replyCode 가 null이면 댓글 작성
+				if(replyCode == null ) 
+				{
+					var formData = $("#replyForm").serialize();
 					
-					if(id1 == "null" || id1 ==" " )
-					{
-						if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+					$.ajax({
+						
+						type : "POST"
+						, url : "g_replyinsert.action"
+						, data : formData
+						, success : function(data) 
 						{
-							// 확인 버튼 클릭 시 동작
-							
-							location.href = "loginmain.action";
-								
+							$("#resultReply").html(data);
+							$(".reply").val("");
 						}
-						else // 취소 버튼 클릭 시 동작
+					,error:function(request,status,error)
+	                  {
+	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                  }    
+						
+					});// end ajax	
+				
+				}else// 댓글 코드 가지고 있으면(null 아니면) 대댓글 작성
+				{
+					
+				
+					var formData = document.getElementById("reply_text").innerHTML;
+					console.log(formData);
+					
+					
+					$.ajax({
+						
+						type : "POST"
+						, url : "g_rreplyinsert.action" 
+						, data : {formData :formData, replyCode:replyCode}
+						, success : function(data) 
 						{
-							location.href = "redirect:groupbuyingitempage.action";
+							$("#resultReply").html(data);
+							$(".reply").val("");
 						}
-					}
-					else// 회원이면
-					{
-						
-						<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
-						   
-						var replyCode = "<%=r_replycode %>"; --%>
-						
-						
-						
-						// replyCode 가 null이면 댓글 작성
-						if(replyCode == null ) 
-						{
-							var formData = $("#replyForm").serialize();
-							
-							$.ajax({
-								
-								type : "POST"
-								, url : "g_replyinsert.action"
-								, data : formData
-								, success : function(data) 
-								{
-									$("#resultReply").html(data);
-									$(".reply").val("");
-								}
-							,error:function(request,status,error)
-			                  {
-			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			                  }    
-								
-							});// end ajax	
-						
-						}else// 댓글 코드 가지고 있으면(null 아니면) 대댓글 작성
-						{
-							
-						
-							var formData = document.getElementById("reply_text").innerHTML;
-							console.log(formData);
-							
-							
-							$.ajax({
-								
-								type : "POST"
-								, url : "g_rreplyinsert.action" 
-								, data : {formData :formData, replyCode:replyCode}
-								, success : function(data) 
-								{
-									$("#resultReply").html(data);
-									$(".reply").val("");
-								}
-								,error:function(request,status,error)
-			                  {
-			                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			                  }      
-							});	 
-						}
-						
-					}	
+						,error:function(request,status,error)
+	                  {
+	                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                  }      
+					});	 
+				}
+				
+			}	
 
-				});	
-				
+		});	
+		
 			
 				
 				
@@ -465,85 +456,72 @@ textarea
  */
  
  
-//찜 추가
- function jjim() 
- {
- 	
- 	var id1 = "<%=info %>";
-    
-    
-    
- 	
-    if(id1 == "null" || id1 ==" " )
- 	{
- 		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
- 		{
- 			// 확인 버튼 클릭 시 동작
- 			
- 			location.href = "loginmain.action";
- 				
- 		}else // 취소 버튼 클릭 시 동작
- 		{
- 				location.href = "redirect:groupbuyingitempage.action";
- 		}
- 	}
- 	else // 회원이면
- 	{
-         
- 		if(confirm("찜 목록에 추가하시겠습니까?"))
- 		{
- 			
- 			// 확인 버튼 클릭 시 동작
- 			$.get("gjjiminsert.action", function(data) 
- 			{
- 				alert(data);
- 			});
- 			
- 		}else // 취소 버튼 클릭 시 동작
- 		{
- 			location.href = "redirect:groupbuyingitempage.action";
- 		}
- 		
- 		
- 		
- 	}
- 	
- 	
- 	
- }
- 
- 
-
-function orderItem(obj)
-{
-	a = obj.getAttribute("id");
-
-	//alert(${count});
-	//alert(${member});
-	
-	if(${count}>=${member})
+	// 찜 추가
+	function jjim() 
 	{
-		alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
-		$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
-		return;
-	} 
+		// 사용자 아이디 받아오기
+		var id1 = "<%=info %>";	   
+		
+		// 비 로그인시
+		if(id1 == "null" || id1 ==" " )
+		{
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 메인으로 돌아간다				
+				location.href = "loginmain.action";
+					
+			}else // 취소 버튼 클릭 시 동작
+			{
+					location.href = "redirect:groupbuyingitempage.action";
+			}
+		}
+		else // 회원이면
+		{		       
+			if(confirm("찜 목록에 추가하시겠습니까?"))
+			{				
+				// 확인 버튼 클릭 시 gjjiminsert.action 주소 요청
+				$.get("gjjiminsert.action"
+				, function(data) 
+				{
+					alert(data);
+				});
+				
+			}else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingitempage.action";
+			}					
+			
+		}
+				
+	}
+		
 	
-	$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
-}
-
-function sendMsg()
-{
-	userCode = document.getElementById("userCode").value;
-	nickName = document.getElementById("nickName").value;
-	myUserCode = document.getElementById("myUserCode").value;
+	function orderItem(obj)
+	{
+		a = obj.getAttribute("id");
+			
+		if(${count}>=${member})
+		{
+			alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
+			$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
+			return;
+		} 
+		
+		$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
+	}
 	
-	 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
-     var name = "";
-     var option = "width = 350, height = 340, top = 100, left = 200, location = no"
-     window.open(url, name, option);
-	
-	
-}
+	function sendMsg()
+	{
+		userCode = document.getElementById("userCode").value;
+		nickName = document.getElementById("nickName").value;
+		myUserCode = document.getElementById("myUserCode").value;
+		
+		 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
+	     var name = "";
+	     var option = "width = 350, height = 340, top = 100, left = 200, location = no"
+	     window.open(url, name, option);
+				
+	}
 
 </script>
 

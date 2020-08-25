@@ -473,13 +473,14 @@ input
 	}
 	
 	
-	// 주소
+	// 주소 API 
 	function execDaumPostcode()
 	{
 		new daum.Postcode(
 		{
-			oncomplete : function(data)
-			{
+			oncomplete : function(data)		// data는 사용자가 선택한 주소 정보를 담고 있는 객체 
+			{	
+				// 해당 정보를 받아서 처리할 콜백함수를 정의하는 부분
 				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
 				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
@@ -507,9 +508,7 @@ input
 
 				// 우편번호와 주소 정보를 해당 필드에 넣는다.
 				document.getElementById("postcode").value = data.zonecode;
-				document.getElementById("roadAddress").value = roadAddr;
-
-				
+				document.getElementById("roadAddress").value = roadAddr;	
 
 				
 			}

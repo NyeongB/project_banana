@@ -121,101 +121,105 @@ input
 </style>
 
 <script type="text/javascript">
-var point=0;
-var type;
-$(document).ready(function()
-{
-	$("#payment").click(function()
-	{	
+
+	// 충천할 포인트
+	var point = 0;
+	// 충전 타입
+	var type;
+	
+	$(document).ready(function()
+	{
+		// 충전버튼 클릭 시 이벤트 
+		$("#payment").click(function()
+		{	
+			
+			//alert("결제요청");
+			//alert("결제 금액 : " + point + "결제 타입 : " + type);
+			
+			// 충전 타입 
+			if(type=='type1')
+	  			t = 'trans';		// 계좌이체
+	  		else if(type=='type2')
+	  			t = 'card';			// 카드
+	  		else if(type=='type3')
+	  			t = 'phone';		// 휴대폰결제			
+			
+			requestPay(point,t);
+		});
 		
-		//alert("결제요청");
-		//alert("결제 금액 : " + point + "결제 타입 : " + type);
-		
-		if(type=='type1')
-  		t='trans';
-  		else if(type=='type2')
-  		t='card';
-  		else if(type=='type3')
-  		t='phone';
-		
-		
-		
-		requestPay(point,t);
+		$("#cancel").click(function()
+		{
+			alert("취소");
+		});
 	});
 	
-	$("#cancel").click(function()
-	{
-		alert("취소");
-	});
-});
-
-
-
-
-function requestPay(p,t) {
-	IMP.init('imp63967210');
-    // IMP.request_pay(param, callback) 호출
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : t, //card 
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'BANANA401 : 포인트 결제',
-	    amount : p,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        alert(msg);
-	        
-	        
-	        
-	        // 결제 완료시 결제창으로 이동
-	        // 가격과 결제유형 같이 넘ㄱ
-	        location.href="<%=cp%>/pointcharge.action?point="+p+"&type="+t;
-	        
-	        
-	        /* msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num; */
-	        
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        alert(msg);
-	    }
-	    
-	});
-  }
+	// 이니시스 결제 API
+	function requestPay(p,t) 
+	{	
+		IMP.init('imp63967210');
+	    // IMP.request_pay(param, callback) 호출
+		IMP.request_pay({
+			
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : t, //card 
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : 'BANANA401 : 포인트 결제',
+		    amount : p,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		},function(rsp)
+		{
+			
+		   if ( rsp.success ) 
+		   {
+		        var msg = '결제가 완료되었습니다.';
+		        alert(msg);
+		        		        
+		        // 결제 완료시 사용자 포인트 update하기 위해 주소 요청
+		        // 가격과 결제유형 같이 넘긴다
+		        location.href = "<%=cp%>/pointcharge.action?point=" + p + "&type="+ t;		        
+		        
+		    }else 
+		    {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        alert(msg);
+		    }
+		    
+		});
+	  }
   
-  function getPoint(id)
-{
+	 // 사용자가 선택한 포인트 설정 
+	 function getPoint(id)
+	 {
+		point = Number(id);
+		// 사용자가 선택한 포인트 노출
+		document.getElementById('point').innerHTML = point;
+
+	 }
 	  
-	//alert(id);
-	point = Number(id);
-	document.getElementById('point').innerHTML=point;
-
-}
-  
-  function getType(id)
-  {
-  	var typeText;
-  	type = id;
-  	//alert(id);
-  	if(id=='type1')
-  		typeText='실시간 계좌이체';
-  	else if(id=='type2')
-  		typeText='카드 결제';
-  	else if(id=='type3')
-  		typeText='휴대폰 결제';
-  	document.getElementById('type').innerHTML=typeText;
-
-  }
+	// 사용자가 선택한 결제타입 설정
+	function getType(id)
+	{
+		var typeText;
+		type = id;
+		
+		// 결제 타입 분기
+		if(id=='type1')
+			typeText='실시간 계좌이체';
+		else if(id=='type2')
+			typeText='카드 결제';
+		else if(id=='type3')
+			typeText='휴대폰 결제';
+		
+		// 사용자가 선택한 결제 타입 노출
+		document.getElementById('type').innerHTML=typeText;
+	
+	}
 
 </script>
 
@@ -249,7 +253,7 @@ function requestPay(p,t) {
 					
 						<div class="row">
 							<div class="col-md-12 point1">
-								<h3>포인트 충전</h3>
+								<h3 class="thick">포인트 충전</h3>
 								<hr><br><br>
 							</div>
 						</div> <!-- end 포인트 충전 div -->
@@ -260,13 +264,13 @@ function requestPay(p,t) {
 
 								<div class="row">
 									<div class="col-md-12"> 
-										<h2>충전할 금액</h2>
+										<h2 class="thick">충전할 금액</h2>
 									</div>
 								</div><br>
 						
 								<div class="row">
 									<div class="col-md-12 check" > 
-									   <label for="m5000"><input type="radio" name="charge" id="5000" onclick="getPoint(this.id)">5,000원</label>
+									   <label for="m5000"><input type="radio" name="charge" id="5000"   onclick="getPoint(this.id)">5,000원</label>
 									   <label for="m10000"><input type="radio" name="charge" id="10000" onclick="getPoint(this.id)">10,000원</label>
 									   <label for="m20000"><input type="radio" name="charge" id="20000" onclick="getPoint(this.id)">20,000원</label>
 									   <label for="m30000"><input type="radio" name="charge" id="30000" onclick="getPoint(this.id)">30,000원</label>
@@ -294,7 +298,7 @@ function requestPay(p,t) {
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
-										<h2>결제 수단</h2>
+										<h2 class="thick">결제 수단</h2>
 									
 									</div>
 								</div><br>

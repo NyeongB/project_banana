@@ -7,13 +7,11 @@
 <mapper namespace="com.banana.my.IPointChargeDAO">
 	
 	<select id="pointCharge" statementType="CALLABLE" >
-
      {call
      
       prc_point_charge(#{b_user_code},#{point}, #{type})
 
      }
-
    </select>
 	
 	
