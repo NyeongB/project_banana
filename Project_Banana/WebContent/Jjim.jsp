@@ -18,12 +18,11 @@
 <script type="text/javascript" src="<%=cp%>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
+	// 관심도 유효성 검사
 	function checkRating()
 	{
 		const rating = document.getElementById("rating").value;
-		
-		alert(rating);
-		
+				
 		// 미입력 시
 		if(rating == "" || rating == " ")
 		{

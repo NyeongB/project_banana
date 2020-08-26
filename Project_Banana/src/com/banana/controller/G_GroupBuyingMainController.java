@@ -474,25 +474,23 @@ public class G_GroupBuyingMainController
 		 
 		 try 
 		 {
-		
-			 
+				 
 			 HttpSession session = request.getSession();
 			 
 			 String gpostCode = (String)session.getAttribute("postcode");
 			 SessionInfo info = (SessionInfo)session.getAttribute("user");
 			 String UserCode = info.getB_user_code();
-			
-			 //System.out.println(rpostCode);
-			 //System.out.println(UserCode);
 			 
+			 // 사용자 점수 받아오기			
+			 double rating = Double.parseDouble(request.getParameter("rating"));
 			 GPostDTO dto = new GPostDTO();
 			 dto.setG_post_code(gpostCode);
 			 dto.setB_user_code(UserCode);
+			 dto.setRating(rating);
 			 
 			 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
 			
-			 dao.GJjim(dto);
-		 
+			 dao.GJjim(dto); 
 			
 			 
 			 view = "/AjaxJJimComplete.jsp";
