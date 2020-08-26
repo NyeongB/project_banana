@@ -123,7 +123,8 @@ img
 								<th>가격</th>
 								<th>거래지역</th>
 								<th>거래자 닉네임</th>
-								<th>등록 날짜</th>
+								<th>등록날짜</th>
+								<th>관심도</th>
 							</tr>
 						</thead>
 						<c:forEach var="jjims" items="${jjim }" varStatus="status">
@@ -143,6 +144,7 @@ img
 								<td>${jjims.loc_name }</td>
 								<td>${jjims.nickname }</td>
 								<td>${jjims.sdate }</td>
+								<td>${jjims.rating }</td>
 							</tr>
 						</c:forEach>
 							

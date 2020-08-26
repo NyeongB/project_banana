@@ -20,13 +20,25 @@ public class GPostDTO
 	
 	// 리뷰를 위한
 	private String review;
+
 	private int star;
 	
+	// 찜 점수
+	private double rating;
 	
-	//getter/setter 설정	
+	//getter/setter 설정
+
 	public String getReview()
 	{
 		return review;
+	}
+	public double getRating()
+	{
+		return rating;
+	}
+	public void setRating(double rating)
+	{
+		this.rating = rating;
 	}
 	public int getStar()
 	{

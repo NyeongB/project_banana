@@ -244,21 +244,21 @@ function logincheck()
 	
 	
 
- $(document).ready(function() 
-{
-	
-	 $( ".top" ).click( function() {
-			$( "html, body" ).animate( { scrollTop : 0 }, 400 );
-			return false;
-		} );
+	 $(document).ready(function() 
+	{
 		
-		
-		$(".bottom").click(function() 
-		{
-			$("html, body").animate({scrollTop: $(document).height() }, "slow");
-			return false;
-		});
-});
+		 $( ".top" ).click( function() {
+				$( "html, body" ).animate( { scrollTop : 0 }, 400 );
+				return false;
+			} );
+			
+			
+			$(".bottom").click(function() 
+			{
+				$("html, body").animate({scrollTop: $(document).height() }, "slow");
+				return false;
+			});
+	});
 
 	
 	function goList(obj)

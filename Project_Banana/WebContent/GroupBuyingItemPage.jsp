@@ -257,6 +257,59 @@ textarea
 </style>
 
 <script type="text/javascript">
+
+	// 찜 추가
+	function jjim() 
+	{
+		// 사용자 아이디 받아오기
+		var id1 = "<%=info %>";	   
+		
+		// 비 로그인시
+		if(id1 == "null" || id1 ==" " )
+		{
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 메인으로 돌아간다				
+				location.href = "loginmain.action";
+					
+			}else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingitempage.action";
+			}
+		}
+		else // 회원이면
+		{		       
+			if(confirm("찜 목록에 추가하시겠습니까?"))
+			{		
+				
+				var url = "Jjim.jsp";
+			    var name = "";
+			    var option = "width = 350, height = 160, top = 100, left = 200, location = no";
+			    window.open(url, name, option);		
+				
+				
+				//const rating = prompt("상품의 관심도를 입력해주세요 (0 ~ 5 사이의값 소수도 가능)");
+				
+				// 확인 버튼 클릭 시 gjjiminsert.action 주소 요청
+				/* $.get("gjjiminsert.action"
+				, function(data) 
+				{
+					alert(data);
+				}); */
+				
+			}else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:groupbuyingitempage.action";
+			}					
+			
+		}
+				
+	}
+
+
+
+
+
 	var replyCode;
 	<%-- var nick = "<%=nickName %>"; --%>
 	
@@ -442,58 +495,6 @@ textarea
 		
 	}
 
-	
-	
-
-/* function test()
-{
-	//alert("확인");
-	
-	var title = "<c:out value='${title}'/>";
-	
-	window.location.replace("groupbuyingitempage.action?title="+title+"&postcode="+a);
-}
- */
- 
- 
-	// 찜 추가
-	function jjim() 
-	{
-		// 사용자 아이디 받아오기
-		var id1 = "<%=info %>";	   
-		
-		// 비 로그인시
-		if(id1 == "null" || id1 ==" " )
-		{
-			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
-			{
-				// 확인 버튼 클릭 시 메인으로 돌아간다				
-				location.href = "loginmain.action";
-					
-			}else // 취소 버튼 클릭 시 동작
-			{
-					location.href = "redirect:groupbuyingitempage.action";
-			}
-		}
-		else // 회원이면
-		{		       
-			if(confirm("찜 목록에 추가하시겠습니까?"))
-			{				
-				// 확인 버튼 클릭 시 gjjiminsert.action 주소 요청
-				$.get("gjjiminsert.action"
-				, function(data) 
-				{
-					alert(data);
-				});
-				
-			}else // 취소 버튼 클릭 시 동작
-			{
-				location.href = "redirect:groupbuyingitempage.action";
-			}					
-			
-		}
-				
-	}
 		
 	
 	function orderItem(obj)
@@ -510,6 +511,7 @@ textarea
 		$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 	}
 	
+	// 메세지 발신 메소드
 	function sendMsg()
 	{
 		userCode = document.getElementById("userCode").value;
