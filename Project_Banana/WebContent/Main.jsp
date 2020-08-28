@@ -127,6 +127,13 @@ li {
 	}
 	
 	
+	function goReng()
+	{
+		
+		location.href="r_main.action";
+		
+	}
+	
 </script>
 
 
