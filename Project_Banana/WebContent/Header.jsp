@@ -111,7 +111,7 @@ hr
 }
 .search
 {
-	margin-bottom: 0px;
+	margin-bottom: 0px!important;
 
 }
 

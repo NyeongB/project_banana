@@ -102,8 +102,7 @@ public class G_GroupBuyingMainController
 		}
 		
 	
-	  // 소분류 불러오는 메소드(G_CateMain에서 G_CateSMain으로 넘어감)
-	 
+	  // 소분류 불러오는 메소드(G_CateMain에서 G_CateSMain으로 넘어감)	 
 	  @RequestMapping(value = "/g_catesmain.action", method = RequestMethod.GET)
 	  public String cateList(Model model, String bid, String mid, HttpServletRequest request) 
 	  { 
@@ -161,10 +160,8 @@ public class G_GroupBuyingMainController
 		  return view; 
 	  }
 	  
-	  //공동구매 메인 부르기
-	  
-	
-	@RequestMapping(value = "/g_main.action", method = RequestMethod.GET)
+	  //공동구매 메인 부르기	
+	  @RequestMapping(value = "/g_main.action", method = RequestMethod.GET)
 	  public String gMain(Model model, HttpServletRequest request) 
 	  { 
 		  String view = null;
@@ -289,13 +286,13 @@ public class G_GroupBuyingMainController
 					member = list.get(0).getMember_num();
 				}
 				//String title = list.get(0).getTitle();
-				
+				String endDate = list.get(0).getEnd_date();
 				model.addAttribute("greplyList", dao2.greplyList(code));
 				model.addAttribute("gPostDetailList",dao.gPostDetailList(dto));
 				model.addAttribute("count", dao.gApplyCount(dto));
 				model.addAttribute("member", member);
 				model.addAttribute("userCode", userCode);
-				//model.addAttribute("title", title);
+				model.addAttribute("endDate", endDate);
 				
 				
 			} catch (Exception e)
@@ -311,50 +308,47 @@ public class G_GroupBuyingMainController
 	  
 	  
 		
-	  //주문상세 확인 페이지
-	  @RequestMapping(value = "/groupbuyingjumunconfirm.action", method =RequestMethod.GET)
-		public String GroupBuyingJumunConfirm(Model model,HttpServletRequest request)
+	// 주문 확인 상세 페이지
+	@RequestMapping(value = "/groupbuyingjumunconfirm.action", method =RequestMethod.GET)
+	public String GroupBuyingJumunConfirm(Model model,HttpServletRequest request)
+	{
+		String view = null; 
+		
+		try
 		{
-			String view = null; 
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);			
+			IMyPointDAO pointdao = SqlSession.getMapper(IMyPointDAO.class);
 			
-			try
-			{
-				IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-				
-				IMyPointDAO pointdao = SqlSession.getMapper(IMyPointDAO.class);
-				
-				// 세션 찾기
-				HttpSession session = request.getSession();		
-				SessionInfo info = (SessionInfo) session.getAttribute("user");
-				
-				if(info == null)
-					return "/loginmain.action";
-				
-				String b_user_code = info.getB_user_code();
-				
-				String code = request.getParameter("postcode"); 
-				//System.out.println(code);
-				GPostDTO dto = new GPostDTO();
-				dto.setG_post_code(code);
-				IndexDTO dto2 = new IndexDTO();
-				dto2.setB_user_code(b_user_code);
-				model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
-				model.addAttribute("pointList", pointdao.pointList(dto2));	
-				model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));
-				
-				
-				
-				
-				
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-			}
+			// 세션에서 사용자 정보 가져오기
+			HttpSession session = request.getSession();		
+			SessionInfo info = (SessionInfo) session.getAttribute("user");
 			
-			view = "/G_GroupBuyingJumunConfirm.jsp";
+			// 비 로그인시 로그인 페이지로 돌아간다.
+			if(info == null)
+				return "/loginmain.action";
 			
-			return view;
+			// f
+			String b_user_code = info.getB_user_code();
+			
+			String code = request.getParameter("postcode"); 
+			//System.out.println(code);
+			GPostDTO dto = new GPostDTO();
+			dto.setG_post_code(code);
+			IndexDTO dto2 = new IndexDTO();
+			dto2.setB_user_code(b_user_code);
+			model.addAttribute("gPostConfirmList",dao.gPostDetailList(dto));
+			model.addAttribute("pointList", pointdao.pointList(dto2));	
+			model.addAttribute("sumPoint", pointdao.sumPoint(b_user_code));			
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
 		}
+		
+		view = "/G_GroupBuyingJumunConfirm.jsp";
+		
+		return view;
+	}
 	 
 	  //게시물 작성 시 대분류 카테고리 클릭 시 
 	  @RequestMapping(value = "/ajaxcate.action", method =RequestMethod.GET)
@@ -461,47 +455,44 @@ public class G_GroupBuyingMainController
 			
 			return view;
 		}
-
 	  
-	  
-	  
-	  
-	// 찜하기 클릭 시		
+	 // 찜하기 클릭 시		
 	 @RequestMapping(value = "/gjjiminsert.action", method = RequestMethod.GET)
 	 public String gjjiminsert(HttpServletRequest request, HttpServletResponse response) 
 	 {
 		 String view = null;
 		 
 		 try 
-		 {
-				 
-			 HttpSession session = request.getSession();
+		 {	
+			 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
 			 
-			 String gpostCode = (String)session.getAttribute("postcode");
+			 // 세션에서 사용자 정보 받아오기
+			 HttpSession session = request.getSession();	 
 			 SessionInfo info = (SessionInfo)session.getAttribute("user");
 			 String UserCode = info.getB_user_code();
 			 
+			 // 세션에서 게시물 코드 받아오기
+			 String gpostCode = (String)session.getAttribute("postcode");
+			 
 			 // 사용자 점수 받아오기			
 			 double rating = Double.parseDouble(request.getParameter("rating"));
+			 
+			 // 받아온 데이터 dto 저장
 			 GPostDTO dto = new GPostDTO();
 			 dto.setG_post_code(gpostCode);
 			 dto.setB_user_code(UserCode);
 			 dto.setRating(rating);
 			 
-			 IGJjimDAO dao = SqlSession.getMapper(IGJjimDAO.class);
-			
-			 dao.GJjim(dto); 
-			
 			 
-			 view = "/AjaxJJimComplete.jsp";
+			 // DB에 찜데이터 입력
+			 dao.GJjim(dto); 			 
 			 
 		 }catch(Exception e)
 		 {
 		  	 System.out.println(e.toString());
 		 }
-		 
-		 
-		 
+		 		 
+		 view = "/AjaxJJimComplete.jsp";
 		 return view;
 	 
 	 }

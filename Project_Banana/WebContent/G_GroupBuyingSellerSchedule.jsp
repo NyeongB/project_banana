@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/bootstrap.min.css">
 <link rel="icon" href="images/favicon.ico" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
 <script type="text/javascript" src="<%=cp%>/util/core/main.js"></script>
 <script type="text/javascript" src="<%=cp%>/util/daygrid/main.js"></script>
@@ -42,7 +43,7 @@
 #calendar h2
 {
 	font-weight: bold !important;
-	font-size: 25pt;
+	font-size: 20pt;
 
 }
 
@@ -64,9 +65,10 @@
 }	
 .date_detail
 {
-	font-size: 11pt;
+	font-size: 10pt;
 	margin-top: 100px;
 	margin-bottom: 10px;
+	padding-left:0px;
 	
 }
 #itemImg
@@ -77,9 +79,9 @@
 
 
 }
-tr:first-child > td > .fc-day-grid-event
+tr:first-child > td  .fc-day-grid-event
 {
-	font-size: 3pt;
+	font-size: 8pt;
 
 }
 .calendar_area
@@ -88,8 +90,13 @@ tr:first-child > td > .fc-day-grid-event
 	margin-bottom: 50px;
 
 }
+.calendar
+{
+	margin-left: 100px;
 
-/* .Header
+
+}
+ .Header
 {
 	z-index : 1;
 	position: relative;
@@ -107,7 +114,7 @@ tr:first-child > td > .fc-day-grid-event
 	z-index : 250;
 	position: absolute;
 	top : 0px;
-} */
+} 
 
 </style>
 
@@ -142,87 +149,80 @@ tr:first-child > td > .fc-day-grid-event
 
 		
 		
-
-document.addEventListener('DOMContentLoaded', function() {
-	
-	  //var events = readData();
-	  var calendarEl = document.getElementById('calendar');
-	  
-	  var calendar = new FullCalendar.Calendar(calendarEl, {
+	// FullCalendar 기본 셋팅 
+	document.addEventListener('DOMContentLoaded', function() {
+		
+		var calendarEl = document.getElementById('calendar');
 		  
-	    themeSystem: 'bootstrap',
-	    plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
-	    defaultView: 'dayGridMonth',	    
-	    navLinks: true,
-	    defaultDate: new Date(),
-	     eventClick: function(info) {
-	    	 
-	    	 var postcode = info.event.id;
-	    	 $('#openModalBtn').click();
-	       
-	       // alert('id: ' + info.event.id);
-	        // 모달 데이터 불러오기 
-	        $.ajax(
-	   				{
-	   					type : "GET"
-	   					,data : { postcode : postcode }
-	   					,url : "/Project_Banana/ggroupbuyingscheduledetail.action"
-	   					,success:function(args)
-	   					{
-	   						var detailList = document.getElementById("detail-list");
-	   						//var myModalLabel = document.getElementById("myModalLabel");
-	   						
-	   						
-	   						detailList.innerHTML = args;
-	   						
-	   						
-	   					},
-	   					 error:function(request,status,error)
-	   					{
-				        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	   					}   					
-	   				});		 
-	        
-
-	        
-	      }, 
-	    header: {
-	      left: 'prev,next today',
-	      center: 'title',
-	      right: ''
-	    },
-	    locale: 'ko',  		  
-	      eventSources: [{
-	       
-	    	 events: function(info, callback, failureCallback)// 이건 무슨 의미지?
-	    	{
-	    		$.ajax(
-   				{
-   					type : "GET"
-   					,url : "/Project_Banana/ggroupbuyingscheduleajax.action"
-   					,dataType: "json"
-   					,success:function(args)
-   					{
-   						callback(args);
-   						//alert(args);
-   						
-   					},
-   					 error:function(request,status,error)
-   					{
-			        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-   					}   					
-   				});		   		
-	    		
-	    	} 
-	    	
-	     		
+		var calendar = new FullCalendar.Calendar(calendarEl, {
 			
-	    	
-	    }]  
-	   
-	    
-	  });
-	  calendar.render();
+			// 캘린더 기본 셋팅
+			themeSystem: 'bootstrap',
+			plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+			defaultView: 'dayGridMonth',	    
+			navLinks: true,
+			defaultDate: new Date(),
+			  
+			// 일정 클릭시 이벤트 
+			eventClick: function(info) 
+			{		    	 
+				var postcode = info.event.id;
+				$('#openModalBtn').click();				 
+				 
+				// 모달 데이터 불러오기 (ajax 처리)
+				$.ajax(
+				{
+					type : "GET"
+					,data : { postcode : postcode }
+					,url : "/Project_Banana/ggroupbuyingscheduledetail.action"
+					,success:function(args)
+					{
+						var detailList = document.getElementById("detail-list");
+						detailList.innerHTML = args;							
+							
+					},error:function(request,status,error)
+					{
+				    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}   					
+				});		 
+	  
+		    },
+		    // 헤더 부분
+		    header: {
+		      left: 'prev,next today',
+		      center: 'title',
+		      right: ''
+		    },
+		    locale: 'ko',
+		    // 캘린더 일정 부분
+			eventSources: [{
+			  
+				// 캘린더에 일정 불러오는 함수
+				events: function(info, callback, failureCallback)
+				{
+					$.ajax(
+					{
+						type : "GET"
+						,url : "/Project_Banana/ggroupbuyingscheduleajax.action"
+						,dataType: "json"
+						,success:function(args)
+						{
+							// fullCalendar 자체 callback 함수
+							callback(args);
+					
+						},
+						 error:function(request,status,error)
+						{
+				     		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}   					
+					});		   		
+				
+				} 
+		    	
+		    }]     
+		    
+		});
+		  calendar.render();
 	});
 
 
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						
 							<div class="row">
-								<div class="col-md-10 calendar_area"><div id="calendar" style="width: 100%; height: 100%;" class="text-center thick"></div></div>
+								<div class="col-md-10 calendar_area"><div id="calendar" style="width: 85%; height: 85%;" class="thick text-right calendar"></div></div>
 								<div class="col-md-2">
 									<div class="col-md-12">
 										<ul class="date_detail">

@@ -258,13 +258,13 @@ textarea
 
 <script type="text/javascript">
 
-	// 찜 추가
+	// 찜 추가 메소드
 	function jjim() 
 	{
-		// 사용자 아이디 받아오기
-		var id1 = "<%=info %>";	   
-		
-		// 비 로그인시
+		// 사용자 유저코드 받아오기
+		const id1 ='${userCode }';
+				
+		// 비 로그인 시
 		if(id1 == "null" || id1 ==" " )
 		{
 			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
@@ -277,30 +277,19 @@ textarea
 				location.href = "redirect:groupbuyingitempage.action";
 			}
 		}
-		else // 회원이면
+		else // 로그인 시
 		{		       
 			if(confirm("찜 목록에 추가하시겠습니까?"))
 			{		
-				
+				// 찜 관심도 창 설정
 				var url = "Jjim.jsp";
 			    var name = "";
 			    var option = "width = 350, height = 160, top = 100, left = 200, location = no";
+			    
+			    // 찜 관심도 창 오픈
 			    window.open(url, name, option);		
 				
-				
-				//const rating = prompt("상품의 관심도를 입력해주세요 (0 ~ 5 사이의값 소수도 가능)");
-				
-				// 확인 버튼 클릭 시 gjjiminsert.action 주소 요청
-				/* $.get("gjjiminsert.action"
-				, function(data) 
-				{
-					alert(data);
-				}); */
-				
-			}else // 취소 버튼 클릭 시 동작
-			{
-				location.href = "redirect:groupbuyingitempage.action";
-			}					
+			}		
 			
 		}
 				
@@ -496,18 +485,22 @@ textarea
 	}
 
 		
-	
+	// 주문하기 버튼 클릭시
 	function orderItem(obj)
-	{
+	{	
+		// 게시물 코드 받아오기 
 		a = obj.getAttribute("id");
-			
-		if(${count}>=${member})
+	
+		
+		// 모집인원이 마감되었을 경우
+		if(${count} >= ${member})
 		{
-			alert("현재 모집 인원이 다 차서 신청할 수 없습니다.");
+			alert("현재 모집 인원이 마감되어 신청할 수 없습니다.");
 			$(location).attr("href","groupbuyingitempage.action?postcode=" + a);
 			return;
 		} 
 		
+		// 공동구매 참여가 가능한 경우
 		$(location).attr("href","groupbuyingjumunconfirm.action?postcode=" + a);
 	}
 	
@@ -518,10 +511,10 @@ textarea
 		nickName = document.getElementById("nickName").value;
 		myUserCode = document.getElementById("myUserCode").value;
 		
-		 var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
-	     var name = "";
-	     var option = "width = 350, height = 340, top = 100, left = 200, location = no"
-	     window.open(url, name, option);
+		var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
+	    var name = "";
+	    var option = "width = 350, height = 340, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
 				
 	}
 

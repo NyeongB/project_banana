@@ -213,39 +213,37 @@ window.onload = function()
 
 
 
-// 버튼 클릭 시 로그인 유무 체크 후 동작 다르게
-function logincheck() 
-{
-	var id1 = "<%=info %>";
-   
-	
-	if(id1 == "null" || id1 ==" " )
+	// 버튼 클릭 시 로그인 유무 체크 후 동작 다르게
+	function logincheck() 
 	{
-		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+		var id1 = "<%=info %>";	   
+		
+		if(id1 == "null" || id1 ==" " )
 		{
-			// 확인 버튼 클릭 시 동작
+			if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
+			{
+				// 확인 버튼 클릭 시 동작
+				
+			location.href = "loginmain.action";
+				
+			}
+			else // 취소 버튼 클릭 시 동작
+			{
+				location.href = "redirect:g_main.action";
+			}
+		}
+		else
+		{
+			// 회원일 때 회원정보 수정 페이지로 이동하기
 			
-		location.href = "loginmain.action";
 			
 		}
-		else // 취소 버튼 클릭 시 동작
-		{
-			location.href = "redirect:g_main.action";
-		}
-	}
-	else
-	{
-		// 회원일 때 회원정보 수정 페이지로 이동하기
-		
 		
 	}
-	
-}
-	
-	
+		
 
 	 $(document).ready(function() 
-	{
+	 {
 		
 		 $( ".top" ).click( function() {
 				$( "html, body" ).animate( { scrollTop : 0 }, 400 );
@@ -258,7 +256,7 @@ function logincheck()
 				$("html, body").animate({scrollTop: $(document).height() }, "slow");
 				return false;
 			});
-	});
+	 });
 
 	
 	function goList(obj)

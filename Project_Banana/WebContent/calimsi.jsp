@@ -6,66 +6,102 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	// 인코딩 UTF-8로 설정
 	request.setCharacterEncoding("UTF-8");
+	
 	String cp = request.getContextPath();
-	System.out.println((int)request.getAttribute("check"));
-	int check = (int)request.getAttribute("check");
+	
+	// 사용자 정보 받아오기 
+	// check = 0 공동구매 제안자
+	// check = 1 공동구매 참여자 
+	int check = (int) request.getAttribute("check");
+	
+	// JSON 배열 생성
 	JSONArray jarr = new JSONArray();
 
+	// 공동구매 제안자 입장 일정 불러오기
 	if(check == 0)
 	{
+		// 시작일자, 종료일자 받아오기
 		ArrayList<ScheduleDTO> startEnd = (ArrayList<ScheduleDTO>) request.getAttribute("startEnd");
+		// 분배일자 ,영수증일자 받아오기
 		ArrayList<ScheduleDTO> bunReci = (ArrayList<ScheduleDTO>) request.getAttribute("bunReci");
-		
-		
-		
-		// 시작일 json 에 넣기
-		for(int i =0; i<startEnd.size(); i++)
-		{
-			JSONObject obj = new JSONObject();
-			obj.put("title",startEnd.get(i).getTitle());
 			
-			System.out.println(startEnd.get(i).getTitle());
-			obj.put("start",startEnd.get(i).getStart_date());
-			obj.put("id",startEnd.get(i).getPost_code());
-			obj.put("color","#FFCC4F");
-			obj.put("display","list-item");
-			jarr.add(obj);			
-		}
-		
-		// 종료일 json 에 넣기
+		// 시작일자 JSON객체에 넣기
 		for(int i =0; i<startEnd.size(); i++)
 		{
+			// JSON 객체 생성
 			JSONObject obj = new JSONObject();
+			
+			// 일정 등록을 위한 fullcalendar 속성 설정 
+			// 일정 제목 설정
 			obj.put("title",startEnd.get(i).getTitle());
-			obj.put("start",startEnd.get(i).getEnd_date());
+			// 일정 시작일 설정(모집 시작날짜)
+			obj.put("start",startEnd.get(i).getStart_date());
+			// 일정 클릭시 상세정보를 위한 게시물코드 저장
 			obj.put("id",startEnd.get(i).getPost_code());
+			// 일정 컬러 설정
+			obj.put("color","#FFCC4F");
+			
+			// JSON 배열에 객체 넣기
+			jarr.add(obj);			
+		}
+		
+		// 종료일자 JSON객체에 넣기
+		for(int i =0; i<startEnd.size(); i++)
+		{
+			// JSON 객체 생성
+			JSONObject obj = new JSONObject();
+			
+			// 일정 등록을 위한 fullcalendar 속성 설정 
+			// 일정 제목 설정
+			obj.put("title",startEnd.get(i).getTitle());
+			// 일정 시작일 설정(모집 종료날짜)
+			obj.put("start",startEnd.get(i).getEnd_date());
+			// 일정 클릭시 상세정보를 위한 게시물 코드 저장
+			obj.put("id",startEnd.get(i).getPost_code());
+			// 일정 컬러 설정
 			obj.put("color","#2383ed");
-			obj.put("display","list-item");
+			
+			// JSON 배열에 객체 넣기
 			jarr.add(obj);			
 		}
 		
-		// 분배일자 json 에 넣기
+		// 분배일자 JSON객체에 넣기
 		for(int i =0; i<bunReci.size(); i++)
 		{
+			// JSON 객체 생성
 			JSONObject obj = new JSONObject();
+			
+			// 일정 등록을 위한 fullcalendar 속성 설정
+			// 일정 제목 설정
 			obj.put("title",bunReci.get(i).getTitle());
+			// 일정 시작일 설정 (물품 분배날짜)
 			obj.put("start",bunReci.get(i).getBun_date());
+			// 일정 클릭시 상세정보를 위한 게시물 코드 저장
 			obj.put("id",bunReci.get(i).getPost_code());
+			// 일정 컬러 설정
 			obj.put("color","#52BF88");
-			obj.put("display","list-item");
+			
+			// JSON 배열에 객체 넣기
 			jarr.add(obj);			
 		}
 		
-		// 영수증 첨부일자
+		// 영수증 첨부일자 JSON객체에 넣기
 		for(int i =0; i<bunReci.size(); i++)
 		{
+			// JSON 객체 생성
 			JSONObject obj = new JSONObject();
+			// 일정 제목 설정
 			obj.put("title",bunReci.get(i).getTitle());
+			// 일정 시작일 설정(영수증 첨부날짜)
 			obj.put("start",bunReci.get(i).getReceipt_date());
+			// 일정 클릭시 상세정보를 위한 게시물 코드 저장
 			obj.put("id",bunReci.get(i).getPost_code());
-			obj.put("display","list-item");
+			// 일정 컬러 설정
 			obj.put("color","#ff8fb8");
+			
+			// JSON 배열에 객체 넣기
 			jarr.add(obj);
 			
 		}

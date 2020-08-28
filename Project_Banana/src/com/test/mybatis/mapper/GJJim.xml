@@ -5,10 +5,8 @@
   
   
 <mapper namespace="com.banana.groupbuying.IGJjimDAO">
-
 	<insert id="GJjim" >
 	INSERT INTO G_POST_JJIM(G_POST_JJIM_CODE, G_POST_CODE, B_USER_CODE, RATING)
 	VALUES('G_PJ'||SEQ_G_POST_JJIM.NEXTVAL, #{g_post_code}, #{b_user_code},#{rating})
 	</insert>
-
 </mapper>
