@@ -258,6 +258,9 @@ textarea
 
 <script type="text/javascript">
 
+	var replyCode;	
+	var a;
+
 	// 찜 추가 메소드
 	function jjim() 
 	{
@@ -295,32 +298,11 @@ textarea
 				
 	}
 
-
-
-
-
-	var replyCode;
-	<%-- var nick = "<%=nickName %>"; --%>
-	
-	var a;
+	// 제이쿼리 
 	$().ready(function() 
 	{
 		
-		
-		/*$('.carousel').carousel();
-		
-		$('.carousel').carousel
-		({
-	
-		  interval: 2000,
-		
-		  pause: 'hover',
-		
-		  wrap: true
-		
-		});
-		*/
-		
+			
 		$( ".top" ).click( function() {
 			$( "html, body" ).animate( { scrollTop : 0 }, 400 );
 			return false;
@@ -352,18 +334,16 @@ textarea
 		});
 				
 		
-		// 댓글 등록
+		// 댓글 등록 
 		$("#replyinsert").click(function() 
 		{
-			var id1 = "<%=info %>";
-			   
+			var id1 = "<%=info %>";			   
 			
 			if(id1 == "null" || id1 ==" " )
 			{
 				if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
 				{
-					// 확인 버튼 클릭 시 동작
-					
+					// 확인 버튼 클릭 시 동작					
 					location.href = "loginmain.action";
 						
 				}
@@ -374,12 +354,6 @@ textarea
 			}
 			else// 회원이면
 			{
-				
-				<%-- <% String r_replycode = (String)session.getAttribute("replycode"); %>
-				   
-				var replyCode = "<%=r_replycode %>"; --%>
-				
-				
 				
 				// replyCode 가 null이면 댓글 작성
 				if(replyCode == null ) 
@@ -699,16 +673,17 @@ textarea
 					<h3 id="QA">Q ＆ A</h3>
 					
 					
-					<div class="form-inline">
-					<form action="" id="replyForm">
-						<div>
-						<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
-						</div>
-						<div>
-						<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
-						</div>
-						<input type="hidden" name="postcode" value="<%=postcode %>">
-					</form>
+					<div class="form-inline">					
+						<!-- 댓글 입력 폼  -->
+						<form action="" id="replyForm">
+							<div>
+								<textarea rows="" cols="" placeholder="상품문의 입력" class="reply" name="reply" id="" ></textarea>
+							</div>
+							<div>
+								<button type="button" class="btn btn-default btn-sm" id="replyinsert"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>등록</button>
+							</div>
+								<input type="hidden" name="postcode" value="<%=postcode %>">
+						</form>
 					</div>
 					
 					<!-- 댓글 INSERT -->
