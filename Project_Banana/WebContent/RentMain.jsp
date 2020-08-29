@@ -533,7 +533,7 @@ b
 							<c:forEach var="rnewList" items="${rnewList }" varStatus="status" begin="0" end="4">
 							  <div class="col-sm-2 col-md-2 thblock">
 							  <h4 class="thick"><span class="line">${status.count }</span></h4>
-	                           		<div class="thumbnail" id="${rnewList.r_post_code }" onclick="postDetail(this)">
+	                           		<div class="thumbnail" id="${rnewList.r_post_code }" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
 	                                	<img src="${rnewList.photo }" style="width: 180px; height: 180px;">
 	                                   
 	                                    <div class="caption">
