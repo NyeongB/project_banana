@@ -415,7 +415,7 @@ b
 				<div class="col-md-12">
 					<div><span class="highlight">나의 렌트 현황</span></div>
 	                  <div class="row item_content">
-	                     <c:forEach var="mylist" items="${rMyList }" varStatus="status" begin="1" end="5">
+	                     <c:forEach var="mylist" items="${rMyList }" varStatus="status" begin="0" end="4">
 	                     <div class="col-sm-2 col-md-2 box">
 	                        <h4 class="thick"><span class="line">${status.count }</span></h4>
 	                           <div class="thumbnail" id="${mylist.r_post_code }" onclick="postDetail(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
