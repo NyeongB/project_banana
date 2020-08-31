@@ -577,11 +577,12 @@ function rreplyadd(obj)
 function jjim() 
 {
 	
-	var id1 = "<%=info %>";
+	// 사용자 유저코드 받아오기
+	const id1 ='${userCode }';
    
    
    
-	
+   // 비 로그인 시
    if(id1 == "null" || id1 ==" " )
 	{
 		if(confirm("로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?"))
@@ -595,22 +596,20 @@ function jjim()
 				location.href = "redirect:rpostdetailpage.action";
 		}
 	}
-	else 
+	else // 로그인 시
 	{
         
 		if(confirm("찜 목록에 추가하시겠습니까?"))
 		{
 			
-			// 확인 버튼 클릭 시 동작
-			<% session.setAttribute("rpostCode",  rpostCode); %>
-			$.get("rjjiminsert.action", function(data) 
-			{
-				alert(data);
-			});
+			// 찜 관심도 창 설정
+			var url = "Jjim.jsp";
+		    var name = "";
+		    var option = "width = 350, height = 160, top = 100, left = 200, location = no";
+		    
+		    // 찜 관심도 창 오픈
+		    window.open(url, name, option);		
 			
-		}else // 취소 버튼 클릭 시 동작
-		{
-			location.href = "redirect:rpostdetailpage.action";
 		}
 		
 		
@@ -681,9 +680,7 @@ function sendMsg()
 			<div class="row">
 				<div class="col-md-12 text-right">
 					조회수 : ${rpostDetail.views }  |  ${rpostDetail.wdate }
-					<input type="hidden" value="${rpostDetail.b_user_code }" id="userCode"/>
-					<input type="hidden" value="${rpostDetail.nickname }" id="nickName"/>
-					<input type="hidden" value="${userCode }" id="myUserCode" />
+					
 				</div>
 			</div>
 			
@@ -728,7 +725,11 @@ function sendMsg()
 								<div class="col-md-12">
 									
 									<div class="col-md-6 w1">
-										작성자 : ${rpostDetail.nickname }
+										작성자 : ${rpostDetail.nickname }  <i class="far fa-envelope" onclick='sendMsg()'></i>
+										<input type="hidden" value="${rpostDetail.b_user_code }" id="userCode"/>
+										<input type="hidden" value="${rpostDetail.nickname }" id="nickName"/>
+										<input type="hidden" value="${userCode }" id="myUserCode" />
+									
 									</div>
 									
 									<div class="col-md-6 text-right warning w2">

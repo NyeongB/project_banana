@@ -259,66 +259,36 @@ public class Rent_MainController
 	
 		
 		
-		
-		/*
-		// 렌트 게시물 insert 
-		@RequestMapping(value = "/r_postinsert.action", method = RequestMethod.GET)
-		 public String rentpostinsert(Model model, HttpServletRequest request) 
-		 {
-			// insert !!!
-			String view = null;
-			
-			IRPostDAO dao = SqlSession.getMapper(IRPostDAO.class);
-			ILoginDAO lda = SqlSession.getMapper(ILoginDAO.class);
-			
-			
-			
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			LoginDTO dto = new LoginDTO();
-			dto.setId(id);
-			dto.setPw(pw);
-			
-			
-			String b_user_code = lda.general(dto);
-			
-			
-			
-			view = "/RentMain.jsp";
-			
-			
-			return view;
-			
-		 }
-		*/
-		
-		
-		
 		// 렌트 게시물 클릭 시 상세 페이지로 이동
 			@RequestMapping(value = "/rpostdetailpage.action", method = RequestMethod.GET)
 			 public String rPostDetailPage(Model model, HttpServletRequest request) 
 			 {
 				
 				String view = null;
+				String userCode = null;
 				
 				try
 				{
+					HttpSession session = request.getSession();
+					SessionInfo info = (SessionInfo)session.getAttribute("user");
+					userCode = info.getB_user_code();
+					IRreplyDAO dao1 = SqlSession.getMapper(IRreplyDAO.class);
+					IRPostDAO dao2 = SqlSession.getMapper(IRPostDAO.class);
+					RPostDTO dto = new RPostDTO();
+					String rpost_code = request.getParameter("r_post_code");
 				
-				IRreplyDAO dao1 = SqlSession.getMapper(IRreplyDAO.class);
-				IRPostDAO dao2 = SqlSession.getMapper(IRPostDAO.class);
-				RPostDTO dto = new RPostDTO();
-				String rpost_code = request.getParameter("r_post_code");
+					dto.setR_post_code(rpost_code);
 				
-				dto.setR_post_code(rpost_code);
-				
-				// 상품 내용 조회
-				model.addAttribute("rpostDetail", dao2.rpostDetail(dto));
-				model.addAttribute("dealLoc", dao2.dealLoc(dto));
-				// 댓글 조회
-				model.addAttribute("rreplyList", dao1.rreplyList(rpost_code));
-				
-				// 예약 마감기간 조회
-				model.addAttribute("bookingEnd", dao2.bookingEnd(rpost_code));
+					model.addAttribute("userCode", userCode);
+					// 상품 내용 조회
+					model.addAttribute("rpostDetail", dao2.rpostDetail(dto));
+					model.addAttribute("dealLoc", dao2.dealLoc(dto));
+					// 댓글 조회
+					model.addAttribute("rreplyList", dao1.rreplyList(rpost_code));
+					
+					
+					// 예약 마감기간 조회
+					model.addAttribute("bookingEnd", dao2.bookingEnd(rpost_code));
 			
 				
 				
