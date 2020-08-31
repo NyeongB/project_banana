@@ -75,7 +75,7 @@
 		<div class="col-md-12">
 			<div class="col-md-12">
 				<h4 class="thick">공동구매</h4>
-				<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${gPostCount }개</h5>
+				<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${postCount }개</h5>
 				<hr />
 			</div>
 			
@@ -106,7 +106,7 @@
 						<ul class="pagination">
 							<li class="disabled"><a href="#" aria-label="Previous"><span
 									aria-hidden="true">&laquo;</span></a></li>
-							${pageIndexList }
+								${pageIndexList }
 							<li><a href="#" aria-label="Next"><span
 									aria-hidden="true">&raquo;</span></a></li>
 						</ul>

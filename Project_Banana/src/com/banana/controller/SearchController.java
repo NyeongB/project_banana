@@ -70,16 +70,96 @@ public class SearchController
 		dto.setStart(start);
 		dto.setEnd(end);		
 		
-		model.addAttribute("searchList",dao.gPostList(dto));
+		model.addAttribute("preGPostList",dao.preGPostList(dto));
 		model.addAttribute("gPostCount", dao.gPostCount(dto));
-		model.addAttribute("rSearchList",dao.rPostList(dto));
+		model.addAttribute("preRPostList",dao.preRPostList(dto));
 		model.addAttribute("rPostCount", dao.rPostCount(dto));
 		model.addAttribute("keyword",keyword);
-		//model.addAttribute("pageIndexList", pageIndexList);
-		
-		
+		model.addAttribute("filter",filter);
+		//model.addAttribute("pageIndexList", pageIndexList);		
 		
 		view = "/SearchItem.jsp";
+		return view;
+		
+	}
+	
+	// 검색창 더보기 눌렀을 때 호출.
+	@RequestMapping(value = "/moreinformatin.action", method = RequestMethod.GET)
+	public String moreInfo(Model model , HttpServletRequest request) 
+	{
+		String view = "";
+		int start;
+		int end;
+		int count;
+		String pageIndexList;
+		String filter = request.getParameter("filter");
+		String keyword = request.getParameter("keyword");
+		// 렌트인지 공동구매인지 구분하는 변수
+		String value = request.getParameter("value");
+		
+		// 의존성 주입?
+		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);		
+	
+		// 페이징 처리 
+		Paging paging = new Paging();
+		String pageNum = request.getParameter("pageNum");
+		
+		// 데이터 넣어서 넘길 dto 생성
+		SearchDTO dto = new SearchDTO();
+		
+		//System.out.println(filter);
+		//System.out.println(keyword);
+		if(filter.equals("1"))
+			dto.setFilter("TITLE");
+		else if (filter.equals("2"))
+			dto.setFilter("CONTENT");
+	
+	
+		dto.setSearchKey(keyword);
+				
+			
+		
+		// 공동구매의 경우
+		if(value.equals("1"))
+		{
+			count = dao.gPostCount(dto);
+			
+			//테이블에서 가져올 리스트의 시작과 끝 위치
+			start = paging.getStart(pageNum, count );
+			end = paging.getEnd(pageNum, count);
+			
+			dto.setStart(start);
+			dto.setEnd(end);	
+			
+			// 페이지번호를 받아온 
+			pageIndexList = paging.pageIndexList(pageNum, count);
+			
+			model.addAttribute("searchList",dao.gPostList(dto));
+			model.addAttribute("postCount", dao.gPostCount(dto));
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("pageIndexList", pageIndexList);		
+		}else
+		{
+			count = dao.rPostCount(dto);
+			
+			//테이블에서 가져올 리스트의 시작과 끝 위치
+			start = paging.getStart(pageNum, count );
+			end = paging.getEnd(pageNum, count);
+			
+			dto.setStart(start);
+			dto.setEnd(end);	
+			
+			
+			// 페이지번호를 받아온 
+			pageIndexList = paging.pageIndexList(pageNum, count);
+						
+			model.addAttribute("searchList",dao.rPostList(dto));
+			model.addAttribute("postCount", dao.rPostCount(dto));
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("pageIndexList", pageIndexList);		
+		}		
+		
+		view = "/GSearchDetailItem.jsp";
 		return view;
 		
 	}	
