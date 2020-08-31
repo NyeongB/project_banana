@@ -622,7 +622,19 @@ function jjim()
 }
 
 
-
+//메세지 발신 메소드
+function sendMsg()
+{
+	userCode = document.getElementById("userCode").value;
+	nickName = document.getElementById("nickName").value;
+	myUserCode = document.getElementById("myUserCode").value;
+	
+	var url = "Msg.jsp?userCode="+userCode+"&nickName="+nickName+"&myUserCode="+myUserCode;
+    var name = "";
+    var option = "width = 350, height = 340, top = 100, left = 200, location = no"
+    window.open(url, name, option);
+			
+}
 
 	
   
@@ -669,6 +681,9 @@ function jjim()
 			<div class="row">
 				<div class="col-md-12 text-right">
 					조회수 : ${rpostDetail.views }  |  ${rpostDetail.wdate }
+					<input type="hidden" value="${rpostDetail.b_user_code }" id="userCode"/>
+					<input type="hidden" value="${rpostDetail.nickname }" id="nickName"/>
+					<input type="hidden" value="${userCode }" id="myUserCode" />
 				</div>
 			</div>
 			
