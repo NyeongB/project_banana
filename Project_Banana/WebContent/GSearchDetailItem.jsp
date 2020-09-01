@@ -22,7 +22,7 @@
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
  	 height: 340px;
- 	 width:150px;
+ 	 width: 200px;
  	 margin-right: 3px;
  	 display: inline-block !important;
 } 
@@ -92,28 +92,27 @@
                         <div class="col-md-12 text-right wr">
                         	<small>${list.nickname }</small>
                         </div>
-                      <p class="location">${list.bun_loc }</p>
-                      <span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>      
-                        
+                      	<p class="location">${list.bun_loc }</p>
+                      	<span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>      
                     </div> 	                		   
 	           </div>	
 			</c:forEach> 	
 			
            <!-- 페이징 인덱스 반드시 추가  -->
-			<div class="row">
+		 	<div class="row">
 				<div class="col-md-12 text-center">
 					<nav>
 						<ul class="pagination">
 							<li class="disabled"><a href="#" aria-label="Previous"><span
 									aria-hidden="true">&laquo;</span></a></li>
-								${pageIndexList }
+									${pageIndexList }
 							<li><a href="#" aria-label="Next"><span
 									aria-hidden="true">&raquo;</span></a></li>
 						</ul>
 					</nav>
 				</div>
-			</div>		 
-			
+			</div>		
+
 		</div>
 		
 	<div class="col-md-2">

@@ -160,4 +160,45 @@ public class Paging
 
 		return result;
 	}
+	
+	
+	// 검색 페이지 인덱스 받아오기 
+	public String pageIndexList(String pageNum, int count,String filter, String keyword,String value)
+	{
+		String result = null;
+		
+		// 페이징 처리 메소드가 있는 Myutil 객체 생성
+		MyUtil util = new MyUtil();
+
+		// 현재 페이지 변수
+		int currentPage = 1;
+
+		// 현재 페이지가 없을 때 
+		if (pageNum != null && pageNum.length() != 0)
+		{
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		// 전체 데이터 개수
+		int dataCount = count;
+
+		// 전체 페이지 수 구하기
+		int numPerPage = 10;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+
+		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
+		if (totalPage < currentPage)
+		{
+			currentPage = totalPage;
+		}
+
+		// 페이지 인덱스 리턴
+		result = util.pageIndexList(currentPage, totalPage,"", keyword ,filter, value);
+
+		return result;
+	}
+	
+	
+	
+	
 }

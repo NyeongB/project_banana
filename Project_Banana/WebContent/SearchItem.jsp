@@ -22,7 +22,7 @@
 	 border-radius:3px;
  	 box-shadow:2px 2px 2px 2px #E6E6E6 !important;
  	 height: 340px;
- 	 width:150px;
+ 	 width:200px;
  	 margin-right: 3px;
  	 display: inline-block !important;
 } 
@@ -71,7 +71,8 @@
 	
 	</div>
 	<div class="col-md-8">	
-		
+		<!-- 공동구매 검색결과 div  -->
+		<!-- 검색결과 안내  -->
 		<div class="col-md-12">
 			<div class="col-md-12">
 				<h4 class="thick">공동구매</h4>
@@ -79,75 +80,84 @@
 				<hr />
 			</div>
 			
-			<c:forEach var="list" items="${preGPostList }">
-				<div class="thumbnail" id="${list.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
-           			<img src="${list.photo }" style="width: 180px; height: 180px;">
-           			<div class="caption">
-                    	<h5 class="thick">${list.title }</h5>
-                    		<div class="col-md-12">
-                   				<div class="col-md-6">
-                   				</div>	                            
-                        	</div>
-                        
-                        <div class="col-md-12 text-right wr">
-                        	<small>${list.nickname }</small>
-                        </div>
-                      <p class="location">${list.bun_loc }</p>
-                      <span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>      
-                        
-                    </div> 	                		   
-	           </div>	
-			</c:forEach> 	
-			<c:if test="${gPostCount > 5 }">
-				<div class="col-md-12 text-right thick"><a href="moreinformatin.action?value=1&filter=${filter }&keyword=${keyword }">▶ 클릭하시면 더 많은 상품을 보실수 있습니다.</a></div>
-			</c:if>
-			
+			<!-- 검색 결과 게시물 forEach문  -->
+			<c:choose>
+				<!-- 검색 결과가 있는 경우  -->
+				<c:when test="${!empty preGPostList}">			
+					<c:forEach var="list" items="${preGPostList }">
+						<div class="thumbnail" id="${list.g_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
+		           			<img src="${list.photo }" style="width: 180px; height: 180px;">
+		           			<div class="caption">
+		                    	<h5 class="thick">${list.title }</h5>
+		                   		<div class="col-md-12">
+		                			<div class="col-md-6"></div>	                            
+		                       	</div>                        
+		                        <div class="col-md-12 text-right wr">
+		                        	<small>${list.nickname }</small>
+		                        </div>
+			                    <p class="location">${list.bun_loc }</p>                      
+			                    <span class="price"><fmt:formatNumber value="${list.dis_cost/list.member_num }" ></fmt:formatNumber>원(1인)</span>                  
+		                    </div> 	                		   
+			           </div>	
+					</c:forEach>
+					<!--게시물 개수가 5개 이상인 경우  --> 	
+					<c:if test="${gPostCount > 5 }">
+						<div class="col-md-12 text-right thick">
+							<a href="moreinformatin.action?value=1&filter=${filter }&keyword=${keyword }">▶ 클릭하시면 더 많은 상품을 보실수 있습니다.</a>
+						</div>
+					</c:if>
+				</c:when>
+				<!-- 검색 결과가 없는 경우  -->
+				<c:otherwise>
+					<div><p class="thick">검색 결과가 없습니다.</p></div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<hr />
+		
+		<!-- 렌트 검색결과 div  -->
+		<!-- 검색결과 안내  -->
 		<div class="col-md-12">
 			<div class="col-md-12">
 				<h4 class="thick">렌트</h4>
 				<h5 class="thick"><span class="highlight">${keyword }</span>의 검색결과 ${rPostCount }개</h5>
 				<hr />
-			</div>
-			
-			
-				<c:choose>
-					<c:when test="${!empty preRPostList}">
-						<c:forEach var="lists" items="${preRPostList }">						
-							<div class="thumbnail" id="${lists.r_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
-			           			<img src="${lists.photo }" style="width: 180px; height: 180px;">
-			           			<div class="caption">
-			                    	<h5 class="thick">${lists.title }</h5>
-			                    		<div class="col-md-12">
-			                   				<div class="col-md-6">
-			                   				</div>	                            
-			                        	</div>
-			                        
-			                        <div class="col-md-12 text-right wr">
-			                        	<small>${lists.nickname } </small>
-			                        </div>
-			                      <p>${lists.offerloc }</p>
-			                      <span class="price"><fmt:formatNumber value="${lists.cost}" ></fmt:formatNumber>원(1인)</span>     
-			                        
-			                    </div> 	                		   
-				           </div>
-				           
-							
-			           </c:forEach> 		
-						<c:if test="${rPostCount > 5 }">
-							<div class="col-md-12 text-right thick"><a href="moreinformatin.action?value=2&filter=${filter }&keyword=${keyword }">▶ 클릭하시면 더 많은 상품을 보실수 있습니다.</a></div>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<div><p class="thick">검색 결과가 없습니다.</p></div>
-					</c:otherwise>				
-				</c:choose>	
-				
-			
-			
-         
+			</div>	
+			<!-- 검색 결과 게시물 forEach문  -->		
+			<c:choose>
+				<!-- 검색 결과가 있는 경우 -->
+				<c:when test="${!empty preRPostList}">
+					<c:forEach var="lists" items="${preRPostList }">						
+						<div class="thumbnail" id="${lists.r_post_code }" onclick="goList(this)" onmouseover="mouseon(this)" onmouseout="mouseout(this)">	                           		
+		           			<img src="${lists.photo }" style="width: 180px; height: 180px;">
+		           			<div class="caption">
+		                    	<h5 class="thick">${lists.title }</h5>
+	                    		<div class="col-md-12">
+	                   				<div class="col-md-6">
+	                   				</div>	                            
+	                        	</div>			                        
+		                        <div class="col-md-12 text-right wr">
+		                        	<small>${lists.nickname } </small>
+		                        </div>
+			                    <p>${lists.offerloc }</p>
+			                    <span class="price"><fmt:formatNumber value="${lists.cost}" ></fmt:formatNumber>원(1인)</span>     			                        
+		                    </div> 	                		   
+			           </div>	           							
+		            </c:forEach> 		
+					<!--게시물 개수가 5개 이상인 경우  --> 	
+					<c:if test="${rPostCount > 5 }">
+						<div class="col-md-12 text-right thick">
+							<a href="moreinformatin.action?value=2&filter=${filter }&keyword=${keyword }">▶ 클릭하시면 더 많은 상품을 보실수 있습니다.</a>
+						</div>
+					</c:if>
+				</c:when>
+				<!-- 검색 결과가 없는 경우 -->
+				<c:otherwise>
+					<div><p class="thick">검색 결과가 없습니다.</p></div>
+				</c:otherwise>				
+			</c:choose>	         
 		</div>
+		
 	</div>
 	<div class="col-md-2">
 	

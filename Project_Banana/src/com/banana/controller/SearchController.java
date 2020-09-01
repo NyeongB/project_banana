@@ -34,41 +34,22 @@ public class SearchController
 		String view = "";
 		String filter = request.getParameter("filter");
 		String keyword = request.getParameter("keyword");
-		
-		// 의존성 주입?
+	
 		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);		
-
-		// 페이징 처리 
-		Paging paging = new Paging();
-		String pageNum = request.getParameter("pageNum");
 		
-		// 데이터 넣어서 넘길 dto 생성
+		// 필터와 키워드를 넣어서 넘길 dto 생성
 		SearchDTO dto = new SearchDTO();
 		
-		//System.out.println(filter);
-		//System.out.println(keyword);
+		// 검색 필터 분기 1인 경우 title로 검색 2인 경우 content 
 		if(filter.equals("1"))
 			dto.setFilter("TITLE");
 		else if (filter.equals("2"))
 			dto.setFilter("CONTENT");
 
-
 		dto.setSearchKey(keyword);
+		
+		// 공동구매 게시물 개수 구하기
 		int count = dao.gPostCount(dto);
-		//System.out.println(count);
-		
-		//테이블에서 가져올 리스트의 시작과 끝 위치
-		int start = paging.getStart(pageNum, count );
-		int end = paging.getEnd(pageNum, count);
-		
-		// 페이지번호를 받아온 
-		String pageIndexList = paging.pageIndexList(pageNum, count);
-		//System.out.println(start);
-		//System.out.println(end);
-	
-		
-		dto.setStart(start);
-		dto.setEnd(end);		
 		
 		model.addAttribute("preGPostList",dao.preGPostList(dto));
 		model.addAttribute("gPostCount", dao.gPostCount(dto));
@@ -87,37 +68,31 @@ public class SearchController
 	@RequestMapping(value = "/moreinformatin.action", method = RequestMethod.GET)
 	public String moreInfo(Model model , HttpServletRequest request) 
 	{
-		String view = "";
-		int start;
-		int end;
-		int count;
-		String pageIndexList;
-		String filter = request.getParameter("filter");
-		String keyword = request.getParameter("keyword");
-		// 렌트인지 공동구매인지 구분하는 변수
-		String value = request.getParameter("value");
+		String view = "";									// 넘어갈 view 페이지
+		int start;											// 페이지 시작값
+		int end;											// 페이지 끝 값
+		int count;											// 게시물개수
+		String pageIndexList;								// 페이지 인덱스
+		String filter = request.getParameter("filter");		// 검색 필터 
+		String keyword = request.getParameter("keyword");	// 검색 키워드		
+		String value = request.getParameter("value");		// 렌트인지 공동구매인지 구분하는 변수		
 		
-		// 의존성 주입?
 		ISearchDAO dao = SqlSession.getMapper(ISearchDAO.class);		
 	
-		// 페이징 처리 
+		// 페이징 처리를 위한 현재 페이지넘버 받아오기 
 		Paging paging = new Paging();
 		String pageNum = request.getParameter("pageNum");
 		
 		// 데이터 넣어서 넘길 dto 생성
 		SearchDTO dto = new SearchDTO();
-		
-		//System.out.println(filter);
-		//System.out.println(keyword);
+				
+		// 검색 필터 분기 1인 경우 title로 검색 2인 경우 content 
 		if(filter.equals("1"))
 			dto.setFilter("TITLE");
 		else if (filter.equals("2"))
 			dto.setFilter("CONTENT");
 	
-	
-		dto.setSearchKey(keyword);
-				
-			
+		dto.setSearchKey(keyword);			
 		
 		// 공동구매의 경우
 		if(value.equals("1"))
@@ -132,14 +107,15 @@ public class SearchController
 			dto.setEnd(end);	
 			
 			// 페이지번호를 받아온 
-			pageIndexList = paging.pageIndexList(pageNum, count);
+			pageIndexList = paging.pageIndexList(pageNum, count, filter,keyword,value);
 			
 			model.addAttribute("searchList",dao.gPostList(dto));
 			model.addAttribute("postCount", dao.gPostCount(dto));
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("pageIndexList", pageIndexList);		
 		}else
-		{
+			
+		{// 렌트의 경우
 			count = dao.rPostCount(dto);
 			
 			//테이블에서 가져올 리스트의 시작과 끝 위치
@@ -148,8 +124,7 @@ public class SearchController
 			
 			dto.setStart(start);
 			dto.setEnd(end);	
-			
-			
+						
 			// 페이지번호를 받아온 
 			pageIndexList = paging.pageIndexList(pageNum, count);
 						
