@@ -57,6 +57,7 @@
 	background-color: white;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 
 
@@ -667,9 +668,11 @@ function sendMsg()
 					 <ol class="breadcrumb">
            				<li class="breadcrumb-item"><a href="">Home</a></li>
             			<li class="breadcrumb-item"><a href="<%=cp %>/r_main.action">렌트</a></li>
-            			<li class="breadcrumb-item"><a>유아동/반려동물</a></li>
-            			<li class="breadcrumb-item"><a>강아지 용품</a></li>
-            			<li class="breadcrumb-item"><a>의류</a></li>
+            		 <c:forEach var="rpostDetail" items="${rpostDetail }">
+            			<li class="breadcrumb-item"><a href="r_catemain.action?bid=${rpostDetail.r_cate_bcode }">${rpostDetail.bigcate_name }</a></li>
+            			<li class="breadcrumb-item"><a href="r_catesmain.action?bid=${rpostDetail.r_cate_bcode }&mid=${rpostDetail.r_cate_mcode}">${rpostDetail.midcate_name }</a></li>
+            			
+            		</c:forEach>
           			</ol>
 				
 				</div>

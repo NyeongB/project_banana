@@ -4,14 +4,26 @@ public class RPostDTO
 {
 	
 	// 주요 속성 구성
-	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time;
-	private String r_cate_code, b_user_code, r_post_code, locname1, locname2, content;
-	private String progress, a_user_code, p_user_code;	
-	private String start_date, end_date, success_date, booking_end_date ,booking_start_date;
-	private String r_apply_code;
+	private String wdate, title, nickname, offerloc, collectloc, photo, views, brand, offer_time, collect_time
+				 , r_cate_code, b_user_code, r_post_code, content, loc_code;
+	
 	private int cost, deposit;
-	private String cate_name;
-	private String loc_code;
+	
+	// 위치 설정 		ex) 서울시           마포구
+	private String	 locname1, locname2; 
+	
+	private String progress, a_user_code, p_user_code;	
+	
+	// 렌트 시작일, 종료일, 렌트확정날짜들, 대여가능 시작일, 대여가능 종료일
+	private String start_date, end_date, success_date, booking_start_date, booking_end_date;
+	
+	private String r_apply_code;
+	
+	// 카테고리 경로
+	private String cate_name, bigcate_name, midcate_name, r_cate_bcode, r_cate_mcode;
+	
+	
+	
 	
 	// getter/ setter 구성
 	public int getStart()
@@ -333,6 +345,46 @@ public class RPostDTO
 	public void setBooking_start_date(String booking_start_date)
 	{
 		this.booking_start_date = booking_start_date;
+	}
+
+	public String getBigcate_name() 
+	{
+		return bigcate_name;
+	}
+
+	public void setBigcate_name(String bigcate_name) 
+	{
+		this.bigcate_name = bigcate_name;
+	}
+
+	public String getMidcate_name() 
+	{
+		return midcate_name;
+	}
+
+	public void setMidcate_name(String midcate_name) 
+	{
+		this.midcate_name = midcate_name;
+	}
+
+	public String getR_cate_bcode() 
+	{
+		return r_cate_bcode;
+	}
+
+	public void setR_cate_bcode(String r_cate_bcode) 
+	{
+		this.r_cate_bcode = r_cate_bcode;
+	}
+
+	public String getR_cate_mcode() 
+	{
+		return r_cate_mcode;
+	}
+
+	public void setR_cate_mcode(String r_cate_mcode) 
+	{
+		this.r_cate_mcode = r_cate_mcode;
 	}
 	
 	
