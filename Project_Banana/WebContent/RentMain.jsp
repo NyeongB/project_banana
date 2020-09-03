@@ -440,7 +440,7 @@ b
 	                     <c:choose>
 	                     <c:when test="${check eq '1'}">
 	                      <div class="logC">
-	                     <b onclick="logincheck()">${noLogin }</b>
+	                     <b onclick="logincheck()">${noApply }</b>
 	                      </div>
 	                     </c:when>
 	                    
@@ -500,7 +500,7 @@ b
 							  <c:choose>
 	                     <c:when test="${check eq '1'}">
 	                      <div class="logC">
-	                     <b onclick="logincheck()">${noLogin }</b>
+	                     <b onclick="logincheck()">${noApply }</b>
 	                      </div>
 	                     </c:when>
 	                    
