@@ -932,7 +932,7 @@ function sendMsg()
 				</div>
 			</div>
 		
-		</div>
+		
 		
 		
 	</div>
