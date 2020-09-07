@@ -166,8 +166,9 @@ public class MyUtil
 
 		return sb.toString();
 	}
-	// 검색 페이징 처리
-	public String pageIndexList(int current_page, int total_page, String list_url,String keyword, String filter,String value)
+	
+	// 검색게시물 페이징 처리
+	public String pageIndexList(int current_page, int total_page, String list_url, String keyword, String filter, String value)
 	{
 		// 현재 페이지가 0이거나 총페이지가 0인경우 
 		if (current_page < 1 || total_page < 1)
@@ -186,7 +187,7 @@ public class MyUtil
 		else
 			list_url = list_url + "?";
 
-		// currentPageSetup : 표시할첫페이지-1
+		// currentPageSetup : 표시할 첫페이지-1
 		currentPageSetup = (current_page / numPerBlock) * numPerBlock;
 		if (current_page % numPerBlock == 0)
 			currentPageSetup = currentPageSetup - numPerBlock;
@@ -194,11 +195,12 @@ public class MyUtil
 		// 1 페이지, [Prev]:10 페이지를 이전페이지로 이동
 		n = current_page - numPerBlock;
 		
-		// 
 		if (total_page > numPerBlock && currentPageSetup > 0)
 		{
-			sb.append("<li><a href='" + list_url + "pageNum=1&keyword="+ keyword +"&filter="+filter+"&value="+value+"'>1</a></li>");
-			sb.append("<li>[<a href='" + list_url + "pageNum=" + n + "'>Prev</a>]</li>");
+			sb.append("<li><a href='" + list_url + "pageNum=1&keyword="
+							+ keyword +"&filter="+filter+"&value="+value+"'>1</a></li>");
+			sb.append("<li>[<a href='" + list_url + "pageNum=" + n 
+							+"&keyword="+keyword +"&filter="+filter+"&valur="+ value +"'>Prev</a>]</li>");
 		}
 
 		// 바로가기 페이지
@@ -210,7 +212,8 @@ public class MyUtil
 				sb.append("<li><a>" + page + "</a></li>");
 			} else
 			{
-				sb.append("<li><a href='" + list_url + "pageNum=" + page +"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>" + page + "</a></li>");
+				sb.append("<li><a href='" + list_url + "pageNum=" + page 
+						  +"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>" + page + "</a></li>");
 			}
 			page++;
 		}
@@ -219,8 +222,10 @@ public class MyUtil
 		n = current_page + numPerBlock;
 		if (total_page - currentPageSetup > numPerBlock)
 		{
-			sb.append("<li>[<a href='" + list_url + "pageNum=" + n +"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>Next</a>]</li>");
-			sb.append("<li><a href='" + list_url + "pageNum=" + total_page +"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>" + total_page + "</a></li>");
+			sb.append("<li>[<a href='" + list_url + "pageNum=" + n 
+						+"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>Next</a>]</li>");
+			sb.append("<li><a href='" + list_url + "pageNum=" + total_page 
+						+"&keyword="+ keyword +"&filter="+filter+"&value="+value+ "'>" + total_page + "</a></li>");
 		}
 
 		return sb.toString();

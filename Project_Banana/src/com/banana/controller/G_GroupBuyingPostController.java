@@ -87,6 +87,8 @@ public class G_GroupBuyingPostController
 			 startDate = req.getParameter("startDate");
 			 endDate = req.getParameter("endDate");
 			 bunDate = req.getParameter("bunDate");
+			 
+			 System.out.println(endDate);
 			 returnDate = req.getParameter("returnDate");
 			 receiptDate = req.getParameter("receiptDate");
 			 
@@ -97,37 +99,37 @@ public class G_GroupBuyingPostController
 			imagePath = cp + "/pds/image";
 			
 			
+			// 공지사항 등록 메소드 실행  
+			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			GPostDTO dto = new GPostDTO();
+			
+			dto.setB_user_code(b_user_code);
+			dto.setLoc_code(loc);
+			dto.setTitle(title);
+			dto.setG_cate_code(scate);
+			dto.setBrand(brand);
+			dto.setPhoto(imagePath+"/"+file);
+			dto.setContent(content);
+			dto.setCost(cost);
+			dto.setDis_cost(dis_cost);
+			dto.setMember_num(goal);
+			dto.setBun_loc(detailLoc);
+			dto.setStart_date(req.getParameter("startDate"));
+			dto.setEnd_date(req.getParameter("endDate"));
+			dto.setBun_date(req.getParameter("bunDate"));
+			dto.setReturn_date(returnDate);
+			dto.setReceipt_date(receiptDate);
+			 				  
+			dao.postItem(dto);
+			
+			
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-	
-		// 공지사항 등록 메소드 실행  
-		IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
-		GPostDTO dto = new GPostDTO();
-		
-		dto.setB_user_code(b_user_code);
-		dto.setLoc_code(loc);
-		dto.setTitle(title);
-		dto.setG_cate_code(scate);
-		dto.setBrand(brand);
-		dto.setPhoto(imagePath+"/"+file);
-		dto.setContent(content);
-		dto.setCost(cost);
-		dto.setDis_cost(dis_cost);
-		dto.setMember_num(goal);
-		dto.setBun_loc(detailLoc);
-		dto.setStart_date(startDate);
-		dto.setEnd_date(endDate);
-		dto.setBun_date(bunDate);
-		dto.setReturn_date(returnDate);
-		dto.setReceipt_date(receiptDate);
-		 
-		
-		  
-		dao.postItem(dto);
+
 		view = "/groupbuyingcomplete.action";
 		 
 		

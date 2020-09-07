@@ -167,13 +167,13 @@ public class Paging
 	{
 		String result = null;
 		
-		// 페이징 처리 메소드가 있는 Myutil 객체 생성
+		// 페이징 처리 하는 메소드 Myutil 객체 생성
 		MyUtil util = new MyUtil();
 
 		// 현재 페이지 변수
 		int currentPage = 1;
 
-		// 현재 페이지가 없을 때 
+		// currentPage 있을 때 
 		if (pageNum != null && pageNum.length() != 0)
 		{
 			currentPage = Integer.parseInt(pageNum);
@@ -192,7 +192,7 @@ public class Paging
 			currentPage = totalPage;
 		}
 
-		// 페이지 인덱스 리턴
+		// 페이지 인덱스 리턴 (현재페이지, 총페이지, url, 검색키워드, 검색필터, 공동구매/렌트)
 		result = util.pageIndexList(currentPage, totalPage,"", keyword ,filter, value);
 
 		return result;

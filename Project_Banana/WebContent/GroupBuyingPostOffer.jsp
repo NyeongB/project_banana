@@ -97,36 +97,37 @@ p
 </style>
 <script type="text/javascript">
 
-
+	// 다음 카카오 지도 초기 설정
 	function initialize()
-	{
-		//alert("확인");
-		
+	{		
 		container = document.getElementById("map");
-
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		
+		// 지도 옵션 설정
 		mapOption = {
-	    center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
-	    level: 5, // 지도의 확대 레벨
-	    draggable: false //지도 드래그로 이동 금지
-		    };  
+			
+	    	center: new kakao.maps.LatLng(37.691996, 126.770978), // 지도의 중심좌표
+	    	level: 5, // 지도의 확대 레벨
+	   		draggable: false //지도 드래그로 이동 금지
+		};  
 
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		
-		 imageSrc = "images/markerGif03.gif"
-		      
-		      
-		 imageSize = new kakao.maps.Size(54,59)  //마커 이미지 크기
-		 imageOption = {offset: new kakao.maps.Point(27,69)};
+		// 마커 이미지 
+		imageSrc = "images/markerGif03.gif"		
 		
+		// 마커 이미지 크기 설정     
+		imageSize = new kakao.maps.Size(54,59)  //마커 이미지 크기
+		imageOption = {offset: new kakao.maps.Point(27,69)};
 		 
 		//구성된 마커의 속성을 활용하여 마커 이미지 생성
 	     markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 		
 		// 지도를 클릭한 위치에 표출할 마커입니다
-		var marker = new kakao.maps.Marker({ 
+		var marker = new kakao.maps.Marker
+		({ 
 		 // 지도 중심좌표에 마커를 생성합니다 
 		    position: map.getCenter() 
 		    , image : markerImage
@@ -134,16 +135,19 @@ p
 		
 		// 지도에 마커를 표시합니다
 		marker.setMap(map);
+		// 지도에서 확대를 막는다.
 		map.setZoomable(false); 
 		
-		// 주소-좌표 변환 객체를 생성합니다
+		// 주소 - 좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch("${addr}", function(result, status) {
+		geocoder.addressSearch("${addr}", function(result, status) 
+		{
 
-		    // 정상적으로 검색이 완료됐으면 
-		     if (status === kakao.maps.services.Status.OK) {
+		     // 정상적으로 검색이 완료 됐을 시 
+		     if (status === kakao.maps.services.Status.OK) 
+		     {
 
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -153,7 +157,7 @@ p
 		            position: coords
 		        });
 
-		       // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
 		            content: '<div style="width:150px;text-align:center;padding:6px 0;">나의 위치</div>'
 		        });
@@ -163,70 +167,45 @@ p
 		        map.setCenter(coords);
 		    } 
 		});   
-		  
+		  		
 		
-		
-		//마커 이동 시 상세 주소에 찍히는 것
+		//마커 이동 시 상세 주소에 찍히는 이벤트 처리
 		kakao.maps.event.addListener(map, 'click', function(mouseEvent) 
 		{
-			
     		searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) 
     		{
     		
 	        	if (status === kakao.maps.services.Status.OK)
-	        	{
-	            
-		              var detailAddr = result[0].address.address_name ;
+	        	{	            
+					var detailAddr = result[0].address.address_name ;       
+					
+					document.getElementById('detailLoc').value= detailAddr;
+					
+					marker.setPosition(mouseEvent.latLng);
+					marker.setMap(map);
 		           
-		            
-		          
-		              
-		              document.getElementById('detailLoc').value= detailAddr;
-		              
-		              marker.setPosition(mouseEvent.latLng);
-		              marker.setMap(map);
-		           
-            
-         
            		}   
           });
-	   });
-		
-		 
-         
-         
-         
-		
+	   });		 	
 		
 		function searchDetailAddrFromCoords(coords, callback)
 		{
-    		// 좌표로 법정동 상세 주소 정보를 요청합니다
+    		// 좌표 값에 해당하는 구 주소와 도로명 주소 정보를 요청
     		geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 	    }
 		
 		function searchAddrFromCoords(coords, callback)
 		{
-		    // 좌표로 행정동 주소 정보를 요청합니다
+		    // 좌표 값에 해당하는 행정동, 법정동 정보를 얻는다.
 		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 		}
-
-		function searchDetailAddrFromCoords(coords, callback) 
-		{
-		    // 좌표로 법정동 상세 주소 정보를 요청합니다
-		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-		}
-		
-		
 		
 	}//initialize()
-	
-	
-	
-	
 		
-	function setZoomable(zoomable) {
+		
+	function setZoomable(zoomable) 
+	{
 	    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
-	 	//alert("확인");
 	    map.setZoomable(zoomable);    
 	}
 				
@@ -376,8 +355,7 @@ p
 	
 	function addRow()
 	{
-		
-			document.getElementById("mCate").insertRow(-1);
+		document.getElementById("mCate").insertRow(-1);
 	}
 	
 	//수요조사 종료일 조건
@@ -398,8 +376,7 @@ p
 		closedate.setDate(closedate.getDate()+30);
 		var cd = new Date(closedate);
 		//alert(cd);
-	
-		
+			
 		 $("#endDate").datetimepicker({
 			 //시작 날짜를 모집 시작 날 보다 5일 뒤로.모집시작부터 최대 한달까지만.
 			 minDate: new Date(nd),
@@ -407,8 +384,7 @@ p
 		 	,startDate : new Date(nd)
 		 	,icons: {
 	            primary: 'ui-icon-calendar'
-	        }
-		
+	        }		
 			  
 		   });  
 		 
@@ -420,7 +396,6 @@ p
 	{
 		//수요조사 종료일 불러옴
 		var edate = $("#endDate").val();
-	    //alert(edate);
 		var newdate = new Date(edate);
 		newdate.setDate(newdate.getDate()+1);
 		var nd = new Date(newdate);
@@ -428,8 +403,7 @@ p
 		//최대 날짜 설정
 		var closedate = new Date(nd);
 		closedate.setDate(closedate.getDate()+3);
-		var cd = new Date(closedate); 
-	 
+		var cd = new Date(closedate); 	 
 		 
 		$("#bunDate").datetimepicker({
 			
@@ -472,13 +446,10 @@ p
 	function receiptCheck()
 	{
 		//수요조사 종료일 불러옴
-		var edate = $("#endDate").val();
-	
+		var edate = $("#endDate").val();	
 			
 		//분배일자 불러옴
-		var bdate = $("#bunDate").val();
-	    
-
+		var bdate = $("#bunDate").val();  
 		
 		$("#receiptDate").datetimepicker({
 			
@@ -594,21 +565,21 @@ p
 						
 						<script type="text/javascript">
 						
-						 $("#gdsImg").change(function(){
-						   if(this.files && this.files[0]) {
-						    var reader = new FileReader;
-						    reader.onload = function(data) {
-						     $(".select_img img").attr("src", data.target.result).width(150);        
-						    }
-						    reader.readAsDataURL(this.files[0]);
-						   }
+						 $("#gdsImg").change(function()
+						 {
+							 if(this.files && this.files[0])
+							 {
+						     	var reader = new FileReader;
+						     	reader.onload = function(data) 
+						     	{
+						     		$(".select_img img").attr("src", data.target.result).width(150);        
+						    	}
+						    	reader.readAsDataURL(this.files[0]);
+						   	 }
 						  });
 						
 						</script>
-					    
-					  
-					    
-					    
+
 					    <p>
 					    ＊상품 이미지는 640x640에 최적화 되어 있습니다.<br>
 					    -이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br>
@@ -620,11 +591,9 @@ p
 
 					</div>
 					
-				
 					<div>글 내용(*) <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea></div>
 					
 					<div class="col-md-12">
-						
 						<div class="col-md-4">가격(*)<p>숫자만 입력 가능</p>
 						<input type="text" class="form-control" id="cost" name="cost" numberonly = "true" /></div>
 					</div>
@@ -712,8 +681,8 @@ p
 					<div class="col-md-12 Btn">
 						<button type="button" class="btn btn-primary" id="postBtn" >게시물 등록</button>
 						<button type="reset" class="btn btn-primary" id="loginBtn">취소</button>
-						</div>
-					</div><!--end col-md-12  -->
+					</div>
+				</div><!--end col-md-12  -->
 					
 				
 				</div><!--end col-md-8  -->
