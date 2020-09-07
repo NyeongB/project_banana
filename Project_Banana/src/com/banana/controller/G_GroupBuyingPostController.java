@@ -23,41 +23,44 @@ public class G_GroupBuyingPostController
 	@Autowired
 	private SqlSession SqlSession;
 			
-	// 중분류 불러오는 메소드
+	// 상품등록 메소드
 	@RequestMapping(value = "/postitem.action", method= {RequestMethod.GET, RequestMethod.POST})
 	public String postItem(HttpServletRequest request)
 	{
 		String view = null;
-		
-		//System.out.println("1234");
-		
+		// 세션 가져오기		
 		HttpSession session = request.getSession();
+		
+		// 파일 경로 정하기
 		String root = session.getServletContext().getRealPath("/");
 		String savePath = root + "pds" + File.separator + "image";
-		File dir = new File(savePath);
 		
+		File dir = new File(savePath);		
 		
+		// 세션에서 정보 가져오기
 		SessionInfo info = (SessionInfo) session.getAttribute("user");
 		String b_user_code = info.getB_user_code();		
 		String loc = info.getLoc_code();
 		
-		// 폴더만들기
+		// 폴더가 없는 경우 폴더를 생성한다.
 		if(!dir.exists())
 			dir.mkdirs();
 		
+		// 인코딩 ,파일 설정
 		String encType = "UTF-8";
 		int maxFileSize = 5*1024*1024;
 		String imagePath = null;
-		
-		String title = null;
-		String scate = null;
-		String brand = null;
-		String file = null;
-		String content = null;
-		int cost = 0;
-		int dis_cost = 0;
-		int goal = 0;
-		String detailLoc = null;
+
+		// 상품 등록에서 보낸 정보를 저장하기 위한 변수 선언
+		String title = null;			// 제목
+		String scate = null;			// 카테고리
+		String brand = null;			// 브랜드명
+		String file = null;				// 파일명
+		String content = null;			// 글내용
+		int cost = 0;					// 비용
+		int dis_cost = 0;				// 할인가
+		int goal = 0;					// 목표인원
+		String detailLoc = null;		//	
 		String startDate = null;
 		String endDate = null;
 		String bunDate = null;
@@ -68,13 +71,12 @@ public class G_GroupBuyingPostController
 		try
 		{
 			MultipartRequest req = null;
+			
 			req = new MultipartRequest(request, savePath, maxFileSize, encType
 					, new DefaultFileRenamePolicy());
-			
-			
-			
+		
 
-			// 클릭한 코드 가져오기
+			 // 넘겨받은 정보 변수에 저장
 			 title = req.getParameter("title");
 			 scate = req.getParameter("scate");
 			 brand = req.getParameter("brand");
@@ -87,22 +89,19 @@ public class G_GroupBuyingPostController
 			 startDate = req.getParameter("startDate");
 			 endDate = req.getParameter("endDate");
 			 bunDate = req.getParameter("bunDate");
-			 
-			 System.out.println(endDate);
 			 returnDate = req.getParameter("returnDate");
 			 receiptDate = req.getParameter("receiptDate");
-			 
-			
-			
-			
+			 			
+			// 파일 저장 위치
 			String cp = request.getContextPath();
 			imagePath = cp + "/pds/image";
-			
-			
-			// 공지사항 등록 메소드 실행  
+						 
 			IGPostDAO dao = SqlSession.getMapper(IGPostDAO.class);
+			
+			// 정보 저장하여 넘길 객체 GPostDTO 생성
 			GPostDTO dto = new GPostDTO();
 			
+			// 정보 dto에 저장
 			dto.setB_user_code(b_user_code);
 			dto.setLoc_code(loc);
 			dto.setTitle(title);
@@ -114,14 +113,14 @@ public class G_GroupBuyingPostController
 			dto.setDis_cost(dis_cost);
 			dto.setMember_num(goal);
 			dto.setBun_loc(detailLoc);
-			dto.setStart_date(req.getParameter("startDate"));
-			dto.setEnd_date(req.getParameter("endDate"));
-			dto.setBun_date(req.getParameter("bunDate"));
+			dto.setStart_date(startDate);
+			dto.setEnd_date(endDate);
+			dto.setBun_date(bunDate);
 			dto.setReturn_date(returnDate);
 			dto.setReceipt_date(receiptDate);
-			 				  
-			dao.postItem(dto);
-			
+			 
+			// 상품등록 프로시져 호출 쿼리문
+			dao.postItem(dto);		
 			
 			
 		} catch (Exception e)
@@ -129,10 +128,7 @@ public class G_GroupBuyingPostController
 			System.out.println(e.toString());
 		}
 		
-
-		view = "/groupbuyingcomplete.action";
-		 
-		
+		view = "/groupbuyingcomplete.action";				
 		
 		return view;
 	}

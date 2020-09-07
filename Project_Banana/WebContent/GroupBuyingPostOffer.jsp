@@ -477,8 +477,7 @@ p
 <div class="row thick">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-3">
-				
+				<div class="col-md-3">				
 				</div>
 				<div class="col-md-6">
 				
@@ -486,7 +485,7 @@ p
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
 		
 	
-				<form action="postitem.action"  method="post"  id="postItem" enctype="multipart/form-data">
+			<form action="postitem.action"  method="post"  id="postItem" enctype="multipart/form-data">
 				
 					<div>제목(*) <input type="text" class="form-control" id="title" name="title"/></div>
 					
@@ -550,21 +549,20 @@ p
 					<input type="hidden" id="scate" name="scate">
 					
 				</div>	<!--end col-md-12  -->
-				
+
 			
-					
-					
 			
 					<div>브랜드명(*) <input type="text" class="form-control" id="brand" name="brand"/></div>
 					
+					<!-- 사진 첨부 영역 -->
 					<div>
-						사진(*)<br>
-						
+						사진(*)<br>												
 						<input type="file" id="gdsImg" name="file">
+						<!-- 사진 미리보기 영역 -->
 						<div class="select_img"><img src=""></div>
 						
-						<script type="text/javascript">
-						
+						<script type="text/javascript">						
+						/* 사진 미리보기 이벤트 */
 						 $("#gdsImg").change(function()
 						 {
 							 if(this.files && this.files[0])
@@ -576,19 +574,18 @@ p
 						    	}
 						    	reader.readAsDataURL(this.files[0]);
 						   	 }
-						  });
-						
+						  });						
 						</script>
-
+						
+						<!-- 사진 안내 -->
 					    <p>
 					    ＊상품 이미지는 640x640에 최적화 되어 있습니다.<br>
-					    -이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br>
-					    -이미지를 클릭 할 경우 원본 이미지를 확인할 수 있습니다.<br>
-					    -이미지를 클릭 후 이동하여 등록 순서를 변경할 수 있습니다.<br>
-					    -큰 이미지일 경우 이미지가 깨지는 경우가 발생할 수 있습니다.<br>
-					    최대 지원 사이즈인 640x640 으로 리사이즈 해서 올려주세요(개당 이미지 최대 10M)
+					    - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br>
+					    - 이미지를 클릭 할 경우 원본 이미지를 확인할 수 있습니다.<br>
+					    - 이미지를 클릭 후 이동하여 등록 순서를 변경할 수 있습니다.<br>
+					    - 큰 이미지일 경우 이미지가 깨지는 경우가 발생할 수 있습니다.<br>
+					      최대 지원 사이즈인 640x640 으로 리사이즈 해서 올려주세요(개당 이미지 최대 10M)
 					    </p>
-
 					</div>
 					
 					<div>글 내용(*) <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea></div>

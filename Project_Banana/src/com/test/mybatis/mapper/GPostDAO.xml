@@ -127,7 +127,7 @@
 
 	</select>
 	
-	
+	<!-- 상품등록 프로시저 호출 쿼리문  -->
 	<select id="postItem" statementType="CALLABLE"  >
 	
 	 {call
