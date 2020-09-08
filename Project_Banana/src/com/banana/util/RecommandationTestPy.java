@@ -1,5 +1,7 @@
 package com.banana.util;
 
+import java.io.StringWriter;
+
 import org.python.util.PythonInterpreter;
 
 
@@ -12,9 +14,15 @@ public class RecommandationTestPy
 	{
 
 		System.setProperty("python.cachedir.skip", "true");
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("RecommandSimilarUser.py");
-        interpreter.exec("print('test')");
+        PythonInterpreter interpreter = new PythonInterpreter();      
+              
+        
+        interpreter.execfile("RecommandSimilarUser1.py");
+        interpreter.exec("print(userReco())");
+      
+        
+        interpreter.close();
+       
 
 	}
 

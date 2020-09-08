@@ -102,6 +102,18 @@ li {
 	line-height: 5px;
 
 }
+.point_area
+{
+	width: 80%;
+	height: 300px;
+	background-color: #fff5d9;
+
+}
+.point_image
+{
+	margin: 30px;
+
+}
 </style>
 <script src="script/script.js"></script>
 <script type="text/javascript">
@@ -110,8 +122,8 @@ li {
 		$('.bxslider').bxSlider(
 		{
 			auto : true, // 자동으로 애니메이션 시작
-			speed : 500, // 애니메이션 속도
-			pause : 3000, // 애니메이션 유지 시간 (1000은 1초)
+			speed : 1000, // 애니메이션 속도
+			pause : 30000, // 애니메이션 유지 시간 (1000은 1초)
 			mode : 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
 			autoControls : false, // 시작 및 중지버튼 보여짐
 			pager : true, // 페이지 표시 보여짐
@@ -154,12 +166,12 @@ li {
 
 		<!-- content  -->
 		<div class="content">
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 			<!-- 왼쪽 MenuUser end  -->
 
 
-			<div class="col-md-8">
-		
+			<div class="col-md-10">
+				<!-- 
 					<div class="col-md-12 introduce">
 						<div class="text-center content">
 							<p class="thick" style="/* color:var(--hover-color); */">" 바나나 서비스를 통해 이웃과 나눠보세요 "</p>
@@ -171,23 +183,36 @@ li {
 								
 						
 						</div>
-					</div>
+					</div> -->
 					
 					
 						
 				<div class="col-md-12">
 					<ul class="bxslider">
-						<li><a href="#"><img
+						<li><a href="#"><img  style="width:100%; height: 450px;"
 								src="https://thumbnail8.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_c233b4a0-95b3-4481-b578-b62b75850dfd.jpg"
 								alt="" ></a></li>
-						<li><a href="#"><img
+						<li><a href="#"><img  style="width:100%; height: 450px;"
 								src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_5388d7d5-6f13-434b-937e-f81ef1f9c370.jpg"
 								alt=""></a></li>
-						<li><a href="#"><img
-								src="https://static.coupangcdn.com/ma/cmg_paperboy/image/1595402468204/C1_PC1%2820%29.jpg"
-								alt="" ></a></li>
+						<li>
+							<div class="col-md-12 introduce">
+						<div class="text-center content">
+							<p class="thick" style="/* color:var(--hover-color); */">" 바나나 서비스를 통해 이웃과 나눠보세요 "</p>
+							<img src="images/banana_1.png" style="width:300px; height: 280px;" alt="" />
+							<div class="form-group form-inline content_menu">
+								<button class="btn form-control thick" onclick="goGonggu()">공동구매 하러가기</button>
+								<button class="btn form-control thick" onclick="goReng()">렌트 하러가기</button>					
+							</div>
 								
-						<li><a href="#"><img
+						
+						</div>
+					</div>
+									
+						
+						</li>
+								
+						<li><a href="#"><img style="width:100%; height: 450px;"
 						src="https://thumbnail6.coupangcdn.com/thumbnails/remote/x/image/bannerunit/bannerunit_e1a80f94-7610-4a37-80b3-434766555d22.jpg"
 						alt="" ></a></li>
 					</ul> 
@@ -195,6 +220,18 @@ li {
 				
 				<div class="col-md-12">
 						<div class="col-md-4">
+							<div class="col-md-12">
+								<h3 class="thick">포인트 충전</h3>
+								<div class="point_area text-center">
+									<img src="images/banana_icon.png"  style=" height: 50px; alt="" class="point_image" />
+									<h3 class="thick"> 포인트 충전을 통해 </h3>
+									<h3 class="thick">바나나 서비스를 이용해보세요</h3>
+									<form action="<%=cp%>/pointchargepage.action"><button class="btn" >포인트 충전하러가기</button></form>
+									
+								</div>
+							
+							</div>
+						
 						</div>
 						<div class="col-md-8 notice-area">
 							<h3 class="thick">공지사항</h3>
@@ -222,7 +259,7 @@ li {
 			</div>
 			<!-- col-md-8 end -->
 
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 
 		</div>
 		<!-- content end -->
