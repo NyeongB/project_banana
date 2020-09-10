@@ -364,13 +364,12 @@ p
 		
 		//모집시작 날짜 값 불러옴.
 		var date = $("#startDate").val();
-		//alert(date);
+		
 		//종료날짜는 최소 5일 이상
 		var newdate = new Date(date);
 		newdate.setDate(newdate.getDate()+5);
 		var nd = new Date(newdate);
-		//alert(nd);
-		 
+		
 		//최대 날짜 설정
 		var closedate = new Date(date);
 		closedate.setDate(closedate.getDate()+30);
@@ -484,8 +483,8 @@ p
 				<div><h1>공통협력 게시물 등록</h1><hr></div><br>
 				<div><h3>상품등록 > 상품등록 완료</h3></div>
 		
-	
-			<form action="postitem.action"  method="post"  id="postItem" enctype="multipart/form-data">
+			<!-- 상품 등록 div -->
+			<form action="postitem.action" method="post" id="postItem" enctype="multipart/form-data">
 				
 					<div>제목(*) <input type="text" class="form-control" id="title" name="title"/></div>
 					
